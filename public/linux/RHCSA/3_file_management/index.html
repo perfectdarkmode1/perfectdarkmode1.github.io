@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.117.0">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title></title>
+    <link href="/images/favicon.png?1693602285" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1693602285" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1693602285" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1693602285" rel="stylesheet">
+    <link href="/css/auto-complete.css?1693602285" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1693602285" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1693602285" rel="stylesheet">
+    <link href="/css/fonts.css?1693602285" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1693602285" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1693602285" rel="stylesheet">
+    <link href="/css/theme-city2.css?1693602285" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1693602285" rel="stylesheet">
+    <link href="/css/print.css?1693602285" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1693602285" rel="stylesheet">
+    <script src="/js/url.js?1693602285"></script>
+    <script src="/js/variant.js?1693602285"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/3_file_management/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <a class="nav nav-next topbar-link" href="/networking/index.html" title="Networking (&#129106;)"><i class="fas fa-chevron-right fa-fw"></i></a>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/linux/index.html" title="Linux (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/linux/rhcsa/3_file_management/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/linux/index.html"><span itemprop="name">Linux</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Perfect Dark Mode</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="toc-wrapper"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#regular-files">Regular Files</a></li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h1 id="7-file-types">7 File types</h1>
+<ol>
+<li>regular</li>
+<li>directory</li>
+<li>block special device</li>
+<li>character special device</li>
+<li>symbolic link</li>
+<li>named pipe</li>
+<li>socket</li>
+</ol>
+<p>Commands</p>
+<ul>
+<li>ls</li>
+<li>stat</li>
+<li>file</li>
+</ul>
+<h2 id="regular-files">Regular Files</h2>
+<ul>
+<li>text or binary data</li>
+<li>represented by hyphen (-)</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ touch file1
+
+[vagrant@server1 ~]$ ls -l</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ file file1</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ stat file1
+
+  File: file1
+
+  Size: 0               Blocks: 0          IO Block: 4096   regular empty file
+
+Device: fd00h/64768d    Inode: 201864106   Links: 1
+
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/ vagrant)   Gid: ( 1000/ vagrant)
+
+Context: unconfined_u:object_r:user_home_t:s0
+
+Access: 2022-12-29 10:35:01.931382107 +0000
+
+Modify: 2022-12-29 10:35:01.931382107 +0000
+
+Change: 2022-12-29 10:35:01.931382107 +0000
+
+ Birth: 2022-12-29 10:35:01.931382107 +0000
+ ```
+
+## Directory Files
+
+-   Letter &#34;d&#34; at beginning identifies them as directory.
+
+### Block and Character (raw) Special Device Files
+
+-   all hardware has device file in /dev
+-   Used by system to communicate with device
+-   &#34;c&#34; or &#34;b&#34; in ls listing
+-   Each device driver is assigned a unique number called the major number
+
+**Major Number**
+
+-  Kernel uses to recognize device driver type
+* Major 8 represents the block device driver for SATA disks
+* Major 253 denotes the driver for device mapper (VDO volumes, LVM logical volumes, etc)
+* Major 11 signifies optical devices
+
+**Minor Number**
+
+-   applies to disk partitions as well
+-   Each device controlled by the same Device Driver gets a Minor Number
+-   The same driver can control multiple devices of the same type</code></pre></div><p>[vagrant@server1 ~]$ ls -l /dev/sda</p>
+<p>brw-rw&mdash;-. 1 root disk 8, 0 Dec 29 12:04 /dev/sda</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>^ column 5 and 6 represent the major and minor numbers
+
+### Symbolic Links
+
+* Shortcut to another file or directory
+* begins with &#34;l&#34; in ls listing</code></pre></div><p>[vagrant@server1 ~]$ ls -l /usr/sbin/vigr</p>
+<p>lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipw</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Compression and Archiving
+
+## Archiving tools
+
+* Preserves general file attributes such as ownership, owning group, and timestamp
+* preserves extended file attributes such as ACLs and SELinux contexts
+* syntax of tar and star are identical
+
+### star
+
+### tar (tape archive)
+
+* create, append, update, list, and extract files or an entire directory tree to and from a single file called a tarball or tarfile
+* can also compress tarball after it&#39;s been created
+
+**-c** creates tarball
+-**f** specifies tarball name
+**-p** Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user
+**-r** appends files to the end of an extant uncompressed tarball
+**-t** List contents of a tarball
+**-u** Appends files to the end of an extant uncompressed tarball provided the specified files being added are newer
+**-v** verbose
+**-x** Extracts or restores from a tarball
+**-P** override the removing of &#34;/&#34;
+**-j** Compress tarball with bzip2
+**-z** Compress tarball with gzip
+-C Change to DIR before performing any options that follow
+
+### Archive entire home directory:</code></pre></div><p>tar -cvf /tmp/home.tar /home</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>- Removes &#34;/&#34; so you do not have to specify the full pathname  when restoring files at any location
+
+### Archive two specific files:</code></pre></div><p>[vagrant@server1 ~]$ tar -cvf /tmp/files.tar /etc/passwd /etc/yum.conf</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### Append files in a directory to existing tarball:</code></pre></div><p>[vagrant@server1 ~]$ tar -rvf /tmp/files.tar /etc/yum.repos.d</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### List what is included in home.tar tarball</code></pre></div><p>[vagrant@server1 ~]$ tar -tvf /tmp/files.tar</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### restore single file and confirm</code></pre></div><p>[vagrant@server1 ~]$ tar -xf /tmp/files.tar etc/yum.conf</p>
+<p>[vagrant@server1 ~]$ ls -l etc/yum.conf</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### Restore all files and confirm</code></pre></div><p>[vagrant@server1 ~]$ tar -xf /tmp/files.tar</p>
+<p>[vagrant@server1 ~]$ ls</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Create a gzip-compressed tarball under /tmp for /home</code></pre></div><p>[vagrant@server1 ~]$ tar -czf /tmp/hom.tar.gz /home</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Create bzip2-compressed tarball under /tmp for /home</code></pre></div><p>sudo tar -cjf /tmp/home.tar.bz2 /home</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>List content of gzip-compressed archive without uncompressing it</code></pre></div><p>tar -tf /tmp/hom.tar.gz</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Extract files from gzip-compressed tarball in the current directory</code></pre></div><p>tar -xf /tmp/hom.tar.gz</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Extract files from the bzip2-compressed  tarball under /tmp (a different directory location than the current directory) </code></pre></div><p>tar -xf /tmp/home.tar.bz2 -C /tmp</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Compression tools
+
+### gzip (gunzip)
+
+*   used to create a compressed file of each of the specified files and adds .gz extension
+
+-r
+compress an entire directory tree
+-l
+display compression info
+
+display filename when uncompressed</code></pre></div><p>[vagrant@server1 ~]$ cp /etc/fstab .</p>
+<p>[vagrant@server1 ~]$ ls -l fstab</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>gzip fstab</code></pre></div><p>[vagrant@server1 ~]$ gzip fstab</p>
+<p>[vagrant@server1 ~]$ ls -l fstab.gz</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Display compression info</code></pre></div><p>[vagrant@server1 ~]$ gzip -l fstab.gz</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Uncompress</code></pre></div><p>[vagrant@server1 ~]$ gunzip fstab.gz</p>
+<p>[vagrant@server1 ~]$ ls -l fstab</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### bzip2 (bunzip2)
+
+* adds .bz2 extension
+- better compression/ decompression ratio but is slower than gzip</code></pre></div><p>[vagrant@server1 ~]$ bzip2 fstab</p>
+<p>[vagrant@server1 ~]$ ls -l</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>[vagrant@server1 ~]$ bunzip2 fstab.bz2</p>
+<p>[vagrant@server1 ~]$ ls -l fstab</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># File Editing
+
+## Vim
+[vimguide]
+
+# File and Directory Operations</code></pre></div><p>touch file1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>- file1 is created with 0 bytes in size
+- Run touch on it and it will get a new timestamp
+
+## Touch
+touch options
+- -d date
+- -t time
+- -a change access time
+- -m change modification time
+- -r change modification time to that of a reference file
+
+Set date on file1 to 2019-09-20</code></pre></div><p>touch -d 2019-09-20 file1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Change modification time on file1 to current system time</code></pre></div><p>touch -m file1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Cat
+ redirect output to specified file</code></pre></div><p>cat &gt; catfile1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## mkdir
+
+options
+- -v verbose
+- -p create with subdirectories
+
+Verbose</code></pre></div><p>mkdir dir1 -v</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>create dir2/perl/perl5</code></pre></div><p>mkdir -vp dir2/perl/perl5</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># Displaying file contents
+
+- cat
+- more
+- less
+- head
+- tail
+
+## Cat
+options
+- -n view output in numbered format
+
+## Tac
+- Display file contents in reverse
+
+## More
+- forward text searching only</code></pre></div><p>more /usr/bin/znew</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Navigation
+- spacebar/f scroll forward 1 screen
+- Enter Scroll forward 1 line
+- b Back one screen
+- d forward half a screen
+- h help
+- q quit
+- /string forward search
+
+## Less
+- forward and backwards searching</code></pre></div><p>less /usr/bin/znew</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Navigation
+- spacebar/f scroll forward 1 screen
+- Enter Scroll forward 1 line
+- b Back one screen
+- d forward half a screen
+- h help
+- q quit
+- /string forward search
+- ?string backward search
+
+## Head
+- displays first 10 lines by default</code></pre></div><p>head /etc/profile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code> View top 3 lines</code></pre></div><p>head -3 /etc/profile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Tail
+
+options
+- -f follow updates on file 
+- display last 10 lines of a file by default</code></pre></div><p>tail /etc/profile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>View last 3 lines</code></pre></div><p>tail -3 /etc/profile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>View updates to the system log file  /varlog/messages in real time:</code></pre></div><p>sudo tail -f /var/log/messages</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># Counting Words, Lines, and Characters in Text Files
+
+## wc (word count)
+- displays the number of lines, words, and characters (or bytes) contained in a text file or input supplied.
+ options
+ - -l prints count of lines
+ - -w print count of words
+ - -c print count of bytes
+ - -m print count of characters</code></pre></div><p>wc /etc/profile
+85  294 2123 /etc/profile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Display count of characters</code></pre></div><p>wc -m /etc/profile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># Copying Files and Directories
+
+## Copying Files
+
+cp
+- overwrites destination without warning
+
+Options
+- -i confirmation before overwriting
+- -r copy entire directory tree
+- -p preserve attributes</code></pre></div><p>cp file1 newfile1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>same name to new directory</code></pre></div><p>cp file1 dir1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>-i option</code></pre></div><p>cp file1 dir1 -i
+cp: overwrite &lsquo;dir1/file1&rsquo;? y</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>- root has a custom alias in their .bashrc file that automatically adds the -i option</code></pre></div><p>alias cp=&lsquo;cp -i&rsquo;</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Copying Directories</code></pre></div><p>cp -r dir1 dir2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>view entire directory hierarchy</code></pre></div><p>ls -l dir2 -R</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>preserve attributes</code></pre></div><p>cp -p file1 /tmp</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># Moving and renaming Files and Directories
+
+## mv
+
+- Move or rename files
+- Alias exists in root&#39;s home directory for -i in the .bashrc file</code></pre></div><p>alias—“alias mv=’mv -i’&quot;&quot;</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>options
+- -i overwrite confirmation</code></pre></div><p>mv -i file1 dir1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>mv newfile1 newfile2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code> Moving and renaming directories
+ 
+- you can mv a dir into another dir. The target dir must exist otherwise you are just renaming the dir</code></pre></div><p>mv dir1 dir2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>rename </code></pre></div><p>mv dir2 dir20</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### Removing files
+
+rm
+- delete one or more specified files
+- alias—“alias rm=’rm -i’”— in the .bashrc file in the root user’s home directory
+- remember to backslash &#34;\&#34; any wildcard characters in filenames
+
+Options
+- -i interactive confirmation
+- -d delete empty directory
+-  -r or -R remove directory and all of it&#39;s contents
+- -v verbose
+- -f force
+
+erase newfile2</code></pre></div><p>rm -i newfile2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### Removing directories
+
+ir
+- used to remove empty directories
+
+options
+- -v verbose</code></pre></div><p>ir emptydir -v</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>rm -dv emptydir</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>rm -r dir20</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># File Linking
+
+### inode (index node)
+A file’s metadata (128 bytes) includes: 
+- file type
+- size
+- permissions
+- owner’s name
+ -owning group name 
+ -last access/modification times
+ -link count
+ -number of allocated blocks
+ -pointers to the data storage location.  This tiny storage space is referred to as the file’s 
+
+- assigned a unique numeric identifier that is used by the kernel for accessing, tracking, and managing the file.
+- mapping between an inode and a filename is referred to as a link.
+- does not store the filename in its metadata
+- filename and corresponding inode number mapping is maintained in the directory’s metadata where the file resides.
+- Links are not created between files and directories
+
+### Hard links
+
+- mapping between one or more filenames and an inode number, making all hard-linked files indistinguishable from one another.
+- all hard-linked files will have identical metadata.
+- Changes to the file metadata and content can be made by accessing any of the filenames.
+- cannot cross file system boundaries
+- cannot link directories
+
+![500](Pasted%20image%2020230131135043.png)  {}
+
+create file 20 as a link - they share the same inode numne (ls -li)</code></pre></div><p>touch file10
+ln file10 file20</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -li output
+- column 1 inode number
+- column 2 link count
+
+# Soft Links
+
+- symbolic or sumlink
+- like a microsoft shortcut
+- Each soft link has unique inode number
+- link count does not increae or decrease
+- Size of soft link is the number of character in pathname to target
+- can cross file system boundaries 
+- can link directories
+
+![250](Pasted%20image%2020230131140523.png)</code></pre></div><p>ln -s file10 soft10</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>- ls-l shows l at the beginning of the permissions for soft link
+- if you remove the original file, the softlink will point to a file that doesn&#39;t exist
+- RHEL 8 has four soft-linked directories under /.
+	1. bin -&gt; usr/bin
+	2. lib -&gt; usr/lib
+	3. lib64 -&gt;usr/lib64
+	4. sbin -&gt; usr/sbin
+- Same syntax for creating linked directories
+
+### Copying vs linking
+
+copying
+- duplicates source file
+- each copy stores data at a unique location
+- each copied file has a unique inode number and unique metadata
+- If a copy is moved, erased, or renamed, the source file will have no impact, and vice versa.
+- Copy is used when the data needs to be edited independent of the other.
+- Permissions on the source and the copy are managed independent of each other.
+
+Linking
+- Creates a shortcut that points to the source file. The source can be accessed or modified using either the source file or the link.
+- All linked files point to the same data.
+- Hard Link: All hard-linked files share the same inode number, and hence the metadata. 
+- Symlink: Each symlinked file has a unique inode number, but the inode number stores only the pathname to the source.
+- Hard Link: If the hard link is weeded out, the other file and the data will remain untouched. 
+- Symlink: If the source is deleted, the soft link will be broken and become meaningless. If the soft link is removed, the source will have no impact.
+- Links are used when access to the same source is required from multiple locations.
+- Permissions are managed on the source file.
+
+ ## Exercise 3-2: Create and Manage Hard Links
+
+1. Create an empty fifile /tmp/hard1, and display the long file listing including the inode number:</code></pre></div><p>[vagrant@server1 ~]$ touch /tmp/hard1
+[vagrant@server1 ~]$ ls -li /tmp/hard1
+86776277 -rw-rw-r&ndash;. 1 vagrant vagrant 0 Feb  1 04:04 /tmp/hard1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>2. Create two hard links called hard2 and hard3 under /tmp, and display the long listing:</code></pre></div><p>[vagrant@server1 ~]$ ln /tmp/hard1 /tmp/hard2
+[vagrant@server1 ~]$ ln /tmp/hard1 /tmp/hard3
+[vagrant@server1 ~]$ ls -li /tmp/hard*
+86776277 -rw-rw-r&ndash;. 3 vagrant vagrant 0 Feb  1 04:04 /tmp/hard1
+86776277 -rw-rw-r&ndash;. 3 vagrant vagrant 0 Feb  1 04:04 /tmp/hard2
+86776277 -rw-rw-r&ndash;. 3 vagrant vagrant 0 Feb  1 04:04 /tmp/hard3</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>3.Edit file hard2 and add some random text. Display the long listing for all three files again:</code></pre></div><p>[vagrant@server1 ~]$ vim /tmp/hard2
+[vagrant@server1 ~]$ ls -li /tmp/hard*
+86776277 -rw-rw-r&ndash;. 3 vagrant vagrant 6 Feb  1 04:09 /tmp/hard1
+86776277 -rw-rw-r&ndash;. 3 vagrant vagrant 6 Feb  1 04:09 /tmp/hard2
+86776277 -rw-rw-r&ndash;. 3 vagrant vagrant 6 Feb  1 04:09 /tmp/hard3</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>4. Erase file hard1 and hard3, and display the long listing for the remaining file:</code></pre></div><p>[vagrant@server1 ~]$ rm -f /tmp/hard1 /tmp/hard3
+[vagrant@server1 ~]$ ls -li /tmp/hard*
+86776277 -rw-rw-r&ndash;. 1 vagrant vagrant 6 Feb  1 04:09 /tmp/hard2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Exercise 3-3: Create and Manage Soft Links
+
+1. Create soft link /root/soft1 pointing to /tmp/hard2, and display the long file listing for both:</code></pre></div><p>[vagrant@server1 ~]$ sudo ln -s /tmp/hard2 /root/soft1
+[vagrant@server1 ~]$ ls -li /tmp/hard2 /root/soft1
+ls: cannot access &lsquo;/root/soft1&rsquo;: Permission denied
+86776277 -rw-rw-r&ndash;. 1 vagrant vagrant 6 Feb  1 04:09 /tmp/hard2
+[vagrant@server1 ~]$ sudo ls -li /tmp/hard2 /root/soft1
+134939839 lrwxrwxrwx. 1 root    root    10 Feb  1 04:21 /root/soft1 -&gt; /tmp/hard2
+86776277 -rw-rw-r&ndash;. 1 vagrant vagrant  6 Feb  1 04:09 /tmp/hard2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>2.Edit soft1 and display the long listing again:</code></pre></div><p>[vagrant@server1 ~]$ sudo vim /root/soft1
+[vagrant@server1 ~]$ sudo ls -li /tmp/hard2 /root/soft1
+134939839 lrwxrwxrwx. 1 root    root    10 Feb  1 04:21 /root/soft1 -&gt; /tmp/hard2
+86776277 -rw-rw-r&ndash;. 1 vagrant vagrant 70 Feb  1 04:27 /tmp/hard2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>3.Remove hard2 and display the long listing:</code></pre></div><p>[vagrant@server1 ~]$ sudo ls -li /tmp/hard2 /root/soft1
+ls: cannot access &lsquo;/tmp/hard2&rsquo;: No such file or directory
+134939839 lrwxrwxrwx. 1 root root 10 Feb  1 04:21 /root/soft1 -&gt; /tmp/hard2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>remove the soft link</code></pre></div><p>rm -f /root/soft1.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>(go do chapter questions)
+
+# Challenge Labs
+
+## Lab 3-1: Archive, List, and Restore Files
+
+As user1 on server1, execute the tar command to create a gzip-compressed archive of the /etc directory. </code></pre></div><p>[vagrant@server1 ~]$ tar -czf etc.tar.gz /etc</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Run the tar command again to create a bzip2-compressed archive of the /etc directory. </code></pre></div><p>[vagrant@server1 ~]$ sudo tar -cjf etc.tar.bz2 /etc</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Compare the file sizes of the two archives. </code></pre></div><p>[vagrant@server1 ~]$ ls -l etc*
+-rw-r&ndash;r&ndash;. 1 root    root    5625643 Feb  1 14:34 etc.tar.bz2
+-rw-rw-r&ndash;. 1 vagrant vagrant 7139420 Feb  1 12:34 etc.tar.gz</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Run the tar command and uncompress and restore both archives without  specifying the compression tool used.</code></pre></div><p>sudo tar -xf etc.tar.bz2 ; sudo tar -xf etc.tar.gz</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Lab 3-2: Practice the vim Editor
+
+As user1 on server1, create a file called vipractice in the home directory using vim. Type (do not copy and paste) each sentence from Lab 3-1 on a separate line (do not worry about line wrapping). Save the file and quit the editor. 
+
+Open vipractice in vim again and reveal line numbering. Copy lines 2 and 3 to the end of the file to make the total number of lines in the file to 6. </code></pre></div><p>yy and p</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Move line 3 to make it line 1. </code></pre></div><p>3m0</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Go to the last line and append the contents of the .bash_profile. 
+
+Substitute all occurrences of the string “Profile” with “Pro File”, and all occurrences of the string “profile” with “pro file”. </code></pre></div><p>:%s/profile/pro file/g</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Erase lines 5 to 8. Save the file and quit vim. </code></pre></div><p>:5,8d</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Provide a count of lines, words, and characters in the vipractice file using the wc command.</code></pre></div><p>wc vipractice</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>## Lab 3-3: File and Directory Operations
+
+As user1 on server1, create one file and one directory in the home directory. </code></pre></div><p>[vagrant@server1 ~]$ touch file3
+[vagrant@server1 ~]$ mkdir dir5</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>List the file and directory and observe the permissions, ownership, and owning group. </code></pre></div><p>[vagrant@server1 ~]$ ls -l file3
+-rw-rw-r&ndash;. 1 vagrant vagrant 0 Feb  2 11:50 file3
+[vagrant@server1 ~]$ ls -l dir5
+total 0
+[vagrant@server1 ~]$ ls -ld dir5
+drwxrwxr-x. 2 vagrant vagrant 6 Feb  2 11:50 dir5</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Try to move the file and the directory to the /var/log directory and notice what happens. </code></pre></div><p>[vagrant@server1 ~]$ mv dir5 /var/log
+mv: cannot move &lsquo;dir5&rsquo; to &lsquo;/var/log/dir5&rsquo;: Permission denied
+[vagrant@server1 ~]$ mv file3 /var/log
+mv: cannot move &lsquo;file3&rsquo; to &lsquo;/var/log/file3&rsquo;: Permission denied</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Try again to move them to the /tmp directory. </code></pre></div><p>[vagrant@server1 ~]$ mv dir5 /tmp
+[vagrant@server1 ~]$ ls /tmp
+dir5   home          hom.tar.gz
+file3  home.tar.bz2  syst-private-921fdf40ba444d249979421c565fd3ad-chronyd.service-QmSCG1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Duplicate the file with the cp command, and then rename the duplicated file using any name. </code></pre></div><p>[vagrant@server1 ~]$ cp /tmp/file3 file4
+[vagrant@server1 ~]$ ls /tmp
+dir5   home          hom.tar.gz
+file3  home.tar.bz2  syst-private-921fdf40ba444d249979421c565fd3ad-chronyd.service-QmSCG1
+[vagrant@server1 ~]$ ls
+dir1  dir3  etc          etc.tar.gz  file2  fstab  tar2files.tar  vipractice
+dir2  dir4  etc.tar.bz2  file1       file4  home   tarball.tar</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Erase the file and directory created for this lab.</code></pre></div><p>[vagrant@server1 ~]$ rm /tmp dir5; rm file4
+rm: cannot remove &lsquo;/tmp&rsquo;: Is a directory
+rm: cannot remove &lsquo;dir5&rsquo;: No such file or directory
+[vagrant@server1 ~]$ rm /tmp/dir5; rm file4
+rm: cannot remove &lsquo;/tmp/dir5&rsquo;: Is a directory
+rm: cannot remove &lsquo;file4&rsquo;: No such file or directory
+[vagrant@server1 ~]$ rm -d /tmp/dir5; rm file4
+rm: cannot remove &lsquo;file4&rsquo;: No such file or directory
+[vagrant@server1 ~]$ ls
+dir1  dir3  etc          etc.tar.gz  file2  home           tarball.tar
+dir2  dir4  etc.tar.bz2  file1       fstab  tar2files.tar  vipractice</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code> </code></pre></div>
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.min.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1693602285" defer></script>
+        <script src="/js/search.js?1693602285" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/index.html" class="parent alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/index.html">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/rhcsa/3_file_management/index.html" class="active"><a class="padding" href="/linux/rhcsa/3_file_management/index.html"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/index.html" class=""><a class="padding" href="/networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/privacy/index.html" class=""><a class="padding" href="/privacy/index.html">Privacy<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/python/index.html" class=""><a class="padding" href="/python/index.html">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/index.html" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/index.html">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/bravebrowser/index.html" class=""><a class="padding" href="/tools/bravebrowser/index.html">Brave Browser Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city2" value="city2" selected>City2</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1693602285" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1693602285" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1693602285" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1693602285" defer></script>
+  </body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.117.0">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title></title>
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1692880408" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1692880408" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1692880408" rel="stylesheet">
+    <link href="/css/auto-complete.css?1692880408" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1692880408" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1692880408" rel="stylesheet">
+    <link href="/css/fonts.css?1692880408" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1692880408" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1692880408" rel="stylesheet">
+    <link href="/css/theme-city.css?1692880408" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1692880408" rel="stylesheet">
+    <link href="/css/print.css?1692880408" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1692880408" rel="stylesheet">
+    <script src="/js/url.js?1692880408"></script>
+    <script src="/js/variant.js?1692880408"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/tech/networking/cisco/dhcp_snooping_and_arp_inspection/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <a class="nav nav-next topbar-link" href="/python/index.html" title="Python (&#129106;)"><i class="fas fa-chevron-right fa-fw"></i></a>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/tech/networking/index.html" title="Networking (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/tech/networking/cisco/dhcp_snooping_and_arp_inspection/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/tech/index.html"><span itemprop="name">Tech</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/tech/networking/index.html"><span itemprop="name">Networking</span></a><meta itemprop="position" content="3"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Perfect Dark Mode</span><meta itemprop="position" content="4"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p>5.0 Security Fundamentals</p>
+<p>5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)</p>
+<p>DHCP Snooping</p>
+<ul>
+<li>notices DHCP messages that fall outside the normal use of DHCP</li>
+<li>watches the DHCP messages that flow through a LAN switch</li>
+<li>builds a table that lists the details of legitimate DHCP flows</li>
+<li>other switch features can know what legitimate DHCP leases exist for devices connected to the switch.</li>
+</ul>
+<p>Dynamic ARP Inspection (DAI)</p>
+<ul>
+<li>
+<p>helps prevent packets being redirected to an attacking host.</p>
+</li>
+<li>
+<p>Some ARP attacks try to convince hosts to send packets to the attacker’s device instead of the true destination.</p>
+</li>
+<li>
+<p>The switch watches ARP messages as they flow through the switch.</p>
+</li>
+<li>
+<p>checks incoming ARP messages,</p>
+</li>
+<li>
+<p>checks those against normal ARP operation as well as</p>
+</li>
+<li>
+<p>checks the details against other data sources, including the DHCP Snooping binding table.</p>
+</li>
+<li>
+<p>When the ARP message does not match the known information about the legitimate addresses in the network, the switch filters the ARP message.</p>
+</li>
+</ul>
+<p>DHCP Snooping Concepts</p>
+<ul>
+<li>
+<p>analyzes incoming messages on the specified subset of ports in a VLAN</p>
+</li>
+<li>
+<p>never filters non-DHCP messages</p>
+</li>
+<li>
+<p>allow the incoming DHCP message or discard the message.</p>
+</li>
+<li>
+<p>operates on LAN switches and is commonly used on Layer 2 LAN switches and enabled on Layer 2 ports.</p>
+</li>
+<li>
+<p>Client facing devices are untrusted</p>
+</li>
+<li>
+<p>DHCP facing devices (server, router, switch) are trusted</p>
+</li>
+<li>
+<p>works first on all ports in a VLAN, but with each port being trusted or untrusted by DHCP Snooping</p>
+</li>
+<li>
+<p>the rules differentiate between messages normally sent by servers (like DHCPOFFER and DHCPACK) versus those normally sent by DHCP clients:</p>
+</li>
+<li>
+<p>DHCP messages received on an untrusted port, for messages normally sent by a server, will always be discarded.</p>
+</li>
+<li>
+<p>DHCP messages received on an untrusted port, as normally sent by a DHCP client, may be filtered if they appear to be part of an attack.</p>
+</li>
+<li>
+<p>DHCP messages received on a trusted port will be forwarded; trusted ports do not filter (discard) any DHCP messages.</p>
+</li>
+</ul>
+<p>A Sample Attack: A Spurious DHCP Server</p>
+<ul>
+<li>Spurious DHCP server (attacker) responds to dhcp message by a client pc</li>
+<li>attacker replies with false dhcp information by naming itself as the default gateway</li>
+<li>Pc1 send all messages to another network to attacker, becoming a man-in-the-middle attack (pc2 could forward the messages to the actual default gateway</li>
+<li>the legitimate DHCP also returns a DHCPOFFER message to host PC1, but most hosts use the first received DHCPOFFER, and the attacker will likely be first in this scenario.</li>
+</ul>
+<p>DHCP Snooping Logic</p>
+<ul>
+<li>
+<p>stops attacks by making ports untrusted</p>
+</li>
+<li>
+<p>DHCP clients also use the DHCP RELEASE and DHCP DECLINE messages.</p>
+</li>
+<li>
+<p>DHCP RELEASE</p>
+</li>
+<li>
+<p>client can tell the DHCP server it no longer needs the address, releasing it back to the DHCP server</p>
+</li>
+<li>
+<p>DHCP DECLINE</p>
+</li>
+<li>
+<p>turn down the use of an IP address during the normal DORA flow on messages.</p>
+</li>
+</ul>
+<p>DHCP Snooping rules:</p>
+<ul>
+<li>
+<p>Examine all incoming DHCP messages.</p>
+</li>
+<li>
+<p>If normally sent by servers, discard the message.</p>
+</li>
+<li>
+<p>If normally sent by clients, filter as follows:</p>
+</li>
+<li>
+<p>DISCOVER and REQUEST</p>
+</li>
+<li>
+<p>check for MAC address consistency between the Ethernet frame and the DHCP message.</p>
+</li>
+</ul>
+<p>RELEASE or DECLINE</p>
+<ul>
+<li>
+<p>check the incoming interface plus IP address versus the DHCP Snooping binding table.</p>
+</li>
+<li>
+<p>For messages not filtered that result in a DHCP lease, build a new entry to the DHCP Snooping binding table.</p>
+</li>
+</ul>
+<p>DHCP snooping checking MAC Address</p>
+<ul>
+<li>
+<p>chaddr (client hardware address)</p>
+</li>
+<li>
+<p>Source MAC address included in DISCOVER message</p>
+</li>
+<li>
+<p>frame encapsulating the dhcp message also includes the source mac address</p>
+</li>
+<li>
+<p>DHCP Snooping checks to make sure those values match.</p>
+</li>
+<li>
+<p>if not the packet is dropped</p>
+</li>
+<li>
+<p>Used on untrusted ports</p>
+</li>
+<li>
+<p>stops attacker from leasing all available addresses so no other client can get a lease</p>
+</li>
+</ul>
+<p>Filtering Messages that Release IP Addresses</p>
+<ul>
+<li>
+<p>DHCP Snooping binding table</p>
+</li>
+<li>
+<p>creates entry for all legitimate DHCP entries</p>
+</li>
+<li>
+<p>DHCP Snooping, and other features like Dynamic ARP Inspection, can use the table to make decisions.</p>
+</li>
+<li>
+<p>DHCP Snooping Binding Table:</p>
+</li>
+<li>
+<p>MAC</p>
+</li>
+<li>
+<p>IP</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>INTERFACE</p>
+</li>
+<li>
+<p>checks client-sent messages like RELEASE and DECLINE that would cause the DHCP server to be allowed to release an address</p>
+</li>
+<li>
+<p>attacker could RELEASE an address that is not his and attempt steal it for himself</p>
+</li>
+<li>
+<p>attacker pretends his source IP is the legitimate IP trying to RELEASE</p>
+</li>
+<li>
+<p>the source interface in the DHCP Snooping Binding Table does not match so dhcp snooping bloacks the request</p>
+</li>
+</ul>
+<p>DHCP Snooping Configuration</p>
+<p>Required:</p>
+<ul>
+<li>
+<p>enable DHCP Snooping</p>
+</li>
+<li>
+<p>ip dhcp snooping</p>
+</li>
+<li>
+<p>list the VLANs on which to use DHCP Snooping</p>
+</li>
+<li>
+<p>ip dhcp snooping vlan vlan-id</p>
+</li>
+</ul>
+<p>Often used:</p>
+<ul>
+<li>
+<p>configure trusted ports</p>
+</li>
+<li>
+<p>default is untrusted.</p>
+</li>
+<li>
+<p>(config-if) # ip dhcp snooping trust</p>
+</li>
+</ul>
+<p>DHCP Snooping verification</p>
+<p>show ip dhcp snooping</p>
+<ul>
+<li>
+<p>enabled or disabled</p>
+</li>
+<li>
+<p>operational in which vlans</p>
+</li>
+<li>
+<p>trusted interfaces</p>
+</li>
+<li>
+<p>Insertion of option 82 is disabled</p>
+</li>
+<li>
+<p>(enabled by default)</p>
+</li>
+<li>
+<p>no ip dhcp information option command is configured</p>
+</li>
+<li>
+<p>(because this switch is not a dhcp relay agent)</p>
+</li>
+<li>
+<p>DHCP relay agents add option 82 DHCP header fields (RFC 3046)</p>
+</li>
+<li>
+<p>If enabled on a non relay agent then dhcp stops working for end users</p>
+</li>
+<li>
+<p>The switch sets fields in the DHCP messages as if it were a DHCP relay agent</p>
+</li>
+<li>
+<p>changes to those messages cause most DHCP servers (and most DHCP relay agents) to ignore the received DHCP messages.</p>
+</li>
+<li>
+<p>Rate limit on each interface</p>
+</li>
+</ul>
+<p>Show ip dhcp snooping binding</p>
+<p>Shows actual dhcp snooping binding table</p>
+<p>DHCP Rate Limiting</p>
+<ul>
+<li>
+<p>attacker generates large volumes of DHCP messages to overload the DHCP Snooping feature and the switch CPU itself</p>
+</li>
+<li>
+<p>optional feature that tracks the number of incoming DHCP messages.</p>
+</li>
+<li>
+<p>If the number of incoming DHCP messages exceeds that limit over a one-second period:</p>
+</li>
+<li>
+<p>port changes to an err-disabled state.</p>
+</li>
+</ul>
+<p>-can be on both on trusted and untrusted interfaces.</p>
+<ul>
+<li>Default of no rate limit</li>
+</ul>
+<p>how to enable DHCP Snooping rate limits and err-disabled recovery.</p>
+<p>(config-int) # ip dhcp snooping rate limit number</p>
+<p>errdisable recovery cause dhcp-rate-limit</p>
+<ul>
+<li>recover from errdisable if caused by dhcp snooping</li>
+</ul>
+<p>errdisable recovery interval number</p>
+<ul>
+<li>seconds to wait before recovering</li>
+</ul>
+<p>(config-int) # no ip dhcp snooping rate limit</p>
+<p>Dynamic ARP Inspection (DAI)</p>
+<ul>
+<li>
+<p>examines incoming ARP messages on untrusted ports to filter those it believes to be part of an attack.</p>
+</li>
+<li>
+<p>compares incoming ARP messages with two sources of data:</p>
+</li>
+<li>
+<p>DHCP Snooping binding table</p>
+</li>
+<li>
+<p>configured ARP ACLs.</p>
+</li>
+<li>
+<p>If the incoming ARP message does not match the tables in the switch, the switch discards the ARP message.</p>
+</li>
+</ul>
+<p>DAI Concepts</p>
+<p>gratuitous ARP (arp reply)—</p>
+<p>triggers hosts to add incorrect ARP entries to their ARP tables.</p>
+<p>Review of Normal IP ARP</p>
+<p>Both hosts learn the other host’s MAC address with this two-message flow. Not only does PC1 learn R2’s MAC address based on the ARP reply (message 2), but router R2 learns PC1’s IP and MAC address because of the ARP request (message 1).</p>
+<p>ARP Request</p>
+<ul>
+<li>
+<p>Ethernet Frame</p>
+</li>
+<li>
+<p>source mac</p>
+</li>
+<li>
+<p>destination mac (broadcast)</p>
+</li>
+<li>
+<p>ARP</p>
+</li>
+<li>
+<p>Origin IP</p>
+</li>
+<li>
+<p>Target IP</p>
+</li>
+<li>
+<p>Origin MAC</p>
+</li>
+<li>
+<p>Target MAC ??</p>
+</li>
+</ul>
+<p>ARP Reply</p>
+<ul>
+<li>
+<p>Ethernet Frame</p>
+</li>
+<li>
+<p>Source MAC</p>
+</li>
+<li>
+<p>Dest. MAC</p>
+</li>
+<li>
+<p>ARP</p>
+</li>
+<li>
+<p>Origin IP</p>
+</li>
+<li>
+<p>Target IP</p>
+</li>
+<li>
+<p>Origin MAC</p>
+</li>
+<li>
+<p>Target MAC</p>
+</li>
+</ul>
+<p>Gratuitous ARP as an Attack Vector</p>
+<ul>
+<li>
+<p>when a host changes its MAC address it can send a gratuitous ARP message with these features:</p>
+</li>
+<li>
+<p>ARP reply.</p>
+</li>
+<li>
+<p>sent without having first received an ARP request.</p>
+</li>
+<li>
+<p>sent to an Ethernet destination broadcast address so that all hosts in the subnet receive the message.</p>
+</li>
+<li>
+<p>could be part of a man-in-the-middle attack</p>
+</li>
+<li>
+<p>attacker uses gratuitous arp to make replies go back to it instead of original host</p>
+</li>
+</ul>
+<p>Dynamic ARP Inspection Logic</p>
+<ul>
+<li>Host does not need arp if it doesn&rsquo;t have an IP yet</li>
+<li>Once DHCP assigns and IP then ARP is used</li>
+<li>for untrusted interfaces DAI confirms an ARP’s correctness based on the DHCP Snooping Binding table</li>
+<li>compares origin MAC and IP</li>
+<li>if not found on the table, discard the arp</li>
+<li>same trusted and untrusted rules as dhcp snooping</li>
+</ul>
+<p>ARP ACL</p>
+<ul>
+<li>
+<p>statically configured</p>
+</li>
+<li>
+<p>list correct pairs of IP and mac addresses</p>
+</li>
+<li>
+<p>Useful for ip addresses configured statically because they will not be in the dhcp snooping binding table</p>
+</li>
+<li>
+<p>DAI can check Ethernet header and arp source and destination messages mac addresses to make sure they match</p>
+</li>
+<li>
+<p>DAI can also check Messages with unexpected IP addresses in the two ARP IP address fields</p>
+</li>
+<li>
+<p>does its work in the switch CPU rather than in the switch ASIC</p>
+</li>
+<li>
+<p>DAI itself can be more susceptible to DoS attacks.</p>
+</li>
+<li>
+<p>attacker could generate large numbers of ARP messages, driving up CPU usage in the switch.</p>
+</li>
+<li>
+<p>DAI can avoid these problems through rate limiting the number of ARP messages on a port over time.</p>
+</li>
+</ul>
+<p>Configuring ARP Inspection on a Layer 2 Switch</p>
+<p>decisions include the following:</p>
+<ul>
+<li>Choose whether to rely on DHCP Snooping, ARP ACLs, or both.</li>
+<li>If using DHCP Snooping, configure it and make the correct ports trusted for DHCP Snooping.</li>
+<li>Choose the VLAN(s) on which to enable DAI.</li>
+<li>Make DAI trusted (rather than the default setting of untrusted) on select ports in those VLANs, typically for the same ports you trusted for DHCP Snooping.</li>
+</ul>
+<p>ip arp inspection vlan vlan-id</p>
+<ul>
+<li>enable arp DAI on that vlan</li>
+</ul>
+<p>(config-if)# ip arp inspection trust</p>
+<ul>
+<li>dhcp snooping should be enabled or DAI will filter all packets</li>
+</ul>
+<p>ip dhcp snooping</p>
+<p>ip dhcp snooping vlan vlan-id</p>
+<p>ip dhcp snooping trust</p>
+<p>(configure arp ACLs)</p>
+<p>show ip arp inspection</p>
+<ul>
+<li>
+<p>gives both configuration settings along with status variables and counters</p>
+</li>
+<li>
+<p>forwarded, dropped, dhcp drops, acl drop counts</p>
+</li>
+<li>
+<p>Is logging enabled?</p>
+</li>
+</ul>
+<p>show ip arp inspection statistics</p>
+<ul>
+<li>
+<p>counts per vlan</p>
+</li>
+<li>
+<p>forwarded, dropped, dhcp drops, acl drops</p>
+</li>
+<li>
+<p>permits</p>
+</li>
+</ul>
+<p>ARP Rate Limiting</p>
+<ul>
+<li>
+<p>Default for all interfaces</p>
+</li>
+<li>
+<p>(trusted and untrusted)</p>
+</li>
+</ul>
+<p>burst interval (a number of seconds)</p>
+<ul>
+<li>x ARP messages over y seconds”</li>
+<li>(DHCP Snooping does not define a burst setting)</li>
+<li>optional configuration</li>
+</ul>
+<p>ip arp inspection limit rate 8 burst interval 4</p>
+<ul>
+<li>
+<p>8 messages in a burst of 4 seconds</p>
+</li>
+<li>
+<p>default of 15 messages over a one second burst</p>
+</li>
+<li>
+<p>show ip arp inspection interfaces</p>
+</li>
+<li>
+<p>rate, burst interval, trust state, per interface</p>
+</li>
+</ul>
+<p>ip arp inspection limit rate number</p>
+<p>ip arp inspection limit rate none</p>
+<ul>
+<li>disable rate limiting</li>
+</ul>
+<p>errdisable recovery cause arp-inspection</p>
+<p>errdisable recovery interval 30</p>
+<p>Configuring Optional DAI Message Checks</p>
+<p>ip arp inspection validate {dst-mac, ip, src-mac}</p>
+<ul>
+<li>one, two, or all three of the options</li>
+<li>command with overrides previous versions of the same command</li>
+<li>show ip arp inspection to validate</li>
+</ul>
+<p>drop ARP packets when the IP addresses in the packets are invalid or when the MAC addresses in the body of the ARP packets do not match the addresses specified in the Ethernet header.</p>
+<ul>
+<li>For src-mac, check the source MAC address in the Ethernet header against the sender MAC address in the ARP body. This check is performed on both ARP requests and responses. When enabled, packets with different MAC addresses are classified as invalid and are dropped.</li>
+<li>For dst-mac, check the destination MAC address in the Ethernet header against the target MAC address in ARP body. This check is performed for ARP responses. When enabled, packets with different MAC addresses are classified as invalid and are dropped.</li>
+<li>For ip, check the ARP body for invalid and unexpected IP addresses. Addresses include 0.0.0.0, 255.255.255.255, and all IP multicast addresses. Sender IP addresses are checked in all ARP requests and responses, and target IP addresses are checked only in ARP responses</li>
+</ul>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+          <style>
+            #logo svg,
+            #logo svg * {
+              color: #282828;
+              color: var(--MENU-SECTIONS-BG-color);
+              fill: #282828 !important;
+              fill: var(--MENU-SECTIONS-BG-color) !important;
+              opacity: .945;
+            }
+            a#logo {
+              color: #282828;
+              color: var(--MENU-SECTIONS-BG-color);
+              font-family: 'Work Sans', 'Helvetica', 'Tahoma', 'Geneva', 'Arial', sans-serif;
+              font-size: 1.875rem;
+              font-weight: 300;
+              margin-top: -.8125rem;
+              max-width: 60%;
+              text-transform: uppercase;
+              width: 14.125rem;
+              white-space: nowrap;
+            }
+            a#logo:hover {
+              color: #282828;
+              color: var(--MENU-SECTIONS-BG-color);
+            }
+            #logo svg {
+              margin-bottom: -1.25rem;
+              margin-inline-start: -1.47rem;
+              width: 40.5%;
+            }
+            @media only all and (max-width: 60rem) {
+              a#logo {
+                font-size: 1.5625rem;
+                margin-top: -.1875rem;
+              }
+              #logo svg {
+                margin-bottom: -.75rem;
+                margin-inline-start: -1.47rem;
+              }
+            }
+            @media all and (-ms-high-contrast:none) {
+              /* IE11s understanding of positioning is weird at best */
+              a#logo {
+                margin-top: -3.625rem;
+              }
+              #logo svg {
+                margin-bottom: -3.875rem;
+                margin-left: -1.47rem;
+              }
+            }
+            @media only all and (-ms-high-contrast:none) and (max-width: 60rem) {
+              #logo svg {
+                margin-left: -1.47rem;
+              }
+            }
+          </style>
+          <a id="logo" href="/index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.044 64.044">
+              <path d="M46.103 136.34c-.642-.394-1.222-2.242-1.98-2.358-.76-.117-1.353.506-1.618 1.519-.266 1.012-.446 4.188.173 5.538.213.435.482.787 1.03.845.547.057.967-.504 1.45-1.027.482-.523.437-.9 1.142-.612.705.289 1.051.4 1.586 1.229.535.828 1.085 4.043.868 5.598-.241 1.458-.531 2.8-.59 4.088.26.075.517.148.772.217 2.68.724 5.373 1.037 7.873.02.001-.028.01-.105.008-.11-.048-.165-.18-.41-.36-.698-.18-.29-.414-.645-.586-1.114a3.212 3.212 0 0 1-.125-1.735c.056-.21.153-.342.249-.475 1.237-1.193 2.932-1.373 4.244-1.384.557-.004 1.389.016 2.198.255.809.239 1.706.724 2.068 1.843.187.578.114 1.17-.043 1.623-.153.438-.369.783-.545 1.091-.178.31-.329.6-.401.821-.007.02-.003.071-.005.094 2.256 1.008 4.716.91 7.189.398.55-.114 1.11-.247 1.673-.377.344-1.085.678-2.145.852-3.208.124-.752.158-2.311-.078-3.538-.118-.613-.306-1.15-.52-1.489-.221-.349-.413-.501-.747-.538-.243-.027-.51.013-.796.098-.67.223-1.33.606-1.966.76l-.008.002-.109.032c-.556.152-1.233.158-1.797-.36-.556-.51-.89-1.367-1.117-2.596-.283-1.528-.075-3.279.89-4.518l.071-.09h.07c.65-.71 1.485-.802 2.16-.599.706.213 1.333.629 1.772.84.736.354 1.185.319 1.475.171.291-.148.5-.439.668-.955.332-1.017.301-2.819.022-4.106-.148-.684-.13-1.292-.13-1.883-1.558-.463-3.067-.982-4.574-1.208-1.128-.169-2.263-.173-3.298.164-.13.046-.256.095-.38.15-.373.164-.633.342-.805.52-.077.098-.081.105-.087.21-.004.068.031.289.13.571.1.282.256.634.467 1.03.279.524.448 1.063.431 1.618a2.12 2.12 0 0 1-.499 1.309 1.757 1.757 0 0 1-.62.51h-.002c-.515.291-1.107.404-1.723.464-.86.083-1.787.026-2.598-.097-.806-.123-1.47-.28-1.948-.555-.444-.256-.79-.547-1.037-.925a2.273 2.273 0 0 1-.356-1.301c.029-.837.403-1.437.625-1.897.111-.23.191-.433.236-.583.045-.15.044-.25.046-.24-.005-.029-.127-.355-1.015-.741-1.138-.495-2.322-.673-3.533-.668h-.015a9.711 9.711 0 0 0-.521.016h-.002c-1.163.057-2.35.308-3.541.569.383 1.531.79 2.753.818 4.502-.096 1.297.158 2.114-1.03 2.935-.85.588-1.508.729-2.15.335" style="fill:#282828;fill-opacity:1;stroke:none;stroke-width:1.03763;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="translate(-40.698 -95.175)"/>
+              <path d="M61.472 101.34v.002c-.3-.003-.603.01-.894.04-.544.055-1.39.165-1.778.306-1.238.364.13 2.344.41 2.913.28.569.285 2.03.14 2.134-.144.103-.375.261-.934.345-.56.084.03-.037-1.589.086-1.62.122-5.506.29-8.265.248-.022.26-.036.521-.097.808-.309 1.442-.63 3.163-.494 4.074.071.473.168.65.414.8.23.14.737.235 1.62-.004.834-.227 1.3-.442 1.887-.456.595-.016 1.555.472 1.965.717.411.245-.03-.008.002 0s.128.05.176.102c.049.053-.276-.523.104.199.379.721.72 3.256.002 4.68-.46.913-1.01 1.49-1.64 1.711-.63.22-1.229.067-1.734-.135-.881-.353-1.584-.7-2.205-.647-1.199 1.94-1.186 4.17-.6 6.602.097.397.212.814.327 1.23 2.68-.556 5.542-1.016 8.337.132 1.064.437 1.73 1.015 1.902 1.857.169.831-.193 1.508-.438 1.986-.122.238-.23.46-.307.642-.07.164-.096.28-.104.324.069.429.309.723.686.945.385.227.89.355 1.35.423.723.104 1.567.152 2.287.086.693-.064 1.032-.338 1.241-.544a2.447 2.447 0 0 0 .303-.437.175.175 0 0 0 .013-.035c-.004-.066-.037-.246-.195-.527-.46-.816-.87-1.595-.817-2.51.028-.476.218-.938.529-1.288.304-.343.698-.586 1.186-.79 1.442-.606 2.96-.609 4.372-.409 1.525.216 2.963.679 4.378 1.083.226-2.09.784-3.9.592-5.77-.058-.565-.287-1.333-.598-1.827-.32-.508-.59-.717-1.036-.642-.648.11-1.472.935-2.707 1.078-.791.092-1.494-.267-1.95-.86-.45-.583-.678-1.335-.78-2.101-.202-1.525.031-3.229.89-4.27.615-.747 1.45-.887 2.15-.74.687.145 1.307.492 1.857.745v-.002c.546.252 1.033.388 1.281.344a.547.547 0 0 0 .353-.188c.113-.124.242-.35.384-.75.604-1.712.206-3.68-.303-5.654-.667.145-1.336.293-2.018.413-1.341.236-2.73.392-4.136.273-.656-.055-1.695-.085-2.58-.476-.442-.195-.903-.514-1.157-1.093-.259-.591-.205-1.313.08-2.014.223-.64 1.082-2.178.692-2.585-.391-.407-1.651-.56-2.554-.571z" style="fill:#282828;fill-opacity:1;stroke:none;stroke-width:.992837;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="translate(-40.698 -95.175)"/>
+              <path d="M83.128 98.116c-.484 1.875-1.057 3.757-2.486 5.033-.638.57-1.13.666-1.483.548-.401-.134-.715-.506-1.058-.973-.338-.461-.655-.97-1.076-1.332-.192-.165-.404-.315-.683-.38-.279-.066-.599-.02-.9.102-.489.196-.89.58-1.28 1.047a6.1 6.1 0 0 0-.985 1.632c-.234.591-.356 1.174-.277 1.713.072.487.392.977.905 1.185.463.187.926.156 1.36.154.433 0 .843.01 1.242.147.55.189.79.736.822 1.368.034.66-.145 1.412-.393 1.988l-.008.021c-.74 1.705-1.946 2.893-3.004 4.349l-.664.915.979.099c.924.092 1.788.26 2.468.675.46.281 1.806 1.205 2.794 2.222.497.513.888 1.031 1.047 1.502.078.231.095.422.05.6a.93.93 0 0 1-.345.474c-.301.223-.606.395-.864.532l-.354.186c-.107.058-.189.087-.345.228a.637.637 0 0 1 .062-.045l-.064.041-.209.236-.103.343s.003.126.007.152c.003.017.003.007.004.015v.002c.016.195.061.307.133.476a4.1 4.1 0 0 0 .32.596 5.7 5.7 0 0 0 2.8 2.258c.284.108.908.321 1.548.36.33.02.59.015.912-.13h.002c.08-.037.228-.095.382-.281.153-.186.19-.355.212-.445l.019-.075.003-.078c.023-.585-.037-1.296.072-1.899.153-.657.435-.956 1.009-.909 2.771.239 4.74 1.955 6.693 3.83l.742.714.279-1.155c.55-2.29 1.093-4.464 2.928-5.977.692-.57 1.184-.642 1.527-.509.39.151.676.536.996.995.319.458.605.926 1.07 1.212.194.119.464.232.784.209.32-.024.638-.163.988-.384 1.022-.645 1.778-1.756 2.086-2.942.136-.522.102-.991-.046-1.301-.158-.334-.433-.553-.754-.707-.653-.314-1.468-.373-2.094-.486-.825-.15-1.22-.475-1.345-.878-.13-.417 0-.953.335-1.61.6-1.173 1.887-2.602 3.13-3.911l.498-.526-.449-.432c-1.545-1.49-3.163-3.01-5.252-3.715h-.002c-.473-.16-1.097-.413-1.73-.424h-.003c-.311-.004-.596.04-.883.24v.002c-.22.155-.483.537-.583.937l-.008.036-.006.038c-.116.773-.06 1.467-.217 1.995-.063.212-.198.418-.359.507-.202.111-.492.153-.976.072-.582-.097-1.978-.69-3.021-1.503-.523-.407-.934-.85-1.117-1.3a1.153 1.153 0 0 1-.083-.63c.03-.184.1-.477.308-.593.21-.116.941-.32 1.377-.642h.002c.192-.141.403-.367.518-.64.114-.275.127-.526.123-.774-.006-.142-.036-.192-.08-.3a8.417 8.417 0 0 0-3-3.027c-1.226-.725-2.585-1.135-3.927-1.539-.434-.12-.844-.111-1.02.466zm.912.947c1.186.364 2.357.718 3.345 1.303 1.035.612 1.864 1.488 2.507 2.528-.514.263-1.095.5-1.44.79-.345.29-.729.914-.815 1.434-.084.509 0 .968.155 1.347.301.74.85 1.276 1.44 1.735 1.18.92 2.554 1.545 3.47 1.698.604.1 1.186.088 1.739-.216.594-.327.935-.911 1.088-1.427.264-.884.193-1.664.262-2.17h.1c.3.006.926.206 1.417.371 1.646.554 3.044 1.773 4.431 3.089-1.102 1.174-2.222 2.423-2.888 3.73-.42.823-.73 1.789-.453 2.687.283.913 1.1 1.415 2.138 1.603.691.126 1.472.226 1.84.403.19.091.258.182.278.223.03.064.058.075-.023.387-.21.804-.761 1.598-1.413 2.01-.247.155-.365.183-.407.187-.042.003-.061.002-.172-.066-.144-.088-.455-.473-.772-.929-.317-.454-.714-1.07-1.452-1.356-.783-.304-1.776-.022-2.713.75-1.942 1.6-2.626 3.764-3.146 5.8-1.802-1.676-3.772-3.138-6.589-3.517h-.002c-.346-.095-1.013-.031-1.293.143-.735.501-1.005 1.132-1.168 2.007-.125.69-.082 1.216-.074 1.659-.055.006-.046.01-.104.006-.42-.026-1.035-.215-1.244-.295-.947-.361-1.774-1.006-2.314-1.857-.054-.085-.072-.132-.109-.2l.027-.016c.284-.15.656-.36 1.045-.648.44-.327.789-.798.93-1.35a2.4 2.4 0 0 0-.068-1.379c-.254-.751-.753-1.353-1.295-1.911-1.09-1.124-2.452-2.049-2.99-2.378-.609-.372-1.303-.44-1.981-.56.875-1.094 1.878-2.251 2.596-3.921.294-.823.543-1.907.513-2.658-.049-.97-.489-2.013-1.52-2.367-.579-.2-1.131-.204-1.58-.203-.45.002-.786-.006-.97-.08h-.002c-.264-.107-.236-.108-.268-.33-.025-.17.021-.553.183-.962a4.67 4.67 0 0 1 .725-1.192c.29-.348.617-.59.705-.626.142-.057.176-.05.22-.04.045.011.127.052.263.17.235.201.56.671.92 1.161.354.484.791 1.08 1.543 1.33.8.267 1.784-.052 2.671-.846 1.594-1.424 2.235-3.317 2.714-5.051zm11.705 7.023c-.02.014.042-.002.042 0l-.008.035c.05-.2-.028-.04-.034-.035zM79.472 122.45a.198.198 0 0 1 .005.023v.014c-.002-.01-.003-.03-.005-.037zm-.29.732-.006.01-.044.027c.016-.01.033-.024.05-.036z" style="color:#000;fill:#282828;stroke-width:1.02352;-inkscape-stroke:none" transform="translate(-40.698 -95.175)"/>
+              <path d="M76.694 128.845c-.85-.012-1.668.253-2.434.67-.01.592-.015 1.17.109 1.772.323 1.573.422 3.553-.07 5.147-.247.804-.684 1.535-1.347 1.891-.663.356-1.467.296-2.362-.159-.522-.266-1.059-.62-1.487-.757-.223-.072-.392-.096-.522-.069-.13.027-.232.094-.362.27-.53.719-.681 1.823-.497 2.876.177 1.012.418 1.438.543 1.56.143.137.26.154.604.055.548-.158 1.523-.857 2.573-.972l.02-.002.5.058c.686.081 1.247.562 1.622 1.19.372.62.591 1.37.73 2.136.279 1.532.25 3.16.083 4.232-.14.91-.394 1.72-.632 2.53 1.719-.385 3.485-.692 5.307-.36 1.174.214 2.749.574 3.762 1.977l.088.122.046.159c.162.551.16 1.114.024 1.578-.13.45-.348.772-.533 1.023-.181.246-.336.444-.437.606-.102.16-.141.275-.145.336-.01.17 0 .197.07.315.057.1.186.242.39.366.408.246 1.106.414 1.843.45a7.842 7.842 0 0 0 2.174-.21 4.28 4.28 0 0 0 .822-.296c.218-.106.385-.242.377-.233l.029-.031c.025-.035.05-.072.05-.068 0-.004 0-.017-.003-.05a2.733 2.733 0 0 0-.21-.579c-.26-.548-.839-1.333-.822-2.46.01-.657.27-1.21.598-1.576.32-.357.696-.575 1.074-.736.759-.323 1.57-.418 2.054-.458 1.653-.136 3.252.296 4.755.765.457.142.905.29 1.352.434.325-2.258.902-4.247.598-6.217-.071-.46-.25-1.169-.486-1.684-.238-.518-.495-.762-.675-.779-.351-.032-.716.14-1.174.418-.457.277-1.005.665-1.695.742-.745.082-1.406-.291-1.84-.908-.428-.608-.653-1.394-.754-2.196-.203-1.596.016-3.377.794-4.493.568-.813 1.358-.984 2.024-.835.65.146 1.243.51 1.769.779.524.267.99.413 1.237.365a.527.527 0 0 0 .346-.2c.11-.132.235-.373.37-.798.612-1.918.27-3.894-.246-6.054-2.815-.851-5.49-1.534-8.089-.267a.727.727 0 0 0-.223.148c-.024.028-.018.021-.026.056.001-.003-.01.178.07.44.162.522.611 1.29.911 1.978l.004.009.029.063.024.084V133c.162.635.016 1.297-.274 1.727-.272.404-.618.636-.952.81-.675.353-1.399.484-1.724.533a5.888 5.888 0 0 1-3.973-.795c-.512-.311-.876-.594-1.133-1.02-.282-.466-.318-1.084-.172-1.557.252-.814.715-1.266.971-1.89a.663.663 0 0 0 .047-.14c.001-.013 0-.006-.007-.037a.761.761 0 0 0-.184-.268c-.264-.267-.865-.595-1.54-.826-1.356-.462-3.07-.659-3.583-.686-.062-.002-.121-.006-.178-.006z" style="fill:#282828;fill-opacity:1;stroke:none;stroke-width:.991342;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" transform="translate(-40.698 -95.175)"/>
+            </svg>
+            Relearn
+          </a>
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1692880410" defer></script>
+        <script src="/js/lunr/lunr.min.js?1692880410" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1692880410" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1692880410" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1692880410" defer></script>
+        <script src="/js/search.js?1692880410" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/index.html" class=""><a class="padding" href="/linux/index.html">Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/index.html" class=""><a class="padding" href="/networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/index.html" class="parent alwaysopen"><input type="checkbox" id="section-43fa384ae01ca11365a601e3cd261ecf" aria-controls="subsections-43fa384ae01ca11365a601e3cd261ecf" checked><label for="section-43fa384ae01ca11365a601e3cd261ecf"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tech</span></label><a class="padding" href="/tech/index.html">Tech<i class="fas fa-check read-icon"></i></a><ul id="subsections-43fa384ae01ca11365a601e3cd261ecf" class="morespace collapsible-menu">
+          <li data-nav-id="/tech/networking/index.html" class="parent alwaysopen"><input type="checkbox" id="section-724cb5d128298c974376dcc6004fbc8c" aria-controls="subsections-724cb5d128298c974376dcc6004fbc8c" checked><label for="section-724cb5d128298c974376dcc6004fbc8c"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/tech/networking/index.html">Networking<i class="fas fa-check read-icon"></i></a><ul id="subsections-724cb5d128298c974376dcc6004fbc8c" class="morespace collapsible-menu">
+          <li data-nav-id="/tech/networking/cisco/dhcp_snooping_and_arp_inspection/index.html" class="active"><a class="padding" href="/tech/networking/cisco/dhcp_snooping_and_arp_inspection/index.html"><i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="/python/index.html" class=""><a class="padding" href="/python/index.html">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/index.html" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/index.html">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/bravebrowser/index.html" class=""><a class="padding" href="/tools/bravebrowser/index.html">Brave Browser Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/tdavetech"><i class='fab fa-fw fa-github'></i> GitHub repo</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city" value="city" selected>City</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1692880410" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1692880410" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1692880410" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1692880410" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1692880410" defer></script>
+  </body>
+</html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.117.0">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title></title>
+    <link href="/images/favicon.png?1693602285" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1693602285" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1693602285" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1693602285" rel="stylesheet">
+    <link href="/css/auto-complete.css?1693602285" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1693602285" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1693602285" rel="stylesheet">
+    <link href="/css/fonts.css?1693602285" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1693602285" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1693602285" rel="stylesheet">
+    <link href="/css/theme-city2.css?1693602285" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1693602285" rel="stylesheet">
+    <link href="/css/print.css?1693602285" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1693602285" rel="stylesheet">
+    <script src="/js/url.js?1693602285"></script>
+    <script src="/js/variant.js?1693602285"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/4_labs/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <a class="nav nav-next topbar-link" href="/networking/index.html" title="Networking (&#129106;)"><i class="fas fa-chevron-right fa-fw"></i></a>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/linux/index.html" title="Linux (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/linux/rhcsa/4_labs/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/linux/index.html"><span itemprop="name">Linux</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Perfect Dark Mode</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="toc-wrapper"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#modify-permission-bits-using-symbolic-form">Modify Permission Bits Using Symbolic Form</a>
+      <ul>
+        <li><a href="#add-an-execute-bit-for-the-owner-and-a-write-bit-for-group-and-public">Add an execute bit for the owner and a write bit for group and public</a></li>
+        <li><a href="#revoke-the-write-bit-from-public-and-assign-read-write-and-execute-bits-to-the-three-user-categories-at-the-same-time">Revoke the write bit from public and assign read, write, and execute bits to the three user categories at the same time.</a></li>
+        <li><a href="#revoke-write-from-the-owning-group-and-write-and-execute-bits-from-public">Revoke write from the owning group and write and execute bits from public.</a></li>
+      </ul>
+    </li>
+    <li><a href="#modify-permission-bits-using-octal-form">Modify Permission Bits Using Octal Form</a>
+      <ul>
+        <li><a href="#read-only-for-user-group-and-other">Read only for user, group, and other</a></li>
+        <li><a href="#add-an-execute-bit-for-the-owner">Add an execute bit for the owner:</a></li>
+        <li><a href="#add-a-write-permission-bit-for-group-and-public">Add a write permission bit for group and public:</a></li>
+        <li><a href="#revoke-the-write-bit-for-public">Revoke the write bit for public:</a></li>
+        <li><a href="#assign-read-write-and-execute-permission-bits-to-all-three-user-categories">Assign read, write, and execute permission bits to all three user categories:</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#run-the-umask-command-without-any-options-and-it-will-display-the-current-umask-value-in-octal-notation">Run the umask command without any options and it will display the current umask value in octal notation:</a></li>
+        <li><a href="#symbolic-form">Symbolic form</a></li>
+        <li><a href="#set-all-new-files-and-directories-to-get-640-and-750-permissions">Set all new files and directories to get 640 and 750 permissions,</a></li>
+        <li><a href="#test-new-umask-666-027640-777-027750">Test new umask (666-027=640) (777-027=750)</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#view-suid-bit-on-su-command">View suid bit on su command</a></li>
+        <li><a href="#test-the-effect-of-setuid-bit-on-executable-files">Test the Effect of setuid Bit on Executable Files</a></li>
+        <li><a href="#test-the-effect-of-setgid-bit-on-executable-files">Test the Effect of setgid Bit on Executable Files</a></li>
+        <li><a href="#set-up-shared-directory-for-group-collaboration">Set up Shared Directory for Group Collaboration</a></li>
+        <li><a href="#view-t-in-permissions-for-sticky-bit">View &ldquo;t&rdquo; in permissions for sticky bit</a></li>
+        <li><a href="#test-the-effect-of-sticky-bit">Test the effect of Sticky Bit</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toc" data-lang="toc"></code></pre></div><h1 id="chmod">chmod</h1>
+<hr>
+<h2 id="modify-permission-bits-using-symbolic-form">Modify Permission Bits Using Symbolic Form</h2>
+<h3 id="add-an-execute-bit-for-the-owner-and-a-write-bit-for-group-and-public">Add an execute bit for the owner and a write bit for group and public</h3>
+<h4 id="heading"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod u+x permfile1 -v
+mode of &#39;permfile1&#39; changed from 0444 (r--r--r--) to 0544 (r-xr--r--)
+[vagrant@server1 ~]$ chmod -v go+w permfile1
+mode of &#39;permfile1&#39; changed from 0544 (r-xr--r--) to 0566 (r-xrw-rw-)</code></pre></div><h3 id="revoke-the-write-bit-from-public-and-assign-read-write-and-execute-bits-to-the-three-user-categories-at-the-same-time">Revoke the write bit from public and assign read, write, and execute bits to the three user categories at the same time.</h3>
+<h5 id="heading-1"></h5>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod -v o-w permfile1
+mode of &#39;permfile1&#39; changed from 0566 (r-xrw-rw-) to 0564 (r-xrw-r--)
+[vagrant@server1 ~]$ chmod -v a=rwx permfile1
+mode of &#39;permfile1&#39; changed from 0564 (r-xrw-r--) to 0777 (rwxrwxrwx)</code></pre></div><h3 id="revoke-write-from-the-owning-group-and-write-and-execute-bits-from-public">Revoke write from the owning group and write and execute bits from public.</h3>
+<h4 id="heading-2"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod g-w,o-wx permfile1 -v
+mode of &#39;permfile1&#39; changed from 0777 (rwxrwxrwx) to 0754 (rwxr-xr--)</code></pre></div><h2 id="modify-permission-bits-using-octal-form">Modify Permission Bits Using Octal Form</h2>
+<h3 id="read-only-for-user-group-and-other">Read only for user, group, and other</h3>
+<h4 id="heading-3"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ touch permfile2
+[vagrant@server1 ~]$ chmod 444 permfile2
+[vagrant@server1 ~]$ ls -l permfile2
+-r--r--r--. 1 vagrant vagrant 0 Feb  4 12:22 permfile2</code></pre></div><h3 id="add-an-execute-bit-for-the-owner">Add an execute bit for the owner:</h3>
+<h4 id="heading-4"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod -v 544 permfile2
+mode of &#39;permfile2&#39; changed from 0444 (r--r--r--) to 0544 (r-xr--r--)</code></pre></div><h3 id="add-a-write-permission-bit-for-group-and-public">Add a write permission bit for group and public:</h3>
+<h4 id="heading-5"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod -v 566 permfile2
+mode of &#39;permfile2&#39; changed from 0544 (r-xr--r--) to 0566 (r-xrw-rw-)</code></pre></div><h3 id="revoke-the-write-bit-for-public">Revoke the write bit for public:</h3>
+<h4 id="heading-6"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod -v 564 permfile2
+mode of &#39;permfile2&#39; changed from 0566 (r-xrw-rw-) to 0564 (r-xrw-r--)</code></pre></div><h3 id="assign-read-write-and-execute-permission-bits-to-all-three-user-categories">Assign read, write, and execute permission bits to all three user categories:</h3>
+<h4 id="heading-7"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ chmod -v 777 permfile2
+mode of &#39;permfile2&#39; changed from 0564 (r-xrw-r--) to 0777 (rwxrwxrwx)</code></pre></div><h1 id="umask">umask</h1>
+<hr>
+<h3 id="run-the-umask-command-without-any-options-and-it-will-display-the-current-umask-value-in-octal-notation">Run the umask command without any options and it will display the current umask value in octal notation:</h3>
+<h4 id="heading-8"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ umask
+0002</code></pre></div><h3 id="symbolic-form">Symbolic form</h3>
+<h4 id="heading-9"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ umask -S
+u=rwx,g=rwx,o=rx</code></pre></div><h3 id="set-all-new-files-and-directories-to-get-640-and-750-permissions">Set all new files and directories to get 640 and 750 permissions,</h3>
+<h4 id="heading-10"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>umask 027</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>umask u=rwx,g=rx,o=</code></pre></div><h3 id="test-new-umask-666-027640-777-027750">Test new umask (666-027=640) (777-027=750)</h3>
+<h4 id="heading-11"></h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ touch tempfile1
+[vagrant@server1 ~]$ ls -l tempfile1
+-rw-r-----. 1 vagrant vagrant 0 Feb  5 12:09 tempfile1
+[vagrant@server1 ~]$ mkdir tempdir1
+[vagrant@server1 ~]$ ls -ld tempdir1
+drwxr-x---. 2 vagrant vagrant 6 Feb  5 12:10 tempdir1</code></pre></div><h1 id="setuid">setuid</h1>
+<hr>
+<h3 id="view-suid-bit-on-su-command">View suid bit on su command</h3>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ ls -l /usr/bin/su
+-rwsr-xr-x. 1 root root 50152 Aug 22 10:08 /usr/bin/su</code></pre></div><h3 id="test-the-effect-of-setuid-bit-on-executable-files">Test the Effect of setuid Bit on Executable Files</h3>
+<p>Open 2 terminal windows. Switch to user1 in terminal1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ su - user1
+Password:
+Last login: Sun Feb  5 12:37:12 UTC 2023 on pts/1</code></pre></div><p>Switch to root on terminal2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo su - root</code></pre></div><p>T1 Revoke the setuid bit from /usr/bin/su</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>chmod -v u-s /usr/bin/su</code></pre></div><p>T2 log off as root</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ctrl+d</code></pre></div><p>Try to log in has root from both terminals</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user1@server1 ~]$ su - root
+Password:
+su: Authentication failure</code></pre></div><p>T1 restore the setuid bit</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ sudo chmod -v +4000 /usr/bin/su
+mode of &#39;/usr/bin/su&#39; changed from 0755 (rwxr-xr-x) to 4755 (rwsr-xr-x)</code></pre></div><h3 id="test-the-effect-of-setgid-bit-on-executable-files">Test the Effect of setgid Bit on Executable Files</h3>
+<p>T1 root
+T2 user1
+Opened with ssh</p>
+<p>T2 list users currently logged in</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>who</code></pre></div><p>T2 send a message to root</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>write root</code></pre></div><p>T1 revoke setgid from /usr/bin/write</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>chmod g-s /usr/bin/write -v</code></pre></div><p>Try to write root</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user1@server1 ~]$ write root
+write: effective gid does not match group of /dev/pts/0</code></pre></div><p>Restore the setgid bit on /usr/bin/write:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# sudo chmod -v +2000 /usr/bin/write
+mode of &#39;/usr/bin/write&#39; changed from 0755 (rwxr-xr-x) to 2755 (rwxr-sr-x)</code></pre></div><p>Test</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>write root</code></pre></div><h3 id="set-up-shared-directory-for-group-collaboration">Set up Shared Directory for Group Collaboration</h3>
+<p>set up 2 test users</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# adduser user100
+[root@server1 ~]# adduser user200</code></pre></div><p>Add group sgrp with GID 9999 with the groupadd command:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# groupadd -g 9999 sgrp</code></pre></div><p>Add user100 and user200 as members to sgrp using the usermod command:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# usermod -aG sgrp user100
+[root@server1 ~]# usermod -aG sgrp user200</code></pre></div><p>Create /sdir directory</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# mkdir /sdir</code></pre></div><p>Set ownership and owning group on /sdir to root and sgrp, using the chown command:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# chown root:sgrp /sdir</code></pre></div><p>Set the setgid bit on /sdir using the chmod command:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ sudo chmod g+s /sdir</code></pre></div><p>Add write permission to the group members on /sdir and revoke all permissions from public:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# chmod g+w,o-rx /sdir</code></pre></div><p>Verify</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# ls -ld /sdir
+drwxrws---. 2 root sgrp 6 Feb 13 15:49 /sdir</code></pre></div><p>Switch or log in as user100 and change to the /sdir directory:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# su - user100
+[user100@server1 ~]$ cd /sdir</code></pre></div><p>Create a file and check the owner and owning group on it:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user100@server1 sdir]$ touch file100
+[user100@server1 sdir]$ ls -l file100
+-rw-rw-r--. 1 user100 sgrp 0 Feb 10 22:41 file100</code></pre></div><p>Log out as user100, and switch or log in as user200 and change to the /sdir directory:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 ~]# su - user200
+[user200@server1 ~]$ cd /sdir</code></pre></div><p>Create a file and check the owner and owning group on it:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user200@server1 sdir]$ touch file200
+[user200@server1 sdir]$ ls -l file200
+-rw-rw-r--. 1 user200 sgrp 0 Feb 13 16:01 file200</code></pre></div><h3 id="view-t-in-permissions-for-sticky-bit">View &ldquo;t&rdquo; in permissions for sticky bit</h3>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user200@server1 sdir]$ ls -l /tmp /var/tmp -d
+drwxrwxrwt. 8 root root 185 Feb 13 16:12 /tmp
+drwxrwxrwt. 4 root root 113 Feb 13 16:00 /var/tmp</code></pre></div><h3 id="test-the-effect-of-sticky-bit">Test the effect of Sticky Bit</h3>
+<p>Switch to user100 and change to the /tmp directory</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user100@server1 sdir]$ cd /tmp</code></pre></div><p>Create file called stckyfile</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user100@server1 tmp]$ touch stickyfile</code></pre></div><p>Try to delete the file as user200</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user200@server1 tmp]$ rm stickyfile
+rm: remove write-protected regular empty file &#39;stickyfile&#39;? y
+rm: cannot remove &#39;stickyfile&#39;: Operation not permitted</code></pre></div><p>Revoke the /tmp stickybit and confirm</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ sudo chmod o-t /tmp
+[vagrant@server1 ~]$ ls -ld /tmp
+drwxrwxrwx. 8 root root 4096 Feb 13 22:00 /tmp</code></pre></div><p>Retry the removal as user200</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user200@server1 tmp]$ rm stickyfile
+rm: remove write-protected regular empty file &#39;stickyfile&#39;? y</code></pre></div><p>Restore the sticky bit on /tmp</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ sudo chmod -v +1000 /tmp
+mode of &#39;/tmp&#39; changed from 0777 (rwxrwxrwx) to 1777 (rwxrwxrwt)</code></pre></div>
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.min.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1693602285" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1693602285" defer></script>
+        <script src="/js/search.js?1693602285" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/index.html" class="parent alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/index.html">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/rhcsa/4_labs/index.html" class="active"><a class="padding" href="/linux/rhcsa/4_labs/index.html"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/index.html" class=""><a class="padding" href="/networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/privacy/index.html" class=""><a class="padding" href="/privacy/index.html">Privacy<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/python/index.html" class=""><a class="padding" href="/python/index.html">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/index.html" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/index.html">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/bravebrowser/index.html" class=""><a class="padding" href="/tools/bravebrowser/index.html">Brave Browser Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city2" value="city2" selected>City2</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1693602285" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1693602285" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1693602285" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1693602285" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1693602285" defer></script>
+  </body>
+</html>
