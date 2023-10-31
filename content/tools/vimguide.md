@@ -4,9 +4,11 @@ date: 2023-04-23T06:20:36-07:00
 draft: false
 ---
 Vim (Vi Improved)
-![[/Pasted image 20231030051400.png]]
+
 ![Alt text](</Pasted image 20231030051302.png>)
 Vim stands for vi (Improved) just like its name it stands for an improved version of the vi text editor command.
+
+![](Pasted%20image%2020231031074904.png)
 
 Lightweight
 

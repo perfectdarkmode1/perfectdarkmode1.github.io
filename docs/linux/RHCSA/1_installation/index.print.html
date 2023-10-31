@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.117.0">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title></title>
+    <link href="/images/favicon.png?1698764006" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1698764018" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1698764018" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1698764018" rel="stylesheet">
+    <link href="/css/auto-complete.css?1698764018" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1698764018" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1698764018" rel="stylesheet">
+    <link href="/css/fonts.css?1698764018" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1698764018" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1698764018" rel="stylesheet">
+    <link href="/css/theme-city2.css?1698764018" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1698764018" rel="stylesheet">
+    <link href="/css/print.css?1698764018" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1698764018" rel="stylesheet">
+    <link href="/css/ie.css?1698764018" rel="stylesheet">
+    <script src="/js/url.js?1698764018"></script>
+    <script src="/js/variant.js?1698764018"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/rhcsa/1_installation/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/linux/index.html"><span itemprop="name">Linux</span></a><meta itemprop="position" content="2"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Perfect Dark Mode</span><meta itemprop="position" content="3"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p><strong>Table of Contents</strong></p>
+<ul>
+<li><a href="#About%20RHEL9">About RHEL9</a></li>
+<li><a href="#Installation%20Logs">Installation Logs</a></li>
+<li><a href="#6%20Virtual%20Consoles">6 Virtual Consoles</a></li>
+<li><a href="#Setting%20up%20VM1">Setting up VM1</a></li>
+</ul>
+<h2 id="about-rhel9">About RHEL9</h2>
+<ul>
+<li>Kernel 5.14</li>
+<li>Released May 2019</li>
+<li>Built along side of Fedora 34</li>
+<li>Installer program = Anaconda</li>
+<li>Default Bootloader = GRUB2</li>
+<li>Default automatic partitioning = /boot, /, swap</li>
+<li>Default desktop environment = GNOME</li>
+</ul>
+<h2 id="installation-logs">Installation Logs</h2>
+<p><strong>/root/anaconda-ks.cfg</strong> Configuration entered</p>
+<p><strong>/var/log/anaconda/anaconda.log</strong> Contains informational, debug, and other general messages</p>
+<p><strong>/var/log/anaconda/journal.log</strong> Stores messages generated by many services and components during system installation</p>
+<p><strong>/var/log/anaconda/packaging.log</strong> Records messages generated by the dnf and rpm commands during software installation</p>
+<p><strong>/var/log/anaconda/program.log</strong> Captures messages generated by external programs</p>
+<p><strong>/var/log/anaconda/storage.log</strong> Records messages generated by storage modules</p>
+<p><strong>/var/log/anaconda/syslog</strong> Records messages related to the kernel</p>
+<p><strong>/var/log/anaconda/X.log</strong> Stores X Window System information</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Note: Logs are created in /tmp then transferred over to /var/log/anaconda once the install is finished.</code></pre></div><h2 id="6-virtual-consoles">6 Virtual Consoles</h2>
+<ul>
+<li>Monitor the installation process.</li>
+<li>View diagnostic messages.</li>
+<li>Discover and fix any issues encountered.</li>
+<li>Information displayed on the console screens is captured in installation log files.</li>
+</ul>
+<p>Console 1 (Ctrl+Alt+F1)</p>
+<ul>
+<li>Main screen</li>
+<li>Select language</li>
+<li>Then switches default console to 6</li>
+</ul>
+<p>Console 2 (Ctrl_Alt+F2)</p>
+<ul>
+<li>Shell interface for root user</li>
+</ul>
+<p>Console 3 (Ctrl_Alt+F3)</p>
+<ul>
+<li>Displays install messages</li>
+<li>Stores them in /tmp/anaconda.log</li>
+<li>Info on detected hardware, etc.</li>
+</ul>
+<p>Console 4 (Ctrl_Alt+F4)</p>
+<ul>
+<li>Shows storage messages</li>
+<li>Stores them in /tmp/storage.log</li>
+</ul>
+<p>Console 5 (Ctrl_Alt+F5)</p>
+<ul>
+<li>Program messages</li>
+<li>Stores them in /tmp/program.log</li>
+</ul>
+<p>Console 6 (Ctrl_Alt+F6)</p>
+<ul>
+<li>Default Graphical configuration and installation console screen</li>
+</ul>
+<p>Lab: What happens if I press the console hotkeys while I am logged in to my desktop?</p>
+<p>Console 1 Brings you to the log in screen. Console 2 does nothing. Console 3-6 all bring you to this log in screen</p>
+<p>![[Pasted image 20230624051043.png]]</p>
+<p>Lab Setup</p>
+<p>VM1</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>server1.example.om 
+192.168.0.110 
+Memory: 2GB 
+Storage: 1x20GB 
+2 vCPUs</code></pre></div><p>VM2</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>server2.exmple.om 
+192.168.0.120 
+Memory: 2048 
+Storage: 1x20GB 
+	4x250 MB data disk 
+	1x5GB data disk 
+2 vCPUs</code></pre></div><h2 id="setting-up-vm1">Setting up VM1</h2>
+<p>Download the disc iso on Redhat&rsquo;s website: <a href="https://access.redhat.com/downloads/content/rhel" target="_blank">https://access.redhat.com/downloads/content/rhel</a></p>
+<p>Name RHEL9-VM1 Accept defaults</p>
+<p>Set drive to 20 gigs</p>
+<p>press &ldquo;spe&rdquo; to hlt utooot</p>
+<p>Selet instll</p>
+<p>selet lnguge</p>
+<p>onfigure timezone under time &amp; dte</p>
+<p>go into instlltion destintion nd li &ldquo;done&rdquo;</p>
+<p>Networ nd hostnme settings</p>
+<ol>
+<li>hnge the hostnme to <a href="http://server1.exmple.om/" target="_blank">server1.exmple.om</a></li>
+<li>go to IPv4 settings in networ nd host nd set to mnul ddress: 192.168.0.110 netms 24 gtewy 192.168.0.1 then sve</li>
+<li>slide the on/off swith in the min menu to on</li>
+</ol>
+<p>Set root pssword</p>
+<p>Chnge the oot order</p>
+<ol>
+<li>power off the vm</li>
+<li>Set oot sequene to hrd dis first then optil, remove floppy</li>
+</ol>
+<p>Aept liense terms nd rete user</p>
+<p>?Enle geogrphil lotion?</p>
+<p>ssh from host os with putty</p>
+<p>Issue these ommnds fter set up</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>whoami 
+hostname 
+pwd 
+logout or ctrl+d</code></pre></div><h2 id="using-cockpit">Using cockpit</h2>
+<ul>
+<li>Web gui for managing RHEL system</li>
+<li>Comes pre-installed
+<ul>
+<li>if not then install with:</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo dnf install cockpit</code></pre></div></li>
+<li>must enable cockpit socket
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo systemctl enable --now cockpit.socket</code></pre></div></li>
+<li>https://yourip:9090</li>
+</ul>
+<h2 id="labs">Labs</h2>
+<h3 id="lab">Lab:</h3>
+<p>Enable cockpit.socket:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo systemctl enable --now cockpit.socket</code></pre></div><p>In a web browser, go to https://&lt;your-ip&gt;:9090</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1698764020" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1698764020" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1698764020" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1698764020" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1698764020" defer></script>
+  </body>
+</html>
