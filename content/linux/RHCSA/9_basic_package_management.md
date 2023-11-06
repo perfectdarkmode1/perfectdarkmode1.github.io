@@ -23,4 +23,13 @@ Two types of packages :: binary (or installable) and source.
 	- Where to install files
 	- Documentation
 		- How to install/uninstall
-		- 
+		- Man pages for config files/commands
+		- other install and usage info
+	- Metadata
+		- stored in central location
+		- includes:
+			- Package version
+			- Install location
+			- Checksum values
+			- List of included files and their attributes
+		

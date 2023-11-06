@@ -1,11 +1,8 @@
-
-**Table of Contents**
-
-- [About RHEL9](#About%20RHEL9)
-- [Installation Logs](#Installation%20Logs)
-- [6 Virtual Consoles](#6%20Virtual%20Consoles)
-- [Setting up VM1](#Setting%20up%20VM1)
-
+---
+title: "RHEL Installation"
+date: 2023-11-02T06:20:36-07:00
+draft: false
+---
 
 ## About RHEL9
 
