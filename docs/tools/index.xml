@@ -6,7 +6,51 @@
     <description>Recent content in Tools on Perfect Dark Mode</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Apr 2023 13:44:23 -0700</lastBuildDate><atom:link href="http://perfectdarkmode.com/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Nov 2023 06:20:36 -0700</lastBuildDate><atom:link href="http://perfectdarkmode.com/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Calibre Server</title>
+      <link>http://perfectdarkmode.com/tools/calibre_server/index.html</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/tools/calibre_server/index.html</guid>
+      <description>Install Calibre and Rsync
+apt install -y calibre rsyncMake a directory for your library
+mkdir /opt/calibreEither upload your existing library using rsync. For example to /opt/calibre/.
+cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/Add a new user to protect your server:
+calibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calibre
+Creating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:
+[Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.</description>
+    </item>
+    <item>
+      <title>Calibre Web with Docker Setup</title>
+      <link>http://perfectdarkmode.com/tools/calibre-web-with-docker/index.html</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/tools/calibre-web-with-docker/index.html</guid>
+      <description>cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/ Install Docker sudo apt update sudo apt install docker.io Create a Docker Network dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network 556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf Create a Docker volume to store Calibre Web data: sudo docker volume create calibre_data Pull the Calibre Web Docker image: sudo docker pull linuxserver/calibre-web Start the Calibre Web Docker container sudo docker run -d \ --name=calibre-web \ --restart=unless-stopped \ -p 8083:8083 \ -e PUID=$(id -u) \ -e PGID=$(id -g) \ -v calibre_data:/config \ -v /opt/calibre/Calibre:/books \ --network calibre_network \ linuxserver/calibre-web Configure Nginx to act as a reverse proxy for Calibre Web: sudo nano /etc/nginx/sites-available/calibre-webAdd the following to the file</description>
+    </item>
+    <item>
+      <title>Distrobox Guide</title>
+      <link>http://perfectdarkmode.com/tools/distrobox/index.html</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/tools/distrobox/index.html</guid>
+      <description>Github: https://github.com/89luca89/distrobox
+Run native containers that have access to the host file system Creates an app launcher icon for the container
+Launch gui apps from other distros natively. Even without spinning up the container first
+Make separate shortcuts for separate distros in the terminal
+Make a profile in the terminal for the container:
+`distrobox-enter &amp;ndash;name ubuntu-20
+Make sure to check the box &amp;ldquo;run a custom command instead of my shell&amp;rdquo;</description>
+    </item>
+    <item>
+      <title>Github Pages with Hugo</title>
+      <link>http://perfectdarkmode.com/tools/githubpageshugo/index.html</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/tools/githubpageshugo/index.html</guid>
+      <description>Go through quick setup here: https://pages.github.com/
+Hugo Setup: https://gohugo.io/hosting-and-deployment/hosting-on-github/
+Here&amp;rsquo;s how to set up a free website using Github pages and Hugo. You can add a custom domain name using Cloudflare for about $10 per year.
+The general steps include:
+Create a Github repository for your site. Change your pages settings. Build the repo into a Hugo site. Add DNS records for a custom domain. </description>
+    </item>
     <item>
       <title>Nextcloud Guide</title>
       <link>http://perfectdarkmode.com/tools/nextcloud/index.html</link>

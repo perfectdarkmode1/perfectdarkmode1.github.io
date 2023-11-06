@@ -10,21 +10,21 @@
     <title>Tools - Perfect Dark Mode</title>
     <link href="http://perfectdarkmode.com/tools/index.html" rel="canonical" type="text/html" title="Tools - Perfect Dark Mode">
     <link href="/tools/index.xml" rel="alternate" type="application/rss+xml" title="Tools - Perfect Dark Mode">
-    <link href="/images/favicon.png?1699274249" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1699283487" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1699274250" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1699274250" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1699274250" rel="stylesheet">
-    <link href="/css/auto-complete.css?1699274250" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1699274250" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1699274250" rel="stylesheet">
-    <link href="/css/fonts.css?1699274250" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1699274250" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1699274250" rel="stylesheet">
-    <link href="/css/theme-city2.css?1699274250" rel="stylesheet" id="variant-style">
-    <link href="/css/variant.css?1699274250" rel="stylesheet">
-    <link href="/css/print.css?1699274250" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1699274250" rel="stylesheet">
-    <link href="/css/ie.css?1699274250" rel="stylesheet">
-    <script src="/js/url.js?1699274250"></script>
-    <script src="/js/variant.js?1699274250"></script>
+    <link href="/css/fontawesome-all.min.css?1699283488" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1699283488" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1699283488" rel="stylesheet">
+    <link href="/css/auto-complete.css?1699283488" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1699283488" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1699283488" rel="stylesheet">
+    <link href="/css/fonts.css?1699283488" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1699283488" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1699283488" rel="stylesheet">
+    <link href="/css/theme-city2.css?1699283488" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1699283488" rel="stylesheet">
+    <link href="/css/print.css?1699283488" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1699283488" rel="stylesheet">
+    <link href="/css/ie.css?1699283488" rel="stylesheet">
+    <script src="/js/url.js?1699283488"></script>
+    <script src="/js/variant.js?1699283488"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -89,6 +89,208 @@
 
           <section>
             <h1 class="a11y-only">Subsections of Tools</h1>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="calibre-server">Calibre Server</h1>
+
+<p>Install Calibre and Rsync</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>apt install -y calibre rsync</span></span></code></pre></div><p>Make a directory for your library</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir /opt/calibre</span></span></code></pre></div><p>Either upload your existing library using <code>rsync</code>. For example to <code>/opt/calibre/</code>.</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#ff5c57">cd</span> ~/Documents
+</span></span><span style="display:flex;"><span>rsync -avuP your-library-dir root@example.org:/opt/calibre/</span></span></code></pre></div><p>Add a new user to protect your server:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>calibre-server --manage-users</span></span></code></pre></div><p>/var/www/nextcloud/data/david/files/Documents/Calibre</p>
+<h2 id="creating-a-service">Creating a service</h2>
+<p>Create a new file <code>/etc/systemd/system/calibre-server.service</code> and add the following:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-systemd" data-lang="systemd"><span style="display:flex;"><span><span style="color:#ff6ac1">[Unit]</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">Description</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">Calibre library server</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">After</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">network.target</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6ac1">[Service]</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">Type</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">simple</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">User</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">root</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">Group</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">root</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">ExecStart</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff6ac1">[Install]</span>
+</span></span><span style="display:flex;"><span><span style="color:#57c7ff">WantedBy</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">multi-user.target</span></span></span></code></pre></div><p>You can change the port with the <code>--port</code> prefix. Additional information <code>man calibre-server</code>.</p>
+<p>Issue <code>systemctl daemon-reload</code> to apply the changes.</p>
+<p>Enable and start the service.</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>systemctl <span style="color:#ff5c57">enable</span> calibre-server
+</span></span><span style="display:flex;"><span>systemctl start calibre-server</span></span></code></pre></div><h2 id="a-reverse-proxy-with-nginx">A reverse proxy with Nginx</h2>
+<p>Create a new file <code>/etc/nginx/sites-available/calibre</code> and enter the following:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#ff6ac1">server</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff6ac1">listen</span> <span style="color:#ff9f43">80</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff6ac1">client_max_body_size</span> <span style="color:#5af78e">64M</span>; <span style="color:#78787e"># to upload large books
+</span></span></span><span style="display:flex;"><span><span style="color:#78787e"></span>    <span style="color:#ff6ac1">server_name</span> <span style="color:#5af78e">calibre.example.org</span> ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff6ac1">location</span> <span style="color:#5af78e">/</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff6ac1">proxy_pass</span> <span style="color:#5af78e">http://127.0.0.1:8080</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Enable the site</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ln -s /etc/nginx/sites-available/calibre /etc/nginx/sites-enabled
+</span></span><span style="display:flex;"><span>systemctl reload nginx</span></span></code></pre></div><p>Issue a Let&rsquo;s Encrypt certificate. <a href="https://landchad.net/certbot" target="_blank">Detailed instructions and additional information</a>.</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>certbot --nginx</span></span></code></pre></div><p>Add CNAME record</p>
+<p>Now just go to <strong>calibre.example.org</strong>. The server will request an username and a password.</p>
+<p>
+<a href="#image-0c3a371ad38656d101da5082372cd2ed" class="lightbox-link">
+<img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" style="height: auto; width: auto;" loading="lazy">
+</a>
+<a href="javascript:history.back();" class="lightbox" id="image-0c3a371ad38656d101da5082372cd2ed">
+<img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image" loading="lazy">
+</a></p>
+<p>After login you will see something like this.</p>
+<p>
+<a href="#image-c901184d984e95db547e4d18f8fe9911" class="lightbox-link">
+<img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" style="height: auto; width: auto;" loading="lazy">
+</a>
+<a href="javascript:history.back();" class="lightbox" id="image-c901184d984e95db547e4d18f8fe9911">
+<img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image" loading="lazy">
+</a></p>
+<p>De DRM Books</p>
+<p>Download kindle verion 1.26 <a href="https://www.filehorse.com/download-kindle-for-pc/40502/download/" target="_blank">https://www.filehorse.com/download-kindle-for-pc/40502/download/</a></p>
+<p>filename: KindleForPC-installer-1.26.55076.exe<br>
+SHA-256: c9d104c4aad027a89ab92a521b7d64bdee422136cf562f8879 f0af96abd74511
+Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" target="_blank">https://www.mobileread.com/forums/showthread.php?t=283371</a></p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#ff5c57">cd</span> ~/Dowloads
+</span></span><span style="display:flex;"><span>shasum -a <span style="color:#ff9f43">256</span> KindleForPC-installer-1.26.55076.exe
+</span></span><span style="display:flex;"><span>c9d104c4aad027a89ab92a521b7d64bdee422136cf562f8879f0af96abd74511  KindleForPC-installer-1.26.55076.exe</span></span></code></pre></div><p>Make sure the hash matches the above.</p>
+<p>Install it with Wine</p>
+<p>Bypass crash on startup</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir -p <span style="color:#ff5c57">$WINEPREFIX</span>/drive_c/users/<span style="color:#ff5c57">$USER</span>/AppData/Local/Amazon/Kindle/crashdump</span></span></code></pre></div><p>Install</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="calibre-web-with-docker-setup">Calibre Web with Docker Setup</h1>
+
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#ff5c57">cd</span> ~/Documents
+</span></span><span style="display:flex;"><span>rsync -avuP your-library-dir root@example.org:/opt/calibre/</span></span></code></pre></div><ol>
+<li>Install Docker</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo apt update
+sudo apt install docker.io</code></pre></div><ol start="2">
+<li>Create a Docker Network</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0"><code>dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network
+556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf</code></pre></div><ol start="3">
+<li>Create a Docker volume to store Calibre Web data:</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker volume create calibre_data</code></pre></div><ol start="4">
+<li>Pull the Calibre Web Docker image:</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker pull linuxserver/calibre-web</code></pre></div><ol start="5">
+<li>Start the Calibre Web Docker container</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo docker run -d <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>--name<span style="color:#ff6ac1">=</span>calibre-web <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>--restart<span style="color:#ff6ac1">=</span>unless-stopped <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>-p 8083:8083 <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>-e <span style="color:#ff5c57">PUID</span><span style="color:#ff6ac1">=</span><span style="color:#ff6ac1">$(</span>id -u<span style="color:#ff6ac1">)</span> <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>-e <span style="color:#ff5c57">PGID</span><span style="color:#ff6ac1">=</span><span style="color:#ff6ac1">$(</span>id -g<span style="color:#ff6ac1">)</span> <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>-v calibre_data:/config <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>-v /opt/calibre/Calibre:/books <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>--network calibre_network <span style="color:#5af78e">\ </span>
+</span></span><span style="display:flex;"><span>linuxserver/calibre-web</span></span></code></pre></div><ol start="6">
+<li>Configure Nginx to act as a reverse proxy for Calibre Web:</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nano /etc/nginx/sites-available/calibre-web</code></pre></div><p>Add the following to the file</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>server { listen 80; server_name example.com; # Replace with your domain or server IP location / { proxy_pass http://localhost:8083; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } }</code></pre></div><p>Enable the site</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo ln -s /etc/nginx/sites-available/calibre-web /etc/nginx/sites-enabled/</code></pre></div><p>Test the configuration</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nginx -t</code></pre></div><p>Restart nginx</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo service nginx restart</code></pre></div><p>Set up a cname record for your site with your DNS provider</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>calibre.example.com</code></pre></div><p>Install ssl cert using certbot</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>certbot --nginx</code></pre></div><p>Heat to the site at <a href="https://calibre.example.com" target="_blank">https://calibre.example.com</a></p>
+<p>login with default credentials</p>
+<p>username: admin
+password: admin123</p>
+<p>select /books as the library directory. Go into admin settings and change your password.</p>
+<p>Whenever you add new books to your server via rsync, you will need to restart the Calibre Web Docker container:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker restart calibre-web</code></pre></div><p>Then restart nginx</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>systemctl restart nginx</code></pre></div>
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="distrobox-guide">Distrobox Guide</h1>
+
+<p>Github: <a href="https://github.com/89luca89/distrobox" target="_blank">https://github.com/89luca89/distrobox</a></p>
+<p>Run native containers that have access to the host file system
+Creates an app launcher icon for the container</p>
+<p>Launch gui apps from other distros natively. Even without spinning up the container first</p>
+<p>Make separate shortcuts for separate distros in the terminal</p>
+<p>Make a profile in the terminal for the container:</p>
+<p>`distrobox-enter &ndash;name ubuntu-20</p>
+<p>Make sure to check the box &ldquo;run a custom command instead of my shell&rdquo;</p>
+<p>Then set a custom shortcut in your OS to that terminal profile
+<code>gnome-terminal --profile=ubuntu</code></p>
+<h2 id="how-to-install">How to Install</h2>
+<p><code>curl -s https://raw.githubusercontent.com/89luca89/distrobox/main/install | sudo sh</code></p>
+<p>or</p>
+<p><code>sudo dnf -y install distrobox</code></p>
+<p>You can find a list of container distros here: <a href="https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#host-distros" target="_blank">https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#host-distros</a></p>
+<h2 id="commands">Commands</h2>
+<h3 id="create-a-container">Create a container</h3>
+<p><code>distrobox create --name aur --image archlinux</code> or
+<code>distrobox-create --name archlinux --image docker.io/library/archlinux</code> or
+<code>distrobox create -n ubuntu -i ubuntu:20.04</code></p>
+<h3 id="additional-options">Additional Options</h3>
+<p>&ndash;nvidia
+- add your host nvidia drivers</p>
+<p>&ndash;additional-packages {package-name}
+- install additional packages</p>
+<h3 id="enter-the-container">Enter the container</h3>
+<p><code>distrobox enter aur</code></p>
+<h3 id="add-app-from-another-distro-to-your-app-launcher-application-menu">Add app from another distro to your app launcher/ application menu</h3>
+<p>`distrobox-export &ndash;app app-name</p>
+<h3 id="create-a-gui-app">Create a GUI app</h3>
+<p><code>distrobox-export --app {appname}</code></p>
+<p>Create a temporary container
+distrobox-ephemeral &ndash;image archlinux</p>
+<p>Create a container for testing server distros
+<code>distrobox create --image almalinux:latest</code></p>
+<p>Create an arm container</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>distrobox create -i aarch64/fedora -n fedora-arm64
+distrobox enter fedora-arm64</code></pre></div><p>Add distro to your display manager to boot into the distribution</p>
+<p><a href="https://cloudyday.tech.blog/2022/05/14/distrobox-is-awesome/" target="_blank">https://cloudyday.tech.blog/2022/05/14/distrobox-is-awesome/</a>
+<a href="https://github.com/89luca89/distrobox/blob/main/docs/posts/run_latest_gnome_kde_on_distrobox.md" target="_blank">https://github.com/89luca89/distrobox/blob/main/docs/posts/run_latest_gnome_kde_on_distrobox.md</a></p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="github-pages-with-hugo">Github Pages with Hugo</h1>
+
+<p>Go through quick setup here: <a href="https://pages.github.com/" target="_blank">https://pages.github.com/</a></p>
+<p>Hugo Setup: <a href="https://gohugo.io/hosting-and-deployment/hosting-on-github/" target="_blank">https://gohugo.io/hosting-and-deployment/hosting-on-github/</a></p>
+<p>Here&rsquo;s how to set up a free website using Github pages and Hugo. You can add a custom domain name using <a href="https://www.cloudflare.com/" target="_blank">Cloudflare</a> for about $10 per year.</p>
+<p>The general steps include:</p>
+<ol>
+<li>Create a Github repository for your site.</li>
+<li>Change your pages settings.</li>
+<li>Build the repo into a Hugo site.</li>
+<li>Add DNS records for a custom domain.</li>
+<li></li>
+</ol>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
           <article class="default">
             <header class="headline">
             </header>
@@ -1305,28 +1507,28 @@ Add a [[menu.shortcuts]] entry for each link</p>
 <p>I use Vultr as my VPS. When I signed up they had a $250 credit towards a new account. If you select the cheapest server (you shouldn&rsquo;t need anything else for a basic site) that comes out to about $6 a month. Of course the $250 credit goes towards that which equates to around 41 months free.</p>
 <p>Head to vultr.com. Create and account and  Select the Cloud Compute option.</p>
 <p>
-<a href="#image-2f3738f1e4be784be81b3768bf845d41" class="lightbox-link">
+<a href="#image-416165064132b6e8402fcd347b8cd7ad" class="lightbox-link">
 <img src="/vultr1.png" alt="vultr1" style="height: auto; width: auto;" loading="lazy">
 </a>
-<a href="javascript:history.back();" class="lightbox" id="image-2f3738f1e4be784be81b3768bf845d41">
+<a href="javascript:history.back();" class="lightbox" id="image-416165064132b6e8402fcd347b8cd7ad">
 <img src="/vultr1.png" alt="vultr1" class="lightbox-image" loading="lazy">
 </a></p>
 <p>Under CPU &amp; Storage Technology, select &ldquo;Regular Performance&rdquo;. Then under &ldquo;Server Location, select the server closest to you. Or closest to where you think your main audience will be.</p>
 <p>Under Server image, select the OS you are most comfortable with. This guide uses Debian.</p>
 <p>
-<a href="#image-3a319485824f91d54a84001aaca071dc" class="lightbox-link">
+<a href="#image-67eda158402f80112509ad4d32af52a0" class="lightbox-link">
 <img src="/vultr2.png" alt="vultr2" style="height: auto; width: auto;" loading="lazy">
 </a>
-<a href="javascript:history.back();" class="lightbox" id="image-3a319485824f91d54a84001aaca071dc">
+<a href="javascript:history.back();" class="lightbox" id="image-67eda158402f80112509ad4d32af52a0">
 <img src="/vultr2.png" alt="vultr2" class="lightbox-image" loading="lazy">
 </a></p>
 <p>Under Server Size, slect the 10GB SSD. Do not select the &ldquo;IPv6 ONLY&rdquo; option. Leave the other options as default and enter your server hostname.</p>
 <p>On the products page, click your new server. You can find your server credentials and IPv4 address here. You will need these to log in to your server.</p>
 <p>
-<a href="#image-e6a6b277e77e03f1c8f5c22ff5ca5ba0" class="lightbox-link">
+<a href="#image-b811c6e800e03371d971230f48c30e83" class="lightbox-link">
 <img src="/vultr3.png" alt="vultr3" style="height: auto; width: auto;" loading="lazy">
 </a>
-<a href="javascript:history.back();" class="lightbox" id="image-e6a6b277e77e03f1c8f5c22ff5ca5ba0">
+<a href="javascript:history.back();" class="lightbox" id="image-b811c6e800e03371d971230f48c30e83">
 <img src="/vultr3.png" alt="vultr3" class="lightbox-image" loading="lazy">
 </a></p>
 <p>Log into your sever via ssh to test. From a Linux terminal run:</p>
@@ -1417,10 +1619,10 @@ series = [&#34;tools&#34;]
 <p>Let&rsquo;s test the website by serving it locally and accessing it at localhost:1313 in your web browser. Enter the command:</p>
 <div class="wrap-code highlight"><pre tabindex="0"><code>hugo serve</code></pre></div><p>Hugo will now be generating your website. You can view it by entering localhost:1313 in your webbrowser.</p>
 <p>
-<a href="#image-5a5a5ff7d5a6ea42707699ab5857b037" class="lightbox-link">
+<a href="#image-084e938bfb42fbc42c68bcd31c3f6611" class="lightbox-link">
 <img src="/hugo1.png" alt="hugo1" style="height: auto; width: auto;" loading="lazy">
 </a>
-<a href="javascript:history.back();" class="lightbox" id="image-5a5a5ff7d5a6ea42707699ab5857b037">
+<a href="javascript:history.back();" class="lightbox" id="image-084e938bfb42fbc42c68bcd31c3f6611">
 <img src="/hugo1.png" alt="hugo1" class="lightbox-image" loading="lazy">
 </a></p>
 <p>You can use this to test new changes before uploading them to your server. When you svae a post or page file such as your about page, hugo will automatically update the changes to this local page if the local server is running.</p>
@@ -1475,10 +1677,10 @@ systemctl reload nginx</code></pre></div><h3 id="access-permissions">Access Perm
 ufw allow 443</code></pre></div><h3 id="nginx-security">Nginx Security</h3>
 <p>We will want to hide your nginx version number on error pages. This will make your site a bit harder for hackers to find exploits. Open your Nginx config file at /etc/nginx/nginx.conf and remove the &ldquo;#&rdquo; before &ldquo;server_tokens off;&rdquo;</p>
 <p>
-<a href="#image-6c5a435fa706d62a592582851b65ddd3" class="lightbox-link">
+<a href="#image-b674b5e4655346cf010cdb3187dee15b" class="lightbox-link">
 <img src="/nginx1.png" alt="nginx1" style="height: auto; width: auto;" loading="lazy">
 </a>
-<a href="javascript:history.back();" class="lightbox" id="image-6c5a435fa706d62a592582851b65ddd3">
+<a href="javascript:history.back();" class="lightbox" id="image-b674b5e4655346cf010cdb3187dee15b">
 <img src="/nginx1.png" alt="nginx1" class="lightbox-image" loading="lazy">
 </a></p>
 <p>Enter your domain into your browser. Congrats! You now have a running website!</p>
@@ -1512,8 +1714,8 @@ ufw allow 443</code></pre></div><h3 id="nginx-security">Nginx Security</h3>
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1699274250" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1699274250" defer></script>
+    <script src="/js/clipboard.min.js?1699283488" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1699283488" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1543,19 +1745,19 @@ ufw allow 443</code></pre></div><h3 id="nginx-security">Nginx Security</h3>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1699274250" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1699274250" defer></script>
+    <script src="/js/d3/d3-color.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1699283488" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1699283488" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1699274250" defer></script>
+    <script src="/js/theme.js?1699283488" defer></script>
   </body>
 </html>

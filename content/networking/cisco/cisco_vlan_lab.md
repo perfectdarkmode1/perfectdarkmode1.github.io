@@ -1,8 +1,8 @@
-```
+---
 title: "Cisco VLAN Lab"
 date: 2023-11-06T06:20:36-07:00
 draft: false
-```
+---
 
 This lab covers some basic LAN setup. Real world networks are a lot bigger than this but once you can configure these things. Troubleshooting and setting up bigger networks will be less challenging.
 

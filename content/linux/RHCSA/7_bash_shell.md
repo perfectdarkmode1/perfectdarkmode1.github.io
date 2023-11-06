@@ -1,8 +1,8 @@
-```
+---
 title: "Bash"
 date: 2023-11-06T06:20:36-07:00
 draft: false
-```
+---
 Introduction to the bash shell 
 - Understand, set, and unset shell and environment variables 
 - Comprehend and use command and variable expansions 

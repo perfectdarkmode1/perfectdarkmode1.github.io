@@ -1,8 +1,8 @@
-```
+---
 title: "How to Install Starcraft on Fedora"
 date: 2023-11-06T06:20:36-07:00
 draft: false
-```
+---
 https://www.youtube.com/watch?v=eefsL9K2w4k
 
 # Starcraft 2 install on Fedora Workstation 38

@@ -1,6 +1,8 @@
-```
-Network File System (NFS)
-```
+---
+title: "Network File System (NFS)"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 # Network File System (NFS)
 
 - Same tools for mounting and unmopunting a filesystem.

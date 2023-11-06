@@ -1,8 +1,8 @@
-```
+---
 title: "Advanced User Management"
 date: 2023-11-06T06:20:36-07:00
 draft: false
-```
+---
 
 ## Objectives and Topics
 - Configure password aging attributes on local user accounts 
