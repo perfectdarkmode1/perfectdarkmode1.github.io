@@ -10,14 +10,7 @@ Here are all of my current Linux notes. Including chapter book notes and solutio
 ## RHCSA
 Here are my notes from Asghar Ghori's book: [RHCSA Red Hat Enterprise Linux 8 (UPDATED): Training and Exam Preparation Guide (EX200), Second Edition](https://www.amazon.com/RHCSA-Red-Enterprise-Linux-UPDATED/dp/1775062147)
 
-* [Exam Topics](study_points_for_exam.md)
-* [Installation](1_installation.md)
-* [Interaction](2_interaction.md)
-* [File Management](3_file_management.md)
-* [Advanced File Management](4_adv_file_management.md) 
-* [Networking](16_networking.md)
-* [Network File System](17_Network_File_System.md)
-
+[RHEL Installation](https://perfectdarkmode.com/linux/rhcsa/1_installation/index.html)
 ## Fedora 
 * [My Fedora Setup](fedora_setup.md)
 * [Starcraft on Fedora](starcraftonfedora.md)

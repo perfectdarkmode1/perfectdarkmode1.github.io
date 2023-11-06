@@ -1,7 +1,7 @@
 ---
-cards-deck: RHCSA-EX200
-tags:
-  - ch2
+title: "Interaction"
+date: 2023-11-06T06:20:36-07:00
+draft: false
 ---
 
 # Linux Graphical Environment

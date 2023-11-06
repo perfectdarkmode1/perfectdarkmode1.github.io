@@ -1,6 +1,6 @@
 var relearn_search_index = [
   {
-    "content": "Here are all of my current Linux notes. Including chapter book notes and solutions to specific problems.\nRHCSA Here are my notes from Asghar Ghori’s book: RHCSA Red Hat Enterprise Linux 8 (UPDATED): Training and Exam Preparation Guide (EX200), Second Edition\nExam Topics Installation Interaction File Management Advanced File Management Networking Network File System Fedora My Fedora Setup Starcraft on Fedora Hotkeys I use Linux Journey Notes from linuxjourney.com. This is a great website for absolute Linux beginners.\nBooting Command line basics Devices Dns Permissions Getting Started Init Input/Output Monitoring Kernel Logging Basic Linux Networking Network Sharing Network Troubleshooting Packages Process Utilization ps (processes) Text Filesystem User Management Linux Essentials Finding Your Way Open Source Power of the Linux Command Line The Linux Command Line Book Exploring the System Chapter’s 1-5 Misc Linux Ubuntu Stuff Switching to Linux Resources Keyboard Shortcuts Wsl2 stuff Commands ls scp tar pandoc ",
+    "content": "Here are all of my current Linux notes. Including chapter book notes and solutions to specific problems.\nRHCSA Here are my notes from Asghar Ghori’s book: RHCSA Red Hat Enterprise Linux 8 (UPDATED): Training and Exam Preparation Guide (EX200), Second Edition\nRHEL Installation\nFedora My Fedora Setup Starcraft on Fedora Hotkeys I use Linux Journey Notes from linuxjourney.com. This is a great website for absolute Linux beginners.\nBooting Command line basics Devices Dns Permissions Getting Started Init Input/Output Monitoring Kernel Logging Basic Linux Networking Network Sharing Network Troubleshooting Packages Process Utilization ps (processes) Text Filesystem User Management Linux Essentials Finding Your Way Open Source Power of the Linux Command Line The Linux Command Line Book Exploring the System Chapter’s 1-5 Misc Linux Ubuntu Stuff Switching to Linux Resources Keyboard Shortcuts Wsl2 stuff Commands ls scp tar pandoc ",
     "description": "",
     "tags": null,
     "title": "Linux",
@@ -158,20 +158,6 @@ var relearn_search_index = [
     "tags": null,
     "title": "Tag - vultr",
     "uri": "/tags/vultr/index.html"
-  },
-  {
-    "content": "",
-    "description": "",
-    "tags": null,
-    "title": "Tag - ch2",
-    "uri": "/tags/ch2/index.html"
-  },
-  {
-    "content": "",
-    "description": "",
-    "tags": null,
-    "title": "Tag - ch3",
-    "uri": "/tags/ch3/index.html"
   },
   {
     "content": "",
