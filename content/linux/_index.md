@@ -3,6 +3,9 @@ chapter=true
 archetype = "default"
 title = "Linux"
 weight = 1
+collapsibleMenu = true
+[_build]
+  render = "never"
 +++
 
 Here are all of my current Linux notes. Including chapter book notes and solutions to specific problems.  

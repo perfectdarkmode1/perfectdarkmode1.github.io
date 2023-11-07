@@ -2,6 +2,9 @@
 archetype = "default"
 title = "Tools"
 weight = 5
+collapsibleMenu = true
+[_build]
+  render = "never"
 +++
 
 Upcoming Projects:

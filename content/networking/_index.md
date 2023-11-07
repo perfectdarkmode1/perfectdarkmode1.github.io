@@ -2,6 +2,9 @@
 archetype = "default"
 title = "Networking"
 weight = 2
+collapsibleMenu = true
+[_build]
+  render = "never"
 +++
 
 Mostly Cisco stuff but some Juniper stuff as well. 
