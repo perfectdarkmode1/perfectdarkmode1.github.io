@@ -1,3 +1,9 @@
+---
+title: "WANs and IP Routing"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 1.0 Network Fundamentals
 
 1.1 Explain the role and function of network components

@@ -1,3 +1,9 @@
+---
+title: "Network Address Translation (NAT)"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 4.0 IP Services
 
 4.1 Configure and verify inside source NAT using static and pools

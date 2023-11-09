@@ -1,3 +1,9 @@
+---
+title: "Routing in the LAN"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 A. Use the sdm prefer lanbase-routing command (or similar) in global configuration mode to change the switch forwarding ASIC settings to make space for IPv4 routes at the next reload of the switch.
 
 B. Use the reload EXEC command in enable mode to reload (reboot) the switch to pick up the new sdm prefer command setting.

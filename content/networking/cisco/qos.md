@@ -1,3 +1,9 @@
+---
+title: "QoS"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 4.0 IP Services
 
 4.7 Explain the forwarding per-hop behavior (PHB) for QoS such as classification, marking, queuing, congestion, policing, shaping

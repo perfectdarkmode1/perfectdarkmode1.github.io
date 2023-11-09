@@ -1,3 +1,9 @@
+---
+title: "Cisco Devnet Sandbox Setup"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 Max reservation time: 4 hours
 
 Sandbox user reserves the CML Sandbox and receives software VPN access information and credentials via email at the start of the reservation. (For more information, see the next tab called "VPN Access".) Once connected via software VPN the developer can access the Sandbox's resources with the details below.

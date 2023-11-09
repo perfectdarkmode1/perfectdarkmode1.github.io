@@ -1,3 +1,8 @@
+---
+title: "Layer 2 Etherchannel"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 # Layer 2 Etherchannel
 
 ### Manual Layer 2 EtherChannel

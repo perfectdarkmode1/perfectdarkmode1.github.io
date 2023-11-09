@@ -1,3 +1,9 @@
+---
+title: "OSPF Network Types and Neighbors"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 This chapter covers the following exam topics:
 
 3.0 IP Connectivity

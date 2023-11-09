@@ -1,3 +1,8 @@
+---
+title: "IPv6 Routing"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 3.0 IP Connectivity
 
 3.3 Configure and verify IPv4 and IPv6 static routing

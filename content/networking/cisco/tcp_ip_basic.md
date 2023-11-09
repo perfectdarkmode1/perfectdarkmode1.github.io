@@ -1,46 +1,36 @@
-Exam Topics:
+---
+title: "Basics of TCP/IP"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 
-1.0 Network Fundamentals
 
-1.3 Compare physical interface and cabling types
 
-1.3a Single-mode fiber, multimode fiber, copper
+## TCP/IP Model Layers
+- Application
+- Transport
+- Network
+- Data Link
+- Physical
 
-1.3b Connections (Ethernet shared media and point-to-point)
+### Application Layer
 
-TCP/IP Model
+The application level layer controls services for the applications themselves. Including:
 
-Application
+#### HTTP
+-   HTTP provides interface between software and the network.
+-   HTTP traffic
+    - PC > | HTTP Header | GET home.html | > Web server
+    - Web server > | HTTP Header | OK | Data | home.html | > PC
 
-The application level layer controls services for the applications themselves. Such as http,
+## Key terms
+Term: Same layer interaction on different computers.
+Defenition: Communicate with the same layer on another computer.
 
--Transport
+Term: Adjacent layer interaction on the same computer
+Definition: One lower layer provides a service to the layer just above. The higher layer makes the next lower layer perform a function.
 
--Network
-
--Data Link
-
--Physical
-
-Application Layer
-
--   services for applications
--   http provides interface between software and the network
--   HTTP overview
-
--   HTTP Header GET home.html
--   HTTP Header OK/ Data
-
-Same layer interaction on different computers
-
--   Communicate with the same layer on another computer.
-
-Adjacent layer interaction on the same computer
-
--   One lower layer provides a service to the layer just above.
--   The higher layer makes the next lower layer perform a function
-
-*Wireless protocols are Layer 2
+Note: Wireless protocols function on Layer 2.
 
 Encapsulation
 

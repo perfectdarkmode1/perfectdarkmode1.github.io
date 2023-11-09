@@ -1,3 +1,8 @@
+---
+title: "Router Operation"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 The configuration of IP addresses differs in some ways, with switches using a VLAN interface and routers using an IP address configured on each working interface.
 
 switches do not have auxiliary ports.

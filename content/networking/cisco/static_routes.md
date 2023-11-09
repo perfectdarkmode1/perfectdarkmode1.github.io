@@ -1,3 +1,9 @@
+---
+title: "Static Routes"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 1.0 Network Fundamentals
 
 1.6 Configure and verify IPv4 addressing and subnetting

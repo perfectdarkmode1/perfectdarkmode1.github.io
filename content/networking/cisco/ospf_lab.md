@@ -1,3 +1,8 @@
+---
+title: "OSPF Lab"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 Welcome to the CCNA OSPF lab. You'll need to configure OSPF so that there are full routing capabilities in the network. As well as use show commands to verify your network. Then you will troubleshoot and fix a broken OSPF network.
 
 Once again, this will all be done in Packet Tracer. But feel free to do this lab on real equipment, GNS-3, etc.

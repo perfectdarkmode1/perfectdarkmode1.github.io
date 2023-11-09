@@ -1,3 +1,8 @@
+---
+title: "DHCP Snooping and ARP Inspection"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 5.0 Security Fundamentals
 
 5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)

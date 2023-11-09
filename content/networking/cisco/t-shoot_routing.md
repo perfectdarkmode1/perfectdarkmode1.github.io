@@ -1,3 +1,8 @@
+---
+title: "Troubleshooting Routing"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 Problem Isolation Using the ping Command
 
 functions as part of Layer 3, as a control protocol to assist IP by helping manage the IP network functions.

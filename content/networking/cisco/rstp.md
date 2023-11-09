@@ -1,3 +1,9 @@
+---
+title: "Rapid Spanning Tree (RSTP)"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 2.0 Network Access
 
 2.4 Configure and verify (Layer 2/Layer 3) EtherChannel (LACP)

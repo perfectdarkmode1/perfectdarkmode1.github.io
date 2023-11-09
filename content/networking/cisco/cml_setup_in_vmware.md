@@ -1,3 +1,9 @@
+---
+title: "Cisco CML VMWARE Guide"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 You can find a detailed installation guide here [https://developer.cisco.com/docs/modeling-labs/#!system-requirements](https://developer.cisco.com/docs/modeling-labs/#!system-requirements "https://developer.cisco.com/docs/modeling-labs/#!system-requirements")
 
 Sign up for CML [https://www.cisco.com/c/en/us/products/cloud-systems-management/modeling-labs/index.html](https://www.cisco.com/c/en/us/products/cloud-systems-management/modeling-labs/index.html "https://www.cisco.com/c/en/us/products/cloud-systems-management/modeling-labs/index.html")

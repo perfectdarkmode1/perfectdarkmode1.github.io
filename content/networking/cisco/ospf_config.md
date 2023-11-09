@@ -1,3 +1,9 @@
+---
+title: "OSPF Configuration"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
+
 OSPF Config
 
 This chapter covers the following exam topics:

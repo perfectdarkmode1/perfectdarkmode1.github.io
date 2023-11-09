@@ -1,3 +1,8 @@
+---
+title: "Wireless LANs"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 multiple VLANs must be brought to it over a trunk link.
 
 The wireless side of an AP inherently trunks 802.11 frames by marking them with the BSSID of the WLAN where they belong.
