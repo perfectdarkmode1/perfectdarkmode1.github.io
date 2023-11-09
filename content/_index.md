@@ -13,18 +13,3 @@ You will also run into random things about personal development, dog training, h
 
 Check out what I am doing [Now](now).
 
-{{< columns >}} 
-## Left Content
-Dolor sit, sumo unique argument um no ...
-
-<---> 
-
-## Mid Content
-Dolor sit, sumo unique argument um no ...
-
-<---> 
-
-## Right Content
-Dolor sit, sumo unique argument um no ...
-{{< /columns >}}
-

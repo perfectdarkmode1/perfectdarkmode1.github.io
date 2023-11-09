@@ -3,35 +3,12 @@ title: "VLANs"
 date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
-1.0 Network Fundamentals
-1.13 Describe switching concepts
-1.13.a MAC learning and aging
-1.13.b Frame switching
-1.13.c Frame flooding
-1.13.d MAC address table
-2.0 Network Access
-2.1 Configure and verify VLANs (normal range) spanning multiple switches
-2.1.a Access ports (data and voice)2.1.b Default VLAN
-2.1.c Connectivity
-2.2 Configure and verify interswitch connectivity
-2.2.a Trunk ports
-2.2.b 802.1Q
-2.2.c Native VLAN
 
-Virtual LAN Concepts
+## Virtual LAN (VLAN) Concepts
 
-reasons for choosing to create smaller broadcast domains (VLANs):
+Using VLANs creates smaller broadcast domains. There are many reasons why you would want to do this. You reduce CPU overhead on each device. And reduce security risks by using different security policies on each VLAN.
 
--   reduce CPU overhead on each device
--   reduce security risks
--   different security policies per VLAN
--   more flexible designs that
-
--   group users by department, or by groups that work together, instead of by physical location
-
--   solve problems more quickly
-
--   failure domain for many problems is the same set of devices as those in the same broadcast domain
+You can also use more flexible designs that group users by department instead of by physical location. Using VLANs helps you solve problems more quickly. As the failure point for many problems would include devices in a single broadcast domain.
 
 -   reduce the workload for the Spanning Tree Protocol (STP)
 
