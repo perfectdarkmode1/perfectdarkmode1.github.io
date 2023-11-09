@@ -1,6 +1,6 @@
 +++
 title = "Python"
-draft = false
+draft = true
 weight = 4
 collapsibleMenu = true
 [_build]

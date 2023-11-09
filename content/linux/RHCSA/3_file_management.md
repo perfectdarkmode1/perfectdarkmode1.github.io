@@ -1,14 +1,11 @@
-===
+---
 title: "File Management"
 date: 2023-11-06T06:20:36-07:00
 draft: false
-===
+---
 
 
-```toc
-```
-
-## 7 File types #card
+## 7 File types 
 1.  regular
 2.  directory
 3.  block special device

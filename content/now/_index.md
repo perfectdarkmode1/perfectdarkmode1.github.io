@@ -51,7 +51,7 @@ Currently considering my career options. Possible paths include:
 - [ ] See if there is a way to change URLs for pages. I would like the URL to match the page name instead of saying "index.html"
 - [ ] Get a logo created and add it to site. 
 - [ ] Create a "Contact me" page.
-- [ ] Change "now" icon.
+- [x] Change "now" icon.
 - [ ] Add sections for Personal Development, Parenting, Rel;ationships, History, and Dog Training.
 - [ ] Make a page with all of the tools I use.
 - [ ] Make a script that updates website everytime I update my markdown files in VSCodium.

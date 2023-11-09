@@ -3,7 +3,7 @@ archetype = "home"
 title = ""
 +++
 
-![Alt text](/images/circleportrait.PNG?height=220px&classes=left,inline)
+![Alt text](/images/circleportrait.PNG?height=220px&classes=left,inline) 
 
 ### Hey, I'm David. 
 
@@ -11,6 +11,20 @@ I am a Tech enthusiast and a writer. My goal is to use technology to optimize an
 
 You will also run into random things about personal development, dog training, history, etc. These are meant to help others solve problems that I have had. 
 
-Check out what I am doing [Now](now)
+Check out what I am doing [Now](now).
 
+{{< columns >}} 
+## Left Content
+Dolor sit, sumo unique argument um no ...
+
+<---> 
+
+## Mid Content
+Dolor sit, sumo unique argument um no ...
+
+<---> 
+
+## Right Content
+Dolor sit, sumo unique argument um no ...
+{{< /columns >}}
 
