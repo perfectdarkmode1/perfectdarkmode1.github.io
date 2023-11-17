@@ -1,3 +1,8 @@
+---
+title: "IO Monitoring"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 $ iostat
 
 \- cpu and disk usage

@@ -1,3 +1,8 @@
+---
+title: "Packages and Their Management"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 Software Distribution
 
 Packages such as internet browsers, text editors, media players, etc. are  managed via package managers that install and maintain the software on the system. Packages can be installed using sources code instead of by a package manager.

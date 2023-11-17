@@ -1,3 +1,8 @@
+---
+title: "ls"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 Options
 - -l long listing
 	- file type, permissions, link count, owner, group, size, date and time of last modification, and name of the file

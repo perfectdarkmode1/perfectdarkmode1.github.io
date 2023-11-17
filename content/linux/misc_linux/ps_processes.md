@@ -1,3 +1,8 @@
+---
+title: "Processes"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 Ps (Processes)
 
 Processes are the programs that are running on your machine. The are managed by the kernel.

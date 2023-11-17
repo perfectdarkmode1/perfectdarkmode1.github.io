@@ -1,3 +1,8 @@
+---
+title: "Command Line"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 The Shell
 
 A program that takes your commands from the keyboard and sends them to the operating system to perform.

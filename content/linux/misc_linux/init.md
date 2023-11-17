@@ -1,3 +1,8 @@
+---
+title: "Init"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 System V Overview (sys v) ("system five")
 
 \- init stops and starts essential processes

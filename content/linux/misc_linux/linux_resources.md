@@ -1,3 +1,8 @@
+---
+title: "Resources for learning Linux"
+date: 2023-11-06T06:20:36-07:00
+draft: false
+---
 Going Down the Linux Rabbit Hole
 
 Now that I have finished my CCNA, it's time to go down the Linux rabbit hole. I may or may not be getting any Linux certifications. I mostly just want a foundation of basic Linux and bash scripting skills. This will help expand the areas of technology that I am able to work  with.
