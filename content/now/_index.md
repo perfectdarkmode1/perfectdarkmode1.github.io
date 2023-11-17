@@ -45,10 +45,3 @@ Currently considering my career options. Possible paths include:
 - [ ] Make a page with all of the tools I use.
 - [ ] Make a script that updates website everytime I update my markdown files in VSCodium.
 
-## Diet/ Nutrition
-1. Eating window from 10am to 6pm.
-2. Whole foods plant-based as much as possible. 
-3. Limit Sugar and wheat.
-4. Drink 90oz of water every day.
-5. 2 Tablespoons of apple cider vinegar before first meal. 
-6. Don't stuff yourself. 
