@@ -10,21 +10,21 @@
     <title>Basic Package Management - Perfect Dark Mode</title>
     <link href="http://perfectdarkmode.com/linux/rhcsa/9_basic_package_management/index.html" rel="canonical" type="text/html" title="Basic Package Management - Perfect Dark Mode">
     <link href="/linux/rhcsa/9_basic_package_management/index.xml" rel="alternate" type="application/rss+xml" title="Basic Package Management - Perfect Dark Mode">
-    <link href="/images/favicon.png?1699566253" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1699566254" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1699566254" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1699566254" rel="stylesheet">
-    <link href="/css/auto-complete.css?1699566254" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1699566254" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1699566254" rel="stylesheet">
-    <link href="/css/fonts.css?1699566254" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1699566254" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1699566254" rel="stylesheet">
-    <link href="/css/theme-city2.css?1699566254" rel="stylesheet" id="variant-style">
-    <link href="/css/variant.css?1699566254" rel="stylesheet">
-    <link href="/css/print.css?1699566254" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1699566254" rel="stylesheet">
-    <link href="/css/ie.css?1699566254" rel="stylesheet">
-    <script src="/js/url.js?1699566254"></script>
-    <script src="/js/variant.js?1699566254"></script>
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -115,7 +115,150 @@
 </li>
 </ul>
 </li>
+<li>Package intelligence
+<ul>
+<li>used by package administration toolset for successful completion of the package installation process.</li>
+<li>May include info on:
+<ul>
+<li>prerequisites</li>
+<li>User account setup</li>
+<li>Needed directories/ soft links</li>
 </ul>
+</li>
+<li>Includes reverse process for uninstall.</li>
+</ul>
+</li>
+</ul>
+<h2 id="package-naming">Package Naming</h2>
+<p>5 parts to a package name:
+1. Name
+2. Version
+3. release (revision or build)
+4. Linux version 
+5. Processor Architecture
+- noarch
+- platform independant
+- src
+- Source code packages</p>
+<ul>
+<li>Always has .rpm extension</li>
+<li>.rpm is removed after install
+Example:
+openssl-1.1.1-8.el8.x86_64.rpm,</li>
+</ul>
+<h2 id="package-dependency">Package Dependency</h2>
+<ul>
+<li>Dependency info is in the metadata
+<ul>
+<li>Read by package handling utilities</li>
+</ul>
+</li>
+</ul>
+<h2 id="package-database">Package Database</h2>
+<ul>
+<li>Metadata for installed packages and package files is stored in /var/lib/rpm/
+<ul>
+<li>Package database</li>
+<li>Referenced by package manipulation utilities to obtain:
+<ul>
+<li>package name and version data</li>
+<li>Info about owerships, permissions, timestamps, and file sizes that are part of the package.</li>
+<li>Contain info on dependencies.</li>
+<li>Aids management commands in:
+<ul>
+<li>listing and querying packages</li>
+<li>Verifying dependencies and file attributes.</li>
+<li>Installing new packages.</li>
+<li>Upgrading and uninstalling packages.</li>
+</ul>
+</li>
+<li>Removes and replaces metadata when a package is replaced.</li>
+<li>Can maintain multiple version of a single package.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="package-management-tools">Package Management Tools</h2>
+<ul>
+<li>rpm (redhat package manager)
+<ul>
+<li>Does not automatically resolve dependencies.</li>
+</ul>
+</li>
+<li>yum (yellowdog update, modified)
+<ul>
+<li>Find, get, and install dependencies automatically.</li>
+<li>softlink to dnf now.</li>
+</ul>
+</li>
+<li>dnf (dandified yum)</li>
+</ul>
+<h2 id="package-management-with-rpm">Package management with rpm</h2>
+<p>rpm package management tasks:
+- query
+- install
+- upgrade
+- freshen
+- overwrite
+- remove
+- extract
+- validate
+- verify</p>
+<ul>
+<li>Works with installed and installable packages.</li>
+</ul>
+<h3 id="rpm-command-1">rpm command</h3>
+<h6 id="query-options">Query options</h6>
+<p>Query and display packages<br>
+<code>-q (--query)</code> <br>
+<br>
+List all installed packages<br>
+<code>-qa (--query --all)</code><br>
+<br>
+List config files in a package<br>
+<code>-qc (--query --config-files)</code><br>
+<br>
+List documentation files in a package<br>
+<code>-qd (--query --docfiles)</code> <br>
+<br>
+Exhibit what package a file comes from<br>
+<code>-qf (--query --file)</code> <br>
+<br>
+Show installed package info (Version, Size, Installation status, Date, Signature, Description, etc.)
+<code>-qi (--query --info)</code></p>
+<p>Show installable package info (Version, Size, Installation status, Date, Signature, Description, etc.)
+<code>-qip (--query --info --package)</code></p>
+<p>List all files in a package.<br>
+<code>-ql (--query --list)</code></p>
+<p>List files and packages a package depends on. <br>
+<code>-qR (--query --requires)</code></p>
+<p>List packages that provide the specified package or file.<br>
+<code>-q --whatprovides</code></p>
+<p>List packages that require the specified package or file.<br>
+<code>-q --whatrequires</code></p>
+<h6 id="package-installation-options">Package installation options</h6>
+<p>Remove a package<br>
+<code>-e (--erase)</code></p>
+<p>Upgrades installed package. Or loads if not installed.<br>
+<code>-U (--upgrade)</code></p>
+<p>Display detailed information<br>
+<code>-v (--verbose or -vv)</code></p>
+<p>Verify integrity of a package or package files<br>
+<code>-V (--verify)</code></p>
+<hr>
+<h2 id="labs">Labs</h2>
+<h3 id="lab-mount-rhel-8-iso-persistently">Lab: Mount RHEL 8 ISO Persistently</h3>
+<ol>
+<li>Go to the VirtualBox VM Manager and make sure that the RHEL 8 image is attached to RHEL8-VM1 as depicted below:</li>
+</ol>
+<p>
+<a href="#image-f4709e77dcc767e802ba2f5fa3d81bcb" class="lightbox-link">
+<img src="/images/mountrhel1.png" alt="Alt text" style="height: auto; width: auto;" loading="lazy">
+</a>
+<a href="javascript:history.back();" class="lightbox" id="image-f4709e77dcc767e802ba2f5fa3d81bcb">
+<img src="/images/mountrhel1.png" alt="Alt text" class="lightbox-image" loading="lazy">
+</a></p>
 
             <footer class="footline">
 
@@ -125,8 +268,8 @@
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1699566254" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1699566254" defer></script>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -156,19 +299,19 @@
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1699566254" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1699566254" defer></script>
+    <script src="/js/theme.js?1700252831" defer></script>
   </body>
 </html>
