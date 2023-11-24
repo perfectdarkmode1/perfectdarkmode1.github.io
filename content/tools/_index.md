@@ -1,8 +1,8 @@
-+++
-archetype = "default"
-title = "Tools"
-weight = 5
-collapsibleMenu = true
++++ 
+archetype = "chapter" 
+title = "Tools" 
+weight = 3 
+alwaysopen = false
 [_build]
   render = "never"
 +++

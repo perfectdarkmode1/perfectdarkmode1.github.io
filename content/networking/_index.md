@@ -1,8 +1,8 @@
-+++
-archetype = "default"
-title = "Networking"
-weight = 2
-collapsibleMenu = true
++++ 
+archetype = "chapter" 
+title = "Networking" 
+weight = 2 
+alwaysopen = false
 [_build]
   render = "never"
 +++

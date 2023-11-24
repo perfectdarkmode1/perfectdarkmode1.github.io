@@ -1,10 +1,4 @@
-+++
-title = "What I am Doing Now"
-[_build]
-  render = "always"
-  list = "never"
-  publishResources = true
-+++
+
 
 This is a page to help me stay focused and keep track of what I am doing. It is also to show others what I am currently working on and thinking about. Credit goes to Derrick Sivers for starting a "Now" page movement. Read about "Now" pages [here](https://nownownow.com/about).
 

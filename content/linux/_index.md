@@ -1,13 +1,22 @@
 +++ 
+archetype = "chapter" 
+title = "Linux" 
+weight = 1 
+alwaysopen = false
+[_build]
+  render = "never"
++++
+
+
 chapter=true
-archetype = "default"
+archetype = ""
 title = "Linux"
 weight = 1
 collapsibleMenu = true
 [_build]
   render = "never"
 alwaysopen = false
-+++
+
 
 Here are all of my current Linux notes. Including chapter book notes and solutions to specific problems.  
 
