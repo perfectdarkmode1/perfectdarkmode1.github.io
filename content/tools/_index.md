@@ -31,3 +31,9 @@ https://www.mrmoneymustache.com/
 http://thedarnedestthing.com/vim/wiki%20cheatsheet
 
 [[../Security/firefox_hardening]]
+
+# Browser Sync
+https://www.xbrowsersync.org/
+
+# Privacy tools
+https://www.privacytools.io/

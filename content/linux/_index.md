@@ -6,6 +6,7 @@ weight = 1
 collapsibleMenu = true
 [_build]
   render = "never"
+alwaysopen = false
 +++
 
 Here are all of my current Linux notes. Including chapter book notes and solutions to specific problems.  

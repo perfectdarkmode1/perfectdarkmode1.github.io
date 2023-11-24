@@ -1,7 +1,7 @@
 ---
 title: "How to Install Starcraft on Fedora"
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 https://www.youtube.com/watch?v=eefsL9K2w4k
 

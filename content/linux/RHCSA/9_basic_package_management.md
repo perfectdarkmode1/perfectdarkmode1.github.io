@@ -1,7 +1,7 @@
 ---
 title: "Basic Package Management"
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 ## RPM (Redhat Package Manager)
 - also refers to a file(s) packaged together in a special format with the .rpm extension. 
@@ -149,18 +149,43 @@ Display detailed information\
 Verify integrity of a package or package files\
 `-V (--verify)`
 
+## Querying packages
+
+
 ---
 ## Labs
 
 ### Lab: Mount RHEL 8 ISO Persistently
 1. Go to the VirtualBox VM Manager and make sure that the RHEL 8 image is attached to RHEL8-VM1 as depicted below:
 
-![Alt text](/images/mountrhel1.png)
+![Alt text](/images/isomount.png)
 
+2. Open the /etc/fstab file in the vim editor (or another editor of your choice) and add the following line entry at the end of the file to mount the DVD image (/dev/sr0) in read-only (ro) mode on the /mnt directory.
 
+	```
+	/dev/sr0 /mnt iso9660 ro 0 0
+	```
 
+Note: sr0 represents the first instance of the optical device and iso9660 is the standard format for optical file systems.
 
+3. Mount the file system as per the configuration defined in the /etc/fstab file using the mount command with the -a (all) option:
 
+	```
+	sudo mount -a
+	```
+
+4. Verify the mount using the df command:
+
+	```
+	df -h | grep mnt
+	```
+
+Note: The image and the packages therein can now be accessed via the /mnt directory just like any other local directory on the system.
+
+5. List the two directories—/mnt/BaseOS/Packages and /mnt/AppStream/Packages—that contain all the software packages (directory names are case sensitive):
+
+	```
+	ls -l /mnt/BaseOS/Packages |more
 
 
 
