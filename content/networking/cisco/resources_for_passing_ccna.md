@@ -3,8 +3,6 @@ title: "Resources I used to Pass CCNA"
 date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
-Intro
-
 There are a lot of great CCNA resources out there. This list does not include all of them. Only the ones that I personally used to pass the CCNA 200-301 exam.
 
 Materials for CCNA are generally separated into 5 categories:
@@ -15,39 +13,39 @@ Materials for CCNA are generally separated into 5 categories:
 - Practice test
 - Flashcards
 
-Books
+## Books
 
-Wendell Odom OCG Official cert guide library
+### Wendell Odom OCG Official cert guide library
 
 To me, this is the king of CCNA study materials. Some people do not like reading but this will give you more depth than any other resource on this list.
 
-Todd Lammle Books
+### Todd Lammle Books
 
 Yes, I read both the OCG and Todd Lammle books cover to cover. No, I do not recommend doing this. Todd has a great way of adding humor into networking. If you need to build up your networking from the ground up. These books are great.
 
-Video Courses
+## Video Courses
 
-CBT Nuggets
+### CBT Nuggets
 
 Jeremy Ciara makes learning networking so much fun. This was a great course but is not enough for you to pass the exam on it's own. Also, a CBT nuggets monthly subscription will set you back $59 per month.
 
-Jeremy's IT Lab
+### Jeremy's IT Lab
 
 Jermey's IT lab course was the most informative for me. Jeremey is really great at explaining the more complex topics. Jeremy's course also includes Packet Tracer labs and and in depth Anki flashcard deck for free.
 
-Labs
+## Labs
 
-David Bombal's Packet Tracer Labs
+### David Bombal's Packet Tracer Labs
 
 These labs will really make you think. Although they do steer off the exam objectives a bit.
 
-jeremy's IT labs
+### jeremy's IT labs
 
 These were my favorite labs by far. Very easy to set up with clear instructions and video explanations.
 
-Practice test
+## Practice test
 
-Boson Exsim
+### Boson Exsim
 
 I can't stress this enough. if there is one resource that you invest some money into. it's the Boson practice exams. This is a test simulator that is very close to what the actual test will be like. Exsim comes with 3 exams.
 
@@ -55,13 +53,13 @@ After taking one of these practice tests you will get a breakdown of your scores
 
 These practice exams were crucial for me to understand where my knowledge gaps were.
 
-Subnettingpractice.com
+## Subnettingpractice.com
 
 You can learn subnetting pretty good. Then forget some of the steps a month later and have to learn all over again. It was very helpful to go over some of these subnetting questions once in a while.
 
-Flashcards
+## Flashcards
 
-Anki Deck
+### Anki Deck
 
 These are the only flashcards I used. It is very nice not to have to create your own flashcards. Having the Anki app on your phone is very convenient. You can study whenever you have a few minutes of downtime.
 
@@ -71,6 +69,3 @@ This particular deck goes along with the OCG. You can filter by chapter and add 
 
 I will be using Anki flashcards for every exam in the future.
 
-conclusion
-
-CTA

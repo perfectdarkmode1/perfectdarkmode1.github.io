@@ -1,21 +1,11 @@
 +++ 
-archetype = "chapter" 
+archetype = "default" 
 title = "Linux" 
 weight = 1 
 alwaysopen = false
 [_build]
-  render = "never"
+  render = "always"
 +++
-
-
-chapter=true
-archetype = ""
-title = "Linux"
-weight = 1
-collapsibleMenu = true
-[_build]
-  render = "never"
-alwaysopen = false
 
 
 Here are all of my current Linux notes. Including chapter book notes and solutions to specific problems.  
@@ -23,7 +13,8 @@ Here are all of my current Linux notes. Including chapter book notes and solutio
 ## RHCSA
 Here are my notes from Asghar Ghori's book: [RHCSA Red Hat Enterprise Linux 8 (UPDATED): Training and Exam Preparation Guide (EX200), Second Edition](https://www.amazon.com/RHCSA-Red-Enterprise-Linux-UPDATED/dp/1775062147)
 
-[RHEL Installation](https://perfectdarkmode.com/linux/rhcsa/1_installation/index.html)
+[RHEL Installation](/linux/rhcsa/1_installation)
+
 ## Fedora 
 * [My Fedora Setup](fedora_setup.md)
 * [Starcraft on Fedora](starcraftonfedora.md)

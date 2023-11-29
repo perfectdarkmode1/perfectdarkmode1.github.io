@@ -4,8 +4,6 @@ date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
 
-# How to Study for the CCNA Exam
-
 It took me a whopping 2 years to finish my CCNA! I kept giving up and quitting my studies for months at a time. Why? Because I couldn't remember the massive amount of content covered in the CCNA. It felt hopeless. I could have done it in 6 month (or faster) if I knew how to study.
 
 I hadn't taken a test in 10 years before this. So I had completely forgotten how to learn. This post is about the mistakes I made studying for the CCNA and how to avoid them.

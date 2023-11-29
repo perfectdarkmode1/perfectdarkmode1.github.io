@@ -150,6 +150,10 @@ Verify integrity of a package or package files\
 `-V (--verify)`
 
 ## Querying packages
+Query packages in the package database or at a specified location. 
+
+## Installing a package
+
 
 
 ---
@@ -186,7 +190,45 @@ Note: The image and the packages therein can now be accessed via the /mnt direct
 
 	```
 	ls -l /mnt/BaseOS/Packages |more
+	```
 
+### Lab: Query Packages
+1. query all installed packages:
+	`rpm -qa`
 
+2. query whether the perl package is installed:
+	`rpm -q perl`
 
-		
+3. list all files in a package:
+	`rpm -ql iproute`
+
+4. list only the documentation files in a package:
+	`rpm -qd audit`
+
+5. list only the configuration files in a package:
+	`rpm -qc cups`
+
+6. identify which package owns the specified file:
+	`rpm -qf /etc/passwd`
+
+7. display information about an installed package including version, release, installation status, installation date, size, signatures, description, and so on:
+	`rpm -qd audit`
+
+8. list only the configuration files in a package:
+	`rpm -qc cups`
+
+9. identify which package owns the specified file:
+	`rpm -qf /etc/passwd`
+
+10. display information about an installed package including version, release, installation status, installation date, size, signatures, description, and so on:
+	`rpm -qi setup`
+
+11. list all file and package dependencies for a given package:
+	`rpm -qR chrony`
+
+12. query an installable package for metadata information (version, release, architecture, description, size, signatures, etc.):
+	`rpm -qip /mnt/BaseOS/Packages/zsh-5.5.1-6.el8.x86_64.rpm`
+
+13. determine what packages require the specified package in order to operate properly:
+	`rpm -q --whatrequires lvm2`
+	

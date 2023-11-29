@@ -9,10 +9,11 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 
 ## Mental Health
 - [x] Quit drinking
-- [ ] Quit caffeine. Taper off caffeine over 8 weeks. 
+- [ ] Quit caffeine. Taper off caffeine over 25 days. (5/25) 
 
 ## What I am Reading
-- [ ] RHCSA Red Hat Enterprise Linux 8 - Asghor Ghori
+- [x] RHCSA Red Hat Enterprise Linux 8 - Asghor Ghori
+- [ ] Bliss of the Celibate
 
 ## Drums
 - [ ] Get good at rudiments and learn to read sheet music.
@@ -30,10 +31,10 @@ Currently considering my career options. Possible paths include:
 ## Plans for my website
 - [x] Build out basic theme and layout. 
 - [x] Add picture to about page.
-- [ ] Make a "Recommended Reading" page with recommended books, and a picture of the book covers. Have a rating system for books I have read. 
-- [ ] See if there is a way to change URLs for pages. I would like the URL to match the page name instead of saying "index.html"
+- [x] Make a "Recommended Reading" page with recommended books, and a picture of the book covers. 
+- [x] See if there is a way to change URLs for pages. I would like the URL to match the page name instead of saying "index.html"
 - [ ] Get a logo created and add it to site. 
-- [ ] Create a "Contact me" page.
+- [x] Create a "Contact me" page.
 - [x] Change "now" icon.
 - [ ] Add sections for Personal Development, Parenting, Relationships, History, and Dog Training.
 - [ ] Make a page with all of the tools I use.

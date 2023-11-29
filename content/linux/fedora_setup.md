@@ -4,8 +4,6 @@ date = 2023-11-06T06:20:36-07:00
 draft = false
 alwaysopen = false
 +++ 
-# Setting Up Fedora to be a Usable Workstation
-
 
 When you first download Fedora Workstation, it's going to be a little hard to figure out how to make it usable. Especially if you've never tinkered with Linux before.
 
@@ -231,3 +229,87 @@ See [distrobox](distrobox.md)
 ## ZSH For Humans
 
 [GitHub - romkatv/zsh4humans: A turnkey configuration for Zsh](https://github.com/romkatv/zsh4humans)
+
+## Install Starcraft on Fedora
+
+https://www.youtube.com/watch?v=eefsL9K2w4k
+
+# Starcraft 2 install on Fedora Workstation 38
+
+
+## Install your latest gpu driver https://github.com/lutris/docs/blob/master/InstallingDrivers.md
+
+I am just running off of built in AMD graphics. So we just need to install support for Vulkan API
+`sudo dnf install vulkan-loader vulkan-loader.i686`
+
+
+Install Wine
+`$ sudo dnf -y install wine`
+
+Install Lutris
+Install the Flatpak version in software center.
+
+# Fedora Hotkeys
+
+## Terminal
+
+Close Terminal
+shift + c + q
+
+Previous Tab
+c + Page Up
+
+Next Tab
+c + Page Down
+
+Move to Specific Tab
+Alt + \#
+
+Full Screen
+F11
+
+New Window
+Shift + Ctrl + t
+
+Close Tab
+Shift + Ctrl + w
+
+
+## Desktop
+
+Run a command
+super + F2
+
+Switch Between Applications
+Alt + Esc
+
+Move Window to Left Monitor
+Shift + Super + <- 
+
+Move Window to Right Monitor
+Shift + Super + ->
+
+Minimize Current Window
+Super + H
+
+Close Current Appllication
+Ctrl + Q
+
+## Browser
+
+### Firefox
+
+Switch Between Tabs
+Ctrl + Tab
+
+Switch Between Tabs in Reverse
+Ctrl + Shift + Tab
+
+#### Detach Tab Extension
+https://addons.mozilla.org/en-US/firefox/addon/detach-tab/
+
+Detach Tab
+Ctrl _ Shift _ Space
+
+Reattach Tab
+Ctrl + Shift + v
