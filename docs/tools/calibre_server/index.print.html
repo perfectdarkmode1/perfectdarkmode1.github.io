@@ -1,65 +1,98 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.111.3">
-    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Calibre Server - Perfect Dark Mode">
+    <meta name="twitter:description" content="Install Calibre and Rsync
+apt install -y calibre rsyncMake a directory for your library
+mkdir /opt/calibreEither upload your existing library using rsync. For example to /opt/calibre/.
+cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/Add a new user to protect your server:
+calibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calibre
+Creating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:
+[Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.">
+    <meta property="og:title" content="Calibre Server - Perfect Dark Mode">
+    <meta property="og:description" content="Install Calibre and Rsync
+apt install -y calibre rsyncMake a directory for your library
+mkdir /opt/calibreEither upload your existing library using rsync. For example to /opt/calibre/.
+cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/Add a new user to protect your server:
+calibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calibre
+Creating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:
+[Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre_server/">
+    <meta property="article:section" content="Tools - Perfect Dark Mode">
+    <meta property="article:published_time" content="2023-11-06T06:20:36-07:00">
+    <meta property="article:modified_time" content="2023-11-06T06:20:36-07:00">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <title>Calibre Server - Perfect Dark Mode</title>
     <link href="http://perfectdarkmode.com/tools/calibre_server/" rel="canonical" type="text/html" title="Calibre Server - Perfect Dark Mode">
     <link href="/tools/calibre_server/index.xml" rel="alternate" type="application/rss+xml" title="Calibre Server - Perfect Dark Mode">
-    <link href="/images/favicon.png?1701297257" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1701316816" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1701297257" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701297257" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1701297257" rel="stylesheet">
-    <link href="/css/auto-complete.css?1701297257" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701297257" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1701297257" rel="stylesheet">
-    <link href="/css/fonts.css?1701297257" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701297257" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1701297257" rel="stylesheet">
-    <link href="/css/theme-city2.css?1701297257" rel="stylesheet" id="variant-style">
-    <link href="/css/variant.css?1701297257" rel="stylesheet">
-    <link href="/css/print.css?1701297257" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1701297257" rel="stylesheet">
-    <link href="/css/ie.css?1701297257" rel="stylesheet">
-    <script src="/js/url.js?1701297257"></script>
-    <script src="/js/variant.js?1701297257"></script>
+    <link href="/css/fontawesome-all.min.css?1701316816" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701316816" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1701316816" rel="stylesheet">
+    <link href="/css/auto-complete.css?1701316816" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701316816" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1701316816" rel="stylesheet">
+    <link href="/css/fonts.css?1701316816" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701316816" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1701316816" rel="stylesheet">
+    <link href="/css/theme-city2.css?1701316816" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1701316816" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1701316816" rel="stylesheet">
+    <link href="/css/print.css?1701316816" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1701316816" rel="stylesheet">
+    <link href="/css/ie.css?1701316816" rel="stylesheet">
+    <script src="/js/url.js?1701316816"></script>
+    <script src="/js/variant.js?1701316816"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
       window.index_js_url="/index.search.js";
       var root_url="/";
       var baseUri=root_url.replace(/\/$/, '');
-      // translations
-      window.T_Copy_to_clipboard = 'Copy to clipboard';
-      window.T_Copied_to_clipboard = 'Copied to clipboard!';
-      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
-      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
-      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
-      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
-      // some further base stuff
-      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
       window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
     </script>
   </head>
   <body class="mobile-support print" data-url="/tools/calibre_server/">
-    <div id="body" class="default-animation">
-      <div id="sidebar-overlay"></div>
-      <div id="toc-overlay"></div>
-      <nav id="topbar" class="highlightable">
-        <div>
-          <div id="breadcrumbs">
-            <span id="sidebar-toggle-span">
-              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
-            </span>
-            <span class="links">
-              Calibre Server
-            </span>
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide">
+              <button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)">
+                <i class="fa-fw fas fa-bars"></i>
+              </button>
+            </div>
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Calibre Server
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+
           </div>
         </div>
       </nav>
-      <main id="body-inner" class="highlightable default" tabindex="-1">
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
         <div class="flex-block-wrapper">
           <article class="default">
             <header class="headline">
@@ -104,21 +137,11 @@
 </span></span><span style="display:flex;"><span>systemctl reload nginx</span></span></code></pre></div><p>Issue a Let&rsquo;s Encrypt certificate. <a href="https://landchad.net/certbot" target="_blank">Detailed instructions and additional information</a>.</p>
 <div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>certbot --nginx</span></span></code></pre></div><p>Add CNAME record</p>
 <p>Now just go to <strong>calibre.example.org</strong>. The server will request an username and a password.</p>
-<p>
-<a href="#image-73539419d56659ae738d9c021e98d508" class="lightbox-link">
-<img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-73539419d56659ae738d9c021e98d508">
-<img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-430918cbd73350b55e11fc4110e9a42e" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-430918cbd73350b55e11fc4110e9a42e"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>After login you will see something like this.</p>
-<p>
-<a href="#image-a84b32a80d77e9c82357cb257e51b6e6" class="lightbox-link">
-<img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-a84b32a80d77e9c82357cb257e51b6e6">
-<img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-8716145afa5a18ce6b550e1f91e5f9ab" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8716145afa5a18ce6b550e1f91e5f9ab"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>De DRM Books</p>
 <p>Download kindle verion 1.26 <a href="https://www.filehorse.com/download-kindle-for-pc/40502/download/" target="_blank">https://www.filehorse.com/download-kindle-for-pc/40502/download/</a></p>
 <p>filename: KindleForPC-installer-1.26.55076.exe<br>
@@ -132,15 +155,14 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
 <div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>mkdir -p <span style="color:#ff5c57">$WINEPREFIX</span>/drive_c/users/<span style="color:#ff5c57">$USER</span>/AppData/Local/Amazon/Kindle/crashdump</span></span></code></pre></div><p>Install</p>
 
             <footer class="footline">
-
             </footer>
           </article>
 
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1701297257" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1701297257" defer></script>
+    <script src="/js/clipboard.min.js?1701316816" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1701316816" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -170,19 +192,20 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1701297257" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1701297257" defer></script>
+    <script src="/js/d3/d3-color.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1701316816" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1701316816" defer></script>
+    <script src="/js/js-yaml.min.js?1701316816" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1701297257" defer></script>
+    <script src="/js/theme.js?1701316816" defer></script>
   </body>
 </html>
