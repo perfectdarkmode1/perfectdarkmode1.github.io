@@ -5,7 +5,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Calibre Server",
-    "uri": "/tools/calibre_server/"
+    "uri": "/tools/calibre_server/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -13,7 +13,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Calibre Web with Docker Setup",
-    "uri": "/tools/calibre-web-with-docker/"
+    "uri": "/tools/calibre-web-with-docker/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -21,7 +21,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Distrobox Guide",
-    "uri": "/tools/distrobox/"
+    "uri": "/tools/distrobox/index.html"
   },
   {
     "breadcrumb": "Linux",
@@ -29,7 +29,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Fedora Desktop Setup",
-    "uri": "/linux/fedora_setup/"
+    "uri": "/linux/fedora_setup/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -37,7 +37,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Github Pages with Hugo",
-    "uri": "/tools/githubpageshugo/"
+    "uri": "/tools/githubpageshugo/index.html"
   },
   {
     "breadcrumb": "Networking",
@@ -45,7 +45,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "How to Study for CCNA",
-    "uri": "/networking/cisco/ccna_spaced_repetition/"
+    "uri": "/networking/cisco/ccna_spaced_repetition/index.html"
   },
   {
     "breadcrumb": "Networking",
@@ -53,7 +53,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Resources I used to Pass CCNA",
-    "uri": "/networking/cisco/resources_for_passing_ccna/"
+    "uri": "/networking/cisco/resources_for_passing_ccna/index.html"
   },
   {
     "breadcrumb": "Networking",
@@ -61,7 +61,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "What to Learn After CCNA",
-    "uri": "/networking/cisco/things_to_learn_after_ccna/"
+    "uri": "/networking/cisco/things_to_learn_after_ccna/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -69,7 +69,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Nextcloud Guide",
-    "uri": "/tools/nextcloud/"
+    "uri": "/tools/nextcloud/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -77,7 +77,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Vim Guide",
-    "uri": "/tools/vimguide/"
+    "uri": "/tools/vimguide/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -85,7 +85,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Vagrant Guide",
-    "uri": "/tools/vagrantguide/"
+    "uri": "/tools/vagrantguide/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -93,7 +93,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Pandoc Guide",
-    "uri": "/tools/pandoc/"
+    "uri": "/tools/pandoc/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -101,7 +101,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Rsync Guide",
-    "uri": "/tools/rsync/"
+    "uri": "/tools/rsync/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -109,7 +109,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Beginners Guide to Git",
-    "uri": "/tools/gitguide/"
+    "uri": "/tools/gitguide/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -117,7 +117,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "How to Set up Hugo Relearn Theme",
-    "uri": "/tools/hugorelearn/"
+    "uri": "/tools/hugorelearn/index.html"
   },
   {
     "breadcrumb": "Tools",
@@ -131,7 +131,7 @@ var relearn_search_index = [
       "vultr"
     ],
     "title": "Building a Minimalist Website with Hugo",
-    "uri": "/tools/buildawebsite/"
+    "uri": "/tools/buildawebsite/index.html"
   },
   {
     "breadcrumb": "",
@@ -139,7 +139,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Categories",
-    "uri": "/categories/"
+    "uri": "/categories/index.html"
   },
   {
     "breadcrumb": "Tags",
@@ -147,7 +147,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tag - http",
-    "uri": "/tags/http/"
+    "uri": "/tags/http/index.html"
   },
   {
     "breadcrumb": "Tags",
@@ -155,7 +155,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tag - hugo",
-    "uri": "/tags/hugo/"
+    "uri": "/tags/hugo/index.html"
   },
   {
     "breadcrumb": "Categories",
@@ -163,7 +163,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Category - linux",
-    "uri": "/categories/linux/"
+    "uri": "/categories/linux/index.html"
   },
   {
     "breadcrumb": "Tags",
@@ -171,7 +171,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tag - nginx",
-    "uri": "/tags/nginx/"
+    "uri": "/tags/nginx/index.html"
   },
   {
     "breadcrumb": "Tags",
@@ -179,7 +179,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tag - ssl",
-    "uri": "/tags/ssl/"
+    "uri": "/tags/ssl/index.html"
   },
   {
     "breadcrumb": "",
@@ -187,7 +187,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tags",
-    "uri": "/tags/"
+    "uri": "/tags/index.html"
   },
   {
     "breadcrumb": "Categories",
@@ -195,7 +195,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Category - tools",
-    "uri": "/categories/tools/"
+    "uri": "/categories/tools/index.html"
   },
   {
     "breadcrumb": "Tags",
@@ -203,7 +203,7 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tag - vultr",
-    "uri": "/tags/vultr/"
+    "uri": "/tags/vultr/index.html"
   },
   {
     "breadcrumb": "Tags",
@@ -211,6 +211,6 @@ var relearn_search_index = [
     "description": "",
     "tags": null,
     "title": "Tag - Evergreen_notes",
-    "uri": "/tags/evergreen_notes/"
+    "uri": "/tags/evergreen_notes/index.html"
   }
 ]
