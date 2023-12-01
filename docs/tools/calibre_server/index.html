@@ -25,7 +25,7 @@ calibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calib
 Creating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:
 [Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre_server/index.html">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre_server/">
     <meta property="article:section" content="Tools - Perfect Dark Mode">
     <meta property="article:published_time" content="2023-11-06T06:20:36-07:00">
     <meta property="article:modified_time" content="2023-11-06T06:20:36-07:00">
@@ -33,21 +33,21 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
     <title>Calibre Server - Perfect Dark Mode</title>
     <link href="/tools/calibre_server/index.xml" rel="alternate" type="application/rss+xml" title="Calibre Server - Perfect Dark Mode">
     <link href="/tools/calibre_server/index.print.html" rel="alternate" type="text/html" title="Calibre Server - Perfect Dark Mode">
-    <link href="/images/favicon.png?1701450957" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1701460563" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1701450957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701450957" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1701450957" rel="stylesheet">
-    <link href="/css/auto-complete.css?1701450957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701450957" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1701450957" rel="stylesheet">
-    <link href="/css/fonts.css?1701450957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701450957" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1701450957" rel="stylesheet">
-    <link href="/css/theme-city2.css?1701450957" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1701450957" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1701450957" rel="stylesheet">
-    <link href="/css/print.css?1701450957" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1701450957" rel="stylesheet">
-    <script src="/js/url.js?1701450957"></script>
-    <script src="/js/variant.js?1701450957"></script>
+    <link href="/css/fontawesome-all.min.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701460563" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1701460563" rel="stylesheet">
+    <link href="/css/auto-complete.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701460563" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1701460563" rel="stylesheet">
+    <link href="/css/fonts.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701460563" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1701460563" rel="stylesheet">
+    <link href="/css/theme-city2.css?1701460563" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1701460563" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1701460563" rel="stylesheet">
+    <link href="/css/print.css?1701460563" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1701460563" rel="stylesheet">
+    <script src="/js/url.js?1701460563"></script>
+    <script src="/js/variant.js?1701460563"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -69,7 +69,7 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
       window.T_N_results_found = `{1} results found for "{0}"`;
     </script>
   </head>
-  <body class="mobile-support html" data-url="/tools/calibre_server/index.html">
+  <body class="mobile-support html" data-url="/tools/calibre_server/">
     <div id="R-body" class="default-animation">
       <div id="R-body-overlay"></div>
       <nav id="R-topbar">
@@ -161,11 +161,11 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
 </span></span><span style="display:flex;"><span>systemctl reload nginx</span></span></code></pre></div><p>Issue a Let&rsquo;s Encrypt certificate. <a href="https://landchad.net/certbot" target="_blank">Detailed instructions and additional information</a>.</p>
 <div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>certbot --nginx</span></span></code></pre></div><p>Add CNAME record</p>
 <p>Now just go to <strong>calibre.example.org</strong>. The server will request an username and a password.</p>
-<p><a href="#R-image-a4e61e66826662a29b856ca5228a513a" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4e61e66826662a29b856ca5228a513a"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-745a9910bb0d7c9ddafb7c687fa7ca8e" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-745a9910bb0d7c9ddafb7c687fa7ca8e"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>After login you will see something like this.</p>
-<p><a href="#R-image-3ca1e4e887659d1002aff6a99e29310d" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3ca1e4e887659d1002aff6a99e29310d"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-b8873d49060ee65bd076f24cfae1bdaa" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8873d49060ee65bd076f24cfae1bdaa"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>De DRM Books</p>
 <p>Download kindle verion 1.26 <a href="https://www.filehorse.com/download-kindle-for-pc/40502/download/" target="_blank">https://www.filehorse.com/download-kindle-for-pc/40502/download/</a></p>
 <p>filename: KindleForPC-installer-1.26.55076.exe<br>
@@ -200,16 +200,16 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1701450957" defer></script>
-        <script src="/js/lunr/lunr.min.js?1701450957" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1701450957" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1701450957" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1701450957" defer></script>
-        <script src="/js/search.js?1701450957" defer></script>
+        <script src="/js/auto-complete.js?1701460563" defer></script>
+        <script src="/js/lunr/lunr.min.js?1701460563" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1701460563" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1701460563" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1701460563" defer></script>
+        <script src="/js/search.js?1701460563" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
         </ul>
         <hr class="padding">
       </div>
@@ -217,34 +217,34 @@ Perfect Dark Mode
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
           <li data-nav-id="" class=""><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669"><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><span class="padding">Linux</span><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora_setup/index.html" class=""><a class="padding" href="/linux/fedora_setup/index.html">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><span class="padding">Networking</span><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/index.html" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/index.html">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/index.html" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/index.html">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/index.html" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/index.html">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="" class="parent "><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab" checked><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><span class="padding">Tools</span><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/calibre_server/index.html" class="active"><a class="padding" href="/tools/calibre_server/index.html">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/calibre-web-with-docker/index.html" class=""><a class="padding" href="/tools/calibre-web-with-docker/index.html">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/distrobox/index.html" class=""><a class="padding" href="/tools/distrobox/index.html">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/githubpageshugo/index.html" class=""><a class="padding" href="/tools/githubpageshugo/index.html">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/calibre_server/" class="active"><a class="padding" href="/tools/calibre_server/">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/" class=""><a class="padding" href="/tools/githubpageshugo/">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/" class=""><a class="padding" href="/tools/vimguide/">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/" class=""><a class="padding" href="/tools/vagrantguide/">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/" class=""><a class="padding" href="/tools/pandoc/">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
           </ul>
         </div>
         <div id="R-shortcuts">
           <div class="nav-title padding">More</div>
           <ul class="space">
             <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
-            <li><a class="padding" href="/recommended/_index.md/index.html"><i class='fas fa-fw fa-book'></i> Recommended</a></li>
-            <li><a class="padding" href="/contact/index.html"><i class='fas fa-fw fa-envelope'></i> Contact</a></li>
-            <li><a class="padding" href="/now/index.html"><i class='fas fa-fw fa-play'></i> Now</a></li>
-            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+            <li><a class="padding" href="/recommended/"><i class='fas fa-fw fa-book'></i> Recommended</a></li>
+            <li><a class="padding" href="/contact/"><i class='fas fa-fw fa-envelope'></i> Contact</a></li>
+            <li><a class="padding" href="/now/"><i class='fas fa-fw fa-play'></i> Now</a></li>
+            <li><a class="padding" href="/tags/"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
           </ul>
         </div>
         <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
@@ -296,8 +296,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1701450957" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1701450957" defer></script>
+    <script src="/js/clipboard.min.js?1701460563" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1701460563" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -327,20 +327,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1701450957" defer></script>
-    <script src="/js/js-yaml.min.js?1701450957" defer></script>
+    <script src="/js/d3/d3-color.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1701460563" defer></script>
+    <script src="/js/js-yaml.min.js?1701460563" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1701450957" defer></script>
+    <script src="/js/theme.js?1701460563" defer></script>
   </body>
 </html>

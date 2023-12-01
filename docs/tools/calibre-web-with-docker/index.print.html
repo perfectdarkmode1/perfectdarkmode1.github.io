@@ -13,30 +13,30 @@
     <meta property="og:title" content="Calibre Web with Docker Setup - Perfect Dark Mode">
     <meta property="og:description" content="cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/ Install Docker sudo apt update sudo apt install docker.io Create a Docker Network dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network 556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf Create a Docker volume to store Calibre Web data: sudo docker volume create calibre_data Pull the Calibre Web Docker image: sudo docker pull linuxserver/calibre-web Start the Calibre Web Docker container sudo docker run -d \ --name=calibre-web \ --restart=unless-stopped \ -p 8083:8083 \ -e PUID=$(id -u) \ -e PGID=$(id -g) \ -v calibre_data:/config \ -v /opt/calibre/Calibre:/books \ --network calibre_network \ linuxserver/calibre-web Configure Nginx to act as a reverse proxy for Calibre Web: sudo nano /etc/nginx/sites-available/calibre-webAdd the following to the file">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre-web-with-docker/index.html">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre-web-with-docker/">
     <meta property="article:section" content="Tools - Perfect Dark Mode">
     <meta property="article:published_time" content="2023-11-06T06:20:36-07:00">
     <meta property="article:modified_time" content="2023-11-06T06:20:36-07:00">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title>Calibre Web with Docker Setup - Perfect Dark Mode</title>
-    <link href="http://perfectdarkmode.com/tools/calibre-web-with-docker/index.html" rel="canonical" type="text/html" title="Calibre Web with Docker Setup - Perfect Dark Mode">
+    <link href="http://perfectdarkmode.com/tools/calibre-web-with-docker/" rel="canonical" type="text/html" title="Calibre Web with Docker Setup - Perfect Dark Mode">
     <link href="/tools/calibre-web-with-docker/index.xml" rel="alternate" type="application/rss+xml" title="Calibre Web with Docker Setup - Perfect Dark Mode">
-    <link href="/images/favicon.png?1701450957" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1701460563" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1701450957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701450957" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1701450957" rel="stylesheet">
-    <link href="/css/auto-complete.css?1701450957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701450957" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1701450957" rel="stylesheet">
-    <link href="/css/fonts.css?1701450957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701450957" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1701450957" rel="stylesheet">
-    <link href="/css/theme-city2.css?1701450957" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1701450957" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1701450957" rel="stylesheet">
-    <link href="/css/print.css?1701450957" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1701450957" rel="stylesheet">
-    <link href="/css/ie.css?1701450957" rel="stylesheet">
-    <script src="/js/url.js?1701450957"></script>
-    <script src="/js/variant.js?1701450957"></script>
+    <link href="/css/fontawesome-all.min.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701460563" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1701460563" rel="stylesheet">
+    <link href="/css/auto-complete.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701460563" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1701460563" rel="stylesheet">
+    <link href="/css/fonts.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701460563" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1701460563" rel="stylesheet">
+    <link href="/css/theme-city2.css?1701460563" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1701460563" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1701460563" rel="stylesheet">
+    <link href="/css/print.css?1701460563" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1701460563" rel="stylesheet">
+    <link href="/css/ie.css?1701460563" rel="stylesheet">
+    <script src="/js/url.js?1701460563"></script>
+    <script src="/js/variant.js?1701460563"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -58,7 +58,7 @@
       window.T_N_results_found = `{1} results found for "{0}"`;
     </script>
   </head>
-  <body class="mobile-support print" data-url="/tools/calibre-web-with-docker/index.html">
+  <body class="mobile-support print" data-url="/tools/calibre-web-with-docker/">
     <div id="R-body" class="default-animation">
       <div id="R-body-overlay"></div>
       <nav id="R-topbar">
@@ -144,8 +144,8 @@ password: admin123</p>
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1701450957" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1701450957" defer></script>
+    <script src="/js/clipboard.min.js?1701460563" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1701460563" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -175,20 +175,20 @@ password: admin123</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1701450957" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1701450957" defer></script>
-    <script src="/js/js-yaml.min.js?1701450957" defer></script>
+    <script src="/js/d3/d3-color.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1701460563" defer></script>
+    <script src="/js/js-yaml.min.js?1701460563" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1701450957" defer></script>
+    <script src="/js/theme.js?1701460563" defer></script>
   </body>
 </html>
