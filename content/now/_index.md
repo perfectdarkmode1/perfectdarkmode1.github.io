@@ -9,7 +9,7 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 
 ## Mental Health
 - [x] Quit drinking
-- [ ] Quit caffeine. Taper off caffeine over 25 days. (5/25) 
+- [ ] Quit caffeine. Taper off caffeine over 70 days. (4/70) 
 
 ## What I am Reading
 - [x] RHCSA Red Hat Enterprise Linux 8 - Asghor Ghori

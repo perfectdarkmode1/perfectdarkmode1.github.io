@@ -1,0 +1,17 @@
+{{- $onwidths := cond (isset . "onwidths") .onwidths "show" }}
+{{- $onwidthm := cond (isset . "onwidthm") .onwidthm "show" }}
+{{- $onwidthl := cond (isset . "onwidthl") .onwidthl "show" }}
+{{- with .page }}
+	{{- $format := partial "get-format.hugo" . }}
+	{{- $outputFormat := partial "output-format.hugo" (dict "page" . "format" $format) }}
+    {{- partial "topbar/func/button.html" (dict
+    "page" .
+    "class" "topbar-button-toc"
+    "href" "contact/"
+    "icon" ""
+    "onwidths" $onwidths
+    "onwidthm" $onwidthm
+    "onwidthl" $onwidthl
+    "title" (printf "%s (CTRL+ALT+t)" (T "Contact"))
+)}}
+{{- end }}
