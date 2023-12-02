@@ -17,22 +17,22 @@
     <meta property="og:url" content="http://perfectdarkmode.com/">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1701460563" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1701517006" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701460563" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1701460563" rel="stylesheet">
-    <link href="/css/auto-complete.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701460563" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1701460563" rel="stylesheet">
-    <link href="/css/fonts.css?1701460563" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701460563" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1701460563" rel="stylesheet">
-    <link href="/css/theme-city2.css?1701460563" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1701460563" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1701460563" rel="stylesheet">
-    <link href="/css/print.css?1701460563" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1701460563" rel="stylesheet">
-    <link href="/css/ie.css?1701460563" rel="stylesheet">
-    <script src="/js/url.js?1701460563"></script>
-    <script src="/js/variant.js?1701460563"></script>
+    <link href="/css/fontawesome-all.min.css?1701517007" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701517007" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1701517007" rel="stylesheet">
+    <link href="/css/auto-complete.css?1701517007" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701517007" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1701517007" rel="stylesheet">
+    <link href="/css/fonts.css?1701517007" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701517007" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1701517007" rel="stylesheet">
+    <link href="/css/theme-city2.css?1701517007" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1701517007" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1701517007" rel="stylesheet">
+    <link href="/css/print.css?1701517007" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1701517007" rel="stylesheet">
+    <link href="/css/ie.css?1701517007" rel="stylesheet">
+    <script src="/js/url.js?1701517007"></script>
+    <script src="/js/variant.js?1701517007"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -259,6 +259,126 @@ Ctrl + Shift + Tab</p>
 Ctrl _ Shift _ Space</p>
 <p>Reattach Tab
 Ctrl + Shift + v</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="rhcsa-lab-using-vagrant">RHCSA Lab Using Vagrant</h1>
+
+<p><a href="#R-image-012cea08a076ac078b96bbeb30be7b33" class="lightbox-link"><img src="/images/vagrantmultivmdeployment.jpg?width=600px" alt="RHCSA Vagrant Lab" class="figure-image noborder lightbox noshadow" style="height: auto; width: 600px;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-012cea08a076ac078b96bbeb30be7b33"><img src="/images/vagrantmultivmdeployment.jpg?width=600px" alt="RHCSA Vagrant Lab" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p>We are going to use it to set up two RHEL 8 servers with some custom configuration options. I will include some helpful Vagrant commands at the end if you get stuck.</p>
+<p>In this guide, I will be using Fedora 38 as my main operating system. I use Fedora because it is similar in features to Red Hat Linux Distributions. This will give me even more practice for the RHCSA exam as I use it in day-to-day operations.</p>
+<p>Note, if you are using Windows, you will need to install ssh. This can be done by installing Git. Which automatically installs ssh for you.</p>
+<p>You will also need to have the latest version of Virtualbox installed.</p>
+<h2 id="here-are-the-steps">Here are the steps:</h2>
+<ol>
+<li>Download and install Vagrant</li>
+<li>Make a new directory for your vagrant lab to live in</li>
+<li>Add the vagrant box</li>
+<li>Install the Vagrant disk size plugin</li>
+<li>Initialize the Vagrant box and Edit the Vagrant file</li>
+<li>Bring up the Vagrant box</li>
+</ol>
+<h3 id="1-download-and-install-vagrant">1. Download and install Vagrant.</h3>
+<p>In Fedora, this is very easy. Run the following command to download and install Vagrant:</p>
+<p><code>sudo dnf install vagrant</code></p>
+<h3 id="2-make-a-new-directory-for-your-vagrant-lab-to-live-in">2. Make a new directory for your vagrant lab to live in.</h3>
+<p>Make your vagrant directory and make it your current working directory:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code class="language-mkdir" data-lang="mkdir">cd Vagrant</code></pre></div><ol start="3">
+<li>
+<p>Add the Vagrant box.
+<code>vagrant box add generic/rhel8</code></p>
+</li>
+<li>
+<p>Install the Vagrant disk size plugin.
+The disk size program will help us set up custom storage sizes. Since we will be re-partitioning storage, this is a useful feature.</p>
+</li>
+</ol>
+<p><code>vagrant plugin install vagrant-disksize</code></p>
+<ol start="5">
+<li>Initialize the Vagrant box and edit the Vagrant file.
+First, initialize the Vagrant box in the vagrant directory:</li>
+</ol>
+<p><code>vagrant init generic/rhel8</code></p>
+<p>After completion, there will now be a file called &ldquo;Vagrantfile&rdquo; in your current directory. Since Vim is on the RHCSA exam, it&rsquo;s wise to practice with it whenever you can. So let&rsquo;s open the file in Vim:</p>
+<p><code>vim Vagrantfile</code></p>
+<p>You will see a bunch of lines commented out, and a few lines without comments. Go ahead and comment out everything and paste this at the end of the file:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Vagrant.configure(&#34;2&#34;) do |config
+
+
+config.vm.box = &#34;generic/rhel8&#34;
+
+
+config.vm.define &#34;server1&#34; do |server1|
+
+
+server1.vm.hostname = &#34;server1.example.com&#34;
+
+
+server1.vm.network &#34;private_network&#34;, ip: &#34;192.168.2.110&#34;
+
+
+config.disksize.size = &#39;10GB&#39;
+
+
+end
+
+
+config.vm.define &#34;server2&#34; do |server2|
+
+
+server2.vm.hostname = &#34;server2.example.com&#34;
+
+
+server2.vm.network &#34;private_network&#34;, ip: &#34;192.168.2.120&#34;
+
+
+config.disksize.size = &#39;16GB&#39;
+
+
+end
+
+
+config.vm.provider &#34;virtualbox&#34; do |vb|
+
+
+vb.memory = &#34;2048&#34;
+
+
+end
+
+
+end|</code></pre></div><p>The configuration file is fairly self-explanatory. Save Vagrantfile and exit Vim. Then, create /etc/vbox/networks.conf and add the following:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>* 10.0.0.0/8 192.168.0.0/1
+* 2001::/646</code></pre></div><p>This will allow you to be more flexible with what network addresses can be used in VirtualBox.</p>
+<h2 id="bring-up-the-vagrant-box">Bring up the Vagrant box.</h2>
+<p>Now, we bring up the Vagrant box. This will open two Virtual machines in Virtualbox named server1 and server2 in headless mode (there is no GUI).</p>
+<p><code>vagrant up</code></p>
+<p>Great! Now we can use Vagrant to ssh into server1:</p>
+<p><code>vagrant ssh server 1</code></p>
+<p>From server1 ssh into server2 using its IP address:</p>
+<p><code>[vagrant@server1 ~]$ ssh 192.168.2.120</code></p>
+<p>Now you are in and ready to stir things up. The last thing you need is some commands to manage your Vagrant machines.</p>
+<h2 id="helpful-vagrant-commands">Helpful Vagrant commands.</h2>
+<p>Shut down Vagrant machines:</p>
+<p><code>vagrant halt</code>
+Suspend or resume a machine:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>vagrant suspend
+vagrand resume</code></pre></div><p>Restart a virtual machine:</p>
+<p><code>vagrant reload</code></p>
+<p>Destroy a Vagrant machine:</p>
+<p><code>vagrant destroy [machine-name]</code></p>
+<p>Show running VMs:</p>
+<p><code>vagrant status</code></p>
+<p>List other Vagrant options:</p>
+<p><code>vagrant</code></p>
+<p>If you are going for RHCSA, there is no doubt that you will also use Vagrant sometime in the future. And as you can see, it&rsquo;s pretty quick and simple to get started.</p>
+<p>Feel free to reach out with questions.</p>
 
             <footer class="footline">
             </footer>
@@ -636,6 +756,29 @@ Ctrl + Shift + v</p>
             </footer>
           </article>
 
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">Subsections of Python</h1>
+          </section>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
           <section>
             <h1 class="a11y-only">Subsections of Tools</h1>
           <article class="default">
@@ -681,11 +824,11 @@ Ctrl + Shift + v</p>
 </span></span><span style="display:flex;"><span>systemctl reload nginx</span></span></code></pre></div><p>Issue a Let&rsquo;s Encrypt certificate. <a href="https://landchad.net/certbot" target="_blank">Detailed instructions and additional information</a>.</p>
 <div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>certbot --nginx</span></span></code></pre></div><p>Add CNAME record</p>
 <p>Now just go to <strong>calibre.example.org</strong>. The server will request an username and a password.</p>
-<p><a href="#R-image-745a9910bb0d7c9ddafb7c687fa7ca8e" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-745a9910bb0d7c9ddafb7c687fa7ca8e"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-da3f9afebe7be5287f7f2b4eb349e9a1" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-da3f9afebe7be5287f7f2b4eb349e9a1"><img src="https://landchad.net/pix/calibre/calibre-1.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>After login you will see something like this.</p>
-<p><a href="#R-image-b8873d49060ee65bd076f24cfae1bdaa" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8873d49060ee65bd076f24cfae1bdaa"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-ec0096bd68ec7de89ddb14c2d4b4fce3" class="lightbox-link"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ec0096bd68ec7de89ddb14c2d4b4fce3"><img src="https://landchad.net/pix/calibre/calibre-2.png" alt="calibre" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>De DRM Books</p>
 <p>Download kindle verion 1.26 <a href="https://www.filehorse.com/download-kindle-for-pc/40502/download/" target="_blank">https://www.filehorse.com/download-kindle-for-pc/40502/download/</a></p>
 <p>filename: KindleForPC-installer-1.26.55076.exe<br>
@@ -2036,16 +2179,16 @@ Add a [[menu.shortcuts]] entry for each link</p>
 <h2 id="setting-up-a-virtual-private-server-vps">Setting up a Virtual Private Server (VPS)</h2>
 <p>I use Vultr as my VPS. When I signed up they had a $250 credit towards a new account. If you select the cheapest server (you shouldn&rsquo;t need anything else for a basic site) that comes out to about $6 a month. Of course the $250 credit goes towards that which equates to around 41 months free.</p>
 <p>Head to vultr.com. Create and account and  Select the Cloud Compute option.</p>
-<p><a href="#R-image-b0061cdcaea2a84539b598c7d99ee04f" class="lightbox-link"><img src="/vultr1.png" alt="vultr1" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b0061cdcaea2a84539b598c7d99ee04f"><img src="/vultr1.png" alt="vultr1" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-421d2c39315b892bf9bcaa8f436e1b81" class="lightbox-link"><img src="/vultr1.png" alt="vultr1" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-421d2c39315b892bf9bcaa8f436e1b81"><img src="/vultr1.png" alt="vultr1" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>Under CPU &amp; Storage Technology, select &ldquo;Regular Performance&rdquo;. Then under &ldquo;Server Location, select the server closest to you. Or closest to where you think your main audience will be.</p>
 <p>Under Server image, select the OS you are most comfortable with. This guide uses Debian.</p>
-<p><a href="#R-image-0fa9b03bdc7aba5beaf19080ceadd5c4" class="lightbox-link"><img src="/vultr2.png" alt="vultr2" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0fa9b03bdc7aba5beaf19080ceadd5c4"><img src="/vultr2.png" alt="vultr2" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-1dabe98524f7dbc9503146c568ecb4f4" class="lightbox-link"><img src="/vultr2.png" alt="vultr2" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1dabe98524f7dbc9503146c568ecb4f4"><img src="/vultr2.png" alt="vultr2" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>Under Server Size, slect the 10GB SSD. Do not select the &ldquo;IPv6 ONLY&rdquo; option. Leave the other options as default and enter your server hostname.</p>
 <p>On the products page, click your new server. You can find your server credentials and IPv4 address here. You will need these to log in to your server.</p>
-<p><a href="#R-image-eb35881362045eb68ff7ff13e5a76969" class="lightbox-link"><img src="/vultr3.png" alt="vultr3" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-eb35881362045eb68ff7ff13e5a76969"><img src="/vultr3.png" alt="vultr3" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-3d6cf56e85e08bcf3211254753de4d55" class="lightbox-link"><img src="/vultr3.png" alt="vultr3" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3d6cf56e85e08bcf3211254753de4d55"><img src="/vultr3.png" alt="vultr3" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>Log into your sever via ssh to test. From a Linux terminal run:</p>
 <div class="wrap-code highlight"><pre tabindex="0"><code>ssh username@serveripaddress</code></pre></div><p>Then, enter your password when prompted.</p>
 <h2 id="registering-a-domain-name">Registering a Domain Name</h2>
@@ -2133,8 +2276,8 @@ series = [&#34;tools&#34;]
 <div class="wrap-code highlight"><pre tabindex="0"><code>![imagename}(/imagename.png)</code></pre></div><h3 id="serve-your-website-locally">Serve your website locally</h3>
 <p>Let&rsquo;s test the website by serving it locally and accessing it at localhost:1313 in your web browser. Enter the command:</p>
 <div class="wrap-code highlight"><pre tabindex="0"><code>hugo serve</code></pre></div><p>Hugo will now be generating your website. You can view it by entering localhost:1313 in your webbrowser.</p>
-<p><a href="#R-image-7901f5106c282909fc64d9150c95a096" class="lightbox-link"><img src="/hugo1.png" alt="hugo1" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7901f5106c282909fc64d9150c95a096"><img src="/hugo1.png" alt="hugo1" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-d5b0390536ac9ad87dfcc9e3cff7fbe7" class="lightbox-link"><img src="/hugo1.png" alt="hugo1" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d5b0390536ac9ad87dfcc9e3cff7fbe7"><img src="/hugo1.png" alt="hugo1" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>You can use this to test new changes before uploading them to your server. When you svae a post or page file such as your about page, hugo will automatically update the changes to this local page if the local server is running.</p>
 <p>Press &ldquo;Ctrl + c&rdquo; to stop this local server. This is only for testing and does not need to be running to make your site work.</p>
 <h3 id="build-out-your-public-directory">Build out your public directory</h3>
@@ -2186,8 +2329,8 @@ systemctl reload nginx</code></pre></div><h3 id="access-permissions">Access Perm
 <div class="wrap-code highlight"><pre tabindex="0"><code>ufw allow 80
 ufw allow 443</code></pre></div><h3 id="nginx-security">Nginx Security</h3>
 <p>We will want to hide your nginx version number on error pages. This will make your site a bit harder for hackers to find exploits. Open your Nginx config file at /etc/nginx/nginx.conf and remove the &ldquo;#&rdquo; before &ldquo;server_tokens off;&rdquo;</p>
-<p><a href="#R-image-ee40164d7cca03e399c88fc12581f9c4" class="lightbox-link"><img src="/nginx1.png" alt="nginx1" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ee40164d7cca03e399c88fc12581f9c4"><img src="/nginx1.png" alt="nginx1" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p><a href="#R-image-5f9e66540b1edee1d1c6f3af0ba5a56b" class="lightbox-link"><img src="/nginx1.png" alt="nginx1" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5f9e66540b1edee1d1c6f3af0ba5a56b"><img src="/nginx1.png" alt="nginx1" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
 <p>Enter your domain into your browser. Congrats! You now have a running website!</p>
 <h2 id="use-certbot-to-enable-https">Use Certbot to enable HTTPS</h2>
 <p>Right now, our site uses the unencrypted http. We want it to use the encrypted version HTTPS (HTTP over SSL). This will increase user privacy, hide usernames and passwords used on your site, and you get the lock symbol by your URL name instead of &ldquo;!not secure&rdquo;.</p>
@@ -2219,12 +2362,218 @@ ufw allow 443</code></pre></div><h3 id="nginx-security">Nginx Security</h3>
           </article>
 
           </section>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">Subsections of Dog Training</h1>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="dog-training-101">Dog Training 101</h1>
+
+<p><a href="#R-image-411ef42512f4907004d97a3d03c051c0" class="lightbox-link"><img src="/images/lukebottle.jpg?classes=border&amp;height=400px" alt="Luke!" class="figure-image border lightbox noshadow" style="height: 400px; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-411ef42512f4907004d97a3d03c051c0"><img src="/images/lukebottle.jpg?classes=border&amp;height=400px" alt="Luke!" class="lightbox-image border lightbox noshadow" loading="lazy"></a></p>
+<p>For years, famous dog trainers like Cesar Milan would teach people to train dogs with aversive tactics and “Dominance”. It turns out these methods are just plain cruel and make things much worse for your dog.</p>
+<p>So much so that even police forces have banned the use of aversive training to get highly trained killer attack dogs.</p>
+<p>Dogs lack the contextual ability to understand what punishments are. They will usually just make your doggo scared of you.</p>
+<p>Aversive tactics will only change their behavior in the exact situation that they are in when they are punished. And cause a host of other problems along the way.</p>
+<p>As soon as you leave the room, they think they are free to do the behavior again. And besides, do you really want your dog to be miserable?</p>
+<p>Also, Dogs (like humans), will also endure punishment if they think a reward is worth it. So these methods are not as effective as we are led to believe.</p>
+<h2 id="the-new-way-progressive-reinforcement">The New Way: Progressive Reinforcement</h2>
+<p>Rewarding dogs for good behavior will reinforce that behavior. Ignoring or preventing bad behavior will stop bad behaviors from happening.</p>
+<p>Read that again&hellip;</p>
+<h2 id="treats-toys-and-cuddles">Treats, Toys, and Cuddles</h2>
+<p>There are three main rewards used to reinforce your dog&rsquo;s behavior. Treats, toys, and belly rubs (attention).</p>
+<p>When “shaping” a new behavior, treats tend to be the most effective. All dogs will do anything to get a treat. And they are damn smart at figuring out how to get them. There are three types of treats to give your dog:</p>
+<ul>
+<li>High Value</li>
+<li>Medium Value</li>
+<li>Low Value</li>
+</ul>
+<p>High-value treats are the cream of the crop. When you need something that is more rewarding than the ever-so-rewarding environment your dog is in. This is your go-to.</p>
+<p>Think of all of the smells, bugs, and dogs at your local park. You need a reward that is better than what they could get if they simply ignored you.</p>
+<p>Try stuff like cheese, beef liver, and bacon (to be used sparingly).</p>
+<p>Medium-value rewards are used for medium-value environments. Think backyard with some distractions. These are things like training treats that you can find at the pet store.</p>
+<p>Low-value rewards are used in the house with minimal distraction. Many people just use their dog&rsquo;s kibble for a low-value reward.</p>
+<p>This is a great way to have your dog work for their meal rather than just dumping it in a big bowl.</p>
+<p>If a certain treat is not working for your dog, they simply do not find it rewarding enough. Searching out and getting food is engrained in your dog’s DNA. And is a skill that they have been honing for (perhaps) millions of years.</p>
+<p>It’s up to you to find out what treats makes your dog tick.</p>
+<h2 id="marking-good-behaviors">Marking Good Behaviors</h2>
+<p>You’ve probably seen those small devices that make a “click”. You know they are for dogs. But how do they work?</p>
+<p>A clicker is what dog trainers call a “Reward Marker”. This is Pavlov’s bell. They hear a sharp “click”, and they get a reward.</p>
+<p>Dogs will repeatedly do what gets them a “click”. The good thing is, they will often exaggerate the movement or position that has gotten them a “click” in the past.</p>
+<p>We can use this to our advantage.</p>
+<h2 id="exercise-charging-the-clicker">Exercise: Charging the Clicker</h2>
+<p>Here is how you get your dog to associate a clicker with a reward. If you do not have a clicker, you can use a verbal reward marker like a friendly “yes” or “good”.</p>
+<p>However, clickers are more precise and highly recommended. For these instructions, replace the “click” with your verbal marker of choice.</p>
+<p>Step 1: Hold the clicker behind your back. We start here because some dogs are scared of the clicker noise at first. So we want to muffle the sound.</p>
+<p>“Click” and give your dog a treat. Do this a few times.</p>
+<p>Step 2: After your dog is used to the clicking sound and you are sure they are scared, bring it out in front of you. “Click” and give a treat. Do this 5–10 times.</p>
+<p>Step 3: Start walking around the living room. Keep clicking and immediately giving treats. After 20–30 treats. Your dog should be primed for clicker training.</p>
+<h2 id="shaping-behaviors">Shaping Behaviors</h2>
+<p>Let’s teach your dog how to sit. What do you do? Instead of pushing Fido’s rear end to the ground and saying “Sit”. Start in your living room, and follow this process.</p>
+<ol>
+<li>Use a treat as a lure. Let them get into the desired position themselves. Mark and reward small movements that trend toward the desired result.</li>
+<li>Once you get the desired behavior reliably. Add a verbal queue. And fade the Lure.</li>
+<li>Generalize the behavior by adding distractions.</li>
+</ol>
+<h2 id="luring-the-sit">Luring the Sit</h2>
+<p>Take a nummy and put it over and back behind your dog&rsquo;s head. Your dog’s body will eventually make a movement that is trending in the right direction.</p>
+<p>Look for a subtle knee bend (if they don’t just sit right away). “Click” and reward any movement where their fuzzy butt goes toward the ground.</p>
+<p>If you “click” Progressively towards a sit, eventually you will get a sit.</p>
+<h2 id="adding-a-verbal-queue">Adding a Verbal Queue</h2>
+<p>Only after you are getting the behavior reliably, do you add the word “Sit”. Here, you will say “sit”, then Lure the behavior. Do this repeatedly. Then, you will start to “fade the lure”.</p>
+<p>Lure “fading” is a technique dog trainers use to get rid of a lure over time. This lets a pooch better associate a verbal queue with what you want them to do.</p>
+<p>To fade a lure, simply cut back on the use of your treat and hand motion over time. First, say the command “sit” and do the same hand motion that got the “sit” but without the treat.</p>
+<p>Then, say “sit” and lessen the hand motion until you can get the sit with just the verbal command.</p>
+<h2 id="generalizing-behaviors">Generalizing Behaviors</h2>
+<p>You will notice that your dog will only want to do a trick when they are in the living room, with no distractions around. As soon as they get outside, or you try to show a friend…</p>
+<p>They become wild animals…</p>
+<p>This is where generalization comes in. Generalization is a way to get a dog to do a behavior in any situation. You do this by adding gradual distractions.</p>
+<p>Have your dog perform sit following a path that adds more and more distraction. If you slip up, take a step back to a less distracting step.</p>
+<p>The general steps to adding distractions are as follows.</p>
+<ol>
+<li>Living room (no distractions)</li>
+<li>Backyard (slight distractions)</li>
+<li>Out on a walk (more distractions)</li>
+<li>At a park (intense distractions)</li>
+<li>Outside of a dog park (impossible)</li>
+<li>Inside a dog park (nuclear)</li>
+</ol>
+<p>Each of these steps provides new challenges for your dog to stay focused. Birds, people, other dogs, traffic, etc. The ultimate training ground.</p>
+<p>Soon your dog will sit in any situation. Give your dog a chance to succeed by always starting at the bottom of the list.</p>
+<p>Get creative, this ladder is not all-inclusive.</p>
+<h2 id="adding-other-tricks-and-modifying-behaviors">Adding Other Tricks and Modifying Behaviors</h2>
+<p>The steps above lay the foundation for Progressive Reinforcement training. You will use them to get your dogs to do impressive feats. Use the principles above to teach your dogs some useful tricks:</p>
+<ul>
+<li>Leave it</li>
+<li>Down</li>
+<li>Loose leash walking</li>
+<li>Stay</li>
+<li>Fetch</li>
+<li>Come</li>
+</ul>
+<p>Remember, never get mad at your dog or yell at them. Stay positive and train behaviors that you want, rather than focusing on getting your dog to stop doing something.</p>
+<p>You can use these steps for behavior modification as well. All kinds of problems can be solved by using progressive reinforcement training:</p>
+<ul>
+<li>Fear</li>
+<li>Chasing</li>
+<li>Aggressiveness</li>
+<li>Unwanted Chewing</li>
+<li>Unwanted Barking</li>
+</ul>
+<h2 id="resources-for-success">Resources for Success</h2>
+<p>There is a lot more to learn, and no way to capture it all in a quick article on the internet. Don’t worry, I will not leave you high and dry.</p>
+<p>Dog training is an unregulated industry and there are a lot of crap resources out there.</p>
+<p>Here are some progressive reinforcement dog training resources that you can count on.</p>
+<h2 id="kikopup">Kikopup</h2>
+<p>If you take one resource away from this list, it should be this one. I swear the Kiko pup teaches EVERYTHING about dog training and giving your dog a good life. Here is a <a href="https://www.youtube.com/@kikopup" target="_blank">link to her channel.</a></p>
+<h2 id="book-recommendations">Book Recommendations</h2>
+<p>There are great books for any problems or goals you have with your dog.</p>
+<ul>
+<li>The Power of Positive Dog Training</li>
+<li>Don’t Shoot the Dog</li>
+<li>The Other End of The Leash</li>
+<li>“Stop” How to Control Predatory Chasing in Dogs</li>
+<li>Mine! A Practical Guide to Resource Guarding in Dogs</li>
+<li>The Cautious Canine</li>
+<li>Total Recall, Perfect Response Training for Puppies and Adult Dogs</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          </section>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="linux">Linux</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">Subsections of Writing</h1>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="writing-off-the-cuff">Writing off the Cuff</h1>
+
+<p>My favorite and by far easiest method of writing is writing off the cuff. You get your thoughts down and spring new thoughts to life. You are finding out what you know without referencing materials.</p>
+<p>You are creating out of nothing. It is pure writing and creativity folded into one. We all have a “Muse” that will give to us whenever we ask.</p>
+<p>All you have to do is start writing.</p>
+<h2 id="writers-block-doesnt-exist">Writer’s block doesn’t exist.</h2>
+<p>Writer’s Block sucks. You don’t Know what to write next. You are stuck in limbo. But are you really stuck? You really can’t Think of ANYTHING to put down next?</p>
+<p>Writer’s Block is a trick! Perhaps it’s An excuse cropping up to get you out of the zone.</p>
+<p>Your thoughts never stop. So start there. What’s The first thing that comes to mind when you read your last sentence?</p>
+<p>Just write that down and move on. Follow your train of thought to find out who you really are.</p>
+<p>And to find out what you really have to say.</p>
+<h2 id="the-first-draft-is-always-garbage">The first draft is always garbage.</h2>
+<p>Live it. Accept it. Once you do. It doesn’t matter what you write. Just put down whatever comes to your mind. No matter how bad it seems. You will touch up later.</p>
+<p>Writers block doesn’t even exist. It’s Just a concept. You aren’t writing because you can’t think of anything.</p>
+<p>It’s because you are a perfectionist. You are unwilling to put down “garbage” on a piece of paper.</p>
+<h2 id="just-keep-going">Just keep going…</h2>
+<p>Don’t Stop. You have set aside this time to create. And creating is what gets your blood flowing. It’s The reason you are alive.</p>
+<p>Distractions are going to try and stop you. They are the enemy. And this is how you win.</p>
+<p>Stay on the course. The wind is your muse and your sail is your unrelenting determination.</p>
+<p>The ocean wants to keep your from going anywhere. It can’t do this if you do not will it.</p>
+<h2 id="the-conclusion-doesnt-matter">The conclusion doesn’t matter.</h2>
+<p>You have to end your writing. But this is not the end. It is actually a new beginning for your reader. You have given them your best.</p>
+<p>Remind them what you said and give them a plan of what is next. You just changed a life forever. No matter how big or small of a change.</p>
+<p>This is your impact. This is why you are here.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          </section>
           </section>
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1701460563" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1701460563" defer></script>
+    <script src="/js/clipboard.min.js?1701517007" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1701517007" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -2254,20 +2603,20 @@ ufw allow 443</code></pre></div><h3 id="nginx-security">Nginx Security</h3>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1701460563" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1701460563" defer></script>
-    <script src="/js/js-yaml.min.js?1701460563" defer></script>
+    <script src="/js/d3/d3-color.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1701517007" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1701517007" defer></script>
+    <script src="/js/js-yaml.min.js?1701517007" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1701460563" defer></script>
+    <script src="/js/theme.js?1701517007" defer></script>
   </body>
 </html>
