@@ -786,6 +786,8 @@ div.highlight > div td{
 }
 /* disable selection for lineno cells */
 div.highlight > div td:first-child:not(:last-child){
+    -ms-user-select: none;
+    -webkit-user-select: none;
     user-select: none;
 }
 /* increase code column to full width if highlight shortcode was used in table lineno mode  */
@@ -1628,8 +1630,6 @@ h6 a {
 }
 
 .menu-control .control-style {
-    border: 0;
-    border-radius: 0;
     cursor: pointer;
     height: 1.574em;
     overflow: hidden;
@@ -1660,6 +1660,7 @@ html[dir="rtl"] .menu-control span {
 .menu-control button {
     -webkit-appearance: none;
     appearance: none;
+    outline: none;
     width: 100%;
 }
 .menu-control button:active,
@@ -1747,7 +1748,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .a11y-only {
     /* idea taken from https://www.filamentgroup.com/lab/a11y-form-labels.html */
-    clip: rect(1px,1px,1px,1px);
+    clip-path: polygon(0 0, 1px 0, 1px 1px, 0 1px);
     overflow: hidden;
     position: absolute;
     height: 1px;

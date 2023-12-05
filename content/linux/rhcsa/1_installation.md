@@ -1,8 +1,4 @@
----
-title: "RHEL Installation"
-date: 2023-11-02T06:20:36-07:00
-draft: true
----
+# CHapter 1 RHCSA Notes
 
 ## About RHEL9
 

@@ -1,6 +1,6 @@
 +++ 
-archetype = "chapter" 
-title = "Personal Development" 
+archetype = "default" 
+title = "Misc." 
 weight = 6
 alwaysopen = false
 [_build]
