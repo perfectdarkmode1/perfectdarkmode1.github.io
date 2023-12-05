@@ -34,10 +34,15 @@ Currently considering my career options. Possible paths include:
 - [x] Add picture to about page.
 - [x] Make a "Recommended Reading" page with recommended books, and a picture of the book covers. 
 - [x] See if there is a way to change URLs for pages. I would like the URL to match the page name instead of saying "index.html"
-- [ ] Get a logo created and add it to site. 
+- [x] Get a logo created and add it to site. 
 - [x] Create a "Contact me" page.
 - [x] Change "now" icon.
 - [ ] Add sections for Personal Development, Parenting, Relationships, History, and Dog Training.
 - [ ] Make a page with all of the tools I use.
 - [ ] Make a script that updates website everytime I update my markdown files in VSCodium.
+- [ ] Add social icons.
+- [ ] Add comments functionality to pages.
+- [ ] Add a newsletter.
+- [ ] Custom avatar.
 
+## Potential Upcoming Projects
