@@ -2,7 +2,7 @@
 ![Bliss of the Celibate Cover](/images/blissofthecelibate.png?height=125px&classes=left,inline)
 _Date Read: 2023-12-03 Rating 7/10_
 
-
+Sex drive is a powerful force. And misusing it brings you down to the level of an animal. You must conserve and transmute this force to reveal your true gifts. Feeding lust makes your never satisfied, and spills over into all other areas in life. 
 
 ## Notes
 Thousand petalled lotus of man\'s astral and physical brain, unique
@@ -31,237 +31,235 @@ The deposit of the man\'s pearls into the woman actually is of great physical an
 The male sexual energy is the cornerstone of a man\'s psychological
 resilience and his character
 
-the female is having to grab the wheel of the \"Tenth House
+The female is having to grab the wheel of the Tenth House.
 
-In doing so, she has to also try to be at the helm in the \"Fourth
-House,\" where she always used to prosper, and having to do both, she
-does them badly
+In doing so, she has to also try to be at the helm in the Fourth
+House, where she always used to prosper, and having to do both, she
+does them badly.
 
-with knowledge and cultivation, men can come back into their true
+With knowledge and cultivation, men can come back into their true
 power, stop our \"fall,\" and bring back the Garden of Eden, day by
-day, by Degrees
+day, by degrees.
 
 We are talking about giving his patience back. Getting his steadiness
 of mind back. Getting his nobility and fidelity back. Getting his calm
 and generosity back. Getting rid of his neediness and thralldom to
 sex.
 
-charms, powers, and psychological improvements that descend upon the
+Charms, powers, and psychological improvements that descend upon the
 male who begins to respect his divine shakti, even by making a
 moderate attempt at restraint, say, cutting his orgasms in half.
 
 The greatness of a man depends completely on the degree of his ability
-to keep the First Law, and his Effort to keep the First Law
+to keep the First Law, and his Effort to keep the First Law.
 
 Even when he fails, the man or woman who makes the effort, and holds
 to the ideal, is better than the one who says that there is no ideal,
 or that no effort needs to be made.
 
 No man is great who doesn\'t have righteous control of his sexual
-energy
+energy.
 
-his ability to be moral in other ways depends on this
+His ability to be moral in other ways depends on this.
 
-no good influence, whether moral, intellectual, or spiritual, is
+No good influence, whether moral, intellectual, or spiritual, is
 effected by a man or woman lacking righteous self control. They have
 only destructive influence in the world. Because sexual purity is
-practically everything
+practically everything.
 
-crass, gross thrill that has nothing to do with you, and no compare
-with Divine Bliss
+Crass, gross thrill that has nothing to do with you, and no compare
+with Divine Bliss.
 
-aspirant may finally adopt pure celibacy without strain.
+Aspirant may finally adopt pure celibacy without strain.
 
-essential meaning of celibacy is: A period in which there is no loss
-of the creative substance, including the finer substance
+Essential meaning of celibacy is: A period in which there is no loss
+of the creative substance, including the finer substance.
 
 Refraining from conscious sexual thrills or indulgence involving the
 sexual organ while in the waking state, even if there is no loss of
-semen
+semen.
 
-Even one month of celibacy gives permanent, eternal effect
+Even one month of celibacy gives permanent, eternal effect.
 
-Sex desire is bondage
+Sex desire is bondage.
 
-will invent endless rationales for keeping their addiction going, as
+Will invent endless rationales for keeping their addiction going, as
 well as encouraging others to be addicted, both for their own lustful
 stimulation, as well as to provide for themselves a validating
-environment
+environment.
 
-empty, fruitless sensual pleasure that entangles you deeper into
+Empty, fruitless sensual pleasure that entangles you deeper into
 matter.
 
-even the absence of lustful thoughts
+Even the absence of lustful thoughts.
 
 Celibacy State 1: Celibacy Under Vows
 
 One soldier has \"burned the bridge behind him\" as he marches to the
 battle; the other soldier leaves the bridge there, but is still
-marching nevertheless
+marching nevertheless.
 
 Men should be encouraged toward the many grades of restraint without
-thinking they have signed up for The Death Of All Pleasure
+thinking they have signed up for The Death Of All Pleasure.
 
-Better health --More energy --Less need for sleep --More power to manifest thoughts
+Better health --More energy --Less need for sleep --More power to manifest thoughts.
+
 --Deeper meditation --More wealth
 
-Sex is a force of nature, but it is nota \"human need
+Sex is a force of nature, but it is nota \"human need.
 
-attain authority over forces of nature
+Attain authority over forces of nature.
 
-sex appetite is insatiable, has no end, and leads man down to the
-nature of a demon
+Sex appetite is insatiable, has no end, and leads man down to the
+nature of a demon.
 
 Sex is for making babies. It wasn\'t intended for anything else. It
 wasn\'t intended as a drug to make you feel better, or take away your
-pain for a moment
+pain for a moment.
 
 It wasn\'t meant as a way for you to build up your social power, give
-you influence over ignorant men, or get you baubles and dollars from them
+you influence over ignorant men, or get you baubles and dollars from them.
 
-wasn\'t meant as a way to get famous, make money, or sell
-entertainment
+It wasn\'t meant as a way to get famous, make money, or sell
+entertainment.
 
-not meant to give you the fleeting impression of \"bonding\" with
-someone
+Not meant to give you the fleeting impression of \"bonding\" with
+someone.
 
-You do have a need for that increased vitality, strength and endurance
+You do have a need for that increased vitality, strength and endurance.
 
-need for the evenness and patience that restraint will give you
+Need for the evenness and patience that restraint will give you.
 
-need for knowledge, which builds up like compound interest in the
-celibate
+Need for knowledge, which builds up like compound interest in the
+celibate.
 
-need for meditation, which is stabilized by celibacy
+Need for meditation, which is stabilized by celibacy.
 
-need for enlightenment, which will be made possible through your
-celibacy
+Need for enlightenment, which will be made possible through your
+celibacy.
 
-stop losing your vital force
+Stop losing your vital force.
 
-bogus \"tantra\" people like to claim that they are \"including the
-world\" in their definition of the divine
+Bogus \"tantra\" people like to claim that they are \"including the
+world\" in their definition of the divine.
 
-renounce sin and sexuality because it disturbs us; it takes away our
-peace
+Renounce sin and sexuality because it disturbs us; it takes away our
+peace.
 
 It draws our shakti down the spine, and out into materiality, in fact
-giving the outer world its seeming reality
+giving the outer world its seeming reality.
 
 The more that married couples sex each other, the higher the divorce
-rate in a nation
+rate in a nation.
 
 There is no higher bonding brought by sexing. It is simply using each
-other as a drug
+other as a drug.
 
-the more men and women sex each other, the more they violate their own
+The more men and women sex each other, the more they violate their own
 sacredness, cheapen their relationship, and lose respect for one
-another
+another.
 
-Higher bonding comes from respect for each other\'s good character
+Higher bonding comes from respect for each other\'s good character.
 
-divine friendship
+Divine friendship.
 
-Friendship is the highest form of all human relationship
+Friendship is the highest form of all human relationship.
 
-practices. Through spiritual practices such as meditation, all
-material addictions decline and then disappear
+Practices. Through spiritual practices such as meditation, all
+material addictions decline and then disappear.
 
-meditation is the greatest cure for all addictions, including sexual
-addiction
+Meditation is the greatest cure for all addictions, including sexual
+addiction.
 
 One of the reasons it works is simply that meditation and intense
 prayer bring a superior pleasure. There is no comparison between the
-pleasure of meditation, and the sense pleasures of the body
+pleasure of meditation, and the sense pleasures of the body.
 
-satvic qualities, service to mankind, and charisma -- all of which arise naturally from firm celibacy
+Satvic qualities, service to mankind, and charisma -- all of which arise naturally from firm celibacy.
 
-if you repeatedly break moral law concerning sex, your life becomes
-darker and less successful on all levels
+If you repeatedly break moral law concerning sex, your life becomes
+darker and less successful on all levels.
 
-Most human sorrow, and all human sexual perversion is the result of repeatedly breaking sexual moral law and
-indulging in illicit sex
+Most human sorrow, and all human sexual perversion is the result of repeatedly breaking sexual moral law and indulging in illicit sex.
 
-For there are eunuchs who were born thus from their mother\'s womb,
+"For there are eunuchs who were born thus from their mother\'s womb,
 and there are eunuchs who were made eunuchs by men, and there are
 eunuchs who have made themselves eunuchs for the sake of the kingdom
-of heaven. He who is able to accept it, let him accept it
+of heaven. He who is able to accept it, let him accept it." -Jesus Christ
 
 But this is a hard statement, and few can bear it.
 
 Kingdom of Heaven\" means the limitless bliss of the Pure
-Consciousness
+Consciousness.
 
 The \"Kingdom of Heaven\" is something we are bid to attain here and
-now in this very life
+now in this very life.
 
 It is almost impossible to achieve celibacy if you drink any caffeine
--- even a little bit
+-- even a little bit.
 
 Another quote from Christ that relates to celibacy: \"Unless you
 become as little children you cannot enter the Kingdom of Heaven.
 
 By keeping the mind on lofty thoughts, and by strenuous exercise,
-continuous action for God, and meditation, the sacred and powerful creative force can be
-transmuted into physical strength and health, mental creativity, and
-divine ecstasy in God-communion
+continuous action for God, and meditation, the sacred and powerful creative force can be transmuted into physical strength and health, mental creativity, and divine ecstasy in God-communion.
 
-Virtue brings beauty, sin brings ugliness
+Virtue brings beauty, sin brings ugliness.
 
-Yoga\" actually means \"union\" with the divine
+\"Yoga\" actually means \"union\" with the divine.
 
-Yoga Sutras\" by Patanjali
+\"Yoga Sutras\" by Patanjali.
 
 An austerity is a \"doing without.\" Austerity and Renunciation are
 synonymous terms and there is no confusion about them.
 
 Buddha was a Hindu. The books he read were the Bhagavad-Gita and the
-Vedas
+Vedas.
 
-No one who is spiritual is without austerity
+No one who is spiritual is without austerity.
 
 Self restraints, fixed observances, posture, regulation of breath,
 abstraction, concentration, contemplation, trance are the eight parts
-of yoga.\"
+of yoga.
 
-The Science of Yoga, The Yoga Sutras of Patanjali with Commentary by I.K. Taimni, p. 205
+The Science of Yoga, The Yoga Sutras of Patanjali with Commentary by I.K. Taimni, p. 205.
 
 One of the self restraints is called \"bramacharya.\": 30. \"Ahimsa
 (Non-Injury), Satya (Truth), Asteya (Abstention From Stealing),
-Bramacharya (Continence) and Aparigraha Abstinence From Avariciousness are the Five Yamas (Forms Of Restraint
+Bramacharya (Continence) and Aparigraha Abstinence From Avariciousness are the Five Yamas (Forms Of Restraint).
 
-Sanskrit, which is the oldest language
+Sanskrit, which is the oldest language.
 
 Sanskrit is a very exacting language not subject to playful
-interpretation
+interpretation.
 
-bramacharya refers to one thing, and one thing only: sexual celibacy
+Bramacharya refers to one thing, and one thing only: sexual celibacy.
 
-bramacharya means: no orgasms, at minimum
+Bramacharya means: no orgasms, at minimum.
 
-broader meaning is no thought of sex or sexual titillation
+Broader meaning is no thought of sex or sexual titillation.
 
 If you are an earnest brahmachari, who is going deeper, you don\'t
-look at the rear ends of women as they go by
+look at the rear ends of women as they go by.
 
-you don\'t feel a drop in your private parts when you look at a woman;
-you don\'t imagine having sex with any woman, etc
+You don\'t feel a drop in your private parts when you look at a woman;
+you don\'t imagine having sex with any woman, etc.
 
 On being firmly established in sexual continence vigor (virya) is
-attained
+attained.
 
-weakness, laxity and inadequacy disappear and are replaced by
-extraordinary resilience, strength and energy. ..
+Weakness, laxity and inadequacy disappear and are replaced by
+extraordinary resilience, strength and energy.
 
-so that not the slightest thought or desire connected with sex or
-suggesting sex ever enters the mind
+So that not the slightest thought or desire connected with sex or
+suggesting sex ever enters the mind.
 
 Bramacharya is, therefore...a control of the thoughts so complete that
 not the slightest stirring of our sex instincts is possible at any
 time.
 
-Yoga Vasistha,\" by the sage Vasistha, is one of the most valuable
-books on yoga
+\"Yoga Vasistha,\" by the sage Vasistha, is one of the most valuable
+books on yoga.
 
 Woe unto him who is unable to give up cravings, for this is the sole
 means to one\'s ultimate good.
@@ -269,158 +267,144 @@ means to one\'s ultimate good.
 He who does not allow his mind to roam in objects of sense pleasure is
 able to master it \[his mind\].
 
-Lovingly, patiently wean yourself away from sense addictions
+Lovingly, patiently wean yourself away from sense addictions.
 
 What they do is weaken gullible males, making them craven sex-addicts,
-but now with delusional notions that keep them trapped
+but now with delusional notions that keep them trapped.
 
 Sex-addicted men do not win wars, or even battles, nor can they even
-mount effective resistance
+mount effective resistance.
 
 Perfect continence is the sole condition of success in spiritual life.
 And it is difficult, no, it is impossible, to practice absolute purity
-without love and faith in God
+without love and faith in God.
 
 Banish all fear and weakness. Never weaken your mind by thinking of
 past mistakes.
 
 Never lose faith in yourself. The Lord will do everything for you.
-Have faith in Him
+Have faith in Him.
 
 From lust comes grief, from lust comes fear; he who is free from lust
-neither SOrrOWS nor fears.
+neither sorrows nor fears.
 
-If a man\'s thoughts are free from lust, if his mind is not perplexed
+If a man\'s thoughts are free from lust, if his mind is not perplexed.
 
-The thirst of a heedless man grows like a creeper; he runs from life to life, like a
-monkey seeking fruit in the forest.
+The thirst of a heedless man grows like a creeper; he runs from life to life, like a monkey seeking fruit in the forest.
 
-sufferings fall from him like water drops from a lotus leaf
+Sufferings fall from him like water drops from a lotus leaf.
 
-called a medicant (sanyyasin).\"
+Called a medicant (sanyyasin).
 
 He who, though richly adorned, exercises tranquillity, is quiet,
 subdued, restrained, chaste, and has ceased to injure all other
-beings, is indeed a Brahman, an ascetic, a friar
+beings, is indeed a Brahman, an ascetic, a friar.
 
-There is no satisfying lusts
+There are no satisfying lusts.
 
-ever by a shower of gold pieces; he who knows that lusts have a short
+Ever by a shower of gold pieces; he who knows that lusts have a short
 taste and bring suffering in their train is wise.
 
 Four things befall the heedless man who courts his neighbor\'s wife --
 first, acquisition of demerit, secondly, an uncomfortable bed,
-thirdly, evil report, and lastly, hell
+thirdly, evil report, and lastly, hell.
 
 The type of Buddhism spreading most in America is Tibetan Buddhism, or
-\"Tantric Buddhism
+\"Tantric Buddhism\".
 
-Any sexual self restraint has great benefits to man morally,
-emotionally, and physically, and conduces to all prosperity
+Any sexual self restraint has great benefits to man morally, emotionally, and physically, and conduces to all prosperity.
 
-engine of enlightenment
+Engine of enlightenment.
 
-makes possible the deeper meditation
+Makes possible the deeper meditation.
 
-steadies the mind
+Steadies the mind.
 
-any sexual self-restraint\" gives \"great benefits\" to man
+Any sexual self-restraint\" gives \"great benefits\" to man.
 
-it is more difficult to attain celibacy and sexual selfrestraint for a
-male
+It is more difficult to attain celibacy and sexual self restraint for a
+male.
 
-when he attains it, the effects on him are immediately greater
+When he attains it, the effects on him are immediately greater.
 
 In bodily terms, the woman is the actual winner in the sex act; the
 male is the actual loser.
 
 When you become entirely devoted to the Lord of Creation, All of
-creation becomes devoted to you
-
-The organization left by Paramahansa Yogananda
+creation becomes devoted to you.
 
 In the spiritual path, one disengages from grosser pleasures so that
-one can experience pleasures that are finer and more satisfying
+one can experience pleasures that are finer and more satisfying.
 
-the one thing worth attaining
+The one thing worth attaining.
 
-increased energy and greater powers of concentration
+Increased energy and greater powers of concentration.
 
 To be oppressive toward others in the attempt to make them \"pure\" is
-ignorant and itself impure
+ignorant and itself impure.
 
-proper attitude one should have toward wickedness is to ignore it,
+Proper attitude one should have toward wickedness is to ignore it,
 while praising the virtuous.
 
-Celibacy has always been, and still is, essential to classical yoga
+Celibacy has always been, and still is, essential to classical yoga.
 
 The sanskrit term for sexual celibacy is bramacharya. For a man it
 means no emission of sexual fluid. This is the minimum meaning for
-celibacy. Celibacy has been broken, for example, if a man has an orgasm in sleep
+celibacy. Celibacy has been broken, for example, if a man has an orgasm in sleep.
 
 He fully burns up all thoughts of sex, starting with the gross
 physical mind, and then later cleaning up his dream states and astral
-mind
+mind.
 
-For there are eunuchs who were born thus from their mother\'s womb,
-and there are eunuchs who were made eunuchs by men, and there are
-eunuchs who have made themselves eunuchs for the sake of the Kingdom
-of Heaven. He who is able accept it, let him accept it --Jesus Christ Matthew 19:12
+Yogananda states that meditation is the highest of all the austerities.
 
-Yogananda states that meditation is the highest of all the
-\"austerities.
-
-the renunciation of harmful food, useless diversions, fruitless
-pleasures
+The renunciation of harmful food, useless diversions, fruitless pleasures.
 
 She seems to lack his energy, intrepidness, intelligence, skill, and
-courage
+courage.
 
 When he first finds attraction to another female, again, it is to the
-eyes and face. His shakti dwells in the higher part of the spine
+eyes and face. His shakti dwells in the higher part of the spine.
 
 The orgasm has indeed made him less interested in society, less able
-to deal with the stresses of other people, and even antisocial
+to deal with the stresses of other people, and even antisocial.
 
-He can fill up this strange new emptiness with a distraction or thrill
+He can fill up this strange new emptiness with a distraction or thrill.
 
 Divine Shakti becomes insulted and angry seeing herself \"dumped on
 the ground\" for no procreative purpose. She regrets that she gave
-that boy the sexual organ and the sexual power of the male. The Divine Shakti begins taking steps to mess up the boy\'s
-life, and darken his world
+that boy the sexual organ and the sexual power of the male. The Divine Shakti begins taking steps to mess up the boy\'s life, and darken his world.
 
 As the boy keeps sexing, a coarse energy or pollution gathers in his
-lower chakras, casting a blight on his outer world
+lower chakras, casting a blight on his outer world.
 
-If he doesn\'t have clear moral teachings or guidance on this subject, from people he loves and respects, he won\'t
-adequately reject this activity and will be tempted to do it again
+If he doesn\'t have clear moral teachings or guidance on this subject, from people he loves and respects, he won\'t adequately reject this activity and will be tempted to do it again.
 
 Other men, especially males, are in the best position to protect him
-here. Without clear warnings and teachings/dharma from another male he respects, he does it again and begins to develop an addiction to it
+here. Without clear warnings and teachings/dharma from another male he respects, he does it again and begins to develop an addiction to it.
 
-first he had no interest in the idea of the sex act. In fact as a boy
+First he had no interest in the idea of the sex act. In fact as a boy
 the sex act seemed stupid and disgusting. But now it is interesting
-and the idea gives a sexual charge
+and the idea gives a sexual charge.
 
-encounter. This marks him, giving him powerful samskaras
-(memories/impressions) of sex. Later as he tries to renounce, these
-impressions will become deeply problematic. The memories of sex will keep coming back
-to him, inciting his lust
+This marks him, giving him powerful samskaras (memories/impressions) of sex. Later as he tries to renounce, these impressions will become deeply problematic. The memories of sex will keep coming back to him, inciting his lust.
 
 His eyes now have the habit of looking at the bodies of women and
-lusting
+lusting.
 
 The male developing sex addiction is always drawn to look at the
-bodies of women. Women on the street, women at school, women at work, etc
+bodies of women. Women on the street, women at school, women at work, etc.
 
 But now his consciousness is dropping lower. In society, this causes
-women to become preoccupied with a new part of her body, her butt
+women to become preoccupied with a new part of her body, her butt.
 
-Women in more pure societies are never obsessed about their butts
+Women in more pure societies are never obsessed about their butts.
 
-You can tell where a society is at in it\'s decline by which part of the anatomy the female is most obsessed about
+You can tell where a society is at in it\'s decline by which part of the anatomy the female is most obsessed about.
 
-The male becomes powerless in his reaction to the female form
+The male becomes powerless in his reaction to the female form.
+
+## Left off here.
 
 Every time he sees the female form, in photos or it life, he is
 intensely drawn to it. The female body has a seemingly magical hold
