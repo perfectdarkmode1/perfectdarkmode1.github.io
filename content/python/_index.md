@@ -4,9 +4,7 @@ draft = false
 weight = 4
 collapsibleMenu = true
 [_build]
-  render = "never"
+  render = "always"
 +++
 
-# Python Stuff
-
-[Basics](basics.md)
+Going to deep dive Python after RHCSA and Security + is finished. Coming soon...

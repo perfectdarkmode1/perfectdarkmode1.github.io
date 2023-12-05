@@ -19,6 +19,7 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 ## Drums
 - [ ] Get good at rudiments and learn to read sheet music.
 - [ ] Read "A Fresh Approach to the Snare Drum" - Mark Wessels
+- [ ] Building a powerful minimalist electronic drum set.
 
 ## What I am thinking about
 
@@ -46,3 +47,6 @@ Currently considering my career options. Possible paths include:
 - [ ] Custom avatar.
 
 ## Potential Upcoming Projects
+
+- [ ] Fedora Silverblue
+- [ ] Docker Deep Dive

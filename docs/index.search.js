@@ -1,5 +1,61 @@
 var relearn_search_index = [
   {
+    "breadcrumb": "",
+    "content": "Check the sidebar! Coming soon..\n",
+    "description": "",
+    "tags": null,
+    "title": "Linux",
+    "uri": "/linux/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "Mostly Cisco stuff but some Juniper stuff as well.\nCisco Here are my notes from CCNA 200-301 Official Cert Guide Library 1st Edition\nHow to Study for CCNA Cisco Devnet Sandbox Cisco VLAN Lab CLassful IPv4 CLI CML Setup in VMWARE Device Management DHCP Configuration DHCP Snooping and ARP Inspection Ethernet LANs Extended ACLs IP Services IPv6 IPv6 Addressing and Subnetting Ipv6 Configuration IPv6 Routing LAN Architecture Layer 2 Etherchannel Basic Device Management NAT OSPF Concepts OSPF Configuration OSPF Lab OSPF Types and Neighbors QOS CCNA Resources Router Operation LAN Routing RSTP Securing Network Devices Security Architectures Spanning Tree Spanning Tree Concepts Standard ACLs Static Routes Switching Switch Interfaces Switchport Security TCP IP TCP IP Transport and Applications Things to Learn After CCNA Routing Troubleshooting VLANs WAN Architecture Ip Routing and WANs Wireless Wireless LAN Wireless Security Juniper My attempt at trying to figure out Juniper.\nCisco to Junos Cheat Sheet Consoling into an MX80 from Linux Juniper CLI Basics Junos Fundementals How to Paste a Config How to Toggle POE ",
+    "description": "",
+    "tags": null,
+    "title": "Networking",
+    "uri": "/networking/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "No cybersecurity stuff yet!\n",
+    "description": "",
+    "tags": null,
+    "title": "Cyber Security",
+    "uri": "/cybersecurity/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "Going to deep dive Python after RHCSA and Security + is finished. Coming soon…\n",
+    "description": "",
+    "tags": null,
+    "title": "Python",
+    "uri": "/python/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.space/\nRSS Create and RSS feed of my site and subscribe to other feeds.\nFollow these sites:\nhttps://denshi.org/ https://drewdevault.com/ https://opensourcemusings.com/support https://www.mrmoneymustache.com/\nDWM Tile Manager http://thedarnedestthing.com/vim/wiki%20cheatsheet\n[[../Security/firefox_hardening]]\nBrowser Sync https://www.xbrowsersync.org/\nPrivacy tools https://www.privacytools.io/\n",
+    "description": "",
+    "tags": null,
+    "title": "Tools",
+    "uri": "/tools/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "Working on improving my writing skills. Check the sidebar!\n",
+    "description": "",
+    "tags": null,
+    "title": "Writing",
+    "uri": "/writing/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "Misc.",
+    "uri": "/misc/"
+  },
+  {
     "breadcrumb": "Tools",
     "content": "Install Calibre and Rsync\napt install -y calibre rsyncMake a directory for your library\nmkdir /opt/calibreEither upload your existing library using rsync. For example to /opt/calibre/.\ncd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/Add a new user to protect your server:\ncalibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calibre\nCreating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:\n[Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix. Additional information man calibre-server.\nIssue systemctl daemon-reload to apply the changes.\nEnable and start the service.\nsystemctl enable calibre-server systemctl start calibre-serverA reverse proxy with Nginx Create a new file /etc/nginx/sites-available/calibre and enter the following:\nserver { listen 80; client_max_body_size 64M; # to upload large books server_name calibre.example.org ; location / { proxy_pass http://127.0.0.1:8080; } }Enable the site\nln -s /etc/nginx/sites-available/calibre /etc/nginx/sites-enabled systemctl reload nginxIssue a Let’s Encrypt certificate. Detailed instructions and additional information.\ncertbot --nginxAdd CNAME record\nNow just go to calibre.example.org. The server will request an username and a password.\nAfter login you will see something like this.\nDe DRM Books\nDownload kindle verion 1.26 https://www.filehorse.com/download-kindle-for-pc/40502/download/\nfilename: KindleForPC-installer-1.26.55076.exe\nSHA-256: c9d104c4aad027a89ab92a521b7d64bdee422136cf562f8879 f0af96abd74511 Found here: https://www.mobileread.com/forums/showthread.php?t=283371\ncd ~/Dowloads shasum -a 256 KindleForPC-installer-1.26.55076.exe c9d104c4aad027a89ab92a521b7d64bdee422136cf562f8879f0af96abd74511 KindleForPC-installer-1.26.55076.exeMake sure the hash matches the above.\nInstall it with Wine\nBypass crash on startup\nmkdir -p $WINEPREFIX/drive_c/users/$USER/AppData/Local/Amazon/Kindle/crashdumpInstall\n",
     "description": "",
