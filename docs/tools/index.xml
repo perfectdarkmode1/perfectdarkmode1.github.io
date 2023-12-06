@@ -9,26 +9,6 @@
     <lastBuildDate>Mon, 06 Nov 2023 06:20:36 -0700</lastBuildDate>
     <atom:link href="http://perfectdarkmode.com/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Calibre Server</title>
-      <link>http://perfectdarkmode.com/tools/calibre_server/</link>
-      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
-      <guid>http://perfectdarkmode.com/tools/calibre_server/</guid>
-      <description>Install Calibre and Rsync
-apt install -y calibre rsyncMake a directory for your library
-mkdir /opt/calibreEither upload your existing library using rsync. For example to /opt/calibre/.
-cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/Add a new user to protect your server:
-calibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calibre
-Creating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:
-[Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.</description>
-    </item>
-    <item>
-      <title>Calibre Web with Docker Setup</title>
-      <link>http://perfectdarkmode.com/tools/calibre-web-with-docker/</link>
-      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
-      <guid>http://perfectdarkmode.com/tools/calibre-web-with-docker/</guid>
-      <description>cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/ Install Docker sudo apt update sudo apt install docker.io Create a Docker Network dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network 556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf Create a Docker volume to store Calibre Web data: sudo docker volume create calibre_data Pull the Calibre Web Docker image: sudo docker pull linuxserver/calibre-web Start the Calibre Web Docker container sudo docker run -d \ --name=calibre-web \ --restart=unless-stopped \ -p 8083:8083 \ -e PUID=$(id -u) \ -e PGID=$(id -g) \ -v calibre_data:/config \ -v /opt/calibre/Calibre:/books \ --network calibre_network \ linuxserver/calibre-web Configure Nginx to act as a reverse proxy for Calibre Web: sudo nano /etc/nginx/sites-available/calibre-webAdd the following to the file</description>
-    </item>
-    <item>
       <title>Distrobox Guide</title>
       <link>http://perfectdarkmode.com/tools/distrobox/</link>
       <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
@@ -53,6 +33,15 @@ The general steps include:
 Create a Github repository for your site. Change your pages settings. Build the repo into a Hugo site. Add DNS records for a custom domain. </description>
     </item>
     <item>
+      <title>How to set up Calibre web with Docker and Nginx</title>
+      <link>http://perfectdarkmode.com/tools/calibre-web-with-docker/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/tools/calibre-web-with-docker/</guid>
+      <description>I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
+The good news is that it is really fast and simple. You’ll need a few tools to get this done:
+A server with a public IP address A DNS Provider (I use CloudFlare) Docker Nginx A Calibre Library Certbot Rsync First, sync your local Calibre library to a folder on your server:</description>
+    </item>
+    <item>
       <title>Nextcloud Guide</title>
       <link>http://perfectdarkmode.com/tools/nextcloud/</link>
       <pubDate>Sun, 23 Apr 2023 13:44:23 -0700</pubDate>
@@ -60,18 +49,6 @@ Create a Github repository for your site. Change your pages settings. Build the 
       <description>This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare
 What is Nextcloud? Nextcloud is so many things. It offers so many features and options, it deserves a bulleted list:
 Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google&amp;rsquo;s services Create web forms or surveys It is also free and open source.</description>
-    </item>
-    <item>
-      <title>Vim Guide</title>
-      <link>http://perfectdarkmode.com/tools/vimguide/</link>
-      <pubDate>Sun, 23 Apr 2023 06:20:36 -0700</pubDate>
-      <guid>http://perfectdarkmode.com/tools/vimguide/</guid>
-      <description>test
-Vim (Vi Improved)
-Vim stands for vi (Improved) just like its name it stands for an improved version of the vi text editor command.
-Lightweight
-Start Vim
-vimVim Search Patterns Moving the Cursor h or left arrow - move left one character k or up arrow - move up one line j or down arrow - move down one line l or right arrow - will move you right one character</description>
     </item>
     <item>
       <title>Vagrant Guide</title>

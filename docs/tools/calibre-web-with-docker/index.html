@@ -8,34 +8,38 @@
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Calibre Web with Docker Setup - Perfect Dark Mode">
-    <meta name="twitter:description" content="cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/ Install Docker sudo apt update sudo apt install docker.io Create a Docker Network dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network 556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf Create a Docker volume to store Calibre Web data: sudo docker volume create calibre_data Pull the Calibre Web Docker image: sudo docker pull linuxserver/calibre-web Start the Calibre Web Docker container sudo docker run -d \ --name=calibre-web \ --restart=unless-stopped \ -p 8083:8083 \ -e PUID=$(id -u) \ -e PGID=$(id -g) \ -v calibre_data:/config \ -v /opt/calibre/Calibre:/books \ --network calibre_network \ linuxserver/calibre-web Configure Nginx to act as a reverse proxy for Calibre Web: sudo nano /etc/nginx/sites-available/calibre-webAdd the following to the file">
-    <meta property="og:title" content="Calibre Web with Docker Setup - Perfect Dark Mode">
-    <meta property="og:description" content="cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/ Install Docker sudo apt update sudo apt install docker.io Create a Docker Network dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network 556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf Create a Docker volume to store Calibre Web data: sudo docker volume create calibre_data Pull the Calibre Web Docker image: sudo docker pull linuxserver/calibre-web Start the Calibre Web Docker container sudo docker run -d \ --name=calibre-web \ --restart=unless-stopped \ -p 8083:8083 \ -e PUID=$(id -u) \ -e PGID=$(id -g) \ -v calibre_data:/config \ -v /opt/calibre/Calibre:/books \ --network calibre_network \ linuxserver/calibre-web Configure Nginx to act as a reverse proxy for Calibre Web: sudo nano /etc/nginx/sites-available/calibre-webAdd the following to the file">
+    <meta name="twitter:title" content="How to set up Calibre web with Docker and Nginx - Perfect Dark Mode">
+    <meta name="twitter:description" content="I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
+The good news is that it is really fast and simple. You’ll need a few tools to get this done:
+A server with a public IP address A DNS Provider (I use CloudFlare) Docker Nginx A Calibre Library Certbot Rsync First, sync your local Calibre library to a folder on your server:">
+    <meta property="og:title" content="How to set up Calibre web with Docker and Nginx - Perfect Dark Mode">
+    <meta property="og:description" content="I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
+The good news is that it is really fast and simple. You’ll need a few tools to get this done:
+A server with a public IP address A DNS Provider (I use CloudFlare) Docker Nginx A Calibre Library Certbot Rsync First, sync your local Calibre library to a folder on your server:">
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre-web-with-docker/">
     <meta property="article:section" content="Tools - Perfect Dark Mode">
     <meta property="article:published_time" content="2023-11-06T06:20:36-07:00">
     <meta property="article:modified_time" content="2023-11-06T06:20:36-07:00">
     <meta property="og:site_name" content="Perfect Dark Mode">
-    <title>Calibre Web with Docker Setup - Perfect Dark Mode</title>
-    <link href="/tools/calibre-web-with-docker/index.xml" rel="alternate" type="application/rss+xml" title="Calibre Web with Docker Setup - Perfect Dark Mode">
-    <link href="/tools/calibre-web-with-docker/index.print.html" rel="alternate" type="text/html" title="Calibre Web with Docker Setup - Perfect Dark Mode">
-    <link href="/images/favicon.png?1701823157" rel="icon" type="image/png">
+    <title>How to set up Calibre web with Docker and Nginx - Perfect Dark Mode</title>
+    <link href="/tools/calibre-web-with-docker/index.xml" rel="alternate" type="application/rss+xml" title="How to set up Calibre web with Docker and Nginx - Perfect Dark Mode">
+    <link href="/tools/calibre-web-with-docker/index.print.html" rel="alternate" type="text/html" title="How to set up Calibre web with Docker and Nginx - Perfect Dark Mode">
+    <link href="/images/favicon.png?1701896601" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1701823157" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701823157" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1701823157" rel="stylesheet">
-    <link href="/css/auto-complete.css?1701823157" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701823157" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1701823157" rel="stylesheet">
-    <link href="/css/fonts.css?1701823157" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701823157" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1701823157" rel="stylesheet">
-    <link href="/css/theme-city2.css?1701823157" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1701823157" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1701823157" rel="stylesheet">
-    <link href="/css/print.css?1701823157" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1701823157" rel="stylesheet">
-    <script src="/js/url.js?1701823157"></script>
-    <script src="/js/variant.js?1701823157"></script>
+    <link href="/css/fontawesome-all.min.css?1701896601" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701896601" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1701896601" rel="stylesheet">
+    <link href="/css/auto-complete.css?1701896601" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701896601" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1701896601" rel="stylesheet">
+    <link href="/css/fonts.css?1701896601" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701896601" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1701896601" rel="stylesheet">
+    <link href="/css/theme-city2.css?1701896601" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1701896601" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1701896601" rel="stylesheet">
+    <link href="/css/print.css?1701896601" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1701896601" rel="stylesheet">
+    <script src="/js/url.js?1701896601"></script>
+    <script src="/js/variant.js?1701896601"></script>
     <script>
       // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
       // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
@@ -67,7 +71,7 @@
           <div class="topbar-area topbar-area-start" data-area="start">
             <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
             </div>
-            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/tools/calibre_server/" title="Calibre Server (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/tools/githubpageshugo/" title="Github Pages with Hugo (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
             </div>
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
@@ -79,7 +83,7 @@
 
           </div>
           <span class="topbar-breadcrumbs highlightable">
-            Calibre Web with Docker Setup
+            How to set up Calibre web with Docker and Nginx
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
@@ -93,7 +97,8 @@
             <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
             </div>
 
-
+            <div class="topbar-button topbar-button-blank" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>
 
 
 
@@ -108,26 +113,28 @@
           <article class="default">
             <header class="headline">
             </header>
-<h1 id="calibre-web-with-docker-setup">Calibre Web with Docker Setup</h1>
+<h1 id="how-to-set-up-calibre-web-with-docker-and-nginx">How to set up Calibre web with Docker and Nginx</h1>
 
+<p>I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.</p>
+<p>The good news is that it is really fast and simple. You’ll need a few tools to get this done:</p>
+<ul>
+<li>A server with a public IP address</li>
+<li>A DNS Provider (I use CloudFlare)</li>
+<li>Docker</li>
+<li>Nginx</li>
+<li>A Calibre Library</li>
+<li>Certbot</li>
+<li>Rsync</li>
+</ul>
+<p>First, sync your local Calibre library to a folder on your server:</p>
 <div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#ff5c57">cd</span> ~/Documents
-</span></span><span style="display:flex;"><span>rsync -avuP your-library-dir root@example.org:/opt/calibre/</span></span></code></pre></div><ol>
-<li>Install Docker</li>
-</ol>
+</span></span><span style="display:flex;"><span>rsync -avuP your-library-dir root@example.org:/opt/calibre/</span></span></code></pre></div><h4 id="install-docker">Install Docker</h4>
 <div class="wrap-code highlight"><pre tabindex="0"><code>sudo apt update
-sudo apt install docker.io</code></pre></div><ol start="2">
-<li>Create a Docker Network</li>
-</ol>
+sudo apt install docker.io</code></pre></div><p>Create a Docker Network</p>
 <div class="wrap-code highlight"><pre tabindex="0"><code>dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network
-556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf</code></pre></div><ol start="3">
-<li>Create a Docker volume to store Calibre Web data:</li>
-</ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker volume create calibre_data</code></pre></div><ol start="4">
-<li>Pull the Calibre Web Docker image:</li>
-</ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker pull linuxserver/calibre-web</code></pre></div><ol start="5">
-<li>Start the Calibre Web Docker container</li>
-</ol>
+556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf</code></pre></div><p>Create a Docker volume to store Calibre Web data:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker volume create calibre_data</code></pre></div><p>Pull the Calibre Web Docker image:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker pull linuxserver/calibre-web</code></pre></div><p>Start the Calibre Web Docker container</p>
 <div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo docker run -d <span style="color:#5af78e">\ </span>
 </span></span><span style="display:flex;"><span>--name<span style="color:#ff6ac1">=</span>calibre-web <span style="color:#5af78e">\ </span>
 </span></span><span style="display:flex;"><span>--restart<span style="color:#ff6ac1">=</span>unless-stopped <span style="color:#5af78e">\ </span>
@@ -137,23 +144,24 @@ sudo apt install docker.io</code></pre></div><ol start="2">
 </span></span><span style="display:flex;"><span>-v calibre_data:/config <span style="color:#5af78e">\ </span>
 </span></span><span style="display:flex;"><span>-v /opt/calibre/Calibre:/books <span style="color:#5af78e">\ </span>
 </span></span><span style="display:flex;"><span>--network calibre_network <span style="color:#5af78e">\ </span>
-</span></span><span style="display:flex;"><span>linuxserver/calibre-web</span></span></code></pre></div><ol start="6">
-<li>Configure Nginx to act as a reverse proxy for Calibre Web:</li>
-</ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nano /etc/nginx/sites-available/calibre-web</code></pre></div><p>Add the following to the file</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>server { listen 80; server_name example.com; # Replace with your domain or server IP location / { proxy_pass http://localhost:8083; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } }</code></pre></div><p>Enable the site</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo ln -s /etc/nginx/sites-available/calibre-web /etc/nginx/sites-enabled/</code></pre></div><p>Test the configuration</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nginx -t</code></pre></div><p>Restart nginx</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo service nginx restart</code></pre></div><p>Set up a cname record for your site with your DNS provider</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>calibre.example.com</code></pre></div><p>Install ssl cert using certbot</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>certbot --nginx</code></pre></div><p>Heat to the site at <a href="https://calibre.example.com" target="_blank">https://calibre.example.com</a></p>
-<p>login with default credentials</p>
+</span></span><span style="display:flex;"><span>linuxserver/calibre-web</span></span></code></pre></div><h4 id="configure-nginx-to-act-as-a-reverse-proxy-for-calibre-web">Configure Nginx to act as a reverse proxy for Calibre Web:</h4>
+<p>Create the site file:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nano /etc/nginx/sites-available/calibre-web</code></pre></div><p>Add the following to the file:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>server { listen 80; server_name example.com; # Replace with your domain or server IP location / { proxy_pass http://localhost:8083; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } }</code></pre></div><p>Enable the site:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo ln -s /etc/nginx/sites-available/calibre-web /etc/nginx/sites-enabled/</code></pre></div><p>Restart nginx:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo service nginx restart</code></pre></div><h4 id="dns-cname-record">DNS CNAME Record</h4>
+<p>Make sure to set up a cname record for your site with your DNS provider such as: calibre.example.com</p>
+<h4 id="ssl-certificate">SSL Certificate</h4>
+<p>Install ssl cert using certbot</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>certbot --nginx</code></pre></div><p>Head to the site at <a href="https://calibre.example.com" target="_blank">https://calibre.example.com</a> and login with default credentials:</p>
 <p>username: admin
 password: admin123</p>
-<p>select /books as the library directory. Go into admin settings and change your password.</p>
-<p>Whenever you add new books to your server via rsync, you will need to restart the Calibre Web Docker container:</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker restart calibre-web</code></pre></div><p>Then restart nginx</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>systemctl restart nginx</code></pre></div>
+<p>Select /books as the library directory. Go into admin settings and change your password.</p>
+<h4 id="adding-new-books">Adding new books</h4>
+<p>Whenever you add new books to your server via rsync, you will need to restart the Calibre Web Docker container and then restart nginx:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo docker restart calibre-web
+systemctl restart nginx</code></pre></div><p>That’s all there is to it. Feel free to reach out if you have issues.</p>
+
             <footer class="footline">
             </footer>
           </article>
@@ -175,12 +183,12 @@ password: admin123</p>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1701823157" defer></script>
-        <script src="/js/lunr/lunr.min.js?1701823157" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1701823157" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1701823157" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1701823157" defer></script>
-        <script src="/js/search.js?1701823157" defer></script>
+        <script src="/js/auto-complete.js?1701896602" defer></script>
+        <script src="/js/lunr/lunr.min.js?1701896602" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1701896602" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1701896602" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1701896602" defer></script>
+        <script src="/js/search.js?1701896602" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -202,12 +210,10 @@ password: admin123</p>
           <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cyber Security<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/" class="parent "><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab" checked><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/calibre_server/" class=""><a class="padding" href="/tools/calibre_server/">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/calibre-web-with-docker/" class="active"><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/githubpageshugo/" class=""><a class="padding" href="/tools/githubpageshugo/">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class="active"><a class="padding" href="/tools/calibre-web-with-docker/">How to set up Calibre web with Docker and Nginx<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/vimguide/" class=""><a class="padding" href="/tools/vimguide/">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/vagrantguide/" class=""><a class="padding" href="/tools/vagrantguide/">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/pandoc/" class=""><a class="padding" href="/tools/pandoc/">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
@@ -275,8 +281,8 @@ password: admin123</p>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1701823157" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1701823157" defer></script>
+    <script src="/js/clipboard.min.js?1701896602" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1701896602" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -306,20 +312,20 @@ password: admin123</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1701823157" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1701823157" defer></script>
-    <script src="/js/js-yaml.min.js?1701823157" defer></script>
+    <script src="/js/d3/d3-color.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1701896602" defer></script>
+    <script src="/js/js-yaml.min.js?1701896602" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1701823157" defer></script>
+    <script src="/js/theme.js?1701896602" defer></script>
   </body>
 </html>

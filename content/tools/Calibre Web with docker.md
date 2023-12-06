@@ -1,37 +1,50 @@
 ---
-title: "Calibre Web with Docker Setup"
+title: "How to set up Calibre web with Docker and Nginx"
 date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
 
+I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
+
+The good news is that it is really fast and simple. You’ll need a few tools to get this done:
+
+- A server with a public IP address
+- A DNS Provider (I use CloudFlare)
+- Docker
+- Nginx
+- A Calibre Library
+- Certbot
+- Rsync
+
+First, sync your local Calibre library to a folder on your server:
 ```sh
 cd ~/Documents
 rsync -avuP your-library-dir root@example.org:/opt/calibre/
 ```
 
-1. Install Docker
+#### Install Docker
 ```
 sudo apt update
 sudo apt install docker.io
 ```
 
-2. Create a Docker Network
+Create a Docker Network
 ```
 dthomas@david2:/etc/systemd/system$ sudo docker network create calibre_network
 556a9ca12eafd36768f068d3de071d357870a145c4ccc400c601819d420040cf
 ```
 
-3. Create a Docker volume to store Calibre Web data:
+Create a Docker volume to store Calibre Web data:
 ```
 sudo docker volume create calibre_data
 ```
 
-4. Pull the Calibre Web Docker image:
+Pull the Calibre Web Docker image:
 ```
 sudo docker pull linuxserver/calibre-web
 ```
 
-5. Start the Calibre Web Docker container
+Start the Calibre Web Docker container
 ```sh
 sudo docker run -d \ 
 --name=calibre-web \ 
@@ -45,59 +58,51 @@ sudo docker run -d \
 linuxserver/calibre-web
 ```
 
-6. Configure Nginx to act as a reverse proxy for Calibre Web:
+#### Configure Nginx to act as a reverse proxy for Calibre Web:
+
+Create the site file:
 ```
 sudo nano /etc/nginx/sites-available/calibre-web
 ```
 
-Add the following to the file
+Add the following to the file:
 ```
 server { listen 80; server_name example.com; # Replace with your domain or server IP location / { proxy_pass http://localhost:8083; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } }
 ```
 
-Enable the site
+Enable the site:
 ```
 sudo ln -s /etc/nginx/sites-available/calibre-web /etc/nginx/sites-enabled/
 ```
 
-Test the configuration
-```
-sudo nginx -t
-```
-
-Restart nginx
-
+Restart nginx:
 ```
 sudo service nginx restart
 ```
+#### DNS CNAME Record
 
-Set up a cname record for your site with your DNS provider
-```
-calibre.example.com
-```
+Make sure to set up a cname record for your site with your DNS provider such as: calibre.example.com
+
+#### SSL Certificate
 
 Install ssl cert using certbot
 ```
 certbot --nginx
 ```
 
-Heat to the site at https://calibre.example.com
-
-login with default credentials
+Head to the site at https://calibre.example.com and login with default credentials:
 
 username: admin
 password: admin123
 
-select /books as the library directory. Go into admin settings and change your password. 
+Select /books as the library directory. Go into admin settings and change your password. 
 
-Whenever you add new books to your server via rsync, you will need to restart the Calibre Web Docker container:
+#### Adding new books
+Whenever you add new books to your server via rsync, you will need to restart the Calibre Web Docker container and then restart nginx:
 
 ```
 sudo docker restart calibre-web
-```
-
-Then restart nginx
-
-```
 systemctl restart nginx
 ```
+
+That’s all there is to it. Feel free to reach out if you have issues.
