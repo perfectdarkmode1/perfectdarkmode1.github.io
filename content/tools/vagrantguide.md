@@ -1,7 +1,7 @@
 ---
 title: "Vagrant Guide"
 date: 2023-04-22T06:39:22-07:00
-draft: false
+draft: true
 ---
 
 Vagrant is software that lets you set up multiple, pre-configured virtual machines in a flash. I am going to show you how to do this using Windows and Virtual Box. But you can do this on MacOS and Linux as well.

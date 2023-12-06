@@ -39,19 +39,13 @@ I use Vultr as my VPS. When I signed up they had a $250 credit towards a new acc
 
 Head to vultr.com. Create and account and  Select the Cloud Compute option. 
 
-![vultr1](/vultr1.png)
-
 Under CPU & Storage Technology, select "Regular Performance". Then under "Server Location, select the server closest to you. Or closest to where you think your main audience will be. 
 
 Under Server image, select the OS you are most comfortable with. This guide uses Debian. 
 
-![vultr2](/vultr2.png)
-
 Under Server Size, slect the 10GB SSD. Do not select the "IPv6 ONLY" option. Leave the other options as default and enter your server hostname.
 
 On the products page, click your new server. You can find your server credentials and IPv4 address here. You will need these to log in to your server.
-
-![vultr3](/vultr3.png)
 
 Log into your sever via ssh to test. From a Linux terminal run:
 ```
@@ -217,7 +211,7 @@ Save your doc and exit. Next, there should be an about.md page now in your ~/Doc
 Note: To insert an image into your post. Add the image to your ~/Documents/hugo/static directory. Then reference the image in your post like this:
 
 ```
-![imagename}(/imagename.png)
+
 ```
 
 ### Serve your website locally
@@ -345,8 +339,6 @@ ufw allow 443
 ### Nginx Security
 
 We will want to hide your nginx version number on error pages. This will make your site a bit harder for hackers to find exploits. Open your Nginx config file at /etc/nginx/nginx.conf and remove the "#" before "server_tokens off;"
-
-![nginx1](/nginx1.png)
 
 Enter your domain into your browser. Congrats! You now have a running website!
 
