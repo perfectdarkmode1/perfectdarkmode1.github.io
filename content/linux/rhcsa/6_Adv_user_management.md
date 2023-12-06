@@ -1,8 +1,4 @@
----
-title: "Advanced User Management"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 6 RHCSA Notes - Advanced User Management
 
 ## Objectives and Topics
 - Configure password aging attributes on local user accounts 

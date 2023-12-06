@@ -1,8 +1,4 @@
----
-title: "Basic User Management"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 5 RHCSA Notes - Basic User Management
 
 
 - Show who is currently logged in

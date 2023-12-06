@@ -1,8 +1,4 @@
----
-title: "Process and Task Scheduling"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 8 RHCSA Notes - Process and Task Scheduling
 
 - Identify and display system and user executed processes.
 - View process states and priorities.

@@ -1,12 +1,8 @@
----
-title: "Interaction"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 2 RHCSA Notes - Interaction
 
-# Linux Graphical Environment
+## Linux Graphical Environment
 
-## Wayland #card
+## Wayland
 - Client/server display protocol. 
 - Foundation for running GUI apps.
 - Better graphics capabilities, features, and performance than X.

@@ -1,9 +1,4 @@
----
-title: "File Management"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
-
+# Chapter 3 RHCSA Notes - File Management
 
 ## 7 File types 
 1.  regular

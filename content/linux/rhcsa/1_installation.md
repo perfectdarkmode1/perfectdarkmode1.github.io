@@ -1,4 +1,4 @@
-# CHapter 1 RHCSA Notes
+# Chapter 1 RHCSA Notes - Installation
 
 ## About RHEL9
 

@@ -1,9 +1,4 @@
----
-title: "Network File System (NFS)"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
-# Network File System (NFS)
+# Chapter 16 RHCSA Notes - Network File System
 
 - Same tools for mounting and unmopunting a filesystem.
 - Mounted and accessd the same way as local filesystems.

@@ -1,13 +1,9 @@
----
-title: "Networking"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 16 RHCSA Notes - Networking
 
-# Networking, Network Devices, and Network Management
+## Networking, Network Devices, and Network Management
+
 ---
 ## Hostname
-
 
 - "-", "_ ", and ". " characters are allowed.
 - Up to 253 characters.

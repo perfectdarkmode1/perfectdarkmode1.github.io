@@ -1,8 +1,4 @@
----
-title: "Advanced File Management"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 4 RHCSA Notes - Advanced File Management
 
 ## Goals and Objectives
 

@@ -1,8 +1,5 @@
----
-title: "Basic Package Management"
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
+# Chapter 9 RHCSA Notes - Basic Package Management
+
 ## RPM (Redhat Package Manager)
 - also refers to a file(s) packaged together in a special format with the .rpm extension. 
 - Each package included or available for RHEL is in rpm format.
