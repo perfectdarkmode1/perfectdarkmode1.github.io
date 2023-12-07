@@ -9,12 +9,12 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 
 ## Mental Health
 - [x] Quit drinking
-- [ ] Quit caffeine. Taper off caffeine over 2 weeks (Day 3/14) 
+- [ ] Quit caffeine. Taper off caffeine over 2 weeks (Day 4/14) 
 
 ## What I am Reading
 - [x] RHCSA Red Hat Enterprise Linux 8 - Asghor Ghori
 - [x] Bliss of the Celibate
-- [ ] Caffeine Blues
+- [ ] The Coiled Serpent
 
 ## Drums
 - [ ] Get good at rudiments and learn to read sheet music.
@@ -45,7 +45,7 @@ Currently considering my career options. Possible paths include:
 - [ ] Add comments functionality to pages.
 - [ ] Add a newsletter.
 - [ ] Custom avatar.
-- [ ] Write 20 Polished posts. (3/20)
+- [ ] Write 20 posts. (3/20)
 
 ## Potential Upcoming Projects
 

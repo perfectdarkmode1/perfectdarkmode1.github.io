@@ -1,7 +1,4 @@
 
-
-
-```
 1.0 Network Fundamentals
 1.6 Configure and verify IPv4 addressing and subnetting
 3.0 IP Connectivity

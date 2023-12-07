@@ -109,7 +109,7 @@ title = "Recommended"
 ![Unit 731: Testimony](https://m.media-amazon.com/images/I/71aDNbjnHAL._SL1500_.jpg?classes=inline&height=175px)
 ![The Rape Of Nanking: The Forgotten Holocaust Of World War II](https://m.media-amazon.com/images/I/617EJpW9FPL._SL1360_.jpg?classes=inline&height=175px)
 ![Night](https://m.media-amazon.com/images/I/81JmqR3cjwL._SL1500_.jpg?classes=inline&height=175px)
-![American Sniper](https://m.media-amazon.com/images/I/817Dt733HPL._SL1500_.jpg?classes=inline&height=125px)
+![American Sniper](https://m.media-amazon.com/images/I/817Dt733HPL._SL1500_.jpg?classes=inline&height=175px)
 
 
 ## Parenting
