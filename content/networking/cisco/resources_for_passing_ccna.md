@@ -3,6 +3,8 @@ title: "Resources I used to Pass CCNA"
 date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
+![](/images/resourcesforccna.png)
+
 There are a lot of great CCNA resources out there. This list does not include all of them. Only the ones that I personally used to pass the CCNA 200-301 exam.
 
 Materials for CCNA are generally separated into 5 categories:
@@ -39,7 +41,7 @@ Jermey's IT lab course was the most informative for me. Jeremey is really great 
 
 These labs will really make you think. Although they do steer off the exam objectives a bit.
 
-### jeremy's IT labs
+### Jeremy's IT labs
 
 These were my favorite labs by far. Very easy to set up with clear instructions and video explanations.
 
@@ -49,7 +51,7 @@ These were my favorite labs by far. Very easy to set up with clear instructions 
 
 I can't stress this enough. if there is one resource that you invest some money into. it's the Boson practice exams. This is a test simulator that is very close to what the actual test will be like. Exsim comes with 3 exams.
 
-After taking one of these practice tests you will get a breakdown of your scores per category. You will also get to go through all of your questions and see detailed exlantations for why each answer is right or wrong.
+After taking one of these practice tests you will get a breakdown of your scores per category. You will also get to go through all of your questions and see detailed explantations for why each answer is right or wrong.
 
 These practice exams were crucial for me to understand where my knowledge gaps were.
 
@@ -68,4 +70,15 @@ Anki also used spaced-repetition. It will give you harder flashcards more often 
 This particular deck goes along with the OCG. You can filter by chapter and add more as you get through the book.
 
 I will be using Anki flashcards for every exam in the future.
+
+## My Top 3
+Be careful not to use too many resources. You may get a bit overwhelmed. Especially if this is your first certification like it was for me. You will be building study habits and learning how to read questions correctly. So focus on quality over quantity.
+
+If I had to study for the CCNA again, I would use these three resources:
+
+- OCG
+- Boson Exsim 
+- Anki Flashcards
+
+If you like these posts, please let me know so i can keep making more like them!
 

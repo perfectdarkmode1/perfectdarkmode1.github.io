@@ -1,4 +1,5 @@
-![Alt text](/images/circleportrait.PNG?height=220px&classes=left,inline) 
+![David Vargas](/images/circleportrait.PNG?height=220px&classes=inline) 
+![CCNA Logo](/images/ccna.png?height=100px&classes=inline)
 
 ### Hey, I'm David. 
 

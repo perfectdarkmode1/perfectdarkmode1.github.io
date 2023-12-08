@@ -3,6 +3,7 @@ title: "How to Study for CCNA"
 date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
+![CCNA Study Calendar](/Pasted%20image%2020231208132459.png)
 
 It took me a whopping 2 years to finish my CCNA! I kept giving up and quitting my studies for months at a time. Why? Because I couldn't remember the massive amount of content covered in the CCNA. It felt hopeless. I could have done it in 6 month (or faster) if I knew how to study.
 
@@ -88,6 +89,8 @@ Review 4 Practice questions and review
 
 The final 30 days
 
+![](/Pasted%20image%2020231208132727.png)
+
 I HIGHLY recommend Boson ExSim for your final 30 days of studying. ExSim comes with 3 exams (A,B, and C). Start with exam A in test simulation mode. Leave about a week in between each practice exam so you can go over your answers and Boson's explanations for each answer.
 
 One week before your test, (after you've completed exams A,B, and C). Do a random exam. Make sure you do the timed version that don't show your score as you go.
@@ -97,5 +100,16 @@ You should be scoring above 900 by your 3rd and 4th exam if you have been review
 Schedule your exam
 
 Pearson view didn't let me schedule the exam past 30 days out from when I wanted to take it. I'm not sure if this is the case all the time. But by the time you are 30 days out you should have your test scheduled. This will light the fire under you. Great motivation for the home stretch.
+
+If your exam is around June during Cisco Live, Cisco usually offers a 50% discount for an exam voucher. You probably won’t find any other discounts unless you pay for Cisco’s specific CCNA training.
+
+## Final word on labs
+
+You can technically pass the CCNA without doing many labs. But this will leave you at a HUGE disadvantage in the job market. Labs are crucial for really understanding networking. Knowing your way around the CLI and being able to troubleshoot networking issues will make you stand out from those who crammed for the exam.
+
+If you’ve made it this far I really appreciate you taking the time to read this post. I really hope it helps at least one person. 
+
+
+
 
 
