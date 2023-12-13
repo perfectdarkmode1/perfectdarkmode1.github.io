@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="Chapter 2 RHCSA Notes - Interaction Linux Graphical Environment Wayland Client/server display protocol. Foundation for running GUI apps. Better graphics capabilities, features, and performance than X. Core Components #card Display manager (login manager) Desktop environment Display/ Login Manager #card Presentation of graphical login screen
+Allows users to enter credentials to log on to the system
+Preconfigured graphical desktop manager appears after the credentials are verified
+Default display manager for RHEL8 :: GNOME Display Manager (GDM).">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="Chapter 2 RHCSA Notes - Interaction Linux Graphical Environment Wayland Client/server display protocol. Foundation for running GUI apps. Better graphics capabilities, features, and performance than X. Core Components #card Display manager (login manager) Desktop environment Display/ Login Manager #card Presentation of graphical login screen
+Allows users to enter credentials to log on to the system
+Preconfigured graphical desktop manager appears after the credentials are verified
+Default display manager for RHEL8 :: GNOME Display Manager (GDM).">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/tech/rhcsa/2_interaction/">
+    <meta property="article:section" content="Tech - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1702482067" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1702482067" rel="stylesheet">
+    <link href="/css/auto-complete.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1702482067" rel="stylesheet">
+    <link href="/css/fonts.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1702482067" rel="stylesheet">
+    <link href="/css/theme-city2.css?1702482067" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1702482067" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1702482067" rel="stylesheet">
+    <link href="/css/print.css?1702482067" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1702482067" rel="stylesheet">
+    <script src="/js/url.js?1702482067"></script>
+    <script src="/js/variant.js?1702482067"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/tech/rhcsa/2_interaction/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#linux-graphical-environment">Linux Graphical Environment</a></li>
+    <li><a href="#wayland">Wayland</a>
+      <ul>
+        <li><a href="#core-components-card">Core Components #card</a></li>
+        <li><a href="#display-login-manager-card">Display/ Login Manager #card</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#top-level-directories-card">Top-Level Directories #card</a>
+      <ul>
+        <li><a href="#static-directories-card">Static directories #card</a></li>
+        <li><a href="#dynamic-directories-card">Dynamic directories #card</a></li>
+      </ul>
+    </li>
+    <li><a href="#file-system-categories-card">File System Categories #card</a>
+      <ul>
+        <li><a href="#disk-based-card">Disk-based #card</a></li>
+        <li><a href="#network-based-card">Network Based #card</a></li>
+        <li><a href="#memory-based-card">Memory Based #card</a></li>
+      </ul>
+    </li>
+    <li><a href="#root-file-system--disk-based-card">Root File System (/), Disk-Based #card</a>
+      <ul>
+        <li><a href="#key-directories">Key Directories:</a></li>
+      </ul>
+    </li>
+    <li><a href="#procfs-file-system-proc-card">Procfs File System (/proc) #card</a></li>
+    <li><a href="#runtime-file-system-run-card">Runtime File System (/run) #card</a></li>
+    <li><a href="#the-system-file-system-sys-card">The System File System (/sys) #card</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tree-command-card">tree command #card</a></li>
+      </ul>
+    </li>
+    <li><a href="#labs">Labs</a>
+      <ul>
+        <li><a href="#list-only-the-directories--d-in-the-root-users-home-directory-root-card">List only the directories (-d) in the root user’s home directory (/root). #card</a></li>
+        <li><a href="#list-files-in-the-etcsysconfig-directory-along-with-their-permissions-sizes-in-human-readable-format-and-full-path-card">List files in the /etc/sysconfig directory along with their permissions, sizes in human-readable format, and full path. #card</a></li>
+        <li><a href="#view-tree-man-pages">View tree man pages.</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#listing-files-and-directories">Listing Files and Directories</a></li>
+    <li><a href="#ls">ls</a>
+      <ul>
+        <li><a href="#labs-1">labs:</a></li>
+        <li><a href="#printing-working-directory-pwd-command-card">Printing Working Directory (pwd) command #card</a></li>
+      </ul>
+    </li>
+    <li><a href="#navigating-directories">Navigating Directories</a>
+      <ul>
+        <li><a href="#labs-2">Labs:</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#tty-command-card">tty command #card</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#uptime-command-card">uptime command #card</a>
+      <ul>
+        <li><a href="#clear-command">clear command</a></li>
+      </ul>
+    </li>
+    <li><a href="#determining-command-path">Determining Command Path</a></li>
+    <li><a href="#which-command-card">which command #card</a></li>
+    <li><a href="#whereis-command-card">whereis command #card</a></li>
+    <li><a href="#type-command-card">type command #card</a></li>
+    <li><a href="#viewing-system-information">Viewing System Information</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#viewing-cpu-specs">Viewing CPU Specs</a></li>
+    <li><a href="#lscpu-command-card">lscpu command #card</a></li>
+    <li><a href="#getting-help">Getting Help</a>
+      <ul>
+        <li><a href="#manual-pages-card">Manual pages #card</a></li>
+        <li><a href="#man-page-navigation">Man page navigation</a></li>
+      </ul>
+    </li>
+    <li><a href="#headings-in-the-manual">Headings in the Manual</a></li>
+    <li><a href="#manual-sections-card">Manual Sections #card</a></li>
+    <li><a href="#searching-by-keyword">Searching by Keyword</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#info-and-pinfo-commands">info and pinfo Commands</a>
+      <ul>
+        <li><a href="#info-page-navigation">info page Navigation</a></li>
+      </ul>
+    </li>
+    <li><a href="#documentation-in--usrsharedoc">Documentation in  /usr/share/doc/</a></li>
+    <li><a href="#online-rhel-documentation-card">Online RHEL Documentation #card</a></li>
+    <li><a href="#labs-3">Labs</a>
+      <ul>
+        <li><a href="#lab-2-navigate-linux-directory-tree">Lab 2: Navigate Linux Directory Tree</a></li>
+        <li><a href="#lab-miscellaneous-tasks">Lab: Miscellaneous Tasks</a></li>
+        <li><a href="#lab-identify-system-and-kernel-information">Lab: Identify System and Kernel Information</a></li>
+        <li><a href="#lab-man">Lab: Man</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h1 id="chapter-2-rhcsa-notes---interaction">Chapter 2 RHCSA Notes - Interaction</h1>
+<h2 id="linux-graphical-environment">Linux Graphical Environment</h2>
+<h2 id="wayland">Wayland</h2>
+<ul>
+<li>Client/server display protocol.</li>
+<li>Foundation for running GUI apps.</li>
+<li>Better graphics capabilities, features, and performance than X.</li>
+</ul>
+<h3 id="core-components-card">Core Components #card</h3>
+<ul>
+<li>Display manager (login manager)</li>
+<li>Desktop environment</li>
+</ul>
+<h3 id="display-login-manager-card">Display/ Login Manager #card</h3>
+<ul>
+<li>
+<p>Presentation of graphical login screen</p>
+</li>
+<li>
+<p>Allows users to enter credentials to log on to the system</p>
+</li>
+<li>
+<p>Preconfigured graphical desktop manager appears after the credentials are verified</p>
+</li>
+<li>
+<p>Default display manager for RHEL8 :: GNOME Display Manager (GDM).</p>
+</li>
+</ul>
+<h4 id="desktop-environment-card">Desktop Environment #card</h4>
+<ul>
+<li>after login, the display/login manager establishes a Desktop Environment (DE)</li>
+</ul>
+<h1 id="linux-directory-structure-and-filesystems">Linux Directory Structure and Filesystems</h1>
+<p>Filesystem Hierarchy Standard (FHS) :: Describes names, locations, and permissions for many file types and directories.</p>
+<h2 id="top-level-directories-card">Top-Level Directories #card</h2>
+<ul>
+<li>Key top-level directories under /</li>
+<li>Some of these directories hold static data</li>
+<li>others contain dynamic (or variable) information.</li>
+</ul>
+<h3 id="static-directories-card">Static directories #card</h3>
+<ul>
+<li>commands</li>
+<li>configuration files</li>
+<li>library routines</li>
+<li>kernel files</li>
+<li>device files</li>
+</ul>
+<h3 id="dynamic-directories-card">Dynamic directories #card</h3>
+<ul>
+<li>log files</li>
+<li>status files</li>
+<li>temporary files\</li>
+</ul>
+<h2 id="file-system-categories-card">File System Categories #card</h2>
+<p>Three groups:</p>
+<ul>
+<li>disk-based</li>
+<li>network-based</li>
+<li>memory-based</li>
+</ul>
+<h3 id="disk-based-card">Disk-based #card</h3>
+<ul>
+<li>created on physical media such as a hard drive or a USB flash drive</li>
+<li>store information persistently</li>
+</ul>
+<p>two disk-based file systems that  are created when you select the default partitioning :: root and boot file systems.</p>
+<h3 id="network-based-card">Network Based #card</h3>
+<ul>
+<li>disk-based file systems that are shared over the network for remote access.</li>
+<li>store information persistently</li>
+</ul>
+<h3 id="memory-based-card">Memory Based #card</h3>
+<ul>
+<li>virtual; created automatically at system startup and destroyed when the system goes down.</li>
+<li>lost at system reboots.</li>
+</ul>
+<h2 id="root-file-system--disk-based-card">Root File System (/), Disk-Based #card</h2>
+<p>Size of the root file system is automatically determined by the installer program based on the available disk space when you select the default partitioning (it may be altered)</p>
+<h3 id="key-directories">Key Directories:</h3>
+<h4 id="etc-card">/etc #card</h4>
+<ul>
+<li>etcetera (extended text configuration)</li>
+<li>system configuration files</li>
+<li>common subdirectories
+syst
+sysconfig
+lvm
+skel</li>
+<li>comprise configuration files for syst</li>
+<li>most system services</li>
+<li>Logical Volume Manager</li>
+<li>per-user shell startup template files</li>
+</ul>
+<p>/root :: default home directory for the root user</p>
+<p>/mnt :: used to temporarily mount a file system</p>
+<h4 id="boot-file-system-boot-disk-based-card">Boot File System (/boot), Disk-Based #card</h4>
+<ul>
+<li>Linux kernel</li>
+<li>boot support files</li>
+<li>boot configuration files</li>
+<li>size determined by the installer program based on the available disk space when you select the default partitioning</li>
+<li>may be set to a different size during or after the installation</li>
+</ul>
+<h4 id="the-home-directory-home-card">The Home Directory (/home) #card</h4>
+<ul>
+<li>store user home directories and other user contents.</li>
+</ul>
+<h4 id="the-optional-directory-opt-card">The Optional Directory (/opt) #card</h4>
+<ul>
+<li>hold additional software that may need to be installed on the system</li>
+<li>subdirectory is created for each installed software.</li>
+</ul>
+<h4 id="unix-system-resources-directory-usr-card">UNIX System Resources Directory (/usr) #card</h4>
+<ul>
+<li>most of the system files.</li>
+</ul>
+<h5 id="usrbin-card">/usr/bin #card</h5>
+<ul>
+<li>binary directory</li>
+<li>crucial user executable commands.</li>
+</ul>
+<h5 id="usrsbin-card">/usr/sbin #card</h5>
+<ul>
+<li>Most commands are required at system boot,</li>
+<li>system binary</li>
+<li>crucial system administration commands not intended for execution by normal users (although they can still run a few of them).</li>
+<li>not included in the default search path for normal users</li>
+</ul>
+<h5 id="usrlib-and-usrlib64-card">/usr/lib and /usr/lib64 #card</h5>
+<ul>
+<li>shared library routines</li>
+<li>required by many commands/programs located in /usr/bin and /usr/sbin</li>
+<li>used kernel and other applications and programs for their successful installation and operation</li>
+<li>/usr/lib directory also stores system initialization and service management programs</li>
+<li>/usr/lib64 contains 64-bit shared library routines.</li>
+</ul>
+<h5 id="usrinclude-card">/usr/include #card</h5>
+<ul>
+<li>header files for C language.</li>
+</ul>
+<h5 id="usrlocal-card">/usr/local: #card</h5>
+<ul>
+<li>system administrator repository for storing commands and tools</li>
+<li>commands not generally included with the original Linux distribution.
+/usr/local/bin
+executables
+/usr/local/etc
+configuration files
+/usr/local/lib and /usr/local/lib64
+holds library routines.
+/usr/share:
+directory location for manual pages, documentation, sample templates, configuration files, etc.
+may be shared with other Linux platforms.</li>
+</ul>
+<h5 id="usrsrc-card">/usr/src: #card</h5>
+<ul>
+<li>used to store source code.</li>
+</ul>
+<h4 id="variable-directory-var-card">Variable Directory (/var) #card</h4>
+<ul>
+<li>data that frequently changes while the system is operational.</li>
+<li>log, status, spool, lock, and other dynamic data.</li>
+</ul>
+<p>common subdirectories</p>
+<h5 id="varlog-card">/var/log #card</h5>
+<ul>
+<li>most system log files</li>
+<li>system logs, boot logs, user logs, failed user logs, installation logs, cron logs, mail logs, etc.</li>
+</ul>
+<h5 id="varopt-card">/var/opt #card</h5>
+<ul>
+<li>log, status, and other variable data files for additional software installed in /opt, t.</li>
+</ul>
+<h5 id="varspool-card">/var/spool #card</h5>
+<ul>
+<li>print jobs, cron jobs, mail messages, and other queued items.</li>
+</ul>
+<h5 id="vartmp-card">/var/tmp #card</h5>
+<ul>
+<li>Large temporary files or temporary files that need to exist for longer periods of time than what is typically allowed in /tmp</li>
+<li>survive system reboots</li>
+<li>deleted if they are not accessed or modified for a period of 30 days.</li>
+</ul>
+<h4 id="temporary-directory-tmp-card">Temporary Directory (/tmp) #card</h4>
+<ul>
+<li>temporary files</li>
+<li>programs can create temporary files here during runtime or installation.</li>
+<li>These files survive system reboots and are automatically removed if they are not accessed or modified for a period of 10 days.</li>
+</ul>
+<h4 id="devices-file-system-dev-card">Devices File System (/dev) #card</h4>
+<ul>
+<li>Device nodes for (physical  and virtual)</li>
+<li>Linux kernel talks to devices through device nodes.</li>
+<li>Device nodes are automatically created and deleted by the udevd service.</li>
+</ul>
+<p>udevd service :: A Linux service for dynamic device management.</p>
+<p>Two types of device files :: Character (or raw), and block.</p>
+<p>kernel accesses devices using :: Character (or raw), and/or  block Device files.</p>
+<h4 id="character-devices-card">Character devices #card</h4>
+<ul>
+<li>Accessed serially.</li>
+<li>Console, serial printers, mice, keyboards, terminals, etc.</li>
+</ul>
+<h4 id="block-devices-card">Block devices #card</h4>
+<ul>
+<li>Accessed in a parallel fashion with data exchanged in blocks.</li>
+<li>Data on block devices is accessed randomly.</li>
+<li>Hard disk drives, optical drives, parallel printers, etc.</li>
+</ul>
+<h2 id="procfs-file-system-proc-card">Procfs File System (/proc) #card</h2>
+<ul>
+<li>Config and status info on:
+<ul>
+<li>Kernel, CPU, memory, disks, partitioning, file systems, networking, running processes, etc.</li>
+</ul>
+</li>
+<li>Zero-length pseudo files point to data maintained by the kernel in the memory.</li>
+<li>Interface to interact with kernel-maintained information.</li>
+<li>Contents created in memory at system boot time, updated during runtime, and destroyed at system shutdown.</li>
+</ul>
+<h2 id="runtime-file-system-run-card">Runtime File System (/run) #card</h2>
+<ul>
+<li>Data for processes running on the system.
+<ul>
+<li>/run/media</li>
+</ul>
+</li>
+<li>Used to automatically mount external file systems (CD, DVD, flash USB.)</li>
+<li>Contents deleted at shutdown.</li>
+</ul>
+<h2 id="the-system-file-system-sys-card">The System File System (/sys) #card</h2>
+<ul>
+<li>Info about hardware devices, drivers, and some kernel features.</li>
+<li>Used by the kernel to load necessary support for devices, create device nodes in /dev, and configure devices.</li>
+<li>Auto-maintained.</li>
+</ul>
+<h1 id="essential-system-commands">Essential System Commands</h1>
+<h3 id="tree-command-card">tree command #card</h3>
+<ul>
+<li>List hierarchy of directories and files.</li>
+<li>Column 2
+<ul>
+<li>Size.</li>
+</ul>
+</li>
+<li>Column 3
+<ul>
+<li>Full path.</li>
+</ul>
+</li>
+</ul>
+<p>Options.
+tree -a :: Include hidden files in the output.
+tree -d :: Exclude files from the output.
+tree -h :: Displays file sizes in human-friendly format.
+tree -f :: Prints the full path for each file.
+tree -p :: Includes file permissions in the output</p>
+<h2 id="labs">Labs</h2>
+<h3 id="list-only-the-directories--d-in-the-root-users-home-directory-root-card">List only the directories (-d) in the root user’s home directory (/root). #card</h3>
+<div class="wrap-code highlight"><pre tabindex="0"><code>tree -d /root</code></pre></div><h3 id="list-files-in-the-etcsysconfig-directory-along-with-their-permissions-sizes-in-human-readable-format-and-full-path-card">List files in the /etc/sysconfig directory along with their permissions, sizes in human-readable format, and full path. #card</h3>
+<div class="wrap-code highlight"><pre tabindex="0"><code>tree -phf /etc/sysconfig</code></pre></div><h3 id="view-tree-man-pages">View tree man pages.</h3>
+<div class="wrap-code highlight"><pre tabindex="0"><code>man tree</code></pre></div><h1 id="prompt-symbols-card">Prompt Symbols #card</h1>
+<ul>
+<li>Hash sign (#) for root user.</li>
+<li>Dollar sign ($) for normal users.</li>
+</ul>
+<h1 id="linux-commands-card">Linux Commands #card</h1>
+<p>Two types of commands:</p>
+<ol>
+<li>User
+<ul>
+<li>General purpose.</li>
+<li>For any user.</li>
+</ul>
+</li>
+<li>System Management
+<ul>
+<li>Superuser.</li>
+<li>Require elevated privileges.</li>
+</ul>
+</li>
+</ol>
+<h1 id="command-mechanics-card">Command Mechanics #card</h1>
+<p>Basic Syntax</p>
+<ul>
+<li>command option(s) argument(s)</li>
+<li>Many commands have preconfigured default options and arguments.</li>
+</ul>
+<p>An option that starts with a single hyphen character (-la, for instance) ::: Short-option format.</p>
+<ul>
+<li>Two hyphen characters (&ndash;all, for instance)  ::: Long-option format.</li>
+</ul>
+<h2 id="listing-files-and-directories">Listing Files and Directories</h2>
+<h2 id="ls">ls</h2>
+<ul>
+<li>ll :: shortcut for ls -l</li>
+</ul>
+<p>Flags
+ls -l ::: View long listing format.
+ls -d ::: View info on the specified directory.
+ls -h ::: Human readable format.
+ls -a ::: List all files, including the hidden files.
+ls -t ::: Sort output by date and time with the newest file first.
+ls -R ::: List contents recursively.
+ls -i ::: View inode information.</p>
+<h3 id="labs-1">labs:</h3>
+<h4 id="show-the-long-listing-of-only-usr-without-showing-its-contents-card">Show the long listing of only /usr without showing its contents. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -ld /usr</code></pre></div><h4 id="display-all-files-in-the-current-directory-with-their-sizes-in-human-friendly-format-card">Display all files in the current directory with their sizes in human-friendly format. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -lh</code></pre></div><h4 id="list-all-files-including-the-hidden-files-in-the-current-directory-with-detailed-information-card">List all files, including the hidden files, in the current directory with detailed information. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -la</code></pre></div><h4 id="sort-output-by-date-and-time-with-the-newest-file-first-card">Sort output by date and time with the newest file first. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -lt</code></pre></div><h4 id="list-contents-of-the-etc-directory-recursively-card">List contents of the /etc directory recursively. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -R /etc</code></pre></div><h4 id="list-directory-info-and-the-contents-of-a-directory-recursively-card">List directory info and the contents of a directory recursively. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -lR /etc</code></pre></div><h4 id="view-ls-manpage">View ls manpage.</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>man ls</code></pre></div><h3 id="printing-working-directory-pwd-command-card">Printing Working Directory (pwd) command #card</h3>
+<ul>
+<li>Returns the absolute path to a file or directory.</li>
+</ul>
+<h2 id="navigating-directories">Navigating Directories</h2>
+<p>Absolute path (full path or a fully qualified pathname) :: Points to a file or directory in relation to the top of the directory tree. It always starts with the forward slash (/).</p>
+<p>Relative path :: Points to a file or directory in relation to your current location.</p>
+<h3 id="labs-2">Labs:</h3>
+<h4 id="go-one-level-up-into-the-parent-directory-using-the-relative-path-card">Go one level up into the parent directory using the relative path #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd ..</code></pre></div><h4 id="cd-into-etcsysconfig-using-the-absolute-path-etcsysconfig-or-the-relative-path-etcsysconfig-card">cd into /etc/sysconfig using the absolute path (/etc/sysconfig), or the relative path (etc/sysconfig) #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd /etc/sysconfig
+cd /
+cd etc/sysconfig</code></pre></div><h4 id="change-into-the-usrbin-directory-from-etcsysconfig-using-relative-or-absolute-path-card">Change into the /usr/bin directory from /etc/sysconfig using relative or absolute path #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd /usr/bin</code></pre></div><p>or</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd ../../bin</code></pre></div><h4 id="return-to-your-home-directory-card">Return to your home directory #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd</code></pre></div><p>or</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd ~</code></pre></div><h4 id="use-the-absolute-path-to-change-into-the-home-directory-of-the-root-user-from-etcsysconfig-card">Use the absolute path to change into the home directory of the root user from /etc/sysconfig #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd ../../root</code></pre></div><h4 id="switch-between-the-current-and-previous-directories-card">Switch between the current and previous directories #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd ..</code></pre></div><h4 id="use-the-cd-command-to-print-the-home-directory-of-the-current-user-card">use the cd command to print the home directory of the current user #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd -</code></pre></div><h1 id="terminal-device-files-card">Terminal Device Files #card</h1>
+<ul>
+<li>Unique pseudo (or virtual) numbered device files that represent terminal sessions opened by users.</li>
+<li>Used to communicate with individual sessions.</li>
+<li>Stored in the /dev/pts/ (pseudo terminal session).</li>
+<li>Created  when a user opens a new terminal session.</li>
+<li>Removed when a session closes.</li>
+</ul>
+<h2 id="tty-command-card">tty command #card</h2>
+<ul>
+<li>Identify current terminal session.</li>
+<li>Displays filename and location.</li>
+<li>Example: /dev/pts/0</li>
+</ul>
+<h1 id="inspecting-systems-uptime-and-processor-load">Inspecting System’s Uptime and Processor Load</h1>
+<h2 id="uptime-command-card">uptime command #card</h2>
+<ul>
+<li>Displays:
+<ul>
+<li>System’s current time.</li>
+<li>System up time.</li>
+<li>Number of users currently logged in.</li>
+<li>Average % CPU load over the past 1, 5, and 15 minutes.
+<ul>
+<li>0.00 and 1.00 represent no load and full load.</li>
+<li>Greater than 1.00 signifies excess load (over 100%).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="clear-command">clear command</h3>
+<ul>
+<li>Clears the terminal screen and places the cursor at the top left of the screen.</li>
+<li>Can also use Ctrl+l for this command.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>clear</code></pre></div><p>Shortcut for the clear command ::: ctrl+l</p>
+<h2 id="determining-command-path">Determining Command Path</h2>
+<p>tools for identifying the absolute path of the command that will be executed when you run it without specifying its full path.</p>
+<p>which, whereis, and type</p>
+<p>show the full location of the ls command:</p>
+<h2 id="which-command-card">which command #card</h2>
+<ul>
+<li>Show command aliases and location.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 bin]# which ls
+alias ls=&#39;ls --color=auto&#39;
+        /usr/bin/ls</code></pre></div><h2 id="whereis-command-card">whereis command #card</h2>
+<ul>
+<li>Locates binary, source, and manual files for specified command name.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 bin]# whereis ls
+ls: /usr/bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1p/ls.1p.gz&gt;)</code></pre></div><h2 id="type-command-card">type command #card</h2>
+<ul>
+<li>Find whether the given command is an alias, shell built-in, file, function, or keyword.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>type ls</code></pre></div><h2 id="viewing-system-information">Viewing System Information</h2>
+<h4 id="uname-command">uname command</h4>
+<ul>
+<li>Show system operating system name.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[root@server1 bin]# uname
+Linux</code></pre></div><p>Flags
+uname -s ::: Show kernel name.
+uname -n ::: Show hostname.
+uname -r ::: Show kernel release.
+uname -v ::: Show kernel build date.
+uname -m ::: Show machine hardware name.
+uname -p ::: Show processor type.
+uname -i ::: Show hardware platform.
+uname -o ::: Show OS name.
+uname -a ::: Show kernel name, nodename, release, version, machine, and os.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>uname</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>uname -a</code></pre></div><pre><code>Linux = Kernel name
+server1.example.com = Hostname of the system
+4.18.0-80.el8.x86_64 = Kernel release
+#1 SMP Wed Mar 13 12:02:46 UTC 2019 = Date and time of the kernel built
+x86_64 = Machine hardware name
+x86_64 = Processor type
+x86_64 = Hardware platform
+GNU/Linux = Operating system name
+</code></pre>
+<h2 id="viewing-cpu-specs">Viewing CPU Specs</h2>
+<h2 id="lscpu-command-card">lscpu command #card</h2>
+<ul>
+<li>Shows CPU:
+<ul>
+<li>Architecture.</li>
+<li>Operating modes.</li>
+<li>Vendor.</li>
+<li>Family.</li>
+<li>Model.</li>
+<li>Speed.</li>
+<li>Cache memory.</li>
+<li>Virtualization support type.</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>lscpu</code></pre></div><pre><code>architecture of the CPU (x86_64)
+supported modes of operation (32-bit and 64-bit)
+sequence number of the CPU on this system (1)
+threads per core (1)
+cores per socket (1)
+number of sockets (1)
+vendor ID (GenuineIntel)
+CPU model (58) model name (Intel …)
+speed (2294.784 MHz)
+amount and levels of cache memory (L1d, L1i, L2, and L3)
+</code></pre>
+<h2 id="getting-help">Getting Help</h2>
+<h3 id="manual-pages-card">Manual pages #card</h3>
+<ul>
+<li>Informational pages stored in /usr/share/man for each program.</li>
+</ul>
+<h4 id="man-command">man command</h4>
+<p>man -k {keyword} ::: perform a keyword search on manual pages.
+man -f ::: Equivalent to whatis.</p>
+<h4 id="commands-to-find-informationhelp-about-programs-card">Commands to find information/help about programs. #card</h4>
+<ul>
+<li>apropos</li>
+<li>whatis</li>
+<li>info</li>
+<li>pinfo</li>
+</ul>
+<p>Directory with additional program documentation ::: /usr/share/doc/</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>man passwd</code></pre></div><pre><code>name of the command, the 
+	section of the manual pages it is documented in within the parentheses
+	type (User utilities) of the command on line 1
+	short description (NAME)
+	command’s usage (SYNOPSIS)
+	long description (DESCRIPTION)
+	detailed explanation of each option that the command supports 
+	0ther relevant data
+	highlighted line at the bottom indicates the line number of the manual page. 
+</code></pre>
+<h3 id="man-page-navigation">Man page navigation</h3>
+<p>h ::: Help on navigation.
+q ::: Quit the man page.
+Up arrow key ::: Scroll up one line.
+Enter or Down arrow key ::: Scroll down one line.
+f / Spacebar / Page down ::: Move forward one page.
+b / Page up ::: Move backward one page.
+d / u ::: Move down/up half a page.
+g / G ::: Move to the beginning / end of the man pages.
+:f ::: Display line number and bytes being viewed.
+/pattern ::: Searches forward for the specified pattern.
+?pattern ::: Searches backward for the specified pattern.
+n / N ::: Find the next / previous occurrence of a pattern.</p>
+<h2 id="headings-in-the-manual">Headings in the Manual</h2>
+<p>NAME :: Name of the command or file with a short description.
+SYNOPSIS :: Syntax summary.
+DESCRIPTION :: Overview of the command or file.
+OPTIONS :: Options available for use.
+EXAMPLES :: Some examples to explain the usage.
+FILES :: A list of related files.
+SEE ALSO :: Reference to other manual pages or topics.
+BUGS :: Any reported bugs or issues.
+AUTHOR :: Contributor information.</p>
+<h2 id="manual-sections-card">Manual Sections #card</h2>
+<ul>
+<li>Manual information is split into nine sections for organization and clarity.</li>
+<li>Man searches through each section until it finds a match.
+<ul>
+<li>Starts at section 1, then section 2, etc.</li>
+</ul>
+</li>
+<li>Some commands in Linux also have a configuration file with an identical name.
+<ul>
+<li>Ex: passwd command in /usr/bin and the passwd file in /etc.</li>
+</ul>
+</li>
+<li>Specify the section to find that page only.
+<ul>
+<li>Ex: <code>man 5 passwd</code></li>
+</ul>
+</li>
+<li>Section number is located at the top (header) of the page.</li>
+</ul>
+<p>Section 1 :: Refers to user commands.
+Section 4 :: Contains special files.
+Section 5 :: Describes file formats for many system configuration files.
+Section 8 :: Documents system administration and privileged commands designed for the root user.</p>
+<h2 id="searching-by-keyword">Searching by Keyword</h2>
+<h4 id="apropos-command-card">apropos command #card</h4>
+<ul>
+<li>search all sections of the manual pages and show a list of all entries matching the specified keyword in their names or descriptions.</li>
+<li>Must mandb command in order to build an indexed database of the manual pages prior to using.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>mandb</code></pre></div><h4 id="mandb-command-card">mandb command #card</h4>
+<ul>
+<li>Build an indexed database of the manual pages.</li>
+</ul>
+<h4 id="lab-find-a-forgotten-xfs-administration-command-card">Lab: Find a forgotten XFS administration command. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>man -k xfs
+or
+apropos xfs</code></pre></div><h4 id="lab-show-a-brief-list-of-options-and-a-description-card">Lab: Show a brief list of options and a description. #card</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>passwd --help
+or
+passwd -?</code></pre></div><h4 id="whatis-command-card">whatis command #card</h4>
+<ul>
+<li>same output as <code>man -f</code></li>
+<li>Display one-line manual page descriptions.</li>
+</ul>
+<h2 id="info-and-pinfo-commands">info and pinfo Commands</h2>
+<p>info and pinfo commands</p>
+<ul>
+<li>Display command detailed documentation.</li>
+<li>Divided into sections called nodes. The</li>
+<li>Header:
+<ul>
+<li>Name of the file being displayed.</li>
+<li>Names of the current, next, and previous nodes.</li>
+</ul>
+</li>
+<li>info and pinfo commands is almost identical.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>info ls</code></pre></div><p>u navigate efficiently.</p>
+<h3 id="info-page-navigation">info page Navigation</h3>
+<p>Down / Up arrows :: Move forward / backward one line.
+Spacebar / Del :: Move forward / backward one page.
+q :: Quit the info page.
+t :: Go to the top node of the document.
+s :: Search</p>
+<h2 id="documentation-in--usrsharedoc">Documentation in  /usr/share/doc/</h2>
+<p>/usr/share/doc/ ::: stores general documentation for installed packages under subdirectories that match their names.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /usr/share/doc/gzip</code></pre></div><h2 id="online-rhel-documentation-card">Online RHEL Documentation #card</h2>
+<ul>
+<li>docs.redhat.com</li>
+<li>Release notes and guides on planning, installation, administration, security, storage management, virtualization, etc.</li>
+<li>access.redhat.com</li>
+</ul>
+<h2 id="labs-3">Labs</h2>
+<h3 id="lab-2-navigate-linux-directory-tree">Lab 2: Navigate Linux Directory Tree</h3>
+<p>Check your location in the directory tree.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>pwd</code></pre></div><p>Show file permissions in the current directory including the hidden files.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ls -la</code></pre></div><p>Change directory into /etc and confirm the directory change.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd /etc
+pwd</code></pre></div><p>Switch back to the directory where you were before, and run pwd again to verify.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd -
+pwd</code></pre></div><h3 id="lab-miscellaneous-tasks">Lab: Miscellaneous Tasks</h3>
+<p>Identify the terminal device file.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>tty</code></pre></div><p>Open a couple of terminal sessions. Compare the terminal numbers.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[vagrant@server1 ~]$ tty
+/dev/pts/1</code></pre></div><p>Execute the uptime command and analyze the system uptime and processor load information.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>uptime</code></pre></div><p>Use three commands to identify the location of the vgs command.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>which vgs
+whereis vgs
+type vgs</code></pre></div><h3 id="lab-identify-system-and-kernel-information">Lab: Identify System and Kernel Information</h3>
+<ol>
+<li>Analyze the basic information about the system and kernel reported.</li>
+</ol>
+<div class="wrap-code highlight"><pre tabindex="0"><code>uname -a</code></pre></div><p>Examine the key items relevant to the processor.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>lscpu</code></pre></div><h3 id="lab-man">Lab: Man</h3>
+<p>View man page for uname.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>man uname</code></pre></div><p>View the 5 man page section for the shadow.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>man 5 shadow</code></pre></div>
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1702482067" defer></script>
+        <script src="/js/search.js?1702482067" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/spirituality/" class=""><input type="checkbox" id="R-section-e26f41f8140930aef233f86ba175d572" aria-controls="R-subsections-e26f41f8140930aef233f86ba175d572"><label for="R-section-e26f41f8140930aef233f86ba175d572"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Spirituality</span></label><a class="padding" href="/spirituality/">Spirituality<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-e26f41f8140930aef233f86ba175d572" class="morespace collapsible-menu">
+          <li data-nav-id="/spirituality/wetdream/" class=""><a class="padding" href="/spirituality/wetdream/">Semen Retention, What do you do After a Wet Dream?<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/dogtraining/" class=""><input type="checkbox" id="R-section-55ea4753a7fd8684805a80ed8832a217" aria-controls="R-subsections-55ea4753a7fd8684805a80ed8832a217"><label for="R-section-55ea4753a7fd8684805a80ed8832a217"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Dog Training</span></label><a class="padding" href="/dogtraining/">Dog Training<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-55ea4753a7fd8684805a80ed8832a217" class="morespace collapsible-menu">
+          <li data-nav-id="/dogtraining/dogtraining101/" class=""><a class="padding" href="/dogtraining/dogtraining101/">Dog Training 101<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class=""><input type="checkbox" id="R-section-a16074696a2e072964041e9ad7cd8fd5" aria-controls="R-subsections-a16074696a2e072964041e9ad7cd8fd5"><label for="R-section-a16074696a2e072964041e9ad7cd8fd5"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-a16074696a2e072964041e9ad7cd8fd5" class="morespace collapsible-menu">
+          <li data-nav-id="/writing/writingoffthecuff/" class=""><a class="padding" href="/writing/writingoffthecuff/">Writing off the Cuff<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tech/" class="parent "><input type="checkbox" id="R-section-43fa384ae01ca11365a601e3cd261ecf" aria-controls="R-subsections-43fa384ae01ca11365a601e3cd261ecf" checked><label for="R-section-43fa384ae01ca11365a601e3cd261ecf"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tech</span></label><a class="padding" href="/tech/">Tech<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-43fa384ae01ca11365a601e3cd261ecf" class="morespace collapsible-menu">
+          <li data-nav-id="/tech/fedora_setup/" class=""><a class="padding" href="/tech/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/resources_for_passing_ccna/" class=""><a class="padding" href="/tech/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsavagrantlabsetup/" class=""><a class="padding" href="/tech/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsanotes/" class=""><a class="padding" href="/tech/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/things_to_learn_after_ccna/" class=""><a class="padding" href="/tech/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsa/2_interaction/" class="active"><a class="padding" href="/tech/rhcsa/2_interaction/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">How to set up Calibre web with Docker and Nginx<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1702482067" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1702482067" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1702482067" defer></script>
+    <script src="/js/js-yaml.min.js?1702482067" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1702482067" defer></script>
+  </body>
+</html>

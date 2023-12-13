@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="16 Controller-Based Networking Friday, October 29, 2021 2:40 PM
+○ Matching an Ethernet frame’s destination Media Access Control (MAC) address to the MAC address table (Layer 2 switches) Matching an IP packet’s destination IP address to the IP routing table (routers, Layer 3 switches)○ Encrypting the data and adding a new IP header (for virtual private network [VPN] processing)○ ○ Changing the source or destination IP address (for Network Address Translation [NAT] processing)">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="16 Controller-Based Networking Friday, October 29, 2021 2:40 PM
+○ Matching an Ethernet frame’s destination Media Access Control (MAC) address to the MAC address table (Layer 2 switches) Matching an IP packet’s destination IP address to the IP routing table (routers, Layer 3 switches)○ Encrypting the data and adding a new IP header (for virtual private network [VPN] processing)○ ○ Changing the source or destination IP address (for Network Address Translation [NAT] processing)">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/tech/networking/newccnanotes/16controllerbasednetworking/">
+    <meta property="article:section" content="Tech - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1702482067" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1702482067" rel="stylesheet">
+    <link href="/css/auto-complete.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1702482067" rel="stylesheet">
+    <link href="/css/fonts.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1702482067" rel="stylesheet">
+    <link href="/css/theme-city2.css?1702482067" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1702482067" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1702482067" rel="stylesheet">
+    <link href="/css/print.css?1702482067" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1702482067" rel="stylesheet">
+    <script src="/js/url.js?1702482067"></script>
+    <script src="/js/variant.js?1702482067"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/tech/networking/newccnanotes/16controllerbasednetworking/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h1 id="16-controller-based-networking">16 Controller-Based Networking</h1>
+<p>Friday, October 29, 2021 2:40 PM</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○ Matching an Ethernet frame’s destination Media Access Control (MAC) address to the MAC address table (Layer 2 switches)
+Matching an IP packet’s destination IP address to the IP routing table (routers, Layer 3
+switches)</code></pre></div><h6 id="heading">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Encrypting the data and adding a new IP header (for virtual private network [VPN]
+processing)</code></pre></div><h6 id="heading-1">○</h6>
+<p>○ Changing the source or destination IP address (for Network Address Translation [NAT] processing)<br>
+○ Discarding a message due to a filter (access control lists [ACLs], port security)<br>
+The Control Plane<br>
+any action that controls the data plane.<br>
+creating the tables used by the data plane, tables like the IP routing table, an IP Address Resolution Protocol (ARP) table, a switch MAC address table, and so on.<br>
+adding to, removing, and changing entries to the tables used by the data plane</p>
+<p>common control plane protocols:<br>
+Routing protocols (OSPF, Enhanced Interior Gateway Routing Protocol [EIGRP], Routing<br>
+Information Protocol [RIP], Border Gateway Protocol [BGP])<br>
+IPv4 ARP<br>
+IPv6 Neighbor Discovery Protocol (NDP)<br>
+Switch MAC learning<br>
+STP<br>
+The Management Plane<br>
+includes protocols that allow network engineers to manage the devices.<br>
+Telnet and Secure Shell (SSH)are two of the most obvious management plane protocols.</p>
+<p>Cisco Switch Data Plane Internals<br>
+switch uses a ternary contentspecialized type of memory to store the equivalent of the MAC address table: -addressable memory (TCAM).<br>
+the ASIC can feed the fields to be matched, like a MAC address value, into the TCAM, and the TCAM returns the matching table entry, without a need to run a search algorithm.<br>
+Most of the control and management plane functions run in IOS. The data plane function (and the<br>
+control plane function of MAC learning) happens in the ASIC.</p>
+<p>Controllers and Software-Defined Architecture<br>
+Controllers and Centralized Control<br>
+To do their work, those distributed control plane processes use messages to communicate<br>
+with each othernetworks are said to use a , like OSPF protocol messages between routers. As a result, traditional distributed control plane.<br>
+centralized control plane,with its foundations in a service called a controller.<br>
+A controller, or SDN controller, centralizes the control of the networking devices<br>
+the controller can perform all control plane functions, replacing the devices’ distributed control plane. Alternately, the controller can simply be aware of the ongoing work of the<br>
+distributed data, control, and management planes on the devices, without changing how those operate. And the list goes on, with many variations.<br>
+The networking devices do not populate their forwarding tables with traditional distributed</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The networking devices do not populate their forwarding tables with traditional distributed control plane processes</code></pre></div><p>The Southbound Interface<br>
+an interface between the controller and those devices, and given its location at the bottom part of<br>
+drawings,<br>
+in SDN, the word interface (including in the names of SBI, NBI, and API) refers to software<br>
+interfaces<br>
+often includes a protocol, so that the controller and devices can communicate, but it often includes an application programming interface (API). An APIis a method for one application<br>
+(program) to exchange data with another application.<br>
+API is an interface to an application program. Programs process data, so an API lets two programs<br>
+exchange data<br>
+functions, variables, and data structurescopy structured data between the programs across a network.—that can be used by one program to communicate and<br>
+an interface between a program (the controller) and a program (on the networking device) that lets the two programs communicate,<br>
+one goal being to allow the controller to program the data plane forwarding tables of the<br>
+networking device.<br>
+some controllers might support one or a few SBIs, for a specific purpose, while others might support many more SBIs, allowing a choice of SBIs to use<br>
+three sample architectures that happen to show three separate SBIs, specifically:<br>
+OpenFlow (from the ONF; <a href="http://www.opennetworking.org/" target="_blank">http://www.opennetworking.org)</a>)<br>
+(SBI) OpFlex (from Cisco; used with ACI)<br>
+CLI (Telnet/SSH) and SNMP (used with Cisco APIC-EM)<br>
+CLI (Telnet/SSH) and SNMP, and NETCONF (used with Cisco Software-Defined Access)<br>
+The Northbound Interface</p>
+<p>The Northbound Interface<br>
+how does the controller know what to add? How does it choose? What kind of information would your program need to gather before it could attempt to add something like MAC table entries or<br>
+IP routes to a network?<br>
+○ A list of all the devices in the network<br>
+○ The capabilities of each devices<br>
+○ The interfaces/ports on each device<br>
+○ The current state of each port<br>
+○ The topology—which devices connect to which, over which interfaces<br>
+○ Device configuration—IP addresses, VLANs, and so on as configured on the devices<br>
+A controller gathers all sorts of useful information about the network, like the items in the previous list. The controller itself can create a centralized repository of all this useful information<br>
+about the network.<br>
+NBI) opens the controller so its data and functions can be used by other programs, enabling<br>
+network programmability<br>
+Programs can pull information from the controller, using the controller’s APIs. The NBIs also enable programs to use the controller’s capabilities to program flows into the devices using the<br>
+controller’s SBIs.<br>
+An application can run on the same server as the controller and use an NBI, which is an API, so<br>
+that two programs can communicate.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>REST (Representational State Transfer)different hosts, using HTTP messages to transfer data over the APIdescribes a type of API that allows applications to sit on
+application running on the same system as the controller, the API does not need to send messages
+over a network because both programs run on the same system.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>over a network because both programs run on the same system.
+when the application runs on a different system somewhere else in the network other than running on the controller, the API needs a way to send the data back and forth over an IP network,
+and RESTful APIs meet that need
+REST API
+HTTP GET request to a particular URI. The HTTP GET is like any other HTTP GET, even like
+those used to retrieve web pages.
+the URI is not for a web page, but rather identifies an object on the controller, typically a data structure that the application needs to learn and then process
+the URI might identify an object that is the list of physical interfaces on a specific device along with the status of each.</code></pre></div><p>the response holds variable names and their values, in a format that can be easily used by a program. The common formats for data used for network programmabilityare JavaScript Object<br>
+Notation (JSON) and eXtensible Markup Language (XML), shown as step 3.<br>
+<strong>Examples of Network Programmability and SDN</strong></p>
+<h5 id="opendaylightcontroller-and-openflow-sbi">OpenDaylight(Controller) and OpenFlow (SBI)</h5>
+<div class="wrap-code highlight"><pre tabindex="0"><code>defines the concept of a controller along with an IP-based SBI between the controller and
+the network devices.
+defines a standard idea of what a switch’s capabilities are, based on the ASICs and TCAMs commonly used in switches today. (switch abstraction)
+An with great flexibility beyond the traditional model of a Layer 2/3 switch.OpenFlowswitch can act as a Layer 2 switch, a Layer 3 switch, or in different ways and
+centralizes most control plane functions, with control of the network done by the controller
+plus any applications that use the controller’s NBIs.
+applications may use any APIs (NBIs) supported on the controller platform to dictate what</code></pre></div><p>applications may use any APIs (NBIs) supported on the controller platform to dictate what kinds of forwarding table entries are placed into the devices; however, it calls for OpenFlow<br>
+as the SBI protocolOpenFlow .Additionally,the networking devices need to be switches that support</p>
+<p>a controller with an OpenFlow SBI, the controller plays a big role in the network. The next few pages provide a brief background about two such controllers.</p>
+<p>The OpenDaylightController<br>
+open-source<br>
+ageneralized version of the ODL architecture.</p>
+<p><strong>The Cisco Open SDN Controller (OSC)</strong><br>
+a commercial version of the OpenDaylight controller<br>
+followed the intended model for the ODL project:<br>
+no longer produces and sells the Cisco OSC<br>
+two Cisco offerings that use an IBN approach to SDN<br>
+Cisco Application Centric Infrastructure (ACI)<br>
+Cisco’s current SDN offerings of Access (SDA) in the enterprise campusACI in the data center, and Software-Defined WAN (SD, Software-Defined -<br>
+WAN) in the enterprise WAN.<br>
+Cisco made the network infrastructure become application centric, hence the name of the Cisco data center SDN solution: Application Centric<br>
+Infrastructure, or ACI.</p>
+<p>how ACI creates a powerful and flexible network to support a modern<br>
+data center in which VMs and containers are created, run, move, and are stopped dynamically as a matter of routine.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ACI Physical Design: Spine and Leaf
+uses a specific physical switch topology called spine and leaf.
+also called a Clos network
+ Each leaf switch must connect to every spine switch.
+ Each spine switch must connect to every leaf switch.
+ Leaf switches cannot connect to each other.
+ Spine switches cannot connect to each other.
+ Endpoints connect only to the leaf switches.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>The center, like the router on the leftendpoints can be connections to devices outside the data
+most of the endpoints will be either physical servers running a
+native OS or servers running virtualization software with numbers of VMs and containers as shown in the center of the figure.</code></pre></div><p>ACI Operating Model with Intent-Based Networking<br>
+endpoints are the VMs, containers, or even traditional servers with<br>
+the OS running directly on the hardware. ACI then uses several constructs as implemented via the Application Policy Infrastructure<br>
+Controller (APIC)controller for ACI., the software that serves as the centralized<br>
+one web app often exists as three separate servers:<br>
+<strong>Web server</strong> web server, which sends web page content to the user.: Users from outside the data center connect to a<br>
+<strong>App (Application) server</strong> dynamic content, the app server does the processing to build : Because most web pages contain<br>
+the next web page for that particular user based on the user’s profile and latest actions and input.<br>
+<strong>DB (Database) server:</strong> Many of the app server’s actions<br>
+require data; the DB server retrieves and stores the data as requested by the app server.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>the engineer, or some automation program, defines the policies and intent for which endpoints should be allowed to
+communicate and which should not. Then the controller determines what that means for this network at this moment
+in time, depending on where the endpoints are right now.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>intent-based networking (IBN) model.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>when starting the VMs for this app, the virtualization software
+would create (via the APIC) several endpoint groups (EPGs) as shown in Figure 16-11. The controller must also be told the access
+policies, which define which EPGs should be able to communicate (and which should not), as implied in the figure with arrowed lines.
+For example, the routers that connect to the network external to</code></pre></div><p>For example, the routers that connect to the network external to the data center should be able to send packets to all web servers,<br>
+but not to the app servers or DB servers.</p>
+<p>ACI uses a centralized controller called the Application Policy Infrastructure Controller (APIC),</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>it is the controller that creates application policies for the
+data center infrastructure. The APIC takes the intent (EPGs, policies, and so on), which completely changes the
+operational model away from configuring VLANs, trunks, EtherChannels, ACLs, and so on. (Some control plane in
+switches)</code></pre></div><p>Cisco APIC Enterprise Module (APIC-EM)<br>
+a Cisco SDN solution:<br>
+APIC Enterprise Module (APICbegan to reimagine networking in the enterprise, they saw a -EM), solves a different problem. When Cisco huge barrier: the<br>
+installed base of their own products in most of their customer’s networks.<br>
+APIC-EM Basics<br>
+offer enterprise SDN using the same switches and routers already<br>
+installed in networks.<br>
+It includes these applications,<br>
+Topology map: of the network.The application discovers and displays the topology<br>
+Path Trace: the application shows the path through the network, along with The user supplies a source and destination device, and<br>
+details about the forwarding decision at each step.<br>
+Plug and Play: that you can unbox a new device and make it IP reachable through This application provides Day 0 installation support so<br>
+automation in the controller.<br>
+Easy QoS: With a few simple decisions at the controller, you can<br>
+configure complex QoS features at each device.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>does not directly program the data or control planes, but it does interact with the management plane via Telnet, SSH, and/or SNMP;</code></pre></div><p>APIC-EM Replacement<br>
+many of the functions of APICCisco DNA Center (DNAC) product-EM have become core features of the<br>
+list of applications just above this chapter’s Figure 16-14 also exist<br>
+as part of DNAC, for instance.</p>
+<p>Comparing Traditional Versus Controller-Based Networks<br>
+Configuration management refers to any feature that changes device configuration, with automated configuration management doing so with software (program) control.<br>
+Operational network management includes monitoring, gathering operational data, reporting, and<br>
+alerting humans to possible issues</p>
+<p>How Automation Impacts Network Management<br>
+Centralized controllers formalize and define data models for the configuration and operational data about networks.</p>
+<p>Northbound APIs and their underlying data models make it much easier to automate functions versus traditional networks.<br>
+The robust data created by controllers makes it possible to automate functions that were not<br>
+easily automated without controllers.<br>
+The new reimagined software defined networks that use new operational models simplify operations, with automation resulting in more consistent configuration and less errors.<br>
+Centralized collection of operational data at controllers allows the application of modern data analytics to networking operational data, providing actionable insights that were likely not<br>
+noticeable with the former model.<br>
+Time required to complete projects is reduced.<br>
+New operational models use external inputs, like considering time-of-day, day-of-week, and<br>
+network load.<br>
+Comparing Traditional Networks with Controller-Based Networks</p>
+<p>three most likely to be seen from Cisco in an enterprise: Software-Defined Access (SDA), Software-<br>
+Defined WAN (SDSDA.) -WAN), and Application Centric Infrastructure (ACI). (Chapter 17 introduces</p>
+<p>The network engineer does not need to think about every command on every device.<br>
+The controller configures the devices with consistent and streamlined settings.<br>
+The result: faster and more consistent changes with fewer issues.<br>
+Uses new and improved operational models that allow the configuration of the network rather than per-device configuration</p>
+<p>Enables automation through northbound APIs that provide robust methods and modeldata -driven</p>
+<p>Configures the network devices through southbound APIs, resulting in more consistent device<br>
+configuration, fewer errors, and less time spent troubleshooting the network<br>
+Enables a DevOps approach to networks</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1702482067" defer></script>
+        <script src="/js/search.js?1702482067" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/spirituality/" class=""><input type="checkbox" id="R-section-e26f41f8140930aef233f86ba175d572" aria-controls="R-subsections-e26f41f8140930aef233f86ba175d572"><label for="R-section-e26f41f8140930aef233f86ba175d572"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Spirituality</span></label><a class="padding" href="/spirituality/">Spirituality<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-e26f41f8140930aef233f86ba175d572" class="morespace collapsible-menu">
+          <li data-nav-id="/spirituality/wetdream/" class=""><a class="padding" href="/spirituality/wetdream/">Semen Retention, What do you do After a Wet Dream?<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/dogtraining/" class=""><input type="checkbox" id="R-section-55ea4753a7fd8684805a80ed8832a217" aria-controls="R-subsections-55ea4753a7fd8684805a80ed8832a217"><label for="R-section-55ea4753a7fd8684805a80ed8832a217"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Dog Training</span></label><a class="padding" href="/dogtraining/">Dog Training<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-55ea4753a7fd8684805a80ed8832a217" class="morespace collapsible-menu">
+          <li data-nav-id="/dogtraining/dogtraining101/" class=""><a class="padding" href="/dogtraining/dogtraining101/">Dog Training 101<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class=""><input type="checkbox" id="R-section-a16074696a2e072964041e9ad7cd8fd5" aria-controls="R-subsections-a16074696a2e072964041e9ad7cd8fd5"><label for="R-section-a16074696a2e072964041e9ad7cd8fd5"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-a16074696a2e072964041e9ad7cd8fd5" class="morespace collapsible-menu">
+          <li data-nav-id="/writing/writingoffthecuff/" class=""><a class="padding" href="/writing/writingoffthecuff/">Writing off the Cuff<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tech/" class="parent "><input type="checkbox" id="R-section-43fa384ae01ca11365a601e3cd261ecf" aria-controls="R-subsections-43fa384ae01ca11365a601e3cd261ecf" checked><label for="R-section-43fa384ae01ca11365a601e3cd261ecf"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tech</span></label><a class="padding" href="/tech/">Tech<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-43fa384ae01ca11365a601e3cd261ecf" class="morespace collapsible-menu">
+          <li data-nav-id="/tech/fedora_setup/" class=""><a class="padding" href="/tech/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/resources_for_passing_ccna/" class=""><a class="padding" href="/tech/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsavagrantlabsetup/" class=""><a class="padding" href="/tech/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsanotes/" class=""><a class="padding" href="/tech/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/things_to_learn_after_ccna/" class=""><a class="padding" href="/tech/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/networking/newccnanotes/16controllerbasednetworking/" class="active"><a class="padding" href="/tech/networking/newccnanotes/16controllerbasednetworking/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">How to set up Calibre web with Docker and Nginx<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1702482067" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1702482067" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1702482067" defer></script>
+    <script src="/js/js-yaml.min.js?1702482067" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1702482067" defer></script>
+  </body>
+</html>

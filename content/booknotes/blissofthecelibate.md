@@ -408,16 +408,16 @@ The male becomes powerless in his reaction to the female form.
 
 Every time he sees the female form, in photos or it life, he is
 intensely drawn to it. The female body has a seemingly magical hold
-over him, and his response to the female form is intense
+over him, and his response to the female form is intense.
 
-The female form becomes his true idol, his de facto god
+The female form becomes his true idol, his de facto god.
 
 He is easily irritated, and easily loses his temper, especially after
-an orgasm
+an orgasm.
 
-powers of focus and concentration lessen.
+Powers of focus and concentration lessen.
 
-becomes less competent and energetic in discharging his duties
+Becomes less competent and energetic in discharging his duties.
 
 He has less patience and operates from a lower morale.
 
@@ -425,310 +425,231 @@ He is more likely to get into conflicts and arguments with others, and
 operate from a less noble emotional position.
 
 He performs more other deeds which are unvirtuous, destructive, or
-negative
+negative.
 
-listless and lacks sparkle. He lacks energy. --He is sick more. He may
-develop a chronic health problem
+Listless and lacks sparkle. He lacks energy. --He is sick more. He may
+develop a chronic health problem.
 
 Usually the sexing man comes to be more comfortable relating to women,
-and is uncomfortable with men
+and is uncomfortable with men.
 
-feels uncomfortable getting close to men, and avoids men as friends
+Feels uncomfortable getting close to men, and avoids men as friends.
 
 Men no longer appeal as companions, because he relates to others
 mostly with a sexual charge, and he has become so sexualized that it
 begins to respond to strange things, as if sexual desire had an
-omnivorous appetite
+omnivorous appetite.
 
 You can usually tell a man who is fairly sexually clean, because he
-will have close non sexual male relationships, even preferring to be with men, with no sexual thing at all
+will have close non sexual male relationships, even preferring to be with men, with no sexual thing at all.
 
-He begins to find himself attracted to things in the woman that did not have a sexual meaning before
+He begins to find himself attracted to things in the woman that did not have a sexual meaning before.
 
 He is about to take the path of the demon, who is destined to be made
-fertilizer by the Divine Being
+fertilizer by the Divine Being.
 
-a sexual thrill will begin to develop around increasingly perverse and
+A sexual thrill will begin to develop around increasingly perverse and
 disturbing things. With each new collapse, he yields something more in
 the realm of his conscience and values.
 
 He may still retain the same beliefs about right or wrong. But he
 violates his own principles in pursuit of the drug. So he may
 eventually be led into homosexuality, blood, violence, and other evil
-things as he cultivates them as sources of a fresh sexual thrill . This is the beginning of the development of
-\"blood lust,\" which necessarily arises eventually out of sexual
-indulgence
+things as he cultivates them as sources of a fresh sexual thrill. This is the beginning of the development of \"blood lust,\" which necessarily arises eventually out of sexual
+indulgence.
 
-man either moves into the darkness of sexual perversion, or realizes
+Man either moves into the darkness of sexual perversion, or realizes
 where he is headed and turns back in the direction of his original
-purity
+purity.
 
-most effective technique for regaining this lost purity is outright
+Most effective technique for regaining this lost purity is outright
 sexual renunciation, along with deep meditation.
 
-meditation is critically important, because it gives a more-than-ample
-replacement of the lost pleasure when pursued devoutly. If
+Meditation is critically important, because it gives a more-than-ample
+replacement of the lost pleasure when pursued devoutly.
 
-steps along the way as he reverses his path:
+Steps along the way as he reverses his path:
 
-conscious realization that what he is doing is wrong and destructive
+Conscious realization that what he is doing is wrong and destructive
 in his life. --He has become aware of becoming in some way sexually
 corrupted or perverted. --He realizes he is addicted and begins to
-seek for help in some form
+seek for help in some form.
 
-It is good for the male to ask, in a conscious way, a higher power to intervene and assist him in overcoming the addiction
+It is good for the male to ask, in a conscious way, a higher power to intervene and assist him in overcoming the addiction.
 
 The higher power might be termed God, Jesus Christ, or another guru.
 -- He makes a statement to himself of renunciation. Like a smoker who
 throws all his cigarettes in the sewer, he accomplishes an act of
-renunciation
+renunciation.
 
-begins to make an effort not to look at sexual things, read sexual
-things, or listen to sexual things, or go to women where does sexual things. --Because of this effort he reduces his orgasms,
-but he will probably continue to slip regularly. When he does slip, he feels increasing remorse and disgust with himself. He prays more about the problem.
+Begins to make an effort not to look at sexual things, read sexual
+things, or listen to sexual things, or go to women where does sexual things. --Because of this effort he reduces his orgasms, but he will probably continue to slip regularly. When he does slip, he feels increasing remorse and disgust with himself. He prays more about the problem.
 
-If the man is fortunate, he will find activities that substitute for the pleasure being given up. He will begin to turn the
-energy now saved to more constructive and positive activities. This may be involvement with people or service. It may be one of the arts. He may throw himself into writing a book, or reading and learning He may get obsessed with his car or some other vehicle, or
-begin some new interest. If he is very fortunate, he will discover meditation. This will eventually completely short circuit the sex addiction
+If the man is fortunate, he will find activities that substitute for the pleasure being given up. He will begin to turn the energy now saved to more constructive and positive activities. This may be involvement with people or service. It may be one of the arts. He may throw himself into writing a book, or reading and learning He may get obsessed with his car or some other vehicle, or
+begin some new interest. If he is very fortunate, he will discover meditation. This will eventually completely short circuit the sex addiction.
 
 As he sexes less, any trend toward perversion begins to recede. He
 strips back the years and regains his more simple, healthy sexual
-interests
+interests.
 
 Things that were once gross but had become interesting, now are gross
-and repugnant again. --Small and wholesome matters become sexually attractive again, such as the sight of a woman\'s calf, or the shape
-of her bust, or her downy cheek
+and repugnant again. --Small and wholesome matters become sexually attractive again, such as the sight of a woman\'s calf, or the shape of her bust, or her downy cheek/
 
-restraint. --He feels more sexually potent, and the attraction to
-women at times is quite strong. This occasionally causes him to slip
-again. As a once sexually active man attempts restraint, he naturally
-builds up a higher level of sexual potential than back
+Restraint. --He feels more sexually potent, and the attraction to women at times is quite strong. This occasionally causes him to slip again. As a once sexually active man attempts restraint, he naturally builds up a higher level of sexual potential than back.
 
-he comes into states in which he feels more potent than ever
+He comes into states in which he feels more potent than ever.
 
-At times, as this energy is building up but not transmuted, he feels
-so virile he thinks he could be a veritable stag, mating with many
-women. He can find sexual attraction to even the plainest of women at these times. He feels like his sexual energy is some kind of
-boon or precious gift he has to bestow. (This is true, but he should
-not let it trick him into the Deed.)
+At times, as this energy is building up but not transmuted, he feels so virile he thinks he could be a veritable stag, mating with many women. He can find sexual attraction to even the plainest of women at these times. He feels like his sexual energy is some kind of boon or precious gift he has to bestow. (This is true, but he should not let it trick him into the Deed.)
 
-This is a lot of fun for him to feel this potent, so he will
-occasionally slip. Like a sailor who has been away at sea for months, sex desire becomes keen again, and he will at times savor it
+This is a lot of fun for him to feel this potent, so he will occasionally slip. Like a sailor who has been away at sea for months, sex desire becomes keen again, and he will at times savor it
 and \"ride\" it as he once did when he was younger and becoming addicted.
 
-This is a mistake, but most men will go through phases like this. The
-stored up sexual energy is still inclined to want to go down through
-the lower
+This is a mistake, but most men will go through phases like this. The stored up sexual energy is still inclined to want to go down through the lower.
 
-He is trying to pen up a wild stallion that is used to running free.
-He has a tiger in the barn, and for a period it seems to be
-problematic
+He is trying to pen up a wild stallion that is used to running free. He has a tiger in the barn, and for a period it seems to be problematic.
 
-Eventually the horse will be like a powerful, disciplined draft horse
-that can be applied to any task
+Eventually the horse will be like a powerful, disciplined draft horse that can be applied to any task.
 
-But during the beginning, the horse wants to bolt a lot. Because of the storing of the sexual energy, any
-fanning of the flame makes the man feel extremely passionate desire. What he has inside him seems more powerful than before
+But during the beginning, the horse wants to bolt a lot. Because of the storing of the sexual energy, any fanning of the flame makes the man feel extremely passionate desire. What he has inside him seems more powerful than before.
 
-With cultivation the tiger will become calm and serve you
+With cultivation the tiger will become calm and serve you.
 
-Celibacy must be impossible or bad. It makes men very horny.\" But the
-fellow is only in an unbaked stage of unskilled celibacy
+(Thinks that) Celibacy must be impossible or bad. It makes men very horny.\" But the fellow is only in an unbaked stage of unskilled celibacy.
 
-The man has a long way to go yet. When he does slip, he will feel more remorse than ever
+The man has a long way to go yet. When he does slip, he will feel more remorse than ever.
 
-And like an alcoholic, he will also find that he sinks to the old
-depths rather quickly. Whereas his sexual appetite had seemed so wholesome,
-now a perverse thought reappears. This happens after a slip. Channels
-have been \"cut\" in the body, brain, and astral body by the addiction
-and experiences of the past. These channels are still fresh. Weeds may
-be growing up in
-
-what was once a highway, but the path is still there. In Hinduism
-these impressions or markings are called \"samskaras.\" If you scratch
-a mark in the ground, water will tend to find that channel and flow
+And like an alcoholic, he will also find that he sinks to the old depths rather quickly. Whereas his sexual appetite had seemed so wholesome, now a perverse thought reappears. This happens after a slip. Channels have been \"cut\" in the body, brain, and astral body by the addiction and experiences of the past. These channels are still fresh. Weeds may be growing up in what was once a highway, but the path is still there. In Hinduism these impressions or markings are called \"samskaras.\" If you scratch a mark in the ground, water will tend to find that channel and flow
 down it. 
 
-Just abstaining and letting them lie fallow for a while doesn\'t erase
-them. They are quickly reclaimed and reactivated with every lapse back
-into sexing
+Just abstaining and letting them lie fallow for a while doesn\'t erase them. They are quickly reclaimed and reactivated with every lapse back into sexing.
 
-There will be lapses. But the wise man steels his continues to cultivate himself away from sexing. --He may find he can
-will the sexual energy to bolt up up his spine. When doing so, his spine will bolt erect, as if his whole upper body had become an
-erection. --He stops looking at the butts of women
+There will be lapses. But the wise man steels his continues to cultivate himself away from sexing. --He may find he can will the sexual energy to bolt up up his spine. When doing so, his spine will bolt erect, as if his whole upper body had become an
+erection. --He stops looking at the butts of women and their other physical features. When he does look, he feels a little disappointed by what he sees.
 
-their other physical features. When he does look, he feels a little
-disappointed by what he sees
-
-It\'s just the same old but. He starts to think, \"You see one,
+It\'s just the same old butt. He starts to think, \"You see one,
 you\'ve seen them all.\"
 
-His most tempting sexual encounters begin to be in the dream state. He
-sees fewer women who attract him
+His most tempting sexual encounters begin to be in the dream state. He sees fewer women who attract him.
 
-As he begins to purify himself of lust, he begins to sense lust in others
+As he begins to purify himself of lust, he begins to sense lust in others.
 
 Most women begin to seem used and soiled, or having lust. He senses
-these things by instinct
+these things by instinct.
 
-Because he is becoming pure, he notices the impurity in others
+Because he is becoming pure, he notices the impurity in others.
 
-He finds that he is only attracted to those with some purity
+He finds that he is only attracted to those with some purity.
 
-He no longer consciously masturbates; only in near sleep or sleep states
+He no longer consciously masturbates; only in near sleep or sleep states.
 
-He becomes keenly aware of how any loss of semen weakens him
-physically and demoralizes him. --He may masturbate consciously or
-semi-consciously, but endeavors not to \"leak\" any semen
+He becomes keenly aware of how any loss of semen weakens him physically and demoralizes him. --He may masturbate consciously or semi-consciously, but endeavors not to \"leak\" any semen.
 
-He may experiment with Taoist\" sexual practices in which sexual pleasure is indulged, but
-semen is retained or drawn back in. These cause harm to the sexual
-organs such as the prostate, plus keep him sexing and addicted to the
-thrill
+He may experiment with Taoist\" sexual practices in which sexual pleasure is indulged, but semen is retained or drawn back in. These cause harm to the sexual organs such as the prostate, plus keep him sexing and addicted to the thrill.
 
-He sees how even the mental activity of lusting is vitiating and
-drains him of shakti
+He sees how even the mental activity of lusting is vitiating and drains him of shakti.
 
 He senses how even when he looks at a woman with lust, he is losing
-subtle shakti
+subtle shakti.
 
-now we have a man capable of becoming that jewel among men, the
-celibate
+Now we have a man capable of becoming that jewel among men, the celibate.
 
-Virya refers to noticeable qualities of character and countenance
-that come to the celibate male (In some Sutra translations the English word \"vigor\" is
-used instead)
+Virya refers to noticeable qualities of character and countenance that come to the celibate male (In some Sutra translations the English word \"vigor\" is used instead).
 
-Virya means the increase of masculine qualities such as strength,
-stamina, energy, clarity, patience and evenness
+Virya means the increase of masculine qualities such as strength, stamina, energy, clarity, patience and evenness.
 
-his body, face and attitude
+His body, face and attitude.
 
 He wins wars, and protects others who are more vulnerable. Virility
-also makes a man unafraid
+also makes a man unafraid.
 
-Art of War\" there is given this interesting strategy for winning a
-war: Send prostitutes into the enemy camp
+Art of War\" there is given this interesting strategy for winning a war: Send prostitutes into the enemy camp.
 
-sturdy, intrepid, and forceful.
+Sturdy, intrepid, and forceful.
 
 The first evidence of a man\'s progress in spiritual life is a strong
 grit.
 
-what \"grit\" means: Firmness of character, especially in pain or danger
+What \"grit\" means: Firmness of character, especially in pain or danger.
 
-unrestrained and wanton sex destroys the character of man and takes
-away his courage
+Unrestrained and wanton sex destroys the character of man and takes away his courage.
 
-tejas (effulgence) Tejas refers to the sparkle in the eyes and, the glow of vitality, and charismatic aura around the face
-and body of a celibate saint or yogi.
+Tejas (effulgence) Tejas refers to the sparkle in the eyes and, the glow of vitality, and charismatic aura around the face and body of a celibate saint or yogi.
 
-You are sick less often. Many health problems will be mitigated, or
-disappear entirely. You need less sleep
+You are sick less often. Many health problems will be mitigated, or disappear entirely. You need less sleep.
 
-develop a more even temperament
+Develop a more even temperament.
 
-Few things irritate you or cause you to lose your temper
+Few things irritate you or cause you to lose your temper.
 
-you are bolder, more courageous, and show integrity
+You are bolder, more courageous, and show integrity.
 
-develop consistency of character and more constancy in pursuing goals
+Develop consistency of character and more constancy in pursuing goals.
 
-even begin controlling \"wet dreams
+Even begin controlling \"wet dreams"
 
 Out in the world, you rarely see any female who has any sexual
-attraction to you
+attraction to you.
 
-When any come close to attracting you, it will always be a woman who
-is herself developing moral purity
+When any come close to attracting you, it will always be a woman who is herself developing moral purity.
 
-You no longer create sexual experiences in the dream state. One begins to see the female form in a different way
+You no longer create sexual experiences in the dream state. One begins to see the female form in a different way.
 
-You begin seeing that almost all women assume males are no better than
-dogs, that all men inherently worship the female form, and that men
-are generally unable to resist any woman who gives them half a chance
+You begin seeing that almost all women assume males are no better than dogs, that all men inherently worship the female form, and that men are generally unable to resist any woman who gives them half a chance.
 
-Women who are conventionally \"sexy\" will not attract this sort of
-man unless they have high moral virtue similar to his
+Women who are conventionally \"sexy\" will not attract this sort of man unless they have high moral virtue similar to his.
 
-So it is that as men return to purity and goodness, women
-automatically follow
+So it is that as men return to purity and goodness, women automatically follow.
 
-Others notice you and are attracted to you more than before,
-especially women
+Others notice you and are attracted to you more than before, especially women.
 
-happens to be attracted to the stored up sexual energy itself, which
-provides greater temptations to the celibate, and to her
+Happens to be attracted to the stored up sexual energy itself, which
+provides greater temptations to the celibate, and to her.
 
-As a man withdraws energy from the lower centers and the sexual
-organ, sometimes a buzzing or vibrating sensation can be felt in the sexual members. This carries
-no erotic or sexual feeling
+As a man withdraws energy from the lower centers and the sexual organ, sometimes a buzzing or vibrating sensation can be felt in the sexual members. This carries no erotic or sexual feeling.
 
-This is the divine shakti knocking off layers of dark karma associated
-with that organ
+This is the divine shakti knocking off layers of dark karma associated with that organ.
 
-You stop having erections, even in the dream state
+You stop having erections, even in the dream state.
 
-requires abstention from all caffeine
+Requires abstention from all caffeine.
 
-a sign of spiritual development is a more pleasant and attractive voice
+A sign of spiritual development is a more pleasant and attractive voice.
 
-Your words are found to have more effect. Your thoughts are found to
-influence your surroundings. People who spend time around you become
-more like you. Whatever spiritual realization you have, you become
-able to pass it to others
+Your words are found to have more effect. Your thoughts are found to influence your surroundings. People who spend time around you become more like you. Whatever spiritual realization you have, you become able to pass it to others.
 
-One result is usually a heightened interest in God and pursuit of the
-spiritual life
+One result is usually a heightened interest in God and pursuit of the spiritual life.
 
-even a celibate man who is not a God-seeker will influence others
-powerfully through his thoughts
+Even a celibate man who is not a God-seeker will influence others powerfully through his thoughts.
 
-the buildup of the male energy, manifests as more energy
+The buildup of the male energy, manifests as more energy.
 
-endurance, steadiness, toughness, and courage -- in all areas of life
+Endurance, steadiness, toughness, and courage -- in all areas of life.
 
-wasting of the male substance eventually makes a man weak, listless,
-timid, and feminine
+Wasting of the male substance eventually makes a man weak, listless,
+timid, and feminine.
 
-place in the human brain associated with sexual orgasm. This area lies
+Place in the human brain associated with sexual orgasm. This area lies
 next to the part of the brain associated with violent aggression. As
-the sexer repeatedly \"overheats\" this part of the brain, it begins
+the sexer repeatedly \"overheats\" this part of the brain, it begins to fuse with the violent-aggressive part of the brain. Thus the sexer eventually finds that he is getting erections at the sight of blood and violence. We have a term from deep in our cultural history:
+\"blood lust\".
 
-to fuse with the violent-aggressive part of the brain. Thus the sexer
-eventually finds that he is getting erections at the sight of blood
-and violence. We have a term from deep in our cultural history:
-\"blood lust
+Even it a man be the greatest of sinners; even if he has murdered an entire village, and all of its inhabitants were righteous. Still by the boat of meditation this man is purified, accounted good, and cometh to Me.
 
-Even it a man be the greatest of sinners; even if he has murdered an
-entire village, and all of its inhabitants were righteous. Still by
-the boat of meditation this man is purified, accounted good, and cometh
-to Me
+Desire for celibacy does not often emerge in the female as compellingly as in a man who finally figures out the situation. First of all, sex desire tends not to become such a problem for the female,
+causing such negative consequences.
 
-desire for celibacy does not often emerge in the female as
-compellingly as in a man who finally figures out the situation. First
-of all, sex desire tends not to become such a problem for the female,
-causing such negative consequences
+Any man who sexes more than once a month is automatically inferior to any woman.
 
-any man who sexes more than once a month is automatically inferior to
-any woman
+A female yogi directing her shakti up the spine over a long time will eventually cease from having her period.
 
-a female yogi directing her shakti up the spine over a long time will
-eventually cease from having her period.
-
-many great female saints having the highest station of nirvikalpa
-samadhi. Examples: St. Teresa of Avila, Ananda Mayi Ma, the living
-saint Karuna Mayi
+Many great female saints having the highest station of nirvikalpa samadhi. Examples: St. Teresa of Avila, Ananda Mayi Ma, the living saint Karuna Mayi.
 
 The man is inherently rajasic, pushing outward and also manifests his
-spiritual progress more noticeably in the external realm
+spiritual progress more noticeably in the external realm.
 
-Typical Male Weaknesses --Addiction to the Female Form; tendency to
-become addicted to sex --Lack Of interest in the spiritual and
-esoteric --Addiction to activity and worldly pursuits, Overly aggressive, combative nature
+Typical Male Weaknesses --Addiction to the Female Form; tendency to become addicted to sex --Lack Of interest in the spiritual and esoteric --Addiction to activity and worldly pursuits, Overly aggressive, combative nature.
 
-Hurtfulness towards others which clouds his karma and hides from him
-the spiritual truth --Pride, ego, arrogance, lack of humility
+Hurtfulness towards others which clouds his karma and hides from him the spiritual truth --Pride, ego, arrogance, lack of humility.
 --Fruitless intellectuality; tendency to become distracted by too many
 facts, details, and fine distinctions, Difficulty grasping the broad, ineffable, inarticulate sense of things --Enjoyment of arguing
 over spiritual things; lording spiritual knowledge over others --Less

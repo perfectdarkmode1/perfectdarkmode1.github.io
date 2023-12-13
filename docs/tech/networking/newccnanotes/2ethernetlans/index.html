@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="2 Ethernet LANs 1.0 Network Fundamentals
+1.1 Explain the role and function of network components 1.1.b L2 and L3 Switches 1.2 Describe characteristics of network topology architectures 1.2.e Small office/home office (SOHO) 1.3 Compare physical interface and cabling types 1.3.a Single-mode fiber, multimode fiber, copper 1.3.b Connections (Ethernet shared media and point-to-point) 802.3 (Ethernet Standards
+10BASE-T
+10 MbpsEthernet 802.3Copper/ 100 m
+100BASE-T 100 MbpsFast Ethernet 802.3uCopper/ 100m
+1000BASE-LX 1000 MbpsGigabit Ethernet Gigabit Ethernet802.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="2 Ethernet LANs 1.0 Network Fundamentals
+1.1 Explain the role and function of network components 1.1.b L2 and L3 Switches 1.2 Describe characteristics of network topology architectures 1.2.e Small office/home office (SOHO) 1.3 Compare physical interface and cabling types 1.3.a Single-mode fiber, multimode fiber, copper 1.3.b Connections (Ethernet shared media and point-to-point) 802.3 (Ethernet Standards
+10BASE-T
+10 MbpsEthernet 802.3Copper/ 100 m
+100BASE-T 100 MbpsFast Ethernet 802.3uCopper/ 100m
+1000BASE-LX 1000 MbpsGigabit Ethernet Gigabit Ethernet802.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/tech/networking/newccnanotes/2ethernetlans/">
+    <meta property="article:section" content="Tech - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1702482067" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1702482067" rel="stylesheet">
+    <link href="/css/auto-complete.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1702482067" rel="stylesheet">
+    <link href="/css/fonts.css?1702482067" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1702482067" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1702482067" rel="stylesheet">
+    <link href="/css/theme-city2.css?1702482067" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1702482067" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1702482067" rel="stylesheet">
+    <link href="/css/print.css?1702482067" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1702482067" rel="stylesheet">
+    <script src="/js/url.js?1702482067"></script>
+    <script src="/js/variant.js?1702482067"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/tech/networking/newccnanotes/2ethernetlans/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#11-explain-the-role-and-function-of-network-components">1.1 Explain the role and function of network components</a></li>
+    <li><a href="#11b-l2-and-l3-switches">1.1.b L2 and L3 Switches</a></li>
+    <li><a href="#12-describe-characteristics-of-network-topology-architectures">1.2 Describe characteristics of network topology architectures</a></li>
+    <li><a href="#12e-small-officehome-office-soho">1.2.e Small office/home office (SOHO)</a></li>
+    <li><a href="#13-compare-physical-interface-and-cabling-types">1.3 Compare physical interface and cabling types</a></li>
+    <li><a href="#13a-single-mode-fiber-multimode-fiber-copper">1.3.a Single-mode fiber, multimode fiber, copper</a></li>
+    <li><a href="#13b-connections-ethernet-shared-media-and-point-to-point">1.3.b Connections (Ethernet shared media and point-to-point)</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h1 id="2-ethernet-lans">2 Ethernet LANs</h1>
+<p>1.0 Network Fundamentals</p>
+<h2 id="11-explain-the-role-and-function-of-network-components">1.1 Explain the role and function of network components</h2>
+<h2 id="11b-l2-and-l3-switches">1.1.b L2 and L3 Switches</h2>
+<h2 id="12-describe-characteristics-of-network-topology-architectures">1.2 Describe characteristics of network topology architectures</h2>
+<h2 id="12e-small-officehome-office-soho">1.2.e Small office/home office (SOHO)</h2>
+<h2 id="13-compare-physical-interface-and-cabling-types">1.3 Compare physical interface and cabling types</h2>
+<h2 id="13a-single-mode-fiber-multimode-fiber-copper">1.3.a Single-mode fiber, multimode fiber, copper</h2>
+<h2 id="13b-connections-ethernet-shared-media-and-point-to-point">1.3.b Connections (Ethernet shared media and point-to-point)</h2>
+<p>802.3 (Ethernet Standards<br>
+10BASE-T</p>
+<ul>
+<li>
+<ul>
+<li>10 MbpsEthernet</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>802.3Copper/ 100 m<br>
+100BASE-T</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>100 MbpsFast Ethernet</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>802.3uCopper/ 100m<br>
+1000BASE-LX</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>1000 MbpsGigabit Ethernet</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Gigabit Ethernet802.3z</li>
+</ul>
+</li>
+<li>
+<p>Fiber, 5000 m<br>
+1000BASE-T</p>
+</li>
+<li>
+<p>1000 Mbps</p>
+</li>
+<li>
+<ul>
+<li>Gigabit Ethernet802.3ab</li>
+</ul>
+</li>
+<li>
+<p>Copper, 100m<br>
+10GBASE-T</p>
+</li>
+<li>
+<p>10 Gbps</p>
+</li>
+<li>
+<ul>
+<li>10 Gig Ethernet802.3an</li>
+</ul>
+</li>
+<li>
+<p>Copper100m<br>
+Three most common</p>
+</li>
+<li>
+<p>10BASE-T, 100BASE-T, and 1000BASE-T<br>
+Twisting of the wires helps reduce EMI.</p>
+</li>
+<li>
+<p>EMI between wire pairs</p>
+</li>
+</ul>
+<p>Crosstalk</p>
+<p>Gigabit Ethernet interface Converter (GBIC)</p>
+<ul>
+<li>The original form factor for a removeable transceiver for Gigabit interfaces; larger than SFPs<br>
+Small Form Pluggable (SFP)</li>
+<li>The replacement for GBICs, used on gigabit interfaces, with a smaller size, taking less space on the side of the networking card or switch.</li>
+</ul>
+<p>Small Form Pluggable Plus (SFP+)</p>
+<ul>
+<li>Same size as the SFP, but used on 10-Gbps interfaces<br>
+UTP Cabling Pinouts for 10BASE-T and 100BASE-T</li>
+<li>2 wire pairs,</li>
+<li>one pair for each direction</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>10BASE-T and 100BASE-T</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Crossover
+▪▪ transmits on pins 1/2RECEIVES ON PINS 3/</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>PC/ Router/ AP</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>▪ Transmits on pins 3/</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Switch/ Hub</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>▪▪ Transmits on pins 3/6receives on pins 1/
+Ethernet NIC transmitters send on pins 1 and 2
+NIC receivers receive on pins 3 and 6
+Straight through cable</code></pre></div><ul>
+<li>Pins 1/2 &gt; 1/</li>
+<li>Pins 3/6 &gt; 3/<br>
+auto-mdix (cisco)</li>
+<li>Notices when a wrong cable is used</li>
+<li>automatically changes it&rsquo;s logic to make the link work.</li>
+<li>
+<ul>
+<li>4 wire pairsBoth ends transmit and receive simultaneously on each wire pair.</li>
+</ul>
+</li>
+<li>pairs 1/2, 3/6, 4/5, 7/</li>
+<li>Crossover cable crosses the pairs at pins 1/2 and 3/6, it also crosses pairs 4/5 with 7/</li>
+</ul>
+<p>1000BASE-T</p>
+<p>Fiber Cabling Transmission Concepts<br>
+Physical cable</p>
+<ul>
+<li>Core &gt;</li>
+<li>
+<ul>
+<li>Cladding &gt; Buffer &gt;</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Strengthener &gt;Outer Jacket</li>
+</ul>
+</li>
+<li>Shines light into the core</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Optical Transmitter</code></pre></div><ul>
+<li>
+<ul>
+<li>multiple angles (modes) of light waves Less expensive</li>
+</ul>
+</li>
+<li>10 gigabit over ethernet allows for distance up to 400m</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Multimode fiber</code></pre></div><ul>
+<li>Smaller diameter (around 1/5 of multimode) core</li>
+<li>
+<ul>
+<li>lasersingle angle-based transmitter<br>
+More expensive SFP/ SFP+ hardware<br>
+Distances up to tens of kilometers</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Single mode fiber</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Transmit port on one end of the fiber connects to the receive port on the other end (Tx and Rx)
+10Gbps Fiber Standards</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>10Gbps Fiber Standards</code></pre></div><ul>
+<li>
+<ul>
+<li>10GBASE10GBASE&ndash;S/ MM/ 400mLX4/ MM/ 300m</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>10GBASE10GBASE&ndash;LR/ SM/ 10kmE/ SM/ 30km</li>
+</ul>
+</li>
+</ul>
+<p>UTP, MM, and SM comparisons</p>
+<ul>
+<li>low cable cost</li>
+<li>
+<ul>
+<li>low switch port cost100m Max Distance</li>
+</ul>
+</li>
+<li>Some susceptibility to interference</li>
+<li>Some risk of copying from cable emissions</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>UTP</code></pre></div><ul>
+<li>Medium cable cost</li>
+<li>
+<ul>
+<li>Medium switch port cost500m Max Distance</li>
+</ul>
+</li>
+<li>No susceptibility to interference</li>
+<li>No risk of copying from cable emissions</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Multimode</code></pre></div><ul>
+<li>Medium cable cost</li>
+<li>
+<ul>
+<li>High switch port cost40Km Max Distance</li>
+</ul>
+</li>
+<li>No susceptibility to interference</li>
+<li>No risk of copying from cable emissions</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Single-Mode</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Ethernet Header (preamble/sfd/Destination/Source/Type/Dataandpad/FCS)
+Header</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>□□ 7 bitesSynchronization</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>▪ Preamble</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>□ 1 Byte
+□ Signifies next byte begins the Destination MAC Address Field</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>▪ Start Frame Delimiter (SFD)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>▪ Destination MAC Address□ 6 Bytes
+▪ Source MAC Address□ 6 Bytes</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>□□ 2 bytesType of protocol listed in the frame (IPv4 or IPv6)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>▪ Type</code></pre></div><p>Sending Data In Ethernet Networks</p>
+<p>▪▪ (^46) padding can be added to meet the minimum length requirement-1500Bytes</p>
+<ul>
+<li>Data and Pad</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Trailer</code></pre></div><ul>
+<li>
+<ul>
+<li>Frame Check Sequence (FCS)Used to determine if the frame experienced transmission errors</li>
+</ul>
+</li>
+<li>Maximum layer 3 packet that can be sent<br>
+Maximum Transmission Unit (MTU)</li>
+</ul>
+<p>Ethernet Addressing</p>
+<ul>
+<li>6 bytes long (48 bits)</li>
+<li>
+<ul>
+<li>12 digit hexadecimalCisco switch may list a mac address with periods: 0000.0C12.<br>
+Unicast address- an address for a single NIC or port</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>OUI(Organizationally unique indentifier)</code></pre></div><ul>
+<li>
+<ul>
+<li>Universally unique manufacturer code24 Bits</li>
+</ul>
+</li>
+<li>6 Hex Digits<br>
+Vendor Assigned</li>
+<li>24 Bits</li>
+<li>6 Hex Digits</li>
+<li>Delivered to all devices on the Ethernet LAN.</li>
+<li>FFFF.FFFF.FFFF</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Broadcast Address</code></pre></div><ul>
+<li>Copied and forwarded to a subset of devices on the LAN</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Multicast Address</code></pre></div><p>Group addresses</p>
+<p>Identifying Network Layer Protocols with the Ethernet Type Field<br>
+The type field identifies which type of layer 3 packet exists within the ethernet frame (IPv6 or<br>
+IPv4)Ethertype is the term used for the type field in an ethernet frame</p>
+<p>Error Detection with FCS</p>
+<ul>
+<li>Error detection does not mean error recoveryEthernet decide whether the frame should be discarded and does not attempt to recover the lost<br>
+frame.</li>
+</ul>
+<p>frame.<br>
+Sending Ethernet frames with switches and hubs</p>
+<ul>
+<li>
+<ul>
+<li>Switches allow the use of Full Duplex LogicHubs use half-duplex logic</li>
+</ul>
+</li>
+</ul>
+<p>Sending in Modern Ethernet LANs Using Full Duplex</p>
+<ul>
+<li>
+<ul>
+<li>must wait to send if it is currently receiving a framecannot send and receive at the same time</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Half duplex</code></pre></div><ul>
+<li>
+<ul>
+<li>Does not have to wait before sending, send and receive at the same time.</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Full Duplex</code></pre></div><p>Hubs</p>
+<ul>
+<li>Uses physical link standards instead of data link standards and are considered layer 1 devices<br>
+Carrier Sense multiple access with Collision Detection (CSMA/CD)<br>
+1.2. Listen until line is not busySend frame</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ii.i. Send jamming signal telling all nodes a collision has occurredeach node waits a random time then tries to send again
+iii. Back to step one</code></pre></div><ol start="3">
+<li>Listen for a collision while sending if a collision occurs:</li>
+</ol>
+<ul>
+<li>
+<ul>
+<li>All links between PCs and switches use full duplexA link connected to a hub should be half duplex</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○ refers to hubs that use CSMA/CD and share bandwidth</code></pre></div><ul>
+<li>Ethernet Shared media</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○ network built with switches where links work independently of others
+○ A frame can be sent on every Point-to-point link in an ethernet at the same time.</code></pre></div><ul>
+<li>Ethernet point-to-point</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1702482067" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1702482067" defer></script>
+        <script src="/js/search.js?1702482067" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/spirituality/" class=""><input type="checkbox" id="R-section-e26f41f8140930aef233f86ba175d572" aria-controls="R-subsections-e26f41f8140930aef233f86ba175d572"><label for="R-section-e26f41f8140930aef233f86ba175d572"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Spirituality</span></label><a class="padding" href="/spirituality/">Spirituality<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-e26f41f8140930aef233f86ba175d572" class="morespace collapsible-menu">
+          <li data-nav-id="/spirituality/wetdream/" class=""><a class="padding" href="/spirituality/wetdream/">Semen Retention, What do you do After a Wet Dream?<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/dogtraining/" class=""><input type="checkbox" id="R-section-55ea4753a7fd8684805a80ed8832a217" aria-controls="R-subsections-55ea4753a7fd8684805a80ed8832a217"><label for="R-section-55ea4753a7fd8684805a80ed8832a217"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Dog Training</span></label><a class="padding" href="/dogtraining/">Dog Training<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-55ea4753a7fd8684805a80ed8832a217" class="morespace collapsible-menu">
+          <li data-nav-id="/dogtraining/dogtraining101/" class=""><a class="padding" href="/dogtraining/dogtraining101/">Dog Training 101<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class=""><input type="checkbox" id="R-section-a16074696a2e072964041e9ad7cd8fd5" aria-controls="R-subsections-a16074696a2e072964041e9ad7cd8fd5"><label for="R-section-a16074696a2e072964041e9ad7cd8fd5"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-a16074696a2e072964041e9ad7cd8fd5" class="morespace collapsible-menu">
+          <li data-nav-id="/writing/writingoffthecuff/" class=""><a class="padding" href="/writing/writingoffthecuff/">Writing off the Cuff<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tech/" class="parent "><input type="checkbox" id="R-section-43fa384ae01ca11365a601e3cd261ecf" aria-controls="R-subsections-43fa384ae01ca11365a601e3cd261ecf" checked><label for="R-section-43fa384ae01ca11365a601e3cd261ecf"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tech</span></label><a class="padding" href="/tech/">Tech<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-43fa384ae01ca11365a601e3cd261ecf" class="morespace collapsible-menu">
+          <li data-nav-id="/tech/fedora_setup/" class=""><a class="padding" href="/tech/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/resources_for_passing_ccna/" class=""><a class="padding" href="/tech/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsavagrantlabsetup/" class=""><a class="padding" href="/tech/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/rhcsanotes/" class=""><a class="padding" href="/tech/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/things_to_learn_after_ccna/" class=""><a class="padding" href="/tech/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tech/networking/newccnanotes/2ethernetlans/" class="active"><a class="padding" href="/tech/networking/newccnanotes/2ethernetlans/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">How to set up Calibre web with Docker and Nginx<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1702482067" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1702482067" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1702482067" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1702482067" defer></script>
+    <script src="/js/js-yaml.min.js?1702482067" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1702482067" defer></script>
+  </body>
+</html>

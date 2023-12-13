@@ -1,7 +1,7 @@
 +++ 
 archetype = "default" 
 title = "Writing" 
-weight = 6
+weight = 3
 alwaysopen = false
 [_build]
   render = "always"
