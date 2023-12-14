@@ -4,6 +4,14 @@ var relearn_search_index = [
     "content": "",
     "description": "",
     "tags": null,
+    "title": "Linux",
+    "uri": "/linux/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "",
+    "description": "",
+    "tags": null,
     "title": "Spirituality",
     "uri": "/spirituality/"
   },
@@ -14,6 +22,14 @@ var relearn_search_index = [
     "tags": null,
     "title": "Dog Training",
     "uri": "/dogtraining/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "Networking",
+    "uri": "/networking/"
   },
   {
     "breadcrumb": "",
@@ -28,8 +44,8 @@ var relearn_search_index = [
     "content": "Check the sidebar! Coming soon..\n",
     "description": "",
     "tags": null,
-    "title": "Tech",
-    "uri": "/tech/"
+    "title": "Python",
+    "uri": "/python/"
   },
   {
     "breadcrumb": "",
@@ -56,12 +72,12 @@ var relearn_search_index = [
     "uri": "/dogtraining/dogtraining101/"
   },
   {
-    "breadcrumb": "Tech",
+    "breadcrumb": "Linux",
     "content": "When you first download Fedora Workstation, it’s going to be a little hard to figure out how to make it usable. Especially if you’ve never tinkered with Linux before.\nHere is how to set up Fedora.\nAdd badname user $ adduser --badname firstname.lastname $ sudo usermod -aG wheel username\n# uncomment this line in the visudo file $ sudo visudo %wheel ALL=(ALL) ALLDelete other user:\n$ userdel username\nDNF Config (for speed) DNF is one of the package managers that comes with Fedora. You use it to install most software and applications.\nThe official doc is Here Just open up your DNF config file with your favorite text editor.\nsudo nano /etc/dnf/dnf.confThen add the following:\nfastestmirror=True max_parallel_downloads=10 defaultyes=True keepcache=TrueClear cache (do this occasionally) sudo dnf clean dbcache or sudo dnf cleanall\nUpdate DNF sudo dnf -y update\nDNF commands https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/package-management/DNF/\nRPM Fusion More accessibility to various software packages.\nhttps://rpmfusion.org/\nFedora with dnf:\nsudo dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpmAppStream metadata to enable users to install packages using Gnome Software/KDE Discover\nsudo dnf -y groupupdate coreflatpak\nlhttps://flatpak.org/setup/Fedora\nflatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakreposet a hostname sudo hostnamectl set-hostname \"New_Custom_Name\" this will show after next reboot\nMake it yours in the software center\ngnome tweaks add minimize and maximize\nextentions (by gnome) (green puzzle piece) Add a Dock https://extensions.gnome.org/extension/307/dash-to-dock/\nWindow is Ready - Notification Remover https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/\nVitals https://extensions.gnome.org/extension/1460/vitals/\nArch Menu https://extensions.gnome.org/extension/3628/arcmenu/\nDash to Panel https://extensions.gnome.org/extension/1160/dash-to-panel/\nScreenshot tool https://extensions.gnome.org/extension/1112/screenshot-tool/\nran gnome-screenshot tool in command prompt and it asked to install\nl2tp VPN sudo dnf install xl2tpd sudo dnf install NetworkManager-l2tp sudo dnf install NetworkManager-l2tp-gnome service NetworkManager restartAirpods not pairing Issue remove from the pairing list, force them in pairing mode and pair them back.\nThis can be made easy with bluetoothctl.\n1/ Just in case, restart the bluetooth service:\n$ sudo systemctl restart bluetooth $ systemctl status bluetooth 2/ bluetoothctl is easier than the UI imo\n$ bluetoothctl [bluetooth] $ devices Device 42:42:42:42:42:42 My AirPods \u003c-- grab the name here [bluetooth] $ remove 42:42:42:42:42:42 Now, make sure your airpods are in the charging case, close the lid, wait 15 seconds, then open the lid. Press and hold the setup button on the case for up to 10 seconds. The status light should flash white, which means that your AirPods are ready to connect\n3/ Pair them back\n[bluetooth] $ pair 42:42:42:42:42:42 \u003c--- add the same device from earlier Enable Fractional Scaling This lets you change display scaling in smaller increments. Make sure Wayland is turned on \u003e\nrun: gsettings set org.gnome.mutter experimental-features \"['scale-monitor-framebuffer']\"\nthen Reboot\nInstall gimp $ sudo dnf install gimp enable in screenshot tool after install for gimp {f}\nInstall Arrows https://graphicdesign.stackexchange.com/questions/44797/how-do-i-insert-arrows-into-a-picture-in-gimp\nGo to your home folder Go to .config/GIMP Go to the folder with a version number (2.10 for me) Go to scripts Download the arrow.scm file and place it here. Don't forget to unzip. Open GIMP and draw a pathFrom Tools menu, select Arrow\n= h.265 main 10 profile media codec error =\nKeypassxc sudo dnf install snapd sudo ln -s /var/lib/snapd/snap /snap sudo snap install keepassxcInstall Obsidian using Flatpak In your terminal, run the following command to install Obsidian:\nflatpak install flathub.obsidian.Obsidian Open Obsidian by running the following command:\nflatpak run.obsidian.Obsidian Distrobox See distrobox\nZSH For Humans GitHub - romkatv/zsh4humans: A turnkey configuration for Zsh\nInstall Starcraft on Fedora https://www.youtube.com/watch?v=eefsL9K2w4k\nStarcraft 2 install on Fedora Workstation 38 Install your latest gpu driver https://github.com/lutris/docs/blob/master/InstallingDrivers.md I am just running off of built in AMD graphics. So we just need to install support for Vulkan API sudo dnf install vulkan-loader vulkan-loader.i686\nInstall Wine $ sudo dnf -y install wine\nInstall Lutris Install the Flatpak version in software center.\nFedora Hotkeys Terminal Close Terminal shift + c + q\nPrevious Tab c + Page Up\nNext Tab c + Page Down\nMove to Specific Tab Alt + #\nFull Screen F11\nNew Window Shift + Ctrl + t\nClose Tab Shift + Ctrl + w\nDesktop Run a command super + F2\nSwitch Between Applications Alt + Esc\nMove Window to Left Monitor Shift + Super + \u003c-\nMove Window to Right Monitor Shift + Super + -\u003e\nMinimize Current Window Super + H\nClose Current Appllication Ctrl + Q\nBrowser Firefox Switch Between Tabs Ctrl + Tab\nSwitch Between Tabs in Reverse Ctrl + Shift + Tab\nDetach Tab Extension https://addons.mozilla.org/en-US/firefox/addon/detach-tab/\nDetach Tab Ctrl _ Shift _ Space\nReattach Tab Ctrl + Shift + v\n",
     "description": "",
     "tags": null,
     "title": "Fedora Desktop Setup",
-    "uri": "/tech/fedora_setup/"
+    "uri": "/linux/fedora_setup/"
   },
   {
     "breadcrumb": "Tools",
@@ -72,28 +88,28 @@ var relearn_search_index = [
     "uri": "/tools/calibre-web-with-docker/"
   },
   {
-    "breadcrumb": "Tech",
+    "breadcrumb": "Networking",
     "content": " There are a lot of great CCNA resources out there. This list does not include all of them. Only the ones that I personally used to pass the CCNA 200-301 exam.\nMaterials for CCNA are generally separated into 5 categories:\nBooks Video courses Labs Practice test Flashcards Books Wendell Odom OCG Official cert guide library To me, this is the king of CCNA study materials. Some people do not like reading but this will give you more depth than any other resource on this list. Link.\nTodd Lammle Books Yes, I read both the OCG and Todd Lammle books cover to cover. No, I do not recommend doing this. Todd has a great way of adding humor into networking. If you need to build up your networking from the ground up. These books are great. Link.\nVideo Courses CBT Nuggets Jeremy Ciara makes learning networking so much fun. This was a great course but is not enough for you to pass the exam on it’s own. Also, a CBT nuggets monthly subscription will set you back $59 per month. Link.\nJeremy’s IT Lab Jermey’s IT lab course was the most informative for me. Jeremy is really great at explaining the more complex topics. Jeremy’s course also includes Packet Tracer labs and and in depth Anki flashcard deck for free. Link.\nLabs David Bombal’s Packet Tracer Labs These labs will really make you think. Although they do steer off the exam objectives a bit. Link.\nJeremy’s IT labs These were my favorite labs by far. Very easy to set up with clear instructions and video explanations. Link.\nPractice test Boson Exsim I can’t stress this enough. if there is one resource that you invest some money into. it’s the Boson practice exams. This is a test simulator that is very close to what the actual test will be like. Exsim comes with 3 exams.\nAfter taking one of these practice tests you will get a breakdown of your scores per category. You will also get to go through all of your questions and see detailed explantations for why each answer is right or wrong.\nThese practice exams were crucial for me to understand where my knowledge gaps were. Link.\nSubnettingpractice.com You can learn subnetting pretty good. Then forget some of the steps a month later and have to learn all over again. It was very helpful to go over some of these subnetting questions once in a while. Link.\nFlashcards Anki Deck These are the only flashcards I used. It is very nice not to have to create your own flashcards. Having the Anki app on your phone is very convenient. You can study whenever you have a few minutes of downtime.\nAnki also used spaced-repetition. It will give you harder flashcards more often based on how you rate their difficulty.\nThis particular deck goes along with the OCG. You can filter by chapter and add more as you get through the book.\nI will be using Anki flashcards for every exam in the future. Link.\nMy Top 3 Be careful not to use too many resources. You may get a bit overwhelmed. Especially if this is your first certification like it was for me. You will be building study habits and learning how to read questions correctly. So focus on quality over quantity.\nIf I had to study for the CCNA again, I would use these three resources:\nOCG Boson Exsim Anki Flashcards If you like these posts, please let me know so i can keep making more like them!\n",
     "description": "",
     "tags": null,
     "title": "Resources I used to Pass CCNA",
-    "uri": "/tech/resources_for_passing_ccna/"
+    "uri": "/networking/resources_for_passing_ccna/"
   },
   {
-    "breadcrumb": "Tech",
+    "breadcrumb": "Linux",
     "content": " We are going to use Vagrant to set up two RHEL 8 servers with some custom configuration options. I will include some helpful Vagrant commands at the end if you get stuck.\nIn this guide, I will be using Fedora 38 as my main operating system. I use Fedora because it is similar in features to Red Hat Linux Distributions. This will give me even more practice for the RHCSA exam as I use it in day-to-day operations.\nNote, if you are using Windows, you will need to install ssh. This can be done by installing Git. Which automatically installs ssh for you.\nYou will also need to have the latest version of Virtualbox installed.\nHere are the steps: Download and install Vagrant Make a new directory for your vagrant lab to live in Add the vagrant box Install the Vagrant disk size plugin Initialize the Vagrant box and Edit the Vagrant file Bring up the Vagrant box 1. Download and install Vagrant. In Fedora, this is very easy. Run the following command to download and install Vagrant:\nsudo dnf install vagrant\n2. Make a new directory for your vagrant lab to live in. Make your vagrant directory and make it your current working directory:\ncd Vagrant Add the Vagrant box. vagrant box add generic/rhel8\nInstall the Vagrant disk size plugin. The disk size program will help us set up custom storage sizes. Since we will be re-partitioning storage, this is a useful feature.\nvagrant plugin install vagrant-disksize\nInitialize the Vagrant box and edit the Vagrant file. First, initialize the Vagrant box in the vagrant directory: vagrant init generic/rhel8\nAfter completion, there will now be a file called “Vagrantfile” in your current directory. Since Vim is on the RHCSA exam, it’s wise to practice with it whenever you can. So let’s open the file in Vim:\nvim Vagrantfile\nYou will see a bunch of lines commented out, and a few lines without comments. Go ahead and comment out everything and paste this at the end of the file:\nVagrant.configure(\"2\") do |config config.vm.box = \"generic/rhel8\" config.vm.define \"server1\" do |server1| server1.vm.hostname = \"server1.example.com\" server1.vm.network \"private_network\", ip: \"192.168.2.110\" config.disksize.size = '10GB' end config.vm.define \"server2\" do |server2| server2.vm.hostname = \"server2.example.com\" server2.vm.network \"private_network\", ip: \"192.168.2.120\" config.disksize.size = '16GB' end config.vm.provider \"virtualbox\" do |vb| vb.memory = \"2048\" end end|The configuration file is fairly self-explanatory. Save Vagrantfile and exit Vim. Then, create /etc/vbox/networks.conf and add the following:\n* 10.0.0.0/8 192.168.0.0/1 * 2001::/646This will allow you to be more flexible with what network addresses can be used in VirtualBox.\nBring up the Vagrant box. Now, we bring up the Vagrant box. This will open two Virtual machines in Virtualbox named server1 and server2 in headless mode (there is no GUI).\nvagrant up\nGreat! Now we can use Vagrant to ssh into server1:\nvagrant ssh server 1\nFrom server1 ssh into server2 using its IP address:\n[vagrant@server1 ~]$ ssh 192.168.2.120\nNow you are in and ready to stir things up. The last thing you need is some commands to manage your Vagrant machines.\nHelpful Vagrant commands. Shut down Vagrant machines:\nvagrant halt Suspend or resume a machine:\nvagrant suspend vagrand resumeRestart a virtual machine:\nvagrant reload\nDestroy a Vagrant machine:\nvagrant destroy [machine-name]\nShow running VMs:\nvagrant status\nList other Vagrant options:\nvagrant\nIf you are going for RHCSA, there is no doubt that you will also use Vagrant sometime in the future. And as you can see, it’s pretty quick and simple to get started.\nFeel free to reach out with questions.\n",
     "description": "",
     "tags": null,
     "title": "RHCSA Lab Using Vagrant",
-    "uri": "/tech/rhcsavagrantlabsetup/"
+    "uri": "/linux/rhcsavagrantlabsetup/"
   },
   {
-    "breadcrumb": "Tech",
+    "breadcrumb": "Linux",
     "content": " RHCSA Red Hat Enterprise Linux 8 (UPDATED) - Asghar Ghori\nHere are my notes from Asghar Gori’s RHCSA book. Buy the book or read the reviews here.\nChapter 1: Installation Chapter 2: Interaction Chapter 3: File Management Chapter 4: Advanced File Management Chapter 5: Basic User Management Chapter 6: Advanced User Management Chapter 7: The Bash Shell Chapter 8: Process and Task Scheduling Chapter 9: Basic Package Management Chapter 16: Networking Chapter 17: Network File System ",
     "description": "",
     "tags": null,
     "title": "RHCSA Notes",
-    "uri": "/tech/rhcsanotes/"
+    "uri": "/linux/rhcsanotes/"
   },
   {
     "breadcrumb": "Spirituality",
@@ -104,12 +120,12 @@ var relearn_search_index = [
     "uri": "/spirituality/wetdream/"
   },
   {
-    "breadcrumb": "Tech",
+    "breadcrumb": "Networking",
     "content": "It’s easy to get overwhelmed with options after completing your CCNA. What do you learn next? If you are trying to get a job as a Network Engineer, you will want to check this out.\nI went through dozens of job listings that mentioned CCNA. Then, tallied up the main devices/vendors, certifications, and technologies mentioned. And left out anything that wasn’t mentioned more than twice.\nCore CCNA technologies such as LAN, WAN, OSPF, Spanning Tree, VLANs, etc. have been left out. The point here is to target the most sought after technologies and skills by employers. I also left out soft skills and any job that wasn’t a networking specific role.\nDevices/ Vendors Palo Alto is huge! I’m not suprised by this. Depending on the company, a network engineer may be responsible for firewall configuration and troubleshooting. It also looks like Network Engineers with a wide variety of skills are saught after.\nDevice/Vendor Times Mentioned Palo Alto 9 Cisco ASA 6 Juniper 6 Office 365 5 Meraki 4 Vmware 4 Linux 4 Ansible 4 AWS 3 Wireshark 3 Technologies Firewall comes in first again. Followed closely by VPN skills. Every interview I had for a Network Engineer position asked if I knew how to configure and troubleshoot VPNs.\nTechnology Times Mentioned Firewall 19 VPN 16 Wireless 12 BGP 12 Security 12 MPLS 10 Load balancers 8 Ipsec 7 ISE 6 DNS 5 SDWAN 5 Cloud 4 TACACS+ 4 ACL 4 SIEM 4 IDS/IPS 4 RADIUS 3 ITIL 3 Ipam 3 VOIP 3 EIGRP 3 Python 3 Certifications CCNP blew every other cert out of the water. Companies will be very interested if you are working towards this cert. Security + comes highly recommended as well.\nCertification Times Mentioned CCNP 18 Security+ 6 JNCIA 4 JNCIP 4 Network + 4 CCIE 4 PCNSA 3 So what do you do after CCNA? It depends…\nAre you trying to get a new job ASAP? Are there opportunities at your current role that you can use your new skills to leverage? Do you have some study time before you are ready to take the next step?\nCCNP Enterprise is a good bet if you really want to stand out in Network Engineering interviews.\nDon’t want to be a Network engineer? Continue to build a good base of IT skills. This will open you up to a larger variety of jobs and open skill paths that you need a good foundation to unlock.\nCore skills include:\nLinux/ Operating systems Networking General Cybersecurity Programming/ Scripting A good Linux certification like the RHCSA would be great to learn more about Linux, scripting, and operating systems. Security + would be good if you want to get a solid foundation of cyber security. And Python skills will give you a gold star in any IT interview.\nDon’t get paralyzed by choices. Pick something that interests you and go for it. That is the only way to get it right. Doing what you enjoy is better than not doing anything at all because you can’t decide the best path.\nHopefully we can revisit this post after learning Python to get a much bigger sample size.\n",
     "description": "",
     "tags": null,
     "title": "What to Learn After CCNA",
-    "uri": "/tech/things_to_learn_after_ccna/"
+    "uri": "/networking/things_to_learn_after_ccna/"
   },
   {
     "breadcrumb": "Writing",
@@ -236,6 +252,14 @@ var relearn_search_index = [
     "tags": null,
     "title": "Tag - vultr",
     "uri": "/tags/vultr/"
+  },
+  {
+    "breadcrumb": "",
+    "content": "",
+    "description": "",
+    "tags": null,
+    "title": "Cybersecurity",
+    "uri": "/cybersecurity/"
   },
   {
     "breadcrumb": "Tags",
