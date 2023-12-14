@@ -1,9 +1,11 @@
 +++ 
 archetype = "default" 
-title = "Writing" 
+title = "Python" 
 weight = 3
 alwaysopen = false
 [_build]
   render = "always"
 +++
-Working on improving my writing skills. Check the sidebar!
+
+Check the sidebar! Coming soon..
+

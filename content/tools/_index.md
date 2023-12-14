@@ -1,7 +1,7 @@
 +++ 
 archetype = "chapter" 
 title = "Tools" 
-weight = 5
+weight = 4
 alwaysopen = false
 [_build]
   render = "always"
