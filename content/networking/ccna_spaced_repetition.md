@@ -1,7 +1,7 @@
 ---
-title: "How to Study for CCNA"
+title: How to Study for CCNA
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 ![CCNA Study Calendar](/Pasted%20image%2020231208132459.png)
 

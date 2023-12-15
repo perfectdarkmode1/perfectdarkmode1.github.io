@@ -6,3 +6,5 @@ title = "Book Notes"
   publishResources = true
 +++
 
+Coming soon...
+

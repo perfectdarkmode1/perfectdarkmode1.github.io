@@ -3,6 +3,8 @@
 
 ### Hey, I'm David. 
 
-I am a personal development enthusiast and a writer. My goal is to become the greatest possible version of myself and share my journey. So that I may carve out a new path and help others do the same. 
+I am a tech enthusiast interested in Linux, open source projects, Networking, scripting, programming, and cybersecurity. This is my hub where I will be teaching as I learn. This will help me pick up skills better and hopefully help others along the way.
 
-Check out what I am doing [Now](now).
+The site name "Perfect Dark Mode" is a throwback to the game "Perfect Dark" and the best visual theme for any technology, dark mode. Just thought it was a clever play on words and matches some aspiration in me that wants to be a cool stealthy hacker. 
+
+Check out what I am doing [Now](now)

@@ -4,25 +4,15 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 
 ## Career
 
-I am currently a Network Engineer and considering a career change into writing. I have become slightly aversive to tech over the years so it seems like this career is not a great fit for me.
-
-## Mental Health
-
-I have been dealing with a moderate caffeine addiction that has been effecting my sleep pretty badly. I haven't found the grit needed to quit completely so I am focusing on other aspects of my life. 
-
-I haven't had any alcohol for months. Currently on a 90 day celibacy/semen retention experiment and meditating daily. 
+I am currently a Network Engineer working towards building the skills needed to become a Linux Systems Administrator. I am studying for Red Hat's RHCSA exam. And will be doing Security + after that. As well as picking up some Python and Docker along the way.
 
 ## What I am Reading
 
-Autobiography of a Yogi. 
+![Ready to Run](https://m.media-amazon.com/images/W/MEDIAX_792452-T1/images/I/81fFzB1oT2L._SL1220_.jpg?classes=inline&height=175px)
 
 ## Music
 
 Currently building a powerful minimalist electronic drum set. Will post some pictures when finished. 
-
-## What I am thinking about
-
-Currently considering my career options. May swap out the site name to a pen name and build a Freelance content writing business based on personal development. 
 
 
 ## Plans for my website
@@ -34,7 +24,7 @@ Currently considering my career options. May swap out the site name to a pen nam
 - [x] Create a "Contact me" page.
 - [x] Change "now" icon.
 - [ ] Make a page with all of the tools I use.
-- [ ] Make a script that updates website everytime I update my markdown files in VSCodium.
+- [ ] Make a script that updates website every time I update my markdown files in VSCodium.
 - [ ] Add comments functionality to pages.
 - [ ] Add a newsletter.
 - [ ] Custom avatar.
