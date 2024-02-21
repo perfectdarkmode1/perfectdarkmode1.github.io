@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Shell - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/finding_your_way_on_a_linux_system/index.html" rel="canonical" type="text/html" title="Shell - Perfect Dark Mode">
+    <link href="/linux/misc_linux/finding_your_way_on_a_linux_system/index.xml" rel="alternate" type="application/rss+xml" title="Shell - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Shell</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="shell">Shell</h1>
+
+<p>Different Linux Shells</p>
+<ul>
+<li>Bourne-again shell (Bash)</li>
+<li>C shell (csh/tcsh)</li>
+<li>Korn Shell (ksh)</li>
+<li>Z shell (zsh)</li>
+</ul>
+<p>View your system&rsquo;s hostname by running the hostname command:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hostname</code></pre></div><p>2 types of commands</p>
+<p>- internal (~30 built in commands) (builtins)</p>
+<p>- External</p>
+<p>- reside in individual files</p>
+<p>- usually binary programs or scripts</p>
+<p>- shellusys PATH variable to find the command (the executable file)</p>
+<p>Quoting</p>
+<p>Double quotes</p>
+<p>- text in between is regular characters</p>
+<p>- except $ \ `</p>
+<p>variables, command substitution and arithmetic still work</p>
+<p>- a space bar loses it&rsquo;s meaning as an argument seperator</p>
+<p>Single Quotes</p>
+<p>- revoke special meaning from all characters in quotes</p>
+<p>Escape Characters</p>
+<p>- takes special meaning out of characters</p>
+<p>$ echo \$USER</p>
+<p>$ USER</p>
+<p>- .\ tells bash to ignore specialness of preceding character</p>
+<p>Set a variable</p>
+<p>$ $TWOWORDS</p>
+<p>2.1</p>
+<p>Variables</p>
+<p>Local Variable</p>
+<p>- available to the current shell process only</p>
+<p>- Not accessible to other programs</p>
+<p>Environment Variables</p>
+<p>- available in shell session and sub processes</p>
+<p>- usually in capital letters</p>
+<p>- all variables are set when shell is started</p>
+<p>Config: Local variables</p>
+<p>$ greeting=hello</p>
+<p>$ echo $greeting</p>
+<p>hello</p>
+<p>Remove variable</p>
+<p>$ unset greeting</p>
+<p>Config: Global Variables</p>
+<p>$ greeting=hello</p>
+<p>$ export greeting</p>
+<p>or</p>
+<p>$ export greeting=hello</p>
+<p>Use variable in front of a command</p>
+<p>$ TZ=EST date</p>
+<p>$ TZ=GMT date</p>
+<p>Display all environment variables</p>
+<p>$ env</p>
+<p>The PATH Variable</p>
+<p>- stores a list of directories that have executable commands</p>
+<p>append new directory to PATH</p>
+<p>$ PATH=$PATH:new_directory</p>
+<p>append new directory to PATH using another variable</p>
+<p>$ mybin=/opt/bin</p>
+<p>$ PATH=$PATH:$mybin</p>
+<p>which = find out how shell invokes a specific command</p>
+<p>$ which nano</p>
+<p>Using the command line to get help</p>
+<p>/usr/share/doc/</p>
+<p>- stores most documentation</p>
+<p>Display quick help options</p>
+<p>$ bash &ndash;help</p>
+<p>Man</p>
+<p>categories</p>
+<p>1 user command</p>
+<p>2 system calls</p>
+<p>3 functions to the c library</p>
+<p>4 drivers and device files</p>
+<p>5 configuration files and file formats</p>
+<p>6 games</p>
+<p>7 misc</p>
+<p>8 system administrator commands</p>
+<p>9 kernel</p>
+<p>- Man page belongs to one category</p>
+<p>- Each category can have a man page with the same name</p>
+<p>- call a specific page &amp; category</p>
+<p>$ man 5 passwd</p>
+<p>- otherwise man will select 1st available (passwd(1))</p>
+<p>- uses less to display content</p>
+<p>- Search man page (while it is displayed)</p>
+<p>\ search_word</p>
+<p>- searching forward</p>
+<p>$ search-word</p>
+<p>- searching backward</p>
+<p>type N</p>
+<p>- jump to next match</p>
+<p>type H</p>
+<p>- see other features</p>
+<p>Info pages</p>
+<p>$ info mkdir</p>
+<p>- place cursor on hyperlinks &amp; press enter to visit them</p>
+<p>/usr/share/doc</p>
+<p>- contains directory for most packages installed on the system</p>
+<p>- each one contains README or readme.txt</p>
+<p>- can also contain changelog, etc.</p>
+<p>Locating files</p>
+<p>$ locate word</p>
+<p>- searches database for matching string</p>
+<p>- database is managed by updatedb</p>
+<p>can run updatedb to manually update the database</p>
+<p>The find command</p>
+<p>- searches directory tree recursively</p>
+<p>- requires search path</p>
+<p>$ find . -name myfile</p>
+<p>Using directories and Listing Files</p>
+<p>$ sudo apt install tree</p>
+<p>$ tree</p>
+<p>Shows current directory and sub directories</p>
+<p>File and directory names</p>
+<p>Navigating the Filesytem</p>
+<p>Special relative paths</p>
+<p>$ ls -a</p>
+<p>- also shows hidden files and directories</p>
+<p>. indicates current location</p>
+<p>.. indicates parent directory</p>
+<p>$ cd ../..</p>
+<p>- can be used to navigate up the file tree very quickly</p>
+<p>Using directories and Listing Files Part 2</p>
+<p>$ tree -L 1 /</p>
+<p>- shows only first column of thre root directory tree</p>
+<p>FHS (Filesystem Hierarchy Standard)</p>
+<p>- Defines standards of standard directory locations</p>
+<p>- changes made in root filesystem effect all users</p>
+<p>- will also require admin</p>
+<p>$ su - michael</p>
+<p>- switch user</p>
+<p>ls ~michael</p>
+<p>- ls the home directory of a user (if you have permissions)</p>
+<p>Hidden files</p>
+<p>- begin with .</p>
+<p>- often used to set user-specific configuration settings</p>
+<p>Additional ls Options</p>
+<p>l: Long</p>
+<p>h: Human readable</p>
+<p>d: directories without contents</p>
+<p>t: modification time</p>
+<p>r: reverse sort</p>
+<p>X: file eXtension</p>
+<p>S: size</p>
+<p>R: Recursive (run ls here and then repeat the command in every subdirectory you find)</p>
+<p>Recursion in Bash</p>
+<p>- when something is defined in terms of itself</p>
+<p>$ du -h</p>
+<p>output a list file size of all files, directories, and subdirectories for a certain location</p>
+<p>Creating, Moving, and Deleting Files</p>
+<p>globbing</p>
+<p>* matches any character including no character</p>
+<p>? matches any one character</p>
+<p>[] matches a class of characters</p>
+<p>$ ls file [1-35-6a-c]</p>
+<p>can use multiple ranges</p>
+<p>$ [1a5]</p>
+<p>match certain characters</p>
+<p>$ [^a]</p>
+<p>match everything but a</p>
+<p>Character class</p>
+<p>ls file [[:digit:]]</p>
+<p>match everything in the digit class</p>
+<p>ls file [[:digit:]a]</p>
+<p>match digit or a</p>
+<p>[:alnum:]</p>
+<p>letters and numbers</p>
+<p>[:alpha:]</p>
+<p>upper or lowercase letters</p>
+<p>[:blank:]</p>
+<p>spaces and tabs</p>
+<p>[:cntrl:]</p>
+<p>control characters (backspace, bell, NAK, escape)</p>
+<p>[:digit:]</p>
+<p>Numerals</p>
+<p>[:graph:]</p>
+<p>Graphic characters (all characters except ctrl and space)</p>
+<p>[:lower:]</p>
+<p>lowercase letters</p>
+<p>[:print:]</p>
+<p>printable characters (alnum, punct, and space)</p>
+<p>[:punct:]</p>
+<p>Punctuation (!, &amp;,&quot;)</p>
+<p>[:space:]</p>
+<p>whitespace characters (tabs, spaces, newlines]</p>
+<p>[:upper:]</p>
+<p>Uppercase letters</p>
+<p>[:xdigit:]</p>
+<p>Hexadecimal numerals</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

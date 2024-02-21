@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vagrant Guide - Perfect Dark Mode">
+    <meta name="twitter:description" content="Vagrant is software that lets you set up multiple, pre-configured virtual machines in a flash. I am going to show you how to do this using Windows and Virtual Box. But you can do this on MacOS and Linux as well.
+Download Vagrant, VirtualBox and Git.
+Vagrant link.
+Virtualbox link.
+You may want to follow another tutorial for setting up VirtualBox.
+Git link.
+Installing git will install ssh on windows. Which you will use to access your lab.">
+    <meta property="og:title" content="Vagrant Guide - Perfect Dark Mode">
+    <meta property="og:description" content="Vagrant is software that lets you set up multiple, pre-configured virtual machines in a flash. I am going to show you how to do this using Windows and Virtual Box. But you can do this on MacOS and Linux as well.
+Download Vagrant, VirtualBox and Git.
+Vagrant link.
+Virtualbox link.
+You may want to follow another tutorial for setting up VirtualBox.
+Git link.
+Installing git will install ssh on windows. Which you will use to access your lab.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/vagrantguide/">
+    <meta property="article:section" content="Tools - Perfect Dark Mode">
+    <meta property="article:published_time" content="2023-04-22T06:39:22-07:00">
+    <meta property="article:modified_time" content="2023-04-22T06:39:22-07:00">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title>Vagrant Guide - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/tools/vagrantguide/" rel="canonical" type="text/html" title="Vagrant Guide - Perfect Dark Mode">
+    <link href="/tools/vagrantguide/index.xml" rel="alternate" type="application/rss+xml" title="Vagrant Guide - Perfect Dark Mode">
+    <link href="/images/favicon.png?1701896601" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1701896602" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1701896602" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1701896602" rel="stylesheet">
+    <link href="/css/auto-complete.css?1701896602" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1701896602" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1701896602" rel="stylesheet">
+    <link href="/css/fonts.css?1701896602" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1701896602" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1701896602" rel="stylesheet">
+    <link href="/css/theme-city2.css?1701896602" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1701896602" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1701896602" rel="stylesheet">
+    <link href="/css/print.css?1701896602" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1701896602" rel="stylesheet">
+    <link href="/css/ie.css?1701896602" rel="stylesheet">
+    <script src="/js/url.js?1701896602"></script>
+    <script src="/js/variant.js?1701896602"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/tools/vagrantguide/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Vagrant Guide
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+            <div class="topbar-button topbar-button-blank" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            </div>
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="vagrant-guide">Vagrant Guide</h1>
+
+<p>Vagrant is software that lets you set up multiple, pre-configured virtual machines in a flash. I am going to show you how to do this using Windows and Virtual Box. But you can do this on MacOS and Linux as well.</p>
+<p>Download Vagrant, VirtualBox and Git.</p>
+<p><a href="https://www.vagrantup.com/downloads" target="_blank">Vagrant</a> link.</p>
+<p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">Virtualbox</a> link.</p>
+<p>You may want to follow another <a href="https://www.youtube.com/watch?v=8mns5yqMfZk" target="_blank">tutorial</a> for setting up VirtualBox.</p>
+<p><a href="https://git-scm.com/download/win" target="_blank">Git</a> link.</p>
+<p>Installing git will install ssh on windows. Which you will use to access your lab. Just make sure you select the option to add git and unit tools to your PATH variable.</p>
+<p>Make a Vagrant project folder.</p>
+<p>Note: All of these commands are going to be in a Windows command prompt.</p>
+<blockquote>
+<p>mkdir vagranttest</p>
+</blockquote>
+<p>Move in to your new directory.</p>
+<blockquote>
+<p>cd vagranttest</p>
+</blockquote>
+<p>Add and Initialize Your Vagrant Project.</p>
+<p>You can find preconfigured virtual machines <a href="https://app.vagrantup.com/boxes/search" target="_blank">here</a>.</p>
+<p>We are going to use ubuntu/trusty64.</p>
+<p>Add the Vagrant box</p>
+<blockquote>
+<p>vagrant box add ubuntu/trusty64</p>
+</blockquote>
+<p>Initialize your new Vagrant box</p>
+<blockquote>
+<p>vagrant init ubuntu/trusty64</p>
+</blockquote>
+<p>Use the dir command to see the contents of this directory.</p>
+<p>We are going to edit this Vagrantfile to set up our multiple configurations.</p>
+<blockquote>
+<p>notepad Vagrantfile</p>
+</blockquote>
+<p>Here is the new config without all of the commented lines. Add this (minus the top line) under Vagrant.configure(&ldquo;2&rdquo;) do |config|.</p>
+<p>Vagrant.configure(&ldquo;2&rdquo;) do |config|<br>
+  config.vm.box = &ldquo;ubuntu/trusty64&rdquo;<br>
+  config.vm.define &ldquo;server1&rdquo; do |server1|<br>
+    server1.vm.hostname = &ldquo;server1&rdquo;<br>
+    server1.vm.network &ldquo;private_network&rdquo;, ip: &ldquo;10.1.1.2&rdquo;<br>
+  end<br>
+  config.vm.define &ldquo;server2&rdquo; do |server2|<br>
+    server2.vm.hostname = &ldquo;server2&rdquo;<br>
+    server2.vm.network &ldquo;private_network&rdquo;, ip: &ldquo;10.1.1.3&rdquo;<br>
+  end<br>
+end</p>
+<p>Now save your Vagrant file in Notepad.</p>
+<p>Bring up your selected vagrant boxes:</p>
+<blockquote>
+<p>vagrant up</p>
+</blockquote>
+<p>Now if you open virtual box, you should see the new machines running in headless mode. This means that the machines have no user interface..</p>
+<p>Ssh into server1</p>
+<blockquote>
+<p>vagrant ssh server1</p>
+</blockquote>
+<p>You are now in serve1&rsquo;s terminal.</p>
+<p>From server1, ssh into server2</p>
+<blockquote>
+<p>ssh 10.1.1.3</p>
+</blockquote>
+<p>Success! You are now in server2 and can access both machines from your network. Just enter &ldquo;exit&rdquo; to return to the previous terminal.</p>
+<p>Additional Helpful Vagrant Commands.</p>
+<p>Without the machine name specified, vagrant commands will work on all virtual machines in your vagrant folder. I&rsquo;ve thrown in a couple examples using [machine-name] at the end.</p>
+<p>Shut down Vagrant machines</p>
+<blockquote>
+<p>vagrant halt</p>
+</blockquote>
+<p>Shut down only one machine</p>
+<blockquote>
+<p>vagrant halt [machine-name]</p>
+</blockquote>
+<p>Suspend and resume a machine</p>
+<blockquote>
+<p>vagrant suspend</p>
+</blockquote>
+<blockquote>
+<p>vagrant resume</p>
+</blockquote>
+<p>Restart a virtual machine</p>
+<blockquote>
+<p>vagrant reload</p>
+</blockquote>
+<p>Destroy a virtual machine</p>
+<blockquote>
+<p>vagrant detstroy [machine-name]</p>
+</blockquote>
+<p>Show running vms</p>
+<blockquote>
+<p>vagrant status</p>
+</blockquote>
+<p>List Vagrant options</p>
+<blockquote>
+<p>vagrant</p>
+</blockquote>
+<p>Playground for future labs</p>
+<p>This type of deployment is going to be the bedrock of many Linux and Red Hat labs. You can easily use pre-configured machines to create a multi-machine environment. This is also a quick way to test your network and server changes without damaging anything.</p>
+<p>Now go set up a Vagrant lab yourself and let me know what you plan to do with it!</p>
+<h2 id="what-is-vagrant">What is Vagrant?</h2>
+<ul>
+<li>Easy to configure, reproducible environments</li>
+<li>Provisions virtualbox vms</li>
+<li>Vagrant box: OS image</li>
+</ul>
+<p>Syntax:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vagrant box add user/box</span></span></code></pre></div><p>Add centos7 box</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vagrant box add jasonc/centos7</span></span></code></pre></div><p>Many public boxes to download</p>
+<p>Vagrant project = folder with a vagrant file</p>
+<p>Install Vagrant here: <a href="https://www.vagrantup.com/downloads" title="https://www.vagrantup.com/downloads" target="_blank">https://www.vagrantup.com/downloads</a></p>
+<p>Make a vagrant folder:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir vm1
+</span></span><span style="display:flex;"><span><span style="color:#ff5c57">cd</span> vm1</span></span></code></pre></div><p>initialize vagrant project:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vagrant init jasonc/centos7</span></span></code></pre></div><p>bring up all vms defined in the vagrant file)</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vagrant up</span></span></code></pre></div><p>vagrant will import the box into virtualbox and start it</p>
+<p>the vm is started in headless mode</p>
+<p>(there is no user interfaces)</p>
+<p>Vagrant up / multi machine</p>
+<p>Bring up only one specific vm</p>
+<ul>
+<li>vagrant up [vm-name]</li>
+</ul>
+<p>SSH Vagrant</p>
+<ul>
+<li>vagrant ssh [vm_name] or vagrant ssh if there is only one vm in the vagrant file</li>
+</ul>
+<p>Need to download ssh for windows</p>
+<p>downloading git will install this:</p>
+<p><a href="https://desktop.github.com/" title="https://desktop.github.com/" target="_blank">https://desktop.github.com/</a></p>
+<p>Shut down vagrant machines</p>
+<ul>
+<li>vagrant halt</li>
+</ul>
+<p>Shutdown only one machine</p>
+<ul>
+<li>vagrant halt [vm]</li>
+</ul>
+<p>Saves present state of the machine</p>
+<p>just run vagrant up without having to import tha machines again</p>
+<p>Suspend the machine</p>
+<ul>
+<li>
+<p>vagrant suspend [VM]</p>
+</li>
+<li>
+<p>vagrant resume [VM]</p>
+</li>
+</ul>
+<p>Destroy VM</p>
+<ul>
+<li>vagrant destroy [VM]</li>
+</ul>
+<p>List options</p>
+<ul>
+<li>vagrant</li>
+</ul>
+<p>Vagrant command works on the vagrant folder that you are in</p>
+<p>Vagrant File</p>
+<p>Vagrant.configure (2) do | config |</p>
+<p>config.vm.box = &ldquo;jasonc/centos7&rdquo;</p>
+<p>config.vm.hostname = &ldquo;linuxsvr1&rdquo;</p>
+<p>(default files)</p>
+<p>config.vm.network &ldquo;private_network&rdquo;, ip: &ldquo;10.2.3.4&rdquo;</p>
+<p>config.vm.provider &ldquo;virtualbox&rdquo; do | vbi</p>
+<p>vb.gui = true</p>
+<p>vb.memory = &ldquo;1024&rdquo;</p>
+<p>(shell provisioner)</p>
+<p>config.vm.provision &ldquo;shell&rdquo;, path: &ldquo;setup.sh&rdquo;</p>
+<p>end</p>
+<p>end</p>
+<p>Configuring a multi machine setup:</p>
+<p>Specify common configurations at the top of the file</p>
+<p>Vagrant.configure (2) do | config |</p>
+<p>config.vm.box = &ldquo;jasonc/centos7&rdquo;</p>
+<p>config.vm.define = &ldquo;server1&rdquo; do | server1 |</p>
+<p>server1.vm.hostname = &ldquo;server1&rdquo;</p>
+<p>server1.vm.network &ldquo;private_network&rdquo;, ip: &ldquo;10.2.3.4&rdquo;</p>
+<p>end</p>
+<p>config.vm.define = &ldquo;server2&rdquo; do | server2 |</p>
+<p>server2.vm.hostname = &ldquo;server2&rdquo;</p>
+<p>server2.vm.network &ldquo;private_network&rdquo;, ip: &ldquo;10.2.3.5&rdquo;</p>
+<p>end</p>
+<p>end</p>
+<p>You can search for vagrant boxes at <a href="https://app.vagrantup.com/boxes/search" title="https://app.vagrantup.com/boxes/search" target="_blank">https://app.vagrantup.com/boxes/search</a></p>
+<p>Course software downloads: <a href="http://mirror.linuxtrainingacademy.com/" title="http://mirror.linuxtrainingacademy.com/" target="_blank">http://mirror.linuxtrainingacademy.com/</a></p>
+<p>Install Git: <a href="https://git-scm.com/download/win" title="https://git-scm.com/download/win" target="_blank">https://git-scm.com/download/win</a></p>
+<ul>
+<li>
+<p>make sure to check option for git and unit tools to be added to the PATH</p>
+</li>
+<li>
+<p>vagrant ssh</p>
+<ul>
+<li>
+<p>to connect to the vagrant machine in the folder that you are in</p>
+</li>
+<li>
+<p>default password in vagrant</p>
+</li>
+<li>
+<p>tyoe &rsquo;exit to return to  prompt</p>
+</li>
+</ul>
+</li>
+<li>
+<p>vagrant halt</p>
+<ul>
+<li>stop the vm and save it&rsquo;s current state</li>
+</ul>
+</li>
+<li>
+<p>vagrant reload</p>
+<ul>
+<li>restarts the vm</li>
+</ul>
+</li>
+<li>
+<p>vagrant status</p>
+<ul>
+<li>shows running vms in that folder</li>
+</ul>
+</li>
+</ul>
+<p>You can access files in the vagrant directory from both VMs</p>
+<h2 id="example-rhel8-config">Example RHEL8 Config</h2>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Vagrant.configure<span style="color:#ff6ac1">(</span><span style="color:#5af78e">&#34;2&#34;</span><span style="color:#ff6ac1">)</span> <span style="color:#ff6ac1">do</span> |config|
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>config.vm.box <span style="color:#ff6ac1">=</span> <span style="color:#5af78e">&#34;generic/rhel8&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>config.vm.define <span style="color:#5af78e">&#34;server1&#34;</span> <span style="color:#ff6ac1">do</span> |server1|
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>server1.vm.hostname <span style="color:#ff6ac1">=</span> <span style="color:#5af78e">&#34;server1.example.com&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>server1.vm.network <span style="color:#5af78e">&#34;private_network&#34;</span>, ip: <span style="color:#5af78e">&#34;192.168.1.110&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>config.disksize.size <span style="color:#ff6ac1">=</span> <span style="color:#5af78e">&#39;10GB&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>end
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>config.vm.define <span style="color:#5af78e">&#34;server2&#34;</span> <span style="color:#ff6ac1">do</span> |server2|
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>server2.vm.hostname <span style="color:#ff6ac1">=</span> <span style="color:#5af78e">&#34;server2.example.com&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>server2.vm.network <span style="color:#5af78e">&#34;private_network&#34;</span>, ip: <span style="color:#5af78e">&#34;192.168.1.120&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>config.disksize.size <span style="color:#ff6ac1">=</span> <span style="color:#5af78e">&#39;16GB&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>end
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>config.vm.provider <span style="color:#5af78e">&#34;virtualbox&#34;</span> <span style="color:#ff6ac1">do</span> |vb|
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vb.memory <span style="color:#ff6ac1">=</span> <span style="color:#5af78e">&#34;2048&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>end
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>end</span></span></code></pre></div><div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vagrant plugin install vagrant-disksize</span></span></code></pre></div>
+            <footer class="footline">
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1701896602" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1701896602" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1701896602" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1701896602" defer></script>
+    <script src="/js/js-yaml.min.js?1701896602" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1701896602" defer></script>
+  </body>
+</html>

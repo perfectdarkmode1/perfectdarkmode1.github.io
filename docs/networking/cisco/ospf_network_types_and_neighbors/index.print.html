@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>OSPF Network Types and Neighbors - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/ospf_network_types_and_neighbors/index.html" rel="canonical" type="text/html" title="OSPF Network Types and Neighbors - Perfect Dark Mode">
+    <link href="/networking/cisco/ospf_network_types_and_neighbors/index.xml" rel="alternate" type="application/rss+xml" title="OSPF Network Types and Neighbors - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/ospf_network_types_and_neighbors/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">OSPF Network Types and Neighbors</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="ospf-network-types-and-neighbors">OSPF Network Types and Neighbors</h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>3.0 IP Connectivity</p>
+<p>3.4 Configure and verify single area OSPFv2</p>
+<p>3.4.a Neighbor adjacencies</p>
+<p>3.4.b Point-to-point</p>
+<p>3.4.c Broadcast (DR/BDR selection)</p>
+<p>3.4.d Router ID</p>
+<p>OSPF Network Types</p>
+<p>Network Type
+Keyword
+broadcast
+point-to-point
+Dynamically Discovers
+Neighbors
+Yes
+Yes
+Uses a
+DR/BDR
+Yes
+No &ldquo;&gt;</p>
+<p>The OSPF Broadcast Network Type</p>
+<p>default to use network type broadcast</p>
+<p>Attempt to discover neighbors by sending OSPF Hellos to the 224.0.0.5 multicast address (an address reserved for sending packets to all OSPF routers in the subnet)</p>
+<p>Attempt to elect a DR and BDR on each subnet</p>
+<p>On the interface with no other routers on the subnet (G0/1), become the DR</p>
+<p>On the interface with three other routers on the subnet (G0/0), be either DR, BDR, or a DROther router</p>
+<p>all discovered routers on the link should become neighbors and at least reach the 2-way state. For all neighbor relationships that include the DR and/or BDR, the neighbor relationship should further reach the full state. That section defined the term fully adjacent as a special term that refers to neighbors that reach this full state.</p>
+<p>To see the setting, use the show ip ospf interface command, as shown in Example 21-4. The first highlighted item identifies the network type</p>
+<p>Click here to view code image
+RI* show ip ospf interface ge/ø
+GigabitEthernete/e is up, line protocol is up
+Internet Address 10.1.1.1/24, Area e, Attached via Interface Enabl
+Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, cost: 1
+Topology-MTID
+e
+Cost
+1
+Disabled
+no
+Shutdown
+no
+Topology Name
+Base
+Enabled by interface config, including secondary ip addresses
+Transmit Delay is 1 sec, State DROTHER, Priority 1
+Designated Router (ID) 4.4.4.4, Interface address 10.1.1.4
+Backup Designated router (ID) 3.3.3.3, Interface address 10.1.1.3
+Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit
+oob-resync timeout 40
+Hello due in ee:ee:ee
+Supports Link-local Signaling (LLS)
+Cisco NSF helper support enabled
+IETF NSF helper support enabled
+Index 1/1/1, flood queue length e
+Next
+Last flood scan length is e, maximum is 1
+Last flood scan time is e msec, maximum is e
+Nei ghhnr r Olin* i e R Ad-iarpnt- nei ghhnr c-nllnt-
+msec &ldquo;&gt;</p>
+<p>Adjacent with neighbor 4.4.4.4 (Designated Router)
+Suppress hello for e neighbor(s) &ldquo;&gt;</p>
+<p>ip ospf network broadcast interface subcommand would configure the setting.</p>
+<p>Configuring to Influence the DR/BDR Election</p>
+<p>If the DR fails, the BDR becomes the DR, and a new BDR is elected.</p>
+<p>When a better router enters the subnet, no preemption of the existing DR or BDR occurs.</p>
+<ul>
+<li>Preemption: If a new router is configured to be the DR, it will not become the DR until the OSPF process is reset.</li>
+</ul>
+<p>As a result of these rules, while you can configure a router to be the best (highest priority) router to become the DR in an election, doing so only increases that router’s statistical chances of being the DR at a given point in time. If the router fails, other routers will become DR and BDR, and the best router will not be DR again until the current DR and BDR fail.</p>
+<p>The highest OSPF interface priority: The highest value wins during an election, with values ranging from 0 to 255.</p>
+<p>The highest OSPF Router ID: If the priority ties, the election chooses the router with the highest OSPF RID.</p>
+<p>If an engineer preferred that R1 be the DR, the engineer could add the configuration in Example 21-5 to set R1’s interface priority to 99. (default of 1)</p>
+<p>RI* configure terminal
+Configuring from terminal, memory, or network [terminal]?
+Enter configuration commands, one per line.
+End with CNTL/Z.
+RI (config)# interface gø,&lsquo;ø
+RI (config-if)# ip ospf priority 99
+RI (config-if)# AZ
+RI* show ip ospf interface ge/ø I include Priority
+Transmit Delay is 1 sec, State DROTHER, Priority 99
+10.1.1.2
+10.1.1.3
+10.1.
+1.4
+RI* show ip
+Neighbor ID
+2.2. 2.2
+3.3. 3.3
+4.4.4.4
+RI* show ip
+Interface
+Gie/l
+Gie/e
+ospf neighbor
+pri
+1
+1
+1
+State
+2WAY/DROTHER
+FULL/BDR
+FULL/DR
+Dead Time
+ospf
+PID
+1
+1
+interface brief
+Area
+e
+e
+Address/Mask
+IP
+le.1.11.1/24
+le.1.1.1/24
+Address
+Cost
+1
+1
+State
+DR
+DROTH
+In
+2/ &ldquo;&gt;</p>
+<p>show that the DR and BDR have not changed at all</p>
+<p>The OSPF Point-to-Point Network Type</p>
+<p>(HDLC and PPP) do not support data-link broadcasts.</p>
+<p>to use OSPF network type point-to-point. R2, on the other end of the WAN link, would need the same configuration command on its matching interface.</p>
+<p>RI
+Click here to view code image
+RI* configure terminal
+Enter configuration commands, one per line.
+End with CNTL/Z.
+RI (config)# interface ge/Ø/0
+RI (config-if)# ip ospf network point-to-point
+RI (config-if)#
+RI* show ip ospf interface ge/0/0
+GigabitEthernete/0/e is up, line protocol is up
+Internet Address 10.1.12.1/24, Area e, Attached via Interface Enab
+Process ID 1, Router ID 1.1.1.1, Network Type POINT TO POINT, cost
+Topology-MT ID
+e
+Cost
+4
+Disabled
+no
+Shutdown
+no
+Topology Name
+Base
+Enabled by interface config, including secondary ip addresses
+Transmit Delay is 1 sec, State POINT TO POINT
+Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit
+oob-resync timeout 40
+Hello due in ee:ee:el
+Supports Link-local Signaling (LLS)
+Cisco NSF helper support enabled &ldquo;&gt;</p>
+<p>Index 1/3/3, flood queue length e
+Next
+Last flood scan length is 1, maximum is 3
+Last flood scan time is e msec, maximum is e msec
+Neighbor Count is 1, Adjacent neighbor count is 1
+Adjacent with neighbor 2.2.2.2
+Suppress hello for e neighbor(s) &ldquo;&gt;</p>
+<p>RI
+Click here to view code image
+show ip ospf neighbor
+eighbor ID
+.2.2.2
+pri
+e
+State
+FULL/
+Dead Time
+lines omitted for brevity
+show ip ospf interface brief
+nterface
+ie/e/e
+PID
+1
+Area
+e
+Address/Mask
+IP
+le.1.12.1/24
+Address
+10.1. 12.2
+Cost
+4
+Interfac
+GigabitE
+State Nbrs F
+1/1
+P2P
+lines omitted for brevity &ldquo;&gt;</p>
+<p>OSPF Neighbor Relationships</p>
+<p>They must have compatible values for several settings as listed in the Hellos exchanged between the two routers</p>
+<p>Requirement
+Interfaces must be in an up/up state.
+Access control lists (ACL) must not filter
+routing protocol messages.
+Interfaces must be in the same subnet.
+They must pass routing protocol neigh-
+bor authentication (if configured).
+Hello and hold/dead timers must match.
+Router IDs (RID) must be unique.
+They must be in the same area.
+OSPF process must not be shut down.
+Required
+for OSPF
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Neighbor Missing
+if Incorrect
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes &ldquo;&gt;</p>
+<p>MTU setting.
+Neighboring interfaces must use same
+OSPF network type.
+Yes
+Yes
+No
+No &ldquo;&gt;</p>
+<p>For items listing a “yes” in this column, if that item is configured incorrectly, the neighbor will not appear in lists of OSPF neighbors—for instance, with the show ip ospf neighbor command.</p>
+<p>the last section (shaded) lists a couple of OSPF settings that give a different symptom when incorrect</p>
+<p>for these two items, when incorrect, a router can list the other router as a neighbor, but the neighbor relationship does not work properly in that the routers do not exchange LSAs as they should</p>
+<p>Requirement
+Hello and dead timers must match.
+They must be in the same area.
+RIDs must be unique.
+They must pass any neighbor
+authentication.
+OSPF process must not be shut down.
+Best show Command
+show ip ospf interface
+show ip ospf interface brief
+show ip ospf
+show ip ospf interface
+show ip ospf, show ip ospf
+interface &ldquo;&gt;</p>
+<p>10/40 is the default hello/dead timer</p>
+<p>Finding Area Mismatches</p>
+<p>Check the output of show running-config to look for</p>
+<p>ip ospf process-id area area-number interface subcommands</p>
+<p>network commands in OSPF configuration mode</p>
+<p>Use the show ip ospf interface [brief] command to list the area number</p>
+<p>Finding Duplicate OSPF Router IDs</p>
+<p>both routers automatically generate a log message for the duplicate OSPF RID problem between R1 and R3;</p>
+<p>show ip ospf commands on both R3 and R1 to easily list the RID on each router,</p>
+<p>use the router-id 3.3.3.3 OSPF subcommand and use the EXEC mode command clear ip ospf process. (OSPF will not begin using a new RID value until the process restarts, either via command or reload.)</p>
+<p>Finding OSPF Hello and Dead Timer Mismatches</p>
+<p>Hello interval/timer: The per-interface timer that tells a router how often to send OSPF Hello messages on an interface.</p>
+<p>Dead interval/timer: The per-interface timer that tells the router how long to wait without having received a Hello from a neighbor before believing that neighbor has failed. (Defaults to four times the Hello timer.)</p>
+<p>Click here to view code image
+RI* show ip ospf interface GO/O
+GigabitEthernete/e is up, line protocol is up
+Internet Address 10.1.1.1/24, Area e, Attached via Network Stateme
+Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, cost: 1
+Topology-MT ID Cost Disabled Shutdown
+e
+1
+no
+no
+Topology Name
+Base
+Transmit Delay is 1 sec, State DR, Priority 1
+Designated Router (ID) 1.1.1.1, Interface address 10.1.1.1
+No backup designated router on this network
+Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit
+lines omitted for brevity &ldquo;&gt;</p>
+<p>R4# show ip ospf interface Gi€/€
+GigabitEthernete/e is up, line protocol is up
+Internet Address le.1.1.4/24, Area e, Attached via Network Statem
+Process ID 4, Router ID le.1.44.4, Network Type BROADCAST, cost:
+Topology-MT ID Cost Disabled Shutdown
+e
+1
+no
+no
+Topology Name
+Base
+Transmit Delay is 1 sec, State DR, Priority 1
+Transmit Delay is 1 sec, State DR, Priority 1
+Designated Router (ID) 10.1
+No backup designated router
+Timer intervals configured,
+lines omitted for brevity
+.44.4, Interface address 10.1.1.4
+on this network
+Hello 5, Dead 20, Wait 2e, Retransmit &ldquo;&gt;</p>
+<p>Shutting Down the OSPF Process</p>
+<p>When a routing protocol process is shut down, IOS does the following:</p>
+<p>Brings down all neighbor relationships and clears the OSPF neighbor table</p>
+<p>Clears the LSDB</p>
+<p>Clears the IP routing table of any OSPF-learned routes</p>
+<p>IOS retains all OSPF configuration.</p>
+<p>IOS still lists all OSPF-enabled interfaces in the OSPF interface list (show ip ospf interface) but in a DOWN state.</p>
+<p>Mismatched MTU Settings</p>
+<p>defining the largest network layer packet that the router will forward out each interface.</p>
+<p>default MTU size of 1500 bytes,</p>
+<p>The ip mtu size interface subcommand defines the IPv4 MTU setting, and the ipv6 mtu size command sets the equivalent for IPv6 packets.</p>
+<p>Symptom: they fail to exchange their LSDBs. Eventually, after trying and failing to exchange their LSDBs, the neighbor relationship also fails.</p>
+<p>show interfaces command (which lists the IP MTU).</p>
+<p>Mismatched OSPF Network Types</p>
+<p>one router uses broadcast, and the other uses point-to-point, the following occurs:</p>
+<p>The two routers become fully adjacent neighbors (that is, they reach a full state).</p>
+<p>They exchange their LSDBs.</p>
+<p>They do not add IP routes to the IP routing table.</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

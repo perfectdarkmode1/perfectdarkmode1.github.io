@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Switchport Security Configuration - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/switchport_security_config/index.html" rel="canonical" type="text/html" title="Switchport Security Configuration - Perfect Dark Mode">
+    <link href="/networking/cisco/switchport_security_config/index.xml" rel="alternate" type="application/rss+xml" title="Switchport Security Configuration - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/switchport_security_config/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Switchport Security Configuration</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="switchport-security-configuration">Switchport Security Configuration</h1>
+
+<p>5.0 Security Fundamentals</p>
+<p>5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)</p>
+<p>Port Security Concepts and Configuration</p>
+<ul>
+<li>identifies devices based on the source MAC address of Ethernet frames that the devices send.</li>
+<li>no restrictions on whether the frame came from a local device or was forwarded through other switches</li>
+<li>examines frames received on the interface to determine if a violation has occurred.</li>
+<li>defines a maximum number of unique source MAC addresses allowed for all frames coming in the interface.</li>
+<li>keeps a list and counter of all unique source MAC addresses on the interface.</li>
+<li>monitors newly learned MAC addresses, considering those MAC addresses to cause a violation if the newly learned MAC address would push the total number of MAC table entries for the interface past the configured maximum allowed MAC addresses for that port.</li>
+<li>takes action to discard frames from the violating MAC addresses, plus other actions depending on the configured violation mode.</li>
+</ul>
+<p>Other port security options</p>
+<ul>
+<li>Define a maximum of three MAC addresses, defining all three specific MAC addresses.</li>
+<li>Define a maximum of three MAC addresses but allow those addresses to be dynamically learned, allowing the first three MAC addresses learned.</li>
+<li>Define a maximum of three MAC addresses, predefining one specific MAC address, and allowing two more to be dynamically learned.</li>
+</ul>
+<p>sticky secure MAC addresses.</p>
+<ul>
+<li>port security learns the MAC addresses off each port so that you do not have to preconfigure the values. It also adds the learned MAC addresses to the port security configuration (in the running-config file).</li>
+</ul>
+<p>Configuring Port Security</p>
+<ul>
+<li>works on both access ports and trunk ports</li>
+</ul>
+<p>requires you to statically configure the port as a trunk or an access port.</p>
+<ul>
+<li>
+<p>Use the switchport mode access or the switchport mode trunk interface subcommands</p>
+</li>
+<li>
+<p>Use the switchport port-security interface subcommand to enable port security on the interface.</p>
+</li>
+<li>
+<p>(Optional)</p>
+</li>
+<li>
+<p>switchport port-security maximum number</p>
+</li>
+<li>
+<p>override the default maximum number of allowed MAC addresses associated with the interface (1).</p>
+</li>
+</ul>
+<p>(Optional)</p>
+<ul>
+<li>
+<p>switchport port-security violation {protect | restrict | shutdown}</p>
+</li>
+<li>
+<p>override the default action to take upon a security violation (shutdown).</p>
+</li>
+</ul>
+<p>(Optional)</p>
+<ul>
+<li>
+<p>switchport port-security mac-address mac-address</p>
+</li>
+<li>
+<p>predefine any allowed source MAC addresses for this interface.</p>
+</li>
+</ul>
+<p>(Optional)</p>
+<ul>
+<li>
+<p>switchport port-security mac-address sticky</p>
+</li>
+<li>
+<p>tell the switch to “sticky learn” dynamically learned MAC addresses.</p>
+</li>
+</ul>
+<p>switchport port-security</p>
+<ul>
+<li>enables port security, with all defaults</li>
+</ul>
+<p>switchport port-security mac-address 0200.1111.1111</p>
+<ul>
+<li>defines a specific source MAC address. With the default maximum source address setting of 1</li>
+</ul>
+<p>default violation action</p>
+<p>disable the interface.</p>
+<ul>
+<li>
+<p>Port security does not save the configuration of the sticky addresses</p>
+</li>
+<li>
+<p>use the copy running-config startup-config command if desired.</p>
+</li>
+</ul>
+<p>voice ports and EtherChannels</p>
+<ul>
+<li>
+<p>voice ports</p>
+</li>
+<li>
+<p>make sure to configure the maximum MAC address to at least two (one for the phone, or for a PC connected to the phone)</p>
+</li>
+<li>
+<p>EtherChannels</p>
+</li>
+<li>
+<p>the port security configuration should be placed on the port-channel interface, rather than the individual physical interfaces in the channel.</p>
+</li>
+</ul>
+<p>Verifying Port Security</p>
+<p>Show port-security interface</p>
+<ul>
+<li>
+<p>provides the most insight to how port security operates</p>
+</li>
+<li>
+<p>lists the configuration settings for port security on an interface</p>
+</li>
+<li>
+<p>includes information about any security violations</p>
+</li>
+<li>
+<p>Port Security: Enabled</p>
+</li>
+<li>
+<p>Port Status: Secure-shutdown</p>
+</li>
+<li>
+<p>Violation mode: shutdown</p>
+</li>
+<li>
+<p>Maximum MAC Addresses : 1</p>
+</li>
+<li>
+<p>Last source Address:VLAN: 0013:197b:5004 1</p>
+</li>
+</ul>
+<p>Show port-security interface fastEthernet 0/2</p>
+<ul>
+<li>Port Security: Enabled</li>
+<li>Port Status: Secure-shutdown</li>
+<li>Violation Mode: Shutdown</li>
+<li>Maximum MAC Addresses: 1</li>
+<li>Sticky MAC Addresses: 1</li>
+<li>Last Source Address: Vlan 0013:197b:5004 1</li>
+</ul>
+<p>secure-shutdown state</p>
+<ul>
+<li>the interface has been disabled because of port security</li>
+</ul>
+<p>Port Security MAC Addresses</p>
+<ul>
+<li>
+<p>Port security ports</p>
+</li>
+<li>
+<p>No longer listed as dynamic entries</p>
+</li>
+<li>
+<p>Do not show up in the results from show mac address-table dynamic EXEC command.</p>
+</li>
+<li>
+<p>you need to use one of these options to see the MAC table entries associated with ports using port security:</p>
+</li>
+</ul>
+<p>show mac address-table secure:</p>
+<ul>
+<li>Lists MAC addresses associated with ports that use port security</li>
+</ul>
+<p>show mac address-table static:</p>
+<ul>
+<li>Lists MAC addresses associated with ports that use port security, as well as any other statically defined MAC addresses</li>
+</ul>
+<p>show mac address-table secure interface F0/2</p>
+<p>Port Security Violation Modes</p>
+<p>(All three options cause the switch to discard the offending frame)</p>
+<p>Protect</p>
+<ul>
+<li>Discard frame</li>
+</ul>
+<p>Restrict</p>
+<ul>
+<li>Discard frame</li>
+<li>Send log and snmp messages</li>
+<li>increment violation counter</li>
+</ul>
+<p>Shutdown</p>
+<ul>
+<li>Discard frame</li>
+<li>Send log and snmp messages</li>
+<li>increment violation counter</li>
+<li>Puts interface into err-disabled state, discarding all traffic</li>
+</ul>
+<p>Shutdown Mode</p>
+<ul>
+<li>
+<p>recover from an err-disabled state</p>
+</li>
+<li>
+<p>interface must be shut down with the shutdown command and then enabled with the no shutdown command.</p>
+</li>
+<li>
+<p>automatically recover from the err-disabled state:</p>
+</li>
+</ul>
+<p>errdisable recovery cause psecure-violation</p>
+<ul>
+<li>automatic recovery for interfaces in an err-disabled state caused by port security</li>
+</ul>
+<p>errdisable recovery interval seconds</p>
+<ul>
+<li>set the time to wait before recovering the interface</li>
+</ul>
+<p>show port-security interface</p>
+<ul>
+<li>lists the current port-security status (secure-shutdown) as well as the configured mode (shutdown)</li>
+<li>last line of output lists the number of violations that caused the interface to fail to an err-disabled state</li>
+<li>second-to-last line identifies the MAC address and VLAN of the device that caused the violation.</li>
+</ul>
+<p>violations counter</p>
+<ul>
+<li>notes the number of times the interface has been moved to the err-disabled (secure-shutdown) state.</li>
+<li>while err-disabled, many frames can arrive, but the counter remains at 1.</li>
+<li>after shutdown/no shutdown, another violation that causes the interface to fail to an err-disabled state will cause the counter to increment to 2.</li>
+</ul>
+<p>Protect and Restrict Modes</p>
+<ul>
+<li>still discard offending traffic, but the interface remains in a connected (up/up) state and in a port security state of secure-up.</li>
+<li>port continues to forward good traffic but discards offending traffic.</li>
+</ul>
+<p>protect</p>
+<ul>
+<li>discard the frame.</li>
+<li>does not change the port to an err-disabled state</li>
+<li>does not generate messages</li>
+<li>does not even increment the violations counter</li>
+</ul>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

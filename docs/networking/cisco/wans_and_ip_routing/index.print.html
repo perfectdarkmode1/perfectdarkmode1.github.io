@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>WANs and IP Routing - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/wans_and_ip_routing/index.html" rel="canonical" type="text/html" title="WANs and IP Routing - Perfect Dark Mode">
+    <link href="/networking/cisco/wans_and_ip_routing/index.xml" rel="alternate" type="application/rss+xml" title="WANs and IP Routing - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/wans_and_ip_routing/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">WANs and IP Routing</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="wans-and-ip-routing">WANs and IP Routing</h1>
+
+<p>1.0 Network Fundamentals</p>
+<p>1.1 Explain the role and function of network components</p>
+<p>1.1.a Routers</p>
+<p>1.2 Describe characteristics of network topology architectures</p>
+<p>1.2.d WAN</p>
+<p>Leased-Line WANs</p>
+<p>Physical Details of Leased Lines</p>
+<ul>
+<li>predetermined speed</li>
+<li>Full Duplex</li>
+<li>Uses two pairs of wires one for each direction</li>
+<li>Conceptually crossover</li>
+</ul>
+<p>Leased Circuit</p>
+<ul>
+<li>Electrical circuit (line) between 2 endpoints</li>
+</ul>
+<p>Serial Link (line)</p>
+<ul>
+<li>Bits flow serially</li>
+<li>Routers use serial interfaces</li>
+</ul>
+<p>Point to point link (line)</p>
+<ul>
+<li>two points only</li>
+</ul>
+<p>T1</p>
+<ul>
+<li>1.544 Mbps</li>
+</ul>
+<p>WAN link</p>
+<ul>
+<li>General term</li>
+</ul>
+<p>Private Line</p>
+<ul>
+<li>Data is private</li>
+</ul>
+<p>HDLC Data-Link Details of Leased Lines</p>
+<ul>
+<li>Leased line specifies layer 1</li>
+<li>HDLC and PPP are the most popular Layer 2 protocols used on leased lines</li>
+</ul>
+<p>HDLC</p>
+<ul>
+<li>less work than ethernet because of point to point leased line</li>
+<li>has an address field, but the destination is implied</li>
+<li>Cant use between cisco and non cisco</li>
+<li>Cisco HDLC type field is proprietary</li>
+</ul>
+<p>Comparing HDLC Header Fields to Ethernet</p>
+<p>HDLC Header</p>
+<p>Flag</p>
+<ul>
+<li>Like preamble, SFD</li>
+<li>1 byte</li>
+</ul>
+<p>Destination address</p>
+<ul>
+<li>1 byte</li>
+</ul>
+<p>Control</p>
+<ul>
+<li>No longer used</li>
+<li>1 byte</li>
+</ul>
+<p>Type</p>
+<ul>
+<li>Type of layer 3 packet inside the frame</li>
+<li>2 bytes</li>
+</ul>
+<p>Data</p>
+<p>FCS</p>
+<ul>
+<li>Error detection</li>
+<li>2 bytes</li>
+</ul>
+<p>How Router Use a WAN Data Link</p>
+<p>How routers use HDLC when sending data</p>
+<ul>
+<li>LAN1 802.3header/IP Packet/ 802.3trailer &gt;</li>
+<li>HDLC HDLCheader/IP Packet/ HDLC Trailer &gt;</li>
+<li>LAN2 802.3header/Ippacket/802.3trailer &gt;</li>
+</ul>
+<p>Leased line negatives</p>
+<ul>
+<li>Higher cost and</li>
+<li>long install times</li>
+<li>Slow speeds</li>
+</ul>
+<p>Ethernet as a WAN technology</p>
+<p>Customer Router</p>
+<ul>
+<li>CPE</li>
+</ul>
+<p>Service provider</p>
+<ul>
+<li>
+<p>point of Presence (PoP)</p>
+</li>
+<li>
+<p>Where the fiber connects at the provider</p>
+</li>
+</ul>
+<p>Common ethernet WAN names</p>
+<ul>
+<li>
+<p>Ethernet WAN</p>
+</li>
+<li>
+<p>Ethernet Line Service (E-Line)</p>
+</li>
+<li>
+<p>Ethernet emulation</p>
+</li>
+<li>
+<p>Ethernet over MPLS (EoMPLS) (Multi protocol label switching) A technology used to create ethernet service for a customer.</p>
+</li>
+<li>
+<p>Acts like simple ethernet link between two routers</p>
+</li>
+</ul>
+<p>How Routers Route IP Packets Using Ethernet Emulation</p>
+<p>EoMPLS WAN (Provider network simulating an ethernet link)</p>
+<ul>
+<li>802.3 header and trailer</li>
+</ul>
+<p>IP Routing</p>
+<ol>
+<li>
+<p>Use FCS field to ensure that the frame had no errors; if errors occurred, discard the frame.</p>
+</li>
+<li>
+<p>Discard the old data-link header and trailer, leaving the IP packet.</p>
+</li>
+<li>
+<p>Compare the IP packet’s destination IP address to the routing table, and find the route that best matches the destination address. This route identifies the outgoing interface of the router and possibly the next-hop router IP address.</p>
+</li>
+<li>
+<p>Encapsulate the IP packet inside a new data-link header and trailer, appropriate for the outgoing interface, and forward the frame</p>
+</li>
+</ol>
+<p>The IP Header (20 bytes)</p>
+<ul>
+<li>Version, Length, DS Field, Packet Length (4 bytes)</li>
+<li>Identification, Flags, Fragment Offset (4 bytes)</li>
+<li>Time to Live, Protocol, Header Checksum (4 bytes)</li>
+<li>Source IP (4 bytes)</li>
+<li>Destination IP (4 bytes)</li>
+</ul>
+<p>IP Routing Protocols</p>
+<ol>
+<li>add route for each directly connected subnet</li>
+<li>tell neighbors about routes in routing table</li>
+<li>add new routes learned to routing table, with next hop as the router the address was learned from   </li>
+</ol>
+<p>ARP</p>
+<ul>
+<li>
+<p>Ethernet broadcast arp request &gt;</p>
+</li>
+<li>
+<p>Sender IP, sender MAC, Target IP, target MAC ??</p>
+</li>
+<li>
+<p>&lt; Ethernet unicast ARP reply</p>
+</li>
+<li>
+<p>Target IP, Target MAC, Sender IP, sender MAC</p>
+</li>
+</ul>
+<p>arp -a</p>
+<ul>
+<li>to see arp cache on most operating systems</li>
+</ul>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

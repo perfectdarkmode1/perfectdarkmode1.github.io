@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>File Permissions - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/file_permissions/index.html" rel="canonical" type="text/html" title="File Permissions - Perfect Dark Mode">
+    <link href="/linux/misc_linux/file_permissions/index.xml" rel="alternate" type="application/rss+xml" title="File Permissions - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/file_permissions/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">File Permissions</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="file-permissions">File Permissions</h1>
+
+<p>File permissions</p>
+<p>$ls -l Desktop/</p>
+<p>drwxr-xr-x 2 pete penguins 4096 Dec 1 11:45 .</p>
+<p>Four parts to file permissions</p>
+<p>Filetype (d (for directory) in the example) a is for regular file</p>
+<p>These 3 parts are the actual file permissions.</p>
+<p>d | rwx | r-x | r-x</p>
+<p>Filetype | User Permissions | Group Permissions | Other Permissions</p>
+<p>r - readable</p>
+<p>w - writable</p>
+<p>x - executable</p>
+<ul>
+<li>empty</li>
+</ul>
+<p>Modifying Permissions</p>
+<p>$ chmod u+x myfile</p>
+<p>Format: Chmod, permission set (user, group or other), file</p>
+<p>The + is adding the permission</p>
+<p>$ chmod u-x myfile</p>
+<p>The - is removing the permission</p>
+<p>$ chmod ug+w</p>
+<p>Adding write to user and group (add &ldquo;o&rdquo; for other permissions)</p>
+<p>Numerical representations for changing permissions</p>
+<p>4: read permission</p>
+<p>2: write permission</p>
+<p>1: execute permission</p>
+<p>Ex: $ chmod 755 myfile</p>
+<p>Rwx re re user, group, other</p>
+<p>Ownership permissions</p>
+<p>$ sudo chown patty myfile</p>
+<p>Sets the owner of myfile to patty (chown is change owner)</p>
+<p>$ sudo chgrp whales myfile</p>
+<p>Set the group of myfile to whales (chgrp = change group)</p>
+<p>$ sudo chown patty:whales myfile</p>
+<p>Changes group and user at the same time.</p>
+<p>Umask</p>
+<p>Used to chane default permissions</p>
+<p>Only persists if you modify .profile</p>
+<p>$ umask 021</p>
+<p>Takes away x permissions from others (the default is 022)</p>
+<p>Setuid</p>
+<p>SUID</p>
+<p>Allows a user to run a program as the owner of the program file rather than as themselves.</p>
+<p>in /usr/bin/passwd you&rsquo;ll see an &rsquo;s&rsquo; in permissions for SUID.</p>
+<p>This means when a user is running the passwd command they are running as root.</p>
+<p>-rwsr-xr-x 1 root root 47032 Dec 1 11:45 /usr/bin/passwd</p>
+<p>Modifying SUID</p>
+<p>2 ways to modify</p>
+<p>Symbolic:</p>
+<p>$ sudo chmod u+s myfile</p>
+<p>Numerical:</p>
+<p>$ sudo chmod 4755 myfile</p>
+<p>SUID  is denoted with a 4 and is pre-pended to the permission set.</p>
+<p>SUID denoted as a capital S does not have execute permissions</p>
+<p>Setgid</p>
+<p>SGID</p>
+<p>Allows a program to run as if it was a member of that group.</p>
+<p>Modifying SGID</p>
+<p>$ sudo chmod g+s myfile</p>
+<p>$ sudo chmod 2555 myfile</p>
+<p>Numerical representations for SGID is 2</p>
+<p>Process permissions</p>
+<p>Effective user ID</p>
+<p>There are three UIDs associated with every process.</p>
+<p>When you launch a process, it runs with the same permissions as the user or group that ran it.  This is used to grant access rights to a process.</p>
+<p>Real User ID</p>
+<p>The ID of the user who launched the process. Used to track down the user who launched a process.</p>
+<p>Saved user ID</p>
+<p>Allows a process to switch between the effective user ID and the Real user ID</p>
+<p>The Sticky Bit</p>
+<p>A permission bit that makes it so only the owner  or root can delete or modify the file.</p>
+<p>$ls -ld /tmp</p>
+<p>drwxrwxrwxt 6 root root 4096 Dec 15 11:45 /tmp</p>
+<p>The t at the end is the sticky bit.</p>
+<p>Modify sticky bit</p>
+<p>$ sudo chmod +t mydir</p>
+<p>$ sudo chmod 1755 mydir</p>
+<p>The numerical representation of the sticky bit is 1</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

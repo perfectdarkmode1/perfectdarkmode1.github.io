@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Fedora Desktop Setup - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/fedora/fedora_setup/index.html" rel="canonical" type="text/html" title="Fedora Desktop Setup - Perfect Dark Mode">
+    <link href="/linux/fedora/fedora_setup/index.xml" rel="alternate" type="application/rss+xml" title="Fedora Desktop Setup - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700865753" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700865754" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700865754" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700865754" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700865754" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700865754" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700865754" rel="stylesheet">
+    <link href="/css/fonts.css?1700865754" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700865754" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700865754" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700865754" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700865754" rel="stylesheet">
+    <link href="/css/print.css?1700865754" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700865754" rel="stylesheet">
+    <link href="/css/ie.css?1700865754" rel="stylesheet">
+    <script src="/js/url.js?1700865754"></script>
+    <script src="/js/variant.js?1700865754"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/fedora/fedora_setup/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Fedora Desktop Setup</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="fedora-desktop-setup">Fedora Desktop Setup</h1>
+
+<h1 id="setting-up-fedora-to-be-a-usable-workstation">Setting Up Fedora to be a Usable Workstation</h1>
+<p>When you first download Fedora Workstation, it&rsquo;s going to be a little hard to figure out how to make it usable. Especially if you&rsquo;ve never tinkered with Linux before.</p>
+<p>Here is how to set up Fedora.</p>
+<h2 id="add-badname-user">Add badname user</h2>
+<p><code>$ adduser --badname firstname.lastname</code>
+<code>$ sudo usermod -aG wheel username</code></p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># uncomment this line in the visudo file 
+$ sudo visudo
+%wheel ALL=(ALL) ALL</code></pre></div><p>Delete other user:</p>
+<p><code>$ userdel username</code></p>
+<h2 id="dnf-config-for-speed">DNF Config (for speed)</h2>
+<p>DNF is one of the package managers that comes with Fedora. You use it to install most software and applications.</p>
+<p>The official doc is <a href="https://dnf.readthedocs.io/en/latest/conf_ref.html#description]%28https://dnf.readthedocs.io/en/latest/conf_ref.html#description" title="https://dnf.readthedocs.io/en/latest/conf_ref.html#description" target="_blank">Here</a>
+Just open up your DNF config file with your favorite text editor.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nano /etc/dnf/dnf.conf</code></pre></div><p>Then add the following:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>fastestmirror=True  
+max_parallel_downloads=10  
+defaultyes=True  
+keepcache=True</code></pre></div><h2 id="clear-cache-do-this-occasionally">Clear cache (do this occasionally)</h2>
+<p><code>sudo dnf clean dbcache</code>
+or <code>sudo dnf cleanall</code></p>
+<h2 id="update-dnf">Update DNF</h2>
+<p><code>sudo dnf -y update</code></p>
+<h2 id="dnf-commands">DNF commands</h2>
+<p><a href="https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/package-management/DNF/" title="https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/package-management/DNF/" target="_blank">https://docs.fedoraproject.org/en-US/fedora/latest/system-administrators-guide/package-management/DNF/</a></p>
+<h2 id="rpm-fusion">RPM Fusion</h2>
+<p>More accessibility to various software packages.</p>
+<p><a href="https://rpmfusion.org/" title="https://rpmfusion.org/" target="_blank">https://rpmfusion.org/</a></p>
+<p>Fedora with dnf:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm</code></pre></div><h2 id="appstream-metadata">AppStream metadata</h2>
+<p>to enable users to install packages using Gnome Software/KDE Discover</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo dnf -y groupupdate core</code></pre></div><p>flatpak</p>
+<p>lhttps://flatpak.org/setup/Fedora</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo</code></pre></div><h2 id="set-a-hostname">set a hostname</h2>
+<p><code>sudo hostnamectl set-hostname &quot;New_Custom_Name&quot;</code>
+this will show after next reboot</p>
+<h2 id="make-it-yours">Make it yours</h2>
+<p>in the software center</p>
+<h2 id="gnome-tweaks">gnome tweaks</h2>
+<p>add minimize and maximize</p>
+<h2 id="extentions-by-gnome-green-puzzle-piece">extentions (by gnome) (green puzzle piece)</h2>
+<h2 id="add-a-dock">Add a Dock</h2>
+<p><a href="https://extensions.gnome.org/extension/307/dash-to-dock/" title="https://extensions.gnome.org/extension/307/dash-to-dock/" target="_blank">https://extensions.gnome.org/extension/307/dash-to-dock/</a></p>
+<h2 id="window-is-ready---notification-remover">Window is Ready - Notification Remover</h2>
+<p><a href="https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/" target="_blank">https://extensions.gnome.org/extension/1007/window-is-ready-notification-remover/</a></p>
+<h2 id="vitals">Vitals</h2>
+<p><a href="https://extensions.gnome.org/extension/1460/vitals/" title="https://extensions.gnome.org/extension/1460/vitals/" target="_blank">https://extensions.gnome.org/extension/1460/vitals/</a></p>
+<h2 id="arch-menu">Arch Menu</h2>
+<p><a href="https://extensions.gnome.org/extension/3628/arcmenu/" title="https://extensions.gnome.org/extension/3628/arcmenu/" target="_blank">https://extensions.gnome.org/extension/3628/arcmenu/</a></p>
+<h2 id="dash-to-panel">Dash to Panel</h2>
+<p><a href="https://extensions.gnome.org/extension/1160/dash-to-panel/" title="https://extensions.gnome.org/extension/1160/dash-to-panel/" target="_blank">https://extensions.gnome.org/extension/1160/dash-to-panel/</a></p>
+<h2 id="screenshot-tool">Screenshot tool</h2>
+<p><a href="https://extensions.gnome.org/extension/1112/screenshot-tool/" title="https://extensions.gnome.org/extension/1112/screenshot-tool/" target="_blank">https://extensions.gnome.org/extension/1112/screenshot-tool/</a></p>
+<p>ran gnome-screenshot tool in command prompt and it asked to install</p>
+<h2 id="l2tp-vpn">l2tp VPN</h2>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo dnf install xl2tpd
+
+sudo dnf install NetworkManager-l2tp
+
+sudo dnf install NetworkManager-l2tp-gnome
+
+service NetworkManager restart</code></pre></div><h2 id="airpods-not-pairing-issue">Airpods not pairing Issue</h2>
+<p>remove from the pairing list, force them in pairing mode and pair them back.</p>
+<p>This can be made easy with bluetoothctl.</p>
+<p>1/ Just in case, restart the bluetooth service:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>$ sudo systemctl restart bluetooth
+$ systemctl status bluetooth </code></pre></div><p>2/ bluetoothctl is easier than the UI imo</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>$ bluetoothctl
+[bluetooth] $ devices
+Device 42:42:42:42:42:42 My AirPods &lt;-- grab the name here
+[bluetooth] $ remove 42:42:42:42:42:42 </code></pre></div><p>Now, make sure your airpods are in the charging case, close the lid, wait 15 seconds, then open the lid. Press and hold the setup button on the case for up to 10 seconds. The status light should flash white, which means that your AirPods are ready to connect</p>
+<p>3/ Pair them back</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[bluetooth] $ pair 42:42:42:42:42:42 &lt;--- add the same device from earlier </code></pre></div><h2 id="enable-fractional-scaling">Enable Fractional Scaling</h2>
+<p>This lets you change display scaling in smaller increments.
+Make sure Wayland is turned on &gt;</p>
+<p>run:
+<code>gsettings set org.gnome.mutter experimental-features &quot;['scale-monitor-framebuffer']&quot;</code></p>
+<p>then Reboot</p>
+<h2 id="install-gimp">Install gimp</h2>
+<p>$ sudo dnf install gimp
+enable in screenshot tool after install for gimp {f}</p>
+<p>Install Arrows
+<a href="https://graphicdesign.stackexchange.com/questions/44797/how-do-i-insert-arrows-into-a-picture-in-gimp" target="_blank">https://graphicdesign.stackexchange.com/questions/44797/how-do-i-insert-arrows-into-a-picture-in-gimp</a></p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Go to your home folder
+Go to .config/GIMP
+Go to the folder with a version number (2.10 for me)
+Go to scripts
+Download the arrow.scm file and place it here. Don&#39;t forget to unzip.
+Open GIMP and draw a path</code></pre></div><p>From Tools menu, select Arrow</p>
+<p>= h.265 main 10 profile media codec error =</p>
+<h2 id="keypassxc">Keypassxc</h2>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo dnf install snapd
+sudo ln -s /var/lib/snapd/snap /snap
+sudo snap install keepassxc</code></pre></div><h2 id="install-obsidian-using-flatpak">Install Obsidian using Flatpak</h2>
+<ol>
+<li>
+<p>In your terminal, run the following command to install Obsidian:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>flatpak install flathub.obsidian.Obsidian</span></span></code></pre></div></li>
+<li>
+<p>Open Obsidian by running the following command:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>flatpak run.obsidian.Obsidian</span></span></code></pre></div></li>
+</ol>
+<h2 id="distrobox">Distrobox</h2>
+<p>See <a href="/linux/fedora/fedora_setup/distrobox.md">distrobox</a></p>
+<h2 id="zsh-for-humans">ZSH For Humans</h2>
+<p><a href="https://github.com/romkatv/zsh4humans" target="_blank">GitHub - romkatv/zsh4humans: A turnkey configuration for Zsh</a></p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700865754" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700865754" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700865754" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700865754" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700865754" defer></script>
+  </body>
+</html>

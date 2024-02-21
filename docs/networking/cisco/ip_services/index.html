@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>IP Services - Perfect Dark Mode</title>
+    <link href="/networking/cisco/ip_services/index.xml" rel="alternate" type="application/rss+xml" title="IP Services - Perfect Dark Mode">
+    <link href="/networking/cisco/ip_services/index.print.html" rel="alternate" type="text/html" title="IP Services - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/cisco/ip_services/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <span class="nav nav-next topbar-link"><i class="fa fa-chevron-right fa-fw"></i></span>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/index.html" title=" (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/networking/cisco/ip_services/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <span id="toc-menu" title='Table of Contents (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">IP Services</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+          <div class="default-animation progress">
+            <div class="toc-wrapper"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#first-hop-redundancy-protocol">First Hop Redundancy Protocol</a></li>
+    <li><a href="#simple-network-management-protocol">Simple Network Management Protocol</a></li>
+    <li><a href="#ftp-and-tftp">FTP and TFTP</a>
+      <ul>
+        <li><a href="#upgrading-ios-images">Upgrading IOS Images</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="ip-services">IP Services</h1>
+
+<p>3.0 IP Connectivity</p>
+<p>3.5 Describe the purpose of First Hop Redundancy Protocol</p>
+<p>4.0 Infrastructure Services</p>
+<p>4.4 Explain the function of SNMP in network operations</p>
+<p>4.9 Describe the capabilities and function of TFTP/FTP in the network</p>
+<h2 id="first-hop-redundancy-protocol">First Hop Redundancy Protocol</h2>
+<p>Subnet 10.1.1.0/24
+SW3
+Default
+GW=.9
+SW4
+SWI
+SW2
+.9
+Single Points of Failure
+RI
+Figure 12-1 RI and the One WAN Link as Single Points of Failure &ldquo;&gt;</p>
+<p>Subnet 10. I .1.0/24
+SW3
+Default
+GW=.9
+SW4
+Remote
+Single Points of Failure
+SWI
+SW2
+.9
+R4
+Main Site
+Figure 12-2 Higher Availability but with RI Still as a Single Point of Failure &ldquo;&gt;</p>
+<p>Subnet 10.1.1.0/24
+sw3 1
+Default
+GW=.9
+SW4 1
+SWI
+SW2 1
+GO/O
+.9
+.129
+Figure 12-3 Removing All Single Points ofFailure from the Network Design &ldquo;&gt;</p>
+<p>GW=.9
+GW=.9
+GW=.129
+GW=.129
+GO/O
+.9
+GO/I
+.129
+Figure 124 Balancing Traffic by Assigning Different Default Routers to Different Clients &ldquo;&gt;</p>
+<p>All hosts act like they always have, with one default router setting that never has to change.</p>
+<p>The default routers share a virtual IP address in the subnet, defined by the FHRP.</p>
+<p>Hosts use the FHRP virtual IP address as their default router address.</p>
+<p>The routers exchange FHRP protocol messages so that both agree as to which router does what work at any point in time.</p>
+<p>When a router fails or has some other problem, the routers use the FHRP to choose which router takes over responsibilities from the failed router.</p>
+<p>The Three Solutions for First-Hop Redundancy</p>
+<p>First Hop Redundancy Protocol does not name any one protocol. Instead, it names a family of protocols that fill the same role</p>
+<p>acronym
+HSRP
+VRRP
+GLBP
+Full Name
+Hot Standby
+Router Protocol
+Virtual Router
+Redundancy
+Protocol
+Gateway Load
+Balancing
+Protocol
+Origin
+Cisco
+RFC
+5798
+Cisco
+Redundancy
+Approach
+active/standby
+active/standby
+active/active
+Load
+Balancing
+Per&hellip;
+subnet
+subnet
+host &ldquo;&gt;</p>
+<p>HSRP Concepts</p>
+<p>operates with an active/standby model (also more generally called active/passive</p>
+<p>allows two (or more) routers to cooperate</p>
+<p>GW=.I
+GW=.I
+Host ARP Table
+MAC
+10.1.1.1 VMACI
+HSRP Active
+.1
+VMACI
+RI
+HSRP
+HSRP Standby
+Figure 12-5 All Traffic Goes to .1 (RI, Which Is Active); R2 Is Standby &ldquo;&gt;</p>
+<p>HSRP Failover</p>
+<p>GW=.I
+GW=.I
+GW=.I
+GW=.I
+c
+.9
+vrMC1
+VMACI
+.129
+HSRP Active
+Host ARP Table
+MAC
+No Change
+10.1.1.1 VMACI
+Figure 12-6 Packets Sent Through R2 (New Active) Once It Takes Overfor Failed RI &ldquo;&gt;</p>
+<p>To make the switches change their MAC address table entries for VMAC1, R2 sends an Ethernet frame with VMAC1 as the source MAC address.</p>
+<p>he frame is also a LAN broadcast, so all the switches learn a MAC table entry for VMAC1 that leads toward R2.</p>
+<p>HSRP Load Balancing</p>
+<p>you can configure multiple instances of HSRP in the same subnet (called multiple HSRP groups), preferring one router to be active in one group and the other router to be preferred as active in another.</p>
+<p>Subnet 10.1.1.0/24
+SW3
+10.1.2.1
+VLAN 2
+Subnet 10.1.2.0/24
+Active Subnet I
+Standby Subnet 2
+10.1.1.1
+SWI
+HSRP
+RI
+SW2
+10.1.2.1
+Active Subnet 2
+Standby Subnet 1
+F igure 12-7 Load Balancing with HSRP by Using Different Active Routers per Subnet &ldquo;&gt;</p>
+<p>FHRPs are needed on any device that acts as a default router,</p>
+<p>includes both traditional routers and Layer 3 switches.</p>
+<h2 id="simple-network-management-protocol">Simple Network Management Protocol</h2>
+<p>SNMPv2c and SNMPv3</p>
+<p>application layer protocol</p>
+<p>provides a message format for communication between what are termed managers and agents</p>
+<p>manager</p>
+<p>a network management application running on a PC or server</p>
+<p>typically being called a Network Management Station (NMS)</p>
+<p>uses SNMP protocols to communicate with each SNMP agent.</p>
+<p>Cisco Prime series of management products (<a href="http://www.cisco.com/go/prime" target="_blank">www.cisco.com/go/prime</a>) use SNMP (and other protocols) to manage networks.</p>
+<p>agents</p>
+<p>exist in the network, one per device that is managed.</p>
+<p>software running inside each device (router, switch, and so on), with knowledge of all the variables on that device that describe the device’s configuration, status, and counters.</p>
+<p>keeps a database of variables that make up the parameters, status, and counters for the operations of the device. This database, called the Management Information Base (MIB)</p>
+<p>IOS on routers and switches include an SNMP agent, with built-in MIB, that can be enabled with the configuration shown later</p>
+<p>i.e. Cisco Prime)
+The MB
+The Cisco Router and
+SNMP Agent Software
+Figure 12-8 Elements of Simple Network Management Protocol &ldquo;&gt;</p>
+<p>SNMP Variable Reading and Writing: SNMP Get and Set</p>
+<p>NMS typically polls the SNMP agent on each device</p>
+<p>NMS can notify the human user in front of the PC or send emails, texts, and so on to notify the network operations staff of any issues identified by the data found by polling the devices. You can even reconfigure the device through these SNMP variables in the MIB if you permit this level of control.</p>
+<p>NMS uses the SNMP Get, GetNext, and GetBulk messages (together referenced simply as Get messages) to ask for information from an agent.</p>
+<p>NMS sends an SNMP Set message to write variables on the SNMP agent as a means to change the configuration of the device.</p>
+<p>messages come in pairs, with, for instance, a Get Request asking the agent for the contents of a variable, and the Get Response supplying that information</p>
+<p>o find out if GiO/O is UP/UP
+SNMP Get Request
+The MIB
+Gi0/0
+Router I
+Figure 12-9 SNMP Get Request and Get Response Message Flow &ldquo;&gt;</p>
+<p>NMS can analyze various statistical facts such as averages, minimums, and maximums</p>
+<p>NMS can set thresholds for certain key variables, telling the NMS to send a notification (email, text, and so on) when a threshold is passed.</p>
+<p>SNMP Notifications: Traps and Informs</p>
+<p>SNMP agents can initiate communications to the NMS.</p>
+<p>generally called notifications, use two specific SNMP messages: Trap and Inform</p>
+<p>SNMP agents send a Trap or Inform SNMP message to the NMS to list the state of certain MIB variables when those variables reach a certain state.</p>
+<p>y GiO/O Interface Failed!
+Take a Look!
+SNMP Trap @
+The MIB
+Router 1
+Figure 12-10 SNMP Trap Notification Process &ldquo;&gt;</p>
+<p>SNMP Traps and Inform messages have the exact same purpose but differ in the protocol mechanisms</p>
+<p>trap</p>
+<p>The SNMP agent sends the Trap to the IP address of the NMS, with UDP as the transport protocol as with all SNMP messages,</p>
+<p>less overhead than inform</p>
+<p>Inform</p>
+<p>Like Trap messages but with reliability added</p>
+<p>Added to the protocol with SNMP Version 2 (SNMPv2),</p>
+<p>use UDP but add application layer reliability</p>
+<p>NMS must acknowledge receipt of the Inform with an SNMP Response message, or the SNMP agent will time out and resend the Inform.</p>
+<p>The Management Information Base</p>
+<p>Every SNMP agent has its own Management Information Base</p>
+<p>defines variables whose values are set and updated by the agent</p>
+<p>enable the management software to monitor/control the network device.</p>
+<p>defines each variable as an object ID (OID)</p>
+<p>organizes the OIDs based in part on RFC standards, and in part with vendor-proprietary variables</p>
+<p>organizes all the variables into a hierarchy of OIDs, usually shown as a tree</p>
+<p>Each node in the tree can be described based on the tree structure sequence, either by name or by number.</p>
+<p>nternet I
+rivate 4
+enterprises (I)
+Cisco 9
+1.3.6.1.4.1.9.2.2
+1.3.6.1.4.1.9.9.10
+Figure 12-11 Management Information Base (MIB) &ldquo;&gt;</p>
+<p>you could use an SNMP manager and type MIB variable 1.3.6.1.4.1.9.2.1.58.0 and click a button to get that variable, to see the current CPU usage percentage from a Cisco router</p>
+<p>Securing SNMP</p>
+<p>use ACLs to limit SNMP messages to those from known servers only.</p>
+<p>can configure an IPv4 ACL to filter incoming SNMP messages that arrive in IPv4 packets and an IPv6 ACL to filter SNMP messages that arrive in IPv6 packets.</p>
+<p>all versions of SNMP support a basic clear-text password mechanism,</p>
+<p>SNMPv1 defined clear-text passwords called SNMP communities.</p>
+<p>SNMP agent and the SNMP manager need prior knowledge of the same SNMP community value (called a community string)</p>
+<p>Get messages and the Set message include the appropriate community string value, in clear text.</p>
+<p>NMS sends a Get or Set with the correct community string, as configured on the SNMP agent, the agent processes the message.</p>
+<p>SNMPv1 defines both a read-only community and a read-write community.</p>
+<p>read-only (RO) community allows Get messages, and the read-write (RW) community allows both reads and writes (Gets and Sets).</p>
+<p>RI RO Passi
+RI RW Pass2
+O Get (?assl or Pass2 Worki)
+@Set (Pass2 Only Works)
+Figure 12-12 RO and RW Communities with the Get and Set Commands
+RO Passi
+RI RW Pass2 &ldquo;&gt;</p>
+<p>SNMPv2, and the related Community-based SNMP Version 2 (SNMPv2c)</p>
+<p>The original specifications for SNMPv2 did not include SNMPv1 communities</p>
+<p>SNMPv3</p>
+<p>security had arrived with the powerful network management protocol. SNMPv3 does away with communities and replaces them with the following features:</p>
+<p>Message integrity: This mechanism, applied to all SNMPv3 messages, confirms whether or not each message has been changed during transit.</p>
+<p>Authentication: This optional feature adds authentication with both a username and password, with the password never sent as clear text. Instead, it uses a hashing method like many other modern authentication processes.</p>
+<p>Encryption (privacy): This optional feature encrypts the contents of SNMPv3 messages so that attackers who intercept the messages cannot read their contents.</p>
+<h2 id="ftp-and-tftp">FTP and TFTP</h2>
+<dl>
+<dt>lick here to view code image</dt>
+<dt>R2# show file systems</dt>
+<dt>File Systems:</dt>
+<dt>*</dt>
+<dt>Size(b)</dt>
+<dt>256487424</dt>
+<dt>262136</dt>
+<dt>7794737152</dt>
+<dt>Free(b)</dt>
+<dt>49238016</dt>
+<dt>253220</dt>
+<dt>7483719680</dt>
+<dt>copied in 187.</dt>
+<dt>Type</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>network</dt>
+<dt>disk</dt>
+<dt>disk</dt>
+<dt>nvram</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>opaque</dt>
+<dt>network</dt>
+<dt>opaque</dt>
+<dt>usbflash</dt>
+<dt>Flags</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>prefixes</dt>
+<dt>archive:</dt>
+<dt>system :</dt>
+<dt>tmpsys :</dt>
+<dt>null :</dt>
+<dt>tftp:</dt>
+<dt>flasho</dt>
+<dd>flash:#
+flashl:
+nvram:
+sys log:
+xmodem :
+ymodem :
+rcp:
+pram:
+http :
+scp:
+tar:
+https:
+cns:
+usbflashø:
+74503236 bytes
+876 secs (396555 bytes/sec) &ldquo;&gt;</dd>
+</dl>
+<p>Opaque: To represent logical internal file systems for the convenience of internal functions and commands</p>
+<p>Network: To represent external file systems found on different types of servers for the convenience of reference in different IOS commands</p>
+<p>Disk: For flash</p>
+<p>Usbflash: For USB flash</p>
+<p>NVRAM: A special type for NVRAM memory, the default location of the startup-config file</p>
+<p>the command more flash0:/wotemp/fred would display the contents of file fred in directory /wotemp in the first flash memory slot in the router.</p>
+<p>many commands use a keyword that indirectly refers to a formal filename, to reduce typing. For example:</p>
+<p>show running-config command: Refers to file system:running-config</p>
+<p>show startup-config command: Refers to file nvram:startup-config</p>
+<p>show flash command: Refers to default flash IFS (usually flash0:)</p>
+<h3 id="upgrading-ios-images">Upgrading IOS Images</h3>
+<p>process to upgrade an IOS image into flash memory, using the following steps:</p>
+<p>Step 1. Obtain the IOS image from Cisco, usually by downloading the IOS image from Cisco.com using HTTP or FTP.</p>
+<p>Step 2. Place the IOS image someplace that the router can reach. Locations include TFTP or FTP servers in the network or a USB flash drive that is then inserted into the router.</p>
+<p>Step 3. Issue the copy command from the router, copying the file into the flash memory that usually remains with the router on a permanent basis. (Routers usually cannot boot from the IOS image in a USB flash drive.)</p>
+<p>nternet
+Figure 12-13
+TFTp server
+Router
+o
+copy tftp flash
+Copying an IOS Image as Part of the Cisco IOS Software Upgrade Process &ldquo;&gt;</p>
+<p>Copying a New IOS Image to a Local IOS File System Using TFTP</p>
+<p>ddress or name of remote host [ ] ? 2.2.2.1
+Source filename [ ] ? c29øe-universa1k9-mz . SPA. 152-4. Ml.bin
+Destination filename [c29ee-universa1k9-mz.SPA.152-4.M1.bin ] ?
+Ml. bin
+—mz. SPA.
+Accessing tftp://2.2.2.1/c29ee-universa1k9-mz.
+Loading
+c29ee
+-universalk9
+152-4.</p>
+<ul>
+<li>9779404e
+97794e4e
+bytes
+bytes ]
+copied
+in
+187 . 876
+secs
+(396555
+SPA. 152-4. Ml. bin
+(via Gigi
+from 2.2.2.1
+bytes/ sec) &ldquo;&gt;</li>
+</ul>
+<p>copy command</p>
+<p>works through these kinds of questions:</p>
+<p>What is the IP address or host name of the TFTP server?</p>
+<p>What is the name of the file?</p>
+<p>Ask the server to learn the size of the file, and then check the local router’s flash to ask whether enough space is available for this file in flash memory.</p>
+<p>Does the server actually have a file by that name?</p>
+<p>Do you want the router to erase any old files in flash?</p>
+<p>Afterward</p>
+<p>verifies that the checksum for the file shows that no errors occurred</p>
+<p>view the contents of the flash file system</p>
+<p>show flash</p>
+<p>shows the files in the default flash file system (flash0:)</p>
+<dl>
+<dt>3:38.</dt>
+<dt>3</dt>
+<dt>4</dt>
+<dt>ee:es.</dt>
+<dt>5</dt>
+<dt>ee:es.</dt>
+<dt>6</dt>
+<dt>ee:es.</dt>
+<dt>7</dt>
+<dt>ee:es.</dt>
+<dt>8</dt>
+<dt>18:20.</dt>
+<dt>9</dt>
+<dt>21 :es.</dt>
+<dt>-#- - -length&ndash; &mdash;&ndash;date/time&ndash;</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Aug</dt>
+<dt>Oct</dt>
+<dt>show flash</dt>
+<dt>le4193476</dt>
+<dt>seee32e</dt>
+<dt>1038</dt>
+<dt>12288e</dt>
+<dt>1697952</dt>
+<dt>415956</dt>
+<dt>1153</dt>
+<dt>9779404e</dt>
+<dt>21</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>16</dt>
+<dt>10</dt>
+<dt>2e15</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e14</dt>
+<dt>ee.</dt>
+<dd>44
+52
+02
+16
+28
+56
+• 38
+path
++00.
+c29ee-universa1k9-mz . SPA
+cpexpress . tar
+home . shtml
+home . tar
+securedesktop-ios-3.1.1.
+ss1c1ient-win-1.1.4.176.
+wo-lic-l
+c29ee-universa1k9-mz.SPA
+49238e16 bytes
+available (207249408
+bytes used) &ldquo;&gt;</dd>
+</dl>
+<p>dir flash0: command lists the contents of that same file system, with similar information. (You can use the dir command to display the contents of any local IFS.)</p>
+<p>irectory of flashe:/
+1
+3
+4
+5
+6
+7
+8
+9
+-rw-
+-rw-
+-rw-
+le4193476
+seee32e
+le38
+12288e
+1697952
+415956
+1153
+97794e4e
+Jul 21 2e15 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Aug 16 2e12 +ee:ee
+Oct 10 2e14 +ee:ee
+c29ee-universa1
+cpexpress . tar
+home . shtml
+home . tar
+securedesktop-i
+sslclient-win-l
+wo-lic-l
+c29ee-universa1
+256487424 bytes total (49238e16 bytes free) &ldquo;&gt;</p>
+<p>show flash lists the bytes used, whereas the dir command lists the total bytes (bytes used plus bytes free). know which command lists which particular total.</p>
+<p>Verifying IOS Code Integrity with MD5</p>
+<p>when Cisco builds a new IOS image, it calculates and publishes an MD5 hash value for that specific IOS file.</p>
+<p>IOS verify command.</p>
+<p>will list the MD5 hash as recalculated on your router. If both MD5 hashes are equal, the file has not changed.</p>
+<p>ww.cisco.com
+Compare
+Download:
+MD5: xxxxxxx&hellip;
+Figure 12-14 MDS Verification of IOS Images—Concepts &ldquo;&gt;</p>
+<p>verify 5 command generates the MD5 hash on your router,</p>
+<p>you can include the hash value computed by Cisco as the last parameter (as shown in the example), or leave it off. If you include it, IOS will tell you if the locally computed value matches what you copied into the command. If you leave it out, the verify command lists the locally computed MD5 hash, and you have to do the picky character-by-character check of the values yourself.</p>
+<p>lick here to view code image
+R2# verify 5 flashø:c29ee-universa1k9-mz.SPA.154-3.M3.bin a79e325
+.MD5 of flashe:c29ee-universa1k9-mz.SPA.154-3.M3.bin Done!
+Verified (flashe:c29ee-universa1k9-mz . SPA. 154-3.M3. bin)
+= a79e325e6c &ldquo;&gt;</p>
+<p>Copying Images with FTP</p>
+<p>ethod
+TFTP
+FTP
+SCP
+Method (Full Name)
+Trivial File Transfer Protocol
+File Transfer Protocol
+Secure Copy Protocol
+Encrypted?
+No
+No
+Yes &ldquo;&gt;</p>
+<p>copy ftp flash</p>
+<dl>
+<dt>lick here to view code image</dt>
+<dt>RI* copy</dt>
+<dt>Tl.bxn</dt>
+<dt>—mz. SPA.</dt>
+<dt>155-2.</dt>
+<dt>Tl.bxn</dt>
+<dt>—mz. SPA.</dt>
+<dt>155-2.</dt>
+<dt>Destination filename [c29ee-universa1k9-mz .SPA.155</dt>
+<dt>-2. Tl.bin]?</dt>
+<dt>Accessing ftp</dt>
+<dt>Loading</dt>
+<dt>c29ee</dt>
+<dd>//192.168.1.17e/c29ee-universa1k9
+-universalk9
+[OK - I e7410736/4096
+bytes ]
+le741e736
+bytes
+copied
+in
+119 . 604
+secs
+(898e53
+bytes/ sec) &ldquo;&gt;</dd>
+</dl>
+<p>can configure the FTP username and password on the router so that you do not have to include them in the copy command. For instance, the global configuration commands ip ftp username wendell and ip ftp password odom would have configured those values.</p>
+<p>The FTP and TFTP Protocols</p>
+<p>copy command, when using the tftp or ftp keyword, makes the command act as a client</p>
+<p>FTP Protocol Basics</p>
+<p>uses TCP</p>
+<p>TCP port 21 and in some cases also well-known port 20.</p>
+<p>FTP uses a client/server model for file transfer</p>
+<p><!-- raw HTML omitted --></p>
+<p>FTP control connection—define the kinds of functions supported by FTP</p>
+<p>allow the client to navigate around the directory structures of the server, list files, and then transfer files from the server (FTP GET) or to the server (FTP PUT).</p>
+<p>summary of some of the FTP actions:</p>
+<p>Navigate directories: List the current directory, change the current directory to a new directory, go back to the home directory, all on both the server and client side of the connection.</p>
+<p>Add/remove directories: Create new directories and remove existing directories on both the client and server.</p>
+<p>List files: List files on both the client and server.</p>
+<p>File transfer: Get (client gets a copy of the file from the server), Put (client takes a file that exists on the client and puts a copy of the FTP server).</p>
+<p>FTP Active and Passive Modes</p>
+<p>may impact whether the TCP client can or cannot connect to the server and perform normal functions</p>
+<p>user at the FTP client can choose which mode to use</p>
+<p>FTP passive mode may be the more likely option to work.</p>
+<p>FTP uses two types of TCP connections:</p>
+<p>Control Connection: Used to exchange FTP commands</p>
+<p>Data Connection: Used for sending and receiving data, both for file transfers and for output to display to a user</p>
+<p>when a client connects to an FTP server, the client first creates the FTP control connection</p>
+<p>server listens for new control connections on its well-known port 21</p>
+<p>client allocates any new dynamic port (49222 in this case) and creates a TCP connection to the server</p>
+<p>9222
+192.168.1.102
+TCP SYN
+TCP SYN ACK
+TCP ACK
+Figure 12-17 FTP Client Creates an FTP Control Connection
+FTP Server
+192.168.1.11 &ldquo;&gt;</p>
+<p>The FTP client allocates a currently unused dynamic port and starts listening on that port.</p>
+<p>The client identifies that port (and its IP address) to the FTP server by sending an FTP PORT command to the server.</p>
+<p>The server, because it also operates in active mode, expects the PORT command; the server reacts and initiates the FTP data connection to the client’s address (192.168.1.102) and port (49333).</p>
+<p>9222
+TCP control
+FTP PORT 192.168.1.102 49333
+TCP SYN for FTP Data
+FTP Server
+21
+49160
+Figure 12-18 FTP Active Mode Process to Create the Data Connection &ldquo;&gt;</p>
+<p>Passive mode helps solve the firewall restrictions by having the FTP client initiate the FTP data connection to the server.</p>
+<p>passive mode does not simply cause the FTP client to connect to a well-known port on the server;</p>
+<p>The FTP client changes to use FTP passive mode, notifying the server using the FTP PASV command.</p>
+<p>The server chooses a port to listen on for the upcoming new TCP connection, in this case TCP port 49444.</p>
+<p>The FTP notifies the FTP client of its IP address and chosen port with the FTP PORT command.</p>
+<p>The FTP client opens the TCP data connection to the IP address and port learned at the previous step.</p>
+<p>92.168.1.102
+49222
+49160
+192.168.1.11
+FTP Server
+FTP PASV
+49444
+FTP PORT 192.168.1.11 49444 0
+TCP SYN for FTP Data Connection
+Figure 12-19 FTP Passive Mode Process to Create the Data Connection &ldquo;&gt;</p>
+<p>FTP over TLS (FTP Secure)</p>
+<p>FTPS encrypts both the control and data connections with TLS, including the exchange of the usernames and passwords</p>
+<p>FTPS explicit mode process:</p>
+<p>The client creates the FTP control TCP connection to server well-known port 21.</p>
+<p>The client initiates the use of TLS in the control connection with the FTP AUTH command.</p>
+<p>When the user takes an action that requires an FTP data connection, the client creates an FTP data TCP connection to server well-known port 21.</p>
+<p>The client initiates the use of TLS in the data connection with the FTP AUTH command.</p>
+<p>92.168.1.102
+192.168.1.11
+FTP Server
+o
+49222
+FTP AUTH (Starts TLS)
+49299
+o
+FTP AUTH (Starts TLS)
+Figure 12-20 FTPS Explicit Mode Control and Data Connection Establishment &ldquo;&gt;</p>
+<p>implicit mode process</p>
+<p>begins with a required TLS connection, with no need for an FTP AUTH command, using well-known ports 990 (for the control connection) and 989 (for the data connection).</p>
+<p>SFTP</p>
+<p>uses SSH to encrypt file transfers over an SSH connection. However, the acronym SFTP does not refer to a secure version of FTP.</p>
+<p>TFTP Protocol Basics</p>
+<p>Trivial File Transfer Protocol uses UDP well-known port 69. Because it uses UDP, TFTP adds a feature to check each file for transmission errors by using a checksum process on each file after the transfer completes.</p>
+<p>the code requires less space to install, which can be useful for devices with limited memory.</p>
+<p>can Get and Put files, but it includes no commands to change directories, create/remove directories, or even to list files on the server.</p>
+<p>does not support even simple clear-text authentication. In effect, if a TFTP server is running, it should accept requests from any TFTP client.</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1700252831" defer></script>
+        <script src="/js/search.js?1700252831" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" aria-controls="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" checked><label for="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Fedora</span></label><a class="padding" href="">Fedora<i class="fas fa-check read-icon"></i></a><ul id="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora/fedora_setup/index.html" class=""><a class="padding" href="/linux/fedora/fedora_setup/index.html">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/hotkeys/index.html" class=""><a class="padding" href="/linux/fedora/hotkeys/index.html">Fedora Hotkeys<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/silverblue/index.html" class=""><a class="padding" href="/linux/fedora/silverblue/index.html">Fedora Silverblue<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/starcraftonfedora/index.html" class=""><a class="padding" href="/linux/fedora/starcraftonfedora/index.html">How to Install Starcraft on Fedora<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-2c366602ce05ece354fb0e76680a93b8" aria-controls="subsections-2c366602ce05ece354fb0e76680a93b8" checked><label for="section-2c366602ce05ece354fb0e76680a93b8"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu misc</span></label><a class="padding" href="">misc<i class="fas fa-check read-icon"></i></a><ul id="subsections-2c366602ce05ece354fb0e76680a93b8" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/index.html" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/index.html">Boot<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/command_line/index.html">Command Line<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/index.html">Consoling in on Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/index.html" class=""><a class="padding" href="/linux/misc_linux/devices/index.html">Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/index.html" class=""><a class="padding" href="/linux/misc_linux/dns/index.html">DNS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/index.html" class=""><a class="padding" href="/linux/misc_linux/file_permissions/index.html">File Permissions<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/index.html" class=""><a class="padding" href="/linux/misc_linux/getting_started/index.html">General Linux and History<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/index.html" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/index.html">How to Get Putty to Work in Ubuntu<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/index.html" class=""><a class="padding" href="/linux/misc_linux/init/index.html">Init<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/index.html" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/index.html">IO Monitoring<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/index.html" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/index.html">Keyboard Shortcuts<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/index.html" class=""><a class="padding" href="/linux/misc_linux/kernel/index.html">Linux Kernel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/index.html" class=""><a class="padding" href="/linux/misc_linux/logging/index.html">Logging<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/index.html" class=""><a class="padding" href="/linux/misc_linux/ls/index.html">ls<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/index.html" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/index.html">Network Troubleshooting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/index.html" class=""><a class="padding" href="/linux/misc_linux/network_basics/index.html">Networking in Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html">Open source and Linux Community<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/index.html" class=""><a class="padding" href="/linux/misc_linux/packages/index.html">Packages and Their Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/index.html" class=""><a class="padding" href="/linux/misc_linux/process_utilization/index.html">Process Utilization<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/index.html" class=""><a class="padding" href="/linux/misc_linux/ps_processes/index.html">Processes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_resources/index.html">Resources for learning Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/index.html" class=""><a class="padding" href="/linux/misc_linux/scp_command/index.html">scp<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/index.html" class=""><a class="padding" href="/linux/misc_linux/network_sharing/index.html">Sharing Resources<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html">Shell<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html">Skills that go with Bash Scripting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/index.html">Switching to Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/index.html">Symbols in Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/index.html" class=""><a class="padding" href="/linux/misc_linux/tar/index.html">Tar Stuff<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/index.html" class=""><a class="padding" href="/linux/misc_linux/text_fu/index.html">Text Editors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/index.html" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/index.html">The Linux Filesystem<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/index.html" class=""><a class="padding" href="/linux/misc_linux/user_management/index.html">User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/index.html" class=""><a class="padding" href="/linux/misc_linux/wsl2/index.html">Windows Subsystem for Linux<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-7ed069a6f41a18ead2ddedfda31e7113" aria-controls="subsections-7ed069a6f41a18ead2ddedfda31e7113" checked><label for="section-7ed069a6f41a18ead2ddedfda31e7113"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu RHCSA</span></label><a class="padding" href="">RHCSA<i class="fas fa-check read-icon"></i></a><ul id="subsections-7ed069a6f41a18ead2ddedfda31e7113" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/rhcsa/4_adv_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/4_adv_file_management/index.html">Advanced File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/6_adv_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/6_adv_user_management/index.html">Advanced User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/7_bash_shell/index.html" class=""><a class="padding" href="/linux/rhcsa/7_bash_shell/index.html">Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/9_basic_package_management/index.html" class=""><a class="padding" href="/linux/rhcsa/9_basic_package_management/index.html">Basic Package Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/5_basic_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/5_basic_user_management/index.html">Basic User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/3_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/3_file_management/index.html">File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/2_interaction/index.html" class=""><a class="padding" href="/linux/rhcsa/2_interaction/index.html">Interaction<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/17_network_file_system/index.html" class=""><a class="padding" href="/linux/rhcsa/17_network_file_system/index.html">Network File System (NFS)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/16_networking/index.html" class=""><a class="padding" href="/linux/rhcsa/16_networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/index.html" class=""><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/index.html">Process and Task Scheduling<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/1_installation/index.html" class=""><a class="padding" href="/linux/rhcsa/1_installation/index.html">RHEL Installation<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-32ba51710c14dbc40b371b19ad442e93" aria-controls="subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="">Networking<i class="fas fa-check read-icon"></i></a><ul id="subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-e7b43009273138043ffb9c6ae58c8cce" aria-controls="subsections-e7b43009273138043ffb9c6ae58c8cce" checked><label for="section-e7b43009273138043ffb9c6ae58c8cce"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Cisco</span></label><a class="padding" href="">Cisco<i class="fas fa-check read-icon"></i></a><ul id="subsections-e7b43009273138043ffb9c6ae58c8cce" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/tcp_ip_basic/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_basic/index.html">Basics of TCP/IP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cli/index.html" class=""><a class="padding" href="/networking/cisco/cli/index.html">Cisco CLI Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/index.html" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/index.html">Cisco CML VMWARE Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/index.html" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/index.html">Cisco Devnet Sandbox Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/index.html" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/index.html">Cisco VLAN Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/index.html" class=""><a class="padding" href="/networking/cisco/classful_ipv4/index.html">Classfull IPv4<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/index.html" class=""><a class="padding" href="/networking/cisco/management/index.html">Device Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/index.html" class=""><a class="padding" href="/networking/cisco/device_management_protocols/index.html">Device Management Protocols<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_config/index.html">DHCP Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html">DHCP Snooping and ARP Inspection<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/index.html" class=""><a class="padding" href="/networking/cisco/ethernet_lans/index.html">Ethernet LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/index.html" class=""><a class="padding" href="/networking/cisco/extended_acls/index.html">Extended ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/index.html" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/index.html">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/index.html" class="active"><a class="padding" href="/networking/cisco/ip_services/index.html">IP Services<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/index.html">IPv6 Addressing and Subnetting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/index.html" class=""><a class="padding" href="/networking/cisco/ipv6/index.html">IPv6 Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_config/index.html">IPv6 Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_routing/index.html">IPv6 Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/lan_architecture/index.html">LAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/index.html" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/index.html">Layer 2 Etherchannel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree/index.html">More Spanning Tree<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/index.html" class=""><a class="padding" href="/networking/cisco/nat/index.html">Network Address Translation (NAT)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/index.html" class=""><a class="padding" href="/networking/cisco/ospf_concepts/index.html">OSPF Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/index.html" class=""><a class="padding" href="/networking/cisco/ospf_config/index.html">OSPF Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/index.html" class=""><a class="padding" href="/networking/cisco/ospf_lab/index.html">OSPF Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/index.html" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/index.html">OSPF Network Types and Neighbors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/index.html" class=""><a class="padding" href="/networking/cisco/qos/index.html">QoS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/index.html" class=""><a class="padding" href="/networking/cisco/rstp/index.html">Rapid Spanning Tree (RSTP)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/index.html" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/index.html">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/index.html" class=""><a class="padding" href="/networking/cisco/router_operation/index.html">Router Operation<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/index.html" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/index.html">Routing in the LAN<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/index.html" class=""><a class="padding" href="/networking/cisco/securing_network_devices/index.html">Securing Network Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/index.html" class=""><a class="padding" href="/networking/cisco/security_architectures/index.html">Security Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/index.html">Spanning Tree Protocol Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/index.html" class=""><a class="padding" href="/networking/cisco/standard_acls/index.html">Standard ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/index.html" class=""><a class="padding" href="/networking/cisco/static_routes/index.html">Static Routes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/index.html" class=""><a class="padding" href="/networking/cisco/switch_interfaces/index.html">Switch Interfaces<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/index.html" class=""><a class="padding" href="/networking/cisco/switchport_security_config/index.html">Switchport Security Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/index.html">TCP/UDP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/index.html" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/index.html">Troubleshooting Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/index.html" class=""><a class="padding" href="/networking/cisco/vlans/index.html">VLANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/wan_architecture/index.html">WAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/index.html" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/index.html">WANs and IP Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/index.html" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/index.html">What is a VLAN?<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/index.html" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/index.html">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/index.html" class=""><a class="padding" href="/networking/cisco/wireless_architectures/index.html">Wireless Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/index.html" class=""><a class="padding" href="/networking/cisco/wireless_lan/index.html">Wireless LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/index.html" class=""><a class="padding" href="/networking/cisco/wireless/index.html">Wireless Principles<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/index.html" class=""><a class="padding" href="/networking/cisco/wireless_security/index.html">Wireless Security<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-671e08f4a7e985c9c54ec2c3658b1e25" aria-controls="subsections-671e08f4a7e985c9c54ec2c3658b1e25" checked><label for="section-671e08f4a7e985c9c54ec2c3658b1e25"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Juniper</span></label><a class="padding" href="">Juniper<i class="fas fa-check read-icon"></i></a><ul id="subsections-671e08f4a7e985c9c54ec2c3658b1e25" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/index.html" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/index.html">Cisco to Juniper Cheat Sheet<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/index.html" class=""><a class="padding" href="/networking/juniper/junos_fundementals/index.html">Junos Basics<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/index.html" class=""><a class="padding" href="/tools/calibre_server/index.html">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/index.html" class=""><a class="padding" href="/tools/calibre-web-with-docker/index.html">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/index.html" class=""><a class="padding" href="/tools/distrobox/index.html">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/index.html" class=""><a class="padding" href="/tools/githubpageshugo/index.html">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+            <li><a class="padding" href="/now/index.html"><i class='fas fa-fw fa-play'></i> now</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city2" value="city2" selected>City2</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

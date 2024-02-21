@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="17 Software-Defined Access (SDA) 1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.e Controllers (Cisco DNA Center and WLC)
+6.0 Automation and Programmability
+6.1 Explain how automation impacts network management
+6.2 Compare traditional networks with controller-based networking
+6.3 Describe controller-based and software defined architectures (overlay, underlay, and fabric)
+6.3.a Separation of control plane and data plane
+6.3.b Northbound and southbound APIs
+6.4 Compare traditional campus device management with Cisco DNA Center enabled device">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="17 Software-Defined Access (SDA) 1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.e Controllers (Cisco DNA Center and WLC)
+6.0 Automation and Programmability
+6.1 Explain how automation impacts network management
+6.2 Compare traditional networks with controller-based networking
+6.3 Describe controller-based and software defined architectures (overlay, underlay, and fabric)
+6.3.a Separation of control plane and data plane
+6.3.b Northbound and southbound APIs
+6.4 Compare traditional campus device management with Cisco DNA Center enabled device">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/newccnanotes/17softwaredefinedaccess/">
+    <meta property="article:section" content="Networking - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1708488311" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1708488311" rel="stylesheet">
+    <link href="/css/auto-complete.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1708488311" rel="stylesheet">
+    <link href="/css/fonts.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1708488311" rel="stylesheet">
+    <link href="/css/theme-city2.css?1708488311" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1708488311" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1708488311" rel="stylesheet">
+    <link href="/css/print.css?1708488311" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1708488311" rel="stylesheet">
+    <script src="/js/url.js?1708488311"></script>
+    <script src="/js/variant.js?1708488311"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/newccnanotes/17softwaredefinedaccess/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h1 id="17-software-defined-access-sda">17 Software-Defined Access (SDA)</h1>
+<p>1.0 Network Fundamentals<br>
+1.1 Explain the role and function of network components<br>
+1.1.e Controllers (Cisco DNA Center and WLC)<br>
+6.0 Automation and Programmability<br>
+6.1 Explain how automation impacts network management<br>
+6.2 Compare traditional networks with controller-based networking<br>
+6.3 Describe controller-based and software defined architectures (overlay, underlay, and fabric)<br>
+6.3.a Separation of control plane and data plane<br>
+6.3.b Northbound and southbound APIs<br>
+6.4 Compare traditional campus device management with Cisco DNA Center enabled device<br>
+management</p>
+<p>The southbound side of the controller contains the fabric, underlay, and overlay<br>
+<strong>Overlay:</strong> transport traffic from one fabric endpoint to another over the fabric.Themechanisms to create VXLAN tunnels between SDA switches, which are then used to</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Traffic sent by the endpoint devices flows through VXLAN tunnels in the overlay</code></pre></div><p>Monday, November 1, 2021 9:36 AM</p>
+<p><strong>Underlay:</strong> The network of devices and connections (cables and wireless) to provide IP connectivity to all<br>
+nodes in the fabric, with a goal to support the dynamic discovery of all SDA devices and endpoints as a part of the process to create overlay VXLAN tunnels.</p>
+<p>the underlay exists asmultilayer switches and their links, with IP connectivity<br>
+<strong>Fabric:</strong> across the network with the desired features and attributes.The combination of overlay and underlay, which together provide all features to deliver data</p>
+<p>The overlay drawing at the top of the figure shows only two switches—called fabric edge nodes,<br>
+because they happen to betwo. Both concepts (underlay and overlay) together create the SDA fabric.at the edges of the SDA fabric—with a tunnel labeled VXLAN connecting the</p>
+<p>The SDA Underlay<br>
+also includes the configuration and operation of the underlay so it can support the work of the<br>
+overlay network<br>
+Using Existing Gear for the SDA Underlay<br>
+Because of the possibility of harming the existing production configuration, should not be used to configure the underlay if the devices are currently used in production.DNA Center<br>
+(DNA Center will be used to configure the underlay with deployments that use all new<br>
+hardware.)</p>
+<h6 id="heading">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○ Thesupported depending on their different SDA roles (see a link at existing hardware must be from the SDA compatibility list, with different models http://www.cisco.com/go/sda).
+○ Thethat same compatibility list.device software levels must meet the requirements, based on their roles, as detailed in
+roles include:
+Fabric edge node:A switch that connects to endpoint devices (similar to</code></pre></div><p>Fabric edge node:traditional access switches)A switch that connects to endpoint devices (similar to<br>
+Fabric border node: A switch that connects to devices outside SDA’s control, for<br>
+example, switches that connect to the WAN routers or to an ACI data center<br>
+Fabric control node:A switch that performs special control plane functions for<br>
+the underlay (LISP), requiring more CPU and memory<br>
+Using New Gear for the SDA Underlay<br>
+buying new hardware for the SDA fabric—that is, agreenfield design<br>
+think about these traditional LAN design points:<br>
+▪ The number of ports needed in switches in each wiring closet<br>
+○ ▪ The port speeds required</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>▪ The benefit of a switch stack in each wiring closet</code></pre></div><h6 id="heading-1">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>▪ The cable length and types of cabling already installed</code></pre></div><h6 id="heading-2">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>▪ The need for power (PoE/PoE+)</code></pre></div><h6 id="heading-3">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>▪ The power available in each new switch versus the PoE power requirements</code></pre></div><h6 id="heading-4">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○ ▪ Link capacity (speed and number of links) for links between switches</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>In comparison, a greenfield SDA fabric uses a routed access layer design
+DNA Center will configure the devices’ underlay configuration to use a routed access layer
+routed access layer design has these features:</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>routed access layer design has these features:
+All switches act as Layer 3 switches.
+The switches use theIS-ISrouting protocol.
+All links between switches (single links, EtherChannels) are routed Layer 3 links
+(not Layer 2 links).
+As a resultwhich links to use based on the IP routing tables., STP/RSTP is not needed,with the routing protocol instead choosing
+The equivalent of a traditional access layer switchthe default gateway for the endpoint devices, rather than distribution switches.—anSDA edge node—acts as
+As a result, HSRP (or any FHRP) is no longer needed.</code></pre></div><p>The SDA Overlay<br>
+The first SDA node to receive the frame encapsulates the frame in a new message—using a<br>
+tunneling specification called VXLAN<br>
+andin VXLAN, the other SDA nodes forward the frame based on the VXLAN tunnel details. The last SDA forwards the frame into the fabric. Once the ingress node has encapsulated the original frame<br>
+node removes the VXLAN details, leaving the original frame, and forwards the original frame on<br>
+toward the destination endpoint.<br>
+there isno performance penalty for the switches to perform the extra work. (happens in ASIC)<br>
+SDA uses LISP for endpoint discovery and location needed to create the VXLAN tunnels.<br>
+VXLAN Tunnels in the Overlay (Data Plane)<br>
+goals in mind:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The VXLAN tunneling (the encapsulation and de-encapsulation) must be performed by
+the ASIC on each switch so that there is no performance penalty. (for the SDA hardware compatibility list: the switches must have ASICs that can That is one reason
+perform the work.)
+The VXLAN encapsulation must supply header fields that SDA needs for its features, so
+the tunneling protocol should be flexible and extensible, while still being supported by the switch ASICs.
+The tunneling encapsulation needs to encapsulate the entire data link frame instead
+of encapsulating the IP packet. That allows SDA to support Layer 2 forwarding features as well as Layer 3 forwarding features.</code></pre></div><p>Virtual Extensible LAN (VXLAN) protocol to create the tunnels used by SDA.<br>
+the egress edge nodeingress edge node encapsulates the frame and sends it across a VXLAN tunnel to the</p>
+<p>To support the VXLAN encapsulation, the underlay uses a separate IP address space as compared with the rest of the enterprise</p>
+<p>The overlay tunnels use addresses from the enterprise address space. For instance, imagine<br>
+an enterprise used these address spaces:<br>
+10.0.0.0/8: Entire enterprise<br>
+172.16.0.0/16: SDA underlay</p>
+<p>the underlay would be built using the 172.16.0.0/16 IPv4 address space, with all links using<br>
+addresses from that address space<br>
+each with one underlay IP address</p>
+<p>LISP for Overlay Discovery and Location (Control Plane)<br>
+Traditional Layer 2 switches learn possible destinations by examining the source MAC<br>
+addresses of incoming frames, storing those MAC addresses as possible future destinations in the switch’s MAC address table. When new frames arrive, the Layer 2 switch data plane<br>
+then attempts to match the Ethernet frame’s destination MAC address to an entry in its<br>
+MAC address table.<br>
+Traditional Layer 3 routers learn destination IP subnets using routing protocols, storing routes to reach each subnet in their routing tables. When new packets arrive, the Layer 3<br>
+data plane attempts to match the IP packet’s destination IP address to some entry in the IP routing table.<br>
+Nodes in the SDA network do not do these same control plane actions to support endpoint traffic<br>
+Fabric edge nodes—SDA nodes that connect to the edge of the SDA fabric—learn the<br>
+location of possible endpoints using traditional means, based on their MAC address, individual IP address, and by subnet, identifying each endpoint with an endpoint identifier<br>
+(EID).<br>
+The fabric edge nodes register the fact that the node can reach a given endpoint (EID) into a<br>
+database called the LISP map server.<br>
+Thelocators (RLOCs) (which identify the fabric edge node that can reach the EID).LISP map server keeps the list of endpoint identifiers (EIDs) and matching routing<br>
+In the future, when the fabric data plane needs to forward a message, it will look for and find the destination in the LISP map server’s database.<br>
+step 1 in the figure, switch SW3 sent a message to the LISP map server, registering the</p>
+<p>step 1 in the figure, switch SW3 sent a message to the LISP map server, registering the information about subnet 10.1.3.0/24 (an EID), with its RLOC setting to identify itself as the<br>
+node that can reach that subnet.<br>
+Step 2 shows an equivalent registration process, this time for SW4, with EID 10.1.4.0/24, and with R4’s RLOC of 172.16.4.4.</p>
+<p>ingress tunnel router (ITR)-where the frame arrives<br>
+3 An Ethernet frame to a new destination arrives at ingress edge node SW1 (upper left), and<br>
+the switch does not know where to forward the frame.<br>
+4 The ingress node sends a message to the LISP map server asking if the LISP server knows how to reach IP address 10.1.3.1.</p>
+<p>5 The LISP map server looks in its database and finds the entry it built back at step 1 in the previous figure, listing SW3’s RLOC of 172.16.3.3.</p>
+<p>6 The LISP map server contacts SW3—the node listed as the RLOC—to confirm that the<br>
+entry is correct.<br>
+7 SW3 completes the process of informing the ingress node (SW1) that 10.1.3.1 can be reached through SW3.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>It adds the IP, UDP, and VXLAN headers shown so it can deliver the message over the SDA
+network
+that outer IP header listing a destination IP address of the RLOC IP address</code></pre></div><p>as all the VXLAN processing happens in an ASIC.<br>
+DNA Center and SDA Operation<br>
+two notable roles:<br>
+As the controller in a network that uses Cisco SDA<br>
+As expectation that one day DNA Center may become Cisco’s primary enterprise network a network management platform for traditional (non-SDA) network devices, with an<br>
+management platform<br>
+Cisco DNA Center</p>
+<p>Cisco DNA Center</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Cisco DNA Center includes a robust northbound REST API along with a series of southbound APIs
+supports several southbound APIs
+two categories:
+Protocols to support traditional networking devicesSSH, SNMP /software versions: Telnet,
+Protocols to support more recent networking devices/software versions:
+NETCONF, RESTCONF
+Cisco DNA Center and Scalable Groups
+SDA creates many interesting new and powerful features beyond how traditional
+campus networks work. Cisco DNA Center not only enables an easier way to configure and operate those features, but it also completely changes the operational model
+one feature as an example:scalable groups.
+Issues with Traditional IP-Based Security</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>ACL management suffers with these kinds of issues:
+ACEs (access control entries) cannot be removed from ACLs because of
+the risk of causing failures to the logic for some other past requirement.
+New changes become more and more challenging due to the length of the
+ACLs.
+Troubleshooting ACLs as a systembe delivered from end-to-end—becomes an even greater challenge.—determining whether a packet would</code></pre></div><p>SDA Security Based on User Groups</p>
+<p>The model in Figure 17-14 helps demonstrate the concept of intent-based<br>
+networking (IBN)the network—in this case, a set of security policies. The controller. The engineer configures the intent or outcome desired from<br>
+communicates with the devices in the network, with the devices determining exactly what configuration and behavior are necessary to achieve those<br>
+intended policies.<br>
+The engineer can consider each new security requirement separately,<br>
+without analysis of an existing (possibly lengthy) ACL.<br>
+Each new requirement can be considered without searching for all the ACLs in the likely paths between endpoints and analyzing each and every<br>
+ACL.<br>
+DNA Center (and related software) keeps the policies separate, with space<br>
+to keep notes about the reason for the policy.<br>
+Each policy can be removed without fear of impacting the logic of the other policies.</p>
+<p>achieved bygroup assigned a tying security to groups of usersscalable group tag (SGT). , called scalable groups, with each</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>security tools in the network, like Cisco’s Identity Services Engine (ISE)</code></pre></div><p>DNA Center as a Network Management Platform<br>
+Cisco Prime Infrastructure (PI)(<a href="https://www.cisco.com/go/primeinfrastructure" target="_blank">www.cisco.com/go/primeinfrastructure</a>) is an example ofa<br>
+traditional enterprise network management product<br>
+includes the following features:<br>
+Singlefeatures-pane-of-glass: Provides one GUI from which to launch all PI functions and<br>
+Discovery, inventory, and topology:and arranges them in a topology mapDiscovers network devices, builds an inventory,<br>
+Entire enterprise: Provides support for traditional enterprise LAN, WAN, and data<br>
+center management functions<br>
+Methods and protocols: Uses SNMP, SSH, and Telnet, as well as CDP and LLDP, to<br>
+discover and learn information about the devices in the network<br>
+Lifecycle management: configure it to be working in production (day 1), and perform ongoing monitoring and Supports different tasks to install a new device (day 0),<br>
+make changes (day n)</p>
+<p>make changes (day n)<br>
+Application visibility:Simplifies QoS configuration deployment to each device<br>
+Converged wired and wireless: Enables you to manage both the wired and wireless LAN from the same management platform<br>
+Software Image Management (SWIM): Manages software images on network devices and automates updates<br>
+Plug-and-Play: Performs initial installation tasks for new network devices after you<br>
+physically install the new device, connect a network cable, and power on<br>
+PI itself runs as an application on a server platform with GUI access via a web browser<br>
+server can be purchased from Cisco as a software package to be installed and run on your<br>
+servers, or as a physical appliance.<br>
+DNA Center Similarities to Traditional Management<br>
+both can discover network devices and create a network topology map</p>
+<p>I encourage you to take some time to use and watch some videos about Cisco DNA Center. The<br>
+“Chapter Review” section for this chapter on the companion website lists some links for good videos. Also, start at <a href="https://developer.cisco.comand" target="_blank">https://developer.cisco.comand</a> look for Cisco DNA Center sandbox labs to<br>
+find a place to experiment with Cisco DNA Center.<br>
+DNA Center Differences with Traditional Management<br>
+Cisco DNA Center supports SDA, whereas other management apps do not<br>
+So think of PI as comprehensive to traditional device management, with Cisco DNA Center having<br>
+many of those features, while focusing on future features like SDA support.<br>
+Cisco DNA Center features help make initial installation easier, simplify the work to implement<br>
+features that traditionally have challenging configuration, and use tools to help you notice issues more quickly. Some of the features unique to Cisco DNA Center include<br>
+EasyQoS: Deploys QoS, one of the most complicated features to configure manually, with<br>
+just a few simple choices from Cisco DNA Center<br>
+Encrypted traffic analysis: Enables Cisco DNA to use algorithms to recognize security threats<br>
+even in encrypted traffic<br>
+Device 360 and Client 360: Gives a comprehensive (360device -degree) view of the health of the<br>
+Network time travel: Shows past client performance in a timeline for comparison to current behavior<br>
+Path trace: Discovers the actual path packets would take from source to destination based<br>
+on current forwarding tables</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1708488311" defer></script>
+        <script src="/js/search.js?1708488311" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669"><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/newccnanotes/17softwaredefinedaccess/" class="active"><a class="padding" href="/networking/newccnanotes/17softwaredefinedaccess/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1708488311" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1708488311" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1708488311" defer></script>
+    <script src="/js/js-yaml.min.js?1708488311" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1708488311" defer></script>
+  </body>
+</html>

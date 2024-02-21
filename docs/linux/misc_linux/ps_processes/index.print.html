@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Processes - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/ps_processes/index.html" rel="canonical" type="text/html" title="Processes - Perfect Dark Mode">
+    <link href="/linux/misc_linux/ps_processes/index.xml" rel="alternate" type="application/rss+xml" title="Processes - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/ps_processes/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Processes</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="processes">Processes</h1>
+
+<p>Ps (Processes)</p>
+<p>Processes are the programs that are running on your machine. The are managed by the kernel.</p>
+<p>PID</p>
+<p>ID associated with each process. Assigned in the order that the processes are created.</p>
+<p>$ ps - shows a list of running processes.</p>
+<p>PID: Process ID</p>
+<p>TTY: Controlling terminal associated with the process</p>
+<p>STAT: Process status code</p>
+<p>TIME: Total CPU usage time</p>
+<p>CMD: Name of executable/ command</p>
+<p>$ ps aux</p>
+<p>a - displays all processes running - even by other users</p>
+<p>u - shows more details</p>
+<p>x - lists all processes that don&rsquo;t have a TTY associated with it.</p>
+<p>shows a ? in the TTY field</p>
+<p>common in daemon processes that launch as part of system startup.</p>
+<p>USER: The effective user.</p>
+<p>PID: Process ID</p>
+<p>%CPU: CPU time used divided by the time the process has been running.</p>
+<p>%MEM: Ratio of the process&rsquo;s resident set size to the physical memory on the machine.</p>
+<p>VSZ: Virtual memory usage of the entire process</p>
+<p>RSS: Resident set size, the non-swapped physical memory that a task has used.</p>
+<p>TTY: Controlling terminal associated with the process.</p>
+<p>STAT: Process status code</p>
+<p>START: Start time of the process</p>
+<p>TIME: Total CPU usage time</p>
+<p>COMMAND: Name of executable/command</p>
+<p>$ top</p>
+<p>shows real time process info. Refreshes every 10 seconds</p>
+<p>Controlling terminal</p>
+<p>TTY is the terminal that executed the command</p>
+<p>There are two types of terminals</p>
+<p>terminal devices</p>
+<p>native terminal device that you can type into and send output to your system.</p>
+<p>TTY1</p>
+<p>enter Ctrl-Alt-F1 to enter</p>
+<p>Ctrl-Alt-F7 to exit</p>
+<p>pseudoterminal devices</p>
+<p>The shell you normally use denoted by PTS under the TTY field</p>
+<p>? under the TTY field means that the process is not linked to a controlling terminal.</p>
+<p>Process Details</p>
+<p>The kernel knows:</p>
+<p>The status of the process</p>
+<p>The resources the process is using and receives</p>
+<p>The process owner</p>
+<p>Signal handling</p>
+<p>And basically everything else</p>
+<p>It&rsquo;s the kernels job to allocate resources to different processes depending on the process demands.</p>
+<p>Process Creation</p>
+<p>When a process is created, the process that is created gets a PPID, the PPID is the parent process&rsquo;s (the process that started this process) PID</p>
+<p>This is called the Fork system.</p>
+<p>init: the very first process that starts when the computer turns on. It has a process ID of 1</p>
+<p>Can&rsquo;t be terminated unless the system shuts down. Also runs with root privileges.</p>
+<p>runs many processes that keep the system running.</p>
+<p>Process Termination</p>
+<p>A process can exit using the _exit system call.</p>
+<p>When a process wants to terminate, it lets the system know why it&rsquo;s terminating with a termination status.</p>
+<p>Status of 0 means that the process succeeded.</p>
+<p>the parent process must acknowledge the termination of the child process by using the wait system call.</p>
+<p>The wait system call checks the termination status of the child process.</p>
+<p>Orphan processes get put under care of init.</p>
+<p>Zombie processes</p>
+<p>When a child process terminates and a parent hasn&rsquo;t called wait yet. The zombie stays in the process until the parent wait calls it. When a parent calls the zombie it is known as &ldquo;reaping&rdquo; and the zombie will disappear.</p>
+<p>if the parent doesn&rsquo;t perform the wait call on the zombie then init will adopt the zombie and wait call it.</p>
+<p>Too many zombie processes take up space in the process table. If the process table is filled up it will prevent other processes from running.</p>
+<p>Signals</p>
+<p>A notification to a process that something has happened.</p>
+<p>Why we have signals.</p>
+<p>Software interrupts that have a lot of uses.</p>
+<p>A user can type one of the special terminal characters (Ctrl-C) or (Ctrl-Z) to kill, interrupt, or suspend processes.</p>
+<p>Hardware issues can occur and the kernel wants to notify the process.</p>
+<p>Software issues can occur and the kernel wants to notify the process.</p>
+<p>They are basically ways processes can communicate.</p>
+<p>Signal process.</p>
+<p>Signal is generated by some event</p>
+<p>Delivered to a process</p>
+<p>In a pending state until it is delivered.</p>
+<p>When the process is ran, the signal will be delivered.</p>
+<p>Processes have signal masks and they can block signals if specified.</p>
+<p>After a signal is delivered a process could do a multitude of things:</p>
+<p>Ignore the signal</p>
+<p>&ldquo;Catch&rdquo; the signal and perform a specific handler routine.</p>
+<p>Process can be terminated, as opposed to the normal exit system call.</p>
+<p>Block the signal, depending on the signal mask.</p>
+<p>Common Signals</p>
+<p>- Defined by integers with symbolic names that are in the form of SIGxxx.</p>
+<p>- SIGHUP or HUP or 1: Hangup</p>
+<p>- SIGINT or INT or 2: Interrupt</p>
+<p>- SIGKILL or KILL or 9: kill</p>
+<p>- SIGSEGV or SEGV or 11: Segmentation fault</p>
+<p>- SIGTERM or TERM or 15: Software termination</p>
+<p>- SIGSTOP or STOP: Stop</p>
+<p>*numbers can vary with signals so they are usually referred by their names.</p>
+<p>* some signals are unblockable, one example is the SIGKILL signal. The KILL signal destroys the process.</p>
+<p>Kill (Terminate)</p>
+<p>$ kill 12445 - signal to kill a process. 12445 is the PID of the process to be killed.</p>
+<p>This send a TERM signal. The SIGTERM signal is sent to a process to request it&rsquo;s termination by allowing it to cleanly release its resources and saving it&rsquo;s state.</p>
+<p>$ kill -9 12445 - specifying signal -9 (SIGKILL) to kill the process.</p>
+<p>- SIGHUP - Hangup, sent to a process when the controlling terminal is closed.</p>
+<p>- SIGINT - Is an interrupt signal (Ctrl-C)</p>
+<p>- SIGTERM - Kill the process, but allow it to do some cleanup first.</p>
+<p>- SIGKILL - Kill the process, kill it with fire, no cleanup</p>
+<p>- SIGSTOP - Stop/ suspend a process</p>
+<p>niceness</p>
+<p>Process take turns sharing the CPU. A nice value can influence the process scheduling algorithm.</p>
+<p>Processes have a number to determine the priority for a CPU. High numbers are lower in priority and low numbers or negative are higher in priority. Nice is high not nice is low.</p>
+<p>$ top - shows processes with Niceness level under NI column.</p>
+<p>$ nice -n 5 apt upgrade - set priority for new process.</p>
+<p>$ renice 10 -p 3245 - set priority for an existing process.</p>
+<p>Process states</p>
+<p>$ ps aux</p>
+<p><!-- raw HTML omitted --></p>
+<p>STAT column show values for different states.</p>
+<p>- R - running or runnable, waiting for the CPU to process it.</p>
+<p>- S - Interruptible sleep, waiting for an even to comeplete, such as input from the terminal.</p>
+<p>-D - Uninterruptable sleep - can&rsquo;t be killed or interrupted, only a reboot can make them go away.</p>
+<p>- Z - Zombie</p>
+<p>- T - Stopped or suspended</p>
+<p>/proc filesystem</p>
+<p>Processes are stored here</p>
+<p>$ ls /proc - there are subdirectories for every PID. Shows all processes in file form. Shows more infor here than in ps</p>
+<p>Job Control</p>
+<p>Sending a job to the background</p>
+<p>sending an ampersand (&amp;) to the command will run it in the background so you can still use your shell.</p>
+<p>Example</p>
+<p>$ sleep 1000 &amp;</p>
+<p>$ sleep 1001 &amp;</p>
+<p>$ sleep 1002 &amp;</p>
+<p>View all background jobs</p>
+<p>$ jobs - to view the jobs you just sent to the background.</p>
+<p>This will show job id in the first column, then status , then the command that was ran. + and - next to the job is the most recent and second most recent program respectively.</p>
+<p>Sending a job to the background on existing job</p>
+<p>Ctrl+Z &gt;  $ bg</p>
+<p>Moving a job from the background to the foreground</p>
+<p>$ fg %1</p>
+<p>Kill background jobs</p>
+<p>kill %1</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

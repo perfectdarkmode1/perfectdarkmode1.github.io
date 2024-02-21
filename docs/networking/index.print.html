@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Networking - Perfect Dark Mode">
+    <meta name="twitter:description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta property="og:title" content="Networking - Perfect Dark Mode">
+    <meta property="og:description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title>Networking - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/" rel="canonical" type="text/html" title="Networking - Perfect Dark Mode">
+    <link href="/networking/index.xml" rel="alternate" type="application/rss+xml" title="Networking - Perfect Dark Mode">
+    <link href="/images/favicon.png?1708488311" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1708488312" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708488312" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1708488312" rel="stylesheet">
+    <link href="/css/auto-complete.css?1708488312" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708488312" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1708488312" rel="stylesheet">
+    <link href="/css/fonts.css?1708488312" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708488312" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1708488312" rel="stylesheet">
+    <link href="/css/theme-city2.css?1708488312" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1708488312" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1708488312" rel="stylesheet">
+    <link href="/css/print.css?1708488312" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1708488312" rel="stylesheet">
+    <link href="/css/ie.css?1708488312" rel="stylesheet">
+    <script src="/js/url.js?1708488312"></script>
+    <script src="/js/variant.js?1708488312"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Networking
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable chapter narrow" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="chapter">
+            <header class="headline">
+            </header>
+<div class="article-subheading">Chapter 2</div>
+<h1 id="networking">Networking</h1>
+
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <section>
+            <h1 class="a11y-only">Subsections of Networking</h1>
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="how-to-study-for-ccna">How to Study for CCNA</h1>
+
+<p><a href="#R-image-ce217bb4b20507fcf50832ba0ed38c55" class="lightbox-link"><img src="/Pasted%20image%2020231208132459.png" alt="CCNA Study Calendar" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ce217bb4b20507fcf50832ba0ed38c55"><img src="/Pasted%20image%2020231208132459.png" alt="CCNA Study Calendar" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p>It took me a whopping 2 years to finish my CCNA! I kept giving up and quitting my studies for months at a time. Why? Because I couldn&rsquo;t remember the massive amount of content covered in the CCNA. It felt hopeless. I could have done it in 6 month (or faster) if I knew how to study.</p>
+<p>I hadn&rsquo;t taken a test in 10 years before this. So I had completely forgotten how to learn. This post is about the mistakes I made studying for the CCNA and how to avoid them.</p>
+<p>You will also learn, as I did, about spaced repetition. I&rsquo;ve also included a 6 month CCNA spaced repetition calendar.</p>
+<hr>
+<h2 id="my-mistakes-so-you-dont-make-them">My Mistakes, So You Don&rsquo;t Make Them</h2>
+<hr>
+<h3 id="mistake-1-didnt-start-flashcards-until-the-final-30-days">Mistake #1 Didn&rsquo;t start flashcards until the final 30 days</h3>
+<p>I wish I would have started flashcards from day 1. This would have helped a crap ton. Remembering all of the little details is not only useful for taking the test. It embeds the concepts in your brain and keeps you processing how things work .</p>
+<p>If there is anything you take from this list. You should definitely be doing some flashcards every day.</p>
+<h3 id="mistake-2-not-enough-labs-as-i-went">Mistake #2 Not enough labs as I went.</h3>
+<p>While studying the OCG and video courses. I did some labs. But I also skipped a ton of labs because it wasn&rsquo;t convenient at the time. Then I was forced to lab every single topic in the final 30 days. A lot of cramming was done..</p>
+<p>Make sure to do all of the labs as you go. Make up your own labs as well. This is very important to building job worthy skills.</p>
+<h3 id="mistake-3-didnt-have-a-plan-or-stick-with-it">Mistake #3 Didn&rsquo;t have a plan or stick with it.</h3>
+<p>When your plan consists of, &ldquo;just read everything and watch the videos and take the test when you feel ready&rdquo;, you tend to procrastinate and put things off. Make a study schedule and a solid plan. (See below)</p>
+<p>Having a set date for when you will take the test was pretty motivating. I did not find this out until about 30 days until my test.</p>
+<hr>
+<h2 id="spaced-repetition">Spaced Repetition</h2>
+<hr>
+<p>If you are using Anki flashcards for your studies, you may already be using spaced repetition. Spaced repetition is repeatedly reviewing with the time in between reviews getting longer each time you review it.</p>
+<p>Here is an excellent article about our learning curves and why spaced repetition helps us remember things <a href="https://fs.blog/spacing-effect/" title="https://fs.blog/spacing-effect/" target="_blank">https://fs.blog/spacing-effect/</a></p>
+<h4 id="how-to-set-up-a-spaced-repetition-calendar-for-ccna">How to set up a spaced repetition calendar for CCNA.</h4>
+<p>Step 1. Plan how long your studies will take</p>
+<p>Figure out how long you need. It usually takes around 240 hours of studying for CCNA. (Depending on experience). Then figure out how many hours per day that you can spend on studying. This example is based on a 6 month study calendar.</p>
+<p>You can use this 6 month excel calendar to plan and track your progress. You. can still use this method If you have already been studying CCNA. Just edit your calendar for how much time you have left.</p>
+<p>The calendar is also based on Wendel Odom&rsquo;s Official Cert Guide. You will also want to mix your other resources into your reviews.</p>
+<p>Decide what your review sessions will be</p>
+<p>Plan to review each chapter 3-4 times. here is what I did for review sessions to pass the exam.</p>
+<p>Review 1 Read and highlight (and flashcards)</p>
+<ul>
+<li>Read the chapter. Highlight key information that you want to remember.</li>
+<li>Do a lab for the material you studied (if applicable)</li>
+<li>Answer DIKTA questions</li>
+<li>Start Chapter 1 Anki Flascards</li>
+</ul>
+<p>Review 2 Copy highlights over to OneNote (keep doing flashcards)</p>
+<ul>
+<li>Copy your highlights over to OneNote. (using copy and paste if you have the digital book)</li>
+<li>Read your highlights and make sure you understand everything.</li>
+<li>lab and continue doing flashcards. (just go through Anki suggested flashcards, not just ones for the specific chapter.)</li>
+</ul>
+<p>Review 3 Labs and Highlight your notes (and flashcards)</p>
+<ul>
+<li>
+<p>More labs!</p>
+</li>
+<li>
+<p>Go over your notes. Color coding everything. (You can find my jumbled note mess here)</p>
+</li>
+<li>
+<p>Green: Read again</p>
+</li>
+<li>
+<p>Teal: Very important Learn this/ lab it.</p>
+</li>
+<li>
+<p>Red/ purple: make extra flashcards out of this.</p>
+</li>
+</ul>
+<p>Review 4 Practice questions and review</p>
+<ul>
+<li>Go through and answer the DIKTA questions again. Review any missed answers.</li>
+<li>Lab anything you aren&rsquo;t quite sure of.</li>
+</ul>
+<p>The final 30 days</p>
+<p><a href="#R-image-c28a2b532a9636b40ba7f1dace440999" class="lightbox-link"><img src="/Pasted%20image%2020231208132727.png" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c28a2b532a9636b40ba7f1dace440999"><img src="/Pasted%20image%2020231208132727.png" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p>I HIGHLY recommend Boson ExSim for your final 30 days of studying. ExSim comes with 3 exams (A,B, and C). Start with exam A in test simulation mode. Leave about a week in between each practice exam so you can go over your answers and Boson&rsquo;s explanations for each answer.</p>
+<p>One week before your test, (after you&rsquo;ve completed exams A,B, and C). Do a random exam. Make sure you do the timed version that don&rsquo;t show your score as you go.</p>
+<p>You should be scoring above 900 by your 3rd and 4th exam if you have been reviewing Boson&rsquo;s answer explanations.</p>
+<p>Schedule your exam</p>
+<p>Pearson view didn&rsquo;t let me schedule the exam past 30 days out from when I wanted to take it. I&rsquo;m not sure if this is the case all the time. But by the time you are 30 days out you should have your test scheduled. This will light the fire under you. Great motivation for the home stretch.</p>
+<p>If your exam is around June during Cisco Live, Cisco usually offers a 50% discount for an exam voucher. You probably won’t find any other discounts unless you pay for Cisco’s specific CCNA training.</p>
+<h2 id="final-word-on-labs">Final word on labs</h2>
+<p>You can technically pass the CCNA without doing many labs. But this will leave you at a HUGE disadvantage in the job market. Labs are crucial for really understanding networking. Knowing your way around the CLI and being able to troubleshoot networking issues will make you stand out from those who crammed for the exam.</p>
+<p>If you’ve made it this far I really appreciate you taking the time to read this post. I really hope it helps at least one person.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="resources-i-used-to-pass-ccna">Resources I used to Pass CCNA</h1>
+
+<p><a href="#R-image-a8b869da63422801e25d0dae79cab31a" class="lightbox-link"><img src="/images/resourcesforccna.png" alt="" class="figure-image noborder lightbox noshadow" style="height: auto; width: auto;" loading="lazy"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a8b869da63422801e25d0dae79cab31a"><img src="/images/resourcesforccna.png" alt="" class="lightbox-image noborder lightbox noshadow" loading="lazy"></a></p>
+<p>There are a lot of great CCNA resources out there. This list does not include all of them. Only the ones that I personally used to pass the CCNA 200-301 exam.</p>
+<p>Materials for CCNA are generally separated into 5 categories:</p>
+<ul>
+<li>Books</li>
+<li>Video courses</li>
+<li>Labs</li>
+<li>Practice test</li>
+<li>Flashcards</li>
+</ul>
+<h2 id="books">Books</h2>
+<h3 id="wendell-odom-ocg-official-cert-guide-library">Wendell Odom OCG Official cert guide library</h3>
+<p>To me, this is the king of CCNA study materials. Some people do not like reading but this will give you more depth than any other resource on this list. <a href="https://www.amazon.com/CCNA-200-301-Official-Guide-Library/dp/1587147149/ref=sr_1_1?keywords=ccna&#43;200-301&amp;sr=8-1" target="_blank">Link.</a></p>
+<h3 id="todd-lammle-books">Todd Lammle Books</h3>
+<p>Yes, I read both the OCG and Todd Lammle books cover to cover. No, I do not recommend doing this. Todd has a great way of adding humor into networking. If you need to build up your networking from the ground up. These books are great. <a href="https://www.amazon.com/Cisco-CCNA-Certification-Set-200-301/dp/1119677610/ref=sr_1_8?keywords=ccna&#43;200-301&amp;sr=8-8&amp;ufe=app_do%3Aamzn1.fos.18ed3cb5-28d5-4975-8bc7-93deae8f9840" target="_blank">Link.</a></p>
+<h2 id="video-courses">Video Courses</h2>
+<h3 id="cbt-nuggets">CBT Nuggets</h3>
+<p>Jeremy Ciara makes learning networking so much fun. This was a great course but is not enough for you to pass the exam on it&rsquo;s own. Also, a CBT nuggets monthly subscription will set you back $59 per month. <a href="https://www.cbtnuggets.com/it-training/cisco/ccna" target="_blank">Link.</a></p>
+<h3 id="jeremys-it-lab">Jeremy&rsquo;s IT Lab</h3>
+<p>Jermey&rsquo;s IT lab course was the most informative for me. Jeremy is really great at explaining the more complex topics. Jeremy&rsquo;s course also includes Packet Tracer labs and and in depth Anki flashcard deck for free. <a href="https://www.youtube.com/watch?v=H8W9oMNSuwo&amp;list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ" target="_blank">Link.</a></p>
+<h2 id="labs">Labs</h2>
+<h3 id="david-bombals-packet-tracer-labs">David Bombal&rsquo;s Packet Tracer Labs</h3>
+<p>These labs will really make you think. Although they do steer off the exam objectives a bit. <a href="https://courses.davidbombal.com/p/cisco-ccna-packet-tracer-ultimate-labs-ccna-exam-prep-labs" target="_blank">Link.</a></p>
+<h3 id="jeremys-it-labs">Jeremy&rsquo;s IT labs</h3>
+<p>These were my favorite labs by far. Very easy to set up with clear instructions and video explanations.  <a href="https://www.youtube.com/watch?v=H8W9oMNSuwo&amp;list=PLxbwE86jKRgMpuZuLBivzlM8s2Dk5lXBQ" target="_blank">Link.</a></p>
+<h2 id="practice-test">Practice test</h2>
+<h3 id="boson-exsim">Boson Exsim</h3>
+<p>I can&rsquo;t stress this enough. if there is one resource that you invest some money into. it&rsquo;s the Boson practice exams. This is a test simulator that is very close to what the actual test will be like. Exsim comes with 3 exams.</p>
+<p>After taking one of these practice tests you will get a breakdown of your scores per category. You will also get to go through all of your questions and see detailed explantations for why each answer is right or wrong.</p>
+<p>These practice exams were crucial for me to understand where my knowledge gaps were. <a href="https://www.boson.com/practice-exam/200-301-cisco-ccna-practice-exam" target="_blank">Link.</a></p>
+<h2 id="subnettingpracticecom">Subnettingpractice.com</h2>
+<p>You can learn subnetting pretty good. Then forget some of the steps a month later and have to learn all over again. It was very helpful to go over some of these subnetting questions once in a while. <a href="https://subnettingpractice.com/" target="_blank">Link.</a></p>
+<h2 id="flashcards">Flashcards</h2>
+<h3 id="anki-deck">Anki Deck</h3>
+<p>These are the only flashcards I used. It is very nice not to have to create your own flashcards. Having the Anki app on your phone is very convenient. You can study whenever you have a few minutes of downtime.</p>
+<p>Anki also used spaced-repetition. It will give you harder flashcards more often based on how you rate their difficulty.</p>
+<p>This particular deck goes along with the OCG. You can filter by chapter and add more as you get through the book.</p>
+<p>I will be using Anki flashcards for every exam in the future. <a href="https://ankiweb.net/shared/info/591991787" target="_blank">Link.</a></p>
+<h2 id="my-top-3">My Top 3</h2>
+<p>Be careful not to use too many resources. You may get a bit overwhelmed. Especially if this is your first certification like it was for me. You will be building study habits and learning how to read questions correctly. So focus on quality over quantity.</p>
+<p>If I had to study for the CCNA again, I would use these three resources:</p>
+<ul>
+<li>OCG</li>
+<li>Boson Exsim</li>
+<li>Anki Flashcards</li>
+</ul>
+<p>If you like these posts, please let me know so i can keep making more like them!</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="what-to-learn-after-ccna">What to Learn After CCNA</h1>
+
+<p>It&rsquo;s easy to get overwhelmed with options after completing your CCNA. What do you learn next? If you are trying to get a job as a Network Engineer, you will want to check this out.</p>
+<p>I went through dozens of job listings that mentioned CCNA. Then, tallied up the main devices/vendors, certifications, and technologies mentioned. And left out anything that wasn&rsquo;t mentioned more than twice.</p>
+<p>Core CCNA technologies such as LAN, WAN, OSPF, Spanning Tree, VLANs, etc. have been left out. The point here is to target the most sought after technologies and skills by employers. I also left out soft skills and any job that wasn&rsquo;t a networking specific role.</p>
+<h2 id="devices-vendors">Devices/ Vendors</h2>
+<p>Palo Alto is huge! I&rsquo;m not suprised by this. Depending on the company, a network engineer may be responsible for firewall configuration and troubleshooting. It also looks like Network Engineers with a wide variety of skills are saught after.</p>
+<table>
+<thead>
+<tr>
+<th>Device/Vendor</th>
+<th>Times Mentioned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Palo Alto</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Cisco ASA</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Juniper</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Office 365</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Meraki</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Vmware</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Ansible</td>
+<td>4</td>
+</tr>
+<tr>
+<td>AWS</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Wireshark</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technologies">Technologies</h2>
+<p>Firewall comes in first again. Followed closely by VPN skills. Every interview I had for a Network Engineer position asked if I knew how to configure and troubleshoot VPNs.</p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Times Mentioned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firewall</td>
+<td>19</td>
+</tr>
+<tr>
+<td>VPN</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Wireless</td>
+<td>12</td>
+</tr>
+<tr>
+<td>BGP</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>12</td>
+</tr>
+<tr>
+<td>MPLS</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Load balancers</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Ipsec</td>
+<td>7</td>
+</tr>
+<tr>
+<td>ISE</td>
+<td>6</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>5</td>
+</tr>
+<tr>
+<td>SDWAN</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Cloud</td>
+<td>4</td>
+</tr>
+<tr>
+<td>TACACS+</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SIEM</td>
+<td>4</td>
+</tr>
+<tr>
+<td>IDS/IPS</td>
+<td>4</td>
+</tr>
+<tr>
+<td>RADIUS</td>
+<td>3</td>
+</tr>
+<tr>
+<td>ITIL</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Ipam</td>
+<td>3</td>
+</tr>
+<tr>
+<td>VOIP</td>
+<td>3</td>
+</tr>
+<tr>
+<td>EIGRP</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="certifications">Certifications</h2>
+<p>CCNP blew every other cert out of the water. Companies will be very interested if you are working towards this cert. Security + comes highly recommended as well.</p>
+<table>
+<thead>
+<tr>
+<th>Certification</th>
+<th>Times Mentioned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CCNP</td>
+<td>18</td>
+</tr>
+<tr>
+<td>Security+</td>
+<td>6</td>
+</tr>
+<tr>
+<td>JNCIA</td>
+<td>4</td>
+</tr>
+<tr>
+<td>JNCIP</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Network +</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CCIE</td>
+<td>4</td>
+</tr>
+<tr>
+<td>PCNSA</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="so-what-do-you-do-after-ccna">So what do you do after CCNA?</h2>
+<p>It depends&hellip;</p>
+<p>Are you trying to get a new job ASAP? Are there opportunities at your current role that you can use your new skills to leverage? Do you have some study time before you are ready to take the next step?</p>
+<p>CCNP Enterprise is a good bet if you really want to stand out in Network Engineering interviews.</p>
+<h2 id="dont-want-to-be-a-network-engineer">Don&rsquo;t want to be a Network engineer?</h2>
+<p>Continue to build a good base of IT skills. This will open you up to a larger variety of jobs and open skill paths that you need a good foundation to unlock.</p>
+<p>Core skills include:</p>
+<ul>
+<li>Linux/ Operating systems</li>
+<li>Networking</li>
+<li>General Cybersecurity</li>
+<li>Programming/ Scripting</li>
+</ul>
+<p>A good Linux certification like the RHCSA would be great to learn more about Linux, scripting, and operating systems. Security + would be good if you want to get a solid foundation of cyber security. And Python skills will give you a gold star in any IT interview.</p>
+<h2 id="dont-get-paralyzed-by-choices">Don&rsquo;t get paralyzed by choices.</h2>
+<p>Pick something that interests you and go for it. That is the only way to get it right. Doing what you enjoy is better than not doing anything at all because you can&rsquo;t decide the best path.</p>
+<p>Hopefully we can revisit this post after learning Python to get a much bigger sample size.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1708488312" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1708488312" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1708488312" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1708488312" defer></script>
+    <script src="/js/js-yaml.min.js?1708488312" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1708488312" defer></script>
+  </body>
+</html>

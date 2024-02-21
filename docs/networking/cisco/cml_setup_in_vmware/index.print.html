@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Cisco CML VMWARE Guide - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/cml_setup_in_vmware/index.html" rel="canonical" type="text/html" title="Cisco CML VMWARE Guide - Perfect Dark Mode">
+    <link href="/networking/cisco/cml_setup_in_vmware/index.xml" rel="alternate" type="application/rss+xml" title="Cisco CML VMWARE Guide - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/cml_setup_in_vmware/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Cisco CML VMWARE Guide</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="cisco-cml-vmware-guide">Cisco CML VMWARE Guide</h1>
+
+<p>You can find a detailed installation guide here <a href="https://developer.cisco.com/docs/modeling-labs/#!system-requirements" title="https://developer.cisco.com/docs/modeling-labs/#!system-requirements" target="_blank">https://developer.cisco.com/docs/modeling-labs/#!system-requirements</a></p>
+<p>Sign up for CML <a href="https://www.cisco.com/c/en/us/products/cloud-systems-management/modeling-labs/index.html" title="https://www.cisco.com/c/en/us/products/cloud-systems-management/modeling-labs/index.html" target="_blank">https://www.cisco.com/c/en/us/products/cloud-systems-management/modeling-labs/index.html</a></p>
+<p>Install VMWare Player <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" title="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html</a></p>
+<p>Set up is pretty easy, just go through the installer. Leave all defaults.</p>
+<p>Set up for non-commercial use</p>
+<p>Download CML files <a href="https://software.cisco.com/download/home/286290254/type/286290305/release/CML-Personal%202.2.3" title="https://software.cisco.com/download/home/286290254/type/286290305/release/CML-Personal%202.2.3" target="_blank">https://software.cisco.com/download/home/286290254/type/286290305/release/CML-Personal 2.2.3</a></p>
+<p>.ova and .iso</p>
+<p>And copy your license key from your account page <a href="https://learningnetworkstore.cisco.com/myaccount" title="https://learningnetworkstore.cisco.com/myaccount" target="_blank">https://learningnetworkstore.cisco.com/myaccount</a></p>
+<p>Open and import the .ova</p>
+<p>Go into your vm settings and make sure you provide enough RAM and CPU, also add the iso file here.</p>
+<p>Also select connect at power on</p>
+<p>Note: Intel VT or AMD-V must be enabled in your BIOS for this setup to work</p>
+<p>I also had to use NAT to get this to work.</p>
+<p>Power on your VM</p>
+<p>Once loaded, your screen should look like this:</p>
+<p>Click inside of the vm and press enter to continue</p>
+<p>Press tab to highlight &ldquo;Accept EULA&rdquo; and press enter</p>
+<p>Press enter to continue</p>
+<p>Note the navigation commands and press enter again</p>
+<p>Define CML and Linux root username and passwords</p>
+<p>Press enter to use DHCP to get an IP address</p>
+<p>Press okay</p>
+<p>You should now be here:</p>
+<p>Note the HTTPs address and enter it into your browser</p>
+<p>Add the license from earlier:</p>
+<p><a href="https://www.ryadel.com/en/resize-extend-disk-partition-unallocated-disk-space-linux-centos-rhel-ubuntu-debian/" title="https://www.ryadel.com/en/resize-extend-disk-partition-unallocated-disk-space-linux-centos-rhel-ubuntu-debian/" target="_blank">https://www.ryadel.com/en/resize-extend-disk-partition-unallocated-disk-space-linux-centos-rhel-ubuntu-debian/</a></p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

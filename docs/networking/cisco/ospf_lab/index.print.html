@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>OSPF Lab - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/ospf_lab/index.html" rel="canonical" type="text/html" title="OSPF Lab - Perfect Dark Mode">
+    <link href="/networking/cisco/ospf_lab/index.xml" rel="alternate" type="application/rss+xml" title="OSPF Lab - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/ospf_lab/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">OSPF Lab</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="ospf-lab">OSPF Lab</h1>
+
+<p>Welcome to the CCNA OSPF lab. You&rsquo;ll need to configure OSPF so that there are full routing capabilities in the network. As well as use show commands to verify your network. Then you will troubleshoot and fix a broken OSPF network.</p>
+<p>Once again, this will all be done in Packet Tracer. But feel free to do this lab on real equipment, GNS-3, etc.</p>
+<h2 id="ospf-setup">OSPF Setup</h2>
+<p>There are two main ways to configure OSPF. You can go into OSPF configuration mode. Or you can configure OSPF in Interface configuration mode. I will show you how to configure router1. You will need to configure the other routers as well.</p>
+<h2 id="step-1-configure-ospf-on-routers-1-2-and-3">Step 1. Configure OSPF on routers 1, 2, and 3.</h2>
+<p>Do not configure OSPF on router3 link to isprouter. Also, make sure to include the loopback interfaces in your OSPF networks.</p>
+<h3 id="enter-ospf-configuration-mode">Enter OSPF Configuration Mode</h3>
+<p>router1 (config) # router ospf 1</p>
+<h3 id="define-networks-for-ospf-to-advertise">Define networks for OSPF to advertise</h3>
+<p>router1 (config-router) network 10.0.1.0 0.0.0.255 area 0</p>
+<p>router1 (config-router) network 192.168.1.0 0.0.0.255 area 0</p>
+<p>router1 (config-router) network 1.1.1.1 0.0.0.0 area 0</p>
+<p>or</p>
+<h3 id="configure-ospf-in-interface-configuration-mode">Configure OSPF in Interface configuration mode</h3>
+<p>Interface configuration</p>
+<p>router1 (config-if) # Ip ospf 1 area 0</p>
+<h2 id="step-2--configure-router1-connection-to-the-1921681024-network-as-a-passive-interface">Step 2.  Configure router1 connection to the 192.168.1.0/24 network as a passive interface</h2>
+<p>Make ospf interfaces that are not connected to a router stop trying to for neighbor relationships. (Stop sending hellos and stop processing hellos)</p>
+<p>passive interface type number</p>
+<h2 id="step-3-configure-router3-to-us-isprouter-as-the-default-gateway-and-to-advertise-the-default-route">Step 3. Configure router3 to us isprouter as the default gateway and to advertise the default route.</h2>
+<p>Set a default route</p>
+<p>ip route 0.0.0.0 0.0.0.0 19.0.0.1</p>
+<p>Advertise a default route</p>
+<p>default-information originate</p>
+<h2 id="step-4-ping-isprouter-from-pc1-to-verify-connection">Step 4. Ping isprouter from PC1 to verify connection</h2>
+<h2 id="step-5-use-show-commands-to-view-ospf-neighbors-routing-table-and-the-ospf-lsdb">Step 5. Use Show Commands to view OSPF neighbors, routing Table, and the OSPF LSDB</h2>
+<p>Show Commands</p>
+<p>Show IP OSPF neighbor (neighbors)</p>
+<p>Show ip ospf database (Link State database)</p>
+<p>show ip route</p>
+<p>show ip ospf interface</p>
+<p>20 lines of output per interface</p>
+<p>show ip ospf interface gi0/0</p>
+<p>show ip ospf interface brief</p>
+<p>To check if ospf is enabled on the proper interfaces. Single line of output per interface</p>
+<p>show ip ospf rib (spf calculation)</p>
+<p>Show ip route</p>
+<p>Show ip route ospf</p>
+<p>Show ip protocols</p>
+<p>Broken OSPF Lab</p>
+<p>More OSPF Labs</p>
+<h2 id="other-helpful-ospf-commands">Other helpful OSPF commands</h2>
+<p>Configure OSPF Router ID (preferred by router)</p>
+<p>router1 (config-router) # router-id 1.1.1.1</p>
+<p>Create a loopback interface</p>
+<p>Highest loopback interface with the &ldquo;up&rdquo; status is used as the RID if the RID is not manually configured.</p>
+<p>If no loopbacks are configured, and the RID is not manually configured, then the highest IP with an &ldquo;up&rdquo; ststus is used as the RID.</p>
+<p>interface loopback 0.</p>
+<p>ip address 1.1.1.1</p>
+<p>Clear IP OSPF process</p>
+<p>Restart the OSPF process. This can be used so RID configurations will take effect.</p>
+<p>Change the cost of an interface</p>
+<p>ip ospf cost 4</p>
+<h2 id="change-the-reference-bandwidth">Change the reference bandwidth</h2>
+<p>router ospf # auto-cost reference bandwidth 10000</p>
+<h2 id="change-the-interface-bandwidth">Change the interface bandwidth</h2>
+<p>bandwidth speed (kbps)</p>
+<h2 id="ospf-load-balancing">OSPF Load balancing</h2>
+<p>maximum paths 5</p>
+<h2 id="set-ospf-network-to-point-to-point">Set Ospf Network to point-to-point</h2>
+<p>Must be set on both routers</p>
+<p>router1 (config-if) # ip ospf network point-to-point</p>
+<h2 id="set-the-ospf-network-type-back-to-broadcast">Set the ospf network type back to broadcast</h2>
+<p>ip ospf network broadcast</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

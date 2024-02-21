@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Text Editors - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/text_fu/index.html" rel="canonical" type="text/html" title="Text Editors - Perfect Dark Mode">
+    <link href="/linux/misc_linux/text_fu/index.xml" rel="alternate" type="application/rss+xml" title="Text Editors - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/text_fu/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Text Editors</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="text-editors">Text Editors</h1>
+
+<p>stdout (Standard Out)</p>
+<p>I/O (input/output streams)</p>
+<p>$ echo Hello World  &gt; Peanuts.txt</p>
+<p>Writes Hello World to a new file called Peanuts.txt</p>
+<p>Processes use I/O streams to receive input and return output.</p>
+<p>echo takes the input of the keyboard and returns it as output to the screen. &gt; Is an I/O redirection operator that changes where the standard output goes. if the file already exist the contents will be overwritten.</p>
+<p>$ echo Hello World &raquo; Peanuts.txt</p>
+<blockquote>
+<p>&gt; is used to add the output to the end of the file instead of overwriting it. This will also create Peanuts.txt if it doesn&rsquo;t already exist.</p>
+</blockquote>
+<p>stdin (Standard In) &lt;</p>
+<p>cat &lt; peanuts.txt &gt; banana.txt</p>
+<p>inputs cat to peanuts.txt and outputs to Banana.txt</p>
+<p>stderr (Standard Error)</p>
+<p>$ ls /fake/directory &gt; peanuts.txt</p>
+<p>trying to ls a directory that doesn&rsquo;t exist</p>
+<p>Output: ls: cannot access /fake/directory: No such file or directory</p>
+<p>This does not output to peanut.txt because you cannot output a stderror the same way as stdout.</p>
+<p>Use a file descriptor to do this. This is a non-negative number that is used to access a file or stream.</p>
+<p>The file descriptor for stdin, stdout, and stderr is 0,1, and 2 respectively.</p>
+<p>Redirect stderr to a file</p>
+<p>$ ls /fake/directory 2&gt; peanuts.txt</p>
+<p>To see both stderr and stdout in a file</p>
+<p>$ ls /fake/directory &gt; peanuts.txt 2&gt;&amp;1</p>
+<p>There is a shorter way to redirect both stdout and stderr to a file</p>
+<p>$ ls /fake/directory &amp;&gt; peanuts.txt</p>
+<p>To get rid of stderr messages completely</p>
+<p>$ ls fake/directory 2&gt; /dev/null</p>
+<p>redirects output to /dev/null</p>
+<p>pipe and tee</p>
+<p>$ ls -la /etc | less</p>
+<p>| allows us to take the stdout of a command and make that the stdin to another process.</p>
+<p>$ ls | tee peanuts.txt</p>
+<p>tee writes the output to two different streams.</p>
+<p>env (Environment)</p>
+<p>Environment variables store info to variables in your specific user environment.</p>
+<p>$ echo $HOME</p>
+<p>Shows what is stored in the HOME variable</p>
+<p>$ echo $USER</p>
+<p>Shows what is stored in the USER variable</p>
+<p>$ env</p>
+<p>Shows all environment info used by shell and other processes</p>
+<p>You can access a variable by placing $ in front of it like the above examples</p>
+<p>The system will check the paths in the PATH variable for the command you are trying to run. If it is not in any of those paths then it will not find the command. If you downloaded a tool and place the commands in a path not listed then it will not find the tool when you run the command. You can include other paths in this list.</p>
+<p>cut</p>
+<p>$ cut -c 5 file.txt</p>
+<p>outputs the 5th character in each line of file.txt space also counts as a character.</p>
+<p>$ cut -f 2 file.txt</p>
+<p>-f flag sorts by fields. Fields are separated by tabs. So this would output the field after the first tab which is the second field.</p>
+<p>$ cut -f  1 -d &ldquo;;&rdquo; file.txt</p>
+<p>Changes tab delimiter to a ; delimiter</p>
+<p>paste</p>
+<p>$ paste -s file2.txt</p>
+<p>combines file2.txt into one line using tabs to separate. -s makes everything go on one line.</p>
+<p>$ paste -d &rsquo; &rsquo; -s file2.txt</p>
+<p>changes the delimiter to a space</p>
+<p>head</p>
+<p>by default, the head command will show you the first 10 lines in a file</p>
+<p>$ head /var/log/syslog</p>
+<p>shows the first 10 lines in /var/log/syslog</p>
+<p>$ head -n 15 /var/log/syslog</p>
+<p>-n flag is for number of lines, this would output 15 lines. You can output as many lines as you want.</p>
+<p>tail</p>
+<p>Shows last 10 lines of file by default</p>
+<p>$ tail /var/log/syslog</p>
+<p>$ tail -n 15 /var/log/syslog</p>
+<p>Shows 15 lines instead of 10</p>
+<p>$ tail -f /var/log/syslog</p>
+<p>-f will follow the file as it grows</p>
+<p>Expand and Unexpand</p>
+<p>$ expand sample.txt</p>
+<p>converts any tabs in the file to a series of spaces.</p>
+<p>$ expand file.txt &gt; spacefile.txt</p>
+<p>put that output into a new file</p>
+<p>$ unexpand -a result.txt</p>
+<p>converts spaces back to tabs</p>
+<p>Join and Split</p>
+<p>$ join file1.txt file2.txt</p>
+<p>Joined via matching list fields</p>
+<p>-1 refers to file3.txt -2 refers to list2.txt and specifies the field from each file that you want.</p>
+<p>$ split somefile</p>
+<p>splits into different files by default it will split them once they reach a 1000 line limit. The files are names x** by default</p>
+<p>sort</p>
+<p>useful for sorting lines</p>
+<p>$ sort file.txt</p>
+<p>Sorts file in alphabetical order</p>
+<p>$  sort  -r file.txt</p>
+<p>-r flag reverses the order of the sort</p>
+<p>$ sort -n file.txt</p>
+<p>sorts by numerical value</p>
+<p>tr (Translate)</p>
+<p>allows you to translate a set of characters into another set of characters</p>
+<p>$ tr a-z A-Z</p>
+<p>hello</p>
+<p>HELLO</p>
+<p>uniq (Unique)</p>
+<p>Useful tool for parsing text.</p>
+<p>$ uniq reading.txt</p>
+<p>Outputs contents of reading.txt without duplicates.</p>
+<p>$ uniq -c reading.txt</p>
+<p>Outputs a count of each word</p>
+<p>$ unique -u reading.txt</p>
+<p>Outputs only unique words</p>
+<p>$ unique -d reading.txt</p>
+<p>Only outputs duplicate values</p>
+<p>This will not detect duplicate lines if they are not adjacent</p>
+<p>To overcome this limitation:</p>
+<p>$ sort reading.txt | uniq</p>
+<p>This will output duplicated because the sort puts all of the duplicates together first.</p>
+<p>wc and nl</p>
+<p>The wc (word count) command shows the total count of words in a file</p>
+<p>$ wc /etc/passwd</p>
+<p>Output: 96  265  5925 /etc/passwd</p>
+<p>displays number of lines, number of words, and number of bytes respectively</p>
+<p>To just see the count of a certain field, use the -l, -w, or -c respectively</p>
+<p>$ wc -l /etc/psswd</p>
+<p>$ nl file.txt</p>
+<p>shows number of lines in the file</p>
+<p>grep</p>
+<p>Allows you to search files for characters that match a certain pattern. Like if a string is in a certain file or file in a certain directory.</p>
+<p>$ grep fox sample.txt</p>
+<p>looks for fox</p>
+<p>$ grep -i somepattern somefile</p>
+<p>looks for patterns that are case insensitive</p>
+<p>$ env | grep -i User</p>
+<p>Grabs User from env without needing CAPS for USER variable</p>
+<p>$ ls /somedir | grep &lsquo;.txt$&rsquo;</p>
+<p>returns all files ending with .txt in somedi</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

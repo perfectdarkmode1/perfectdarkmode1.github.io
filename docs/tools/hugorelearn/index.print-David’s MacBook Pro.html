@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to Set up Hugo Relearn Theme - Perfect Dark Mode">
+    <meta name="twitter:description" content="Hugo Setup Adding a module as a theme Make sure Go is installed
+go versionCreate a new site
+hugo new site sitename cd sitenameInitialize your site as a module
+hugo mod init sitenameConfirm
+cat go.modAdd the module as a dependency using it&rsquo;s git link
+hugo mod get github.com/McShelby/hugo-theme-relearnConfirm
+cat go.modadd the theme to config.toml
+# add this line to config.toml and save theme = [&#34;github.com/McShelby/hugo-theme-relearn&#34;]Confirm by viewing site
+hugo serve # visit browser at http://localhost:1313/ to view siteAdding a new &ldquo;chapter&rdquo; page">
+    <meta property="og:title" content="How to Set up Hugo Relearn Theme - Perfect Dark Mode">
+    <meta property="og:description" content="Hugo Setup Adding a module as a theme Make sure Go is installed
+go versionCreate a new site
+hugo new site sitename cd sitenameInitialize your site as a module
+hugo mod init sitenameConfirm
+cat go.modAdd the module as a dependency using it&rsquo;s git link
+hugo mod get github.com/McShelby/hugo-theme-relearnConfirm
+cat go.modadd the theme to config.toml
+# add this line to config.toml and save theme = [&#34;github.com/McShelby/hugo-theme-relearn&#34;]Confirm by viewing site
+hugo serve # visit browser at http://localhost:1313/ to view siteAdding a new &ldquo;chapter&rdquo; page">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/hugorelearn/">
+    <meta property="article:section" content="Tools - Perfect Dark Mode">
+    <meta property="article:published_time" content="2023-04-22T05:45:26-07:00">
+    <meta property="article:modified_time" content="2023-04-22T05:45:26-07:00">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title>How to Set up Hugo Relearn Theme - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/tools/hugorelearn/" rel="canonical" type="text/html" title="How to Set up Hugo Relearn Theme - Perfect Dark Mode">
+    <link href="/tools/hugorelearn/index.xml" rel="alternate" type="application/rss+xml" title="How to Set up Hugo Relearn Theme - Perfect Dark Mode">
+    <link href="/images/favicon.png?1702594242" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1702594242" rel="stylesheet">
+    <link href="/css/auto-complete.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1702594242" rel="stylesheet">
+    <link href="/css/fonts.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1702594242" rel="stylesheet">
+    <link href="/css/theme-city2.css?1702594242" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1702594242" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1702594242" rel="stylesheet">
+    <link href="/css/print.css?1702594242" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1702594242" rel="stylesheet">
+    <link href="/css/ie.css?1702594242" rel="stylesheet">
+    <script src="/js/url.js?1702594242"></script>
+    <script src="/js/variant.js?1702594242"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/tools/hugorelearn/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            How to Set up Hugo Relearn Theme
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="how-to-set-up-hugo-relearn-theme">How to Set up Hugo Relearn Theme</h1>
+
+<h1 id="hugo-setup">Hugo Setup</h1>
+<h2 id="adding-a-module-as-a-theme">Adding a module as a theme</h2>
+<p>Make sure Go is installed</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>go version</code></pre></div><p>Create a new site</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hugo new site sitename
+cd sitename</code></pre></div><p>Initialize your site as a module</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hugo mod init sitename</code></pre></div><p>Confirm</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cat go.mod</code></pre></div><p>Add the module as a dependency using it&rsquo;s git link</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hugo mod get github.com/McShelby/hugo-theme-relearn</code></pre></div><p>Confirm</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cat go.mod</code></pre></div><p>add the theme to config.toml</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code># add this line to config.toml and save
+theme = [&#34;github.com/McShelby/hugo-theme-relearn&#34;]</code></pre></div><p>Confirm by viewing site</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hugo serve
+# visit browser at http://localhost:1313/ to view site</code></pre></div><p>Adding a new &ldquo;chapter&rdquo; page</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hugo new --kind chapter Chapter/_index.md</code></pre></div><p>Add a home page</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new --kind home _index.md</span></span></code></pre></div><p>Add a default page</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new &lt;chapter&gt;/&lt;name&gt;/_index.md</span></span></code></pre></div><p>or</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new &lt;chapter&gt;/&lt;name&gt;.md</span></span></code></pre></div><p>You will need to change some options in _index.md</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>+++
+# is this a &#34;chaper&#34;?
+chapter=true
+archetype = &#34;chapter&#34;
+# page title name
+title = &#34;Linux&#34;
+# The &#34;chapter&#34; number
+weight = 1
++++</code></pre></div><p>Adding a &ldquo;content page&rdquo; under a category</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>hugo new basics/first-content.md</span></span></code></pre></div><p>Create a sub directory:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>hugo new basics/second-content/_index.md</code></pre></div><ul>
+<li>change draft = true to draft = false in the content page to make a page render.</li>
+</ul>
+<h2 id="global-site-parameters">Global site parameters</h2>
+<p>Add these to your config.toml file and edit as you please</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[params]
+  # This controls whether submenus will be expanded (true), or collapsed (false) in the
+  # menu; if no setting is given, the first menu level is set to false, all others to true;
+  # this can be overridden in the pages frontmatter
+  alwaysopen = true
+  # Prefix URL to edit current page. Will display an &#34;Edit&#34; button on top right hand corner of every page.
+  # Useful to give opportunity to people to create merge request for your doc.
+  # See the config.toml file from this documentation site to have an example.
+  editURL = &#34;&#34;
+  # Author of the site, will be used in meta information
+  author = &#34;&#34;
+  # Description of the site, will be used in meta information
+  description = &#34;&#34;
+  # Shows a checkmark for visited pages on the menu
+  showVisitedLinks = false
+  # Disable search function. It will hide search bar
+  disableSearch = false
+  # Disable search in hidden pages, otherwise they will be shown in search box
+  disableSearchHiddenPages = false
+  # Disables hidden pages from showing up in the sitemap and on Google (et all), otherwise they may be indexed by search engines
+  disableSeoHiddenPages = false
+  # Disables hidden pages from showing up on the tags page although the tag term will be displayed even if all pages are hidden
+  disableTagHiddenPages = false
+  # Javascript and CSS cache are automatically busted when new version of site is generated.
+  # Set this to true to disable this behavior (some proxies don&#39;t handle well this optimization)
+  disableAssetsBusting = false
+  # Set this to true if you want to disable generation for generator version meta tags of hugo and the theme;
+  # don&#39;t forget to also set Hugo&#39;s disableHugoGeneratorInject=true, otherwise it will generate a meta tag into your home page
+  disableGeneratorVersion = false
+  # Set this to true to disable copy-to-clipboard button for inline code.
+  disableInlineCopyToClipBoard = false
+  # A title for shortcuts in menu is set by default. Set this to true to disable it.
+  disableShortcutsTitle = false
+  # If set to false, a Home button will appear below the search bar on the menu.
+  # It is redirecting to the landing page of the current language if specified. (Default is &#34;/&#34;)
+  disableLandingPageButton = true
+  # When using mulitlingual website, disable the switch language button.
+  disableLanguageSwitchingButton = false
+  # Hide breadcrumbs in the header and only show the current page title
+  disableBreadcrumb = true
+  # If set to true, hide table of contents menu in the header of all pages
+  disableToc = false
+  # If set to false, load the MathJax module on every page regardless if a MathJax shortcode is present
+  disableMathJax = false
+  # Specifies the remote location of the MathJax js
+  customMathJaxURL = &#34;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js&#34;
+  # Initialization parameter for MathJax, see MathJax documentation
+  mathJaxInitialize = &#34;{}&#34;
+  # If set to false, load the Mermaid module on every page regardless if a Mermaid shortcode or Mermaid codefence is present
+  disableMermaid = false
+  # Specifies the remote location of the Mermaid js
+  customMermaidURL = &#34;https://unpkg.com/mermaid/dist/mermaid.min.js&#34;
+  # Initialization parameter for Mermaid, see Mermaid documentation
+  mermaidInitialize = &#34;{ \&#34;theme\&#34;: \&#34;default\&#34; }&#34;
+  # If set to false, load the Swagger module on every page regardless if a Swagger shortcode is present
+  disableSwagger = false
+  # Specifies the remote location of the RapiDoc js
+  customSwaggerURL = &#34;https://unpkg.com/rapidoc/dist/rapidoc-min.js&#34;
+  # Initialization parameter for Swagger, see RapiDoc documentation
+  swaggerInitialize = &#34;{ \&#34;theme\&#34;: \&#34;light\&#34; }&#34;
+  # Hide Next and Previous page buttons normally displayed full height beside content
+  disableNextPrev = true
+  # Order sections in menu by &#34;weight&#34; or &#34;title&#34;. Default to &#34;weight&#34;;
+  # this can be overridden in the pages frontmatter
+  ordersectionsby = &#34;weight&#34;
+  # Change default color scheme with a variant one. Eg. can be &#34;auto&#34;, &#34;red&#34;, &#34;blue&#34;, &#34;green&#34; or an array like [ &#34;blue&#34;, &#34;green&#34; ].
+  themeVariant = &#34;auto&#34;
+  # Change the title separator. Default to &#34;::&#34;.
+  titleSeparator = &#34;-&#34;
+  # If set to true, the menu in the sidebar will be displayed in a collapsible tree view. Although the functionality works with old browsers (IE11), the display of the expander icons is limited to modern browsers
+  collapsibleMenu = false
+  # If a single page can contain content in multiple languages, add those here
+  additionalContentLanguage = [ &#34;en&#34; ]
+  # If set to true, no index.html will be appended to prettyURLs; this will cause pages not
+  # to be servable from the file system
+  disableExplicitIndexURLs = false
+  # For external links you can define how they are opened in your browser; this setting will only be applied to the content area but not the shortcut menu
+  externalLinkTarget = &#34;_blank&#34;</code></pre></div><h2 id="syntax-highlighting">Syntax highlighting</h2>
+<p>Supports a variety of [Code Syntaxes]
+To select the syntax, wrap the code in backticks and place the syntax by the first set of backticks.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>```bash
+echo hello
+\```</code></pre></div><h2 id="adding-tags">Adding tags</h2>
+<p>Tags are displayed in order at the top of the page. They will also display using the menu shortcut made further down.</p>
+<p>Add tags to a page:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span><span style="color:#ff5c57">+++</span>
+</span></span><span style="display:flex;"><span>tags = [<span style="color:#5af78e">&#34;tutorial&#34;</span>, <span style="color:#5af78e">&#34;theme&#34;</span>]
+</span></span><span style="display:flex;"><span>title = <span style="color:#5af78e">&#34;Theme tutorial&#34;</span>
+</span></span><span style="display:flex;"><span>weight = <span style="color:#ff9f43">15</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff5c57">+++</span></span></span></code></pre></div><h2 id="choose-a-default-color-themehttpsxyprotogithubiosplashdocsallhtml">Choose a default color <a href="https://xyproto.github.io/splash/docs/all.html" target="_blank">theme</a></h2>
+<p>Add to config.toml with the chosen theme for the &ldquo;style&rdquo; option:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[markup]
+</span></span><span style="display:flex;"><span>  [markup.highlight]
+</span></span><span style="display:flex;"><span>    <span style="color:#78787e"># if `guessSyntax = true`, there will be no unstyled code even if no language</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#78787e"># was given BUT Mermaid and Math codefences will not work anymore! So this is a</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#78787e"># mandatory setting for your site if you want to use Mermaid or Math codefences</span>
+</span></span><span style="display:flex;"><span>    guessSyntax = <span style="color:#ff6ac1">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#78787e"># choose a color theme or create your own</span>
+</span></span><span style="display:flex;"><span>    style = <span style="color:#5af78e">&#34;base16-snazzy&#34;</span></span></span></code></pre></div><h2 id="add-print-option-and-search-output-page">Add Print option and search output page.</h2>
+<p>add the following to config.toml</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[outputs]
+  home = [&#34;HTML&#34;, &#34;RSS&#34;, &#34;PRINT&#34;, &#34;SEARCH&#34;]
+  section = [&#34;HTML&#34;, &#34;RSS&#34;, &#34;PRINT&#34;]
+  page = [&#34;HTML&#34;, &#34;RSS&#34;, &#34;PRINT&#34;]</code></pre></div><h2 id="customization">Customization</h2>
+<p>This theme has a bunch of editable customizations called partials. You can overwrite the default partials by putting new ones in /layouts/partials/.</p>
+<p>to customize &ldquo;partials&rdquo;, create a  &ldquo;partials&rdquo; directory under site/layouts/</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>cd layouts
+mkdir partials
+cd partials</code></pre></div><p>You can find all of the partials available for this theme <a href="https://mcshelby.github.io/hugo-theme-relearn/basics/customization/index.html" target="_blank">here</a></p>
+<h3 id="change-the-site-logo-using-the-logohtml-partial">Change the site logo using the logo.html partial</h3>
+<p>Create logo.html in /layouts/partials</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>vim logo.html</code></pre></div><p>Add the content you want in html. This can be an img html tag referencing an image in the static folder. Or even basic text. Here is the basic syntax of an html page, adding &ldquo;Perfect Dark Mode&rdquo; as the text to display:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;h3&gt;Perfect Dark Mode&lt;/h3&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div><h3 id="add-a-favicon-to-your-site">Add a favicon to your site</h3>
+<ul>
+<li>This is pasted from the relearn site. Add Favicon and edit *
+If your favicon is a SVG, PNG or ICO, just drop off your image in your local <code>static/images/</code> folder and name it <code>favicon.svg</code>, <code>favicon.png</code> or <code>favicon.ico</code> respectively.</li>
+</ul>
+<p>If no favicon file is found, the theme will lookup the alternative filename <code>logo</code> in the same location and will repeat the search for the list of supported file types.</p>
+<p>If you need to change this default behavior, create a new file in <code>layouts/partials/</code> named <code>favicon.html</code>. Then write something like this:</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#ff6ac1">link</span> <span style="color:#57c7ff">rel</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">&#34;icon&#34;</span> <span style="color:#57c7ff">href</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">&#34;/images/favicon.bmp&#34;</span> <span style="color:#57c7ff">type</span><span style="color:#ff6ac1">=</span><span style="color:#5af78e">&#34;image/bmp&#34;</span>&gt;</span></span></code></pre></div><h1 id="changing-theme-colors">Changing theme colors</h1>
+<p>In your config.toml file edit the themeVariant option under [params]</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>  themeVariant = <span style="color:#5af78e">&#34;relearn-dark&#34;</span></span></span></code></pre></div><p>There are some options to choose from or you can custom make your theme colors by using this <a href="https://mcshelby.github.io/hugo-theme-relearn/basics/generator/index.html" target="_blank">stylesheet generator</a></p>
+<p>Menu Shortcuts
+Add a [[menu.shortcuts]] entry for each link</p>
+<div class="wrap-code highlight"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>[[menu.shortcuts]]
+</span></span><span style="display:flex;"><span>name = <span style="color:#5af78e">&#34;&lt;i class=&#39;fab fa-fw fa-github&#39;&gt;&lt;/i&gt; GitHub repo&#34;</span>
+</span></span><span style="display:flex;"><span>identifier = <span style="color:#5af78e">&#34;ds&#34;</span>
+</span></span><span style="display:flex;"><span>url = <span style="color:#5af78e">&#34;https://github.com/McShelby/hugo-theme-relearn&#34;</span>
+</span></span><span style="display:flex;"><span>weight = <span style="color:#ff9f43">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[menu.shortcuts]]
+</span></span><span style="display:flex;"><span>name = <span style="color:#5af78e">&#34;&lt;i class=&#39;fas fa-fw fa-camera&#39;&gt;&lt;/i&gt; Showcases&#34;</span>
+</span></span><span style="display:flex;"><span>url = <span style="color:#5af78e">&#34;more/showcase/&#34;</span>
+</span></span><span style="display:flex;"><span>weight = <span style="color:#ff9f43">11</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[menu.shortcuts]]
+</span></span><span style="display:flex;"><span>name = <span style="color:#5af78e">&#34;&lt;i class=&#39;fas fa-fw fa-bookmark&#39;&gt;&lt;/i&gt; Hugo Documentation&#34;</span>
+</span></span><span style="display:flex;"><span>identifier = <span style="color:#5af78e">&#34;hugodoc&#34;</span>
+</span></span><span style="display:flex;"><span>url = <span style="color:#5af78e">&#34;https://gohugo.io/&#34;</span>
+</span></span><span style="display:flex;"><span>weight = <span style="color:#ff9f43">20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[menu.shortcuts]]
+</span></span><span style="display:flex;"><span>name = <span style="color:#5af78e">&#34;&lt;i class=&#39;fas fa-fw fa-bullhorn&#39;&gt;&lt;/i&gt; Credits&#34;</span>
+</span></span><span style="display:flex;"><span>url = <span style="color:#5af78e">&#34;more/credits/&#34;</span>
+</span></span><span style="display:flex;"><span>weight = <span style="color:#ff9f43">30</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[[menu.shortcuts]]
+</span></span><span style="display:flex;"><span>name = <span style="color:#5af78e">&#34;&lt;i class=&#39;fas fa-fw fa-tags&#39;&gt;&lt;/i&gt; Tags&#34;</span>
+</span></span><span style="display:flex;"><span>url = <span style="color:#5af78e">&#34;tags/&#34;</span>
+</span></span><span style="display:flex;"><span>weight = <span style="color:#ff9f43">40</span></span></span></code></pre></div>
+            <footer class="footline">
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1702594242" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1702594242" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1702594242" defer></script>
+    <script src="/js/js-yaml.min.js?1702594242" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1702594242" defer></script>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Networking in Linux - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/network_basics/index.html" rel="canonical" type="text/html" title="Networking in Linux - Perfect Dark Mode">
+    <link href="/linux/misc_linux/network_basics/index.xml" rel="alternate" type="application/rss+xml" title="Networking in Linux - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/network_basics/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Networking in Linux</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="networking-in-linux">Networking in Linux</h1>
+
+<p>fing install: fing.com/products/development-toolkit</p>
+<p>used to scan network for ip addresses</p>
+<p>view routing table</p>
+<p>$ sudo route -n</p>
+<p>ug: Network is up &amp; gateway is up</p>
+<p>u: Network is up</p>
+<p>Network config</p>
+<p>create an interface and bring it up</p>
+<p>$ ifconfig eth0 192.168.2.1 netmask 255.255.255.0 up</p>
+<p>bring an interface up or down</p>
+<p>$ ifup eth0</p>
+<p>$ ifdown eth0</p>
+<p>IP command</p>
+<p>- Manipulate network stack of system</p>
+<p>show info for all interfaces</p>
+<p>$ iplink show</p>
+<p>show statistics for an interface</p>
+<p>$ ip -s link show eth0</p>
+<p>show ip addresses allocated to interfaces</p>
+<p>$ ip address show</p>
+<p>Bring interfaces up and down</p>
+<p>$ ip link set eth0 up/down</p>
+<p>Add ip address to an interface</p>
+<p>$ ip address add 192.168.1.1/24 dev eth0</p>
+<p>Route</p>
+<p>(route commands)</p>
+<p>add new route</p>
+<p>$sudo route add -net 192.168.2.1/23 gw 10.11.12.3</p>
+<p>remove a route</p>
+<p>sudo route del -net 192.168.2.1/23</p>
+<p>(ip commands)</p>
+<p>add a route</p>
+<p>$ ip route add 192.168.2.1/23 via 10.11.12.3</p>
+<p>delete a route</p>
+<p>$ ip route delete 192.168.2.1/23</p>
+<p>DHCLIENT</p>
+<p>- dhclient starts on boot &gt;</p>
+<p>- gets a list of network interfaces from dhclient.conf file</p>
+<p>- tries to configure each interface using dhcp</p>
+<p>- Keeps track of leases across system reboots</p>
+<p>- dhclient.conf is read</p>
+<p>- dhclient.leases is read to see what leases are assigned</p>
+<p>Obtain a fresh ip</p>
+<p>$ sudo dhclient</p>
+<p>Network manager (Daemon)</p>
+<p>- configures networks automatically</p>
+<p>- applet software in gui</p>
+<p>command line tools to interact with network manager</p>
+<p>nmtool</p>
+<p>- reports Network managers state and it&rsquo;s devices</p>
+<p>$ nm-tool</p>
+<p>$ nmcli</p>
+<p>- control and modify network manager</p>
+<p>arp</p>
+<p>$ arp</p>
+<p>- view arp cache</p>
+<p>$ ip neighbor show</p>
+<p>- view arp cache</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

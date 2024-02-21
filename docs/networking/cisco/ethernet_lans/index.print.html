@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Ethernet LANs - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/ethernet_lans/index.html" rel="canonical" type="text/html" title="Ethernet LANs - Perfect Dark Mode">
+    <link href="/networking/cisco/ethernet_lans/index.xml" rel="alternate" type="application/rss+xml" title="Ethernet LANs - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/ethernet_lans/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Ethernet LANs</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="ethernet-lans">Ethernet LANs</h1>
+
+<ol start="2">
+<li>Ethernet LANs</li>
+</ol>
+<p>Thursday, June 10, 2021</p>
+<p>8:00 AM</p>
+<h1 id="10-network-fundamentals">1.0 Network Fundamentals</h1>
+<h1 id="11-explain-the-role-and-function-of-network-components">1.1 Explain the role and function of network components</h1>
+<h1 id="11b-l2-and-l3-switches">1.1.b L2 and L3 Switches</h1>
+<h1 id="12-describe-characteristics-of-network-topology-architectures">1.2 Describe characteristics of network topology architectures</h1>
+<h1 id="12e-small-officehome-office-soho">1.2.e Small office/home office (SOHO)</h1>
+<h1 id="13-compare-physical-interface-and-cabling-types">1.3 Compare physical interface and cabling types</h1>
+<h1 id="13a-single-mode-fiber-multimode-fiber-copper">1.3.a Single-mode fiber, multimode fiber, copper</h1>
+<h1 id="13b-connections-ethernet-shared-media-and-point-to-point">1.3.b Connections (Ethernet shared media and point-to-point)</h1>
+<p>802.3 (Ethernet Standards</p>
+<p>10BASE-T</p>
+<ul>
+<li>10 Mbps</li>
+<li>Ethernet</li>
+<li>802.3</li>
+<li>Copper/ 100 m</li>
+</ul>
+<p>100BASE-T</p>
+<ul>
+<li>100 Mbps</li>
+<li>Fast Ethernet</li>
+<li>802.3u</li>
+<li>Copper/ 100m</li>
+</ul>
+<p>1000BASE-LX</p>
+<ul>
+<li>1000 Mbps</li>
+<li>Gigabit Ethernet</li>
+<li>802.3z</li>
+<li>Fiber, 5000 m</li>
+</ul>
+<p>1000BASE-T</p>
+<ul>
+<li>1000 Mbps</li>
+<li>Gigabit Ethernet</li>
+<li>802.3ab</li>
+<li>Copper, 100m</li>
+</ul>
+<p>10GBASE-T</p>
+<ul>
+<li>10 Gbps</li>
+<li>10 Gig Ethernet</li>
+<li>802.3an</li>
+<li>Copper 100m</li>
+</ul>
+<p>Three most common</p>
+<ul>
+<li>10BASE-T, 100BASE-T, and 1000BASE-T</li>
+</ul>
+<p>Twisting of the wires helps reduce EMI.</p>
+<p>Crosstalk</p>
+<p>-EMI between wire pairs</p>
+<p>Gigabit Ethernet interface Converter (GBIC)</p>
+<ul>
+<li>The original form factor for a removeable transceiver for Gigabit interfaces; larger than SFPs</li>
+</ul>
+<p>Small Form Pluggable (SFP)</p>
+<ul>
+<li>The replacement for GBICs, used on gigabit interfaces, with a smaller size, taking less space on the side of the networking card or switch.</li>
+</ul>
+<p>Small Form Pluggable Plus (SFP+)</p>
+<ul>
+<li>Same size as the SFP, but used on 10-Gbps interfaces</li>
+</ul>
+<p>UTP Cabling Pinouts for 10BASE-T and 100BASE-T</p>
+<p>10BASE-T and 100BASE-T</p>
+<ul>
+<li>2 wire pairs,</li>
+<li>one pair for each direction</li>
+</ul>
+<p>Crossover</p>
+<p>PC/ Router/ AP</p>
+<ul>
+<li>transmits on pins 1/2</li>
+<li>RECEIVES ON PINS 3/6</li>
+</ul>
+<p>Switch/ Hub</p>
+<ul>
+<li>Transmits on pins 3/6</li>
+<li>receives on pins 1/2</li>
+</ul>
+<p>Ethernet NIC transmitters send on pins 1 and 2</p>
+<p>NIC receivers receive on pins 3 and 6</p>
+<p>Straight through cable</p>
+<ul>
+<li>Pins 1/2 &gt; 1/2</li>
+<li>Pins 3/6 &gt; 3/6</li>
+</ul>
+<p>autoix (cisco)</p>
+<ul>
+<li>Notices when a wrong cable is used</li>
+<li>automatically changes it&rsquo;s logic to make the link work.</li>
+</ul>
+<p>1000BASE-T</p>
+<ul>
+<li>4 wire pairs</li>
+<li>Both ends transmit and receive simultaneously on each wire pair.</li>
+<li>pairs 1/2, 3/6, 4/5, 7/8</li>
+<li>Crossover cable crosses the pairs at pins 1/2 and 3/6, it also crosses pairs 4/5 with 7/8</li>
+</ul>
+<p>Fiber Cabling Transmission Concepts</p>
+<p>Physical cable</p>
+<ul>
+<li>Core &gt;</li>
+<li>Cladding &gt;</li>
+<li>Buffer &gt;</li>
+<li>Strengthener &gt;</li>
+<li>Outer Jacket</li>
+</ul>
+<p>Optical Transmitter</p>
+<ul>
+<li>Shines light into the core</li>
+</ul>
+<p>Multimode fiber</p>
+<ul>
+<li>multiple angles (modes) of light waves</li>
+<li>Less expensive</li>
+<li>10 gigabit over ethernet allows for distance up to 400m</li>
+</ul>
+<p>Single mode fiber</p>
+<ul>
+<li>Smaller diameter (around 1/5 of multimode) core</li>
+<li>laser-based transmitter</li>
+<li>single angle</li>
+</ul>
+<p>More expensive SFP/ SFP+ hardware</p>
+<p>Distances up to tens of kilometers</p>
+<p>Transmit port on one end of the fiber connects to the receive port on the other end (Tx and Rx)</p>
+<p>10Gbps Fiber Standards</p>
+<ul>
+<li>10GBASE-S/ MM/ 400m</li>
+<li>10GBASE-LX4/ MM/ 300m</li>
+<li>10GBASE-LR/ SM/ 10km</li>
+<li>10GBASE-E/ SM/ 30km</li>
+</ul>
+<p>UTP, MM, and SM comparisons</p>
+<p>UTP</p>
+<ul>
+<li>low cable cost</li>
+<li>low switch port cost</li>
+<li>100m Max Distance</li>
+<li>Some susceptibility to interference</li>
+<li>Some risk of copying from cable emissions</li>
+</ul>
+<p>Multimode</p>
+<ul>
+<li>Medium cable cost</li>
+<li>Medium switch port cost</li>
+<li>500m Max Distance</li>
+<li>No susceptibility to interference</li>
+<li>No risk of copying from cable emissions</li>
+</ul>
+<p>Single-Mode</p>
+<ul>
+<li>Medium cable cost</li>
+<li>High switch port cost</li>
+<li>40Km Max Distance</li>
+<li>No susceptibility to interference</li>
+<li>No risk of copying from cable emissions</li>
+</ul>
+<p>Sending Data In Ethernet Networks</p>
+<p>Ethernet Header (preamble/sfd/Destination/Source/Type/Dataandpad/FCS)</p>
+<p>Header</p>
+<ul>
+<li>
+<p>Preamble</p>
+</li>
+<li>
+<p>7 bites</p>
+</li>
+<li>
+<p>Synchronization</p>
+</li>
+<li>
+<p>Start Frame Delimiter (SFD)</p>
+</li>
+<li>
+<p>1 Byte</p>
+</li>
+<li>
+<p>Signifies next byte begins the Destination MAC Address Field</p>
+</li>
+<li>
+<p>Destination MAC Address</p>
+</li>
+<li>
+<p>6 Bytes</p>
+</li>
+<li>
+<p>Source MAC Address</p>
+</li>
+<li>
+<p>6 Bytes</p>
+</li>
+<li>
+<p>Type</p>
+</li>
+<li>
+<p>2 bytes</p>
+</li>
+<li>
+<p>Type of protocol listed in the frame (IPv4 or IPv6)</p>
+</li>
+<li>
+<p>Data and Pad</p>
+</li>
+<li>
+<p>46-1500Bytes</p>
+</li>
+<li>
+<p>padding can be added to meet the minimum length requirement</p>
+</li>
+</ul>
+<p>Trailer</p>
+<ul>
+<li>Frame Check Sequence (FCS)</li>
+<li>Used to determine if the frame experienced transmission errors</li>
+</ul>
+<p>Maximum Transmission Unit (MTU)</p>
+<ul>
+<li>Maximum layer 3 packet that can be sent</li>
+</ul>
+<p>Ethernet Addressing</p>
+<ul>
+<li>
+<p>6 bytes long (48 bits)</p>
+</li>
+<li>
+<p>12 digit hexadecimal</p>
+</li>
+<li>
+<p>Cisco switch may list a mac address with periods: 0000.0C12.3456</p>
+</li>
+<li>
+<p>Unicast address</p>
+</li>
+<li>
+<p>an address for a single NIC or port</p>
+</li>
+</ul>
+<p>OUI (Organizationally unique indentifier)</p>
+<ul>
+<li>Universally unique manufacturer code</li>
+<li>24 Bits</li>
+<li>6 Hex Digits</li>
+</ul>
+<p>Vendor Assigned</p>
+<ul>
+<li>24 Bits</li>
+<li>6 Hex Digits</li>
+</ul>
+<p>Group addresses</p>
+<p>Broadcast Address</p>
+<ul>
+<li>Delivered to all devices on the Ethernet LAN.</li>
+<li>FFFF.FFFF.FFFF</li>
+</ul>
+<p>Multicast Address</p>
+<ul>
+<li>Copied and forwarded to a subset of devices on the LAN</li>
+</ul>
+<p>Identifying Network Layer Protocols with the Ethernet Type Field</p>
+<p>The type field identifies which type of layer 3 packet exists within the ethernet frame (IPv6 or IPv4)</p>
+<p>Ethertype is the term used for the type field in an ethernet frame</p>
+<p>Error Detection with FCS</p>
+<ul>
+<li>Error detection does not mean error recovery</li>
+<li>Ethernet decide whether the frame should be discarded and does not attempt to recover the lost frame.</li>
+</ul>
+<p>Sending Ethernet frames with switches and hubs</p>
+<ul>
+<li>Switches allow the use of Full Duplex Logic</li>
+<li>Hubs use half-duplex logic</li>
+</ul>
+<p>Sending in Modern Ethernet LANs Using Full Duplex</p>
+<p>Half duplex</p>
+<ul>
+<li>must wait to send if it is currently receiving a frame</li>
+<li>cannot send and receive at the same time</li>
+</ul>
+<p>Full Duplex</p>
+<ul>
+<li>Does not have to wait before sending,</li>
+<li>send and receive at the same time.</li>
+</ul>
+<p>Hubs</p>
+<ul>
+<li>Uses physical link standards instead of data link standards and are considered layer 1 devices</li>
+</ul>
+<p>Carrier Sense multiple access with Collision Detection (CSMA/CD)</p>
+<ol>
+<li>
+<p>Listen until line is not busy</p>
+</li>
+<li>
+<p>Send frame</p>
+</li>
+<li>
+<p>Listen for a collision while sending if a collision occurs:</p>
+</li>
+<li>
+<p>Send jamming signal telling all nodes a collision has occurred</p>
+</li>
+<li>
+<p>each node waits a random time then tries to send again</p>
+</li>
+<li>
+<p>Back to step one</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>All links between PCs and switches use full duplex</p>
+</li>
+<li>
+<p>A link connected to a hub should be half duplex</p>
+</li>
+<li>
+<p>Ethernet Shared media</p>
+</li>
+<li>
+<p>refers to hubs that use CSMA/CD and share bandwidth</p>
+</li>
+<li>
+<p>Ethernet point-to-point</p>
+</li>
+<li>
+<p>network built with switches where links work independently of others</p>
+</li>
+<li>
+<p>A frame can be sent on every Point-to-point link in an ethernet at the same time.</p>
+</li>
+</ul>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

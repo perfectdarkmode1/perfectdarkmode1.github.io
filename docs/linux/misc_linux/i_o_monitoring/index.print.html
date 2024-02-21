@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>IO Monitoring - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/i_o_monitoring/index.html" rel="canonical" type="text/html" title="IO Monitoring - Perfect Dark Mode">
+    <link href="/linux/misc_linux/i_o_monitoring/index.xml" rel="alternate" type="application/rss+xml" title="IO Monitoring - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/i_o_monitoring/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">IO Monitoring</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="io-monitoring">IO Monitoring</h1>
+
+<p>$ iostat</p>
+<p>- cpu and disk usage</p>
+<p>cpu info section</p>
+<p>%user:utilization at user level</p>
+<p>%nice: user level w/ nice priority &amp; cpu utilization with nice priorities</p>
+<p>%system: system level (kernel)</p>
+<p>%iowait: time(s) cpu was idle when system had outstandingdisk i/o request</p>
+<p>%steal: involuntary wait time by cpu while hypervisor was servicing another virtual processor</p>
+<p>%idle: cpu idle time w/ no outstanding disk i/o request</p>
+<p>Disk utilization section (2nd part)</p>
+<p>tps: transfers per second issued to device</p>
+<p>transfers= i/o request to device</p>
+<p>- indeterminate size</p>
+<p>- multiple logical requests combined into a single i/o request</p>
+<p>kB_read/s: amount of data read from device</p>
+<p>kB_wrtn/s: amount of data written to device</p>
+<p>kB_read: total # read</p>
+<p>kB_wrtn: total # written</p>
+<p>Memory monitoring</p>
+<p>$ vmstat</p>
+<p>- monitor memory</p>
+<p>Feilds</p>
+<p>Procs</p>
+<p>r: # of processes for run time</p>
+<p>b: # of processes in uninterruptible sleep</p>
+<p>Memory</p>
+<p>swpd: how much virtual memory used</p>
+<p>free: how much free memory</p>
+<p>buff: how much buffer memory</p>
+<p>cache: how much cache memory</p>
+<p>Swap</p>
+<p>si: amount of memory swapped in from disk</p>
+<p>so: amount of memory swapped out to disk</p>
+<p>io</p>
+<p>bi: blocks received in from block device</p>
+<p>bo: blocks sent out to block device</p>
+<p>system</p>
+<p>in: interrupts per second</p>
+<p>cs: context switches per second</p>
+<p>CPU (time spent)</p>
+<p>us: user time</p>
+<p>sy: kernel; time</p>
+<p>id: idle</p>
+<p>wa: waiting for io</p>
+<p>Continuous Monitoring</p>
+<p>- collect, report, and save system activity information</p>
+<p>Installing sar</p>
+<p>- used for historical analysis</p>
+<p>$ sudo apt install sysstat</p>
+<p>Setting up data collection</p>
+<p>if sar doesn&rsquo;t automatically start collecting data</p>
+<p>- modify the ENABLED field in</p>
+<p>/etc/default/sysstat</p>
+<p>- then restart the service</p>
+<p>$ etc/init.d/sysstat restart</p>
+<p>Using sar</p>
+<p>$ sudo sar -q</p>
+<p>- lists details from start of the day</p>
+<p>$ sudo sar -r</p>
+<p>- list memory usage details from start of day</p>
+<p>$ sar -q /var/log/sysstat/sa02 (day)</p>
+<p>- view certain day</p>
+<p>cron jobs</p>
+<p>- used to schedule tasks (run programs)</p>
+<p>30 08 *** /home/pete/scripts/change_wallpaper</p>
+<p>(minute hour day month day of week)</p>
+<p>$ crontab -e</p>
+<p>- create a cron job by editing crontab file</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>IPv6 Configuration - Perfect Dark Mode</title>
+    <link href="/networking/cisco/ipv6_config/index.xml" rel="alternate" type="application/rss+xml" title="IPv6 Configuration - Perfect Dark Mode">
+    <link href="/networking/cisco/ipv6_config/index.print.html" rel="alternate" type="text/html" title="IPv6 Configuration - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/cisco/ipv6_config/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <span class="nav nav-next topbar-link"><i class="fa fa-chevron-right fa-fw"></i></span>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/index.html" title=" (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/networking/cisco/ipv6_config/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">IPv6 Configuration</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="ipv6-configuration">IPv6 Configuration</h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>1.0 Network Fundamentals</p>
+<p>1.9 Compare and contrast IPv6 address types</p>
+<p>1.9.a Global unicast</p>
+<p>1.9.b Unique local</p>
+<p>1.9.c Link local</p>
+<p>1.9.d Anycast</p>
+<p>1.9.e Multicast</p>
+<p>1.9.f Modified EUI 64</p>
+<p>Configuring the Full 128-Bit Address</p>
+<p>To statically configure the full 128-bit unicast address—either global unicast or unique local—the router needs an ipv6 address address/prefix-length interface subcommand on each interface. The address can be an abbreviated IPv6 address or the full 32-digit hex address. The command includes the prefix length value, at the end, with no space between the address and prefix length.</p>
+<p>ubnet
+RI
+GO/O/O
+Subnet
+GO/O
+Subnet
+Figure 24-3 Sample 128-bit IPv6 Addresses to Be Configured on Cisco Router Interfaces &ldquo;&gt;</p>
+<p>lick here to view code image
+ipv6 unicast-routing
+interface GigabitEthernete/e
+interface GigabitEthernete/e/0 &ldquo;&gt;</p>
+<p>lick here to view code image
+ipv6 unicast-routing
+interface GigabitEthernete/e
+interface GigabitEthernete/1/0 &ldquo;&gt;</p>
+<p>both abbreviated and unabbreviated addresses, and both lowercase and uppercase hex digits, showing that all are allowed.</p>
+<p>Enabling IPv6 Routing</p>
+<p>IPv6 routing is not enabled by default. The solution takes only a single command—ipv6 unicast-routing—which enables IPv6 routing on the router.</p>
+<p>A router must enable IPv6 globally (ipv6 unicast-routing) and enable IPv6 on the interface (ipv6 address) before the router will attempt to route IPv6 packets in and out an interface. If you omit the ipv6 unicast-routing command but configure interface IPv6 addresses, the router will not route any received IPv6 packets, but the router will act as an IPv6 host. If you include the ipv6 unicast-routing command but omit all the interface IPv6 addresses, the router will be ready to route IPv6 packets but have no interfaces that have IPv6 enabled, effectively disabling IPv6 routing</p>
+<p>Verifying the IPv6 Address Configuration</p>
+<p>The show ipv6 interface brief command gives you interface IPv6 address info, but not prefix length info, similar to the IPv4 show ip interface brief command.</p>
+<p>this command lists IPv6 addresses, but not the prefix length or prefixes.</p>
+<p>The show ipv6 interface command gives the details of IPv6 interface settings, much like the show ip interface command does for IPv4.</p>
+<p>the show interfaces command still lists the IPv4 address and mask but tells us nothing about IPv6. So, to see IPv6 interface addresses, use commands that begin with show ipv6</p>
+<p>Generating a Unique Interface ID Using Modified EUI-64</p>
+<p>The router then uses EUI-64 rules to create the interface ID part of the address, as follows:</p>
+<p>Key Topic.</p>
+<p>Split the 6-byte (12-hex-digit) MAC address in two halves (6 hex digits each).</p>
+<p>Insert FFFE in between the two, making the interface ID now have a total of 16 hex digits (64 bits).</p>
+<p>Invert the seventh bit of the interface ID.</p>
+<p>ey
+Topic
+Defined by Configuration
+Subnet Prefix
+Calculated by Router Using EUl-64
+1st Half
+of MAC
+Invert 7th Bit, 1st Byte
+(Reading Left to Right)
+FFFE
+2nd Half
+of MAC
+Figure 24-4 IPv6 Address Format with Interface ID and EUI-64 &ldquo;&gt;</p>
+<p>0000 oo o
+0000 oo»
+02
+First 2 Hex Digits
+Convert to Binary
+Invert 7th Bit
+@ Convert to Hex
+Example 2
+16
+0001 Olio
+0001 0100
+14
+Binary
+Binary
+Figure 24-6 Inverting the Seventh Bit of an EUI-64 Interface ID Field &ldquo;&gt;</p>
+<p>tep 2:
+Little
+Space
+A
+c
+B
+A Little Space
+Figure 24-7 A Mnemonic Device to Help Memorize Bit Inversion Shortcut &ldquo;&gt;</p>
+<p>Table 24-2 lists some practice problems,</p>
+<p>ipv6 address address/prefix-length eui-64 interface subcommand.</p>
+<p>pv6 unicast-routing
+! The ipv6 address command now lists a prefix,
+interface GigabitEthernetø,&lsquo;0
+mac-address €201. aaeø.
+interface GigabitEthernetø,&lsquo;0/Ø
+RI* show ipv6 interface brief
+GigabitEthernete/e
+[up/up]
+not the full address
+GigabitEthernete/1
+unassigned
+[administratively down/down]
+GigabitEthernete/0/e
+[up/up]
+FE8e:
+GigabitEthernete/e/1
+[administratively down/down]
+unassigned &ldquo;&gt;</p>
+<p>mac-address command under R1’s G0/0 interface, which causes IOS to use the configured MAC address instead of the universal (burned-in) MAC address</p>
+<p>for interfaces that do not have a MAC address, like serial interfaces, the router uses the MAC of the lowest-numbered router interface that does have a MAC.</p>
+<p>if you mistakenly type the full address and still use the eui-64 keyword, IOS accepts the command and converts the address to the matching prefix before putting the command into the running config file. For example, IOS converts ipv6 address 2000:1:1:1::1/64 eui-64 to ipv6 address 2000:1:1:1::/64 eui-64.</p>
+<p>Dynamic Unicast Address Configuration</p>
+<p>routers can be configured to use dynamically learned IPv6 addresses. These can be useful for routers connecting to the Internet through some types of Internet access technologies, like DSL and cable modems.</p>
+<p>two ways for the router interface to dynamically learn an IPv6 address to use:</p>
+<p>Stateful DHCP</p>
+<p>Stateless Address Autoconfiguration (SLAAC)</p>
+<p><!-- raw HTML omitted --></p>
+<p>Special Addresses Used by Routers</p>
+<p>After you configure the ipv6 unicast-routing global configuration command, to enable the function of IPv6 routing, the addition of a unicast IPv6 address on an interface causes the router to do the following:</p>
+<p>Gives the interface a unicast IPv6 address</p>
+<p>Enables the routing of IPv6 packets in/out that interface</p>
+<p>Defines the IPv6 prefix (subnet) that exists off that interface</p>
+<p>Tells the router to add a connected IPv6 route for that prefix, to the IPv6 routing table, when that interface is up/up</p>
+<p>the same ideas happen for IPv4 when you configure an IPv4 address on a router interface.</p>
+<p>Link-Local Addresses</p>
+<p>a special kind of unicast IPv6 address.</p>
+<p>not used for normal IPv6 packet flows that contain data for applications</p>
+<p>used by some overhead protocols and for routing.</p>
+<p>Link-Local Address Concepts</p>
+<p>packets sent to any link-local address should not be forwarded by any router to another subnet.</p>
+<p>For example, Neighbor Discovery Protocol (NDP), which replaces the functions of IPv4’s ARP, uses link-local addresses.</p>
+<p>Routers also use link-local addresses as the next-hop IP addresses in IPv6 routes,</p>
+<p>IPv6 hosts also use a default router (default gateway) concept, like IPv4, but instead of the router address being in the same subnet, hosts refer to the router’s link-local address. The show ipv6 route command lists the link-local address of the neighboring router, rather than the global unicast or unique local unicast address.</p>
+<p>2 Link Local
+Gw=R1 Link Local
+PCI
+Subnet 2
+Subnet 2
+PC2
+Figure 24-8 IPv6 Using Link-Local Addresses as the Next-Hop Address &ldquo;&gt;</p>
+<p>key facts about link-local addresse</p>
+<p>Unicast (not multicast): Link-local addresses represent a single host,</p>
+<p>Forwarding scope is the local link only: Packets sent to a link-local address do not leave the local data link because routers do not forward packets with link-local destination addresses.</p>
+<p>Automatically generated: Every IPv6 host interface (and router interface) can create its own link-local address automatically,</p>
+<p>Creating Link-Local Addresses on Routers</p>
+<p>all link-local addresses start with the same prefix,(FE80,FE90,FEA0,FEB0) as shown on the left side of Figure 24-9.</p>
+<p>E80 : 0000 : 0000 : 0000
+Figure 24-9 Link-Local Address Format
+64 Bits
+Interface ID: EUl-64 &ldquo;&gt;</p>
+<p>the first 10 bits must match prefix FE80::/10, meaning that the first three hex digits will be either FE8, FE9, FEA, or FEB.</p>
+<p>the next 54 bits should be binary 0, so the link-local address should always start with FE80:0000:0000:0000 as the first four unabbreviated quartets.</p>
+<p>The second half of the link-local address, in practice, can be formed using EUI-64 rules, can be randomly generated, or even configured.</p>
+<p>IOS creates a link-local address for any interface that has configured at least one other unicast address using the ipv6 address command (global unicast or unique local). To see the link-local address, just use the usual commands that also list the unicast IPv6 address: show ipv6 interface and show ipv6 interface brief.</p>
+<p>ddresses
+Click here to view code image
+RI* show ipv6 interface brief
+GigabitEthernet0/e
+[up/ up]
+GigabitEthernete/1
+unassigned
+GigabitEthernete,/0/e
+[administratively down/down]
+[up/ up]
+FE8e:
+GigabitEthernet0/0/1
+[administratively down/down]
+unassigned &ldquo;&gt;</p>
+<p>both addresses have the same interface ID value</p>
+<p>IOS chooses the link-local address for the interface based on the following rules:</p>
+<p>If configured, the router uses the value in the ipv6 address address link-local interface subcommand. Note that the configured link-local address must be from the correct address range for link-local addresses; that is, an address from prefix FE80::/10. In other words, the address must begin with FE8, FE9, FEA, or FEB.</p>
+<p>If not configured, the IOS calculates the link-local address using EUI-64 rules, as discussed and demonstrated in and around Example 24-7. The calculation uses EUI-64 rules even if the interface unicast address does not use EUI-64.</p>
+<p>Routing IPv6 with Only Link-Local Addresses on an Interface</p>
+<p>ipv6 address address/prefix-length: Static configuration of a specific address</p>
+<p>ipv6 address prefix/prefix-length eui-64: Static configuration of a specific prefix and prefix length, with the router calculating the interface ID using EUI-64 rules</p>
+<p>ipv6 address dhcp: Dynamic learning on the address and prefix length using DHCP</p>
+<p>ipv6 address autoconfig: Dynamic learning of the prefix and prefix length, with the router calculating the interface ID using EUI-64 rules (SLAAC)</p>
+<p>ipv6 enable: Enables IPv6 processing and adds a link-local address, but adds no other unicast IPv6 addresses.</p>
+<p>some links, particularly WAN links, do not need a global unicast address</p>
+<p>the routers do not need to have global unicast (or unique local) addresses on the WAN links for routing to work. IPv6 routing protocols use link-local addresses as the next-hop address when dynamically building IPv6 routes.</p>
+<p>static routes, as discussed in Chapter 25, “Implementing IPv6 Routing,” can use link-local addresses for the next-hop address.</p>
+<p>creating a WAN link with no global unicast (or unique local) addresses works. As a result, you would not even need to assign an IPv6 subnet to each WAN link. Then to configure the WAN interfaces, use the ipv6 enable command, enabling IPv6 and giving each interface a generated link-local IPv6 address.</p>
+<p>To use the command, just configure the ipv6 enable command on the interfaces on both ends of the WAN link.</p>
+<p>IPv6 Multicast Addresses</p>
+<p>IANA defines the range FF30::/12 (all IPv6 addresses that begin with FF3) as the range of addresses to be used for some types of multicast applications.</p>
+<p>different IPv6 RFCs reserve multicast addresses for specific purposes. For instance, OSPFv3 uses FF02::5 and FF02::6 as the all-OSPF-routers and all-DR-Routers multicast addresses,</p>
+<p>OSPFv2 uses IPv4 addresses 224.0.0.5 and 224.0.0.6 for the equivalent purposes.</p>
+<p>Reserved Multicast Addresses</p>
+<p>IPv6, instead of using Layer 3 and Layer 2 broadcasts, instead uses Layer 3 multicast addresses, which in turn cause Ethernet frames to use Ethernet multicast addresses. As a result:</p>
+<p>All the hosts that should receive the message receive the message, which is necessary for the protocols to work. However…</p>
+<p>…Hosts that do not need to process the message can make that choice with much less processing as compared to IPv4.</p>
+<p>OSPFv3 uses IPv6 multicast addresses FF02::5 and FF02::6. In a subnet, the OSPFv3 routers will listen for packets sent to those addresses. However, all the endpoint hosts do not use OSPFv3 and should ignore those OSPFv3 messages</p>
+<p>the most common reserved IPv6 multicast addresses.</p>
+<p>ll-nodes
+All-routers
+All-OSPF, All-
+OSPF-DR
+RIPng
+Routers
+EIGRPv6
+Routers
+DHCP Relay
+Agent
+Multicast
+Address
+Meaning
+All-nodes (all interfaces that
+use IPv6 that are on the link)
+All-routers (all IPv6 router
+interfaces on the link)
+All OSPF routers and all
+OSPF-designated routers,
+respectively
+All RIPng routers
+All routers using EIGRP for
+IPv6 (EIGRPv6)
+All routers acting as a
+DHCPv6 relay agent
+IPv4
+Equivalent
+224.0.0.1
+224.0.0.2
+224.0.0.5,
+224.0.0.6
+224.0.0.9
+224.0.0.10
+None &ldquo;&gt;</p>
+<p>show ipv6 interface command to show the multicast addresses used by Router R1 on its G0/0 interface.</p>
+<p>lick here to view code image
+RI* show ipv6 interface GigabitEthernet 0/0
+GigabitEthernet0/0 is up, line protocol is up
+IPv6 is enabled, link-local address is FE80: : 1
+No Virtual link-local address(es):
+Global
+2ee1.
+Joined
+Lines
+unicast address(es):
+group address(es):
+omitted for brevity &ldquo;&gt;</p>
+<p>Multicast Address Scopes</p>
+<p>Each scope defines a different set of rules about whether routers should or should not forward a packet, and how far routers should forward packets, based on those scopes.</p>
+<p>cope
+Name
+Inter-
+face-
+Local
+Local
+Site-
+Local
+Organiz-
+ation-
+Local
+Global
+Quar-
+tet
+FFOI
+FF02
+FF05
+FF08
+FFOE
+Scope
+Defined
+by&hellip;
+Derived by
+Device
+Derived by
+Device
+Configura-
+tion on
+Routers
+Configura-
+tion on
+Routers
+No
+Boundar-
+les
+Meaning
+Packet remains within the device. Use-
+ful for internally sending packets to
+services running on that same host.
+Host that creates the packet can send it
+onto the link, but no routers forward
+the packet.
+Intended to be more than Link-Local,
+so routers forward, but must be less
+than Organization-Local; generally
+meant to limit packets so they do not
+cross WAN links.
+Intended to be broad, probably for an
+entire company or organization. Must
+be broader than Site-Local.
+No boundaries. &ldquo;&gt;</p>
+<p>routers can predict the boundaries of some scopes, like link-local, but they need configuration to know the boundaries of other scopes, for instance, organization-local.)</p>
+<p>ite-local
+Link-local
+Internet
+2
+Figure 24-11 IPv6 Multicast Scopes &ldquo;&gt;</p>
+<p>Link-local address: An IPv6 address that begins FE80. This serves as a unicast address for an interface to which devices apply a link-local scope. Devices often create their own link-local addresses using EUI-64 rules. A more complete term for comparison would be link-local unicast address.</p>
+<p>Link-local multicast address: An IPv6 address that begins with FF02. This serves as a reserved multicast address to which devices apply a link-local scope.</p>
+<p>Link-local scope: A reference to the scope itself, rather than an address. This scope defines that routers should not forward packets sent to an address in this scope.</p>
+<p>Solicited-Node Multicast Addresses</p>
+<p>IPv6 Neighbor Discovery Protocol (NDP) replaces IPv4 ARP,</p>
+<p>NDP improves the MAC-discovery process by sending IPv6 multicast packets that can be processed by the correct host but discarded with less processing by the rest of the hosts in the subnet</p>
+<p>Figure 24-12 shows how to determine the solicited node multicast address associated with a unicast address. Start with the predefined /104 prefix (26 hex digits) shown in Figure 24-12. In other words, all the solicited-node multicast addresses begin with the abbreviated FF02::1:FF. In the last 24 bits (6 hex digits), copy the last 6 hex digits of the unicast address into the solicited-node address.</p>
+<dl>
+<dt>f Unicast Address</dt>
+<dt>FF02</dt>
+<dd>0000
+Defined by RFC
+• 0000 : 0000 : 0000
+Abbreviation:</dd>
+<dd>0001
+Figure 24-12 Solicited-Node Multicast Address Format &ldquo;&gt;</dd>
+</dl>
+<p>a host or router calculates a matching solicited node multicast address for every unicast address on an interface</p>
+<p>the router interface has a unicast address of 2001:DB8:1111:1::1/64, and a link-local address of FE80::AA:AAAA. As a result, the interface has two solicited node multicast addresses, shown at the end of the output.</p>
+<dl>
+<dt>lick here to view code image</dt>
+<dt>Rl# show ipv6 interface GigabitEthernet ø/e</dt>
+<dt>GigabitEthernete/ø is up, line protocol is up</dt>
+<dt>IPv6 is enabled, link-local address is FEW: :AA AAAA</dt>
+<dt>No Virtual link-local address(es):</dt>
+<dt>Global</dt>
+<dt>2001</dt>
+<dt>Joined</dt>
+<dt>Lines</dt>
+<dt>unicast address(es):</dt>
+<dt>group address(es):</dt>
+<dd>[TEN]
+omitted
+for brevity &ldquo;&gt;</dd>
+</dl>
+<p>Miscellaneous IPv6 Addresses</p>
+<p>all IPv6 hosts can use two additional special addresses:</p>
+<p>The unknown (unspecified) IPv6 address, ::, or all 0s</p>
+<p>The loopback IPv6 address, ::1, or 127 binary 0s with a single 1</p>
+<p>A host can use the unknown address (::) when its own IPv6 address is not yet known or when the host wonders if its own IPv6 address might have problems.</p>
+<p>hosts use the unknown address during the early stages of dynamically discovering their IPv6 address. When a host does not yet know what IPv6 address to use, it can use the :: address as its source IPv6 address</p>
+<p>IPv6 loopback address gives each IPv6 host a way to test its own protocol stack. Just like the IPv4 127.0.0.1 loopback address, packets sent to ::1 do not leave the host but are instead simply delivered down the stack to IPv6 and back up the stack to the application on the local host</p>
+<p>Anycast Addresses</p>
+<p>service works best when implemented on several routers</p>
+<p>Hosts can send just one packet to an IPv6 address, and the routers will forward the packet to the nearest router that supports that service by virtue of supporting that destination IPv6 address.</p>
+<p>Step 1. Two routers configure the exact same IPv6 address, designated as an anycast address, to support some service.</p>
+<p>Step 2. In the future, when any router receives a packet for that anycast address, the other routers simply route the packet to the nearest router that supports the address.</p>
+<p>the routers implementing the anycast address must be configured and then advertise a route for the anycast address. The addresses do not come from a special reserved range of addresses;</p>
+<p>they are from the unicast address range. Often, the address is configured with a /128 prefix so that the routers advertise a host route for that one anycast address.</p>
+<p>the routing protocol advertises the route just like any other IPv6 route; the other routers cannot tell the difference</p>
+<p>the actual address (2001:1:1:2::99) looks like any other unicast address</p>
+<p>note the different anycast keyword on the ipv6 address command, telling the local router that the address has a special purpose as an anycast address</p>
+<p>the show ipv6 interface command does identify the address as an anycast address, but the show ipv6 interface brief command does not.</p>
+<p>lick here to view code image
+Rl# configure terminal
+PV6 Anycast Addresses
+Enter configuration commands,
+one per line. End with CNTL/Z.
+Rl(config)# interface gigabitEthernet ø/ø
+iPV6 address
+Rl(config-if)# ipv6 address :99/128 anycast
+Rl(config-if)# AZ
+Rl# show ipv6 interface gø/ø
+GigabitEthernete/ø is up, line protocol is up
+IPv6 is enabled, link-local address is FE80
+No Virtual link-local address(es):
+Global unicast address(es):
+2001 subnet is 2001
+2001 :gg, subnet is 2001 : .•99/128 [ANY]
+I Lines omitted for brevity
+Rl# show ipv6 interface brief gø/ø
+GigabitEthernete/ø Cup/up]
+FE80
+2001 &ldquo;&gt;</p>
+<p>IPv6 Addressing Configuration Summary</p>
+<p>ype
+Global
+unicast
+Unique Local
+Link local
+All hosts
+multicast
+All routers
+multicast
+Routing pro-
+tocol
+multicasts
+Solicited-
+node
+multicast
+Prefix/Address
+Notes
+Many prefixes
+Various
+/104
+Enabled with What Interface
+Subcommand
+ipv6 address address/prefix-length
+ipv6 address prefix/prefix-length eui-64
+ipv6 address prefix/prefix-length eui-64
+ipv6 address address link-local
+Autogenerated by all ipv6 address
+commands
+Autogenerated by the ipv6 enable
+command
+Autogenerated by all ipv6 address
+commands
+Autogenerated by all ipv6 address
+commands
+Added to the interface when the corres-
+ponding routing protocol is enabled on
+the interface
+Autogenerated by all ipv6 address
+commands &ldquo;&gt;</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1700252831" defer></script>
+        <script src="/js/search.js?1700252831" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" aria-controls="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" checked><label for="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Fedora</span></label><a class="padding" href="">Fedora<i class="fas fa-check read-icon"></i></a><ul id="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora/fedora_setup/index.html" class=""><a class="padding" href="/linux/fedora/fedora_setup/index.html">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/hotkeys/index.html" class=""><a class="padding" href="/linux/fedora/hotkeys/index.html">Fedora Hotkeys<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/silverblue/index.html" class=""><a class="padding" href="/linux/fedora/silverblue/index.html">Fedora Silverblue<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/starcraftonfedora/index.html" class=""><a class="padding" href="/linux/fedora/starcraftonfedora/index.html">How to Install Starcraft on Fedora<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-2c366602ce05ece354fb0e76680a93b8" aria-controls="subsections-2c366602ce05ece354fb0e76680a93b8" checked><label for="section-2c366602ce05ece354fb0e76680a93b8"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu misc</span></label><a class="padding" href="">misc<i class="fas fa-check read-icon"></i></a><ul id="subsections-2c366602ce05ece354fb0e76680a93b8" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/index.html" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/index.html">Boot<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/command_line/index.html">Command Line<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/index.html">Consoling in on Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/index.html" class=""><a class="padding" href="/linux/misc_linux/devices/index.html">Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/index.html" class=""><a class="padding" href="/linux/misc_linux/dns/index.html">DNS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/index.html" class=""><a class="padding" href="/linux/misc_linux/file_permissions/index.html">File Permissions<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/index.html" class=""><a class="padding" href="/linux/misc_linux/getting_started/index.html">General Linux and History<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/index.html" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/index.html">How to Get Putty to Work in Ubuntu<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/index.html" class=""><a class="padding" href="/linux/misc_linux/init/index.html">Init<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/index.html" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/index.html">IO Monitoring<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/index.html" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/index.html">Keyboard Shortcuts<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/index.html" class=""><a class="padding" href="/linux/misc_linux/kernel/index.html">Linux Kernel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/index.html" class=""><a class="padding" href="/linux/misc_linux/logging/index.html">Logging<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/index.html" class=""><a class="padding" href="/linux/misc_linux/ls/index.html">ls<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/index.html" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/index.html">Network Troubleshooting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/index.html" class=""><a class="padding" href="/linux/misc_linux/network_basics/index.html">Networking in Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html">Open source and Linux Community<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/index.html" class=""><a class="padding" href="/linux/misc_linux/packages/index.html">Packages and Their Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/index.html" class=""><a class="padding" href="/linux/misc_linux/process_utilization/index.html">Process Utilization<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/index.html" class=""><a class="padding" href="/linux/misc_linux/ps_processes/index.html">Processes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_resources/index.html">Resources for learning Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/index.html" class=""><a class="padding" href="/linux/misc_linux/scp_command/index.html">scp<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/index.html" class=""><a class="padding" href="/linux/misc_linux/network_sharing/index.html">Sharing Resources<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html">Shell<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html">Skills that go with Bash Scripting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/index.html">Switching to Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/index.html">Symbols in Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/index.html" class=""><a class="padding" href="/linux/misc_linux/tar/index.html">Tar Stuff<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/index.html" class=""><a class="padding" href="/linux/misc_linux/text_fu/index.html">Text Editors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/index.html" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/index.html">The Linux Filesystem<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/index.html" class=""><a class="padding" href="/linux/misc_linux/user_management/index.html">User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/index.html" class=""><a class="padding" href="/linux/misc_linux/wsl2/index.html">Windows Subsystem for Linux<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-7ed069a6f41a18ead2ddedfda31e7113" aria-controls="subsections-7ed069a6f41a18ead2ddedfda31e7113" checked><label for="section-7ed069a6f41a18ead2ddedfda31e7113"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu RHCSA</span></label><a class="padding" href="">RHCSA<i class="fas fa-check read-icon"></i></a><ul id="subsections-7ed069a6f41a18ead2ddedfda31e7113" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/rhcsa/4_adv_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/4_adv_file_management/index.html">Advanced File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/6_adv_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/6_adv_user_management/index.html">Advanced User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/7_bash_shell/index.html" class=""><a class="padding" href="/linux/rhcsa/7_bash_shell/index.html">Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/9_basic_package_management/index.html" class=""><a class="padding" href="/linux/rhcsa/9_basic_package_management/index.html">Basic Package Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/5_basic_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/5_basic_user_management/index.html">Basic User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/3_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/3_file_management/index.html">File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/2_interaction/index.html" class=""><a class="padding" href="/linux/rhcsa/2_interaction/index.html">Interaction<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/17_network_file_system/index.html" class=""><a class="padding" href="/linux/rhcsa/17_network_file_system/index.html">Network File System (NFS)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/16_networking/index.html" class=""><a class="padding" href="/linux/rhcsa/16_networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/index.html" class=""><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/index.html">Process and Task Scheduling<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/1_installation/index.html" class=""><a class="padding" href="/linux/rhcsa/1_installation/index.html">RHEL Installation<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-32ba51710c14dbc40b371b19ad442e93" aria-controls="subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="">Networking<i class="fas fa-check read-icon"></i></a><ul id="subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-e7b43009273138043ffb9c6ae58c8cce" aria-controls="subsections-e7b43009273138043ffb9c6ae58c8cce" checked><label for="section-e7b43009273138043ffb9c6ae58c8cce"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Cisco</span></label><a class="padding" href="">Cisco<i class="fas fa-check read-icon"></i></a><ul id="subsections-e7b43009273138043ffb9c6ae58c8cce" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/tcp_ip_basic/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_basic/index.html">Basics of TCP/IP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cli/index.html" class=""><a class="padding" href="/networking/cisco/cli/index.html">Cisco CLI Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/index.html" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/index.html">Cisco CML VMWARE Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/index.html" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/index.html">Cisco Devnet Sandbox Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/index.html" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/index.html">Cisco VLAN Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/index.html" class=""><a class="padding" href="/networking/cisco/classful_ipv4/index.html">Classfull IPv4<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/index.html" class=""><a class="padding" href="/networking/cisco/management/index.html">Device Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/index.html" class=""><a class="padding" href="/networking/cisco/device_management_protocols/index.html">Device Management Protocols<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_config/index.html">DHCP Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html">DHCP Snooping and ARP Inspection<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/index.html" class=""><a class="padding" href="/networking/cisco/ethernet_lans/index.html">Ethernet LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/index.html" class=""><a class="padding" href="/networking/cisco/extended_acls/index.html">Extended ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/index.html" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/index.html">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/index.html" class=""><a class="padding" href="/networking/cisco/ip_services/index.html">IP Services<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/index.html">IPv6 Addressing and Subnetting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/index.html" class=""><a class="padding" href="/networking/cisco/ipv6/index.html">IPv6 Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/index.html" class="active"><a class="padding" href="/networking/cisco/ipv6_config/index.html">IPv6 Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_routing/index.html">IPv6 Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/lan_architecture/index.html">LAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/index.html" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/index.html">Layer 2 Etherchannel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree/index.html">More Spanning Tree<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/index.html" class=""><a class="padding" href="/networking/cisco/nat/index.html">Network Address Translation (NAT)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/index.html" class=""><a class="padding" href="/networking/cisco/ospf_concepts/index.html">OSPF Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/index.html" class=""><a class="padding" href="/networking/cisco/ospf_config/index.html">OSPF Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/index.html" class=""><a class="padding" href="/networking/cisco/ospf_lab/index.html">OSPF Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/index.html" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/index.html">OSPF Network Types and Neighbors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/index.html" class=""><a class="padding" href="/networking/cisco/qos/index.html">QoS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/index.html" class=""><a class="padding" href="/networking/cisco/rstp/index.html">Rapid Spanning Tree (RSTP)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/index.html" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/index.html">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/index.html" class=""><a class="padding" href="/networking/cisco/router_operation/index.html">Router Operation<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/index.html" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/index.html">Routing in the LAN<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/index.html" class=""><a class="padding" href="/networking/cisco/securing_network_devices/index.html">Securing Network Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/index.html" class=""><a class="padding" href="/networking/cisco/security_architectures/index.html">Security Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/index.html">Spanning Tree Protocol Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/index.html" class=""><a class="padding" href="/networking/cisco/standard_acls/index.html">Standard ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/index.html" class=""><a class="padding" href="/networking/cisco/static_routes/index.html">Static Routes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/index.html" class=""><a class="padding" href="/networking/cisco/switch_interfaces/index.html">Switch Interfaces<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/index.html" class=""><a class="padding" href="/networking/cisco/switchport_security_config/index.html">Switchport Security Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/index.html">TCP/UDP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/index.html" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/index.html">Troubleshooting Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/index.html" class=""><a class="padding" href="/networking/cisco/vlans/index.html">VLANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/wan_architecture/index.html">WAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/index.html" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/index.html">WANs and IP Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/index.html" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/index.html">What is a VLAN?<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/index.html" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/index.html">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/index.html" class=""><a class="padding" href="/networking/cisco/wireless_architectures/index.html">Wireless Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/index.html" class=""><a class="padding" href="/networking/cisco/wireless_lan/index.html">Wireless LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/index.html" class=""><a class="padding" href="/networking/cisco/wireless/index.html">Wireless Principles<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/index.html" class=""><a class="padding" href="/networking/cisco/wireless_security/index.html">Wireless Security<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-671e08f4a7e985c9c54ec2c3658b1e25" aria-controls="subsections-671e08f4a7e985c9c54ec2c3658b1e25" checked><label for="section-671e08f4a7e985c9c54ec2c3658b1e25"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Juniper</span></label><a class="padding" href="">Juniper<i class="fas fa-check read-icon"></i></a><ul id="subsections-671e08f4a7e985c9c54ec2c3658b1e25" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/index.html" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/index.html">Cisco to Juniper Cheat Sheet<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/index.html" class=""><a class="padding" href="/networking/juniper/junos_fundementals/index.html">Junos Basics<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/index.html" class=""><a class="padding" href="/tools/calibre_server/index.html">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/index.html" class=""><a class="padding" href="/tools/calibre-web-with-docker/index.html">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/index.html" class=""><a class="padding" href="/tools/distrobox/index.html">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/index.html" class=""><a class="padding" href="/tools/githubpageshugo/index.html">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+            <li><a class="padding" href="/now/index.html"><i class='fas fa-fw fa-play'></i> now</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city2" value="city2" selected>City2</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

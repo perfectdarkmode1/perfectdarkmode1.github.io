@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>OSPF Network Types and Neighbors - Perfect Dark Mode</title>
+    <link href="/networking/cisco/ospf_network_types_and_neighbors/index.xml" rel="alternate" type="application/rss+xml" title="OSPF Network Types and Neighbors - Perfect Dark Mode">
+    <link href="/networking/cisco/ospf_network_types_and_neighbors/index.print.html" rel="alternate" type="text/html" title="OSPF Network Types and Neighbors - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/cisco/ospf_network_types_and_neighbors/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <span class="nav nav-next topbar-link"><i class="fa fa-chevron-right fa-fw"></i></span>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/index.html" title=" (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/networking/cisco/ospf_network_types_and_neighbors/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">OSPF Network Types and Neighbors</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="ospf-network-types-and-neighbors">OSPF Network Types and Neighbors</h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>3.0 IP Connectivity</p>
+<p>3.4 Configure and verify single area OSPFv2</p>
+<p>3.4.a Neighbor adjacencies</p>
+<p>3.4.b Point-to-point</p>
+<p>3.4.c Broadcast (DR/BDR selection)</p>
+<p>3.4.d Router ID</p>
+<p>OSPF Network Types</p>
+<p>Network Type
+Keyword
+broadcast
+point-to-point
+Dynamically Discovers
+Neighbors
+Yes
+Yes
+Uses a
+DR/BDR
+Yes
+No &ldquo;&gt;</p>
+<p>The OSPF Broadcast Network Type</p>
+<p>default to use network type broadcast</p>
+<p>Attempt to discover neighbors by sending OSPF Hellos to the 224.0.0.5 multicast address (an address reserved for sending packets to all OSPF routers in the subnet)</p>
+<p>Attempt to elect a DR and BDR on each subnet</p>
+<p>On the interface with no other routers on the subnet (G0/1), become the DR</p>
+<p>On the interface with three other routers on the subnet (G0/0), be either DR, BDR, or a DROther router</p>
+<p>all discovered routers on the link should become neighbors and at least reach the 2-way state. For all neighbor relationships that include the DR and/or BDR, the neighbor relationship should further reach the full state. That section defined the term fully adjacent as a special term that refers to neighbors that reach this full state.</p>
+<p>To see the setting, use the show ip ospf interface command, as shown in Example 21-4. The first highlighted item identifies the network type</p>
+<p>Click here to view code image
+RI* show ip ospf interface ge/ø
+GigabitEthernete/e is up, line protocol is up
+Internet Address 10.1.1.1/24, Area e, Attached via Interface Enabl
+Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, cost: 1
+Topology-MTID
+e
+Cost
+1
+Disabled
+no
+Shutdown
+no
+Topology Name
+Base
+Enabled by interface config, including secondary ip addresses
+Transmit Delay is 1 sec, State DROTHER, Priority 1
+Designated Router (ID) 4.4.4.4, Interface address 10.1.1.4
+Backup Designated router (ID) 3.3.3.3, Interface address 10.1.1.3
+Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit
+oob-resync timeout 40
+Hello due in ee:ee:ee
+Supports Link-local Signaling (LLS)
+Cisco NSF helper support enabled
+IETF NSF helper support enabled
+Index 1/1/1, flood queue length e
+Next
+Last flood scan length is e, maximum is 1
+Last flood scan time is e msec, maximum is e
+Nei ghhnr r Olin* i e R Ad-iarpnt- nei ghhnr c-nllnt-
+msec &ldquo;&gt;</p>
+<p>Adjacent with neighbor 4.4.4.4 (Designated Router)
+Suppress hello for e neighbor(s) &ldquo;&gt;</p>
+<p>ip ospf network broadcast interface subcommand would configure the setting.</p>
+<p>Configuring to Influence the DR/BDR Election</p>
+<p>If the DR fails, the BDR becomes the DR, and a new BDR is elected.</p>
+<p>When a better router enters the subnet, no preemption of the existing DR or BDR occurs.</p>
+<ul>
+<li>Preemption: If a new router is configured to be the DR, it will not become the DR until the OSPF process is reset.</li>
+</ul>
+<p>As a result of these rules, while you can configure a router to be the best (highest priority) router to become the DR in an election, doing so only increases that router’s statistical chances of being the DR at a given point in time. If the router fails, other routers will become DR and BDR, and the best router will not be DR again until the current DR and BDR fail.</p>
+<p>The highest OSPF interface priority: The highest value wins during an election, with values ranging from 0 to 255.</p>
+<p>The highest OSPF Router ID: If the priority ties, the election chooses the router with the highest OSPF RID.</p>
+<p>If an engineer preferred that R1 be the DR, the engineer could add the configuration in Example 21-5 to set R1’s interface priority to 99. (default of 1)</p>
+<p>RI* configure terminal
+Configuring from terminal, memory, or network [terminal]?
+Enter configuration commands, one per line.
+End with CNTL/Z.
+RI (config)# interface gø,&lsquo;ø
+RI (config-if)# ip ospf priority 99
+RI (config-if)# AZ
+RI* show ip ospf interface ge/ø I include Priority
+Transmit Delay is 1 sec, State DROTHER, Priority 99
+10.1.1.2
+10.1.1.3
+10.1.
+1.4
+RI* show ip
+Neighbor ID
+2.2. 2.2
+3.3. 3.3
+4.4.4.4
+RI* show ip
+Interface
+Gie/l
+Gie/e
+ospf neighbor
+pri
+1
+1
+1
+State
+2WAY/DROTHER
+FULL/BDR
+FULL/DR
+Dead Time
+ospf
+PID
+1
+1
+interface brief
+Area
+e
+e
+Address/Mask
+IP
+le.1.11.1/24
+le.1.1.1/24
+Address
+Cost
+1
+1
+State
+DR
+DROTH
+In
+2/ &ldquo;&gt;</p>
+<p>show that the DR and BDR have not changed at all</p>
+<p>The OSPF Point-to-Point Network Type</p>
+<p>(HDLC and PPP) do not support data-link broadcasts.</p>
+<p>to use OSPF network type point-to-point. R2, on the other end of the WAN link, would need the same configuration command on its matching interface.</p>
+<p>RI
+Click here to view code image
+RI* configure terminal
+Enter configuration commands, one per line.
+End with CNTL/Z.
+RI (config)# interface ge/Ø/0
+RI (config-if)# ip ospf network point-to-point
+RI (config-if)#
+RI* show ip ospf interface ge/0/0
+GigabitEthernete/0/e is up, line protocol is up
+Internet Address 10.1.12.1/24, Area e, Attached via Interface Enab
+Process ID 1, Router ID 1.1.1.1, Network Type POINT TO POINT, cost
+Topology-MT ID
+e
+Cost
+4
+Disabled
+no
+Shutdown
+no
+Topology Name
+Base
+Enabled by interface config, including secondary ip addresses
+Transmit Delay is 1 sec, State POINT TO POINT
+Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit
+oob-resync timeout 40
+Hello due in ee:ee:el
+Supports Link-local Signaling (LLS)
+Cisco NSF helper support enabled &ldquo;&gt;</p>
+<p>Index 1/3/3, flood queue length e
+Next
+Last flood scan length is 1, maximum is 3
+Last flood scan time is e msec, maximum is e msec
+Neighbor Count is 1, Adjacent neighbor count is 1
+Adjacent with neighbor 2.2.2.2
+Suppress hello for e neighbor(s) &ldquo;&gt;</p>
+<p>RI
+Click here to view code image
+show ip ospf neighbor
+eighbor ID
+.2.2.2
+pri
+e
+State
+FULL/
+Dead Time
+lines omitted for brevity
+show ip ospf interface brief
+nterface
+ie/e/e
+PID
+1
+Area
+e
+Address/Mask
+IP
+le.1.12.1/24
+Address
+10.1. 12.2
+Cost
+4
+Interfac
+GigabitE
+State Nbrs F
+1/1
+P2P
+lines omitted for brevity &ldquo;&gt;</p>
+<p>OSPF Neighbor Relationships</p>
+<p>They must have compatible values for several settings as listed in the Hellos exchanged between the two routers</p>
+<p>Requirement
+Interfaces must be in an up/up state.
+Access control lists (ACL) must not filter
+routing protocol messages.
+Interfaces must be in the same subnet.
+They must pass routing protocol neigh-
+bor authentication (if configured).
+Hello and hold/dead timers must match.
+Router IDs (RID) must be unique.
+They must be in the same area.
+OSPF process must not be shut down.
+Required
+for OSPF
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Neighbor Missing
+if Incorrect
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes
+Yes &ldquo;&gt;</p>
+<p>MTU setting.
+Neighboring interfaces must use same
+OSPF network type.
+Yes
+Yes
+No
+No &ldquo;&gt;</p>
+<p>For items listing a “yes” in this column, if that item is configured incorrectly, the neighbor will not appear in lists of OSPF neighbors—for instance, with the show ip ospf neighbor command.</p>
+<p>the last section (shaded) lists a couple of OSPF settings that give a different symptom when incorrect</p>
+<p>for these two items, when incorrect, a router can list the other router as a neighbor, but the neighbor relationship does not work properly in that the routers do not exchange LSAs as they should</p>
+<p>Requirement
+Hello and dead timers must match.
+They must be in the same area.
+RIDs must be unique.
+They must pass any neighbor
+authentication.
+OSPF process must not be shut down.
+Best show Command
+show ip ospf interface
+show ip ospf interface brief
+show ip ospf
+show ip ospf interface
+show ip ospf, show ip ospf
+interface &ldquo;&gt;</p>
+<p>10/40 is the default hello/dead timer</p>
+<p>Finding Area Mismatches</p>
+<p>Check the output of show running-config to look for</p>
+<p>ip ospf process-id area area-number interface subcommands</p>
+<p>network commands in OSPF configuration mode</p>
+<p>Use the show ip ospf interface [brief] command to list the area number</p>
+<p>Finding Duplicate OSPF Router IDs</p>
+<p>both routers automatically generate a log message for the duplicate OSPF RID problem between R1 and R3;</p>
+<p>show ip ospf commands on both R3 and R1 to easily list the RID on each router,</p>
+<p>use the router-id 3.3.3.3 OSPF subcommand and use the EXEC mode command clear ip ospf process. (OSPF will not begin using a new RID value until the process restarts, either via command or reload.)</p>
+<p>Finding OSPF Hello and Dead Timer Mismatches</p>
+<p>Hello interval/timer: The per-interface timer that tells a router how often to send OSPF Hello messages on an interface.</p>
+<p>Dead interval/timer: The per-interface timer that tells the router how long to wait without having received a Hello from a neighbor before believing that neighbor has failed. (Defaults to four times the Hello timer.)</p>
+<p>Click here to view code image
+RI* show ip ospf interface GO/O
+GigabitEthernete/e is up, line protocol is up
+Internet Address 10.1.1.1/24, Area e, Attached via Network Stateme
+Process ID 1, Router ID 1.1.1.1, Network Type BROADCAST, cost: 1
+Topology-MT ID Cost Disabled Shutdown
+e
+1
+no
+no
+Topology Name
+Base
+Transmit Delay is 1 sec, State DR, Priority 1
+Designated Router (ID) 1.1.1.1, Interface address 10.1.1.1
+No backup designated router on this network
+Timer intervals configured, Hello 10, Dead 40, Wait 40, Retransmit
+lines omitted for brevity &ldquo;&gt;</p>
+<p>R4# show ip ospf interface Gi€/€
+GigabitEthernete/e is up, line protocol is up
+Internet Address le.1.1.4/24, Area e, Attached via Network Statem
+Process ID 4, Router ID le.1.44.4, Network Type BROADCAST, cost:
+Topology-MT ID Cost Disabled Shutdown
+e
+1
+no
+no
+Topology Name
+Base
+Transmit Delay is 1 sec, State DR, Priority 1
+Transmit Delay is 1 sec, State DR, Priority 1
+Designated Router (ID) 10.1
+No backup designated router
+Timer intervals configured,
+lines omitted for brevity
+.44.4, Interface address 10.1.1.4
+on this network
+Hello 5, Dead 20, Wait 2e, Retransmit &ldquo;&gt;</p>
+<p>Shutting Down the OSPF Process</p>
+<p>When a routing protocol process is shut down, IOS does the following:</p>
+<p>Brings down all neighbor relationships and clears the OSPF neighbor table</p>
+<p>Clears the LSDB</p>
+<p>Clears the IP routing table of any OSPF-learned routes</p>
+<p>IOS retains all OSPF configuration.</p>
+<p>IOS still lists all OSPF-enabled interfaces in the OSPF interface list (show ip ospf interface) but in a DOWN state.</p>
+<p>Mismatched MTU Settings</p>
+<p>defining the largest network layer packet that the router will forward out each interface.</p>
+<p>default MTU size of 1500 bytes,</p>
+<p>The ip mtu size interface subcommand defines the IPv4 MTU setting, and the ipv6 mtu size command sets the equivalent for IPv6 packets.</p>
+<p>Symptom: they fail to exchange their LSDBs. Eventually, after trying and failing to exchange their LSDBs, the neighbor relationship also fails.</p>
+<p>show interfaces command (which lists the IP MTU).</p>
+<p>Mismatched OSPF Network Types</p>
+<p>one router uses broadcast, and the other uses point-to-point, the following occurs:</p>
+<p>The two routers become fully adjacent neighbors (that is, they reach a full state).</p>
+<p>They exchange their LSDBs.</p>
+<p>They do not add IP routes to the IP routing table.</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1700252831" defer></script>
+        <script src="/js/search.js?1700252831" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" aria-controls="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" checked><label for="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Fedora</span></label><a class="padding" href="">Fedora<i class="fas fa-check read-icon"></i></a><ul id="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora/fedora_setup/index.html" class=""><a class="padding" href="/linux/fedora/fedora_setup/index.html">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/hotkeys/index.html" class=""><a class="padding" href="/linux/fedora/hotkeys/index.html">Fedora Hotkeys<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/silverblue/index.html" class=""><a class="padding" href="/linux/fedora/silverblue/index.html">Fedora Silverblue<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/starcraftonfedora/index.html" class=""><a class="padding" href="/linux/fedora/starcraftonfedora/index.html">How to Install Starcraft on Fedora<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-2c366602ce05ece354fb0e76680a93b8" aria-controls="subsections-2c366602ce05ece354fb0e76680a93b8" checked><label for="section-2c366602ce05ece354fb0e76680a93b8"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu misc</span></label><a class="padding" href="">misc<i class="fas fa-check read-icon"></i></a><ul id="subsections-2c366602ce05ece354fb0e76680a93b8" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/index.html" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/index.html">Boot<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/command_line/index.html">Command Line<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/index.html">Consoling in on Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/index.html" class=""><a class="padding" href="/linux/misc_linux/devices/index.html">Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/index.html" class=""><a class="padding" href="/linux/misc_linux/dns/index.html">DNS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/index.html" class=""><a class="padding" href="/linux/misc_linux/file_permissions/index.html">File Permissions<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/index.html" class=""><a class="padding" href="/linux/misc_linux/getting_started/index.html">General Linux and History<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/index.html" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/index.html">How to Get Putty to Work in Ubuntu<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/index.html" class=""><a class="padding" href="/linux/misc_linux/init/index.html">Init<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/index.html" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/index.html">IO Monitoring<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/index.html" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/index.html">Keyboard Shortcuts<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/index.html" class=""><a class="padding" href="/linux/misc_linux/kernel/index.html">Linux Kernel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/index.html" class=""><a class="padding" href="/linux/misc_linux/logging/index.html">Logging<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/index.html" class=""><a class="padding" href="/linux/misc_linux/ls/index.html">ls<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/index.html" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/index.html">Network Troubleshooting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/index.html" class=""><a class="padding" href="/linux/misc_linux/network_basics/index.html">Networking in Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html">Open source and Linux Community<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/index.html" class=""><a class="padding" href="/linux/misc_linux/packages/index.html">Packages and Their Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/index.html" class=""><a class="padding" href="/linux/misc_linux/process_utilization/index.html">Process Utilization<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/index.html" class=""><a class="padding" href="/linux/misc_linux/ps_processes/index.html">Processes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_resources/index.html">Resources for learning Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/index.html" class=""><a class="padding" href="/linux/misc_linux/scp_command/index.html">scp<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/index.html" class=""><a class="padding" href="/linux/misc_linux/network_sharing/index.html">Sharing Resources<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html">Shell<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html">Skills that go with Bash Scripting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/index.html">Switching to Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/index.html">Symbols in Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/index.html" class=""><a class="padding" href="/linux/misc_linux/tar/index.html">Tar Stuff<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/index.html" class=""><a class="padding" href="/linux/misc_linux/text_fu/index.html">Text Editors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/index.html" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/index.html">The Linux Filesystem<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/index.html" class=""><a class="padding" href="/linux/misc_linux/user_management/index.html">User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/index.html" class=""><a class="padding" href="/linux/misc_linux/wsl2/index.html">Windows Subsystem for Linux<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-7ed069a6f41a18ead2ddedfda31e7113" aria-controls="subsections-7ed069a6f41a18ead2ddedfda31e7113" checked><label for="section-7ed069a6f41a18ead2ddedfda31e7113"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu RHCSA</span></label><a class="padding" href="">RHCSA<i class="fas fa-check read-icon"></i></a><ul id="subsections-7ed069a6f41a18ead2ddedfda31e7113" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/rhcsa/4_adv_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/4_adv_file_management/index.html">Advanced File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/6_adv_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/6_adv_user_management/index.html">Advanced User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/7_bash_shell/index.html" class=""><a class="padding" href="/linux/rhcsa/7_bash_shell/index.html">Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/9_basic_package_management/index.html" class=""><a class="padding" href="/linux/rhcsa/9_basic_package_management/index.html">Basic Package Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/5_basic_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/5_basic_user_management/index.html">Basic User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/3_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/3_file_management/index.html">File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/2_interaction/index.html" class=""><a class="padding" href="/linux/rhcsa/2_interaction/index.html">Interaction<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/17_network_file_system/index.html" class=""><a class="padding" href="/linux/rhcsa/17_network_file_system/index.html">Network File System (NFS)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/16_networking/index.html" class=""><a class="padding" href="/linux/rhcsa/16_networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/index.html" class=""><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/index.html">Process and Task Scheduling<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/1_installation/index.html" class=""><a class="padding" href="/linux/rhcsa/1_installation/index.html">RHEL Installation<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-32ba51710c14dbc40b371b19ad442e93" aria-controls="subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="">Networking<i class="fas fa-check read-icon"></i></a><ul id="subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-e7b43009273138043ffb9c6ae58c8cce" aria-controls="subsections-e7b43009273138043ffb9c6ae58c8cce" checked><label for="section-e7b43009273138043ffb9c6ae58c8cce"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Cisco</span></label><a class="padding" href="">Cisco<i class="fas fa-check read-icon"></i></a><ul id="subsections-e7b43009273138043ffb9c6ae58c8cce" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/tcp_ip_basic/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_basic/index.html">Basics of TCP/IP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cli/index.html" class=""><a class="padding" href="/networking/cisco/cli/index.html">Cisco CLI Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/index.html" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/index.html">Cisco CML VMWARE Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/index.html" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/index.html">Cisco Devnet Sandbox Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/index.html" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/index.html">Cisco VLAN Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/index.html" class=""><a class="padding" href="/networking/cisco/classful_ipv4/index.html">Classfull IPv4<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/index.html" class=""><a class="padding" href="/networking/cisco/management/index.html">Device Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/index.html" class=""><a class="padding" href="/networking/cisco/device_management_protocols/index.html">Device Management Protocols<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_config/index.html">DHCP Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html">DHCP Snooping and ARP Inspection<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/index.html" class=""><a class="padding" href="/networking/cisco/ethernet_lans/index.html">Ethernet LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/index.html" class=""><a class="padding" href="/networking/cisco/extended_acls/index.html">Extended ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/index.html" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/index.html">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/index.html" class=""><a class="padding" href="/networking/cisco/ip_services/index.html">IP Services<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/index.html">IPv6 Addressing and Subnetting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/index.html" class=""><a class="padding" href="/networking/cisco/ipv6/index.html">IPv6 Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_config/index.html">IPv6 Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_routing/index.html">IPv6 Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/lan_architecture/index.html">LAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/index.html" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/index.html">Layer 2 Etherchannel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree/index.html">More Spanning Tree<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/index.html" class=""><a class="padding" href="/networking/cisco/nat/index.html">Network Address Translation (NAT)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/index.html" class=""><a class="padding" href="/networking/cisco/ospf_concepts/index.html">OSPF Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/index.html" class=""><a class="padding" href="/networking/cisco/ospf_config/index.html">OSPF Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/index.html" class=""><a class="padding" href="/networking/cisco/ospf_lab/index.html">OSPF Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/index.html" class="active"><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/index.html">OSPF Network Types and Neighbors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/index.html" class=""><a class="padding" href="/networking/cisco/qos/index.html">QoS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/index.html" class=""><a class="padding" href="/networking/cisco/rstp/index.html">Rapid Spanning Tree (RSTP)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/index.html" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/index.html">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/index.html" class=""><a class="padding" href="/networking/cisco/router_operation/index.html">Router Operation<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/index.html" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/index.html">Routing in the LAN<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/index.html" class=""><a class="padding" href="/networking/cisco/securing_network_devices/index.html">Securing Network Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/index.html" class=""><a class="padding" href="/networking/cisco/security_architectures/index.html">Security Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/index.html">Spanning Tree Protocol Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/index.html" class=""><a class="padding" href="/networking/cisco/standard_acls/index.html">Standard ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/index.html" class=""><a class="padding" href="/networking/cisco/static_routes/index.html">Static Routes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/index.html" class=""><a class="padding" href="/networking/cisco/switch_interfaces/index.html">Switch Interfaces<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/index.html" class=""><a class="padding" href="/networking/cisco/switchport_security_config/index.html">Switchport Security Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/index.html">TCP/UDP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/index.html" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/index.html">Troubleshooting Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/index.html" class=""><a class="padding" href="/networking/cisco/vlans/index.html">VLANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/wan_architecture/index.html">WAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/index.html" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/index.html">WANs and IP Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/index.html" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/index.html">What is a VLAN?<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/index.html" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/index.html">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/index.html" class=""><a class="padding" href="/networking/cisco/wireless_architectures/index.html">Wireless Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/index.html" class=""><a class="padding" href="/networking/cisco/wireless_lan/index.html">Wireless LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/index.html" class=""><a class="padding" href="/networking/cisco/wireless/index.html">Wireless Principles<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/index.html" class=""><a class="padding" href="/networking/cisco/wireless_security/index.html">Wireless Security<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-671e08f4a7e985c9c54ec2c3658b1e25" aria-controls="subsections-671e08f4a7e985c9c54ec2c3658b1e25" checked><label for="section-671e08f4a7e985c9c54ec2c3658b1e25"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Juniper</span></label><a class="padding" href="">Juniper<i class="fas fa-check read-icon"></i></a><ul id="subsections-671e08f4a7e985c9c54ec2c3658b1e25" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/index.html" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/index.html">Cisco to Juniper Cheat Sheet<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/index.html" class=""><a class="padding" href="/networking/juniper/junos_fundementals/index.html">Junos Basics<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/index.html" class=""><a class="padding" href="/tools/calibre_server/index.html">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/index.html" class=""><a class="padding" href="/tools/calibre-web-with-docker/index.html">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/index.html" class=""><a class="padding" href="/tools/distrobox/index.html">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/index.html" class=""><a class="padding" href="/tools/githubpageshugo/index.html">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+            <li><a class="padding" href="/now/index.html"><i class='fas fa-fw fa-play'></i> now</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city2" value="city2" selected>City2</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

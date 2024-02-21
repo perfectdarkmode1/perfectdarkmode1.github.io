@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Wireless Principles - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/wireless/index.html" rel="canonical" type="text/html" title="Wireless Principles - Perfect Dark Mode">
+    <link href="/networking/cisco/wireless/index.xml" rel="alternate" type="application/rss+xml" title="Wireless Principles - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/wireless/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Wireless Principles</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="wireless-principles">Wireless Principles</h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>1.0 Network Fundamentals</p>
+<p>1.1 Explain the role and function of network components</p>
+<p>1.1.d Access Points</p>
+<p>1.11 Describe wireless principles</p>
+<p>1.11.a Nonoverlapping Wi-Fi channels</p>
+<p>1.11.b SSID</p>
+<p>1.11.c RF</p>
+<p>Comparing Wired and Wireless Networks</p>
+<p>Wireless devices must adhere to a common standard (IEEE 802.11).</p>
+<p>Wireless coverage must exist in the area where devices are expected to use it.</p>
+<p>Wireless LAN Topologies</p>
+<p>IEEE 802.11 WLANs are always half duplex because transmissions between stations use the same frequency or channel.</p>
+<p>Basic Service Set</p>
+<p>before a device can participate, it must advertise its capabilities and then be granted permission to join. The 802.11 standard calls this a basic service set (BSS). At the heart of every BSS is a wireless access point (AP),</p>
+<p>The AP operates in infrastructure mode, which means it offers the services that are necessary to form the infrastructure of a wireless network. The AP also establishes its BSS over a single wireless channel. The AP and the members of the BSS must all use the same channel to communicate properly.</p>
+<p>the operation of a BSS hinges on the AP, the BSS is bounded by the area where the AP’s signal is usable. This is known as the basic service area (BSA) or cell.</p>
+<p>the cell is shown as a simple shaded circular area that centers around the AP itself.</p>
+<p>It advertises the existence of the BSS so that devices can find it and try to join. To do that, the AP uses a unique BSS identifier (BSSID) that is based on the AP’s own radio MAC address.</p>
+<p>Wireless devices must also have unique MAC addresses to send wireless frames at Layer 2 over the air.</p>
+<p>the AP advertises the wireless network with a Service Set Identifier (SSID), which is a text string containing a logical name. Think of the BSSID as a machine-readable name tag that uniquely identifies the BSS ambassador (the AP), and the SSID as a nonunique, human-readable name tag that identifies the wireless service.</p>
+<p>Membership with the BSS is called an association. A wireless device must send an association request to the AP and the AP must either grant or deny the request. Once associated, a device becomes a client, or an 802.11 station (STA), of the BSS.</p>
+<p>As long as a wireless client remains associated with a BSS, most communications to and from the client must pass through the AP,</p>
+<p>By using the BSSID as a source or destination address, data frames can be relayed to or from the AP.</p>
+<p>SSID.
+• &lsquo;MyNetwork&quot;
+BSSID: &ldquo;&gt;</p>
+<p>By sending data through the AP first, the BSS remains stable and under control.</p>
+<p>Distribution System</p>
+<p>The 802.11 standard refers to the upstream wired Ethernet as the distribution system (DS) for the wireless BSS,</p>
+<p>the AP is in charge of mapping a virtual local-area network (VLAN) to an SSID.</p>
+<p>SSID. &quot;
+• MyNetwork&quot;
+BSS
+BSSID:</p>
+<p>The AP must be connected to the switch by a trunk link that carries the VLANs.</p>
+<p>The AP uses the 802.1Q tag to map the VLAN numbers to the appropriate SSIDs.</p>
+<p>VLANs 10, 20, 30
+SSID: &lsquo;MyNetwork&quot;
+SSID: &quot;YourNetwork&quot;
+BSSID:
+SSID: &lsquo;Guest&quot;
+BSSID:
+BSSID:
+F igure 26-7 Supporting Multiple SSIDs on One AP &ldquo;&gt;</p>
+<p>The AP then appears as multiple logical APs—one per BSS—with a unique BSSID for each. With Cisco APs, this is usually accomplished by incrementing the last digit of the radio’s MAC address for each SSID.</p>
+<p>Even though wireless clients can be distributed across many SSIDs, all of those clients must share the same AP’s hardware and must contend for airtime on the same channel.</p>
+<p>Extended Service Set</p>
+<p>When APs are placed at different geographic locations, they can all be interconnected by a switched infrastructure. The 802.11 standard calls this an extended service set (ESS),</p>
+<p>Ideally, any SSIDs that are defined on one AP should be defined on all the APs in an ESS</p>
+<p>BSS-I
+AP-I
+BSSID:
+SSID: &quot;
+My Network&quot;
+BSS-2
+AP-2
+BSSID:
+SSID: &quot;MyNetwork&quot;</p>
+<p>Passing from one AP to another is called roaming</p>
+<p>Each AP offers its own BSS on its own channel, to prevent interference between the APs. As a client device roams from one AP to another, it must scan the available channels to find a new AP (and BSS) to roam toward.</p>
+<p>Independent Basic Service Set</p>
+<p>The 802.11 standard allows two or more wireless clients to communicate directly with each other, with no other means of network connectivity. This is known as an ad hoc wireless network, or an independent basic service set (IBSS),</p>
+<p>One of the devices must take the lead and begin advertising a network name and the necessary radio parameters, much like an AP would do.</p>
+<p>Other Wireless Topologies</p>
+<p>Repeater</p>
+<p>A wireless repeater takes the signal it receives and repeats or retransmits it in a new cell area around the repeater.</p>
+<p>Client A
+Repeater
+Client B &ldquo;&gt;</p>
+<p>Some repeaters can use two transmitters and receivers to keep the original and repeated signals isolated on different channels. One transmitter and receiver pair is dedicated to signals in the AP’s cell, while the other pair is dedicated to signals in the repeater’s own cell.</p>
+<p>Workgroup Bridge</p>
+<p>WGB acts as an external wireless network adapter for a device that has none.</p>
+<p>Client A
+WGB
+Cliente</p>
+<p>You might encounter two types of workgroup bridges:</p>
+<p>Universal workgroup bridge (uWGB): A single wired device can be bridged to a wireless network.</p>
+<p>Workgroup bridge (WGB): A Cisco-proprietary implementation that allows multiple wired devices to be bridged to a wireless network.</p>
+<p>Outdoor Bridge</p>
+<p>act as a bridge to form a single wireless link from one LAN to another over a long distance.</p>
+<p>One AP configured in bridge mode is needed on each end of the wireless link. Special purpose antennas are normally used with the bridges to focus their signals in one direction</p>
+<p>Bridge
+LAN В &ldquo;&gt;</p>
+<p>A point-to-multipoint bridged link allows a central site to be bridged to several other sites</p>
+<p>00
+V NVI &ldquo;&gt;</p>
+<p>Mesh Network</p>
+<p>In a mesh topology, wireless traffic is bridged from AP to AP, in a daisy-chain fashion, using another wireless channel.</p>
+<p>Mesh APs can leverage dual radios—one using a channel in one range of frequencies and one a different range. Each mesh AP usually maintains a BSS on one channel, with which wireless clients can associate. Client traffic is then usually bridged from AP to AP over other channels as a backhaul network.</p>
+<p>The mesh network runs its own dynamic routing protocol to work out the best path for backhaul traffic to take across the mesh APs.</p>
+<p>RF Overview</p>
+<p>Electromagnetic waves do not travel in a straight line. Instead, they travel by expanding in all directions away from the antenna.</p>
+<p>frequency of the wave, or the number of times the signal makes one complete up and down cycle in 1 second</p>
+<p>1 Second
+Frequency = 4 cycles/second
+= 4 Hertz</p>
+<p>A hertz (Hz) is the most commonly used frequency unit and is nothing other than one cycle per second.</p>
+<p>Unit
+Hertz
+Kilohertz
+Megahertz
+Gigahertz
+Abbreviation
+kHz
+MHz
+GHz
+Meaning
+Cycles per second
+1000 Hz &ldquo;&gt;</p>
+<p>3 kHz to 300 GHz is commonly called radio frequency (RF).</p>
+<p>Wireless Bands and Channels</p>
+<p>Because a range of frequencies might be used for the same purpose, it is customary to refer to the range as a band of frequencies.</p>
+<p>the range from 530 kHz to around 1710 kHz is used by AM radio stations; therefore, it is commonly called the AM band or the AM broadcast band.</p>
+<p>One of the two main frequency ranges used for wireless LAN communication lies between 2.400 and 2.4835 GHz. This is usually called the 2.4-GHz band, even though it does not encompass the entire range between 2.4 and 2.5 GHz</p>
+<p>The other wireless LAN range is usually called the 5-GHz band because it lies between 5.150 and 5.825 GHz. The 5-GHz band actually contains the following four separate and distinct bands:</p>
+<p>5.150 to 5.250 GHz</p>
+<p>5.250 to 5.350 GHz</p>
+<p>5.470 to 5.725 GHz</p>
+<p>5.725 to 5.825 GHz</p>
+<p>Gap between 5.350 and 5.470</p>
+<p>this gap exists and cannot be used for wireless LANs.</p>
+<p>Do not worry about memorizing the band names or exact frequency ranges; just be aware of the two main bands at 2.4 and 5 GHz.</p>
+<p>A frequency band contains a continuous range of frequencies.</p>
+<p>bands are usually divided into a number of distinct channels. Each channel is known by a channel number and is assigned to a specific frequency.</p>
+<p>2.412
+2.417
+2.422
+2427
+6
+2432 2437 2.442
+Dsss: 22 MHz
+OFDM: 20 MHz
+2.44?
+2,452
+2457
+11
+2462 2467 2.472
+2484</p>
+<p>Channel
+U-Nll-2
+U-Nll-2 Extended
+112 116 124 128132 136 140
+5.700
+U-Nll-3
+149153157161
+36 40 44 48 52 56 60 64
+GHz
+5180 5240 5260 5.320
+5.745
+5825 &ldquo;&gt;</p>
+<p>In the 5-GHz band, this is the case because each channel is allocated a frequency range that does not encroach on or overlap the frequencies allocated for any other channel. In other words, the 5-GHz band consists of nonoverlapping channels.</p>
+<p>APs and Wireless Standards</p>
+<p>Amend-
+ment
+802.11-
+1997
+802.11b
+802.118
+802.11a
+802.11n
+802.11ac
+802.11ax
+2.4
+GHz
+Yes
+Yes
+Yes
+No
+Yes
+No
+Yes
+GHz
+No
+No
+No
+Yes
+Yes
+Yes
+Yes
+Max Data
+Rate
+2 Mbps
+11 Mbps
+54 Mbps
+54 Mbps
+600 Mbps
+6.93 Gbps
+4x
+802.11ac
+Notes
+The original 802.11 standard rati-
+fied in 1997
+Introduced in 1999
+Introduced in 2003
+Introduced in 1999
+HT (high throughput), introduced
+in 2009
+VHT (very high throughput), in-
+troduced in 2013
+High Efficiency Wireless, Wi-Fi6;
+expected late 2019; will operate
+on other bands too, as they be-
+come available &ldquo;&gt;</p>
+<p>Wireless client devices and APs can be compatible with one or more amendments;</p>
+<p>APs can usually operate on both bands simultaneously to support any clients that might be present on each band.</p>
+<p>wireless clients typically associate with an AP on one band at a time, while scanning for potential APs on both bands. The band used to connect to an AP is chosen according to the operating system, wireless adapter driver, and other internal configuration.</p>
+<p>Cisco APs have dual radios (sets of transmitters and receivers) to support BSSs on one 2.4-GHz channel and other BSSs on one 5-GHz channel simultaneously. Some models also have two 5-GHz radios that can be configured to operate BSSs on two different channels at the same time, providing wireless coverage to higher densities of users that are located in the same vicinity.</p>
+<p>RF signals propagate or reach further on the 2.4-GHz band than on the 5-GHz band. They also tend to penetrate indoor walls and objects easier at 2.4 GHz than 5 GHz. However, the 2.4-GHz band is commonly more crowded with wireless devices. Remember that only three nonoverlapping channels are available, so the chances of other neighboring APs using the same channels is greater. In contrast, the 5-GHz band has many more channels available to use, making channels less crowded and experiencing less interference.</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

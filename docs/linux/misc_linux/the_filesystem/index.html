@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>The Linux Filesystem - Perfect Dark Mode</title>
+    <link href="/linux/misc_linux/the_filesystem/index.xml" rel="alternate" type="application/rss+xml" title="The Linux Filesystem - Perfect Dark Mode">
+    <link href="/linux/misc_linux/the_filesystem/index.print.html" rel="alternate" type="text/html" title="The Linux Filesystem - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/misc_linux/the_filesystem/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div class="navigation">
+            <span class="nav nav-next topbar-link"><i class="fa fa-chevron-right fa-fw"></i></span>
+          </div>
+          <div class="navigation">
+            <a class="nav nav-prev topbar-link" href="/index.html" title=" (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
+          </div>
+          <div id="top-print-link">
+            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/linux/misc_linux/the_filesystem/index.print.html">
+              <i class="fas fa-print fa-fw"></i>
+            </a>
+          </div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">The Linux Filesystem</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="the-linux-filesystem">The Linux Filesystem</h1>
+
+<p>Filesystem Hierarchy</p>
+<p>$ ls -l /</p>
+<p>/ - The root directory of the entire filesystem hierarchy, everything is nested under this directory.</p>
+<p>/bin - Essential ready-to-run programs (binaries), includes the most basic commands such as ls and cp.</p>
+<p>/boot - Contains kernal boot loader files.</p>
+<p>/dev - Device files.</p>
+<p>/etc - Core system configuration directory, should hold only configuration files and not any binaries.</p>
+<p>/home - Personal directories for users</p>
+<p>/lib - Holds library files that binaries can use.</p>
+<p>/media - Used as an attachment point for removable media like USB drives.</p>
+<p>/mnt - Temporarily mounted filesystems</p>
+<p>/opt - Optional application software packages.</p>
+<p>/proc - info about currently running processes</p>
+<p>/root - The root user&rsquo;s home directory</p>
+<p>/run - information about the running system since the last boot.</p>
+<p>/sbin - Contains essential system binaries, usually can only be ran by root.</p>
+<p>/srv - Site-specific data which are served by the system.</p>
+<p>/tmp - Storage for temporary files</p>
+<p>/usr - Meant for user installed software and utilities. Inside this directory are sub directories for /usr/bin, /usr/local, etc.</p>
+<p>/var - Variable directory, used for system logging, user tracking, caches, etc. Things that are subject to change all the time.</p>
+<p>Filesystem Types</p>
+<p>Virtual File System (VFS) abstraction layer.</p>
+<p>The layer between appllications and the different file system types.</p>
+<p>Journaling</p>
+<p>Comes by default on MOST filesystem types. A log file that keeps track of what you are doing when moving files. Will keep track of where you left off in case the system loses power.</p>
+<p>Common Desktop Filesystem types</p>
+<p>ext4 - This is the most current version of native Linux filesystems. Compatible with the older ext2 and ext3 versions. Supports disk volumes up to 1 exabyte and file sizes up yo 16 terabytes and more. Standard choice for Linux filesystems.</p>
+<p>Btrfs - &ldquo;Better or Butter FS&rdquo; it is a new filesystem for Linux that comes with snapshots, incremental backups, performance increase and much more. It is widely available, but not quite stable/ compatible yet.</p>
+<p>XFS - High performance journaling file system, great for system with large files such as media server,</p>
+<p>NTFS and FAT - Windows Filesystems</p>
+<p>HFS+ - Macintosh filesystem</p>
+<p>$ df -T</p>
+<p>reports filesystem  disk space usage and other details about your disk.</p>
+<p>Anatomy of a disk</p>
+<p>Partition table</p>
+<p>Every disk has a partition tables that shows the system how the disk is partitioned. It shows how partitions begin and end, which partitions are bootable, what sectors of the disk are allocated to what partition, etc. There are two main partition tables schemes used, Master Boot Record (MBR) and GUID Partition Table (GAPT)</p>
+<p>Partition</p>
+<p>Partitions can&rsquo;t overlap each other. Free space is disk space that is not allocated to a partition.</p>
+<p>MBR</p>
+<p>- Traditional partition table</p>
+<p>- Can have primary, extended, and logical partitions</p>
+<p>- MBR has a limit of four primary partitions</p>
+<p>- Additional partitions can be made by making a primary partition into an extended partition (there can only be one extended partition on a disk). Then inside the extended partition you add logical partitions.</p>
+<p>- Supports disks up to 2 Terabytes.</p>
+<p>GPT</p>
+<p>- GUID Partition Table (GPT) is becoming the new standard for disk partitioning.</p>
+<p>- Has only one type of partition and you can make many of them.</p>
+<p>- Used mostly in conjunction with UEFI based booting</p>
+<p>Filesystem structure</p>
+<p>Boot block</p>
+<p>Located int the first few sectors of the filesystem. It is not really used by the filesystem. It contains information used to boot the operating system. Only one boot block is needed by the operating system. There are unused boot blocks in partitions that don&rsquo;t have boot info.</p>
+<p>Super block</p>
+<p>A single block that comes after the boot block that contains info about the filesystem. Info includes the size of the inode table, size of logical blocks , and size of the filesystem.</p>
+<p>Inode table</p>
+<p>The database that manages files. Each file or directory has a unique entry in the inode table and it has various info about the file.</p>
+<p>Data blocks</p>
+<p>The actual data for the files and directories.</p>
+<p>$ sudo  parted -l</p>
+<p>to view a partition table</p>
+<dl>
+<dt>Disk /dev/sda: 21. 5GB</dt>
+<dt>Sector size (logical/phystcal)</dt>
+<dt>Partition Table: msdos</dt>
+<dt>Disk Flags:</dt>
+<dt>Number start</dt>
+<dt>1049kB</dt>
+<dt>539MB</dt>
+<dt>539MB</dt>
+<dt>End</dt>
+<dt>538MB</dt>
+<dt>21.5GB</dt>
+<dt>21.5GB</dt>
+<dt>size</dt>
+<dt>537MB</dt>
+<dt>20 .9GB</dt>
+<dt>20 .9GB</dt>
+<dd>51281512B
+T ype
+primary
+extended
+Logical
+File system
+fa t32
+Flags
+boot &ldquo;&gt;</dd>
+</dl>
+<p>( MBR example )</p>
+<p>Disk Partitioning</p>
+<p>Tools to partition a disk</p>
+<p>fdisk - basic command-line partitioning tool, it does not support GPT</p>
+<p>parted - command line tool that supports both MBR and GPT partitioning</p>
+<p>gparted - GUI version of parted</p>
+<p>gdisk - fdisk, but only supports GPT</p>
+<p>$ sudo parted</p>
+<p>Enters the parted tool</p>
+<p>select /dev/sdb2</p>
+<p>selects the device</p>
+<p>mkpart primary 123 4567</p>
+<p>to make the partition</p>
+<p>$ resize 2 1234 3456</p>
+<p>to resize a partition. Select the partition number and then start and end points of where you want to resize it to.</p>
+<p>Creating filesystems</p>
+<p>$ sudo mkfs -t ext4 /dev/sdb2</p>
+<p>Allows you to specify the type of filesystem and where it goes. You only want to create a filesystem on a newly partitioned disk or if you are repartitioning an old one. (Otherwise it will probably get corrupted.</p>
+<p>Mount and umount</p>
+<p>A new filesystem must be mounted before you can view its contents. You want to mount it to a mount point.</p>
+<p>What you need:</p>
+<ul>
+<li>Device Location</li>
+<li>Filesystem type</li>
+<li>Mount point</li>
+</ul>
+<p>Mount Point = Directory that the filesystem attaches to:</p>
+<p>Mount filesystem</p>
+<p>$ sudo mount -t ext4 /dev/sdb2 /mydrive</p>
+<p>Unmount</p>
+<p>$ sudo umount /mydrive</p>
+<p>Or</p>
+<p>$ sudo umount /dev/sdb2</p>
+<ul>
+<li>Kernel names devices in the order it finds them</li>
+<li>Device name could change after you mount it</li>
+<li>You can use the devices UUID to identify it instead of a name</li>
+</ul>
+<p>View UUIDs for block devices (device name, UUID, filesystem type</p>
+<p>$ sudo blkid</p>
+<p>Mount w/ UUID</p>
+<p>$ sudo mount UUID=(insert ID here) /my drive</p>
+<ul>
+<li>Secondary hard drives must be mounted by UUID</li>
+</ul>
+<p>/etc/fstab (&ldquo;eff es tab&rdquo;) (filesystem table)</p>
+<ul>
+<li>List of mounted filesystems</li>
+</ul>
+<p>Show contents of /etc/fstab (UUID, mount point, filesystem type, options dump, pass)</p>
+<p>$ cat /etc/fstab</p>
+<p>Dump = used by dumb utility to decide when to take a backup (default is 0)</p>
+<p>Pass = used by fsck to decide what order to check filesystems - value of 0 will not be checked</p>
+<ul>
+<li>You can add an entry manually by editing the file syntax matching other entries</li>
+</ul>
+<p>SWAP</p>
+<ul>
+<li>Storage if you are low on memory</li>
+<li>Space for idle processes to go to make room in RAM</li>
+<li>Allocate twice as much swap as memory (usually)</li>
+</ul>
+<p>Steps to use a partition as swap space:</p>
+<ol>
+<li>Use an empty partition</li>
+<li>Initialize swap areas</li>
+</ol>
+<p>$ mkswap /dev/sdb2</p>
+<ol>
+<li>Enable swap device</li>
+</ol>
+<p>$ swapon  /sdb2/dev</p>
+<ol>
+<li>
+<p>Add entry to /etc/fstab (so this swap partition persists on bootup)</p>
+</li>
+<li>
+<p>Use &ldquo;sw&rdquo; for filesystem type</p>
+</li>
+</ol>
+<p>Remove swap</p>
+<p>$ swapoff /dev/sdb2</p>
+<p>Disk Usage</p>
+<p>Show filesystem utilization (disk free)</p>
+<p>$ df -h</p>
+<ul>
+<li>-h = human readable</li>
+<li>shows current directory</li>
+</ul>
+<p>Show filesystem (disk usage)</p>
+<p>$ du -h</p>
+<ul>
+<li>See what files are taking up space in the current directory</li>
+</ul>
+<p>Show disk usage for root</p>
+<p>$ du -h /</p>
+<p>Filesystem Repair</p>
+<ul>
+<li>Sudden shutdowns can corrupt data</li>
+</ul>
+<p>Filesystem check (fsck)</p>
+<ul>
+<li>Check consistency of a filesystem</li>
+<li>Attempt to repair filesystem</li>
+<li>Ran before disk is mounted on boot</li>
+</ul>
+<p>Run fsck Manually (from a rescue disk because filesystem being checked cannot be mounted)</p>
+<p>$ sudo fsck /dev/sda</p>
+<p>Inodes (Index Nodes)</p>
+<p>The Filesystem</p>
+<p>Inodes (Index Nodes)</p>
+<p>Inode Table: database that manages files in the filesystem</p>
+<p>Inode: Entry in the inode table that describes each file (1 Inode for each file)</p>
+<p>Every # must be unique</p>
+<p>cannot be referenced across different filesystems</p>
+<p>Contains:</p>
+<p>filetype</p>
+<p>- regular</p>
+<p>- directory</p>
+<p>- Character device</p>
+<p>- etc.</p>
+<p>owner</p>
+<p>group</p>
+<p>Access Permissions</p>
+<p>Timestamps</p>
+<p>- mtime (time last modified)</p>
+<p>- ctime (attribute change)</p>
+<p>- atime (last access)</p>
+<p># of hardlinks</p>
+<p>File Sizw</p>
+<p># of blocks</p>
+<p>Pointers to data blocks (important)</p>
+<p>Does not contain the filename or the file itself</p>
+<p>When inodes are created</p>
+<p>Space for inodes is allocated when the filesystem is created</p>
+<p>Algorithm determines amount of space needed</p>
+<p>out of inode space errors can occur</p>
+<p>View inodes/ how many are left:</p>
+<p>$ df -i</p>
+<p>Inode Information</p>
+<p>Identified by numbers</p>
+<p>files get inode number when they are created</p>
+<p>numbers are assigned in sequential order</p>
+<p>numbers are reused after the old inode is deleted</p>
+<p>view inode numbers</p>
+<p>$ls -li</p>
+<p>View detailed info about file and the inode</p>
+<p>$stat ~/Desktop/</p>
+<p>How Inodes locate files</p>
+<p>point to files in the data blocks</p>
+<p>usually contain 15 pointers</p>
+<p>13th pointer points to block containing other pointers</p>
+<p>14th pointer points to more pointers</p>
+<p>15th pointer points to more pointers</p>
+<p>1st 12 pointers can find small files quickly</p>
+<p>Symlinks (symbolic links)</p>
+<p>3rd field in ls command is link count (hard links)</p>
+<p>equivalent of windows shortcuts</p>
+<p>Hard Link= file with a link to an inode</p>
+<p>Create a symlink</p>
+<p>$ln -s myfile myfile4</p>
+<p>ls -li</p>
+<p>1598657 -rw-rw-r&ndash; 1 david.thomas david.thomas 7 Jul 21 14:19 myfile</p>
+<p>1581638 lrwxrwxrwx 1 david.thomas david.thomas 6 Aug 4 14:21 myfile4 -&gt; myfile</p>
+<p>New inode is created</p>
+<p>File gets modified</p>
+<p>Can be referenced accross different filesystems</p>
+<p>Hardlinks</p>
+<p>Hard link a file</p>
+<p>$ln myfile myhardlinkls</p>
+<p>Will show the same inode#</p>
+<p>Modifications to one file will change both</p>
+<p>Link count goes down when file is removed</p>
+<p>Inode gets deleted once all hardlinks are removed</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="sidebar" class="default-animation showVisitedLinks">
+      <div id="header-wrapper" class="default-animation">
+        <div id="header" class="default-animation">
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="search-by">Search</label>
+          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <span data-search-clear=""><i class="fas fa-times"></i></span>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1700252831" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1700252831" defer></script>
+        <script src="/js/search.js?1700252831" defer></script>
+      </div>
+      <div id="homelinks" class="default-animation">
+        <ul>
+          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+      </div>
+      <div id="content-wrapper" class="highlightable">
+        <ul class="topics enlarge morespace collapsible-menu">
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" aria-controls="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" checked><label for="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Fedora</span></label><a class="padding" href="">Fedora<i class="fas fa-check read-icon"></i></a><ul id="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora/fedora_setup/index.html" class=""><a class="padding" href="/linux/fedora/fedora_setup/index.html">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/hotkeys/index.html" class=""><a class="padding" href="/linux/fedora/hotkeys/index.html">Fedora Hotkeys<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/silverblue/index.html" class=""><a class="padding" href="/linux/fedora/silverblue/index.html">Fedora Silverblue<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora/starcraftonfedora/index.html" class=""><a class="padding" href="/linux/fedora/starcraftonfedora/index.html">How to Install Starcraft on Fedora<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-2c366602ce05ece354fb0e76680a93b8" aria-controls="subsections-2c366602ce05ece354fb0e76680a93b8" checked><label for="section-2c366602ce05ece354fb0e76680a93b8"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu misc</span></label><a class="padding" href="">misc<i class="fas fa-check read-icon"></i></a><ul id="subsections-2c366602ce05ece354fb0e76680a93b8" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/index.html" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/index.html">Boot<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/command_line/index.html">Command Line<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/index.html">Consoling in on Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/index.html" class=""><a class="padding" href="/linux/misc_linux/devices/index.html">Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/index.html" class=""><a class="padding" href="/linux/misc_linux/dns/index.html">DNS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/index.html" class=""><a class="padding" href="/linux/misc_linux/file_permissions/index.html">File Permissions<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/index.html" class=""><a class="padding" href="/linux/misc_linux/getting_started/index.html">General Linux and History<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/index.html" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/index.html">How to Get Putty to Work in Ubuntu<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/index.html" class=""><a class="padding" href="/linux/misc_linux/init/index.html">Init<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/index.html" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/index.html">IO Monitoring<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/index.html" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/index.html">Keyboard Shortcuts<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/index.html" class=""><a class="padding" href="/linux/misc_linux/kernel/index.html">Linux Kernel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/index.html" class=""><a class="padding" href="/linux/misc_linux/logging/index.html">Logging<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/index.html" class=""><a class="padding" href="/linux/misc_linux/ls/index.html">ls<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/index.html" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/index.html">Network Troubleshooting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/index.html" class=""><a class="padding" href="/linux/misc_linux/network_basics/index.html">Networking in Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html">Open source and Linux Community<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/index.html" class=""><a class="padding" href="/linux/misc_linux/packages/index.html">Packages and Their Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/index.html" class=""><a class="padding" href="/linux/misc_linux/process_utilization/index.html">Process Utilization<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/index.html" class=""><a class="padding" href="/linux/misc_linux/ps_processes/index.html">Processes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_resources/index.html">Resources for learning Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/index.html" class=""><a class="padding" href="/linux/misc_linux/scp_command/index.html">scp<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/index.html" class=""><a class="padding" href="/linux/misc_linux/network_sharing/index.html">Sharing Resources<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html">Shell<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html">Skills that go with Bash Scripting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/index.html">Switching to Linux<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/index.html">Symbols in Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/index.html" class=""><a class="padding" href="/linux/misc_linux/tar/index.html">Tar Stuff<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/index.html" class=""><a class="padding" href="/linux/misc_linux/text_fu/index.html">Text Editors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/index.html" class="active"><a class="padding" href="/linux/misc_linux/the_filesystem/index.html">The Linux Filesystem<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/index.html" class=""><a class="padding" href="/linux/misc_linux/user_management/index.html">User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/index.html" class=""><a class="padding" href="/linux/misc_linux/wsl2/index.html">Windows Subsystem for Linux<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-7ed069a6f41a18ead2ddedfda31e7113" aria-controls="subsections-7ed069a6f41a18ead2ddedfda31e7113" checked><label for="section-7ed069a6f41a18ead2ddedfda31e7113"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu RHCSA</span></label><a class="padding" href="">RHCSA<i class="fas fa-check read-icon"></i></a><ul id="subsections-7ed069a6f41a18ead2ddedfda31e7113" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/rhcsa/4_adv_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/4_adv_file_management/index.html">Advanced File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/6_adv_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/6_adv_user_management/index.html">Advanced User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/7_bash_shell/index.html" class=""><a class="padding" href="/linux/rhcsa/7_bash_shell/index.html">Bash<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/9_basic_package_management/index.html" class=""><a class="padding" href="/linux/rhcsa/9_basic_package_management/index.html">Basic Package Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/5_basic_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/5_basic_user_management/index.html">Basic User Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/3_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/3_file_management/index.html">File Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/2_interaction/index.html" class=""><a class="padding" href="/linux/rhcsa/2_interaction/index.html">Interaction<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/17_network_file_system/index.html" class=""><a class="padding" href="/linux/rhcsa/17_network_file_system/index.html">Network File System (NFS)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/16_networking/index.html" class=""><a class="padding" href="/linux/rhcsa/16_networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/index.html" class=""><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/index.html">Process and Task Scheduling<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/1_installation/index.html" class=""><a class="padding" href="/linux/rhcsa/1_installation/index.html">RHEL Installation<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-32ba51710c14dbc40b371b19ad442e93" aria-controls="subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="">Networking<i class="fas fa-check read-icon"></i></a><ul id="subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-e7b43009273138043ffb9c6ae58c8cce" aria-controls="subsections-e7b43009273138043ffb9c6ae58c8cce" checked><label for="section-e7b43009273138043ffb9c6ae58c8cce"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Cisco</span></label><a class="padding" href="">Cisco<i class="fas fa-check read-icon"></i></a><ul id="subsections-e7b43009273138043ffb9c6ae58c8cce" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/tcp_ip_basic/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_basic/index.html">Basics of TCP/IP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cli/index.html" class=""><a class="padding" href="/networking/cisco/cli/index.html">Cisco CLI Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/index.html" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/index.html">Cisco CML VMWARE Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/index.html" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/index.html">Cisco Devnet Sandbox Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/index.html" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/index.html">Cisco VLAN Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/index.html" class=""><a class="padding" href="/networking/cisco/classful_ipv4/index.html">Classfull IPv4<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/index.html" class=""><a class="padding" href="/networking/cisco/management/index.html">Device Management<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/index.html" class=""><a class="padding" href="/networking/cisco/device_management_protocols/index.html">Device Management Protocols<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_config/index.html">DHCP Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html">DHCP Snooping and ARP Inspection<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/index.html" class=""><a class="padding" href="/networking/cisco/ethernet_lans/index.html">Ethernet LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/index.html" class=""><a class="padding" href="/networking/cisco/extended_acls/index.html">Extended ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/index.html" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/index.html">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/index.html" class=""><a class="padding" href="/networking/cisco/ip_services/index.html">IP Services<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/index.html">IPv6 Addressing and Subnetting<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/index.html" class=""><a class="padding" href="/networking/cisco/ipv6/index.html">IPv6 Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_config/index.html">IPv6 Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_routing/index.html">IPv6 Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/lan_architecture/index.html">LAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/index.html" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/index.html">Layer 2 Etherchannel<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree/index.html">More Spanning Tree<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/index.html" class=""><a class="padding" href="/networking/cisco/nat/index.html">Network Address Translation (NAT)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/index.html" class=""><a class="padding" href="/networking/cisco/ospf_concepts/index.html">OSPF Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/index.html" class=""><a class="padding" href="/networking/cisco/ospf_config/index.html">OSPF Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/index.html" class=""><a class="padding" href="/networking/cisco/ospf_lab/index.html">OSPF Lab<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/index.html" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/index.html">OSPF Network Types and Neighbors<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/index.html" class=""><a class="padding" href="/networking/cisco/qos/index.html">QoS<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/index.html" class=""><a class="padding" href="/networking/cisco/rstp/index.html">Rapid Spanning Tree (RSTP)<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/index.html" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/index.html">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/index.html" class=""><a class="padding" href="/networking/cisco/router_operation/index.html">Router Operation<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/index.html" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/index.html">Routing in the LAN<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/index.html" class=""><a class="padding" href="/networking/cisco/securing_network_devices/index.html">Securing Network Devices<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/index.html" class=""><a class="padding" href="/networking/cisco/security_architectures/index.html">Security Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/index.html">Spanning Tree Protocol Basics<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/index.html" class=""><a class="padding" href="/networking/cisco/standard_acls/index.html">Standard ACLs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/index.html" class=""><a class="padding" href="/networking/cisco/static_routes/index.html">Static Routes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/index.html" class=""><a class="padding" href="/networking/cisco/switch_interfaces/index.html">Switch Interfaces<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/index.html" class=""><a class="padding" href="/networking/cisco/switchport_security_config/index.html">Switchport Security Configuration<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/index.html">TCP/UDP<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/index.html" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/index.html">Troubleshooting Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/index.html" class=""><a class="padding" href="/networking/cisco/vlans/index.html">VLANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/wan_architecture/index.html">WAN Architecture<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/index.html" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/index.html">WANs and IP Routing<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/index.html" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/index.html">What is a VLAN?<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/index.html" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/index.html">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/index.html" class=""><a class="padding" href="/networking/cisco/wireless_architectures/index.html">Wireless Architectures<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/index.html" class=""><a class="padding" href="/networking/cisco/wireless_lan/index.html">Wireless LANs<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/index.html" class=""><a class="padding" href="/networking/cisco/wireless/index.html">Wireless Principles<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/index.html" class=""><a class="padding" href="/networking/cisco/wireless_security/index.html">Wireless Security<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-671e08f4a7e985c9c54ec2c3658b1e25" aria-controls="subsections-671e08f4a7e985c9c54ec2c3658b1e25" checked><label for="section-671e08f4a7e985c9c54ec2c3658b1e25"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Juniper</span></label><a class="padding" href="">Juniper<i class="fas fa-check read-icon"></i></a><ul id="subsections-671e08f4a7e985c9c54ec2c3658b1e25" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/index.html" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/index.html">Cisco to Juniper Cheat Sheet<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/index.html" class=""><a class="padding" href="/networking/juniper/junos_fundementals/index.html">Junos Basics<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
+          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/index.html" class=""><a class="padding" href="/tools/calibre_server/index.html">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/index.html" class=""><a class="padding" href="/tools/calibre-web-with-docker/index.html">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/index.html" class=""><a class="padding" href="/tools/distrobox/index.html">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/index.html" class=""><a class="padding" href="/tools/githubpageshugo/index.html">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+        </ul>
+        <div id="shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+            <li><a class="padding" href="/now/index.html"><i class='fas fa-fw fa-play'></i> now</a></li>
+            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+          <ul>
+            <li id="select-language-container" class="footerLangSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-language fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-language">Language</label>
+                  <select id="select-language" onchange="location = baseUri + this.value;">
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+            </li>
+            <li id="select-variant-container" class="footerVariantSwitch">
+              <div class="padding select-container">
+                <i class="fas fa-paint-brush fa-fw"></i>
+                <span>&nbsp;</span>
+                <div class="select-style">
+                  <label class="a11y-only" for="select-variant">Theme</label>
+                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                    <option id="city2" value="city2" selected>City2</option>
+                  </select>
+                </div>
+                <div class="select-clear"></div>
+              </div>
+              <script>window.variants && variants.markSelectedVariant();</script>
+            </li>
+            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
+          </ul>
+        </div>
+        <div id="footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

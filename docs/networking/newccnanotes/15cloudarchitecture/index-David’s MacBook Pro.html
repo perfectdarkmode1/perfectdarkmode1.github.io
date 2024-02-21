@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="15 Cloud Architecture 1.0 Network Fundamentals 1.1 Explain the role and function of network components 1.1.g Servers 1.2 Describe the characteristics of network topology architectures 1.2.f On-premises and cloud 1.12 Explain virtualization fundamentals (virtual machines)
+It it has a variety of network access options; and it can be measured and billed back to the user based on can be requested on-demand; it can dynamically scale (that is, it is elastic); it uses a pool of resources; the amount used.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="15 Cloud Architecture 1.0 Network Fundamentals 1.1 Explain the role and function of network components 1.1.g Servers 1.2 Describe the characteristics of network topology architectures 1.2.f On-premises and cloud 1.12 Explain virtualization fundamentals (virtual machines)
+It it has a variety of network access options; and it can be measured and billed back to the user based on can be requested on-demand; it can dynamically scale (that is, it is elastic); it uses a pool of resources; the amount used.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/newccnanotes/15cloudarchitecture/">
+    <meta property="article:section" content="Networking - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1702594242" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1702594242" rel="stylesheet">
+    <link href="/css/auto-complete.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1702594242" rel="stylesheet">
+    <link href="/css/fonts.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1702594242" rel="stylesheet">
+    <link href="/css/theme-city2.css?1702594242" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1702594242" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1702594242" rel="stylesheet">
+    <link href="/css/print.css?1702594242" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1702594242" rel="stylesheet">
+    <script src="/js/url.js?1702594242"></script>
+    <script src="/js/variant.js?1702594242"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/newccnanotes/15cloudarchitecture/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h1 id="15-cloud-architecture">15 Cloud Architecture</h1>
+<p>1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.g Servers
+1.2 Describe the characteristics of network topology architectures
+1.2.f On-premises and cloud
+1.12 Explain virtualization fundamentals (virtual machines)</p>
+<p>It it has a variety of network access options; and it can be measured and billed back to the user based on can be requested on-demand; it can dynamically scale (that is, it is elastic); it uses a pool of resources;
+the amount used.
+Cisco Server Hardware
+Cisco expanded its product line into the server market, with the Cisco Unified Computing System (UCS) product line
+Server Virtualization Basics</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>The the settings for the VMhypervisor manages and allocates the host hardware (CPU, RAM, etc.) to each VM based on
+few of the vendors and product family names associated with virtualized data centers:
+○ VMware vCenter
+○ Microsoft HyperV</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>### 15 Cloud Architecture
+
+Thursday, October 28, 2021 6:57 AM
+
+○ Citrix XenServer  
+○ Red Hat KVM  
+Networking with Virtual Switches on a Virtualized Host  
+in VMware’s virtualization systems, the VM’s virtual NIC goes by the name vNIC.)  
+virtual switch, or vSwitch</code></pre></div><p>Ports connected to VMs or share the same VLAN with other VMs, or even use VLAN trunking to the VM itself.: The vSwitch can configure a port so that the VM will be in its own VLAN,
+Ports connected to physical NICs: that the switch is adjacent to the external physical LAN switch. The vSwitch can (and likely does) The vSwitch uses the physical NICs in the server hardware so
+use VLAN trunking.
+Automated configuration: virtualization software that controls the VMs. That programmability allows the virtualization The configuration can be easily done from within the same
+software to move VMs between hosts (servers) and reprogram the vSwitches so that the VM has the same networking capabilities no matter where the VM is running.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The Physical Data Center Network</code></pre></div><p>each host is cabled to two different switches in the top of the rackswitches—to provide redundant paths into the LAN. Each ToR switch acts as an access layer —called Top of Rack (ToR)
+switch from a design perspective. Each ToR switch is then cabled to an End of Row (EoR) switch, which acts as a distribution switch and also connects to the rest of the network.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Cisco Application Centric Infrastructure (ACI). ACI places the server and switch hardware into racks, but cables the switches with a different topology—a topology required for proper operation  
+of the ACI fabric  
+Workflow with a Virtualized Data Center
+
+Cloud Computing Services  
+five criteria for a cloud computing service  
+**On** without any direct interaction with the provider of the service. **- demand self-service:** The IT consumer chooses when to start and stop using the service,  
+**Broad network access** many types of networks (including the Internet).: The service must be available from many types of devices and over  
+**Resource pooling:** servers for use only by certain consumers) and dynamically allocates resources from that The provider creates a pool of resources (rather than dedicating specific  
+pool for each new request from a consumer.  
+**Rapid elasticity:** expands quickly, so it is called elastic), and the requests for new service are filled quickly.To the consumer, the resource pool appears to be unlimited (that is, it  
+**Measured service:** consumer, both for transparency and for billing.The provider can measure the usage and report that usage to the  
+Private Cloud (On-Premise)  
+cloud services catalog. That catalog exists for the user as a web application that lists anything that can be requested via the company’s cloud infrastructure.</code></pre></div><p>Public Cloud</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Cloud and the “As a Service” Model  
+Infrastructure as a Service</code></pre></div><p>Software as a Service</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>(Development) Platform as a Service
+like IaaS in some ways. Both supply the consumer with one or more VMs, with a configurable amount of CPU, RAM, and other resources.
+includes many more software tools beyond the basic OS.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>often include an integrated development environment (IDE)
+include continuous integration tools that allow the developer to update code and have that code automatically tested and integrated into a larger software project. Examples include
+Google’s App Engine PaaS offering (integrated development environment (see <a href="https://cloud.google.com/appenginewww.eclipse.org%29" target="_blank">https://cloud.google.com/appenginewww.eclipse.org)</a>, and the Jenkins continuous ), the Eclipse
+integration and automation tool (see <a href="https://jenkins.io" target="_blank">https://jenkins.io</a>).</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>WAN Traffic Paths to Reach Cloud Services  
+Accessing Public Cloud Services Using the Internet</code></pre></div><p>Pros and Cons with Connecting to Public Cloud with Internet
+good reasons to use the Internet as the WAN connection to a public cloud service:
+Agility to order a private WAN connection to the cloud provider because cloud : An enterprise can get started using public cloud without having to wait
+providers support Internet connectivity.
+Migration another more easily because cloud providers all connect to the Internet.: An enterprise can switch its workload from one cloud provider to
+Distributed user Internet with their devices (as in the sales SaaS app example).s: The enterprise’s users are distributed and connect to the
+negatives for using the Internet for public cloud access
+Security “man in the middle” can attempt to read the contents of data that passes : The Internet is less secure than private WAN connections in that a
+to/from the public cloud.
+Capacity traffic, so the question of whether the enterprise’s Internet links can handle the : Moving an internal application to the public cloud increases network
+additional load needs to be considered.
+Quality of Service (QoS): WANs can. Using the Internet may result in a worse user experience than The Internet does not provide QoS, whereas private
+desired because of higher delay (latency), jitter, and packet loss.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>**No WAN SLA:** WAN performance and availability to all destinations of a network. WAN service ISPs typically will not provide a service-level agreement (SLA) for  
+providers are much more likely to offer performance and availability SLAs  
+Private WAN and Internet VPN Access to Public Cloud</code></pre></div><p>Cisco makes the that runs as a VM in a cloud service, controlled by the cloud consumer, to do various Cloud Services Router (CSR )to do exactly that: to be a router, but a router
+functions that routers do, including terminating VPNs.
+Pros and Cons of Connecting to Cloud with Private WANs</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>more secure</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>Pros</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code></code></pre></div><p>Cons
+Installing the new private WAN connections takes time, delaying when a company gets started in cloud computing
+cost more than using the Internet
+migrating to a new cloud provider can require another round of private WAN installation, again delaying work projects</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Intercloud Exchanges  
+a cloud consumer can move his workload from one cloud provider to another  
+using a private WAN for the cloud is that it adds another barrier to migrating to a new public cloud provider. One solution adds easier migration to the use of a private WAN through a  
+cloud service called an intercloud exchange (or simply an intercloud)  
+a company that creates a private network as a service</code></pre></div><p>you get the same benefits as when connecting with a private WAN connection to a public cloud, but with the additional pro of easier migration to a new cloud provider. The main con
+is that using an intercloud exchange introduces another company into the mix.</p>
+<p>Migrating Traffic Flows When Migrating to Email SaaS</p>
+<p>Branch Offices with Internet and Private WAN</p>
+<h1 id="16-controller-based-networking">16 Controller-Based Networking</h1>
+<p>1.0 Network Fundamentals<br>
+1.1 Explain the role and function of network components<br>
+1.1.f Endpoints<br>
+1.1.g Servers<br>
+1.2 Describe characteristics of network topology architectures<br>
+1.2.c Spine-leaf<br>
+6.0 Automation and Programmability<br>
+6.1 Explain how automation impacts network management<br>
+6.2 Compare traditional networks with controller-based networking<br>
+6.3 Describe controller-based and software defined architectures (overlay, underlay, and fabric)<br>
+6.3.a Separation of control plane and data plane<br>
+6.3.b Northbound and southbound APIs</p>
+<p>SDN makes use of a controller that centralizes some network functions.<br>
+controllers enable programs to automatically configure and operate networks through power application programming interfaces (APIs).</p>
+<p>The Data Plane<br>
+the tasks that a networking device does to forward a message.<br>
+anything to do with receiving data, processing it, and forwarding that same data<br>
+frame, a packet, or, more generically, a message<br>
+often called the forwarding plane.<br>
+actions that a networking device does that fit into the data plane:<br>
+De-encapsulating and re-encapsulating a packet in a data-link frame (routers, Layer 3<br>
+switches)</p>
+<h6 id="heading">○</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○ Adding or removing an 802.1Q trunking header (routers and switches)
+Matching an Ethernet frame’s destination Media Access Control (MAC) address to the MAC</code></pre></div>
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.min.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1702594242" defer></script>
+        <script src="/js/search.js?1702594242" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669"><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/newccnanotes/15cloudarchitecture/" class="active"><a class="padding" href="/networking/newccnanotes/15cloudarchitecture/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">How to set up Calibre web with Docker and Nginx<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1702594242" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1702594242" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1702594242" defer></script>
+    <script src="/js/js-yaml.min.js?1702594242" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1702594242" defer></script>
+  </body>
+</html>

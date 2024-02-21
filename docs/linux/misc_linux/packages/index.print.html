@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Packages and Their Management - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/packages/index.html" rel="canonical" type="text/html" title="Packages and Their Management - Perfect Dark Mode">
+    <link href="/linux/misc_linux/packages/index.xml" rel="alternate" type="application/rss+xml" title="Packages and Their Management - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/packages/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Packages and Their Management</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="packages-and-their-management">Packages and Their Management</h1>
+
+<p>Software Distribution</p>
+<p>Packages such as internet browsers, text editors, media players, etc. are  managed via package managers that install and maintain the software on the system. Packages can be installed using sources code instead of by a package manager.</p>
+<p>Packages are really just lot and lots of files compiled into one.</p>
+<p>The people who write them are called upstream providers. They send updates to package maintainers who get the software into the hands of the users. Package maintainers review, manage, and distribute this software in the form of packages.</p>
+<p>Packages Repositories</p>
+<p>Central storage location for packages. Machine doesn&rsquo;t know where to look for repositories on the internet unless you tell them.</p>
+<p>Pre-approved sources for repositories are located in /etc/apt/sources.list</p>
+<p>tar and gzip</p>
+<p>Compressing files with gzip</p>
+<p>end in a .gz extension</p>
+<p>$ gzip mycoolfile - compresses the file</p>
+<p>$ gunzip mycoolfile.gz - decompresses the file</p>
+<p>Creating archives with tar</p>
+<p>Used for multiple files.</p>
+<p>will have a .tar extension</p>
+<p>$ tar cvf mytarfile.tar mycoolfile1 mycoolfile2 - compresses 2 files.</p>
+<p>c - create</p>
+<p>v - tell the program to be verbose and let us see what it&rsquo;s doing</p>
+<p>f - the filename of the tar file has to come after this option, if you are creating a tar file you&rsquo;ll have to come up with a name.</p>
+<p>Unpacking archives with tar</p>
+<p>$ tar xvf mytarfile.tar - extracts the file</p>
+<p>x - extract</p>
+<p>v - tell the program to be verbose and let us see what it&rsquo;s doing.</p>
+<p>f - the file you want to extract</p>
+<p>Compressing/ uncompressing archives with tar and gzip</p>
+<p>Used if a file has a .tar.gz extension.</p>
+<p>You can do them one at a time from the end ext first or use z option with tar.</p>
+<p>$ tar czf myfile.tar.gz - Create a compressed tar file</p>
+<p>$ tar xzf file.tar - uncompress and unpack</p>
+<p>eXtract all Zee Files (xzf)</p>
+<p>* other compression utilities will require different commands.</p>
+<p>Package dependencies</p>
+<p>Packages don&rsquo;t usually work alone. They need dependencies to help them run. Packages run code from other libraries so they don&rsquo;t have to have all of the code themselves.</p>
+<p>If the dependencies cannot be accessed or they are broke then the package will not run.</p>
+<p>rpm and dpkg</p>
+<p>.deb (on Debian) and .rpm (on red hat) are executable files just like .exe.</p>
+<p>To install these packages use rpm and dpkg (package management commands used to install package files)</p>
+<p>These will not install package dependencies.</p>
+<p>Install a package</p>
+<p>Debian: $ dpkg -i some_deb_package.deb</p>
+<p>RPM: $ rpm -i some_rpm_package.rpm</p>
+<p>The i stands for install</p>
+<p>Remove a package</p>
+<p>Debian: $ dpkg -r some_deb_package.deb</p>
+<p>RPM: $ rpm - e some_rpm_ package.rpm</p>
+<p>Debian: r for remove</p>
+<p>RPM: e for erase</p>
+<p>List installed packages</p>
+<p>Debian: $ dpkg -l</p>
+<p>RPM: $ rpm -qa</p>
+<p>Debian: l for list</p>
+<p>RPM: q for query and a for all</p>
+<p>yum and apt</p>
+<p>Used for easy package installation, removal, and changes. Can also install package dependencies. Yum is exclusive to the red hat family and apt is exclusive to the Debian family.</p>
+<p>Install a package from a repository</p>
+<p>Debian: $ apt install package_name</p>
+<p>RPM: $ yum install package_name</p>
+<p>Remove a package</p>
+<p>Debian: $ apt remove package_name</p>
+<p>RPM: $ yum erase package_name</p>
+<p>Updating packages for a repository</p>
+<p>You should update your package repositories so they are up to date before you install and update a package.</p>
+<p>Debian: apt update; apt upgrade</p>
+<p>RPM: yum update</p>
+<p>Get information about an installed package</p>
+<p>Debian: apt show package_name</p>
+<p>RPM: yum info package_name</p>
+<p>Compile source code</p>
+<p>Software to install tools that will allow you to compile source code.</p>
+<p>$ sudo apt install build-essential</p>
+<p>Extract the contents of the package file (most likely a .tar.gz file)</p>
+<p>$ tar -xzvf package.tar.gz</p>
+<p>Inside the package contents will be a configure script, this script checks for dependencies on your system and if you are missing anything, you&rsquo;ll see an error and you&rsquo;ll need to fix those dependencies.</p>
+<p>$ ./configure</p>
+<p>The ./ allows you to execute a script in the current directory.</p>
+<p>$ make</p>
+<p>Inside of the package contents is a file called Makefile that contains rules to building the software. The make command looks at this file to build the software.</p>
+<p>$ sudo make install</p>
+<p>This command actually installs the package, it will copy the correct files to the correct locations on your computer.</p>
+<p>$ sudo make uninstall</p>
+<p>To uninstall the package.</p>
+<p>Use the checkinstall file instead of the make command. It can be hard to uninstall packages installed with the make command.</p>
+<p>$ sudo checkinstall</p>
+<p>This will essentially &ldquo;make install&rdquo; and build a .deb package and install it. It makes it easier to remove the package later on.</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

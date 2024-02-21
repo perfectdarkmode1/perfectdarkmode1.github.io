@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="19.The Secure Shell Service 75.00%, 2023-09-21 12:20:00 UTC
+Color: #0010FF
+Understand the OpenSSH service, versions, and algorithms
+19.The Secure Shell Service 75.00%, 2023-09-21 12:20:23 UTC
+Color: #0010FF
+Overview of encryption techniques and authentication methods
+Describe OpenSSH administration commands and configuration files
+Configure private/public key-based authentication
+Access OpenSSH server from other Linux systems
+19.The Secure Shell Service 75.02%, 2023-09-21 12:20:36 UTC
+Color: #0010FF
+Use OpenSSH client tools to transfer files
+Synchronize files remotely over OpenSSH">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="19.The Secure Shell Service 75.00%, 2023-09-21 12:20:00 UTC
+Color: #0010FF
+Understand the OpenSSH service, versions, and algorithms
+19.The Secure Shell Service 75.00%, 2023-09-21 12:20:23 UTC
+Color: #0010FF
+Overview of encryption techniques and authentication methods
+Describe OpenSSH administration commands and configuration files
+Configure private/public key-based authentication
+Access OpenSSH server from other Linux systems
+19.The Secure Shell Service 75.02%, 2023-09-21 12:20:36 UTC
+Color: #0010FF
+Use OpenSSH client tools to transfer files
+Synchronize files remotely over OpenSSH">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/19_secure_shell_service/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1708488311" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1708488311" rel="stylesheet">
+    <link href="/css/auto-complete.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1708488311" rel="stylesheet">
+    <link href="/css/fonts.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1708488311" rel="stylesheet">
+    <link href="/css/theme-city2.css?1708488311" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1708488311" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1708488311" rel="stylesheet">
+    <link href="/css/print.css?1708488311" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1708488311" rel="stylesheet">
+    <script src="/js/url.js?1708488311"></script>
+    <script src="/js/variant.js?1708488311"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/19_secure_shell_service/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5088"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7C88">19.The Secure Shell Service</a></a></li>
+    <li><a href="#19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50145"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7C145">19.The Secure Shell Service</a></a></li>
+    <li><a href="#19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50368"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7C368">19.The Secure Shell Service</a></a></li>
+    <li><a href="#19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50451"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7C451">19.The Secure Shell Service</a></a></li>
+    <li><a href="#19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50505"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7C505">19.The Secure Shell Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51194"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C194">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51299"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C299">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51337"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C337">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51391"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C391">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51550"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C550">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51821"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C821">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511049"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C1049">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511372"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C1372">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511442"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C1442">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511637"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C1637">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511769"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C1769">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512057"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2057">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512118"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2118">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512198"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2198">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512233"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2233">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512385"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2385">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512488"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2488">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512524"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2524">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512581"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2581">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512704"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2704">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512816"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2816">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512892"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2892">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512949"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C2949">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513009"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3009">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513032"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3032">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513232"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3232">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513287"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3287">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513357"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3357">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513538"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3538">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513601"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3601">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513636"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3636">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513832"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3832">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513920"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3920">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513974"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C3974">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514078"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4078">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514083"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4083">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514200"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4200">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514374"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4374">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514555"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4555">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514674"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4674">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514763"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4763">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514923"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4923">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514972"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C4972">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515128"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5128">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515170"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5170">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515197"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5197">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515479"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5479">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515680"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5680">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515756"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5756">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515898"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C5898">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516019"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6019">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516194"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6194">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516291"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6291">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516365"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6365">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516474"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6474">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516559"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6559">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516609"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6609">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516666"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C6666">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517029"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7029">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517055"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7055">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517098"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7098">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517283"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7283">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517428"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7428">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517489"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7489">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517511"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7511">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517560"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7560">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517588"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7588">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517666"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7666">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517670"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7670">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517755"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7755">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517767"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7767">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517804"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7804">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517815"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7815">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517973"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C7973">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518003"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8003">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518036"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8036">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518142"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8142">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518211"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8211">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518266"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8266">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518345"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8345">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518420"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8420">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518501"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8501">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518645"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8645">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518686"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8686">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518818"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8818">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518884"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C8884">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519122"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9122">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519136"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9136">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519166"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9166">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519313"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9313">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519375"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9375">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519407"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9407">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519668"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9668">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519705"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9705">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519957"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9957">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519976"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C9976">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110212"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10212">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110290"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10290">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110467"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10467">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110503"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10503">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110528"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10528">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110572"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10572">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110651"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10651">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110847"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10847">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110935"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C10935">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111025"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11025">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111119"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11119">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111184"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11184">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111189"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11189">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111402"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11402">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111413"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11413">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111508"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11508">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111531"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11531">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111822"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11822">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111860"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C11860">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112124"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C12124">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112452"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C12452">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112678"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C12678">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112926"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C12926">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113038"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13038">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113159"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13159">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113237"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13237">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113319"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13319">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113353"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13353">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113432"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13432">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113485"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13485">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113606"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C13606">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114120"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C14120">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114233"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C14233">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114699"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C14699">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114812"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C14812">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114954"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C14954">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115096"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C15096">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115211"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C15211">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115368"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C15368">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115535"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C15535">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115787"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C15787">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116233"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16233">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116264"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16264">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116421"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16421">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116483"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16483">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116550"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16550">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116863"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16863">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116904"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16904">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116933"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16933">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116989"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C16989">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117024"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17024">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117069"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17069">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117188"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17188">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117257"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17257">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117307"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17307">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117387"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17387">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117626"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17626">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117848"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17848">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117929"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C17929">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118012"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18012">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118085"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18085">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118172"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18172">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118243"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18243">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118460"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18460">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118604"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18604">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118673"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18673">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118834"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C18834">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119028"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19028">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119168"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19168">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119251"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19251">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119330"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19330">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119392"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19392">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119473"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19473">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119530"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19530">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119660"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19660">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119721"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C19721">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120118"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20118">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120236"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20236">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120273"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20273">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120414"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20414">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120564"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20564">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120641"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20641">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120676"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20676">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120686"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20686">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120850"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20850">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120927"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20927">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120979"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C20979">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121079"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21079">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121205"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21205">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121262"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21262">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121276"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21276">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121331"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21331">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121401"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21401">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121492"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21492">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121697"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21697">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121825"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21825">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121974"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C21974">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5122098"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C22098">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5122341"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C22341">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126126"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C26126">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126161"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C26161">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126667"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C26667">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126696"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C26696">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126722"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C26722">The OpenSSH Service</a></a></li>
+    <li><a href="#the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5127021"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7C27021">The OpenSSH Service</a></a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h2 id="19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5088"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7c88" target="_blank">19.The Secure Shell Service</a></h2>
+<p>75.00%, 2023-09-21 12:20:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Understand the OpenSSH service, versions, and algorithms</p>
+</blockquote>
+<h2 id="19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50145"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7c145" target="_blank">19.The Secure Shell Service</a></h2>
+<p>75.00%, 2023-09-21 12:20:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Overview of encryption techniques and authentication methods</p>
+<p>Describe OpenSSH administration commands and configuration files</p>
+<p>Configure private/public key-based authentication</p>
+<p>Access OpenSSH server from other Linux systems</p>
+</blockquote>
+<h2 id="19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50368"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7c368" target="_blank">19.The Secure Shell Service</a></h2>
+<p>75.02%, 2023-09-21 12:20:36 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Use OpenSSH client tools to transfer files</p>
+<p>Synchronize files remotely over OpenSSH</p>
+</blockquote>
+<h2 id="19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50451"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7c451" target="_blank">19.The Secure Shell Service</a></h2>
+<p>75.03%, 2023-09-21 12:20:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>RHCSA Objectives:</p>
+<p>04. Access remote systems using ssh</p>
+</blockquote>
+<h2 id="19the-secure-shell-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub50505"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#50%7c505" target="_blank">19.The Secure Shell Service</a></h2>
+<p>75.04%, 2023-09-21 12:20:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>26. Securely transfer files between systems</p>
+<p>57. Configure key-based authentication for SSH</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51194"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c194" target="_blank">The OpenSSH Service</a></h2>
+<p>75.07%, 2023-09-21 12:21:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>allows users to generate key pairs and use them to set up trusted
+logins between systems</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51299"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c299" target="_blank">The OpenSSH Service</a></h2>
+<p>75.08%, 2023-09-21 12:21:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Additional utilities</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51337"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c337" target="_blank">The OpenSSH Service</a></h2>
+<p>75.08%, 2023-09-21 12:22:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>remote users the ability to log in, execute commands, and</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51391"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c391" target="_blank">The OpenSSH Service</a></h2>
+<p>75.09%, 2023-09-21 12:22:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>and transfer files securely over encrypted network channels</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51550"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c550" target="_blank">The OpenSSH Service</a></h2>
+<p>75.10%, 2023-09-21 12:22:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>OpenSSH Service</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub51821"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c821" target="_blank">The OpenSSH Service</a></h2>
+<p>75.13%, 2023-09-21 12:24:03 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>employs digital signatures for user authentication with encryption to
+secure a communication channel.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511049"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c1049" target="_blank">The OpenSSH Service</a></h2>
+<p>75.15%, 2023-09-21 12:24:26 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>monitors the data being transferred throughout a session to ensure
+integrity</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511372"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c1372" target="_blank">The OpenSSH Service</a></h2>
+<p>75.18%, 2023-09-21 12:24:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>OpenSSH</em> is a free, open source implementation of the proprietary
+SSH.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511442"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c1442" target="_blank">The OpenSSH Service</a></h2>
+<p>75.19%, 2023-09-21 12:25:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Once applied successfully on the system, the unsecure
+services—<em>telnet</em>, <em>rlogin</em>, <em>rcp</em>, and <em>ftp</em>—can be disabled</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511637"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c1637" target="_blank">The OpenSSH Service</a></h2>
+<p>75.21%, 2023-09-21 12:25:29 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>substituted <em>telnet</em> and <em>rlogin</em> remote login services is called
+<em>ssh</em>, and those for <em>rcp</em> and <em>ftp</em> are called <em>scp</em> and <em>sftp</em>,
+respectively.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub511769"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c1769" target="_blank">The OpenSSH Service</a></h2>
+<p>75.22%, 2023-09-21 12:25:41 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Common Encryption Techniques</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512057"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2057" target="_blank">The OpenSSH Service</a></h2>
+<p>75.25%, 2023-09-21 12:25:57 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>two common techniques are <em>symmetric</em> and <em>asymmetric</em>.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512118"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2118" target="_blank">The OpenSSH Service</a></h2>
+<p>75.26%, 2023-09-21 12:26:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>also referred to as <em>secret key encryption</em> and <em>public key
+encryption</em> techniques.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512198"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2198" target="_blank">The OpenSSH Service</a></h2>
+<p>75.27%, 2023-09-21 12:26:44 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Symmetric Technique</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512233"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2233" target="_blank">The OpenSSH Service</a></h2>
+<p>75.27%, 2023-09-21 12:26:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>uses a single key called a <em>secret</em> key that is generated as a result
+of a negotiation process between two entities at the time of their
+initial contact</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512385"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2385" target="_blank">The OpenSSH Service</a></h2>
+<p>75.29%, 2023-09-21 12:27:04 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Both sides use the same secret key during subsequent communication for
+data encryption and decryption.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512488"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2488" target="_blank">The OpenSSH Service</a></h2>
+<p>75.30%, 2023-09-21 12:27:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Asymmetric Technique</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512524"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2524" target="_blank">The OpenSSH Service</a></h2>
+<p>75.30%, 2023-09-21 12:27:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>uses a combination of <em>private</em> and <em>public</em> keys</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512581"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2581" target="_blank">The OpenSSH Service</a></h2>
+<p>75.30%, 2023-09-21 12:27:22 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>randomly generated and mathematically related strings of alphanumeric
+characters attached to messages being exchanged</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512704"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2704" target="_blank">The OpenSSH Service</a></h2>
+<p>75.32%, 2023-09-21 12:27:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>client transmutes the information with a <em>public</em> key and the server
+decrypts it with the paired <em>private</em> key</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512816"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2816" target="_blank">The OpenSSH Service</a></h2>
+<p>75.33%, 2023-09-21 12:27:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>private key must be kept secure since it is private to a single sender</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512892"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2892" target="_blank">The OpenSSH Service</a></h2>
+<p>75.34%, 2023-09-21 12:27:47 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>public key is disseminated to clients</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub512949"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c2949" target="_blank">The OpenSSH Service</a></h2>
+<p>75.34%, 2023-09-21 12:27:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>used for channel encryption as well as user authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513009"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3009" target="_blank">The OpenSSH Service</a></h2>
+<p>75.35%, 2023-09-21 12:27:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Authentication Methods</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513032"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3032" target="_blank">The OpenSSH Service</a></h2>
+<p>75.35%, 2023-09-21 12:28:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Once an encrypted channel is established between the client and
+server, additional negotiations take place between the two to
+authenticate the user trying to access the server.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513232"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3232" target="_blank">The OpenSSH Service</a></h2>
+<p>75.37%, 2023-09-21 12:29:04 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>methods</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513287"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3287" target="_blank">The OpenSSH Service</a></h2>
+<p>75.38%, 2023-09-21 12:29:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>order in which they are attempted during the authentication process:</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513357"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3357" target="_blank">The OpenSSH Service</a></h2>
+<p>75.38%, 2023-09-21 12:29:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>GSSAPI-based (<em>Generic Security Service Application Program
+Interface</em>) authentication</p>
+<p>•Host-based authentication</p>
+<p>•Public key-based authentication</p>
+<p>•Challenge-response authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513538"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3538" target="_blank">The OpenSSH Service</a></h2>
+<p>75.40%, 2023-09-21 12:29:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Password-based authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513601"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3601" target="_blank">The OpenSSH Service</a></h2>
+<p>75.41%, 2023-09-21 12:29:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>GSSAPI-Based Authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513636"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3636" target="_blank">The OpenSSH Service</a></h2>
+<p>75.41%, 2023-09-21 12:29:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>provides a standard interface that allows security mechanisms, such as
+Kerberos, to be plugged in</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513832"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3832" target="_blank">The OpenSSH Service</a></h2>
+<p>75.43%, 2023-09-21 12:29:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>exchange of tokens takes place between the client and server to
+validate user identity.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513920"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3920" target="_blank">The OpenSSH Service</a></h2>
+<p>75.44%, 2023-09-21 12:30:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Host-Based Authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub513974"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c3974" target="_blank">The OpenSSH Service</a></h2>
+<p>75.44%, 2023-09-21 12:30:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>allows a single user, a group of users, or all users on the client to
+be authenticated on the server</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514078"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4078" target="_blank">The OpenSSH Service</a></h2>
+<p>75.45%, 2023-09-21 12:30:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>user</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514083"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4083" target="_blank">The OpenSSH Service</a></h2>
+<p>75.45%, 2023-09-21 12:30:28 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>may be configured to log in with a matching username on the server or
+as a different user that already exists there</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514200"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4200" target="_blank">The OpenSSH Service</a></h2>
+<p>75.47%, 2023-09-21 12:30:49 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>For each user that requires an automatic entry on the server, a
+~/<em>.shosts</em> file is set up containing the client name or IP address,
+and, optionally, a different username.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514374"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4374" target="_blank">The OpenSSH Service</a></h2>
+<p>75.48%, 2023-09-21 12:30:57 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>same rule applies to a group of users or all users on the client that
+require access to the server. In that case, the setup is done in the
+<em>/etc/ssh/shosts.equiv</em> file on the server.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514555"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4555" target="_blank">The OpenSSH Service</a></h2>
+<p>75.50%, 2023-09-21 12:31:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Private/Public Key-Based Authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514674"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4674" target="_blank">The OpenSSH Service</a></h2>
+<p>75.51%, 2023-09-21 12:31:20 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>user on the client has a public key and the server stores the
+corresponding private key</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514763"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4763" target="_blank">The OpenSSH Service</a></h2>
+<p>75.52%, 2023-09-21 12:31:29 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>At the login attempt, the server prompts the user to enter the
+passphrase associated with the key and logs the user in if the
+passphrase and key are validated.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514923"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4923" target="_blank">The OpenSSH Service</a></h2>
+<p>75.54%, 2023-09-21 12:31:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Challenge-Response Authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub514972"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c4972" target="_blank">The OpenSSH Service</a></h2>
+<p>75.54%, 2023-09-21 12:32:02 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>based on the response(s) to one or more arbitrary challenge questions
+that the user has to answer correctly in order to be allowed to log in
+to the server</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515128"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5128" target="_blank">The OpenSSH Service</a></h2>
+<p>75.56%, 2023-09-21 12:32:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Password-Based Authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515170"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5170" target="_blank">The OpenSSH Service</a></h2>
+<p>75.56%, 2023-09-21 12:33:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>last fall back option</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515197"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5197" target="_blank">The OpenSSH Service</a></h2>
+<p>75.57%, 2023-09-21 12:33:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>server prompts the user to enter their password. It checks the
+password against the stored entry in the <em>shadow</em> file and allows the
+user in if the password is confirmed.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515479"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5479" target="_blank">The OpenSSH Service</a></h2>
+<p>75.59%, 2023-09-21 12:33:24 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>GSSAPI-based, host-based, and challenge-response methods are beyond
+the scope of this book</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515680"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5680" target="_blank">The OpenSSH Service</a></h2>
+<p>75.61%, 2023-09-21 12:33:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>OpenSSH Protocol Version and Algorithms</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515756"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5756" target="_blank">The OpenSSH Service</a></h2>
+<p>75.62%, 2023-09-21 12:34:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Its latest and the default version in RHEL 8, version 2,</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub515898"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c5898" target="_blank">The OpenSSH Service</a></h2>
+<p>75.64%, 2023-09-21 12:34:32 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>supports various algorithms for data encryption and user
+authentication (digital signatures) such as RSA, DSA, and ECDSA</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516019"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6019" target="_blank">The OpenSSH Service</a></h2>
+<p>75.65%, 2023-09-21 12:34:44 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>RSA is more common and it is widely employed partly because it
+supports both encryption and authentication. In contrast, DSA and
+ECDSA are restricted to authentication only</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516194"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6194" target="_blank">The OpenSSH Service</a></h2>
+<p>75.66%, 2023-09-21 12:34:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>These algorithms are used to generate public and private key pairs for
+the asymmetric technique.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516291"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6291" target="_blank">The OpenSSH Service</a></h2>
+<p>75.67%, 2023-09-21 12:35:02 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>RSA stands for <em>Rivest-Shamir-Adleman</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516365"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6365" target="_blank">The OpenSSH Service</a></h2>
+<p>75.68%, 2023-09-21 12:35:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DSA for <em>Digital Signature Algorithm</em>, and ECDSA is an acronym for
+<em>Elliptic Curve Digital Signature Algorithm</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516474"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6474" target="_blank">The OpenSSH Service</a></h2>
+<p>75.69%, 2023-09-21 12:35:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>OpenSSH Packages</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516559"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6559" target="_blank">The OpenSSH Service</a></h2>
+<p>75.70%, 2023-09-21 12:35:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>openssh</em>, <em>openssh-clients</em>, and <em>openssh-server</em>.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516609"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6609" target="_blank">The OpenSSH Service</a></h2>
+<p>75.71%, 2023-09-21 12:35:25 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>openssh</em> package provides the <em>ssh-keygen</em> command and some library</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub516666"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c6666" target="_blank">The OpenSSH Service</a></h2>
+<p>75.71%, 2023-09-21 12:35:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>library routines; the <em>openssh-clients</em> package includes commands,
+such as <em>scp</em>, <em>sftp</em>, <em>ssh</em>, and <em>ssh-copy-id</em>, and a client
+configuration file <em>/etc/ssh/ssh_config</em>; and the <em>openssh-server</em>
+package contains the <em>sshd</em> service daemon, server configuration file
+<em>/etc/ssh/sshd_config</em>, and library routines. By default, all three
+packages are installed during OS installation.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517029"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7029" target="_blank">The OpenSSH Service</a></h2>
+<p>75.75%, 2023-09-21 12:35:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>OpenSSH Server Daemon and Client</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517055"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7055" target="_blank">The OpenSSH Service</a></h2>
+<p>75.75%, 2023-09-21 12:35:49 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Client Commands</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517098"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7098" target="_blank">The OpenSSH Service</a></h2>
+<p>75.75%, 2023-09-21 12:38:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>sshd</em> is preconfigured and operational on new RHEL installations,
+allowing remote users to log in to the system</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517283"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7283" target="_blank">The OpenSSH Service</a></h2>
+<p>75.77%, 2023-09-21 12:38:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>listens on well-known TCP port 22 as documented in the
+<em>/etc/ssh/sshd_config</em> file with the Port directive.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517428"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7428" target="_blank">The OpenSSH Service</a></h2>
+<p>75.79%, 2023-09-21 12:38:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>utilities</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517489"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7489" target="_blank">The OpenSSH Service</a></h2>
+<p>75.79%, 2023-09-21 12:39:22 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><strong>Command</strong> <strong>Description</strong> scp The secure remote copy command that
+replaced</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517511"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7511" target="_blank">The OpenSSH Service</a></h2>
+<p>75.80%, 2023-09-21 12:39:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>scp</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517560"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7560" target="_blank">The OpenSSH Service</a></h2>
+<p>75.80%, 2023-09-21 12:39:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>the non-secure rcp command</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517588"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7588" target="_blank">The OpenSSH Service</a></h2>
+<p>75.80%, 2023-09-21 12:39:28 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>sftp The secure remote copy command that replaced the non-secure ftp
+command</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517666"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7666" target="_blank">The OpenSSH Service</a></h2>
+<p>75.81%, 2023-09-21 12:39:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>ssh</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517670"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7670" target="_blank">The OpenSSH Service</a></h2>
+<p>75.81%, 2023-09-21 12:39:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>The secure remote login command that replaced non-secure telnet and
+rlogin commands</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517755"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7755" target="_blank">The OpenSSH Service</a></h2>
+<p>75.82%, 2023-09-21 12:39:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>ssh-copy-id</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517767"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7767" target="_blank">The OpenSSH Service</a></h2>
+<p>75.82%, 2023-09-21 12:39:51 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Copies public key to remote systems</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517804"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7804" target="_blank">The OpenSSH Service</a></h2>
+<p>75.82%, 2023-09-21 12:39:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>ssh-keygen</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517815"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7815" target="_blank">The OpenSSH Service</a></h2>
+<p>75.83%, 2023-09-21 12:39:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Generates and manages private and public key pairs</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub517973"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c7973" target="_blank">The OpenSSH Service</a></h2>
+<p>75.84%, 2023-09-21 12:50:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Server Configuration File</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518003"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8003" target="_blank">The OpenSSH Service</a></h2>
+<p>75.84%, 2023-09-21 12:52:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>OpenSSH server daemon <em>sshd</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518036"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8036" target="_blank">The OpenSSH Service</a></h2>
+<p>75.85%, 2023-09-21 12:52:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>configuration file</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518142"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8142" target="_blank">The OpenSSH Service</a></h2>
+<p>75.86%, 2023-09-21 12:52:22 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>the <em>/etc/ssh</em> directory and called <em>sshd_config</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518211"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8211" target="_blank">The OpenSSH Service</a></h2>
+<p>75.87%, 2023-09-21 12:52:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>directives preset in this file that affect all inbound</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518266"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8266" target="_blank">The OpenSSH Service</a></h2>
+<p>75.87%, 2023-09-21 12:52:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>ssh communication and are tuned to work as-is for most use cases</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518345"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8345" target="_blank">The OpenSSH Service</a></h2>
+<p>75.88%, 2023-09-21 12:53:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>the <em>/var/log/secure</em> log file is used to capture authentication
+messages.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518420"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8420" target="_blank">The OpenSSH Service</a></h2>
+<p>75.89%, 2023-09-21 12:54:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>few directives with their default values</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518501"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8501" target="_blank">The OpenSSH Service</a></h2>
+<p>75.89%, 2023-09-21 12:54:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>below:</p>
+<p>#Port 22 #Protocol 2 ListenAddress 0.0.0.0 SyslogFacility AUTHPRIV
+#LogLevel INFO PermitRootLogin yes #PubkeyAuthentication yes</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518645"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8645" target="_blank">The OpenSSH Service</a></h2>
+<p>75.91%, 2023-09-21 12:54:15 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>AuthorizedKeysFile .ssh/authorized_keys</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518686"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8686" target="_blank">The OpenSSH Service</a></h2>
+<p>75.91%, 2023-09-21 12:55:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>PasswordAuthentication yes #PermitEmptyPasswords no
+ChallengeResponseAuthentication no UsePAM yes X11Forwarding yes</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518818"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8818" target="_blank">The OpenSSH Service</a></h2>
+<p>75.93%, 2023-09-21 12:56:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>directives are elaborated</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub518884"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c8884" target="_blank">The OpenSSH Service</a></h2>
+<p>75.93%, 2023-09-21 12:56:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Port Specifies the port number to listen on. Default is 22. Protocol
+Specifies the default protocol version to use. ListenAddress Sets the
+local addresses the sshd service should listen on. Default is to
+listen on all local addresses.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519122"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9122" target="_blank">The OpenSSH Service</a></h2>
+<p>75.96%, 2023-09-21 12:56:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>SyslogFacility</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519136"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9136" target="_blank">The OpenSSH Service</a></h2>
+<p>75.96%, 2023-09-21 12:56:27 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Defines the facility code to</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519166"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9166" target="_blank">The OpenSSH Service</a></h2>
+<p>75.96%, 2023-09-21 12:59:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>be used when logging messages to the /var/log/secure file. This is
+based on the configuration in the /etc/rsyslog.conf file. Default is
+AUTHPRIV</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519313"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9313" target="_blank">The OpenSSH Service</a></h2>
+<p>75.98%, 2023-09-21 12:59:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>LogLevel Identifies the level of criticality for the messages</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519375"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9375" target="_blank">The OpenSSH Service</a></h2>
+<p>75.98%, 2023-09-21 12:59:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>to be logged. Default is INFO</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519407"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9407" target="_blank">The OpenSSH Service</a></h2>
+<p>75.98%, 2023-09-21 12:59:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>PermitRootLogin Allows or disallows the root user to log in directly
+to the system. Default is yes. PubKeyAuthentication Enables or
+disables public key-based authentication. Default is yes.
+AuthorizedKeysFile Sets the name and location of the file containing a</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519668"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9668" target="_blank">The OpenSSH Service</a></h2>
+<p>76.01%, 2023-09-21 12:59:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>a user’s authorized keys. Default</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519705"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9705" target="_blank">The OpenSSH Service</a></h2>
+<p>76.01%, 2023-09-21 13:00:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>~/.ssh/authorized_keys. PasswordAuthentication Enables or disables
+local password authentication. Default is yes. PermitEmptyPasswords
+Allows or disallows the use of null passwords. Default is no.
+ChallengeResponseAuthentication Enables or disables</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519957"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9957" target="_blank">The OpenSSH Service</a></h2>
+<p>76.04%, 2023-09-21 13:00:32 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>challenge-response</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub519976"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c9976" target="_blank">The OpenSSH Service</a></h2>
+<p>76.04%, 2023-09-21 13:02:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>authentication mechanism. Default is yes. UsePAM Enables or disables
+user authentication via PAM. If enabled, only root will be able to run
+the sshd daemon. Default is yes. X11Forwarding Allows or disallows
+remote access to graphical</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110212"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10212" target="_blank">The OpenSSH Service</a></h2>
+<p>76.06%, 2023-09-21 13:02:41 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>applications. Default is yes.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110290"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10290" target="_blank">The OpenSSH Service</a></h2>
+<p>76.07%, 2023-09-21 13:02:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>There are many more settings available that may be added to the file
+for additional control. Check out the manual pages of the
+<em>sshd_config</em> file (<strong>man 5 sshd_config</strong>) for details.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110467"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10467" target="_blank">The OpenSSH Service</a></h2>
+<p>76.09%, 2023-09-21 13:03:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Client Configuration File</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110503"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10503" target="_blank">The OpenSSH Service</a></h2>
+<p>76.09%, 2023-09-21 13:03:59 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>client machine</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110528"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10528" target="_blank">The OpenSSH Service</a></h2>
+<p>76.10%, 2023-09-21 13:04:02 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>ssh</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110572"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10572" target="_blank">The OpenSSH Service</a></h2>
+<p>76.10%, 2023-09-21 13:04:06 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>local configuration file</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110651"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10651" target="_blank">The OpenSSH Service</a></h2>
+<p>76.11%, 2023-09-21 13:03:49 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>ssh_config</em>, is located in the <em>/etc/ssh</em> directory</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110847"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10847" target="_blank">The OpenSSH Service</a></h2>
+<p>76.13%, 2023-09-21 13:04:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>few directives with their default values</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5110935"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c10935" target="_blank">The OpenSSH Service</a></h2>
+<p>76.14%, 2023-09-21 13:04:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p># Host * # ForwardX11 no # PasswordAuthentication yes #
+StrictHostKeyChecking ask</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111025"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11025" target="_blank">The OpenSSH Service</a></h2>
+<p>76.15%, 2023-09-21 13:06:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>IdentityFile ~/.ssh/id_rsa # IdentityFile ~/.ssh/id_dsa # Port 22 #
+Protocol 2</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111119"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11119" target="_blank">The OpenSSH Service</a></h2>
+<p>76.15%, 2023-09-21 13:08:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>directives are described</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111184"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11184" target="_blank">The OpenSSH Service</a></h2>
+<p>76.16%, 2023-09-21 13:08:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Host</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111189"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11189" target="_blank">The OpenSSH Service</a></h2>
+<p>76.16%, 2023-09-21 13:08:47 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Container that declares directives applicable to one host, a group of
+hosts, or all hosts. It ends when another occurrence of Host or Match
+is encountered. Default is *, which sets global defaults for all
+hosts.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111402"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11402" target="_blank">The OpenSSH Service</a></h2>
+<p>76.18%, 2023-09-21 13:09:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>ForwardX11</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111413"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11413" target="_blank">The OpenSSH Service</a></h2>
+<p>76.18%, 2023-09-21 13:09:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Enables or disables automatic redirection of X11 traffic over SSH
+connections. Default is no</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111508"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11508" target="_blank">The OpenSSH Service</a></h2>
+<p>76.19%, 2023-09-21 13:12:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>PasswordAuthentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111531"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11531" target="_blank">The OpenSSH Service</a></h2>
+<p>76.20%, 2023-09-21 13:12:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Allows or disallows password authentication. Default is yes.
+StrictHostKeyChecking Controls (1) whether to add host keys (host
+fingerprints) to ~/.ssh/known_hosts when accessing a host for the
+first time, and (2) what to do when the keys of a previously-accessed
+host mismatch with what</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111822"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11822" target="_blank">The OpenSSH Service</a></h2>
+<p>76.22%, 2023-09-21 13:13:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>stored in ~/.ssh/known_hosts. Options</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5111860"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c11860" target="_blank">The OpenSSH Service</a></h2>
+<p>76.23%, 2023-09-21 13:13:51 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>are: <strong>no:</strong> adds new host keys and ignores changes to existing keys.
+<strong>yes:</strong> adds new host keys and disallows connections to hosts with
+non-matching keys. <strong>accept-new:</strong> adds new host keys and disallows
+connections to hosts with non-matching keys. <strong>ask (default):</strong>
+prompts</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112124"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c12124" target="_blank">The OpenSSH Service</a></h2>
+<p>76.26%, 2023-09-21 13:13:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>whether to add new host keys and disallows connections to hosts with
+non-matching keys. IdentityFile Defines the name and location of a
+file that stores a user’s private key for their identity validation.
+Defaults are id_rsa, id_dsa, and id_ecdsa based on the type of
+algorithm used. Their corresponding public key files</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112452"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c12452" target="_blank">The OpenSSH Service</a></h2>
+<p>76.29%, 2023-09-21 13:13:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>pub extension are also stored at the same directory location. Port
+Sets the port number to listen on. Default is 22. Protocol Specifies
+the default protocol version to use</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112678"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c12678" target="_blank">The OpenSSH Service</a></h2>
+<p>76.31%, 2023-09-21 13:16:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>~/.ssh</em> directory does not exist by default; it is created when a
+user executes the <em>ssh-keygen</em> command for the first time to generate
+a key pair or connects to a remote ssh server and accepts its host key
+for the first time</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5112926"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c12926" target="_blank">The OpenSSH Service</a></h2>
+<p>76.33%, 2023-09-21 13:16:25 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>client stores the server’s host key locally in a file called
+<em>known_hosts</em> along with its hostname or IP address</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113038"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13038" target="_blank">The OpenSSH Service</a></h2>
+<p>76.35%, 2023-09-21 13:17:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>On subsequent access attempts, the client will use this information to
+verify the server’s authenticity</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113159"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13159" target="_blank">The OpenSSH Service</a></h2>
+<p>76.36%, 2023-09-21 13:18:07 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>more settings available</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113237"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13237" target="_blank">The OpenSSH Service</a></h2>
+<p>76.37%, 2023-09-21 13:18:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Check out the manual pages of the <em>ssh_config</em> file (<strong>man 5
+ssh_config</strong>) for details</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113319"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13319" target="_blank">The OpenSSH Service</a></h2>
+<p>76.37%, 2023-09-21 13:18:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>System Access and File Transfer</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113353"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13353" target="_blank">The OpenSSH Service</a></h2>
+<p>76.38%, 2023-09-21 17:33:25 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>user must log in to the Linux system in order to use it or transfer
+files</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113432"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13432" target="_blank">The OpenSSH Service</a></h2>
+<p>76.39%, 2023-09-21 17:34:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>login process identifies the user to the system</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113485"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13485" target="_blank">The OpenSSH Service</a></h2>
+<p>76.39%, 2023-09-21 17:34:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>accessing a RHEL system remotely, use the <em>ssh</em> command, and the <em>scp</em>
+or the <em>sftp</em> command for copying files</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5113606"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c13606" target="_blank">The OpenSSH Service</a></h2>
+<p>76.40%, 2023-09-21 17:34:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>require either a resolvable hostname of the target system or its IP
+address in order to try to establish a connection</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114120"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c14120" target="_blank">The OpenSSH Service</a></h2>
+<p>76.45%, 2023-09-21 17:35:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Access RHEL System from Another RHEL System</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114233"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c14233" target="_blank">The OpenSSH Service</a></h2>
+<p>76.47%, 2023-09-21 17:35:47 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>exercise works under two assumptions: (1) <em>user1</em> exists on both
+<em>server10</em> and <em>server20</em>, and (2) hostname and IP mapping is in place
+in the <em>/etc/hosts</em> file (Chapter 16)</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114699"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c14699" target="_blank">The OpenSSH Service</a></h2>
+<p>76.51%, 2023-09-21 17:36:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Issue the <em>ssh</em> command as <em>user1</em> on <em>server10</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114812"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c14812" target="_blank">The OpenSSH Service</a></h2>
+<p>76.52%, 2023-09-21 17:37:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>This step adds the hostname of <em>server20</em> to a file called
+<em>known_hosts</em> under <em>/home/user1/.ssh</em> directory on the originating
+computer (<em>server10</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5114954"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c14954" target="_blank">The OpenSSH Service</a></h2>
+<p>76.54%, 2023-09-21 17:37:32 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>This message will not reappear</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115096"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c15096" target="_blank">The OpenSSH Service</a></h2>
+<p>76.55%, 2023-09-21 17:37:39 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>You will be placed in the home directory of <em>user1</em> on <em>server20</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115211"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c15211" target="_blank">The OpenSSH Service</a></h2>
+<p>76.56%, 2023-09-21 17:37:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Issue the basic Linux commands <em>whoami</em>, <em>hostname</em>, and <em>pwd</em> to
+confirm that you are logged in as <em>user1</em> on <em>server20</em> and placed in
+the correct home directory</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115368"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c15368" target="_blank">The OpenSSH Service</a></h2>
+<p>76.58%, 2023-09-21 17:38:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Run the <em>logout</em> or the <em>exit</em> command or simply press the key
+combination Ctrl+d to log off <em>server20</em> and return to <em>server10</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115535"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c15535" target="_blank">The OpenSSH Service</a></h2>
+<p>76.59%, 2023-09-21 17:38:29 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>log on as a different user</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5115787"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c15787" target="_blank">The OpenSSH Service</a></h2>
+<p>76.62%, 2023-09-21 17:38:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Generate, Distribute, and Use SSH Keys</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116233"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16233" target="_blank">The OpenSSH Service</a></h2>
+<p>76.66%, 2023-09-21 17:39:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Log on to <em>server10</em> as <em>user1</em>.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116264"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16264" target="_blank">The OpenSSH Service</a></h2>
+<p>76.67%, 2023-09-21 17:39:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Generate RSA keys without a password (-N) and without detailed output
+(-q). Press Enter when prompted to provide the filename to store the
+private key</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116421"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16421" target="_blank">The OpenSSH Service</a></h2>
+<p>76.68%, 2023-09-21 17:40:15 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>content of the <em>id_rsa</em> (private key) file is shown below</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116483"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16483" target="_blank">The OpenSSH Service</a></h2>
+<p>76.69%, 2023-09-21 17:40:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>content of the <em>id_rsa.pub</em> (public key) file is displayed below</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116550"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16550" target="_blank">The OpenSSH Service</a></h2>
+<p>76.70%, 2023-09-21 17:41:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Copy the public key file to <em>server20</em> under <em>/home/user1/.ssh</em>
+directory. Accept the fingerprints for <em>server20</em> when prompted (only
+presented on the first login attempt). Enter the password for <em>user1</em>
+set on <em>server20</em> to continue with the file copy. The public key will
+be copied as <em>authorized_keys</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116863"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16863" target="_blank">The OpenSSH Service</a></h2>
+<p>76.73%, 2023-09-23 01:55:24 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>this command also creates or updates the</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116904"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16904" target="_blank">The OpenSSH Service</a></h2>
+<p>76.73%, 2023-09-23 01:55:29 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>known_hosts</em> file on <em>server10</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116933"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16933" target="_blank">The OpenSSH Service</a></h2>
+<p>76.73%, 2023-09-23 01:55:36 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>and stores the fingerprints for <em>server20</em> in it</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5116989"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c16989" target="_blank">The OpenSSH Service</a></h2>
+<p>76.74%, 2023-09-23 01:56:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>what is currently stored in it</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117024"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17024" target="_blank">The OpenSSH Service</a></h2>
+<p>76.74%, 2023-09-23 01:59:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>On <em>server10</em>, run the <em>ssh</em> command as <em>user1</em> to</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117069"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17069" target="_blank">The OpenSSH Service</a></h2>
+<p>76.75%, 2023-09-23 01:59:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>connect to <em>server20</em>. You will not be prompted for a password because
+there was none assigned to the ssh keys</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117188"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17188" target="_blank">The OpenSSH Service</a></h2>
+<p>76.76%, 2023-09-23 02:00:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>view this login attempt in the <em>/var/log/secure</em> file on <em>server20</em>:</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117257"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17257" target="_blank">The OpenSSH Service</a></h2>
+<p>76.77%, 2023-09-23 02:00:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>log entry shows the timestamp, hostname, process</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117307"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17307" target="_blank">The OpenSSH Service</a></h2>
+<p>76.77%, 2023-09-23 02:00:38 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>name and PID, username and source IP, and other relevant information</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117387"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17387" target="_blank">The OpenSSH Service</a></h2>
+<p>76.78%, 2023-09-23 02:00:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>will log all future login attempts for this user.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117626"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17626" target="_blank">The OpenSSH Service</a></h2>
+<p>76.80%, 2023-09-23 02:03:03 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>execute a command without actually logging on to it</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117848"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17848" target="_blank">The OpenSSH Service</a></h2>
+<p>76.83%, 2023-09-23 02:03:20 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Invoke the <em>ssh</em> command on <em>server10</em> to execute the <em>hostname</em>
+command on <em>server20</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5117929"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c17929" target="_blank">The OpenSSH Service</a></h2>
+<p>76.83%, 2023-09-23 02:05:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Run the <em>nmcli</em> command on <em>server20</em> to show (s) active network
+connections (c):</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118012"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18012" target="_blank">The OpenSSH Service</a></h2>
+<p>76.84%, 2023-09-23 02:05:40 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>can run any command on <em>server20</em> this way without having to log in to
+it</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118085"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18085" target="_blank">The OpenSSH Service</a></h2>
+<p>76.85%, 2023-09-23 02:05:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Copying Files Remotely Using scp</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118172"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18172" target="_blank">The OpenSSH Service</a></h2>
+<p>76.86%, 2023-09-23 02:06:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>transfer files from <em>server10</em> to <em>server20</em>, and vice versa</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118243"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18243" target="_blank">The OpenSSH Service</a></h2>
+<p>76.86%, 2023-09-23 02:06:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>can be run by a normal user as long as the user has the required read
+and write permissions on the source and destination, or by the <em>root</em>
+user</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118460"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18460" target="_blank">The OpenSSH Service</a></h2>
+<p>76.89%, 2023-09-23 02:06:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>transfer the <em>/etc/chrony.conf</em> file from <em>server20</em> to <em>/tmp</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118604"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18604" target="_blank">The OpenSSH Service</a></h2>
+<p>76.90%, 2023-09-23 02:09:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>file size is 1103 bytes</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118673"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18673" target="_blank">The OpenSSH Service</a></h2>
+<p>76.91%, 2023-09-23 02:09:39 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>transfer the entire <em>/etc/sysconfig</em> directory (-r) from <em>server10</em>
+into <em>/tmp</em> on <em>server20</em> and confirm. Ignore any permission errors
+reported in the output</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5118834"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c18834" target="_blank">The OpenSSH Service</a></h2>
+<p>76.92%, 2023-09-23 02:10:09 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>ls</em> command on <em>server20</em> for verification</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119028"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19028" target="_blank">The OpenSSH Service</a></h2>
+<p>76.94%, 2023-09-23 02:12:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>To transfer a file or directory using a different user account on the
+target server, you need to include that user’s name with the command.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119168"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19168" target="_blank">The OpenSSH Service</a></h2>
+<p>76.96%, 2023-09-23 02:12:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>You must know the password for the user on the target server</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119251"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19251" target="_blank">The OpenSSH Service</a></h2>
+<p>76.96%, 2023-09-23 02:13:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Check the manual pages of the <em>scp</em> command for more details and usage
+examples</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119330"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19330" target="_blank">The OpenSSH Service</a></h2>
+<p>76.97%, 2023-09-23 02:13:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Transferring Files Remotely Using sftp</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119392"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19392" target="_blank">The OpenSSH Service</a></h2>
+<p>76.98%, 2023-09-23 12:08:27 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>interactive file transfer tool that can be used instead of <em>scp</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119473"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19473" target="_blank">The OpenSSH Service</a></h2>
+<p>76.99%, 2023-09-23 12:08:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>launched as follows on <em>server10</em> to connect to <em>server20</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119530"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19530" target="_blank">The OpenSSH Service</a></h2>
+<p>76.99%, 2023-09-23 12:08:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Type ? at the prompt to list available commands</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119660"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19660" target="_blank">The OpenSSH Service</a></h2>
+<p>77.01%, 2023-09-24 23:00:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>common commands</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5119721"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c19721" target="_blank">The OpenSSH Service</a></h2>
+<p>77.01%, 2023-09-24 23:01:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>cd</em> to change directory, <em>get</em>/<em>put</em> to download/upload a file, <em>ls</em>
+to list files, <em>pwd</em> to print working directory, <em>mkdir</em> to create a
+directory, <em>rename</em> to rename a file, <em>rm</em> to remove a file, and
+<em>bye</em>/<em>quit/exit</em> to exit the program and return to the command prompt</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120118"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20118" target="_blank">The OpenSSH Service</a></h2>
+<p>77.05%, 2023-09-26 03:35:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>four commands beginning with an ‘l’—<em>lcd</em>, <em>lls</em>, <em>lpwd</em>, and
+<em>lmkdir</em>—at the sftp&gt; prompt</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120236"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20236" target="_blank">The OpenSSH Service</a></h2>
+<p>77.06%, 2023-09-26 04:19:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>run on the source server (<em>server10</em>)</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120273"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20273" target="_blank">The OpenSSH Service</a></h2>
+<p>77.07%, 2023-09-26 04:20:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Other Linux commands</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120414"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20414" target="_blank">The OpenSSH Service</a></h2>
+<p>77.08%, 2023-09-26 04:20:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>quit</em> at the sftp&gt; prompt to exit the program</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120564"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20564" target="_blank">The OpenSSH Service</a></h2>
+<p>77.10%, 2023-09-26 04:20:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Consult the manual pages of the commands for options and additional
+details.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120641"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20641" target="_blank">The OpenSSH Service</a></h2>
+<p>77.10%, 2023-09-26 04:21:18 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Synchronizing Files Remotely Using</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120676"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20676" target="_blank">The OpenSSH Service</a></h2>
+<p>77.11%, 2023-09-26 04:21:22 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>rsync</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120686"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20686" target="_blank">The OpenSSH Service</a></h2>
+<p>77.11%, 2023-09-26 04:23:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>rsync</em> (<em>remote synchronization</em></p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120850"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20850" target="_blank">The OpenSSH Service</a></h2>
+<p>77.12%, 2023-09-27 02:06:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>source and destination could be on the same system or different
+systems</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120927"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20927" target="_blank">The OpenSSH Service</a></h2>
+<p>77.13%, 2023-09-27 02:06:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>first initiation of <em>rsync</em> copies all files from the</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5120979"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c20979" target="_blank">The OpenSSH Service</a></h2>
+<p>77.14%, 2023-09-27 02:06:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>source to the destination with subsequent executions copy only the
+updated files</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121079"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21079" target="_blank">The OpenSSH Service</a></h2>
+<p>77.15%, 2023-09-27 02:06:47 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>uses the ssh protocol by default.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121205"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21205" target="_blank">The OpenSSH Service</a></h2>
+<p>77.16%, 2023-09-27 02:06:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>copy a single file such as <em>grub.conf</em> to <em>/tmp</em> on the same</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121262"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21262" target="_blank">The OpenSSH Service</a></h2>
+<p>77.17%, 2023-09-27 02:07:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>system</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121276"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21276" target="_blank">The OpenSSH Service</a></h2>
+<p>77.17%, 2023-09-27 02:07:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>a option</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121331"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21331" target="_blank">The OpenSSH Service</a></h2>
+<p>77.17%, 2023-09-27 02:08:09 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>perform an archive operation and preserve all file attributes</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121401"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21401" target="_blank">The OpenSSH Service</a></h2>
+<p>77.18%, 2023-09-27 02:08:18 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>permissions, ownership, symlinks, and timestamps. The -v switch is
+used for verbosity</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121492"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21492" target="_blank">The OpenSSH Service</a></h2>
+<p>77.19%, 2023-09-27 02:08:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>actual size of the <em>grub.cfg</em> file is 5,032 bytes. The additional
+bytes sent (5,126 minus 5,032 = 94 bytes) contain the metadata and
+other overhead, and the received bytes signify the metadata received</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121697"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21697" target="_blank">The OpenSSH Service</a></h2>
+<p>77.21%, 2023-09-27 02:08:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>output displays the files being copied and the file transfer rate as
+well.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121825"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21825" target="_blank">The OpenSSH Service</a></h2>
+<p>77.22%, 2023-09-27 02:08:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>output similar to the following if the file has not been modified:</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5121974"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c21974" target="_blank">The OpenSSH Service</a></h2>
+<p>77.24%, 2023-09-27 02:09:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>copy <em>/etc/rsyslog.conf</em> to <em>/tmp</em> to <em>server20</em> using in-transit
+compression (-z) and displaying the transfer progress (-P)</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5122098"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c22098" target="_blank">The OpenSSH Service</a></h2>
+<p>77.25%, 2023-09-27 02:11:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>copy the entire <em>/home/user1</em> directory recursively (-r) from
+<em>server20</em> to <em>/tmp/trans</em> directory on <em>server10</em> (create
+<em>/tmp/trans</em> before running the <em>rsync</em> comman</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5122341"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c22341" target="_blank">The OpenSSH Service</a></h2>
+<p>77.27%, 2023-09-27 02:13:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Refer to the command’s manual pages for a description of options and
+usage examples.</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126126"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c26126" target="_blank">The OpenSSH Service</a></h2>
+<p>77.65%, 2023-09-27 03:00:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Establish Key-Based Authentication</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126161"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c26161" target="_blank">The OpenSSH Service</a></h2>
+<p>77.65%, 2023-09-27 03:02:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server10</em> and <em>server20</em>, create user
+account <em>user20</em> and assign a password. As <em>user20</em> on <em>server10</em>,
+generate a private/public key pair without a passphrase using the
+<em>ssh-keygen</em> command. Distribute the public key to <em>server20</em> with the
+<em>ssh-copy-id</em> command. Log on to <em>server20</em> as <em>user20</em> and accept the
+fingerprints for the server if presented. On subsequent log in
+attempts from <em>server10</em> to <em>server20</em>, <em>user20</em> should not be
+prompted for their password. (Hint: System Access and File Transfer).</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126667"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c26667" target="_blank">The OpenSSH Service</a></h2>
+<p>77.70%, 2023-09-27 03:03:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Lab 19-2: Test the Effect of</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126696"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c26696" target="_blank">The OpenSSH Service</a></h2>
+<p>77.71%, 2023-09-27 03:03:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>PermitRootLogin Directive</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5126722"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c26722" target="_blank">The OpenSSH Service</a></h2>
+<p>77.71%, 2023-09-27 03:03:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server20</em>, edit the <em>/etc/ssh/sshd_config</em>
+file and change the value of the directive PermitRootLogin to “no”.
+Use the <em>systemctl</em> command to activate the change. As <em>root</em> on
+<em>server10</em>, run <strong>ssh server20</strong> (or its IP address). You’ll get
+permission denied message. Reverse the change on</p>
+</blockquote>
+<h2 id="the-openssh-servicehttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5127021"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#51%7c27021" target="_blank">The OpenSSH Service</a></h2>
+<p>77.74%, 2023-09-27 03:08:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>server20</em> and retry <strong>ssh server20</strong>. You should be able to log in.
+(Hint: The OpenSSH Service).</p>
+</blockquote>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1708488311" defer></script>
+        <script src="/js/search.js?1708488311" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/19_secure_shell_service/" class="active"><a class="padding" href="/linux/rhcsa/19_secure_shell_service/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1708488311" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1708488311" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1708488311" defer></script>
+    <script src="/js/js-yaml.min.js?1708488311" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1708488311" defer></script>
+  </body>
+</html>

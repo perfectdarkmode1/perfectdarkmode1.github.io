@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Process Utilization - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/process_utilization/index.html" rel="canonical" type="text/html" title="Process Utilization - Perfect Dark Mode">
+    <link href="/linux/misc_linux/process_utilization/index.xml" rel="alternate" type="application/rss+xml" title="Process Utilization - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/process_utilization/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Process Utilization</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="process-utilization">Process Utilization</h1>
+
+<p>Tracking Processes: top</p>
+<p>- realtime view of system utilization</p>
+<p>1st line</p>
+<p>- current time - system uptime - # of users logged in - load average</p>
+<p>2nd line</p>
+<p>- tasks running, sleeping, stopped, or zombied</p>
+<p>3rd line</p>
+<p>- us: user cpu time spent running non-niced user processes</p>
+<p>- sy: system cpu time running kernel/ kernel processes</p>
+<p>- ni: nice cpu time spent running niced processes</p>
+<p>- id: cpu idle time %</p>
+<p>- wa: i/o wait, if low, problem is probably not disk or network i/o</p>
+<p>- hi: hardware interrupts/ % of cpu time</p>
+<p>- si: software interrupts/ % of cpu time</p>
+<p>- st: steal time that vms use</p>
+<p>4th and 5th lines = memory + swap usage</p>
+<p>Processes List that are currently in use</p>
+<p>PID: ID of Process</p>
+<p>USER: Owner of process</p>
+<p>PR: Priority</p>
+<p>NI: nice value</p>
+<p>VIRT: virtual memory used by process</p>
+<p>RES: Physical memory used</p>
+<p>SHR: shared memory</p>
+<p>S: status: s=sleep r=running z=zombie D=uninterruptible T=stopped</p>
+<p>%cpu: How much cpu this process is using</p>
+<p>%MEM: Ram used</p>
+<p>TIME+: time (total) of activity</p>
+<p>COMMAND: name of the process</p>
+<p>Specify process to drack by PID</p>
+<p>$ top -p 1</p>
+<p>isof and fuser</p>
+<p>- view files in use</p>
+<p>ISOF</p>
+<p>$ isof</p>
+<p>- shows processes that are holding a device/ file open</p>
+<p>fuser</p>
+<p>- shows info about process that is using a file</p>
+<p>$ fuser -v .</p>
+<p>- shows current directory</p>
+<p>Process Threads</p>
+<p>- used to execute the same program as processes</p>
+<p>- use isolated system resources</p>
+<p>- Threads can share resources easily</p>
+<p>- multithreaded applications may be better than multi-process</p>
+<p>$ ps m</p>
+<p>- view process threads</p>
+<p>- underneath PID is thread</p>
+<p>cpu monitoring</p>
+<p>$ uptime</p>
+<p>- load average feild</p>
+<p>- see cpu load on your system</p>
+<p>- 1, 5, and 15 minute intervals</p>
+<p>- load = average number of processes waiting to be executed by cpu</p>
+<p>$ cat /proc/cpuinfo</p>
+<p>- take into account # of cores when looking at load</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

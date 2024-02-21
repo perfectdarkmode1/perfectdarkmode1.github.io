@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>The Linux Filesystem - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/the_filesystem/index.html" rel="canonical" type="text/html" title="The Linux Filesystem - Perfect Dark Mode">
+    <link href="/linux/misc_linux/the_filesystem/index.xml" rel="alternate" type="application/rss+xml" title="The Linux Filesystem - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/the_filesystem/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">The Linux Filesystem</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="the-linux-filesystem">The Linux Filesystem</h1>
+
+<p>Filesystem Hierarchy</p>
+<p>$ ls -l /</p>
+<p>/ - The root directory of the entire filesystem hierarchy, everything is nested under this directory.</p>
+<p>/bin - Essential ready-to-run programs (binaries), includes the most basic commands such as ls and cp.</p>
+<p>/boot - Contains kernal boot loader files.</p>
+<p>/dev - Device files.</p>
+<p>/etc - Core system configuration directory, should hold only configuration files and not any binaries.</p>
+<p>/home - Personal directories for users</p>
+<p>/lib - Holds library files that binaries can use.</p>
+<p>/media - Used as an attachment point for removable media like USB drives.</p>
+<p>/mnt - Temporarily mounted filesystems</p>
+<p>/opt - Optional application software packages.</p>
+<p>/proc - info about currently running processes</p>
+<p>/root - The root user&rsquo;s home directory</p>
+<p>/run - information about the running system since the last boot.</p>
+<p>/sbin - Contains essential system binaries, usually can only be ran by root.</p>
+<p>/srv - Site-specific data which are served by the system.</p>
+<p>/tmp - Storage for temporary files</p>
+<p>/usr - Meant for user installed software and utilities. Inside this directory are sub directories for /usr/bin, /usr/local, etc.</p>
+<p>/var - Variable directory, used for system logging, user tracking, caches, etc. Things that are subject to change all the time.</p>
+<p>Filesystem Types</p>
+<p>Virtual File System (VFS) abstraction layer.</p>
+<p>The layer between appllications and the different file system types.</p>
+<p>Journaling</p>
+<p>Comes by default on MOST filesystem types. A log file that keeps track of what you are doing when moving files. Will keep track of where you left off in case the system loses power.</p>
+<p>Common Desktop Filesystem types</p>
+<p>ext4 - This is the most current version of native Linux filesystems. Compatible with the older ext2 and ext3 versions. Supports disk volumes up to 1 exabyte and file sizes up yo 16 terabytes and more. Standard choice for Linux filesystems.</p>
+<p>Btrfs - &ldquo;Better or Butter FS&rdquo; it is a new filesystem for Linux that comes with snapshots, incremental backups, performance increase and much more. It is widely available, but not quite stable/ compatible yet.</p>
+<p>XFS - High performance journaling file system, great for system with large files such as media server,</p>
+<p>NTFS and FAT - Windows Filesystems</p>
+<p>HFS+ - Macintosh filesystem</p>
+<p>$ df -T</p>
+<p>reports filesystem  disk space usage and other details about your disk.</p>
+<p>Anatomy of a disk</p>
+<p>Partition table</p>
+<p>Every disk has a partition tables that shows the system how the disk is partitioned. It shows how partitions begin and end, which partitions are bootable, what sectors of the disk are allocated to what partition, etc. There are two main partition tables schemes used, Master Boot Record (MBR) and GUID Partition Table (GAPT)</p>
+<p>Partition</p>
+<p>Partitions can&rsquo;t overlap each other. Free space is disk space that is not allocated to a partition.</p>
+<p>MBR</p>
+<p>- Traditional partition table</p>
+<p>- Can have primary, extended, and logical partitions</p>
+<p>- MBR has a limit of four primary partitions</p>
+<p>- Additional partitions can be made by making a primary partition into an extended partition (there can only be one extended partition on a disk). Then inside the extended partition you add logical partitions.</p>
+<p>- Supports disks up to 2 Terabytes.</p>
+<p>GPT</p>
+<p>- GUID Partition Table (GPT) is becoming the new standard for disk partitioning.</p>
+<p>- Has only one type of partition and you can make many of them.</p>
+<p>- Used mostly in conjunction with UEFI based booting</p>
+<p>Filesystem structure</p>
+<p>Boot block</p>
+<p>Located int the first few sectors of the filesystem. It is not really used by the filesystem. It contains information used to boot the operating system. Only one boot block is needed by the operating system. There are unused boot blocks in partitions that don&rsquo;t have boot info.</p>
+<p>Super block</p>
+<p>A single block that comes after the boot block that contains info about the filesystem. Info includes the size of the inode table, size of logical blocks , and size of the filesystem.</p>
+<p>Inode table</p>
+<p>The database that manages files. Each file or directory has a unique entry in the inode table and it has various info about the file.</p>
+<p>Data blocks</p>
+<p>The actual data for the files and directories.</p>
+<p>$ sudo  parted -l</p>
+<p>to view a partition table</p>
+<dl>
+<dt>Disk /dev/sda: 21. 5GB</dt>
+<dt>Sector size (logical/phystcal)</dt>
+<dt>Partition Table: msdos</dt>
+<dt>Disk Flags:</dt>
+<dt>Number start</dt>
+<dt>1049kB</dt>
+<dt>539MB</dt>
+<dt>539MB</dt>
+<dt>End</dt>
+<dt>538MB</dt>
+<dt>21.5GB</dt>
+<dt>21.5GB</dt>
+<dt>size</dt>
+<dt>537MB</dt>
+<dt>20 .9GB</dt>
+<dt>20 .9GB</dt>
+<dd>51281512B
+T ype
+primary
+extended
+Logical
+File system
+fa t32
+Flags
+boot &ldquo;&gt;</dd>
+</dl>
+<p>( MBR example )</p>
+<p>Disk Partitioning</p>
+<p>Tools to partition a disk</p>
+<p>fdisk - basic command-line partitioning tool, it does not support GPT</p>
+<p>parted - command line tool that supports both MBR and GPT partitioning</p>
+<p>gparted - GUI version of parted</p>
+<p>gdisk - fdisk, but only supports GPT</p>
+<p>$ sudo parted</p>
+<p>Enters the parted tool</p>
+<p>select /dev/sdb2</p>
+<p>selects the device</p>
+<p>mkpart primary 123 4567</p>
+<p>to make the partition</p>
+<p>$ resize 2 1234 3456</p>
+<p>to resize a partition. Select the partition number and then start and end points of where you want to resize it to.</p>
+<p>Creating filesystems</p>
+<p>$ sudo mkfs -t ext4 /dev/sdb2</p>
+<p>Allows you to specify the type of filesystem and where it goes. You only want to create a filesystem on a newly partitioned disk or if you are repartitioning an old one. (Otherwise it will probably get corrupted.</p>
+<p>Mount and umount</p>
+<p>A new filesystem must be mounted before you can view its contents. You want to mount it to a mount point.</p>
+<p>What you need:</p>
+<ul>
+<li>Device Location</li>
+<li>Filesystem type</li>
+<li>Mount point</li>
+</ul>
+<p>Mount Point = Directory that the filesystem attaches to:</p>
+<p>Mount filesystem</p>
+<p>$ sudo mount -t ext4 /dev/sdb2 /mydrive</p>
+<p>Unmount</p>
+<p>$ sudo umount /mydrive</p>
+<p>Or</p>
+<p>$ sudo umount /dev/sdb2</p>
+<ul>
+<li>Kernel names devices in the order it finds them</li>
+<li>Device name could change after you mount it</li>
+<li>You can use the devices UUID to identify it instead of a name</li>
+</ul>
+<p>View UUIDs for block devices (device name, UUID, filesystem type</p>
+<p>$ sudo blkid</p>
+<p>Mount w/ UUID</p>
+<p>$ sudo mount UUID=(insert ID here) /my drive</p>
+<ul>
+<li>Secondary hard drives must be mounted by UUID</li>
+</ul>
+<p>/etc/fstab (&ldquo;eff es tab&rdquo;) (filesystem table)</p>
+<ul>
+<li>List of mounted filesystems</li>
+</ul>
+<p>Show contents of /etc/fstab (UUID, mount point, filesystem type, options dump, pass)</p>
+<p>$ cat /etc/fstab</p>
+<p>Dump = used by dumb utility to decide when to take a backup (default is 0)</p>
+<p>Pass = used by fsck to decide what order to check filesystems - value of 0 will not be checked</p>
+<ul>
+<li>You can add an entry manually by editing the file syntax matching other entries</li>
+</ul>
+<p>SWAP</p>
+<ul>
+<li>Storage if you are low on memory</li>
+<li>Space for idle processes to go to make room in RAM</li>
+<li>Allocate twice as much swap as memory (usually)</li>
+</ul>
+<p>Steps to use a partition as swap space:</p>
+<ol>
+<li>Use an empty partition</li>
+<li>Initialize swap areas</li>
+</ol>
+<p>$ mkswap /dev/sdb2</p>
+<ol>
+<li>Enable swap device</li>
+</ol>
+<p>$ swapon  /sdb2/dev</p>
+<ol>
+<li>
+<p>Add entry to /etc/fstab (so this swap partition persists on bootup)</p>
+</li>
+<li>
+<p>Use &ldquo;sw&rdquo; for filesystem type</p>
+</li>
+</ol>
+<p>Remove swap</p>
+<p>$ swapoff /dev/sdb2</p>
+<p>Disk Usage</p>
+<p>Show filesystem utilization (disk free)</p>
+<p>$ df -h</p>
+<ul>
+<li>-h = human readable</li>
+<li>shows current directory</li>
+</ul>
+<p>Show filesystem (disk usage)</p>
+<p>$ du -h</p>
+<ul>
+<li>See what files are taking up space in the current directory</li>
+</ul>
+<p>Show disk usage for root</p>
+<p>$ du -h /</p>
+<p>Filesystem Repair</p>
+<ul>
+<li>Sudden shutdowns can corrupt data</li>
+</ul>
+<p>Filesystem check (fsck)</p>
+<ul>
+<li>Check consistency of a filesystem</li>
+<li>Attempt to repair filesystem</li>
+<li>Ran before disk is mounted on boot</li>
+</ul>
+<p>Run fsck Manually (from a rescue disk because filesystem being checked cannot be mounted)</p>
+<p>$ sudo fsck /dev/sda</p>
+<p>Inodes (Index Nodes)</p>
+<p>The Filesystem</p>
+<p>Inodes (Index Nodes)</p>
+<p>Inode Table: database that manages files in the filesystem</p>
+<p>Inode: Entry in the inode table that describes each file (1 Inode for each file)</p>
+<p>Every # must be unique</p>
+<p>cannot be referenced across different filesystems</p>
+<p>Contains:</p>
+<p>filetype</p>
+<p>- regular</p>
+<p>- directory</p>
+<p>- Character device</p>
+<p>- etc.</p>
+<p>owner</p>
+<p>group</p>
+<p>Access Permissions</p>
+<p>Timestamps</p>
+<p>- mtime (time last modified)</p>
+<p>- ctime (attribute change)</p>
+<p>- atime (last access)</p>
+<p># of hardlinks</p>
+<p>File Sizw</p>
+<p># of blocks</p>
+<p>Pointers to data blocks (important)</p>
+<p>Does not contain the filename or the file itself</p>
+<p>When inodes are created</p>
+<p>Space for inodes is allocated when the filesystem is created</p>
+<p>Algorithm determines amount of space needed</p>
+<p>out of inode space errors can occur</p>
+<p>View inodes/ how many are left:</p>
+<p>$ df -i</p>
+<p>Inode Information</p>
+<p>Identified by numbers</p>
+<p>files get inode number when they are created</p>
+<p>numbers are assigned in sequential order</p>
+<p>numbers are reused after the old inode is deleted</p>
+<p>view inode numbers</p>
+<p>$ls -li</p>
+<p>View detailed info about file and the inode</p>
+<p>$stat ~/Desktop/</p>
+<p>How Inodes locate files</p>
+<p>point to files in the data blocks</p>
+<p>usually contain 15 pointers</p>
+<p>13th pointer points to block containing other pointers</p>
+<p>14th pointer points to more pointers</p>
+<p>15th pointer points to more pointers</p>
+<p>1st 12 pointers can find small files quickly</p>
+<p>Symlinks (symbolic links)</p>
+<p>3rd field in ls command is link count (hard links)</p>
+<p>equivalent of windows shortcuts</p>
+<p>Hard Link= file with a link to an inode</p>
+<p>Create a symlink</p>
+<p>$ln -s myfile myfile4</p>
+<p>ls -li</p>
+<p>1598657 -rw-rw-r&ndash; 1 david.thomas david.thomas 7 Jul 21 14:19 myfile</p>
+<p>1581638 lrwxrwxrwx 1 david.thomas david.thomas 6 Aug 4 14:21 myfile4 -&gt; myfile</p>
+<p>New inode is created</p>
+<p>File gets modified</p>
+<p>Can be referenced accross different filesystems</p>
+<p>Hardlinks</p>
+<p>Hard link a file</p>
+<p>$ln myfile myhardlinkls</p>
+<p>Will show the same inode#</p>
+<p>Modifications to one file will change both</p>
+<p>Link count goes down when file is removed</p>
+<p>Inode gets deleted once all hardlinks are removed</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

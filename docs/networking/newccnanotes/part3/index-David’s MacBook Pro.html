@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.120.4">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="1.0 Network Fundamentals
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS within the network
+4.6 Configure and verify DHCP client and relay
+DHCP Concepts
+Four messages between the client and server (DORA): Discover: - Sent by the DHCP client to find a willing DHCP server Offer: - Sent by a DHCP server to offer to lease">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="1.0 Network Fundamentals
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS within the network
+4.6 Configure and verify DHCP client and relay
+DHCP Concepts
+Four messages between the client and server (DORA): Discover: - Sent by the DHCP client to find a willing DHCP server Offer: - Sent by a DHCP server to offer to lease">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/newccnanotes/part3/">
+    <meta property="article:section" content="Networking - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1702594242" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1702594242" rel="stylesheet">
+    <link href="/css/auto-complete.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1702594242" rel="stylesheet">
+    <link href="/css/fonts.css?1702594242" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1702594242" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1702594242" rel="stylesheet">
+    <link href="/css/theme-city2.css?1702594242" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1702594242" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1702594242" rel="stylesheet">
+    <link href="/css/print.css?1702594242" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1702594242" rel="stylesheet">
+    <script src="/js/url.js?1702594242"></script>
+    <script src="/js/variant.js?1702594242"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/newccnanotes/part3/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#system-message-logging-syslog">System Message Logging (Syslog)</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#10-nat">10 NAT</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#qos-managing-bandwidth-delay-jitter-and-loss">QoS: Managing Bandwidth, Delay, Jitter, and Loss</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#shaping-and-policing">Shaping and Policing</a></li>
+      </ul>
+    </li>
+    <li><a href="#first-hop-redundancy-protocol">First Hop Redundancy Protocol</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p>1.0 Network Fundamentals<br>
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)<br>
+4.0 IP Services<br>
+4.3 Explain the role of DHCP and DNS within the network<br>
+4.6 Configure and verify DHCP client and relay<br>
+DHCP Concepts</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Four messages between the client and server (DORA):</code></pre></div><ul>
+<li>Discover: - Sent by the DHCP client to find a willing DHCP server</li>
+<li>Offer: - Sent by a DHCP server to offer to lease<br>
+Request: - Sent by the DHCP client to ask the server to lease the IPv4 address listed in the Offer message<br>
+Acknowledgment: - Sent by the DHCP server to assign the address and to list the mask, default router, and DNS server IP addresses</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>IPv4 addresses that allow a host that has no IP address to still be able to send and receive messages on the local subnet:
+0.0.0.0: - An address reserved for use as a source IPv4 address for hosts that do not yet have an IP address.
+255.255.255.255: - The local broadcast IP address. Packets sent to this destination address are broadcast on the local data link, but routers do not forward them.</code></pre></div><ul>
+<li>
+<ul>
+<li>a client, sends a Discover message, with source IP address of 0.0.0.0Host A sends the packet to destination 255.255.255.255 router R1 will not forward this packet.
+- - assuming the DHCP client chooses to use a DHCP option called the broadcast flag; all examples in this book assume the broadcast flag is used.
+- all hosts in the subnet receive the Offer message
+- the original Discover message lists a number called the client ID□□ includes the host’s MAC address, that identifies the original host (host A in this case).As a result, host A knows that the Offer message is meant for host A, which.</li>
+</ul>
+</li>
+</ul>
+<p>Supporting DHCP for Remote Subnets with DHCP Relay</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ip helper - Watch for incoming DHCP messages, with destination IP address 255.255.255.255 - address server-ip.</code></pre></div><h1 id="7-dhcp-config">7 DHCP config</h1>
+<p>Thursday, September 30, 2021 12:17 PM</p>
+<ul>
+<li>
+<ul>
+<li>Watch for incoming DHCP messages, with destination IP address 255.255.255.255Change that packet’s source IP address to the router’s incoming interface IP address..</li>
+</ul>
+</li>
+<li>
+<p>Change that packet’s destination IP address to the address of the DHCP server (as configured in the <strong>addres</strong> scommand). <strong>ip helper-</strong></p>
+</li>
+<li>
+<p>Route the packet to the DHCP server.<br>
+the server simply reverses the source and destination IP address of the packet received from the router<br>
+(relay agent)</p>
+</li>
+<li>
+<p>the Discover message lists source IP address 172.16.1.1, so the server sends the Offer message back to destination IP address 172.16.1.1.</p>
+</li>
+<li>
+<p>the DHCP relay agent (router R1) needs to change the destination IP address, so that the real DHCP client (host A), which does not have an IP address yet, can receive and process the packet.</p>
+</li>
+<li>
+<p>Sends as broadcast back to the LAN</p>
+</li>
+<li>
+<p>for the return packet from the DHCP server</p>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>types of settings the DHCP server needs to know to support DHCP clients:</code></pre></div><ul>
+<li>Subnet ID and mask:</li>
+<li>Reserved (excluded) addresses: - which addresses in the subnet to not lease.</li>
+<li>
+<ul>
+<li>Default router(s)DNS IP address(es)<br>
+other parameters<br>
+Maximum lease time- time limit for leasing an IP address<br>
+DHCP uses three allocation modes<br>
+Dynamic allocation - the DHCP mechanisms and configuration described throughout this chapter.<br>
+automatic allocation-sets the DHCP lease time to infinite.<br>
+static allocation- preconfigures the specific IP address for a client based on the client’s MAC address.<br>
+Trivial File Transfer Protocol (TFTP) server address</li>
+</ul>
+</li>
+</ul>
+<p>Information Stored at the DHCP Server</p>
+<p>Configuring DHCP Relay<br>
+What for?&ndash; DHCP clients exist in the subnetDHCP servers do not exist in the subnet</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>(config-if)# ip helper-address address
+Show ip interface g0/0 - Helper Address is address or Helper address is not set</code></pre></div><p>Configuring a Switch as DHCP Client</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>(config-if) ip address dhcp</code></pre></div><ul>
+<li>the switch does not attempt DHCP until the interface reaches an up/up state<br>
+<strong>show interfaces</strong> - verify ip address <em>interface</em><br>
+<strong>show dhcp lease</strong> - - see the (temporarily) leased IP address and other parametersthe switch does not store the DHCP-learned IP configuration in the running-config</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>show ip default - view address of the default gateway - gateway</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>(config-if) # ip address dhcp</code></pre></div><ul>
+<li>IOS displays this route as a static route (destination 0.0.0.0/0)<br>
+To recognize this route as a DHCP&ndash; administrative distance of 1 for static routes configured with the default of 254 for default routes added because of DHCP.-learned default route, look to the administrative distance value of 254. <strong>ip route</strong> configuration command</li>
+</ul>
+<p>Configuring a Router as DHCP Client</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>To work correctly, an IPv4 host needs to know these values:</code></pre></div><ul>
+<li>
+<ul>
+<li>DNS server IP addressesDefault gateway (router) IP address</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Device’s own IP addressDevice’s own subnet mask</li>
+</ul>
+</li>
+</ul>
+<p>Host Settings for IPv</p>
+<p>Host IP Settings on Windows</p>
+<ul>
+<li>
+<ul>
+<li>lists the host’s IP routing tablethe top of the table lists a route based on the default gateway (0.0.0.0 and 0.0.0.0)</li>
+</ul>
+</li>
+<li>top of the output also lists several other routes related to having a working interface, like a route to the subnet connected to the interface.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>netstat -rn</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>the PC thinks the destination is on the local subnet (link)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>gateway of “on-link”</code></pre></div><p>Host IP Settings on macOS</p>
+<ul>
+<li>
+<ul>
+<li>does not have an /all optiondoes not list the default gateway or DNS servers</li>
+</ul>
+</li>
+<li>Shows mac address and ip address</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ifconfig</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>networksetup - Shows dhcp config, ip, subnet mask, and default gateway - getinfo Ethernet</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>networksetup - Shows dns server - getdnsservers Ethernet</code></pre></div><ul>
+<li>adds a default route to its host routing table based on the default gateway
+<ul>
+<li>output represents the default route using the word default rather than 0.0.0.0 and 0.0.0.</li>
+</ul>
+</li>
+<li>adds route to the local subnet calculated based on the IP address and mask learned with DHCP- uses the <strong>netstat -rn</strong> command to list those routes</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>some Linux distributions do not include net-tools.
+You can add netincludes ifconfig-tools to most Linux distributions.and netstat -rn.</code></pre></div><ul>
+<li>preinstalled on Linuxincludes a set of replacement commands and functions, many performed with the ip command and some</li>
+<li>
+<ul>
+<li>parameters.similar to the macOS version but also shows some interface counters.
+- shows basic addressing info
+- Shows subnet in prefix notation rather than in dotted decimal</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ipaddress</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>iproute library</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>ifconfig wlan0 - - shows l2 and l3 addressesfrom net-tools</code></pre></div><ul>
+<li>from net-tools</li>
+<li>lists a default route, but with a style that shows the destination as 0.0.0.0. - points to the default gateway as learned with DHCP:</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The bottom of the example shows the command meant to replace netstat shows a default route that references the default router, along with a route for the local subnet.-rn: ip route. Note that it also</code></pre></div><ul>
+<li>lists a route to the local subnet</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>netstat -rn</code></pre></div><p>Host IP Settings on Linux</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)</code></pre></div><ul>
+<li>notices DHCP messages that fall outside the normal use of DHCP</li>
+<li>
+<ul>
+<li>watches the DHCP messages that flow through a LAN switchbuilds a table that lists the details of legitimate DHCP flows</li>
+</ul>
+</li>
+<li>other switch features can know what legitimate DHCP leases exist for devices connected to the switch.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>DHCP Snooping</code></pre></div><ul>
+<li>helps prevent packets being redirected to an attacking host.</li>
+<li>Some ARP attacks try to convince hosts to send packets to the attacker’s device instead of the true destination.<br>
+○ checks incoming ARP messages,<br>
+○ checks those against normal ARP operation as well as<br>
+○ checks the details against other data sources, including the DHCP Snooping binding table. When the ARP message does not match the known information about the legitimate<br>
+addresses in the network, the switch filters the ARP message.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>○</code></pre></div><ul>
+<li>The switch watches ARP messages as they flow through the switch.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Dynamic ARP Inspection (DAI)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>DHCP Snooping Concepts</code></pre></div><ul>
+<li>
+<ul>
+<li>analyzes incoming messages on the specified subset of ports in a VLANnever filters non-DHCP messages</li>
+</ul>
+</li>
+<li>allow the incoming DHCP message or discard the message.</li>
+<li>operates on LAN switches and is commonly used on Layer 2 LAN switches and enabled on Layer 2 ports.</li>
+<li>
+<ul>
+<li>Client facing devices are untrustedDHCP facing devices (server, router, switch) are trusted</li>
+</ul>
+</li>
+<li>works first on all ports in a VLAN, but with each port being trusted or untrusted by DHCP Snooping<br>
+the rules differentiate between messages normally sent by servers (like DHCPOFFER and<br>
+DHCPACK) versus those normally sent by DHCP clients:</li>
+<li>
+<ul>
+<li>DHCP messages received on an untrusted port, for messages normally sent by a server, will always be discarded.
+<ul>
+<li>DHCP messages received on an untrusted port, as normally sent by a DHCP client, may be filtered if they appear to be part of an attack.<br>
+DHCP messages received on a trusted port will be forwarded; trusted ports do not filter<br>
+(discard) any DHCP messages.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>A Sample Attack: A Spurious DHCP Server</code></pre></div><ul>
+<li>
+<ul>
+<li>Spurious DHCP server (attacker) responds to dhcp message by a client pcattacker replies with false dhcp information by naming itself as the default gateway</li>
+</ul>
+</li>
+</ul>
+<h1 id="8-dhcp-snooping-and-arp-inspection">8 DHCP Snooping and ARP Inspection</h1>
+<p>Friday, October 1, 2021 11:13 AM</p>
+<ul>
+<li>attacker replies with false dhcp information by naming itself as the default gatewayPc1 send all messages to another network to attacker, becoming a man-in-the-middle<br>
+attack (pc2 could forward the messages to the actual default gateway</li>
+<li>the legitimate DHCP also returns a DHCPOFFER message to host PC1, but most hosts use the<br>
+first received DHCPOFFER, and the attacker will likely be first in this scenario.</li>
+</ul>
+<p>DHCP Snooping Logic</p>
+<ul>
+<li>stops attacks by making ports untrusted</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>▪ client can tell the DHCP server it no longer needs the address, releasing it back to the DHCP server</code></pre></div><ul>
+<li>DHCP RELEASE</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>▪ turn down the use of an IP address during the normal DORA flow on messages.</code></pre></div><ul>
+<li>DHCP DECLINE</li>
+<li>DHCP clients also use the DHCP RELEASE and DHCP DECLINE messages.</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>DHCP Snooping rules:</code></pre></div><ul>
+<li>
+<ul>
+<li>Examine all incoming DHCP messages.If normally sent by servers, discard the message.</li>
+</ul>
+</li>
+<li>If normally sent by clients, filter as follows:
+<ul>
+<li>check for MAC address consistency between the Ethernet frame and the DHCP message.</li>
+</ul>
+</li>
+<li>DISCOVER and REQUEST</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>check the incoming interface plus IP address versus the DHCP Snooping binding
+table.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>RELEASE or DECLINE -</code></pre></div><ul>
+<li>FSnooping binding table.or messages not filtered that result in a DHCP lease, build a new entry to the DHCP</li>
+</ul>
+<p>DHCP snooping checking MAC Address</p>
+<ul>
+<li>
+<p>Source MAC address included in DISCOVER message</p>
+</li>
+<li>
+<p>frame encapsulating the dhcp message also includes the source mac address</p>
+<ul>
+<li>if not the packet is dropped</li>
+</ul>
+</li>
+<li>
+<p>DHCP Snooping checks to make sure those values match.</p>
+</li>
+<li>
+<p>Used on untrusted ports</p>
+</li>
+<li>
+<p>chaddr (client hardware address)</p>
+</li>
+<li>
+<p>stops attacker from leasing all available addresses so no other client can get a lease<br>
+Filtering Messages that Release IP Addresses</p>
+</li>
+<li>
+<p>creates entry for all legitimate DHCP entriesDHCP Snooping, and other features like Dynamic ARP Inspection, can use the table to make<br>
+decisions.</p>
+</li>
+<li>
+<ul>
+<li>MACIP</li>
+</ul>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>DHCP Snooping Binding Table:</p>
+</li>
+<li>
+<p>DHCP Snooping binding table</p>
+</li>
+<li>
+<ul>
+<li>VLANINTERFACE</li>
+</ul>
+</li>
+<li>
+<p>attacker pretends his source IP is the legitimate IP trying to RELEASE</p>
+</li>
+<li>
+<p>the source interface in the DHCP Snooping Binding Table does not match so dhcp snooping bloacks the request</p>
+</li>
+<li>
+<p>attacker could RELEASE an address that is not his and attempt steal it for himself</p>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>checks client-sent messages like RELEASE and DECLINE that would cause the DHCP server to be
+allowed to release an address</code></pre></div><p>DHCP Snooping Configuration</p>
+<ul>
+<li><strong>ip dhcp snooping</strong></li>
+<li>enable DHCP Snooping</li>
+<li><strong>ip dhcp snooping vlan</strong> <em>vlan-id</em></li>
+<li>list the VLANs on which to use DHCP Snooping</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Required:</code></pre></div><ul>
+<li>default is untrusted.</li>
+<li><strong>(config-if) # ip dhcp snooping trust</strong></li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Often used:- configure trusted ports</code></pre></div><p>DHCP Snooping verification<br>
+<strong>show ip dhcp snooping</strong></p>
+<ul>
+<li>enabled or disabled</li>
+<li>
+<ul>
+<li>
+<p>operational in which vlanstrusted interfaces
+- (enabled by default)<br>
+<strong>no ip dhcp information option</strong> - (because this switch is not a dhcp relay agent)command is configured</p>
+<pre><code>- DHCP relay agents add option 82 DHCP header fields (RFC 3046)
+- - If enabled on a non relay agent then dhcp stops working for end usersThe switch sets fields in the DHCP messages as if it were a DHCP relay agent
+- changes to those messages cause most DHCP servers (and most DHCP relay agents) to ignore the received DHCP messages.
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Insertion of option 82 is disabled</li>
+<li>Rate limit on each interface</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Shows actual dhcp snooping binding table</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Show ip dhcp snooping binding</code></pre></div><p>DHCP Rate Limiting</p>
+<ul>
+<li>
+<p>attacker generates large volumes of DHCP messages to overload the DHCP Snooping feature and the switch CPU itself</p>
+<ul>
+<li>optional feature that tracks the number of incoming DHCP messages.
+<ul>
+<li>port changes to an err-disabled state.</li>
+</ul>
+</li>
+<li>If the number of incoming DHCP messages exceeds that limit over a one-second period:
+<ul>
+<li>can be on both on trusted and untrusted interfaces.</li>
+</ul>
+</li>
+<li>Default of no rate limit</li>
+</ul>
+</li>
+<li>
+<p>Default of no rate limit</p>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>(config-int) # ip dhcp snooping rate limit number
+errdisable recovery cause dhcp - recover from errdisable if caused by dhcp snooping - rate-limit
+errdisable recovery interval - seconds to wait before recovering number
+(config-int) # no ip dhcp snooping rate limit</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>how to enable DHCP Snooping rate limits and err-disabled recovery.</code></pre></div><p>Dynamic ARP Inspection (DAI)<br>
+examines incoming ARP messages on untrusted ports to filter those it believes to be part of an<br>
+attack.</p>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>DHCP Snooping binding tableconfigured ARP ACLs.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>compares incoming ARP messages with two sources of data:</li>
+<li>If the incoming ARP message does not match the tables in the switch, the switch discards the ARP message.</li>
+</ul>
+<p>DAI Concepts<br>
+gratuitous ARP (arp reply)triggers hosts to add incorrect ARP entries to their ARP tables.—</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Both hosts learn the other host’s MAC address with this twolearn R2’s MAC address based on the ARP reply (message 2), but router R2 learns PC1’s IP and -message flow. Not only does PC
+MAC address because of the ARP request (message 1).</code></pre></div><ul>
+<li>source mac</li>
+<li>destination mac (broadcast)</li>
+<li>Ethernet Frame</li>
+<li>
+<ul>
+<li>Origin IPTarget IP</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Origin MACTarget MAC ??</li>
+</ul>
+</li>
+<li>ARP</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ARP Request</code></pre></div><ul>
+<li>
+<ul>
+<li>Source MACDest. MAC</li>
+</ul>
+</li>
+<li>Ethernet Frame</li>
+<li>
+<ul>
+<li>Origin IPTarget IP</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Origin MACTarget MAC</li>
+</ul>
+</li>
+<li>ARP</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ARP Reply</code></pre></div><p>Review of Normal IP ARP</p>
+<p>Gratuitous ARP as an Attack Vector</p>
+<ul>
+<li>when a host changes its MAC address it can send a gratuitous ARP message with these features:
+<ul>
+<li>ARP reply.</li>
+<li>sent without having first received an ARP request.sent to an Ethernet destination broadcast address so that all hosts in the subnet receive the</li>
+<li>message.</li>
+<li>attacker uses gratuitous arp to make replies go back to it instead of original host</li>
+</ul>
+</li>
+<li>could be part of a man-in-the-middle attack</li>
+</ul>
+<p>Dynamic ARP Inspection Logic</p>
+<ul>
+<li>
+<p>Host does not need arp if it doesn&rsquo;t have an IP yet</p>
+</li>
+<li>
+<p>Once DHCP assigns and IP then ARP is usedfor untrusted interfaces DAI confirms an ARP’s correctness based on the DHCP Snooping Binding<br>
+table</p>
+</li>
+<li>
+<p>compares origin MAC and IP</p>
+</li>
+<li>
+<ul>
+<li>if not found on the table, discard the arpsame trusted and untrusted rules as dhcp snooping
+- statically configured
+- list correct pairs of IP and mac addressesUseful for ip addresses configured statically because they will not be in the dhcp snooping<br>
+binding table</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ARP ACL</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>DAI can check Ethernet header and arp source and destination messages mac addresses to make
+sure they match</code></pre></div><ul>
+<li>
+<p>DAI can also check Messages with unexpected IP addresses in the two ARP IP address fields</p>
+<ul>
+<li>DAI itself can be more susceptible to DoS attacks.</li>
+<li>attacker could generate large numbers of ARP messages, driving up CPU usage in the switch.<br>
+DAI can avoid these problems through rate limiting the number of ARP messages on a port<br>
+over time.</li>
+</ul>
+</li>
+<li>
+<p>does its work in the switch CPU rather than in the switch ASIC</p>
+</li>
+</ul>
+<p>Configuring ARP Inspection on a Layer 2 Switch<br>
+decisions include the following:</p>
+<ul>
+<li>Choose whether to rely on DHCP Snooping, ARP ACLs, or both.</li>
+<li>
+<ul>
+<li>If using DHCP Snooping, configure it and make the correct ports trusted for DHCP Snooping.Choose the VLAN(s) on which to enable DAI.</li>
+</ul>
+</li>
+<li>Make DAI trusted (rather than theVLANs, typically for the same ports you trusted for DHCP Snooping.default setting of untrusted) on select ports in those<br>
+<strong>ip arp inspection vlan</strong> - enable arp DAI on that vlan <em>vlan-id</em><br>
+<strong>(config</strong> - dhcp snooping should be enabled or DAI will filter all packets <strong>- if)# ip arp inspection trust<br>
+ip dhcp snoopingip dhcp snooping vlan</strong> <em>vlan-id</em><br>
+<strong>ip dhcp snooping trust</strong></li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ip dhcp snooping trust (configure arp ACLs)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>gives both -- forwarded, dropped, dhcp drops, acl drop countsIs logging enabled?configuration settings along with status variables and counters</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>show ip arp inspection -</code></pre></div><ul>
+<li>counts per vlan- forwarded, dropped, dhcp drops, acl drops</li>
+<li>permits</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>show ip arp inspection statistics</code></pre></div><p>ARP Rate Limiting</p>
+<ul>
+<li>(trusted and untrusted)</li>
+<li>Default for all interfaces</li>
+<li>
+<ul>
+<li>x ARP messages over y seconds”(DHCP Snooping does not define a burst setting)</li>
+</ul>
+</li>
+<li>optional configuration</li>
+<li>8 messages in a burst of 4 seconds</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ip arp inspection limit rate 8 burst interval 4</code></pre></div><ul>
+<li>default of 15 messages over a one second burst<br>
+<strong>show ip arp inspection interfaces</strong> - rate, burst interval, trust state, per interface</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>burst interval (a number of seconds)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>ip arp inspection limit rate number</code></pre></div><ul>
+<li>disable rate limiting</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ip arp inspection limit rate none</code></pre></div><p><strong>errdisable recovery cause arperrdisable recovery interval</strong> <em>30</em> <strong>- inspection</strong></p>
+<p>Configuring Optional DAI Message Checks</p>
+<ul>
+<li>one, two, or all three of the options</li>
+<li>
+<ul>
+<li>command with overrides previous versions of the same command <strong>show ip arp inspection</strong> to validate</li>
+</ul>
+</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ip arp inspection validate {dst-mac, ip, src-mac}</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>drop ARP packets the body of the ARP packets do not match the addresses specified in the Ethernet header.when the IP addresses in the packets are invalid or when the MAC addresses in
+Forin the ARP body. This check is src-mac, check the source MAC address in the Ethernet header against the sender MAC address performed on both ARP requests and responses. When enabled,
+packets with different MAC addresses are classified as invalid and are dropped.</code></pre></div><ul>
+<li>Foraddress in ARP body. This check isdst-mac, check the destination MAC address in the Ethernet header against the target MAC performed for ARP responses.When enabled, packets with<br>
+different MAC addresses are classified as invalid and are dropped.</li>
+<li>For255.255.255.255, and all IP multicast addresses. ip, check the ARP body for invalid and unexpected IP addresses. Addresses include 0.0.0.0, Sender IP addresses are checked in all ARP<br>
+requests and responses, and target IP addresses are checked only in ARP responses</li>
+</ul>
+<div class="wrap-code highlight"><pre tabindex="0"><code>2.0 Network Access
+2.3 Configure and verify Layer 2 discovery protocols (Cisco Discovery Protocol and LLDP)
+4.0 IP Services
+4.2 Configure and verify NTP operating in a client and server mode
+4.5 Describe the use of syslog features including facilities and levels</code></pre></div><h2 id="system-message-logging-syslog">System Message Logging (Syslog)</h2>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Sending Messages in Real Time to Current Users</code></pre></div><ul>
+<li>Telnet and SSH users, the device requires a two-step process before the user sees the messages.<br>
+global configuration setting—logging monitor—tells IOS to enable the sending of log<br>
+messages to all logged users.</li>
+</ul>
+<p>must also issue theterminal monitorEXEC command during the login session, which tells<br>
+IOS that this terminal session would like to receive log messages.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Storing Log Messages for Later Review
+two primary means to keep a copy</code></pre></div><ul>
+<li>can configuration command.store copies of the log messages in RAMby virtue of the <strong>logging buffered</strong> global<br>
+any user can come back later and see the old log messagesby using the <strong>show</strong><br>
+<strong>logging EXEC command.</strong><br>
+store log messages centrally to a syslog server.<br>
+syslog protocol - a UDP protocol to send messages to a syslog server for storage<br>
+To configure a router or switch to send log messages to a syslog server, add the</li>
+</ul>
+<h1 id="9-device-management-protocols">9 Device Management Protocols</h1>
+<p>Monday, October 4, 2021 2:02 PM</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>To configure a router or switch to logging host {address | hostname } send log messages to a syslog serverglobal command , add the</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>*Dec 18 17:10:15.079: %LINEPROTOchanged state to down - 5 - UPDOWN: Line protocol on Interface FastEthernet0/0,
+A timestamp: *Dec 18 17:10:15.
+The facility on the router that generated the message : %LINEPROTO
+The severity level : 5
+A mnemonic for the message : UPDOWN
+The description of the message: Line protocol on Interface FastEthernet0/0, changed
+state to down
+you can at least toggle on and off the use of thelog message sequence number (which is not enabled by default)timestamp (which is included by default). Example 9-1 reverses those and a
+defaults by turning off timestamps and turning on sequence numbers.</code></pre></div><p>Log Message Format</p>
+<p>Log Message Severity Levels<br>
+the lower the number, the more severe the event that caused the message.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>last level in the figure is used for messages requested by the debug command
+Table 9severity level for each type.-2 summarizes the configuration commands used to enable logging and to set the
+For example, the command logging console 4 causes IOS to send severity level 0the console –4 messages to</code></pre></div><p>Configuring and Verifying System Logging</p>
+<p>the example configures the same message level at the console and for terminal monitoring<br>
+(level 7, or debug), and the same level for both buffered and logging to the syslog server (level 4, or warning). The levels may be set using the numeric severity level or the name as<br>
+shown earlier in Figure 9-3.<br>
+<strong>show logging</strong> messages per the logging buffered configuration.commandconfirms those same configuration settings and also lists the log</p>
+<p>If any log messages had been buffered, the actual log messages would be listed at<br>
+the end of the command<br>
+clear out the old messages from the log with the <strong>clear logging</strong> EXEC command.</p>
+<p>The debug Command and Log Messages<br>
+<strong>debug</strong> internal events, with that monitoring process continuing over time, so that IOS can issue log EXEC command gives the network engineer a way to ask IOS to monitor for certain<br>
+messages when those events occur<br>
+debug remains active until some user issues the <strong>no debug command</strong> with the same parameters,<br>
+disabling the debug.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>anyone logged in with SSH at the time Example 9the output, even with the logging monitor debug - 4’s output was gathered would not have seen command configured on router R1, without
+first issuing a terminal monitor command.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>all enabled debug options use router CPU, which can cause problems for the router. You can
+monitor CPU use withtheshow process cpucommand
+use caution when using debug commands carefully on production devices.
+the more CLI users that receive debug messages, the more CPU that is consumed.</code></pre></div><h4 id="network-time-protocol-ntp">Network Time Protocol (NTP)</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Devices send timestamps to each other with NTP messages, continually exchanging messages, with one device changing its clock to match the other, eventually synchronizing the clocks.
+How NTP defines the sources of time data (stratum). (reference clocks) andhow good each time source is</code></pre></div><p><strong>Setting the Time and Timezone</strong><br>
+NTP works best if you set the device clock to a reasonably close time before enabling the NTP<br>
+client functionwith the <strong>ntp server</strong> command<br>
+I shouldset the time to 8:52 p.m., set the correct date and timezone, and even tell the device to<br>
+adjust for daylight savings time—and then enable NTP<br>
+Example 9-7 shows how to set the date, time, timezone, and daylight savings time.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>You should set the first two commands before setting the time of day with the EXEC command because the two configuration commands impact the time that is set. clock set
+chose EDT because it is the acronym for daylight savings time in that same EST time zone.
+Finally, thehour automatically over the years.recurring keyword tells the router to spring forward an hour and fall back an
+clock set EXEC command
+uses a time syntax with a 24-hour format, not with a 12-hour format plus a.m./p.m.).</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>uses a time syntax with a 24-hour format, not with a 12-hour format plus a.m./p.m.).
+The EDT, rather than UTC time. show clock command (issued seconds later)lists that time, but also notes the time as</code></pre></div><p><strong>Basic NTP Configuration</strong><br>
+two ntp configuration commands<br>
+<strong>ntp master {stratum</strong> not as an NTP client. The device gets its time information from the internal clock on the <strong>- level}:</strong> NTP server mode—the device acts only as an NTP server, and<br>
+device.<br>
+<strong>ntp server {address | hostname}</strong> : NTP client/server mode—the device acts as both client<br>
+and serversynchronized, the device can then act as an NTP server, to supply time to other NTP. First, it acts as an NTP client, to synchronize time with a server. Once<br>
+clients.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>show ntp status command</code></pre></div><p><strong>show ntp status</strong> command<br>
+lists a status of synchronizedchanging its time to match the server’s time. , which confirms the NTP client has completed the process of Any router acting as an NTP client will list<br>
+“unsynchronized” in that first line until the NTP synchronization process completes with at least one server. It also confirms the IP address of the server—this device’s reference<br>
+clock—with the IP address configured in Example 9-8 (172.16.2.2).</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>show ntp associations
+lists all the NTP servers that the local device can attempt to use, with status information
+about the association between the local device (client) and the various NTP servers.</code></pre></div><h6 id="ntp-reference-clock-and-stratum">NTP Reference Clock and Stratum</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Devices that act solely as an NTP server get their time from either internal device hardware or from some external clock using mechanisms other than NTP.
+NTP servers and clients use a number to show the perceived accuracy of their reference clock data based on stratum level. The lower the stratum level, the more accurate the reference clock
+is considered to be.sets its own stratum level. Then,An NTP server that uses its internal hardware or external reference clock an NTP client adds 1 to the stratum level it learns from its NTP
+server, so that the stratum level increases the more hops away from the original clock source.
+For instance, back in Figure 9which references R3, adds 1 so it has a stratum of 3. R1 uses R2 as its NTP server, so R1 adds 1 to -5, you can see the NTP primary server (R3) with a stratum of 2. R2,
+have a stratum of 4. These increasing stratum levels allow devices to refer to several NTP servers
+and then use time information from the best NTP server, best being the server with the lowest stratum level.
+Routers and switches use the default stratum level of 8 for their internal reference clock based
+on the default setting of 8 for the stratum level in the command allows you to set a value from 1 through 15 ntp master [stratum ; in Example 9-8, the - ntp master 2level] command. The
+command set router R3’s stratum level to 2.
+Note
+NTP considers 15 to be the highest useful stratum level, so any devices that calculate their
+stratum as 16 consider the time data unusable and do not trust the time. So, avoid setting higher stratum values on the ntp master command.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>stratum values on the ntp master command.</code></pre></div><h6 id="redundant-ntp-configuration">Redundant NTP Configuration</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>an enterprise could use NTP to reference NTP servers that use an atomic clock as their reference source, like the NTP primary servers in Figure 9-6, which happen to be run by the US National
+Institute of Standards and Technology (NIST) (see tf.nist.gov).</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>AnNTP primary server acts only as a server, with a reference clock external to the device,
+and has a stratum level of 1secondary servers are servers that use client/server mode as described throughout this , like the two NTP primary servers shown in Figure 9-6.NTP
+section, relying on synchronization with some other NTP server.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>NTP primary server and NTP secondary server.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>After losing their reference clock, R1 and R2 could no longer be useful NTP servers to the rest of the enterprise.
+To overcome this potential issue, the routers can also be configured with the ntp master
+command, resulting in this logic:
+Establish an association with the NTP servers per thentp server command.
+Establish an association with your internal clock using the ntp master stratum command.
+Set the stratum level of the internal clock (per thea higher (worse) stratum level than the Internet-based NTP servers.ntp master {stratum-level} command) to
+Synchronize with the best (lowest) known time source, which will be one of the Internet NTP servers in this scenario
+ntp master 7 command, with a much higher stratum,</code></pre></div><h6 id="ntp-using-a-loopback-interface-for-better-availability">NTP Using a Loopback Interface for Better Availability</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>what happens when one interface on R4 fails
+for any NTP clients that had referred to that specific IP address
+There would likely still be a route to reach R4 itself.
+The NTP client would not be able to send packets to the configured address because that interface is down.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>loopback interface to meet that exact need
+once configured, it remains in an up/up state as long as
+Key Topic.The router remains up.
+You do not issue a shutdown command on that loopback interface.</code></pre></div><h4 id="analyzing-topology-using-cdp-and-lldp">Analyzing Topology Using CDP and LLDP</h4>
+<h6 id="examining-information-learned-by-cdp">Examining Information Learned by CDP</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Cisco-proprietary
+Layer 2 protocol
+does not rely on a working Layer 3 protocol</code></pre></div><p>does not rely on a working Layer 3 protocol<br>
+Devices that support CDP learn information about others by listening for the advertisements sent by other devices.</p>
+<p>CDP discovers several useful details from the neighboring Cisco devices:</p>
+<p><strong>Device identifier</strong> : Typically the host name<br>
+<strong>Address list:</strong> Network and data-link addresses<br>
+<strong>Port identifier:</strong> link that sent the CDP advertisementThe interface on the remote router or switch on the other end of the<br>
+<strong>Capabilities list</strong> : Information on what type of device it is (for example, a router or a<br>
+switch)<br>
+<strong>Platform</strong> : The model and OS level running on the device<br>
+Cisco IP Phones use CDP to learn the data and voice VLAN IDs as configured on the access<br>
+switch.</p>
+<p>routers and switches support the same CDP commands, with the same parameters and<br>
+same types of output.</p>
+<p>To ensure all devices receive a CDP message, tdestination MAC address (0100.0CCC.CCCC). he Ethernet header uses a multicast</p>
+<p>the device processes the message and then discards it, rather than forwarding it<br>
+<strong>show cdp neighbors detail</strong><br>
+lists the full name of the switch model (WSconfigured on the neighboring device. -2960XR-24TS-I) and the IP address</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The show cdp entry name command lists the exact same details shown in the output of
+the command. show cdp neighbors detail command, but for only the one neighbor listed in the
+Cisco recommends that CDP be disabled on any interface that might not have a need for CDP. For switches, any switch port connected to another switch, a router, or to an IP
+phone should use CDP.</code></pre></div><h6 id="configuring-and-verifying-cdp">Configuring and Verifying CDP</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>IOS typically enables CDP globally and on each interface by defaultinterface with the no cdp enable interface subcommand. You can then disable CDP per
+re-enable it with the cdp enable interface subcommand
+disable and re-enable CDP globally on the device
+no cdp run and cdp run global commands</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>send time and the hold time. CDP sends messages every 60 seconds by default, with a hold time
+of 180 seconds.device before removing those details from the CDP tables. You can override the defaults with The hold time tells the device how long to wait after no longer hearing from a
+the cdp timer seconds and cdp holdtime seconds global commands, respectively.</code></pre></div><h4 id="examining-information-learned-by-lldp">Examining Information Learned by LLDP</h4>
+<p>the LLDP output in the example does differ from CDP in a few important ways:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>LLDP uses B as the capability code for switching, referring to bridgetype that existed before switches that performed the same basic functions., a term for the device
+LLDP does not identify IGMP as a capability, while CDP does (I).
+CDP lists the neighbor’s platform, a code that defines the device type, while LLDP does not.
+LLDP lists capabilities with different conventions (see upcoming Example 9-19).</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>System Capabilities : What the device can do
+Enabled Capabilities : What the device does now with its current configuration
+LLDP uses the same messaging concepts as CDP, encapsulating messages directly in dataheaders. Devices do not forward LLDP messages so that LLDP learns only of directly connected -link
+neighbors. LLDP does use a differentmulticast MAC address(0180.C200.000E)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Cisco devices default to disable LLDP
+LLDP separates the sending and receiving of LLDP messages as separate functions.
+LLDP support processing receives LLDP messages on an interface so that the switch or router
+learns about the neighboring device while not transmitting LLDP messages to the neighboring device.
+the commands include options to toggle on|off the transmission of LLDP messages separately
+from the processing of received messages.
+[no] lldp run: A global configuration command thatsets the default mode of LLDP operationfor
+any interface that does not have more specific LLDP subcommands (lldp transmit, lldp receive). The lldp run global command enables LLDP in both directions on those interfaces, while no lldp</code></pre></div><h6 id="configuring-and-verifying-lldp">Configuring and Verifying LLDP</h6>
+<p>The lldp run global command enables LLDP in both directions on those interfaces, while no lldp run disables LLDP.</p>
+<p><strong>[no] lldp transmit</strong> : An interface sub-command that defines the operation of LLDP on the<br>
+interface subcommand causes the device to transmit LLDP messages, while no lldp transmit causes it to regardless of the global [no] lldp run command. The lldp transmit interface<br>
+not transmit LLDP messages.<br>
+<strong>[no] lldp receive</strong> :An interface subcommand that defines the operation of LLDP on the interface<br>
+regardless of the global [no] lldp run command.the device to process received LLDP messages, while no lldp receive causes it to not process The lldp receive interface subcommand causes<br>
+received LLDP messages.</p>
+<p><strong>show lldp interface</strong> lists the interfaces on which LLDP is enabled.</p>
+<p>like CDP,shows the default settings of 30 seconds for the send timer and 120 seconds for the hold timer. LLDP uses a send timer and hold timer for the same purposes as CDP.The example<br>
+You can override the defaults with the commands <strong>lldp timer seconds</strong> and <strong>lldp holdtime seconds</strong> global</p>
+<p>4.0 IP Services<br>
+4.1 Configure and verify inside source NAT using static and pools</p>
+<p>CIDR</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>most public address assignments for the last 20 years have been a CIDR block rather than an entire class A, B, or C network.</code></pre></div><p>Private Addressing</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>no organization is allowed to advertise these networks using a routing protocol on the Internet.</code></pre></div><h2 id="10-nat">10 NAT</h2>
+<p>Friday, October 8, 2021 7:12 AM</p>
+<p>Network Address Translation Concepts</p>
+<p>Static NAT<br>
+IP addresses statically mapped to each other.</p>
+<p>NAT router simply configures a oneregistered address that is used on its behalf. -to-one mapping between the private address and the</p>
+<p>Supporting a second IP host with static NAT requires a second static onesecond IP address in the public address range. -to-one mappingusing a</p>
+<p>the router statically maps 10.1.1.2 to 200.1.1.2. Because the enterprise has a single registered Class C network, it can support at most 254 private IP addresses with NAT, with the usual two<br>
+reserved numbers (the network number and network broadcast address).<br>
+inside local for the private IP addresses in this example and inside global for the public IP addresses.</p>
+<p>Dynamic NAT<br>
+Dynamic NAT sets up a pool of possible inside global addresses and defines matching criteria to determine which inside local IP addresses should be translated with NAT.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Host 10.1.1.1 sends its first packet to the server at 170.1.1.1.
+As the packet enters the NAT router, the router applies some matching logic to decide whether</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>As the packet enters the NAT router, the router applies some matching logic to decide whether the packet should have NAT applied. Because the logic has been configured to match source IP
+addresses that begin with 10.1.1, the router adds an entry in the NAT table for 10.1.1.1 as an inside local address.
+The NAT router needs to allocate an IP address from the pool of valid inside global addresses. It picks the first one available (200.1.1.1, in this case) and adds it to the NAT table to complete the
+entry.
+The NAT router translates the source IP address and forwards the packet.
+The dynamic entry stays in the table as long as traffic flows occasionally. You can configure a timeout value that defines how long the router should wait, having not translated any packets
+with that address, before removing the dynamic entry.entries from the table using the clear ip nat translation You can also * command.manually clear the dynamic
+NAT can be configured with more IP addresses in the inside local address list than in the inside global address pool.
+If a new packet arrives from yet another inside host, and it needs a NAT entry, but all the pooled IP addresses are in use, the router simply discards the packet. The user must try again until a NAT
+entry times out, at which point the NAT function works for the next host that sends a packet. Essentially, the inside global pool of addresses needs to be as large as the maximum number of
+concurrent hosts that need to use the Internet at the same timeexplained in the next section. —unless you use PAT, as is</code></pre></div><p>Overloading NAT with Port Address Translation<br>
+NAT Overload feature, also called Port Address Translation (PAT)</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The NAT router keeps a NAT table entry for every unique combination of inside local IP address and port, with translation to the inside global address and a unique port number associated with</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>and port, with translation to the inside global address and a unique port number associated with the inside global address.
+NAT overload can use more than 65,000 port numbers
+PAT is by far the most popular option</code></pre></div><h5 id="nat-configuration-and-troubleshooting">NAT Configuration and Troubleshooting</h5>
+<p>Static NAT Configuration<br>
+Each static mapping between a local (private) address and a global (public) address must be configured.<br>
+Those same interface subcommands tell NAT whether the interface is inside or outside.<br>
+Step 1. Use thebe in the inside part of the NAT design. <strong>ip nat inside</strong> command in interface configuration mode to configure interfaces to<br>
+Step 2. Use the be in the outside part of the NAT design. <strong>ip nat outside</strong> command in interface configuration mode to configure interfaces to<br>
+Step 3. Use theconfiguration mode to configure the static mappings. <strong>ip nat inside source static inside-local inside-global</strong> command in global</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>static mappings are created using the ip nat inside source static command.
+Source keyword means that NAT translates the source IP address of packets coming into its inside interfaces. The static keyword means that the parameters define a static entry, which should
+never be removed from the NAT table because of timeout.hosts—10.1.1.1 and 10.1.1.2—to have Internet access, two ip nat inside commands are needed.Because the design calls for two
+show ip nat translations The show ip nat statistics command lists the two static NAT entries created in the configuration. command lists statistics, listing things such as the number of currently
+active translation table entries. The statistics also include the number of hits, which increments for every packet for which NAT must translate addresses.</code></pre></div><p>Dynamic NAT Configuration<br>
+Dynamic NAT still requires that each interface be identified as either an inside or outside interface<br>
+Dynamic NAT uses an access control list (ACL) to identify which inside local (private) IP addresses need to have their addresses translated, and it defines a pool of registered public IP addresses to<br>
+allocate.<br>
+Step 1. Use the be in the inside part of the NAT design (just like with static NAT). <strong>ip nat inside</strong> command in interface configuration mode to configure interfaces to<br>
+Step 2. Use the be in the outside part of the NAT design (just like with static NAT). <strong>ip nat outside</strong> command in interface configuration mode to configure interfaces to<br>
+Step 3. be performed.Configure an ACL that matches the packets entering inside interfaces for which NAT should<br>
+Step 4. Use the global configuration mode to configure the pool of public registered IP addresses. <strong>ip nat pool name first-address last-address netmask subnet-mask</strong> command in</p>
+<p>Step 5. Use theconfiguration mode to enable dynamic NAT. Note the command references the ACL (step 3) and <strong>ip nat inside source list acl-number pool pool-name</strong> command in global<br>
+pool (step 4) per previous steps.</p>
+<p>“misses,” as highlighted in the example. The first occurrence of this counter counts the number of times a new packet comes along, needing a NAT entry, and not finding one.</p>
+<p>The second misses counter toward the end of the command output lists the number of misses in the pool. This counter increments only when dynamic NAT tries to allocate a new NAT table entry<br>
+and finds no available addresses</p>
+<p><strong>debug ip nat</strong> packet has its address translated for NAT.command. This debug command causes the router to issue a message every time a</p>
+<p>NAT Overload (PAT) Configuration<br>
+If PAT uses a pool of inside global addresses, the configuration looks exactly like dynamic NAT, except the ip nat inside source list global command has an <strong>overload</strong> keyword added to the end. If<br>
+PAT just needs to use one inside global IP address, the router can use one of its interface IP addresses<br>
+configuration when using an interface IP address as the sole inside global IP address:<br>
+Step 1. As with dynamic and static NAT, configure theto identify inside interfaces. <strong>ip nat inside</strong> interface sub-command<br>
+Step 2. As with dynamic and static NAT, configure theto identify outside interfaces. <strong>ip nat outside</strong> interface subcommand<br>
+Step 3. As with dynamic NAT, interfaces. configure an ACL that matches the packets entering inside<br>
+Step 4. Configure the global configuration command, referring to the ACL created in step 3 and to the interface <strong>ip nat inside source list acl-number interface type/number overload</strong><br>
+whose IP address will be used for translations.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>ip nat inside source list 1 interface serial 0/0/0 overload command has several parameters
+The matching ACL 1 have their addresses translated. The list 1 parameter means the same thing as it does for dynamic NAT: inside local IP addresses interface serial 0/0/0 parameter means that
+the only inside global IP address available is the IP address of the NAT router’s interface serial 0/0/0.
+The router creates one NAT table entry for each unique combination of inside local IP address and port</code></pre></div><p>NAT Troubleshooting<br>
+Reversed inside and outside<br>
+Static NAT: Check the address first and the inside global IP address second. <strong>ip nat inside source static</strong> command to ensure it lists the inside local</p>
+<p>address first and the inside global IP address second.<br>
+Dynamic NAT (ACL): Ensure that the ACL configured to match packets sent by the inside hosts match that host’s packets before any NAT translation has occurred.</p>
+<p>Dynamic NAT (pool): For dynamic NAT without PAT, ensure that the pool has enough IP addresses\</p>
+<p>A large or growing value in the second misses counter in thecommand output can indicate this problem. Also, compare the configured pool to the list of <strong>show ip nat statistics</strong><br>
+addresses in the NAT translation table the problem may be that the configuration intended to use PAT and is missing the overload <strong>(show ip nat translations</strong> ). Finally, if the pool is small,<br>
+keyword<br>
+PAT: It is easy to forget to add the overload option<br>
+perhaps NAT has been configured correctly, but the packets. an ACL exists on one of the interfaces, discarding</p>
+<p>IOS processes ACLs before NATafter translating the addresses with NAT.. For packets exiting an interface, IOS processes any outbound ACL</p>
+<p>User traffic required<br>
+IPv4 routing</p>
+<p>4.0 IP Services<br>
+4.7 Explain the forwarding percongestion, policing, shaping -hop behavior (PHB) for QoS such as classification, marking, queuing,</p>
+<p>QoSthan storing and forwarding a message. defines these actions as per-hop behaviors (PHBs),which isa formal term to refer to actions other</p>
+<h2 id="qos-managing-bandwidth-delay-jitter-and-loss">QoS: Managing Bandwidth, Delay, Jitter, and Loss</h2>
+<div class="wrap-code highlight"><pre tabindex="0"><code>four characteristics of network traffic:
+Bandwidth
+refers to the speed of a link, in bits per second (bps)
+helps to also think of bandwidth as the capacity of the link, in terms of how many bits can be sent over the link per second.
+Delay
+the time between sending one packet and that same packet arriving at the destination host
+Round-trip delay
+Jitter the time it takes to send one packet between two hosts and receive one back
+variation in one-way delay between consecutive packets sent by the same application
+Loss
+the number of lost messages, usually as a percentage of packets sent.
+people think of loss as something caused by faulty cabling or poor WAN services. That is one cause. However, more loss happens because of the normal operation of the
+networking devices, in which the devices’ queues get too full, so the device has nowhere to put new packets, and it discards the packet.</code></pre></div><p>Types of Traffic<br>
+Data Applications</p>
+<h1 id="11-qos">11 QoS</h1>
+<p>Friday, October 8, 2021 11:48 AM</p>
+<p>Quality of Experience (QoE) -users’ perception of their use of the application on the<br>
+network.<br>
+Voice and Video Applications<br>
+Aflowisall the data moving from one application to another over the network, with one<br>
+flow for each direction<br>
+For example, if you open a website and connect to a web server, the web page content that moves from the server to the client is one flow.<br>
+From a voice perspective, a phone call between two IP phones would create a flow for each direction<br>
+Step 1. The phone user makes a phone call and begins speaking.<br>
+Step 2. A chip called a codec processes (digitizes) the sound to create a binary code (160<br>
+bytes with the G.711 codec, for example) for a certain time period (usually 20 ms).<br>
+Step 3. The phone places the data into an IP packet.<br>
+Step 4. The phone sends the packet to the destination IP phone.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>guidelines for interactive voice:
+Delay (one-way): 150 ms or less
+Jitter: 30 ms or less
+Loss: 1% or less</code></pre></div><p>requirements for video<br>
+Bandwidth: 384 Kbps to 20+ Mbps<br>
+Delay (one-way): 200–400 ms<br>
+Jitter: 30–50 ms<br>
+Loss: 0.1%–1%<br>
+QoS as Mentioned in This Book<br>
+“Classification and Marking” is about the marking of packets and the definition of trust<br>
+boundaries.<br>
+“Queuing” describes the scheduling of packets to give one type of packet priority over another.<br>
+“Shaping and Policing” explains these two tools together because they are often used on opposite ends of a link.<br>
+“devices get too busy.Congestion Avoidance” addresses how to manage the packet loss that occurs when network</p>
+<p>Classification and Marking<br>
+a type of QoS tool that by changing some bits in specific header fieldsclassifies packets based on their header contents then marks the message<br>
+Classification Basics<br>
+QoS tools sit in the path that packets take when being forwarded through a router or switch,<br>
+much like the positioning of ACLs. Like ACLs, ACLs, QoS tools are enabled for a direction: packets entering the interface (before the QoS tools are enabled on an interface. Also like<br>
+forwarding decision) or for messages exiting the interface (after the forwarding decision).<br>
+classification refers to the process of matching the fields in a message to make a choice to<br>
+take some QoS action<br>
+QoS tools perform classification (matching of header fields) to decide which packets to take certain QoS actions against.Those actions include the other types of QoS tools discussed in<br>
+this chapter, such as queuing, shaping, policing, and so on.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Matching (Classification) Basics</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Cisco and by RFCs, suggests doing complex matching early in the life of a packet and then
+marking the packet. Marking means that the QoS tool changes one or more header fields, setting a value in the header.
+Differentiated Services Code Point (DSCP)
+a 6-bit field in the IP header meant for QoS marking</code></pre></div><p>Classification on Routers with ACLs and NBAR<br>
+many QoS tools support the ability to simply refer to an IP ACL,with this kind of logic:<br>
+For any packet matched by the ACL with a permit action, consider that packet a match for<br>
+QoS, so do a particular QoS action.<br>
+All these fields are matchable for QoS classification.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>not every classification can be easily made by matching with an ACL. In more challenging cases, Cisco Network Based Application Recognition (NBAR)can be used. NBAR is basically in
+its second major version, called NBAR2, or nextpackets for classification in a large variety of ways that are very useful for QoS.-generation NBAR. In short,NBAR2 matches
+NBAR2 looks far beyond what an ACL can examine in a message
+Cisco also organizes what NBAR can match in ways that make it easy to separate the traffic into different classes.
+you might classify WebEx traffic and give it a unique DSCP marking. NBAR provides
+easy builtof applications.-in matching ability for WebEx, plus more than 1000 different subcategories
+NBAR refers to this idea of defining the characteristics of different applications as application signatures.)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>application signatures.)</code></pre></div><p>Marking IP DSCP and Ethernet CoS<br>
+example plan<br>
+Classify all voice payload traffic that is used for business purposes as IP DSCP EF and<br>
+CoS 5.<br>
+Classify all video conferencing and other interactive video for business purposes as IP DSCP AF41 and CoS 4.<br>
+Classify all business-critical data application traffic as IP DSCP AF21 and CoS 2<br>
+Marking the IP Header<br>
+Marking a QoS field in the IP header works well with QoS because the IP header exists for the entire trip from the source host to the destination host.<br>
+IPv4 defines a Type of Service (ToS) byte in the IPv4 headerThe original RFC defined a 3-bit IP Precedence (IPP) field for QoS marking. That field , as shown in Figure 11-6.<br>
+gave us eight separate valueswhen converted to decimal are decimals 0 through 7.—binary 000, 001, 010, and so on, through 111—which</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Those last 5 bits of the ToS byte per RFC 791 were mostly defined for some purpose but were not used in practice to any significant extent.</code></pre></div><p>DSCP increased the number of marking bits to 6 bits, allowing for64 unique values<br>
+that can be marked. The DiffServ RFCs, which became RFCs back in the late 1990s, have become accepted as the most common method to use when doing QoS, and<br>
+using the DSCP field for marking has become quite common.<br>
+IPv6 has a similar field to mark as well.The 6-bit field also goes by the name DSCP,<br>
+with the byte in the IPv6 header being called the IPv6 Traffic Class byte.<br>
+Marking the Ethernet 802.1Q Header<br>
+marking field exists in the 802.1Q header<br>
+It goes bytwo different names:Class of Service, orCoS, and Priority Code Point, or<br>
+PCP.<br>
+sits in the third byte of the 4possible valuesto mark (see Figure 11-byte 802.1Q header, as a 3-7). It goes by two different names: Class of -bit field,supplying eight<br>
+Service, or CoS, and Priority Code Point, or PCP.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>802.1Q header is not included in all Ethernet frames
+only exists when 802.1Q trunking is used on a link
+only for QoS features enabled on interfaces that use trunking, as shown</code></pre></div><p>Other Marking Fields</p>
+<p>Defining Trust Boundaries<br>
+most voice traffic is marked with a DSCP called Expediteddecimal value of 46 Forwarding (EF), which has a<br>
+trust boundary<br>
+the point in the path of a packet flowing through the network at which the networking devices can trust the current QoS markings</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>when the access layer includes an IP Phone, the phone is typically the trust boundary
+IP Phones can set the CoS and DSCP fields of the messages created by the phone, as
+well as those forwarded from the PC through the phone. are actually configured on the attached access switch The specific marking values</code></pre></div><p>DiffServ Suggested Marking Values<br>
+DiffServ architecture as defined originally by RFC 2475<br>
+three sets of DSCP values as used in DiffServ.<br>
+Expedited Forwarding (EF)<br>
+Expedited Forwarding (EF) DSCP value—a single value<br>
+use for packets that need low latency (delay), low jitter, and low loss.<br>
+decimal 46<br>
+Most often QoS plans use EF to mark voice payloadpackets. With voice calls, some<br>
+packets carry voice payload, and other packets carry call signaling messages.signaling messages set up (create) the voice call between two devices, and they do not Call<br>
+require low delay, jitter, and loss.<br>
+By default, Cisco IP Phones mark voice pay-load with EF,and mark voice signaling<br>
+packets sent by the phone with another value called CS3.<br>
+Assured Forwarding (AF)<br>
+Thmeant to be used in concert with each othere Assured Forwarding (AF) DiffServ RFC (2597) defines a set of 12 DSCP values<br>
+defines the defines three levels of drop priority within each queue for use with congestion concept of four separate queues in a queuing system. Additionally, it<br>
+avoidance tools.need 12 different DSCP markings, one for each combination of queue and drop With four queues, and three drop priority classes per queue, you<br>
+priority. (Queuing and congestion avoidance mechanisms are discussed later in this<br>
+chapter.)<br>
+and Y referring to the drop priority (1 through 3).The text names follow a format of AFXY, with X referring to the queue (1 through 4)</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Class Selector (CS)
+eight DSCP values for backward compatibility with IPP values.
+The DSCP values have the last 3 bits, as shown on the left side of the figure. CSx represents the text names, same first 3 bits as the IPP field, and with binary 0s for the
+where x is the matching IPP value (0 through 7).</code></pre></div><p>Guidelines for DSCP Marking Values<br>
+how all devices should mark data<br>
+DSCP EF: Voice payload<br>
+AF4x: Interactive video (for example, videoconferencing)<br>
+AF3x: Streaming video<br>
+AF2x: High priority (low latency) data<br>
+CS0: Standard data<br>
+Queuing</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>interfacethe QoS toolset for managing the queues that hold packets while they wait their turn to exit an</code></pre></div><p>To use multiple queues, the queuing system needs a classifierfunction to choose which packets<br>
+are placed into which queue<br>
+The queuing system needs a interface becomes availablescheduleras well, to decide which message to take next when the</p>
+<p>Prioritizationrefers to the concept of giving priority to one queue over another<br>
+Round-Robin Scheduling (Prioritization) (Two Types)<br>
+weighting<br>
+the more preference to one queue over another.scheduler takes a different number of packets (or bytes) from each queue, giving<br>
+Class-Based Weighted Fair Queuing (CBWFQ)<br>
+Each class receives at least the amount of bandwidth configured during times of congestion, but maybe more</p>
+<p>Low Latency Queuing</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>tells the scheduler to treat one or more queues as special priority queues</code></pre></div><p>if thethe voice queue? The scheduler never services the other queues (calledspeed of the interface is X bits per second, but more than X bits per second come into queue starvation).<br>
+limit the amount of traffic placed into the priority queue, using a feature called policing<br>
+a cap on the bandwidth used by the priority queue<br>
+Call Admission Control (CAC) tools<br>
+Find a way to this link, so that the policer never discards any of the trafficlimit the amount of voice and video that the network routes out<br>
+CAC tools did not get a mention in the exam topics, so this chapter leaves those<br>
+tools at a brief mention<br>
+A Prioritization Strategy for Data, Voice, and Video<br>
+approach queuing in their QoS plans:<br>
+Key Topic.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Use a round-robin queuing method like CBWFQ for data classes and for noninteractive voice
+and video.
+If faced with too little bandwidth compared to the typical amount of traffic, give data classes that support business-critical applications much more guaranteed bandwidth than is given
+to less important data classes.
+Use a priority queue with LLQ scheduling for interactive voice and video, to achieve low
+delay, jitter, and loss.
+Put voice in a separate queue from video so that the policing function applies separately to each.
+Define enough bandwidth for each priority queue so that the builtdiscard any messages from the priority queues. -in policer should not
+Use Call Admission Control (CAC) tools to avoid adding too much voice or video to the
+network, which would trigger the policer function.</code></pre></div><h3 id="shaping-and-policing">Shaping and Policing</h3>
+<div class="wrap-code highlight"><pre tabindex="0"><code>not found in as many locations in a typical enterprise
+often used at the WAN edge in an enterprise network design.
+monitor the bit rate of the combined messages that flow through a device.
+notes each packet that passes and measures the number of bits per second over time
+attempt to keep the bit rate at or below the configured speed
+policersdiscard packets,and shapershold packets in queues to delay the packets.
+Does this next packet push the measured rate past the configured shaping rate or policing rate?
+If no:
+Let the packet keep moving through the normal path and do nothing extra to the packet.
+If yes:
+If shaping, delay the message by queuing it.
+If policing, either discard the message or mark it differently.
+policing, which discards or rewhich slows down messages that exceed the shaping rate.-marks messages that exceed the policing rate, followed by shaping,</code></pre></div><h4 id="policing">Policing</h4>
+<p>Policers activity.allow for a burst beyond the policing rate for a short time, after a period of low</p>
+<p>Where to Use Policing<br>
+Policing makes sense only in certain cases, and as a general tool, it can be best used at<br>
+the edge between two networks.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>a 200-Mbps committed information rate (CIR).
+the Mbps of traffic in each directionSP providing the WAN service agrees to allow the enterprise to send 200. However, remember that the enterprise
+routers transmit the data at the speed of the access link, or 1 Gbps in this case.
+Thethat the customer chooses for that link.SP can police incoming packets, setting the policing rate to match the CIR
+Policers can also re-mark packets.
+SP could mark the messages with a new marking value, with this strategy:
+Renetwork.-mark packets that exceed the policing rate, but let them into the SP’s
+If other SP network devices are experiencing congestion when they process the packet, the different marking means that device can discard the packet.
+However...
+...if no other SP network devices are experiencing congestion when forwarding that re-marked packet, it gets through the SP network anyway.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>that re-marked packet, it gets through the SP network anyway.
+SP canstill protecting the SP’s network during times of stress.treat their customers a little better by discarding less traffic, while
+key features of policing:
+Key Topic.
+It rate.measures the traffic rate over time for comparison to the configured policing
+It allows for a burst of data after a period of inactivity.
+It is enabled on an interface, in either direction, but typically at ingress.
+It cancandidate for more aggressive discard later in its journey.discard excess messages but can also re-mark the message so that it is a</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Use a shaper to slow down the traffic
+shaping before sending data to an SP that is policing—is one of the typical uses of a shaper
+slows messages down by queuing the messages.
+then services the shaping queues, but not based on when the physical interface is available
+schedules messages from the shaping queues based on the shaping rate
+the shaper queues packets so that the sending rate through the shaper does not exceed the shaping rate; and then output queuing works as normal, if needed.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>shaping queuesapply the round-robin and priority queuing features of CBWFQ and LLQ, respectively, to the</code></pre></div><h6 id="setting-a-good-shaping-time-interval-for-voice-and-video">Setting a Good Shaping Time Interval for Voice and Video</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>you can (and should) configure a shaper’s setting that changes the internal operation of the shaper, which then reduces the delay and jitter caused to voice and video
+traffic.</code></pre></div><h4 id="shaping">Shaping</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>traffic.
+A shaper’s time interval refers to its internal logic and how a shaper averages, over time, sending at a particular rate
+Because the interface transmits bits at 1 Gbps, it takes just .2 seconds, or 200 ms, to send all 200 million bits. Then the shaper must wait for the rest of the
+time interval, another 800 ms, before beginning the next time interval.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>configure a short time interval so there is less wait time
+Tc = 1 second (1000 ms): Send at 1 Gbps for 200 ms, rest for 800 ms
+Tc = .1 second (100 ms): Send at 1 Gbps for 20 ms, rest for 80 ms
+Tc = .01 second (10 ms): Send at 1 Gbps for 2 ms, rest for 8 ms
+When shaping, use a short time interval. By recommendation, use a interval to support voice and video. 10 - ms time
+key features of shapers:
+Key Topic.
+Shapers measure the traffic rate over time for comparison to the configured shaping rate.
+Shapers allow for bursting after a period of inactivity.
+Shapers areenabled on an interface for egress (outgoing packets).
+Shapers slow down packets by queuing them and over time releasing them from the queue at the shaping rate.
+Shapers use queuing tools to create and schedule the shaping queues, which is very
+important for the same reasons discussed for output queuing.</code></pre></div><h4 id="congestion-avoidance">Congestion Avoidance</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>attempts to reduce overall packet loss by preemptively discarding some packets used in TCP connections</code></pre></div><p>connections<br>
+TCP Windowing Basics<br>
+tail drop<br>
+one queue being totally full. Any new packets that arrive for that queue right now will<br>
+be dropped because there is no room at the tail of the queue (tail drop).</p>
+<p>Congestion Avoidance Tools<br>
+discard some TCP segments before the queues fill, hoping that enough TCP connections will<br>
+slow down, reducing congestion, and avoiding tail drop<br>
+monitor the average queue depth over time, triggering more severe actions the deeper the<br>
+queue<br>
+the queue depth passes the maximum thresholdcalled full drop. ,the tool drops all packets, in an action<br>
+congestion avoidance tools can classify messages to treat some packets better than others</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>3.0 IP Connectivity
+3.5 Describe the purpose of First Hop Redundancy Protocol
+4.0 Infrastructure Services
+4.4 Explain the function of SNMP in network operations
+4.9 Describe the capabilities and function of TFTP/FTP in the network</code></pre></div><h2 id="first-hop-redundancy-protocol">First Hop Redundancy Protocol</h2>
+<h1 id="12-ip-services">12 IP Services</h1>
+<p>Monday, October 25, 2021 8:33 AM</p>
+<p>All hosts act like they always have, with one default router setting that never has to change.<br>
+The default routers share a virtual IP address in the subnet, defined by the FHRP.<br>
+Hosts use the FHRP virtual IP address as their default router address.<br>
+The routers exchange FHRP protocol messages so that both agree as to which router does what work at any point in time.<br>
+When a router fails or has some other problem, the routers use the FHRP to choose which router<br>
+takes over responsibilities from the failed router.<br>
+The Three Solutions for First-Hop Redundancy<br>
+First Hop Redundancy Protocol does not name any one protocol. Instead, it names a family of<br>
+protocols that fill the same role</p>
+<p>HSRP Concepts<br>
+operates with an active/standby model(also more generally called active/passive<br>
+allows two (or more) routers to cooperate</p>
+<p>HSRP Failover</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>To make the switches change their MAC address table entries for VMAC1, R2 sends an Ethernet frame with VMAC1 as the source MAC address.
+he frame is also a LAN broadcast, so all the switches learn a MAC table entry for VMAC1 that leads toward R2.</code></pre></div><p>HSRP Load Balancing<br>
+you canconfigure multiple instances of HSRP in the same subnet (called multiple HSRP groups),<br>
+preferring one router to be active in one group and the other router to be preferred as active in another.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>FHRPs are needed on any device that acts as a default router,
+includes both traditional routers and Layer 3 switches.</code></pre></div><h4 id="simple-network-management-protocol">Simple Network Management Protocol</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>SNMPv2c and SNMPv3</code></pre></div><p>application layer protocol<br>
+provides a message format for communication between what are termed managers and agents<br>
+manager<br>
+a network management application running on a PC or server<br>
+typically being called a Network Management Station (NMS)<br>
+uses SNMP protocols to communicate with each SNMP agent.<br>
+Cisco Primeseries of management products (<a href="https://www.cisco.com/go/prime" target="_blank">www.cisco.com/go/prime</a>) use SNMP (and<br>
+other protocols) to manage networks.<br>
+agents<br>
+exist in the network, one per device that is managed.<br>
+software running inside each device (router, switch, and so on), with knowledge of all the<br>
+variables on that device that describe the device’s configuration, status, and counters.<br>
+keeps a operations of the device.database of variables that make up the parameters, status, and counters for the This database, called the Management Information Base (MIB)<br>
+IOS on routers and switches include an SNMP agent, with builtwith the configuration shown later -in MIB, that can be enabled</p>
+<p>SNMP Variable Reading and Writing: SNMP Get and Set<br>
+NMS typically polls the SNMP agent on each device<br>
+NMS can notify the human user in front of the PC or send emails, texts, and so on to notify<br>
+the network operations staff of any issues identified by the data found by polling the devices. You can even reconfigure the device through these SNMP variables in the MIB if<br>
+you permit this level of control.<br>
+NMS uses the SNMPGet messages)to ask for information from an agent.Get, GetNext, and GetBulk messages(together referenced simply as<br>
+NMS sends an SNMP Set message to write variables on the SNMP agent as a means to change the configuration of the device.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>change the configuration of the device.
+messages come in pairs, with, for instance, a Get Request asking the agent for the contents of a variable, and the Get Response supplying that information</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>NMS can analyze various statistical facts such as averages, minimums, and maximums
+NMS can set thresholds for certain key variables, telling the NMS to send a notification (email, text, and so on) when a threshold is passed.</code></pre></div><p>SNMP Notifications: Traps and Informs<br>
+SNMP agents can initiate communications to the NMS.<br>
+generally called notifications, use two specific SNMP messages: Trap and Inform<br>
+SNMP agents MIB variables when those variables reach a certain state.send a Trap or Inform SNMP message to the NMS to list the state of certain</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>SNMP Traps and Inform messages have the exact same purpose but differ in the protocol mechanisms
+trap
+The SNMP agent transport protocol as with all SNMP messages,sends the Trap to the IP address of the NMS, with UDP as the
+less overhead than inform
+Inform</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Like Trap messages but with reliability added
+Added to the protocol with SNMP Version 2 (SNMPv2),
+use UDP but add application layer reliability
+NMS must acknowledge receipt of the Inform with an SNMP Response message, or the SNMP agent will time out and resend the Inform.</code></pre></div><p>The Management Information Base<br>
+Every SNMP agent has its own Management Information Base<br>
+defines variables whose values are set and updated by the agent<br>
+enable the management software to monitor/control the network device.<br>
+defineseach variable as an object ID (OID)<br>
+organizes the OIDs based in part on RFC standards, and in part with vendor-proprietary<br>
+variables<br>
+organizes all the variables into a hierarchy of OIDs, usually shown as a tree<br>
+Each node in the tree can be described based on the tree structure sequence, either by name or by number.</p>
+<p>you could use an SNMP manager and type MIB variable 1.3.6.1.4.1.9.2.1.58.0 and click a<br>
+button to get that variable, to see the current CPU usage percentage from a Cisco router<br>
+Securing SNMP</p>
+<p>Securing SNMP<br>
+use ACLs to limit SNMP messages to those from known servers only.<br>
+can configure an IPv4 ACL to filter incoming SNMP messages that arrive in IPv4 packets and an IPv6 ACL to filter SNMP messages that arrive in IPv6 packets.<br>
+all versions of SNMP support a basic clear-text password mechanism,<br>
+SNMPv1 defined clear-text passwords called SNMP communities.<br>
+SNMP agent and the SNMP manager need prior knowledge of the same SNMP community value (called a community string)<br>
+Get messages and the Set message include the appropriate community string value, in clear text.<br>
+NMS sends a Get or Set with the correct community string, as configured on the<br>
+SNMP agent, the agent processes the message.<br>
+SNMPv1 defines both a read-only community and a read-write community.<br>
+read-only (RO) community allows Get messages, and the read-write (RW)<br>
+community allows both reads and writes (Gets and Sets).</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>SNMPv2, and the related Community-based SNMP Version 2 (SNMPv2c)
+The original specifications for SNMPv2 did not include SNMPv1 communities
+SNMPv3
+security had arrived with the powerful network management protocol. away with communities and replaces them with the following features:SNMPv3 does
+Message integrity:This mechanism, applied to all SNMPv3 messages, confirms
+whether or not each message has been changed during transit.
+Authentication:and password,withThis optional feature the password never sent as clear text. Instead, it uses a adds authentication with both a username
+hashing method like many other modern authentication processes.
+Encryption (privacy): This optional feature encrypts the contents of SNMPv3
+messages so that attackers who intercept the messages cannot read their contents.</code></pre></div><h4 id="ftp-and-tftp">FTP and TFTP</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Opaque:and commandsTo represent logical internal file systems for the convenience of internal functions
+Network: To represent external file systems found on different types of servers for the
+convenience of reference in different IOS commands
+Disk: For flash
+Usbflash: For USB flash
+NVRAM: A special type for NVRAM memory, the default location of the startup-config file
+the command more flash0:/wotemp/fred woulddisplay the contents of file fred in directory
+/wotemp in the first flash memory slot in the router.
+many commands use a keyword that indirectly refers to a formal filename, to reduce typing.For
+example:</code></pre></div><p>example:<br>
+<strong>show running-config</strong> command:Refers to file system:running-config<br>
+<strong>show startup-config</strong> command: Refers to file nvram:startup-config<br>
+<strong>show flash</strong> command: Refers to default flash IFS (usually flash0:)</p>
+<h6 id="upgrading-ios-images">Upgrading IOS Images</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>process to upgrade an IOS image into flash memory, using the following steps:
+Step 1.Obtain the IOS image from Cisco, usually by downloading the IOS image from
+Cisco.com using HTTP or FTP.
+Step 2. Place the IOS image someplace that the router can reach. Locations include
+TFTP or FTP servers in the network or a USB flash drive that is then inserted into the router.
+Step 3. Issue the copy command from the router, copying the file into the flash
+memory that usually remains with the router on a permanent basis. (Routers usually cannot boot from the IOS image in a USB flash drive.)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Copying a New IOS Image to a Local IOS File System Using TFTP</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>copy command</code></pre></div><p>copy command<br>
+works through these kinds of questions:<br>
+What is the IP address or host name of the TFTP server?<br>
+What is the name of the file?<br>
+Ask the server to learn the size of the file, and then check the local router’s flash<br>
+to ask whether enough space is available for this file in flash memory.<br>
+Does the server actually have a file by that name?<br>
+Do you want the router to erase any old files in flash?<br>
+Afterward<br>
+verifies that the checksum for the file shows that no errors occurred<br>
+view the contents of the flash file system<br>
+<strong>show flash</strong><br>
+shows the files in the default flash file system (flash0:)</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>dir flash0 : commandlists the contents of that same file system, with similar
+information.IFS.) (You can use the dircommand to display the contents of any local</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>show flash(bytes used plus bytes free).lists the bytes used, whereas the know which command lists which particular total.dir command lists the total bytes</code></pre></div><p>Verifying IOS Code Integrity with MD5<br>
+when Cisco builds a new IOS image, it calculates and publishes an MD5 hash value for<br>
+that specific IOS file.<br>
+IOS <strong>verify</strong> command.<br>
+will list the MD5 hash as recalculated on your router. If both MD5 hashes are<br>
+equal, the file has not changed.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>verify /md5 commandgenerates the MD5 hash on your router,
+you can include the hash value computed by Cisco as the last parameter (as
+shown in the example), or leave it offlocally computed value matches what you copied into the command. If you. If you include it, IOS will tell you if the
+leave it out, the verify command lists the locally computed MD5 hash, and you</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>leave it out, the verify command lists the locally computed MD5 hash, and you have to do the picky character-by-character check of the values yourself.</code></pre></div><p>Copying Images with FTP</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>copy ftp flash</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>can configure the FTP username and password on the router so that you do not
+have to include them in the copy command. For instance, the global</code></pre></div><p>have to include them in the configuration commands <strong>ip ftp username wendellcopy</strong> command. For instance, the global and <strong>ip ftp password odom</strong><br>
+would have configured those values.<br>
+The FTP and TFTP Protocols<br>
+copycommand, when using the tftp or ftp keyword, makes the command act as a client<br>
+FTP ProtocolBasics<br>
+uses TCP<br>
+TCP port 21 and in some cases also well-known port 20.<br>
+FTP uses a client/server model for file transfer</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>FTP control connection—define the kinds of functions supported by FTP
+allow the client to navigate around the directory structures of the server, list files, and
+then transfer files from the server (FTP GET) or to the server (FTP PUT).
+summary of some of the FTP actions:
+Navigate directories : List the current directory, change the current directory to
+a new directory, go back to the home directory, all on both the server and client side of the connection.
+Add/remove directories: Create new directories and remove existing
+directories on both the client and server.
+List files : List files on both the client and server.
+File transfer: Get (client gets a copy of the file from the server), Put (client takes
+a file that exists on the client and puts a copy of the FTP server).
+FTP Active and Passive Modes
+may impact whether the TCP client can or cannot connect to the server and
+perform normal functions
+user at the FTP client can choose which mode to use
+FTP passive mode may be the more likely option to work.
+FTP uses two types of TCP connections:</code></pre></div><p>FTP uses two types of TCP connections:<br>
+Control Connection: Used to exchange FTP commands<br>
+Data Connection: Used for sending and receiving data, both for file transfers and for output to display to a user</p>
+<p>when a client connects to an FTP server, the client first creates the FTP control connection</p>
+<p>server listens for new control connections on its well-known port 21<br>
+client allocates any new dynamic port (49222 in this case) and creates a TCP connection to the server</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The FTP client allocates a currently unused dynamic port and starts
+listening on that port.
+The client identifies that port (and its IP address) to the FTP server by
+sending an FTP PORT command to the server.
+The server, because it also operates in active mode, expects the PORT command; the server reacts and initiates the FTP data connection to the
+client’s address (192.168.1.102) and port (49333).</code></pre></div><p>Passive mode helps solve the firewall restrictions by having the FTP client<br>
+initiate the FTP data connection to the server.<br>
+passive mode does not simply cause the FTP client to connect to a well-known<br>
+port on the server;<br>
+The FTP client changes to use FTP passive mode, notifying the server using the FTP PASV command.<br>
+The server chooses a port to listen on for the upcoming new TCP</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>The server chooses a port to listen on for the upcoming new TCP connection, in this case TCP port 49444.
+The FTP notifies the FTP client of its IP address and chosen port with the
+FTP PORT command.
+The FTP client opens the TCP data connection to the IP address and port
+learned at the previous step.</code></pre></div><p>FTP over TLS (FTP Secure)<br>
+FTPS encrypts both the control and data connections with TLS, including the exchange of the usernames and passwords<br>
+<strong>FTPS explicit mode process:</strong><br>
+The client creates the FTP control TCP connection to server well-known port 21.<br>
+The client initiates the use of TLS in the control connection with the FTP AUTH command.<br>
+When the user takes an action that requires an FTP data connection, the client<br>
+creates an FTP data TCP connection to server well-known port 21.<br>
+The client initiates the use of TLS in the data connection with the FTP AUTH<br>
+command.</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>implicit mode process
+begins with a required TLS connection, with no need for an FTP AUTH
+command, using wellthe data connection).-known ports 990 (for the control connection) and 989 (for
+SFTP
+uses SSH to encrypt file transfers over an SSH connection. However, the acronym SFTP does not refer to a secure version of FTP.</code></pre></div><p><strong>TFTP Protocol Basics</strong><br>
+Trivial File Transfer Protocol uses UDP well-known port 69. Because it uses UDP, TFTP adds a<br>
+feature to check each file for transmission errors by using a checksum process on each file after the transfer completes.<br>
+the code requires less space to install, which can be useful for devices with limited memory.<br>
+can Get and Put files, but it includes no commands to change directories, create/remove directories, or even to list files on the server.<br>
+does not support even simple clearit should accept requests from any TFTP client.-text authentication. In effect, if a TFTP server is running,</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>1.2 Describe characteristics of network topology architectures
+1.2.a 2 tier
+1.2.b 3 tier
+1.2.e Small office/home office (SOHO)
+1.3 Compare physical interface and cabling types
+1.3.c Concepts of PoE</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Two-Tier Campus Design (Collapsed Core)
+access, distribution, and core.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Access switches connect directly to end users,
+Distribution switches provide a path through which the access switches can forward traffic to
+each other
+each of the access switches connects to at least one distribution switch, typically to two
+distribution switches for redundancy.
+most designs use at least two uplinks to two different distribution switches (as shown in Figure 13 - 1) for redundancy.
+Provides a place to connect end-user devices (the access layer, with access switches)
+Connects the switches with a reasonable number of cables and switch ports by connecting all 40 access switches to two distribution switches</code></pre></div><h1 id="13-lan-architecture">13 LAN Architecture</h1>
+<p>Monday, October 25, 2021 11:51 AM</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Star: A design in which one central device connects to several others, so that if you
+drew the links out in all directions, the design would look like a star with light shining in all directions.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Topology Terminology Seen Within a Two-Tier Design</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Full mesh: For any set of network nodes, a design that connects a link between each pair of nodes.
+Partial mesh: For any set of network nodes, a design that connects a link between
+some pairs of nodes, but not all. In other words, a mesh that is not a full mesh.
+Hybrid: A design that combines topology design concepts into a larger (typically more
+complex) design.
+twoand a partial mesh at the distribution layer.-tier design is indeed a hybrid design that uses both a star topology at the access layer</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>The distribution layer creates a partial mesh.
+none of the access layer switches connect to each other.</code></pre></div><p>Three-Tier Campus Design (Core)</p>
+<p>Three-Tier Campus Design (Core)<br>
+collapsed core refers to the fact that the two-tier design does not have a third tier, the core tier</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>Sometimes the center of the network uses a full mesh, sometimes a partial mesh, depending on
+the availability of cables between the buildings.
+provide one function: to connect the distribution switches.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>Access: Provides a connection point (access) for endbetween two other access switches under normal circumstances.-user devices. Does not forward frames
+Distribution: Provides an aggregation point for access switches, providing connectivity to the rest
+of the devices in the LAN, forwarding frames between switches, but not connecting directly to end-user devices.</code></pre></div><p>Core: Aggregates distribution switches in very large campus LANs, providing very high forwarding<br>
+rates for the larger volume of traffic due to the size of the network.<br>
+Topology Design Terminology</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>the right side of Figure 13-6 combines the star topology of the access layer with the partial mesh
+of the distribution layer. So you might hear these designs that combine concepts called a hybrid design.</code></pre></div><h6 id="small-officehome-office">Small Office/Home Office</h6>
+<div class="wrap-code highlight"><pre tabindex="0"><code>that one wireless router acts like separate devices you would find in an enterprise campus:
+Key Topic.
+An Ethernet switch, for the wired Ethernet connections
+A wireless access point (AP), to communicate with the wireless devices and forward the frames to/from the wired network
+A router, to route IP packets to/from the LAN and WAN (Internet) interfaces
+A firewallbut not vice versa, which often defaults to allow only clients to connect to servers in the Internet,</code></pre></div><h4 id="power-over-ethernet-poe">Power over Ethernet (PoE)</h4>
+<div class="wrap-code highlight"><pre tabindex="0"><code>a LAN switch, acts as the Power Sourcing Equipment (PSE
+supplies DC power so the device does not need an AC/DC converter.
+A device that has the capability to be powered over the Ethernet cable
+is called the Powered Device (PD)</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>PoE Operation
+PoE must (and does) have processes in place to determine if PoE is needed, and for how much power, before applying any potentially harmful power levels to the circuit.
+autonegotiation mechanisms need to work before the PD has booted,
+By using these IEEE autonegotiation messages and watching for the return signal levels, PoE
+can determine whether the device on the end of the cable requires power (that is, it is a PD) and how much power to supply
+Step 1. the device needs power.Do not supply power on a PoE-capable port unless negotiation identifies that
+Step 2. Use Ethernet autonegotiation techniques, sending low power signals and
+monitoring the return signal, to determine the PoE power class, which determines how much power to supply to the device.
+Step 3allows the device to boot.. If the device is identified as a PD, supply the power per the power class, which
+Step 4. Monitor for changes to the power class, both with autonegotiation and
+listening for CDP and LLDP messages from the PD.</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>listening for CDP and LLDP messages from the PD.
+Step 5.If a new power class is identified, adjust the power level per that class.
+PDs signaling how many watts of power they would like to receive from the PSon the specific PoE standard, the PSE will then supply the power, either over two pairs or E. Depending
+four pairs, as noted in Table 13-2.</code></pre></div><p>PoE and LAN Design<br>
+some of the key points to consider when planning a LAN design that includes PoE:<br>
+<strong>Powered Devices:</strong> power requirements.Determine the types of devices and specific models, along with their<br>
+<strong>Power Requirements</strong> : Plan the numbers of different types of PDs to connect into each<br>
+wiring closet to build a power budget. That power budget can then be processed to determine the amount of PoE power to make available through each switch.<br>
+Sa subset of ports. Research the various switch models so that you purchase enough PoE <strong>witch Ports</strong> : Some switches support PoE standards on all ports, some on no ports, some on -<br>
+capable ports for the switches planned for each wiring closet.<br>
+<strong>Switch Power Supplies</strong> so that it delivers enough power to power the switch itself. With PoE, the switch acts as a : Without PoE, when purchasing a switch, you choose a power supply<br>
+distributor of electrical power, so the switch power supply must deliver many more watts than it needs to run the switch itself. You will need to create a power budget per switch,<br>
+based on the number of connected PDs, and purchase power supplies to match those<br>
+requirements.<br>
+<strong>PoE Standards versus Actual</strong> standards they support, the standards supported by the PDs, and how much power they : Consider the number of PoE switch ports needed, the<br>
+consume. For instance, a PD and a switch port may both support PoE+, which supports up to 30 watts supplied by the PSE. However, that powered device may need at most 9 watts</p>
+<p>to 30 watts supplied by the PSE. However, that powered device may need at most 9 watts to operate, so your power budget needs to reserve less power than the maximum for those<br>
+devices.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.min.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1702594242" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1702594242" defer></script>
+        <script src="/js/search.js?1702594242" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669"><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/newccnanotes/part3/" class="active"><a class="padding" href="/networking/newccnanotes/part3/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">How to set up Calibre web with Docker and Nginx<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1702594242" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1702594242" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1702594242" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1702594242" defer></script>
+    <script src="/js/js-yaml.min.js?1702594242" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1702594242" defer></script>
+  </body>
+</html>

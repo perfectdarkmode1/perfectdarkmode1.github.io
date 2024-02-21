@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Window Subsystem for Linux - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/wsl2/wsl2/index.html" rel="canonical" type="text/html" title="Window Subsystem for Linux - Perfect Dark Mode">
+    <link href="/linux/wsl2/wsl2/index.xml" rel="alternate" type="application/rss+xml" title="Window Subsystem for Linux - Perfect Dark Mode">
+    <link href="/images/favicon.png?1699566253" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1699566254" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1699566254" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1699566254" rel="stylesheet">
+    <link href="/css/auto-complete.css?1699566254" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1699566254" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1699566254" rel="stylesheet">
+    <link href="/css/fonts.css?1699566254" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1699566254" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1699566254" rel="stylesheet">
+    <link href="/css/theme-city2.css?1699566254" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1699566254" rel="stylesheet">
+    <link href="/css/print.css?1699566254" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1699566254" rel="stylesheet">
+    <link href="/css/ie.css?1699566254" rel="stylesheet">
+    <script src="/js/url.js?1699566254"></script>
+    <script src="/js/variant.js?1699566254"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/wsl2/wsl2/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Window Subsystem for Linux</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="window-subsystem-for-linux">Window Subsystem for Linux</h1>
+
+<h1 id="add-a-permanent-home-alias-in-wsl2">Add a permanent home alias in WSL2</h1>
+<p>Vim</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>vim ~/.bashrc
+alias home=&#39;cd /mnt/c/Users/david.thomas$&#39; &lt;--- Add this line to file, not a command.
+$ source ~/.bashrc</code></pre></div><h1 id="yank-entire-file-to-clipboard-in-vim">Yank entire file to clipboard in vim</h1>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo apt install vim-gtk3
+# open vim
+:%y+</code></pre></div><h1 id="create-new-user-with--in-the-name">Create new user with . in the name</h1>
+<div class="wrap-code highlight"><pre tabindex="0"><code>add user --force-badname david.thomas</code></pre></div><p>and add them to sudoer file</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>sudo usermod -aG sudo david.thomas</code></pre></div><h3 id="create-and-edit-etcwslconf">Create and edit- <code>/etc/wsl.conf</code></h3>
+<p>Ceate a <code>/etc/wsl.conf</code> with the following setting:</p>
+<div class="wrap-code highlight"><pre tabindex="0"><code>[user]
+default=username</code></pre></div><p>Changing, of course, username to be your default username.</p>
+<p>Exit your distro/instance, then issue a <code>wsl --terminate &lt;distroname&gt;</code> from PowerShell or CMD. When you restart, the default user should be set.</p>
+<p>This is safer and less error-prone than the registry-based methods.02</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1699566254" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1699566254" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1699566254" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1699566254" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1699566254" defer></script>
+  </body>
+</html>

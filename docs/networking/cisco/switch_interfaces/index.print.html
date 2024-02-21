@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Switch Interfaces - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/switch_interfaces/index.html" rel="canonical" type="text/html" title="Switch Interfaces - Perfect Dark Mode">
+    <link href="/networking/cisco/switch_interfaces/index.xml" rel="alternate" type="application/rss+xml" title="Switch Interfaces - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/switch_interfaces/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Switch Interfaces</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="switch-interfaces">Switch Interfaces</h1>
+
+<p>1.0 Network Fundamentals</p>
+<p>1.1 Explain the role and function of network components</p>
+<p>1.1.b L2 and L3 switches</p>
+<p>1.4 Describe switching concepts</p>
+<p>Configuring Speed, Duplex, and Description</p>
+<ul>
+<li>
+<p>autonegotiate</p>
+</li>
+<li>
+<p>What speed to use</p>
+</li>
+<li>
+<p>enabled by default</p>
+</li>
+</ul>
+<p>duplex {auto | full | half} and speed {auto | 10 | 100 | 1000}</p>
+<ul>
+<li>configure the speed and duplex settings</li>
+</ul>
+<p>(config-int) # description text</p>
+<ul>
+<li>add a text description to the interface</li>
+</ul>
+<p>show interfaces status</p>
+<ul>
+<li>lists port #, Name, status, vlan, duplex, speed, and type</li>
+</ul>
+<p>a-full and a-100</p>
+<p>a- means that the listed speed and duplex values were autonegotiated.</p>
+<p>Autonegotiation</p>
+<p>IEEE autonegotiation (IEEE standard 802.3u)</p>
+<ul>
+<li>
+<p>each node states what it can do, and</p>
+</li>
+<li>
+<p>then each node picks the best options that both nodes support:</p>
+</li>
+<li>
+<p>the fastest speed and the best duplex setting, with full duplex being better than half duplex.</p>
+</li>
+<li>
+<p>disable autonegotiation</p>
+</li>
+<li>
+<p>Configure both the speed and duplex on a  switch interface</p>
+</li>
+<li>
+<p>when a node tries to use autonegotiation but hears nothing from the device.</p>
+</li>
+</ul>
+<p>Speed: Use your slowest supported speed (often 10 Mbps).</p>
+<p>Duplex: If your speed = 10 or 100, use half duplex; otherwise, use full duplex.</p>
+<p>Cisco switches can actually sense the speed used by other nodes, even without IEEE autonegotiation.</p>
+<ul>
+<li>
+<p>Cisco switches use this slightly different logic to choose the speed when autonegotiation fails:</p>
+</li>
+<li>
+<p>Speed: Sense the speed (without using autonegotiation), but if that fails, use the IEEE default (slowest supported speed, often 10 Mbps).</p>
+</li>
+<li>
+<p>Duplex: Use the IEEE defaults: If speed = 10 or 100, use half duplex; otherwise, use full duplex.</p>
+</li>
+<li>
+<p>Ethernet interfaces using speeds faster than 1 Gbps always use full duplex.</p>
+</li>
+<li>
+<p>hubs do not react to autonegotiation messages</p>
+</li>
+</ul>
+<p> show interfaces and show interfaces description</p>
+<p>Shutdown command is configured</p>
+<ul>
+<li>Line status = administratively down</li>
+<li>Protocol status = down</li>
+<li>Interface status = disabled</li>
+</ul>
+<p>Cable, speed mismatch, neighbor device is off, shutdown, or err-disabled</p>
+<ul>
+<li>Line status = down</li>
+<li>Protocol status = down</li>
+<li>Interface status = notconnect</li>
+</ul>
+<p>Not expected on LAN switch physical interfaces</p>
+<ul>
+<li>Line status = up</li>
+<li>Protocol status = down</li>
+<li>Interface status = notconnect</li>
+</ul>
+<p>Port security has disabled the interface</p>
+<ul>
+<li>Line status = down</li>
+<li>Protocol status = down (err-disabled)</li>
+<li>Interface status = err-disabled</li>
+</ul>
+<p>the interface is working</p>
+<ul>
+<li>Line status = up</li>
+<li>Protocol status = up</li>
+<li>Interface status = connected</li>
+</ul>
+<p>show interfaces fa0/13 (without the status option)</p>
+<ul>
+<li>lists the speed and duplex for interface Fast Ethernet 0/13</li>
+<li>with nothing implying that the values were learned through autonegotiation.</li>
+</ul>
+<p>speed manually set 10 Mbps on one switch and 100 Mbps on the other</p>
+<ul>
+<li>both switches would list the port in a down/down or notconnect state</li>
+</ul>
+<p>if the duplex settings do not match</p>
+<ul>
+<li>the switch interface will still be in a connected (up/up) or connected state.</li>
+</ul>
+<p>How to identify duplex mismatch problems,</p>
+<ul>
+<li>check the duplex setting on each end of the link to see if the values mismatch.</li>
+<li>watch for incrementing collision and late collision counters</li>
+</ul>
+<p>Common Layer 1 problems</p>
+<ul>
+<li>receiving device might receive a frame whose bits have changed values.</li>
+<li>These frames do not pass the error detection logic as implemented in the FCS field in the Ethernet trailer,</li>
+<li>The receiving device discards the frame and counts it as some kind of input error.</li>
+<li>Cisco switches list this error as a CRC error</li>
+</ul>
+<p>Runts:</p>
+<ul>
+<li>
+<p>Frames that did not meet the minimum frame size requirement</p>
+</li>
+<li>
+<p>(64 bytes, including the 18-byte destination MAC, source MAC, type, and FCS).</p>
+</li>
+<li>
+<p>Can be caused by collisions.</p>
+</li>
+</ul>
+<p>Giants:</p>
+<ul>
+<li>
+<p>Frames that exceed the maximum frame size requirement</p>
+</li>
+<li>
+<p>(1518 bytes, including the 18-byte destination MAC, source MAC, type, and FCS)</p>
+</li>
+</ul>
+<p>Input Errors:</p>
+<ul>
+<li>A total of many counters, including runts, giants, no buffer, CRC, frame, overrun, and ignored counts.</li>
+</ul>
+<p>CRC:</p>
+<ul>
+<li>Received frames that did not pass the FCS math</li>
+<li>can be caused by collisions</li>
+</ul>
+<p>Frame:</p>
+<ul>
+<li>
+<p>Received frames that have an illegal format</p>
+</li>
+<li>
+<p>(like ending with a partial byte)</p>
+</li>
+<li>
+<p>can be caused by collisions.</p>
+</li>
+</ul>
+<p>Packets Output:</p>
+<ul>
+<li>Total number of packets (frames) forwarded out the interface.</li>
+</ul>
+<p>Output Errors:</p>
+<ul>
+<li>Total number of packets (frames) that the switch port tried to transmit, but for which some problem occurred.</li>
+</ul>
+<p>Collisions:</p>
+<ul>
+<li>Counter of all collisions that occur when the interface is transmitting a frame</li>
+</ul>
+<p>Late Collisions:</p>
+<ul>
+<li>
+<p>The subset of all collisions that happen after the 64th byte</p>
+</li>
+<li>
+<p>(In a properly working Ethernet LAN, collisions should occur within the first 64 bytes</p>
+</li>
+<li>
+<p>Often point to a duplex mismatch</p>
+</li>
+</ul>
+<p>Collisions occur as a normal part of the half-duplex logic imposed by CSMA/CD</p>
+<p>a switch interface with an increasing collisions counter might not even have a problem.</p>
+<ul>
+<li>if the CRC errors grow, but the collisions counters do not, the problem might simply be interference on the cable.</li>
+</ul>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

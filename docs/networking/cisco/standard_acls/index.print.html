@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Standard ACLs - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/standard_acls/index.html" rel="canonical" type="text/html" title="Standard ACLs - Perfect Dark Mode">
+    <link href="/networking/cisco/standard_acls/index.xml" rel="alternate" type="application/rss+xml" title="Standard ACLs - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/standard_acls/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Standard ACLs</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="standard-acls">Standard ACLs</h1>
+
+<h1 id="standard-access-control-lists">Standard Access Control Lists</h1>
+<p>Can be used to match packets for applying Quality of Service (QoS) features.</p>
+<h3 id="acl-location-and-direction">ACL location and direction</h3>
+<ul>
+<li>inbound to the router, before the router makes its forwarding (routing) decision</li>
+<li>outbound, after the router makes its forwarding decision and has determined the exit interface to use.</li>
+<li>enable an ACL on an interface that processes the packet, in the direction the packet flows through that interface.</li>
+<li>the router then processes every inbound or outbound IP packet using that ACL</li>
+</ul>
+<h2 id="actions-when-a-match-occurs">Actions when a match occurs</h2>
+<ul>
+<li>deny or permit</li>
+</ul>
+<h3 id="types-of-ip-acls">Types of IP ACLs</h3>
+<ul>
+<li>Standard numbered ACLs (1–99) or (1300-1999)</li>
+<li>Extended numbered ACLs (100–199) or (2000-2699)</li>
+</ul>
+<h4 id="named-acls">Named ACLs</h4>
+<ul>
+<li>Editing with sequence numbers</li>
+<li>configuration identifies the ACL either using a number or a name. ACLs will also be</li>
+<li>either standard or extended</li>
+</ul>
+<h4 id="standard-numbered-ipv4-acls">Standard Numbered IPv4 ACLs</h4>
+<ul>
+<li>matches only the source IP address</li>
+<li>identify the ACL using numbers rather than names (numbered)</li>
+<li>Looks at IPv4 packets.</li>
+</ul>
+<p>List Logic with IP ACLs</p>
+<ul>
+<li>router takes the action listed in that line of the ACL and stops looking further in the ACL</li>
+<li>every IP ACL has a deny all statement implied at the end of the ACL</li>
+</ul>
+<p>Matching Logic and Command Syntax</p>
+<ul>
+<li>Access list is one or more access-list commands with the same number.</li>
+<li>any number from the ranges shown in the preceding line of syntax.</li>
+<li>(One number is no better than the other.) IOS refers to each line in an ACL is an Access Control Entry (ACE engineers just call them ACL statements.</li>
+<li>each access-list command also lists the action (permit or deny), plus the matching logic.</li>
+</ul>
+<p>Matching the Exact IP Address</p>
+<ul>
+<li>
+<p>permit if source = 10.1.1.1</p>
+</li>
+<li>
+<p>access-list 1 permit 10.1.1.1</p>
+</li>
+<li>
+<p>If you use Host keyword IOS will remove the keyword in the config</p>
+</li>
+</ul>
+<p>Matching Any/All Addresses</p>
+<ul>
+<li>access-list 1 permit any</li>
+</ul>
+<p>ACL show commands list</p>
+<ul>
+<li>counters for the number of packets matched by each command in the ACL,</li>
+<li>no counter for that implicit deny any concept at the end of the ACL.</li>
+<li>Configure deny any command to see deny counts</li>
+</ul>
+<h3 id="implementing-standard-ip-acls">Implementing Standard IP ACLs</h3>
+<p># access-list access-list-number {deny | permit} source [source-wildcard]</p>
+<ul>
+<li>
+<p>Plan the location (router and interface) and direction (in or out) on that interface:</p>
+</li>
+<li>
+<p>placed near to the destination of the packets so that they do not unintentionally discard packets that should not be discarded.</p>
+</li>
+<li>
+<p>identify the source IP addresses of packets as they go in the direction that the ACL is examining.</p>
+</li>
+<li>
+<p>Configure one or more access-list</p>
+</li>
+<li>
+<p># access-list access-list-number {deny | permit} source [source-wildcard]</p>
+</li>
+<li>
+<p>Enable the ACL</p>
+</li>
+<li>
+<p>(config-if)# ip access-group number {in | out}</p>
+</li>
+</ul>
+<p>Standard Numbered ACL Example 1</p>
+<p>R2(config)# access-list 1 permit 10.1.1.1</p>
+<p>R2(config)# access-list 1 deny 10.1.1.0 0.0.0.255</p>
+<p>R2(config)# access-list 1 permit 10.0.0.0 0.255.255.255</p>
+<p>R2(config-if)# ip access-group 1 in</p>
+<p># show ip access-lists</p>
+<ul>
+<li>details about IPv4 ACLs only</li>
+</ul>
+<p># show access-lists</p>
+<ul>
+<li>lists details about any configure ACL, not just IPv4</li>
+</ul>
+<p># show ip interface s0/0/1</p>
+<ul>
+<li>lists the number or name of any IP ACL enabled on the interface</li>
+</ul>
+<p>Standard Numbered ACL Example 2</p>
+<ul>
+<li>
+<p>standard ACLs cannot check the destination IP address.</p>
+</li>
+<li>
+<p>extended ACL  lets you check both the source and destination IP address.</p>
+</li>
+<li>
+<p>access-list remark parameter</p>
+</li>
+<li>
+<p>to leave text documentation that stays with the ACL.</p>
+</li>
+<li>
+<p>router checks packets that it routes against the ACL for outbound ACLs</p>
+</li>
+<li>
+<p>a router does not filter packets that the router itself creates with an outbound ACL</p>
+</li>
+</ul>
+<p>Troubleshooting and Verification Tips</p>
+<ul>
+<li>IOS keeps statistics about the packets matched by each line of an ACL</li>
+</ul>
+<p>log keyword</p>
+<ul>
+<li>
+<p>add to end of access-list command</p>
+</li>
+<li>
+<p>IOS then issues log messages with occasional statistics about matches of that ACL line</p>
+</li>
+<li>
+<p>Double check the ACL is enabled on the right interface, or for the right direction</p>
+</li>
+</ul>
+<p>Practice Building access-list Commands</p>
+<p>Tips to consider when choosing matching parameters to any access-list command:</p>
+<ul>
+<li>To match a specific address, just list the address.</li>
+<li>To match any and all addresses, use the any keyword.</li>
+</ul>
+<p>several practice problems (wildcard)</p>
+<ul>
+<li>
+<p>Packets from 172.16.5.4</p>
+</li>
+<li>
+<p>0.0.0.0</p>
+</li>
+<li>
+<p>Packets from hosts with 192.168.6</p>
+</li>
+<li>
+<p>0.0.0.255</p>
+</li>
+<li>
+<p>Packets from hosts with 192.168</p>
+</li>
+<li>
+<p>0.0.255.255</p>
+</li>
+<li>
+<p>Packets from any hosts</p>
+</li>
+<li>
+<p>255.255.255.255</p>
+</li>
+<li>
+<p>Packets from subnet 10.1.200.0/21</p>
+</li>
+<li>
+<p>0.0.7.255</p>
+</li>
+<li>
+<p>Packets from subnet 172.20.112.0/23</p>
+</li>
+<li>
+<p>0.0.1.255</p>
+</li>
+<li>
+<p>Packets from subnet 172.20.112.0/26</p>
+</li>
+<li>
+<p>0.0.0.63</p>
+</li>
+<li>
+<p>Packets from subnet 192.168.9.64/28</p>
+</li>
+<li>
+<p>0.0.0.15</p>
+</li>
+<li>
+<p>Packets from subnet 192.168.9.64/30</p>
+</li>
+<li>
+<p>0.0.0.3</p>
+</li>
+</ul>
+<p>Reverse Engineering from ACL to Address Range (practice problems)</p>
+<ol>
+<li>one address</li>
+<li>192.168.4.0 - 192.168.4.127</li>
+<li>192.168.6.0 - 192.168.6. 31</li>
+<li>172.30.96.0 - 172.30.96.255</li>
+<li>172.30.96.0 - 172.30.96. 63</li>
+<li>10.1.192.0 - 10.1.192..3</li>
+<li>10.1.192.0 - 10.1.193.255</li>
+<li>10.1.192.0 - 10.1.255.255</li>
+</ol>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

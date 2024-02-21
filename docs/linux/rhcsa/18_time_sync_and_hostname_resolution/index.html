@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.122.0">
+    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="Time Synchronization 72.25%, 2023-09-13 13:03:38 UTC
+Color: #0010FF
+Chrony service, a new implementation of the Network Time Protocol, maintains the clock on the system and keeps it synchronized with a more accurate and reliable source of time
+Time Synchronization 72.43%, 2023-09-13 13:09:21 UTC
+Color: #0010FF
+sends a stream of messages to configured time servers and binds itself to the one with least amount of delay in its responses
+Time Synchronization 72.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="Time Synchronization 72.25%, 2023-09-13 13:03:38 UTC
+Color: #0010FF
+Chrony service, a new implementation of the Network Time Protocol, maintains the clock on the system and keeps it synchronized with a more accurate and reliable source of time
+Time Synchronization 72.43%, 2023-09-13 13:09:21 UTC
+Color: #0010FF
+sends a stream of messages to configured time servers and binds itself to the one with least amount of delay in its responses
+Time Synchronization 72.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/18_time_sync_and_hostname_resolution/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1708488311" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1708488311" rel="stylesheet">
+    <link href="/css/auto-complete.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1708488311" rel="stylesheet">
+    <link href="/css/fonts.css?1708488311" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708488311" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1708488311" rel="stylesheet">
+    <link href="/css/theme-city2.css?1708488311" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-light.css?1708488311" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1708488311" rel="stylesheet">
+    <link href="/css/print.css?1708488311" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1708488311" rel="stylesheet">
+    <script src="/js/url.js?1708488311"></script>
+    <script src="/js/variant.js?1708488311"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      window.relearn = window.relearn || {};
+      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'city2' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/18_time_sync_and_hostname_resolution/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub491803"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C1803">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub491919"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C1919">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492002"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2002">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492137"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2137">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492163"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2163">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492194"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2194">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492216"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2216">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492237"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2237">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492554"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2554">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492559"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2559">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492681"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2681">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492705"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2705">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492762"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2762">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492942"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2942">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492963"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C2963">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493040"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3040">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493082"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3082">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493143"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3143">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493224"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3224">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493250"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3250">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493283"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3283">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493415"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3415">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493565"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3565">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493599"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3599">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493668"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3668">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493717"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3717">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493760"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3760">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493858"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3858">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493996"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C3996">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494050"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4050">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494221"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4221">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494398"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4398">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494572"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4572">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494603"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4603">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494649"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4649">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494688"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4688">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494818"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4818">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494938"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4938">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494974"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C4974">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495068"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5068">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495083"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5083">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495177"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5177">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495383"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5383">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495418"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5418">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495461"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5461">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495507"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5507">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495557"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5557">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495617"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5617">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495941"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5941">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495992"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C5992">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496021"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6021">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496162"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6162">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496244"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6244">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496286"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6286">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496391"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6391">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496413"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6413">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496470"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6470">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496550"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6550">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496679"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6679">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496814"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6814">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496825"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6825">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496929"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C6929">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497066"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7066">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497141"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7141">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497225"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7225">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497267"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7267">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497326"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7326">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497428"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7428">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497541"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7541">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497664"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7664">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497792"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7792">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497877"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C7877">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498078"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C8078">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498520"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C8520">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498624"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C8624">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498999"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C8999">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499088"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9088">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499117"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9117">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499147"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9147">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499207"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9207">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499258"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9258">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499297"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9297">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499364"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9364">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499628"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9628">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499677"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9677">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499808"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9808">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499848"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9848">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499860"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9860">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499881"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9881">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499957"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C9957">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910096"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10096">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910261"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10261">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910302"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10302">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910363"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10363">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910470"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10470">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910521"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10521">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910585"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10585">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910649"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10649">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910760"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10760">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910852"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10852">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910940"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C10940">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911056"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11056">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911110"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11110">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911307"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11307">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911400"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11400">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911515"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11515">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911600"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11600">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911689"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11689">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911738"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11738">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911811"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11811">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911919"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C11919">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912031"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12031">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912097"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12097">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912175"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12175">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912303"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12303">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912391"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12391">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912425"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12425">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912791"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12791">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912835"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12835">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912966"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C12966">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913004"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13004">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913171"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13171">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913234"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13234">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913286"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13286">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913392"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13392">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913453"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13453">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913518"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13518">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913535"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13535">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913653"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13653">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913721"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13721">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913753"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13753">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913867"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C13867">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914234"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14234">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914353"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14353">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914717"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14717">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914748"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14748">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914768"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14768">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914834"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14834">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914893"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C14893">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915024"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15024">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915040"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15040">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915075"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15075">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915486"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15486">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915544"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15544">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915563"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15563">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915668"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15668">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915776"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15776">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915858"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15858">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915946"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15946">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915996"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C15996">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916030"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16030">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916076"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16076">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916193"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16193">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916245"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16245">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916330"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16330">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916382"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16382">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916404"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16404">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916573"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16573">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916874"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16874">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916906"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16906">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916941"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16941">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916979"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C16979">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917174"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C17174">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917178"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C17178">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917301"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C17301">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917864"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C17864">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917983"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C17983">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918017"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18017">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918117"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18117">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918158"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18158">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918183"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18183">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918322"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18322">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918339"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18339">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918528"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18528">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918588"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18588">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918618"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18618">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918717"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18717">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918838"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18838">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918852"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18852">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918950"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C18950">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919015"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19015">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919458"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19458">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919485"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19485">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919523"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19523">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919604"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19604">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919636"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19636">Time Synchronization</a></a></li>
+    <li><a href="#time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919658"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7C19658">Time Synchronization</a></a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5" target="_blank">Time Synchronization</a></h2>
+<p>72.25%, 2023-09-13 13:03:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Chrony service, a new implementation of the Network Time Protocol,
+maintains the clock on the system and keeps it synchronized with a
+more accurate and reliable source of time</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub491803"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c1803" target="_blank">Time Synchronization</a></h2>
+<p>72.43%, 2023-09-13 13:09:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>sends a stream of messages to configured time servers and binds itself
+to the one with least amount of delay in its responses</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub491919"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c1919" target="_blank">Time Synchronization</a></h2>
+<p>72.44%, 2023-09-13 13:09:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>responses, the most accurate, and may or may not be the closest
+distance-wise.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492002"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2002" target="_blank">Time Synchronization</a></h2>
+<p>72.45%, 2023-09-13 13:10:35 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>client system maintains a drift in time in a file and references this
+file for gradual drop in inaccuracy.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492137"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2137" target="_blank">Time Synchronization</a></h2>
+<p>72.46%, 2023-09-13 13:10:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>new implementation of NTP called</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492163"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2163" target="_blank">Time Synchronization</a></h2>
+<p>72.46%, 2023-09-13 13:10:49 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>called <em>Chrony</em>.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492194"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2194" target="_blank">Time Synchronization</a></h2>
+<p>72.47%, 2023-09-13 13:11:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>UDP</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492216"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2216" target="_blank">Time Synchronization</a></h2>
+<p>72.47%, 2023-09-13 13:12:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>well-known port 123</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492237"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2237" target="_blank">Time Synchronization</a></h2>
+<p>72.47%, 2023-09-13 13:12:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>If enabled, it starts at system boot and continuously operates to keep
+the system clock in sync with a more accurate source of time.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492554"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2554" target="_blank">Time Synchronization</a></h2>
+<p>72.50%, 2023-09-13 13:13:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>time source</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492559"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2559" target="_blank">Time Synchronization</a></h2>
+<p>72.50%, 2023-09-13 13:13:28 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>source</em> is any reference device that acts as a provider of time to
+other devices.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492681"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2681" target="_blank">Time Synchronization</a></h2>
+<p>72.51%, 2023-09-13 13:14:15 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>atomic clocks. They use</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492705"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2705" target="_blank">Time Synchronization</a></h2>
+<p>72.52%, 2023-09-13 13:14:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>Universal Time Coordinated</em> (UTC) for time accuracy</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492762"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2762" target="_blank">Time Synchronization</a></h2>
+<p>72.52%, 2023-09-13 13:14:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>produce radio signals that radio clocks use for time propagation to
+computer servers and other devices that require correctness in time</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492942"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2942" target="_blank">Time Synchronization</a></h2>
+<p>72.54%, 2023-09-18 12:14:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>preference</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub492963"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c2963" target="_blank">Time Synchronization</a></h2>
+<p>72.54%, 2023-09-18 12:14:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>given to the one that takes the least amount of time to respond.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493040"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3040" target="_blank">Time Synchronization</a></h2>
+<p>72.55%, 2023-09-18 12:14:28 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>may or may not be closest physically.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493082"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3082" target="_blank">Time Synchronization</a></h2>
+<p>72.55%, 2023-09-18 12:13:16 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>common sources</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493143"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3143" target="_blank">Time Synchronization</a></h2>
+<p>72.56%, 2023-09-18 12:13:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>local system clock, an Internet-based public time server, and a radio
+clock.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493224"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3224" target="_blank">Time Synchronization</a></h2>
+<p>72.57%, 2023-09-18 12:14:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>local system clock</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493250"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3250" target="_blank">Time Synchronization</a></h2>
+<p>72.57%, 2023-09-18 12:14:47 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>used as a provider of time.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493283"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3283" target="_blank">Time Synchronization</a></h2>
+<p>72.57%, 2023-09-18 12:15:09 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>requires the maintenance of correct time on the server either manually
+or automatically via <em>cron</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493415"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3415" target="_blank">Time Synchronization</a></h2>
+<p>72.59%, 2023-09-18 12:15:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>no way of synchronizing itself with a more reliable and precise
+external time source</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493565"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3565" target="_blank">Time Synchronization</a></h2>
+<p>72.60%, 2023-09-18 12:15:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>least recommended option.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493599"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3599" target="_blank">Time Synchronization</a></h2>
+<p>72.61%, 2023-09-18 12:15:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>public time servers</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493668"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3668" target="_blank">Time Synchronization</a></h2>
+<p>72.61%, 2023-09-18 12:15:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>visit <em><a href="https://www.ntp.org" target="_blank">www.ntp.org</a></em> for</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493717"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3717" target="_blank">Time Synchronization</a></h2>
+<p>72.62%, 2023-09-18 12:15:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>typically operated by government agencies</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493760"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3760" target="_blank">Time Synchronization</a></h2>
+<p>72.62%, 2023-09-18 12:15:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>research and scientific organizations, large software vendors, and
+universities</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493858"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3858" target="_blank">Time Synchronization</a></h2>
+<p>72.63%, 2023-09-18 12:17:27 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>One of the systems on the local network is identified and configured
+to receive time from one or more public time servers</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub493996"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c3996" target="_blank">Time Synchronization</a></h2>
+<p>72.64%, 2023-09-18 12:17:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>preferred over the use of the local system clock</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494050"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4050" target="_blank">Time Synchronization</a></h2>
+<p>72.65%, 2023-09-18 12:17:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>official <em>ntp.org</em> site also provides a common pool called
+<em>pool.ntp.org</em> for vendors and organizations to register their own NTP
+servers voluntarily for public use</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494221"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4221" target="_blank">Time Synchronization</a></h2>
+<p>72.67%, 2023-09-18 12:17:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>include <em>rhel.pool.ntp.org</em> and <em>ubuntu.pool.ntp.org</em> for
+distribution-specific pools, and <em>ca.pool.ntp.org</em> and
+<em>oceania.pool.ntp.org</em> for country and continent/region-specific pools</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494398"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4398" target="_blank">Time Synchronization</a></h2>
+<p>72.68%, 2023-09-18 12:19:20 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Under these sub-pools, the owners maintain multiple time servers with
+enumerated hostnames such as
+<em>0.rhel.pool.ntp.org</em>,<em>1.rhel.pool.ntp.org</em>, <em>2.rhel.pool.ntp.org</em>,
+and so on</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494572"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4572" target="_blank">Time Synchronization</a></h2>
+<p>72.70%, 2023-09-18 12:19:25 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>radio clock</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494603"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4603" target="_blank">Time Synchronization</a></h2>
+<p>72.71%, 2023-09-18 12:19:29 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>perfect provider of time</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494649"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4649" target="_blank">Time Synchronization</a></h2>
+<p>72.71%, 2023-09-18 12:19:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>updates straight from an atomic clock</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494688"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4688" target="_blank">Time Synchronization</a></h2>
+<p>72.71%, 2023-09-18 12:19:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>Global Positioning System</em> (GPS), WWVB, and DCF77 are some popular
+radio clock methods</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494818"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4818" target="_blank">Time Synchronization</a></h2>
+<p>72.73%, 2023-09-18 12:20:02 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>requires connectivity of some hardware to the computer identified to
+act as an organizational or site-wide time server.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494938"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4938" target="_blank">Time Synchronization</a></h2>
+<p>72.74%, 2023-09-18 12:20:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>NTP Roles</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub494974"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c4974" target="_blank">Time Synchronization</a></h2>
+<p>72.74%, 2023-09-18 12:20:16 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>system can be configured to operate as a primary server, secondary
+server, peer, or client.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495068"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5068" target="_blank">Time Synchronization</a></h2>
+<p>72.75%, 2023-09-18 12:20:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>primary</em> server</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495083"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5083" target="_blank">Time Synchronization</a></h2>
+<p>72.75%, 2023-09-18 12:20:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>gets time from a time source and provides time to secondary servers or
+directly to clients.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495177"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5177" target="_blank">Time Synchronization</a></h2>
+<p>72.76%, 2023-09-18 12:22:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>secondary</em> server receives time from a primary server and can be
+configured to furnish time to a set of clients to offload the primary
+or for redundancy</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495383"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5383" target="_blank">Time Synchronization</a></h2>
+<p>72.78%, 2023-09-18 12:22:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>optional but highly recommended</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495418"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5418" target="_blank">Time Synchronization</a></h2>
+<p>72.79%, 2023-09-18 12:22:27 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>peer</em> reciprocates time with an NTP server</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495461"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5461" target="_blank">Time Synchronization</a></h2>
+<p>72.79%, 2023-09-18 12:22:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>All peers work at the same stratum level</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495507"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5507" target="_blank">Time Synchronization</a></h2>
+<p>72.80%, 2023-09-18 12:22:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>all of them are considered equally reliable</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495557"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5557" target="_blank">Time Synchronization</a></h2>
+<p>72.80%, 2023-09-18 12:23:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>primary and secondary servers can be peers of each other.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495617"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5617" target="_blank">Time Synchronization</a></h2>
+<p>72.81%, 2023-09-18 12:23:08 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>client</em> receives time from a primary or a secondary server and
+adjusts its clock accordingly</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495941"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5941" target="_blank">Time Synchronization</a></h2>
+<p>72.84%, 2023-09-18 12:24:04 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>based on their distance from the reference clocks</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub495992"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c5992" target="_blank">Time Synchronization</a></h2>
+<p>72.84%, 2023-09-18 12:24:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>atomic, radio, and GPS</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496021"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6021" target="_blank">Time Synchronization</a></h2>
+<p>72.85%, 2023-09-18 12:24:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>reference clocks operate at stratum level 0 and are the most accurate
+provider of time with little to no delay</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496162"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6162" target="_blank">Time Synchronization</a></h2>
+<p>72.86%, 2023-09-18 12:24:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>fifteen additional levels that range from 1 to 15</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496244"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6244" target="_blank">Time Synchronization</a></h2>
+<p>72.87%, 2023-09-18 12:24:44 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>stratum 1 are considered perfect</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496286"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6286" target="_blank">Time Synchronization</a></h2>
+<p>72.87%, 2023-09-18 12:24:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>get time updates directly from a stratum 0 device</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496391"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6391" target="_blank">Time Synchronization</a></h2>
+<p>72.88%, 2023-09-18 12:25:03 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>NTP Stratum Levels</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496413"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6413" target="_blank">Time Synchronization</a></h2>
+<p>72.89%, 2023-09-18 12:25:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>stratum 0 device cannot be used on the network directly</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496470"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6470" target="_blank">Time Synchronization</a></h2>
+<p>72.89%, 2023-09-18 12:25:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>It is attached to a computer, which is then configured to operate at
+stratum 1.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496550"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6550" target="_blank">Time Synchronization</a></h2>
+<p>72.90%, 2023-09-18 12:25:32 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Servers functioning at stratum 1 are called <em>time servers</em> and they
+can be set up to deliver time to stratum 2 servers</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496679"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6679" target="_blank">Time Synchronization</a></h2>
+<p>72.91%, 2023-09-18 12:25:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>a stratum 3 server can be configured to synchronize its time with a
+stratum 2</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496814"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6814" target="_blank">Time Synchronization</a></h2>
+<p>72.93%, 2023-09-18 12:25:51 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>and so on</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496825"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6825" target="_blank">Time Synchronization</a></h2>
+<p>72.93%, 2023-09-18 12:27:13 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Servers sharing the same stratum can be configured as peers to
+exchange time updates with one another</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub496929"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c6929" target="_blank">Time Synchronization</a></h2>
+<p>72.94%, 2023-09-18 12:27:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>If a secondary server also gets time updates from a stratum 1 server,
+it will act as a peer to the primary server.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497066"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7066" target="_blank">Time Synchronization</a></h2>
+<p>72.95%, 2023-09-18 12:28:09 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>public NTP servers</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497141"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7141" target="_blank">Time Synchronization</a></h2>
+<p>72.96%, 2023-09-18 12:28:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>operate at higher stratum levels such as 2 and 3.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497225"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7225" target="_blank">Time Synchronization</a></h2>
+<p>72.97%, 2023-09-18 12:28:18 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>configuration file</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497267"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7267" target="_blank">Time Synchronization</a></h2>
+<p>72.97%, 2023-09-18 12:28:22 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>is <em>chrony.conf</em> located in the <em>/etc</em> directory</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497326"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7326" target="_blank">Time Synchronization</a></h2>
+<p>72.98%, 2023-09-18 12:28:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>referenced by the Chrony daemon at startup to determine the sources to
+synchronize the clock, the log file</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497428"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7428" target="_blank">Time Synchronization</a></h2>
+<p>72.99%, 2023-09-18 12:28:49 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>file location, and other details</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497541"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7541" target="_blank">Time Synchronization</a></h2>
+<p>73.00%, 2023-09-18 12:29:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>common directives</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497664"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7664" target="_blank">Time Synchronization</a></h2>
+<p>73.01%, 2023-09-18 12:29:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>driftfile /var/lib/chrony/drift logdir /var/log/chrony pool
+0.rhel.pool.ntp.org iburst server server20s8.example.com iburst</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497792"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7792" target="_blank">Time Synchronization</a></h2>
+<p>73.02%, 2023-09-18 12:29:44 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>server 127.127.1.0 peer prodntp1.abc.net</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub497877"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c7877" target="_blank">Time Synchronization</a></h2>
+<p>73.03%, 2023-09-18 12:30:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><strong>Directive</strong> <strong>Description</strong> driftfile Indicates the location and
+name of the drift file to be used to record the rate at which the
+system clock gains or losses time. This data is used by Chrony to
+maintain</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498078"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c8078" target="_blank">Time Synchronization</a></h2>
+<p>73.05%, 2023-09-18 12:30:43 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>local system clock accuracy. logdir Sets the directory location to
+store the log files in pool Defines the hostname that represents a
+pool of time servers. Chrony binds itself with one of the servers to
+get updates. In case of a failure of that server, it automatically
+switches the binding to another server within the pool. The iburst
+option dictates the Chrony service to send the first four update
+requests to the time server every 2</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498520"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c8520" target="_blank">Time Synchronization</a></h2>
+<p>73.10%, 2023-09-18 12:38:21 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>seconds. This allows the daemon to quickly bring the local clock
+closer to the time server at startup.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498624"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c8624" target="_blank">Time Synchronization</a></h2>
+<p>73.11%, 2023-09-18 12:40:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>server Defines the hostname or IP address of a single time server. The
+IP 127.127.1.0 is a special address that epitomizes the local system
+clock. peer Identifies the hostname or IP address of a time server
+running at the same stratum level. A peer provides time to a server as
+well as receives time from the same</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub498999"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c8999" target="_blank">Time Synchronization</a></h2>
+<p>73.14%, 2023-09-18 12:41:03 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>other directives and options</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499088"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9088" target="_blank">Time Synchronization</a></h2>
+<p>73.15%, 2023-09-18 12:41:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>man chrony.conf</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499117"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9117" target="_blank">Time Synchronization</a></h2>
+<p>73.15%, 2023-09-18 12:41:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Chrony Daemon and Command</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499147"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9147" target="_blank">Time Synchronization</a></h2>
+<p>73.16%, 2023-09-18 12:41:41 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Chrony service runs as a daemon program called <em>chronyd</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499207"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9207" target="_blank">Time Synchronization</a></h2>
+<p>73.16%, 2023-09-18 12:41:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>handles time synchronization in the background</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499258"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9258" target="_blank">Time Synchronization</a></h2>
+<p>73.17%, 2023-09-18 12:41:54 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>uses</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499297"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9297" target="_blank">Time Synchronization</a></h2>
+<p>73.17%, 2023-09-18 12:41:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>etc/chrony.conf</em> file at startup and sets its behavior accordingly</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499364"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9364" target="_blank">Time Synchronization</a></h2>
+<p>73.18%, 2023-09-18 12:42:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>If the local clock requires a time adjustment, Chrony takes multiple
+small steps toward minimizing the gap rather than doing it abruptly in
+a single step</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499628"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9628" target="_blank">Time Synchronization</a></h2>
+<p>73.21%, 2023-09-18 12:42:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Chrony service has a command line program called <em>chronyc</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499677"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9677" target="_blank">Time Synchronization</a></h2>
+<p>73.21%, 2023-09-18 12:42:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>chronyc</em> available that can be employed to monitor the performance of
+the service and control its runtime behavior</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499808"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9808" target="_blank">Time Synchronization</a></h2>
+<p>73.22%, 2023-09-18 12:42:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>subcommands</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499848"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9848" target="_blank">Time Synchronization</a></h2>
+<p>73.23%, 2023-09-18 12:42:53 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>sources</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499860"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9860" target="_blank">Time Synchronization</a></h2>
+<p>73.23%, 2023-09-18 12:42:55 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>tracking</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499881"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9881" target="_blank">Time Synchronization</a></h2>
+<p>73.23%, 2023-09-18 12:43:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>list current sources of time and view performance statistics,
+respectively.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub499957"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c9957" target="_blank">Time Synchronization</a></h2>
+<p>73.24%, 2023-09-18 12:43:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Exercise 18-1: Configure NTP Client</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910096"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10096" target="_blank">Time Synchronization</a></h2>
+<p>73.25%, 2023-09-18 12:44:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>install the Chrony software package and activate the service without
+making any changes to the default configuration. You will validate the
+binding and operation.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910261"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10261" target="_blank">Time Synchronization</a></h2>
+<p>73.27%, 2023-09-18 12:44:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Install the Chrony package using the <em>dnf</em> command</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910302"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10302" target="_blank">Time Synchronization</a></h2>
+<p>73.27%, 2023-09-18 12:45:06 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>command:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910363"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10363" target="_blank">Time Synchronization</a></h2>
+<p>73.28%, 2023-09-18 12:45:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Ensure that preconfigured public time server entries are present in
+the <em>/etc/chrony.conf</em> file:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910470"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10470" target="_blank">Time Synchronization</a></h2>
+<p>73.29%, 2023-09-18 12:47:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>single pool entry set in the file by default</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910521"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10521" target="_blank">Time Synchronization</a></h2>
+<p>73.29%, 2023-09-18 12:47:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>pool name is backed by multiple NTP servers behind the scene.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910585"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10585" target="_blank">Time Synchronization</a></h2>
+<p>73.30%, 2023-09-18 12:47:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Start the Chrony service and set it to autostart at reboots</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910649"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10649" target="_blank">Time Synchronization</a></h2>
+<p>73.31%, 2023-09-18 12:47:38 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Examine the operational status of Chrony</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910760"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10760" target="_blank">Time Synchronization</a></h2>
+<p>73.32%, 2023-09-18 12:48:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Inspect the binding status using the <em>sources</em> subcommand with
+<em>chronyc</em>:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910852"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10852" target="_blank">Time Synchronization</a></h2>
+<p>73.33%, 2023-09-18 12:51:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>number of available time sources</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4910940"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c10940" target="_blank">Time Synchronization</a></h2>
+<p>73.34%, 2023-09-18 12:51:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Columns 1 to 4—M, S, Name/IP, and Stratum—illustrate the mode, state,
+name/IP, and stratum level of the source</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911056"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11056" target="_blank">Time Synchronization</a></h2>
+<p>73.35%, 2023-09-18 12:51:51 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>^ means server and the * implies current association.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911110"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11110" target="_blank">Time Synchronization</a></h2>
+<p>73.35%, 2023-09-18 12:52:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Columns 4 to 8—Poll, Reach, LastRx, and Last Sample—display the
+polling rate (6 means 64 seconds), reachability register (377
+indicates a valid response was received), how long ago the last sample
+was</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911307"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11307" target="_blank">Time Synchronization</a></h2>
+<p>73.37%, 2023-09-18 12:53:12 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>was received, and the offset between the local clock and the source at
+the last measurement</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911400"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11400" target="_blank">Time Synchronization</a></h2>
+<p>73.38%, 2023-09-18 12:53:32 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Check out the manual pages of the <em>chronyc</em> command and search for the
+section ‘sources’ for additional details</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911515"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11515" target="_blank">Time Synchronization</a></h2>
+<p>73.39%, 2023-09-18 12:55:33 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>last line in the output depicts the <em>server10</em> binding with time
+server <em>gpg.n1zyy.com</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911600"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11600" target="_blank">Time Synchronization</a></h2>
+<p>73.40%, 2023-09-18 12:56:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>This association is identified with the asterisk character (*) beside
+the time server</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911689"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11689" target="_blank">Time Synchronization</a></h2>
+<p>73.41%, 2023-09-18 12:56:18 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Display the clock performance using the <em>tracking</em> subcommand</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911738"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11738" target="_blank">Time Synchronization</a></h2>
+<p>73.42%, 2023-09-18 12:56:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>subcommand with <em>chronyc</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911811"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11811" target="_blank">Time Synchronization</a></h2>
+<p>73.42%, 2023-09-18 12:57:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>current source of time (Reference ID) and the stratum level it is
+configured at (Stratum</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4911919"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c11919" target="_blank">Time Synchronization</a></h2>
+<p>73.43%, 2023-09-18 12:58:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>reference time at which the last measurement from the time source was
+processed (Ref time)</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912031"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12031" target="_blank">Time Synchronization</a></h2>
+<p>73.44%, 2023-09-18 12:58:06 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>local time offset from NTP time (System time</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912097"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12097" target="_blank">Time Synchronization</a></h2>
+<p>73.45%, 2023-09-18 12:58:10 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>last reported offset from the NTP server (Last offset)</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912175"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12175" target="_blank">Time Synchronization</a></h2>
+<p>73.46%, 2023-09-18 12:58:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>frequency at which time adjustments are occurring (Frequency</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912303"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12303" target="_blank">Time Synchronization</a></h2>
+<p>73.47%, 2023-09-18 12:58:26 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Check out the manual pages of the <em>chronyc</em> command and search for the
+section “tracking</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912391"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12391" target="_blank">Time Synchronization</a></h2>
+<p>73.48%, 2023-09-18 12:58:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>for additional details.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912425"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12425" target="_blank">Time Synchronization</a></h2>
+<p>73.48%, 2023-09-18 12:58:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>You will not have access to the outside network during the exam, so
+you will need to point your system to an NTP server available on the
+exam network. Simply comment the default server/pool directive(s) and
+add a single directive “server &lt;hostname&gt;” to the file. Replace
+&lt;hostname&gt; with the NTP server name or its IP address as
+provided.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912791"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12791" target="_blank">Time Synchronization</a></h2>
+<p>73.52%, 2023-09-18 12:58:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Displaying and Setting System Date and Time</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912835"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12835" target="_blank">Time Synchronization</a></h2>
+<p>73.52%, 2023-09-18 13:00:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>System date and time can be viewed and manually adjusted with native
+Linux tools such as the <em>timedatectl</em> command</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4912966"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c12966" target="_blank">Time Synchronization</a></h2>
+<p>73.54%, 2023-09-18 13:00:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>modify the date, time, and time zone</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913004"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13004" target="_blank">Time Synchronization</a></h2>
+<p>73.54%, 2023-09-18 13:00:27 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>When executed without any option, as shown below, it outputs the local
+time, Universal time, RTC time (<em>real-time clock</em>, a battery-backed
+hardware clock located on the</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913171"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13171" target="_blank">Time Synchronization</a></h2>
+<p>73.56%, 2023-09-18 13:00:44 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>system board), time zone, and the status of NTP:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913234"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13234" target="_blank">Time Synchronization</a></h2>
+<p>73.56%, 2023-09-18 13:01:54 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>requires that the NTP/Chrony service is deactivated in</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913286"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13286" target="_blank">Time Synchronization</a></h2>
+<p>73.57%, 2023-09-18 13:02:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>in order to make time adjustments. Run the <em>timedatectl</em> command as
+follows to turn off NTP and verify:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913392"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13392" target="_blank">Time Synchronization</a></h2>
+<p>73.58%, 2023-09-19 01:53:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>modify the current date to January 1, 2020, and confirm:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913453"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13453" target="_blank">Time Synchronization</a></h2>
+<p>73.59%, 2023-09-19 01:54:11 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>change the time to 11:20 p.m. and date to November 18, 2019</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913518"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13518" target="_blank">Time Synchronization</a></h2>
+<p>73.59%, 2023-09-19 01:54:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>reactivate NTP</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913535"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13535" target="_blank">Time Synchronization</a></h2>
+<p>73.59%, 2023-09-19 01:55:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Check out the manual pages of the <em>timedatectl</em> command for more
+subcommands and usage examples.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913653"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13653" target="_blank">Time Synchronization</a></h2>
+<p>73.61%, 2023-09-19 01:55:41 UTC</p>
+<p>Color: #285FF5</p>
+<blockquote>
+<p>use the <em>date</em> command to view or modify the system date and time.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913721"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13721" target="_blank">Time Synchronization</a></h2>
+<p>73.61%, 2023-09-19 01:56:52 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>view current date and time:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913753"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13753" target="_blank">Time Synchronization</a></h2>
+<p>73.62%, 2023-09-19 01:56:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>change the date and time to November 22, 2019 1:00 p.m.:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4913867"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c13867" target="_blank">Time Synchronization</a></h2>
+<p>73.63%, 2023-09-19 01:57:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Consult its manual pages for details.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914234"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14234" target="_blank">Time Synchronization</a></h2>
+<p>73.66%, 2023-09-19 01:59:00 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DNS is also referred to as BIND, <em>Berkeley Internet Name Domain</em>,
+which is an implementation of DNS</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914353"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14353" target="_blank">Time Synchronization</a></h2>
+<p>73.68%, 2023-09-19 01:59:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>most popular DNS application in use</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914717"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14717" target="_blank">Time Synchronization</a></h2>
+<p>73.71%, 2023-09-19 01:59:45 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DNS Name Space and Domains</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914748"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14748" target="_blank">Time Synchronization</a></h2>
+<p>73.72%, 2023-09-19 01:59:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DNS <em>name space</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914768"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14768" target="_blank">Time Synchronization</a></h2>
+<p>73.72%, 2023-09-19 02:00:03 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>hierarchical organization of all the domains on the Internet.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914834"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14834" target="_blank">Time Synchronization</a></h2>
+<p>73.72%, 2023-09-19 02:00:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>root of the name space is represented by a period</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4914893"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c14893" target="_blank">Time Synchronization</a></h2>
+<p>73.73%, 2023-09-19 02:00:31 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>hierarchy below the root (.) denotes the <em>top-level domains</em> (TLDs)
+with names such as .com, .net, .edu, .org, .gov, .ca, and .de</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915024"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15024" target="_blank">Time Synchronization</a></h2>
+<p>73.74%, 2023-09-19 02:00:48 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DNS <em>domain</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915040"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15040" target="_blank">Time Synchronization</a></h2>
+<p>73.74%, 2023-09-19 02:01:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>collection of one or more systems.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915075"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15075" target="_blank">Time Synchronization</a></h2>
+<p>73.75%, 2023-09-19 02:01:26 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Subdomains fall under their parent domains and are separated by a
+period (.). For example, <em>redhat.com</em> is a second-level subdomain that
+falls under .com, and <em>bugzilla.redhat.com</em> is a third-level subdomain
+that falls under <em>redhat.com</em>.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915486"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15486" target="_blank">Time Synchronization</a></h2>
+<p>73.79%, 2023-09-19 12:54:22 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>leaves</em> (systems, nodes, or any device with an IP address</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915544"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15544" target="_blank">Time Synchronization</a></h2>
+<p>73.79%, 2023-09-19 12:54:28 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>of the name space</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915563"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15563" target="_blank">Time Synchronization</a></h2>
+<p>73.80%, 2023-09-19 12:55:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>For example, a network switch <em>net01</em> in <em>.travel.gc.ca</em> subdomain</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915668"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15668" target="_blank">Time Synchronization</a></h2>
+<p>73.81%, 2023-09-19 12:55:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>period (.) is added to the end of this name to look like
+<em>net01.travel.gc.ca.</em>, it will be referred to as the <em>Fully</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915776"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15776" target="_blank">Time Synchronization</a></h2>
+<p>73.82%, 2023-09-19 12:55:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>Fully Qualified Domain Name</em> (FQDN) for <em>net01</em>.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915858"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15858" target="_blank">Time Synchronization</a></h2>
+<p>73.83%, 2023-09-19 12:56:29 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>system can be configured to operate as a primary server, secondary
+server, or client</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915946"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15946" target="_blank">Time Synchronization</a></h2>
+<p>73.83%, 2023-09-19 12:56:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DNS server is also referred to as a <em>nameserver</em>.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4915996"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c15996" target="_blank">Time Synchronization</a></h2>
+<p>73.84%, 2023-09-19 12:56:34 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>primary</em> (a.k.a. <em>master</em>) <em>server</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916030"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16030" target="_blank">Time Synchronization</a></h2>
+<p>73.84%, 2023-09-19 12:56:42 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>responsible for its domain (or subdomain</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916076"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16076" target="_blank">Time Synchronization</a></h2>
+<p>73.85%, 2023-09-19 12:56:58 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>maintains a master database of all the hostnames and their associated
+IP addresses that are included in that domain</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916193"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16193" target="_blank">Time Synchronization</a></h2>
+<p>73.86%, 2023-09-19 12:57:06 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Any changes in the database is done on this server.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916245"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16245" target="_blank">Time Synchronization</a></h2>
+<p>73.86%, 2023-09-19 12:57:20 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Each domain must have one primary server with one or more optional
+<em>secondary</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916330"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16330" target="_blank">Time Synchronization</a></h2>
+<p>73.87%, 2023-09-19 12:57:24 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>slave</em>) servers for load balancing and redundancy</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916382"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16382" target="_blank">Time Synchronization</a></h2>
+<p>73.88%, 2023-09-19 12:58:03 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>secondary server</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916404"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16404" target="_blank">Time Synchronization</a></h2>
+<p>73.88%, 2023-09-19 12:58:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>stores an updated copy of the master database and it continues to
+provide name resolution service in the event the primary server
+becomes unavailable or inaccessible.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916573"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16573" target="_blank">Time Synchronization</a></h2>
+<p>73.90%, 2023-09-19 12:58:19 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>DNS client</em> queries nameservers for name lookups</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916874"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16874" target="_blank">Time Synchronization</a></h2>
+<p>73.93%, 2023-09-19 12:59:23 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Resolver Configuration File</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916906"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16906" target="_blank">Time Synchronization</a></h2>
+<p>73.93%, 2023-09-19 12:59:30 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>resolv.conf</em> file under <em>/etc</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916941"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16941" target="_blank">Time Synchronization</a></h2>
+<p>73.93%, 2023-09-19 12:59:40 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>DNS resolver configuration file</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4916979"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c16979" target="_blank">Time Synchronization</a></h2>
+<p>73.94%, 2023-09-19 12:59:47 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>information to support hostname lookups is defined</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917174"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c17174" target="_blank">Time Synchronization</a></h2>
+<p>73.96%, 2023-09-19 13:00:09 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>key</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917178"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c17178" target="_blank">Time Synchronization</a></h2>
+<p>73.96%, 2023-09-19 13:00:12 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>directives</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917301"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c17301" target="_blank">Time Synchronization</a></h2>
+<p>73.97%, 2023-09-19 13:00:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>A sample entry showing the syntax is provided below for reference:</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917864"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c17864" target="_blank">Time Synchronization</a></h2>
+<p>74.03%, 2023-09-20 12:14:36 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>domain example.com search example.net example.org example.edu
+example.gov nameserver 192.168.0.1 8.8.8.8 8.8.4.4</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4917983"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c17983" target="_blank">Time Synchronization</a></h2>
+<p>74.04%, 2023-09-20 12:14:50 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>variation of the above</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918017"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18017" target="_blank">Time Synchronization</a></h2>
+<p>74.04%, 2023-09-20 12:14:54 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>domain example.com search example.net example.org example.edu
+example.gov nameserver 192.168.0.1</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918117"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18117" target="_blank">Time Synchronization</a></h2>
+<p>74.05%, 2023-09-20 12:15:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>nameserver 8.8.8.8 nameserver 8.8.4.4</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918158"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18158" target="_blank">Time Synchronization</a></h2>
+<p>74.05%, 2023-09-20 12:16:17 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Currently</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918183"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18183" target="_blank">Time Synchronization</a></h2>
+<p>74.06%, 2023-09-20 12:16:20 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>entries</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918322"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18322" target="_blank">Time Synchronization</a></h2>
+<p>74.07%, 2023-09-20 12:15:49 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>file absent</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918339"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18339" target="_blank">Time Synchronization</a></h2>
+<p>74.07%, 2023-09-20 12:15:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>resolver utilities only query the nameserver configured on the
+localhost, determine the domain name from the hostname of the system,
+and construct the search path based on the domain name.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918528"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18528" target="_blank">Time Synchronization</a></h2>
+<p>74.09%, 2023-09-20 12:16:57 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>Viewing and Adjusting Name Resolution Sources and Order</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918588"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18588" target="_blank">Time Synchronization</a></h2>
+<p>74.10%, 2023-09-20 12:17:02 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p><em>nsswitch.conf</em> file under <em>/etc</em></p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918618"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18618" target="_blank">Time Synchronization</a></h2>
+<p>74.10%, 2023-09-20 12:17:07 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>directs the lookup utilities to the correct source to get hostname
+information</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918717"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18717" target="_blank">Time Synchronization</a></h2>
+<p>74.11%, 2023-09-20 12:17:26 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>multiple sources, this file also identifies the order in which to
+consult them and an action to be taken next.</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918838"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18838" target="_blank">Time Synchronization</a></h2>
+<p>74.12%, 2023-09-20 12:17:32 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>four keywords</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918852"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18852" target="_blank">Time Synchronization</a></h2>
+<p>74.12%, 2023-09-20 12:17:37 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>success, notfound, unavail, and tryagain</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4918950"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c18950" target="_blank">Time Synchronization</a></h2>
+<p>74.13%, 2023-09-20 12:17:46 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>default actions</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919015"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19015" target="_blank">Time Synchronization</a></h2>
+<p>74.14%, 2023-09-20 12:17:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>success Information found in source and provided to the requester
+return (do not try the next source) notfound Information not found in
+source continue (try the next source) unavail Source down or not
+responding; service disabled or not configured continue (try the next
+source) tryagain Source busy, retry later continue (try the next
+source</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919458"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19458" target="_blank">Time Synchronization</a></h2>
+<p>74.18%, 2023-09-20 12:20:56 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>syntax</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919485"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19485" target="_blank">Time Synchronization</a></h2>
+<p>74.19%, 2023-09-20 12:20:59 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>from the <em>nsswitch.conf</em> file</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919523"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19523" target="_blank">Time Synchronization</a></h2>
+<p>74.19%, 2023-09-20 12:21:05 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>two sources for name resolution: files (<em>/etc/hosts</em>) and DNS
+(<em>/etc/resolv.conf</em>).</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919604"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19604" target="_blank">Time Synchronization</a></h2>
+<p>74.20%, 2023-09-20 12:21:33 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>hosts: files dns</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919636"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19636" target="_blank">Time Synchronization</a></h2>
+<p>74.20%, 2023-09-20 12:26:01 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>default behavior</p>
+</blockquote>
+<h2 id="time-synchronizationhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub4919658"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#49%7c19658" target="_blank">Time Synchronization</a></h2>
+<p>74.20%, 2023-09-20 12:26:14 UTC</p>
+<p>Color: #0010FF</p>
+<blockquote>
+<p>search will terminate if the</p>
+</blockquote>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1708488311" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1708488311" defer></script>
+        <script src="/js/search.js?1708488311" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/18_time_sync_and_hostname_resolution/" class="active"><a class="padding" href="/linux/rhcsa/18_time_sync_and_hostname_resolution/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-language fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-city2" value="city2" selected>City2</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fas fa-history fa-fw"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1708488311" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1708488311" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1708488311" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1708488311" defer></script>
+    <script src="/js/js-yaml.min.js?1708488311" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1708488311" defer></script>
+  </body>
+</html>

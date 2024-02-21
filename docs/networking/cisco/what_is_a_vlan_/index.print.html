@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>What is a VLAN? - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/what_is_a_vlan_/index.html" rel="canonical" type="text/html" title="What is a VLAN? - Perfect Dark Mode">
+    <link href="/networking/cisco/what_is_a_vlan_/index.xml" rel="alternate" type="application/rss+xml" title="What is a VLAN? - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/what_is_a_vlan_/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">What is a VLAN?</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="what-is-a-vlan">What is a VLAN?</h1>
+
+<p>VLANs create smaller broadcast domains. Why create smaller broadcast domains?</p>
+<ul>
+<li>Device have to do less stuff (process less broadcasts)</li>
+<li>Better security</li>
+<li>Group different departments together</li>
+<li>Narrow down problems</li>
+<li>Less spanning tree if you reduce vlan to a single switch</li>
+</ul>
+<p>802.1q tagging</p>
+<p>Frames are tagged with an 802.1q header as they leave the switch. So the receiving switch knows what vlan the frame is part of.</p>
+<p>802.1q header</p>
+<ul>
+<li>4 bytes</li>
+<li>Includes 12 bit vlan id field that supports 4096 vlans. (0 and 5 are reserved so make that 4094)</li>
+<li>Also include type, priority, and flag fields</li>
+</ul>
+<p>VLAN numbers and what they mean</p>
+<p>Normal range vlans are vlans 1-1005. All switches are able to use these vlan numbers.</p>
+<p>Extended range vlans 1006-4094. Only some switches are able to use these</p>
+<p>Native vlan are untagged. This is important. The native vlans is defaulted to 1. But you can manually set it to another number say vlan4.</p>
+<p>VLAN Trunking Protocol (VTP)</p>
+<p>This is a protocol for spreading VLAN settings throughout a network. A switch can be set to Transparent, client, or server.</p>
+<p>Client mode: Cannot configure vlans and can learn new and deleted vlans from other switches.</p>
+<p>Server Mode: Can configure VLANS is the standard range. Can learn new and deleted vlans from other switches.</p>
+<p>VTP Commands:</p>
+<p>Set the vtp mode</p>
+<p>#vtp mode (transparent, client, server, off)</p>
+<p>Show vtp settings</p>
+<p>#show vtp status</p>
+<p>Dynamic trunking protocol</p>
+<p>Will negotiate ISL or 802.1q trunking with other switches</p>
+<p>Switches will default to ISL if they both know that protocol. Otherwise they will use DTP if they both support it. This is because the default setting reads “negotiate”. Or negotiate the protocol used.</p>
+<p>You should disable negotiation of trunks for better security.</p>
+<p>Switchport settings for DTP</p>
+<p>Access: Statically set as access</p>
+<p>Trunk: statically set as trunk</p>
+<p>Dynamic desirable: Initiates and responds to negotiation messages.</p>
+<p>Dynamic auto: responds to negotiation messages only. This is the default setting. If both ends use dynamic auto mode then both ends will be configured as access ports. If the other end is set as Dynamic desirable, then both ports will be set as trunk ports.</p>
+<p>Trunking commands:</p>
+<p>Setting the encapsulation mode</p>
+<p>#switchport trunk encapsulation (dot1q | isl | negotiate)</p>
+<p>Disable DTP</p>
+<p>#switchport no negotiate</p>
+<p>Voice vlans</p>
+<p>Only time you can configure two vlans on an access port is if you add a voice vlan to it. This is because phones are often on the same port as user pcs and voice traffic is often prioritized differently than other traffic.</p>
+<p>CDP protocol must be enabled for voic vlan to work. Also, voice traffic is tagged with an 802.1q header.</p>
+<p>Setting the voice vlan</p>
+<p>#switchport voice vlan 12</p>
+<p>Showing vlan information and troubleshooting</p>
+<p>You will want to see what vlans are configured on what ports. What trunks are allowed on what ports. Verify VTP and DTP settings, etc.</p>
+<p>Show trunk info</p>
+<p>#Show interfaces interface-id trunk</p>
+<p>Choose what vlans are allowed on a trunk</p>
+<p># Switchport trunk allowed vlan</p>
+<p>From &lt;https://d.docs.live.net/6e78e2c308bddf6e/Documents/VLANs%20create%20smaller%20broadcast%20domains.docx</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

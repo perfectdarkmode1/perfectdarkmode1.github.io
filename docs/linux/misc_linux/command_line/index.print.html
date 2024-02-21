@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Command Line - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/command_line/index.html" rel="canonical" type="text/html" title="Command Line - Perfect Dark Mode">
+    <link href="/linux/misc_linux/command_line/index.xml" rel="alternate" type="application/rss+xml" title="Command Line - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/command_line/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Command Line</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="command-line">Command Line</h1>
+
+<p>The Shell</p>
+<p>A program that takes your commands from the keyboard and sends them to the operating system to perform.</p>
+<p>Almost all Linux distros will default to the bash shell.</p>
+<p>Shell prompt , for the most part, adheres to the following format</p>
+<p>username@hostname:current_directory</p>
+<p>david@David-Thomas:/$</p>
+<p>The $ is for a normal user using bash</p>
+<p>Some commands: (Case sensitive)</p>
+<p>$ echo</p>
+<p>Echo Hello World</p>
+<p>Output: Hello World</p>
+<p>$ date</p>
+<p>Output: Mon Nov 30 09:57:25 MST 2020</p>
+<p>$ whoami</p>
+<p>Output: username</p>
+<p>pwd (Print Working Directory)</p>
+<p>Everything in linux is a file, all files are organized in a hierarchical directory tree. The first directory in the file system is the root directory</p>
+<p>$pwd</p>
+<p>Output: current directory</p>
+<p>cd (Change Directory)</p>
+<p>2 different ways to specify a path</p>
+<p>Absolute Path: starts from / (root) directory</p>
+<p>Relative path: from where you currently are /pictures etc.</p>
+<p>$ cd /home/david/pictures</p>
+<p>Output: changes to the above directory</p>
+<p>$ cd Hawaii</p>
+<p>(ran from directory above)</p>
+<p>Output: goes to Hawaii folder in the above directory</p>
+<p>$ cd .</p>
+<p>(current directory)</p>
+<p>$ cd ..</p>
+<p>(parent directory)</p>
+<p>$ cd ~</p>
+<p>(home directory)</p>
+<p>$ cd -</p>
+<p>(previous directory)</p>
+<p>ls (List Directories)</p>
+<p>Lists directory contents of the current directory by default but you can specify which path you want to list the directories of.</p>
+<p>$ ls</p>
+<p>$ ls /home/david</p>
+<p>ls also shows detailed information about the files and directories you are looking at.</p>
+<p>Not all files in a directory will be visible. Filenames that start with . are hidden, you can view them with ls -a (a is for all)</p>
+<p>-l flag will list files in long format (ls -l)</p>
+<p>the output starting from the left shows file permissions, number of links, owner name, owner group, file size, timestamp of last modification, and file/ directory name.</p>
+<p>$ ls -R</p>
+<p>recursively list directory contents</p>
+<p>$ ls - r</p>
+<p>reverse order while sorting</p>
+<p>$ ls -t</p>
+<p>sort by modification time, newest first</p>
+<p>$ ls -la</p>
+<p>uses -l and -a flags together. Use this format to combine flags, the order doesn&rsquo;t usually matter but the flags are ran left to right in order.</p>
+<p>Touch (allows you to create new empty files)</p>
+<p>$touch mynewfile</p>
+<p>creates a file called mynewfile</p>
+<p>if you touch an existing file then it will update the timestamp on that file.</p>
+<p>file</p>
+<p>$file banana.jpg</p>
+<p>will show a description of the file&rsquo;s contents.</p>
+<p>banana.jpg: empty</p>
+<p>mynewfile: ASCII text</p>
+<p>cat (concatenate)</p>
+<p>$ cat mynewfile</p>
+<p>Output: hello</p>
+<p>You can also cat multiple files</p>
+<p>$cat mynewfile banana.jpg</p>
+<p>Output: hello</p>
+<p>This only says hello because banana.jpg is empty.</p>
+<p>less</p>
+<p>opens a page file of a file that you choose</p>
+<p>$less scribble.txt</p>
+<p>or $less \home\david\scribble.txt</p>
+<p>in the page viewer there are commands to help you navigate.</p>
+<p>q - quit out of less</p>
+<p>page up, page down, up and down - navigate using page and arrow keys</p>
+<p>g - moves to the beginning of the text file</p>
+<p>G - Moves to the end of a text file</p>
+<p>/search - search for words in the document. Prefacing words you want to search with /</p>
+<p>h - help with using less</p>
+<p>history</p>
+<p>$ history - shows previously used commands</p>
+<p>$ !! - runs the last used commands</p>
+<p>ctrl-R - reverse search command, start typing the command you want and use ctrl-r to cycle through previous commands based on your search. hit enter once you have found the command you want.</p>
+<p>$ clear - clears command prompt to a fresh one.</p>
+<p>the history is not cleared though.</p>
+<p>tab completion - use tab to auto complete a command.</p>
+<p>cp (Copy)</p>
+<p>makes a copy of files</p>
+<p>$ cp mycoolfile /home/pete/Documents/cooldocs</p>
+<p>copies mycoolfile to /home/pete/Documents/cooldocs</p>
+<p>$ cp *.jpg /home/pete/Pictures</p>
+<p>copies all files with .jpg extension to /home/pete/Pictures</p>
+<p>$ cp -r Pumpkin/ /home/peteDocuments</p>
+<p>if you copy a file over to a directory that has the same filename, the file will be overwritten with whatever you are copying over. You can use the -i flag to prompt you before overwriting a file.</p>
+<p>mv (move)</p>
+<p>Used for moving files and renaming them</p>
+<p>Similar to cp command in terms of flags and functionality.</p>
+<p>You can rename files like this:</p>
+<p>$ mv oldfile newfile</p>
+<p>move file to a different directory</p>
+<p>$ mv file2 /home/david/Documents</p>
+<p>move multiple files</p>
+<p>$ mv file1 file 2 /somedirectory</p>
+<p>rename a directory</p>
+<p>$ mv directory1 directory2</p>
+<p>if you mv a file or directory  it will overwrite anything in the same directory. You can use -I flag to prompt you before overwriting anything</p>
+<p>$ mv -i directory1 directory2</p>
+<p>to mv a file to overwrite a previous one and back up the old one use -b. It will rename the old one with a ~.</p>
+<p>$ mv -b directory1 directory2</p>
+<p>mkdir (make directory)</p>
+<p>Will create a directory if it doesn&rsquo;t already exist.</p>
+<p>$ mkdir books paintings</p>
+<p>Makes multiple directories at the same time</p>
+<p>$mkdir -p books/hemmingway/favorites</p>
+<p>makes subdirectories with -p (parent flag)</p>
+<p>rm (Remove)</p>
+<p>used to delete files and directories</p>
+<p>$ rm file1</p>
+<p>Once files are removed they are gone for good.</p>
+<p>Write-protected files will prompt you before deleting them. If a directory is write-protected it will also not easily be removed.</p>
+<p>$ rm -f file1</p>
+<p>-f flag forces rm to remove all files whether they are write-protected or not, without prompting the user (as long as you have the appropriate permissions.</p>
+<p>$ rm -i file</p>
+<p>-i flag will prompt you on whether or not you actually want to remove the file.</p>
+<p>$ rm -r directory</p>
+<p>(recursive) You can&rsquo;t remove a directory by default. You must use the -r flag. this will remove all files and subdirectories within a directory.</p>
+<p>$ ir directory</p>
+<p>You can delete an empty directory this way.</p>
+<p>find</p>
+<p>$ find /home -name puppies.jpg</p>
+<p>Specify the directory you are searching, what you are searching for. This will search subdirectories as will.</p>
+<p>$ find /home -type d -name MyFolder</p>
+<p>This is trying to find type d (directory)</p>
+<p>help</p>
+<p>Used to help you with a command or check what flags are available.</p>
+<p>$ help echo</p>
+<p>Gives a description and options for the Echo command This format is for built in bash commands.</p>
+<p>$ echo &ndash;help</p>
+<p>Conventional standard if the above option does not work. Used for dev tools.</p>
+<p>man (manual)</p>
+<p>$ man ls</p>
+<p>Manuals built in to most Linux operating systems. They provide documentation about commands and other aspects of the system.</p>
+<p>whatis</p>
+<p>Provides a brief description on what a command does.</p>
+<p>$ whatis cat</p>
+<p>Sourced from cat&rsquo;s manual page.</p>
+<p>alias</p>
+<p>Uses an alias for longer or frequently used commands.</p>
+<p>$ alias foobar =&lsquo;ls -la&rsquo;</p>
+<p>now you can just type foobar instead of typing ls -la</p>
+<p>~/.bashrc</p>
+<p>./profile in Windows Subsystem Linux</p>
+<p>to add a permanent alias</p>
+<p>$ unalias foobar</p>
+<p>removes an alias</p>
+<p>exit</p>
+<p>$ exit</p>
+<p>exits from the shell (completely closes the window.)</p>
+<p>$ logout</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

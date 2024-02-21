@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>Init - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/linux/misc_linux/init/index.html" rel="canonical" type="text/html" title="Init - Perfect Dark Mode">
+    <link href="/linux/misc_linux/init/index.xml" rel="alternate" type="application/rss+xml" title="Init - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/linux/misc_linux/init/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Init</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="init">Init</h1>
+
+<p>System V Overview (sys v) (&ldquo;system five&rdquo;)</p>
+<p>- init stops and starts essential processes</p>
+<p>- 3 major versions of init</p>
+<p>1. system V (most traditional version)</p>
+<p>2. upstart</p>
+<p>3. syst</p>
+<p>- Starts and stops processes sequentially</p>
+<p>- uses scripts to start and stop processes</p>
+<p>- Easy to solve dependencies (A comes before B)</p>
+<p>- Con: Only one service stops or starts at a time.</p>
+<p>- State of the machine is defined by runlevels (0-6) (varies by distro)</p>
+<p>0: Shutdown</p>
+<p>1: Single User Mode</p>
+<p>2: multiuser mode without networking</p>
+<p>3: multiuser mode with networking</p>
+<p>4: unused</p>
+<p>5: multiuser mode w/ networking and GUI</p>
+<p>6: Reboot</p>
+<p>- systems boots and runs scripts associated with runlevel</p>
+<p>- scripts locations:</p>
+<p>/etc/rc.d/rc[runlevel number].d/</p>
+<p>/etc/init.d</p>
+<p>- Scripts that start with S(start) or K(kill) will run on startup and shutdown</p>
+<p>- numbers next to s or k are the sequence they run in</p>
+<p>/etc/rc.d/rc0.d $ ls</p>
+<p>k10 updates K80openvpn</p>
+<p>- See what runlevel your machine is booting to</p>
+<p>/etc.inittab</p>
+<p>- You can change default runlevel</p>
+<p>- slowly getting replaced</p>
+<p>- runlevels exsist in other distros to support systemv scripts</p>
+<p>System V Service</p>
+<p>Command tools to manage sysv services (not specific to sysv)</p>
+<p>List services</p>
+<p>$ service &ndash;status-all</p>
+<p>Start a service</p>
+<p>$ sudo service networking start</p>
+<p>Stop a service</p>
+<p>$ sudo service networking stop</p>
+<p>Restart a service</p>
+<p>$ sudo service networking restart</p>
+<p>Upstart</p>
+<p>developed by canonical (Ubuntu) but Ubuntu uses syst now.</p>
+<p>- Event and job driven model</p>
+<p>- improves on sysv (strict startup processes/ blocking of tasks.</p>
+<p>- To see if your system uses Upstart</p>
+<p>/usr/share/upstart (exists)</p>
+<p>- Jobs = actions that upstart performs</p>
+<p>- Events = messages that are received from other processes to trigger jobs</p>
+<p>$ ls /etc/init</p>
+<p>- see a list of jobs and their configurations</p>
+<p>- Shows how and when to start jobs</p>
+<p>- How upstart works</p>
+<p>- Loads job config files from /etc/init</p>
+<p>- when startup event occurs, run jobs triggered by it</p>
+<p>- those jobs make new events and those events trigger more jobs</p>
+<p>- Does this until all jobs are complete</p>
+<p>Upstart Jobs</p>
+<p>- no easy way to see where an event or job originated</p>
+<p>- will have to look around in /etc/iniit</p>
+<p>View Jobs</p>
+<p>$ initctl list</p>
+<p>- show jobs and their status</p>
+<p>- format: job goal/status</p>
+<p>- Will change as jobs start/ stop</p>
+<p>View specific jobs</p>
+<p>$ initctl status networking</p>
+<p>Manually start a job</p>
+<p>$ sudo initctl start networking</p>
+<p>Manually stop a job</p>
+<p>$ sudo initctl stop networking</p>
+<p>Manually restart a job</p>
+<p>$ sudo initctl restart networking</p>
+<p>Manually emit an event</p>
+<p>$ sudo initctl omit some_event</p>
+<p>Syst</p>
+<p>- Emerging standard for init</p>
+<p>- To tell if your system uses syst</p>
+<p>/use/lib/syst (exists)</p>
+<p>- Uses goals to get system up and running</p>
+<p>- targets to acheive with dependancies needed for those targets</p>
+<p>- does not follow strict sequence</p>
+<p>How syst boots</p>
+<p>1. loads config files located in /etc/syst/ system or /usr/lib/syst/system</p>
+<p>2. Determines boot goal (usually default.target)</p>
+<p>3. Finds out dependencies of boot target and activates them</p>
+<p>- boots into different targets (like run levels)</p>
+<p>poweroff.target</p>
+<p>-shutdown</p>
+<p>rescue.target</p>
+<p>-single user mode</p>
+<p>multi-user.target</p>
+<p>-multiuser with networking</p>
+<p>graphical.target</p>
+<p>-multiuser with networking and GUI</p>
+<p>reboot.target</p>
+<p>-restart</p>
+<p>default.target</p>
+<p>- usually points to graphical.target</p>
+<p>Units</p>
+<p>- the main object for syst</p>
+<p>- can also mount filesystems, monitor network sockets, etc.</p>
+<p>different types of units</p>
+<p>Service Units</p>
+<p>- end in .service</p>
+<p>- The ones that are starting and stopping</p>
+<p>Mount Units</p>
+<p>- Mount filesystems</p>
+<p>- end in .mount</p>
+<p>Target units</p>
+<p>- group together other units (which all get activated)</p>
+<p>- end in .target</p>
+<p>Syst goals</p>
+<p>Unit file/ how to control units</p>
+<p>service unit</p>
+<p>[unit]</p>
+<p>(description/ when to activate)</p>
+<p>[service]</p>
+<p>(start/stop/reload service)</p>
+<p>[install]</p>
+<p>(used for dependencies)</p>
+<p>Syst commands</p>
+<p>List units</p>
+<p>$ systemctllist-units</p>
+<p>View status of unit</p>
+<p>$ systemctl ststua networking.service</p>
+<p>start a service</p>
+<p>$ sudo systemctl start networking.service</p>
+<p>stop a service</p>
+<p>$ sudo systemctl stop networking.service</p>
+<p>restart a service</p>
+<p>$ sudo systemctl.restart networking.service</p>
+<p>Enable a unit</p>
+<p>$ sudo systemctl enable networking.service</p>
+<p>Disable a unit</p>
+<p>$ sudo systemctl disable networking.service</p>
+<p>Power States</p>
+<p>Shutdown system</p>
+<p>$ sudo shutdown -h now</p>
+<p>- power off</p>
+<p>Shutdown and specify the time</p>
+<p>$ sudo shutdown -n +2</p>
+<p>- can be in minutes</p>
+<p>Restart</p>
+<p>$ sudo shutdown -r now</p>
+<p>Reboot</p>
+<p>$ sudo reboot</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>

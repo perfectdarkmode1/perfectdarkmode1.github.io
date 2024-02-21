@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <title>More Spanning Tree - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/cisco/spanning_tree/index.html" rel="canonical" type="text/html" title="More Spanning Tree - Perfect Dark Mode">
+    <link href="/networking/cisco/spanning_tree/index.xml" rel="alternate" type="application/rss+xml" title="More Spanning Tree - Perfect Dark Mode">
+    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
+    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
+    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1700252831" rel="stylesheet">
+    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
+    <link href="/css/variant.css?1700252831" rel="stylesheet">
+    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1700252831" rel="stylesheet">
+    <link href="/css/ie.css?1700252831" rel="stylesheet">
+    <script src="/js/url.js?1700252831"></script>
+    <script src="/js/variant.js?1700252831"></script>
+    <script>
+      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
+      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.index_js_url="/index.search.js";
+      var root_url="/";
+      var baseUri=root_url.replace(/\/$/, '');
+      // translations
+      window.T_Copy_to_clipboard = 'Copy to clipboard';
+      window.T_Copied_to_clipboard = 'Copied to clipboard!';
+      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
+      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
+      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
+      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
+      // some further base stuff
+      var baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.variants && variants.init( [ 'city2' ] );
+    </script>
+  </head>
+  <body class="mobile-support print" data-url="/networking/cisco/spanning_tree/index.html">
+    <div id="body" class="default-animation">
+      <div id="sidebar-overlay"></div>
+      <div id="toc-overlay"></div>
+      <nav id="topbar" class="highlightable">
+        <div>
+          <div id="breadcrumbs">
+            <span id="sidebar-toggle-span">
+              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
+            </span>
+            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
+              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">More Spanning Tree</span><meta itemprop="position" content="2"></li>
+            </ol>
+          </div>
+        </div>
+      </nav>
+      <main id="body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="more-spanning-tree">More Spanning Tree</h1>
+
+<h1 id="spanning-tree-protocol">Spanning Tree Protocol</h1>
+<ul>
+<li>Prevents loops in a network.</li>
+<li>Loops can create Broadcast storms, Mac table instability, and Multiple frame transmission.</li>
+</ul>
+<h2 id="broadcast-storms">Broadcast Storms</h2>
+<ol>
+<li>Switch receives a broadcast frame.</li>
+<li>Switch transmits that frame out of all ports.</li>
+<li>The broadcast frames will keep being received on each switch then broadcasted again.</li>
+</ol>
+<h2 id="mac-table-instability">Mac Table instability</h2>
+<ol>
+<li>Broadcast storm is causing broadcast packets going in and out of every port, the</li>
+<li>Switch has to keep updating the source mac address of those packets.</li>
+</ol>
+<h2 id="multiple-frame-transmission">Multiple frame transmission</h2>
+<p>Issues can be cause when multiples of the same frame are received on a port.</p>
+<p>Spanning tree must build a topology so it can figure out if there is a loop in the network, and pick which port(s) to block to stop any network loops.</p>
+<p>Spanning tree controls all ports in the network and puts them in different port “states”. These states help spanning tree learn the network topology and decide which ports to forward or block. This process is called convergence. Convergence happens whenever spanning tree realizes that there has been a change in the network. (a new switch is added or a link goes down.)The port states are Blocking, Listening, Learning, Forwarding and Disabled.</p>
+<p>Blocking</p>
+<p>• Stable state</p>
+<p>• Mac addresses are not learned on this port</p>
+<p>• Port does not forward any fram</p>
+<p>Listening</p>
+<p>• Removes old or “stale” mac address entries from this port if no frames are recieved for that mac address while it is in this state.</p>
+<p>• Transitory state that is temporary while spanning tree converges.</p>
+<p>• A port in this state does not forward any frames.</p>
+<p>• Incoming frames mac addresses are not learned.</p>
+<p>Learning</p>
+<p>• Incoming mac addresses on this port are now learned.</p>
+<p>• A port in this state does not forward any frames.</p>
+<p>• Also a port in a transitory state.</p>
+<p>Disabled</p>
+<p>• Stable</p>
+<p>• Mac addresses are not learned on this port</p>
+<p>• Port does not forward any frames</p>
+<p>How spanning tree decides.</p>
+<p>To build out the topology, spanning tree elects designated ports and root ports and determines the lowest cost path to the root bridge. (root cost)</p>
+<p>Cost is based on the operating speed of the link. Here are the cost values STP uses based on the speed of the link.</p>
+<p>These are the cisco defaults:</p>
+<p>10 Mbps = 100</p>
+<p>100 Mbps = 19</p>
+<p>1 gbps = 4</p>
+<p>10 gbps = 2</p>
+<p>100 gbps = N/A</p>
+<p>1 tbps = N/A</p>
+<p>You can change the values to a newer form with:</p>
+<p># spanning-tree pathcost method long</p>
+<p>Which changes the values to:</p>
+<p>10 Mbps = 2,000,000</p>
+<p>100 Mbps = 200,000</p>
+<p>1 gbps = 20,000</p>
+<p>10 gbps = 2,000</p>
+<p>100 gbps = 200</p>
+<p>1 tbps = 20</p>
+<p>Designated ports and root ports</p>
+<p>Spanning tree sends Hello BPDUs to determine the spanning tree topology. A port that sends forwards hello bpdus is called a designated port. A port that receives hello bpdus is called a designated port.</p>
+<p>Hello BPDU</p>
+<p>Hello bpdu contains a switches Bridge ID, the root bridge ID, the senders root cost. (cost to the root bridge), and the root switches timer values.</p>
+<p>Bridge ID (BID)</p>
+<p>Has an 8 byte value that is different on each switch. A 2-byte priority field. And a 6 byte system ID that is based on the mac address</p>
+<p>Root Bridge ID</p>
+<p>The Bridge ID of the switch that the sender thinks is currently the root switch.</p>
+<p>Root Switches Timer Values</p>
+<p>Hello Timer = How often Hello bpdus are sent</p>
+<p>MaxAge Timer = The max time that spanning tree will wait not getting a hello bpdu before it reconverges the network.</p>
+<p>Forward Delay Timer = How long a port stays in the listening and learning states.</p>
+<p>Root Cost</p>
+<p>The cost between the sender and the root bridge</p>
+<p>Spanning tree elects a root bridge then decides the best path to the root bridge from all of the other switches. If there are multiple paths to the root bridge, then the worst path is blocked. All ports on the root bridge are set to a forwarding state.</p>
+<p>The other switches elect a port that has the lowest cost path to the root bridge. These ports are called root ports. Root ports are always in a forwarding state.</p>
+
+            <footer class="footline">
+
+            </footer>
+          </article>
+
+        </div>
+      </main>
+    </div>
+    <script src="/js/clipboard.min.js?1700252831" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1700252831" defer></script>
+  </body>
+</html>
