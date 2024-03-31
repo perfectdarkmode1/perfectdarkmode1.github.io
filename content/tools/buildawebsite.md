@@ -58,7 +58,7 @@ Then, enter your password when prompted.
 
 I got my domain perfectdarkmode.com from Cloudflare.com for about $10 per year. You can check to see available domains there. You can also check https://www.namecheckr.com/ to see iof that name is available on various social media sites. 
 
-In CLoudFlare, just click "add a site" and pick a domain that works for you. Next, you will need your server address from earlier. 
+In CloudFlare, just click "add a site" and pick a domain that works for you. Next, you will need your server address from earlier. 
 
 Under domain Registration, click "Manage Domains", click "manage" on your domain. One the sidebar to the right, there is a qucik actions menu. Click "update DNS configuration".
 

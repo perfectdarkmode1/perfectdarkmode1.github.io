@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.122.0">
-    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
@@ -16,36 +16,34 @@ Understand, set, and unset shell and environment variables Comprehend and use co
     <meta property="og:description" content="Chapter 7 RHCSA Notes - The Bash Shell Introduction to the bash shell
 Understand, set, and unset shell and environment variables Comprehend and use command and variable expansions Grasp and utilize input, output, and error redirections Know and use history substitution, command line editing, tab completion, tilde substitution, and command aliasing Identify and use metacharacters, wildcard characters, pipes, and pipelines Discover the use of quoting mechanisms and regular expressions Run and control jobs in background and foreground Identify and examine shell startup files RHCSA Objectives: 02.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/7_bash_shell/">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/7_bash_shell/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1708513026" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1708513026" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1708513026" rel="stylesheet">
-    <link href="/css/fonts.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1708513026" rel="stylesheet">
-    <link href="/css/theme-city2.css?1708513026" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1708513026" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1708513026" rel="stylesheet">
-    <link href="/css/print.css?1708513026" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1708513026" rel="stylesheet">
-    <script src="/js/url.js?1708513026"></script>
-    <script src="/js/variant.js?1708513026"></script>
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
-      window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
       window.relearn = window.relearn || {};
-      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
       // variant stuff
       window.relearn.themeVariantModifier='';
-      window.variants && variants.init( [ 'city2' ] );
+      window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -151,15 +149,15 @@ Understand, set, and unset shell and environment variables Comprehend and use co
             
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
             </div>
-            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
             </div>
-            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
             </div>
-            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
             </div>
-            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
             </div>
 
 
@@ -813,307 +811,307 @@ Stopped
 </ul>
 <h2 id="labs">Labs</h2>
 <h3 id="lab-view-environment-variables">Lab: View environment variables</h3>
-<div class="wrap-code highlight"><pre tabindex="0"><code>env
+<div class="highlight wrap-code"><pre tabindex="0"><code>env
 printenv</code></pre></div><h3 id="lab-viewing-environment-variable-values">Lab: Viewing Environment variable values</h3>
 <ol>
 <li>View the value for the PATH variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $PATH</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $PATH</code></pre></div><ol start="2">
 <li>View the value for the HOME variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $HOME</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $HOME</code></pre></div><ol start="3">
 <li>View the value for the SHELL variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $SHELL</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $SHELL</code></pre></div><ol start="4">
 <li>View the value for the TERM variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $TERM</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $TERM</code></pre></div><ol start="5">
 <li>View the value for the PPID variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $PPID</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $PPID</code></pre></div><ol start="6">
 <li>View the value for the PS1 variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $PS1</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $PS1</code></pre></div><ol start="7">
 <li>View the value for the USER variable</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $USER</code></pre></div><h3 id="lab-setting-and-unsetting-variables">Lab: Setting and Unsetting Variables</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $USER</code></pre></div><h3 id="lab-setting-and-unsetting-variables">Lab: Setting and Unsetting Variables</h3>
 <ol>
 <li>Define a local variable called VR1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>VR1=RHEL8</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>VR1=RHEL8</code></pre></div><ol start="2">
 <li>View the value of VR1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $VR1</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $VR1</code></pre></div><ol start="3">
 <li>Type bash at the command prompt to enter a sub-shell and then run echo $VR1 to check whether the variable is visible in the sub-shell.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $VR1</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $VR1</code></pre></div><ol start="4">
 <li>Exit out of the subshell:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>exit</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>exit</code></pre></div><ol start="5">
 <li>Turn VR1 into an environment variable:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>export VR1</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>export VR1</code></pre></div><ol start="6">
 <li>Type bash at the command prompt to enter a sub-shell and then run echo $VR1 to check whether the variable is visible in the sub-shell.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $VR1</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $VR1</code></pre></div><ol start="7">
 <li>Undefine this variable and erase it from the shell environment:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>unset VR1</code></pre></div><ol start="8">
+<div class="highlight wrap-code"><pre tabindex="0"><code>unset VR1</code></pre></div><ol start="8">
 <li>Define a local variable that contains a value with one or more white spaces:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>VR2=&#34;I love RHEL 8&#34;</code></pre></div><ol start="9">
+<div class="highlight wrap-code"><pre tabindex="0"><code>VR2=&#34;I love RHEL 8&#34;</code></pre></div><ol start="9">
 <li>Define and make the variable an environment variable at the same time:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>export VR3=&#34;I love RHEL 8&#34;</code></pre></div><ol start="10">
+<div class="highlight wrap-code"><pre tabindex="0"><code>export VR3=&#34;I love RHEL 8&#34;</code></pre></div><ol start="10">
 <li>View local and environment variables:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>set</code></pre></div><h3 id="lab-modify-primary-command-prompt">Lab: Modify Primary Command Prompt</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>set</code></pre></div><h3 id="lab-modify-primary-command-prompt">Lab: Modify Primary Command Prompt</h3>
 <ol>
 <li>Change the value of the variable PS1 to reflect the desired information:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>export PS1=&#34;&lt; $LOGNAME on $HOSTNAME in \$PWD &gt; &#34; </code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>export PS1=&#34;&lt; $LOGNAME on $HOSTNAME in \$PWD &gt; &#34; </code></pre></div><ol start="2">
 <li>Edit the .bash_profile file for user1 and define the value exactly as it was run in Step 1.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>vim .bash_profile</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>vim .bash_profile</code></pre></div><ol start="3">
 <li>Test by logging off as user1 and logging back in. The new command prompt will be displayed.</li>
 </ol>
 <h3 id="lab-redirecting-standard-input">Lab: Redirecting Standard Input</h3>
 <ol>
 <li>have the cat command read the /etc/redhat-release file and display its content on the standard output (terminal screen):</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat &lt; /etc/redhat-release</code></pre></div><h3 id="lab-redirecting-standard-output">Lab: Redirecting Standard Output</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat &lt; /etc/redhat-release</code></pre></div><h3 id="lab-redirecting-standard-output">Lab: Redirecting Standard Output</h3>
 <ol>
 <li>Direct the ls command output to a file called ls.out:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls &gt; ls.out</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls &gt; ls.out</code></pre></div><ol start="2">
 <li>Do the same thing but using file descriptors:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls 1&gt; ls.out</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls 1&gt; ls.out</code></pre></div><ol start="3">
 <li>Activate the noclobber feature then try the redirect feature again:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>set -o noclobber
+<div class="highlight wrap-code"><pre tabindex="0"><code>set -o noclobber
 ls &gt; ls.out</code></pre></div><ol start="4">
 <li>Deactivate noclobber</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>set +o noclobber</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>set +o noclobber</code></pre></div><ol start="5">
 <li>Direct the ls command to append the output to the ls.out file instead of overwriting it:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls &gt;&gt; ls.out
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls &gt;&gt; ls.out
 or
 ls 1&gt;&gt; ls.out</code></pre></div><h3 id="lab-redirecting-standard-error">Lab: Redirecting Standard Error</h3>
 <ol>
 <li>Direct the find command issued as a normal user to search for all occurrences of files by the name core in the entire directory tree and sends any error messages produced to /dev/null</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>find / -name core -print 2&gt; /dev/null</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>find / -name core -print 2&gt; /dev/null</code></pre></div><ol start="2">
 <li>Redirect both standard output and error:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls /usr /cdr &amp;&gt; outerr.out
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /usr /cdr &amp;&gt; outerr.out
 or
 ls /usr /cdr 1&gt; outerr.out 2&gt;&amp;1
 # means to redirect file descriptor 1 to file outerr.out as well as to file descriptor 2.</code></pre></div><ol start="3">
 <li>Same as above but append to file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls /usr/cdr &amp;&gt;&gt; outerr.out</code></pre></div><h3 id="lab-show-history-variables">Lab: Show History Variables</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /usr/cdr &amp;&gt;&gt; outerr.out</code></pre></div><h3 id="lab-show-history-variables">Lab: Show History Variables</h3>
 <ol>
 <li>View HISTFILE Variable:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $HISTFILE</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $HISTFILE</code></pre></div><ol start="2">
 <li>View HISTSIZE variable:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $HISTSIZE</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $HISTSIZE</code></pre></div><ol start="3">
 <li>View HISTFILESIZE variable:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo $HISTFILESIZE</code></pre></div><h3 id="lab-history-command">Lab: History command</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo $HISTFILESIZE</code></pre></div><h3 id="lab-history-command">Lab: History command</h3>
 <ol>
 <li>Rune history without any options:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>history</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>history</code></pre></div><ol start="2">
 <li>Display 10 entries:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>history 10</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>history 10</code></pre></div><ol start="3">
 <li>Run the 15th command in history:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>!15</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>!15</code></pre></div><ol start="4">
 <li>re-execute the most recent occurrence of a command that started with a particular letter or series of letters (ch for example):</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>!ch</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>!ch</code></pre></div><ol start="5">
 <li>Issue the most recent command that contained “grep”:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>!?grep?</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>!?grep?</code></pre></div><ol start="6">
 <li>Remove entry 24 from history:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>history -d 24</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>history -d 24</code></pre></div><ol start="7">
 <li>Repeat the last command executed:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>!!</code></pre></div><h3 id="lab-tilde-expansion">Lab: Tilde expansion</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>!!</code></pre></div><h3 id="lab-tilde-expansion">Lab: Tilde expansion</h3>
 <ol>
 <li>Display user&rsquo;s home directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo ~</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo ~</code></pre></div><ol start="2">
 <li>Display the current directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo ~+</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo ~+</code></pre></div><ol start="3">
 <li>Display the previous working directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo ~-</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo ~-</code></pre></div><ol start="4">
 <li>Display user1&rsquo;s home directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo ~user1</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo ~user1</code></pre></div><ol start="5">
 <li>cd into the home directory of user1 and confirm:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cd ~user1
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd ~user1
 pwd</code></pre></div><ol start="6">
 <li>cd into a subdirectory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cd ~/Documents/</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd ~/Documents/</code></pre></div><ol start="7">
 <li>view directory information of the root user&rsquo;s desktop:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -ld ~root/Desktop</code></pre></div><h3 id="lab-command-aliasing">Lab: Command Aliasing</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -ld ~root/Desktop</code></pre></div><h3 id="lab-command-aliasing">Lab: Command Aliasing</h3>
 <ol>
 <li>shows all aliases that are currently set for user1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>su - user1
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user1
 alias</code></pre></div><ol start="2">
 <li>Run alias as root:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>alias</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>alias</code></pre></div><ol start="3">
 <li>Create an alias “search” to abbreviate the find command with several switches and arguments. Enclose the entire command within single quotation marks (‘’) to ensure white spaces are taken care of. Do not leave any spaces before and after the equal sign (=).</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>alias search=&#39;find / -name core -exec ls -l {} \;&#39;</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>alias search=&#39;find / -name core -exec ls -l {} \;&#39;</code></pre></div><ol start="4">
 <li>Search with the new alias:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>search</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>search</code></pre></div><ol start="5">
 <li>create and alias by the same name as rm command but adding the -i flag:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>alias rm=&#39;rm -i&#39;</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>alias rm=&#39;rm -i&#39;</code></pre></div><ol start="6">
 <li>Run rm without using the alias:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>\rm file1</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>\rm file1</code></pre></div><ol start="7">
 <li>Remove the two aliases we just created:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>unalias search rm</code></pre></div><h3 id="lab-wildcards-and-metacharacters">Lab: Wildcards and Metacharacters</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>unalias search rm</code></pre></div><h3 id="lab-wildcards-and-metacharacters">Lab: Wildcards and Metacharacters</h3>
 <ol>
 <li>List all files in the /etc directory that begin with letters “ma” and followed by any characters:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls /etc/ma*</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /etc/ma*</code></pre></div><ol start="2">
 <li>List all hidden files and directories in /home/user1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -d .*</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -d .*</code></pre></div><ol start="3">
 <li>List all files in the /var/log directory that end in “.log”:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls /ver/log/*.log</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /ver/log/*.log</code></pre></div><ol start="4">
 <li>list all files and directories under /var/log with exactly four characters in their names:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -d /var/log/????</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -d /var/log/????</code></pre></div><ol start="5">
 <li>Include all files and directories that begin with either of the two characters and followed by any number of characters.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls /usr/bin/[yw]*</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /usr/bin/[yw]*</code></pre></div><ol start="6">
 <li>Match all directory names that begin with any letter between “m” and “o” in the /etc/systemd/system directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -d /etc/systemd/system/[m-o]*</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -d /etc/systemd/system/[m-o]*</code></pre></div><ol start="6">
 <li>Inverse results of the previous:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -d /etc/systemd/system/[!m-o]*</code></pre></div><h3 id="lab-piping">Lab: Piping</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -d /etc/systemd/system/[!m-o]*</code></pre></div><h3 id="lab-piping">Lab: Piping</h3>
 <ol>
 <li>pipe the output to the less command in order to view the directory listing one screenful at a time:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc | less</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc | less</code></pre></div><ol start="2">
 <li>Run the last command and pipe the output to nl to number each line:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>last | nl</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>last | nl</code></pre></div><ol start="3">
 <li>Send the output of ls to grep for the lines that do not contain the pattern “root”.  Piped again for a case-insensitive selection of all lines that exclude the pattern “dec”. Number the output, and show the last four lines on the display:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /proc | grep -v root | grep -iv dec | nl | tail -4</code></pre></div><h3 id="lab-quoting-mechanisms">Lab: Quoting Mechanisms</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /proc | grep -v root | grep -iv dec | nl | tail -4</code></pre></div><h3 id="lab-quoting-mechanisms">Lab: Quoting Mechanisms</h3>
 <ol>
 <li>Remove a file called * without deleting everything in the directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>rm \*</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>rm \*</code></pre></div><ol start="2">
 <li>Display $LOGNAME without expanding the LOGNAME variable:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo &#39;$LOGNAME&#39;</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo &#39;$LOGNAME&#39;</code></pre></div><ol start="3">
 <li>Run the following with double quotes and without:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo &#34;$SHELL&#34;
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo &#34;$SHELL&#34;
 echo &#34;\$PWD&#34;
 echo &#34;&#39;\&#39;&#34;</code></pre></div><h3 id="lab-grep-and-regex">Lab: grep and regex</h3>
 <ol>
 <li>Search for the pattern “operator” in the /etc/passwd file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep operator /etc/passwd</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep operator /etc/passwd</code></pre></div><ol start="2">
 <li>Search for the space-separated pattern “aliases and functions” in the $HOME/.bashrc file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep &#39;aliases and functions&#39; .bashrc</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep &#39;aliases and functions&#39; .bashrc</code></pre></div><ol start="3">
 <li>Search for the pattern “nologin” in the passwd file and exclude (-v) the lines in the output that contain this pattern. Add the -n switch to show the line numbers associated with the matched lines.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep -nv nologin /etc/passwd</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep -nv nologin /etc/passwd</code></pre></div><ol start="4">
 <li>Find any duplicate entries for the root user in the passwd file. Prepend the caret sign (^) to the pattern “root” to mark the beginning of a line.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep ^root /etc/passwd</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep ^root /etc/passwd</code></pre></div><ol start="5">
 <li>Identify all users in the passwd file with bash as their primary shell.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep bash$ /etc/passwd</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep bash$ /etc/passwd</code></pre></div><ol start="6">
 <li>show the entire login.defs file but exclude all the empty lines:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep -v ^$ /etc/login.defs</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep -v ^$ /etc/login.defs</code></pre></div><ol start="7">
 <li>Perform a case-insensitive search (-i) for all the lines in the /etc/bashrc file that match the pattern “path.”</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep -i path /etc/bashrc</code></pre></div><ol start="8">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep -i path /etc/bashrc</code></pre></div><ol start="8">
 <li>Print all the lines from the /etc/lvm/lvm.conf file that contain an exact match for a word (-w) “acce” followed by exactly two characters:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep -w acce.. /etc/lvm/lvm.conf</code></pre></div><ol start="9">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep -w acce.. /etc/lvm/lvm.conf</code></pre></div><ol start="9">
 <li>Print all the lines from the ls command output that include either (-E) the pattern “cron” or “ly”.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc | grep -E &#39;cron|ly&#39;</code></pre></div><ol start="10">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc | grep -E &#39;cron|ly&#39;</code></pre></div><ol start="10">
 <li>Show all the lines from the /etc/ssh/sshd_config file but exclude (-v) the empty lines and commented lines. Use the -e flag multiple times instead of | for either or.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo grep -ve ^$ -ve ^# /etc/ssh/sshd_config</code></pre></div><ol start="11">
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo grep -ve ^$ -ve ^# /etc/ssh/sshd_config</code></pre></div><ol start="11">
 <li>Learn more about regex:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man 7 regex</code></pre></div><ol start="12">
+<div class="highlight wrap-code"><pre tabindex="0"><code>man 7 regex</code></pre></div><ol start="12">
 <li>Consult the grep man pages:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man grep</code></pre></div><h3 id="lab-managing-jobs">Lab: Managing jobs</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>man grep</code></pre></div><h3 id="lab-managing-jobs">Lab: Managing jobs</h3>
 <ol>
 <li>Issue the jobs command with the -l switch to view all the jobs running in the background:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>jobs -l</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>jobs -l</code></pre></div><ol start="2">
 <li>bring job ID 1 to the foreground and start running it:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>fg %1</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>fg %1</code></pre></div><ol start="3">
 <li>Suspend job 1 with ctrl+z and then let it run in the background:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>bg %1</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>bg %1</code></pre></div><ol start="4">
 <li>Terminate job ID 1, supply its PID (31726) to the kill command:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>kill 31726</code></pre></div><h3 id="lab-shell-startup-files">Lab: Shell Startup Files</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>kill 31726</code></pre></div><h3 id="lab-shell-startup-files">Lab: Shell Startup Files</h3>
 <ol>
 <li>View the first 10 lines of /etc/bashrc:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>head /etc/bashrc</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>head /etc/bashrc</code></pre></div><ol start="2">
 <li>View the first 10 lines of /etc/profile:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>head /etc/profile</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>head /etc/profile</code></pre></div><ol start="3">
 <li>View the directory /etc/profile.d:L</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc/profile.d/</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/profile.d/</code></pre></div><ol start="4">
 <li>View .bashrc</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat ~/.bashrc</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat ~/.bashrc</code></pre></div><ol start="5">
 <li>View .bash_profile</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat ~/.bash_profile</code></pre></div><h3 id="lab--customize-the-command-prompt-user1">Lab:  Customize the Command Prompt (user1)</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat ~/.bash_profile</code></pre></div><h3 id="lab--customize-the-command-prompt-user1">Lab:  Customize the Command Prompt (user1)</h3>
 <ol>
 <li>Permanently customize the primary shell prompt to display “&lt;user1@server1 in /etc &gt;:” when this user switches into the /etc directory. The prompt should always reflect the current directory directory path.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>vim ~/.bash_profile
+<div class="highlight wrap-code"><pre tabindex="0"><code>vim ~/.bash_profile
 export PS1=&#39;$USERNAME $PWD</code></pre></div><h3 id="lab-7-2-redirect-the-standard-input-output-and-error-user1">Lab 7-2: Redirect the Standard Input, Output, and Error (user1)</h3>
 <ol>
 <li>Run the ls command on /etc, /dvd, and /var. Have the output printed on the screen and the errors forwarded to file /tmp/ioerror.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls /etc /dvd /var 2&gt; /tmp/ioerror</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /etc /dvd /var 2&gt; /tmp/ioerror</code></pre></div><ol start="2">
 <li>Check the file after the command execution and analyze the results:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat /tmp/ioerror</code></pre></div><h2 id="review-questions">Review Questions</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /tmp/ioerror</code></pre></div><h2 id="review-questions">Review Questions</h2>
 <p>Q. You want to change the command prompt for yourself. Where (the bash shell file) would you define it so that you get the custom command prompt whenever you log in?
 A. You can define it in the ~/.bash_profile file.</p>
 <p>Q. What is the other name for the command line completion feature?
@@ -1157,7 +1155,9 @@ A. The command provided will redirect the ls command output to the specified fil
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+Perfect Dark Mode
+
         </div>
         <div class="searchbox default-animation">
           <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
@@ -1168,41 +1168,42 @@ A. The command provided will redirect the ls command output to the specified fil
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1708513026" defer></script>
-        <script src="/js/search.js?1708513026" defer></script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
         </ul>
         <hr class="padding">
       </div>
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/7_bash_shell/" class="active"><a class="padding" href="/linux/rhcsa/7_bash_shell/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/7_bash_shell/" class="active"><a class="padding" href="/linux/rhcsa/7_bash_shell/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -1218,11 +1219,12 @@ A. The command provided will redirect the ls command output to the specified fil
             <ul>
               <li id="R-select-language-container" class="footerLangSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-language fa-fw"></i>
+                  <i class="fa-fw fas fa-language"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/7_bash_shell/" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1230,12 +1232,12 @@ A. The command provided will redirect the ls command output to the specified fil
               </li>
               <li id="R-select-variant-container" class="footerVariantSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <i class="fa-fw fas fa-paint-brush"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-city2" value="city2" selected>City2</option>
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1244,7 +1246,7 @@ A. The command provided will redirect the ls command output to the specified fil
               </li>
               <li class="footerVisitedLinks showVisitedLinks">
                 <div class="padding menu-control">
-                  <i class="fas fa-history fa-fw"></i>
+                  <i class="fa-fw fas fa-history"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <button onclick="clearHistory();">Clear History</button>
@@ -1260,8 +1262,8 @@ A. The command provided will redirect the ls command output to the specified fil
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1708513026" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1708513026" defer></script>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1291,20 +1293,20 @@ A. The command provided will redirect the ls command output to the specified fil
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1708513026" defer></script>
-    <script src="/js/js-yaml.min.js?1708513026" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1708513026" defer></script>
+    <script src="/js/theme.js?1711887805" defer></script>
   </body>
 </html>

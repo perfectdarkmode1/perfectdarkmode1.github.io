@@ -26,3 +26,14 @@ pandoc inputfile -f inputfiletype -t outputfiletype -o outputfile
 ```
 for f in *; do pandoc "$f" -s -o "../bloghtml/${f%}.html"; done
 ```
+
+## Convert epub to markdown and migrate to Obsidian
+
+Run `pandoc bookname.epub -o bookname.md --extract-media=images`
+
+This will create the file and an image folder. Place the image folder in your Obsidian attachments folder. Also, place the markdown file in your Obsidian vault and Obsidian will see all of the image references. 
+
+Then, you can run Obsidian's [Text Extractor](image_to_text.md) to pull the text from the image to your clipboard. 
+
+
+

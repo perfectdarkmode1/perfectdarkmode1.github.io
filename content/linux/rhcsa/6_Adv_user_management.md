@@ -16,7 +16,7 @@ Configure superuser access
 
 ## Password Aging attributes
 - can be done for an individual user or applied to all users.
-- chapter. Individual user accounts may be prevented from logging in to the system by locking their access for a period of time or permanently.
+- Individual user accounts may be prevented from logging in to the system by locking their access for a period of time or permanently.
 - must be performed by a user with elevated privileges of the root user.
 - Normal users may be allowed access to privileged commands by defining them appropriately in a configuration file.
 - Each file that exists on the system regardless of its type has an owning user and an owning group.  
@@ -51,8 +51,8 @@ Configure superuser access
 
 ### passwd command
 - set or modify a user’s password
-- modify the password aging attributes and lock 
-- unlock account
+- modify the password aging attributes and 
+- lock or unlock account
 - Switches
 	- -d (--delete) 
 		- Deletes a user password 
@@ -161,8 +161,6 @@ su -
 	- drop-in directory
 /var/log/secure
 	- Sudo logs successful authentication and command data to here under the name of the user using the command.
-
-
 ## Owning User and Owning Group
 - Every file and directory has an owner.
 - Creator assumes ownership by default.
@@ -241,8 +239,6 @@ grep user200 /etc/shadow
 2. Lock the account for user200:
 ```
 usermod -L user200 
-or
-usermod -l user200
 ```
 
 3. Confirm:
@@ -335,7 +331,7 @@ logname
 
 4. use su as follows and execute this privileged command to obtain desired results:
 ```
-su -c 'firewalld-cmd --list-services'
+su -c 'firewall-cmd --list-services'
 ```
 ### Lab: Add user1 to sudo file but only for the cat command.
 1. Open up /etc/sudoers and add the following:
@@ -353,7 +349,9 @@ sudo cat /etc/sudoers
 
 1. Add the following to the bottom of the sudoers file:
 ```
-Cmnd_Alias PKGCMD = /usr/bin/yum, /usr/bin/rpm User_Alias PKGADM = user1, user100, user200 PKGADM ALL = PKGCMD
+Cmnd_Alias PKGCMD = /usr/bin/yum, /usr/bin/rpm
+User_Alias PKGADM = user1, user100, user200 
+PKGADM ALL=PKGCMD
 ```
 
 2. Run rpm or yum with sudo as one of the users.
@@ -456,7 +454,7 @@ su - user5000
 
 ## Review Questions 
 Q. Which command can be used to display the effective (current) username?
-A. The whoami command reports the effective username of the user running this command.
+A. `whoami `
 
 Q. What is the recommended location to store custom sudo rules? 
 A. The custom sudo rules should be stored in files under the /etc/sudoers.d directory.
@@ -483,7 +481,7 @@ Q. What would the command chage -l user5 do?
 A. The command provided will display password aging attributes for user5. 
 
 Q. Which two commands can be used to lock and unlock a user account?
-A. The usermod and passwd commands can be used to lock and unlock a user account. 
+A. `usermod` and `passwd`
 
 Q. When using sudo, log files record activities under the root user account. True or False? 
 A. False. The activities are registered under the username who invokes the sudo command. 

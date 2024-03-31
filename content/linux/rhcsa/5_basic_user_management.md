@@ -12,9 +12,10 @@
 - Set and modify user passwords 
 - Add user account with nologin access
 
-User account information is recorded in several files. These files may be edited manually if necessary; however, this practice is discouraged.
+User account information is recorded in several files. These files 
+- may be edited manually if necessary (not recommended)
 
-service user accounts are added to the system when a corresponding service is installed, there may be situations when they need to be added manually. These accounts do not require login access; their presence is needed to support an installed application.
+- service user accounts are added to the system when a corresponding service is installed, there may be situations when they need to be added manually. These accounts do not require login access; their presence is needed to support an installed application.
 
 ## Listing Logged-In Users
 
@@ -204,8 +205,8 @@ A list of the users who have successfully signed on to the system with valid cre
 		- Holds a group name that must begin with a letter. Group names with up to 255 characters, including the 
 		- uppercase, underscore (_) and hyphen (-) characters, are also supported. (not recommended)
 	 - Field 2 (Encrypted Password): 
-		 - Can be empty or contain an “x” (points to the /etc/gshadow file for the actual password), or a hashed group-level password. You 
-		 - can set a password on a group for non-members to be able to change their group identity temporarily using the newgrp command. The 
+		 - Can be empty or contain an “x” (points to the /etc/gshadow file for the actual password), or a hashed group-level password. 
+		 - can set a password on a group for non-members to be able to change their group identity temporarily using the newgrp command.
 		 - non-members must enter the correct password in order to do so. 
 	- Field 3 (GID): 
 		- Holds a GID, that is also placed in the GID field of the passwd file. 

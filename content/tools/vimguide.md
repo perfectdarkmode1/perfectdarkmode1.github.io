@@ -185,8 +185,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 ```
 
 ### Create ~/.vimrc
-
-# touch ~/.vimrc
+`touch ~/.vimrc`
 
 ### Add to ~/.vimrc
 

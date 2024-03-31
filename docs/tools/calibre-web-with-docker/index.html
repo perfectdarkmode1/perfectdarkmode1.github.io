@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.122.0">
-    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
+The good news is that it is really fast and simple. You’ll need a few tools to get this done:
+A server with a public IP address A DNS Provider (I use CloudFlare) Docker Nginx A Calibre Library Certbot Rsync First, sync your local Calibre library to a folder on your server:">
     <meta property="og:title" content="">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
+The good news is that it is really fast and simple. You’ll need a few tools to get this done:
+A server with a public IP address A DNS Provider (I use CloudFlare) Docker Nginx A Calibre Library Certbot Rsync First, sync your local Calibre library to a folder on your server:">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre-web-with-docker/">
+    <meta property="og:url" content="http://localhost:1313/tools/calibre-web-with-docker/">
     <meta property="article:section" content="Tools - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1708513026" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1708513026" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1708513026" rel="stylesheet">
-    <link href="/css/fonts.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1708513026" rel="stylesheet">
-    <link href="/css/theme-city2.css?1708513026" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1708513026" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1708513026" rel="stylesheet">
-    <link href="/css/print.css?1708513026" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1708513026" rel="stylesheet">
-    <script src="/js/url.js?1708513026"></script>
-    <script src="/js/variant.js?1708513026"></script>
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
-      window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
       window.relearn = window.relearn || {};
-      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
       // variant stuff
       window.relearn.themeVariantModifier='';
-      window.variants && variants.init( [ 'city2' ] );
+      window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -80,15 +82,15 @@
             
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
             </div>
-            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
             </div>
-            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
             </div>
-            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
             </div>
-            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
             </div>
 
 
@@ -107,6 +109,71 @@
             </header>
 <h1 id=""></h1>
 
+<p>I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.</p>
+<p>The good news is that it is really fast and simple. You’ll need a few tools to get this done:</p>
+<ul>
+<li>A server with a public IP address</li>
+<li>A DNS Provider (I use CloudFlare)</li>
+<li>Docker</li>
+<li>Nginx</li>
+<li>A Calibre Library</li>
+<li>Certbot</li>
+<li>Rsync</li>
+</ul>
+<p>First, sync your local Calibre library to a folder on your server:</p>
+<p>rsync -avuP your-library-dir <a href="mailto:root@example.org" target="_blank">root@example.org</a>:/opt/calibre/</p>
+<h1 id="install-docker">Install Docker</h1>
+<p>sudo apt update<br>
+sudo apt install docker.io</p>
+<p>Create a Docker network</p>
+<p>sudo docker network create calibre_network</p>
+<p>Create a Docker volume to store Calibre Web data</p>
+<p>sudo docker volume create calibre_data</p>
+<p>Pull the Calibre Web Docker image</p>
+<p>sudo docker pull linuxserver/calibre-web</p>
+<p>Start the Calibre Web Docker container</p>
+<p>sudo docker run -d \<br>
+&ndash;name=calibre-web \<br>
+&ndash;restart=unless-stopped \<br>
+-p 8083:8083 \<br>
+-e PUID=$(id -u) \<br>
+-e PGID=$(id -g) \<br>
+-v calibre_data:/config \<br>
+-v /opt/calibre/Calibre:/books \<br>
+&ndash;network calibre_network \<br>
+linuxserver/calibre-web</p>
+<h1 id="configure-nginx-to-act-as-a-reverse-proxy-for-calibre-web">Configure Nginx to act as a reverse proxy for Calibre Web</h1>
+<p>Create the site file</p>
+<p>sudo vim /etc/nginx/sites-available/calibre-web</p>
+<p>Add the following to the file</p>
+<p>server { listen 80;<br>
+server_name example.com; # Replace with your domain or server IP location /<br>
+{<br>
+proxy_pass http://localhost:8083;<br>
+proxy_set_header Host $host;<br>
+proxy_set_header X-Real-IP $remote_addr;<br>
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>
+proxy_set_header X-Forwarded-Proto $scheme;<br>
+} }</p>
+<p>Enable the site</p>
+<p>sudo ln -s /etc/nginx/sites-available/calibre-web /etc/nginx/sites-enabled/</p>
+<p>Restart Nginx</p>
+<p>sudo service nginx restart</p>
+<h1 id="dns-cname-record">DNS CNAME Record</h1>
+<p>Make sure to set up a cname record for your site with your DNS provider such as: calibre.example.com</p>
+<h1 id="ssl-certificate">SSL Certificate</h1>
+<p>Install ssl cert using certbot</p>
+<p>certbot &ndash;nginx</p>
+<h1 id="site-setup">Site Setup</h1>
+<p>Head to the site at <a href="https://calibre.example.com/" target="_blank">https://calibre.example.com</a> and log in with default credentials:</p>
+<p>username: admin<br>
+password: admin123</p>
+<p>Select /books as the library directory. Go into admin settings and change your password.</p>
+<h1 id="adding-new-books">Adding new books</h1>
+<p>Whenever you add new books to your server via the rsync command from earlier, you will need to restart the Calibre Web Docker container. Then restart Nginx.</p>
+<p>sudo docker restart calibre-web<br>
+systemctl restart nginx</p>
+<p>That’s all there is to it. Feel free to reach out if you have issues.</p>
 
             <footer class="footline">
             </footer>
@@ -118,7 +185,9 @@
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+Perfect Dark Mode
+
         </div>
         <div class="searchbox default-animation">
           <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
@@ -129,41 +198,42 @@
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1708513026" defer></script>
-        <script src="/js/search.js?1708513026" defer></script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
         </ul>
         <hr class="padding">
       </div>
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669"><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/" class="parent "><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab" checked><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/calibre-web-with-docker/" class="active"><a class="padding" href="/tools/calibre-web-with-docker/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41"><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class="parent "><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700" checked><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class="active"><a class="padding" href="/tools/calibre-web-with-docker/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -179,11 +249,12 @@
             <ul>
               <li id="R-select-language-container" class="footerLangSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-language fa-fw"></i>
+                  <i class="fa-fw fas fa-language"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/tools/calibre-web-with-docker/" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -191,12 +262,12 @@
               </li>
               <li id="R-select-variant-container" class="footerVariantSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <i class="fa-fw fas fa-paint-brush"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-city2" value="city2" selected>City2</option>
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -205,7 +276,7 @@
               </li>
               <li class="footerVisitedLinks showVisitedLinks">
                 <div class="padding menu-control">
-                  <i class="fas fa-history fa-fw"></i>
+                  <i class="fa-fw fas fa-history"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <button onclick="clearHistory();">Clear History</button>
@@ -221,8 +292,8 @@
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1708513026" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1708513026" defer></script>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -252,20 +323,20 @@
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1708513026" defer></script>
-    <script src="/js/js-yaml.min.js?1708513026" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1708513026" defer></script>
+    <script src="/js/theme.js?1711887805" defer></script>
   </body>
 </html>

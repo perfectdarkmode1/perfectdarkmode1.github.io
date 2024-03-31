@@ -16,29 +16,28 @@ Commands
 -   stat
 -   file
 
-### Regular files #card
+### Regular files 
 -   Text or binary data.
 -   Represented by hyphen (-).
 
 
-### Directory Files #card
+### Directory Files 
 -   Identified by the letter "d" in the beginning of ls output.
 
 
-### Block and Character (raw) Special Device Files #card
+### Block and Character (raw) Special Device Files 
 -   All hardware has device file in /dev/.
 -   Used by system to communicate with device.
 -   Identified by "c" or "b" in ls listing.
 -   Each device driver is assigned a unique number called the major number
 
-
-#### Major Number #card
+#### Major Number
 - Used by kernel to recognize device driver type.
 - Column 5 of ls listing.
 ```
 ls -l /dev/sda
 ```
-#### Minor Number #card
+#### Minor Number
 
 - Each device controlled by the same device driver gets a Minor Number
 - Applies to disk partitions as well.
@@ -58,14 +57,14 @@ lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -> vipw
 
 ## Compression and Archiving
 
-### Archiving #card
+### Archiving
 * Preserves file attributes such as ownership, owning group, and timestamp.
 * Preserves extended file attributes such as ACLs and SELinux contexts.
 * Syntax of tar and star are identical.
 
 ### star command
 
-### tar (tape archive) command #card
+### tar (tape archive) command
 * Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile)
 * Can compress a tarball after it's been created.
 * Automatically removes "/" so you do not have to specify the full pathname  when restoring files at any location.
@@ -77,106 +76,108 @@ tar -p :: Preserve file permissions. Default for the root user. Specify this if 
 tar -r :: Append files to the end of an existing uncompressed tarball. 
 tar -t :: List contents of a tarball. 
 tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer. 
-
-#### Archive entire home directory: #card
+-z
+-j
+-C
+#### Archive entire home directory:
 ```
 tar -cvf /tmp/home.tar /home
 ```
 
-#### Archive two specific files: #card
+#### Archive two specific files:
 ```
 tar -cvf /tmp/files.tar /etc/passwd /etc/yum.conf
 ```
 
-#### Append files in a directory to existing tarball: #card
+#### Append files in a directory to existing tarball: 
 ```
 tar -rvf /tmp/files.tar /etc/yum.repos.d
 ```
 
-#### List what is included in home.tar tarball: #card
+#### List what is included in home.tar tarball:
 ```
 tar -tvf /tmp/files.tar
 ```
 
-#### Restore single file and confirm: #card
+#### Restore single file and confirm: 
 ```
 tar -xf /tmp/files.tar etc/yum.conf
 ls -l etc/yum.conf
 ```
 
-#### Restore all files and confirm: #card
+#### Restore all files and confirm:
 ```
 tar -xf /tmp/files.tar
 ls
 ```
 
-#### Create a gzip-compressed tarball under /tmp for /home: #card
+#### Create a gzip-compressed tarball under /tmp for /home: 
 ```
-tar -czf /tmp/hom.tar.gz /home
+tar -czf /tmp/home.tar.gz /home
 ```
 
-#### Create bzip2-compressed tarball under /tmp for /home: #card
+#### Create bzip2-compressed tarball under /tmp for /home: 
 ```
 sudo tar -cjf /tmp/home.tar.bz2 /home
 ```
 
-#### List content of gzip-compressed archive without uncompressing it: #card
+#### List content of gzip-compressed archive without uncompressing it: 
 ```
-tar -tf /tmp/hom.tar.gz
-```
-
-#### Extract files from gzip-compressed tarball in the current directory: #card
-```
-tar -xf /tmp/hom.tar.gz
+tar -tf /tmp/home.tar.gz
 ```
 
-#### Extract files from the bzip2-compressed tarball under /tmp: #card
+#### Extract files from gzip-compressed tarball in the current directory: 
+```
+tar -xf /tmp/home.tar.gz
+```
+
+#### Extract files from the bzip2-compressed tarball under /tmp: 
 ```
 tar -xf /tmp/home.tar.bz2 -C /tmp
 ```
 
 ## Compression tools
 
-### gzip (gunzip) command #card
+### gzip (gunzip) command 
 * Create a compressed file for each of the specified files.
 * Adds .gz extension.
 
 Flags
 
-#### Copy /etc/fstab to the current directory and display filename when uncompressed: #card
+#### Copy /etc/fstab to the current directory and display filename when uncompressed: 
 ```
 cp /etc/fstab .
 ls -l fstab
 ```
 
-#### gzip fstab and view details: #card
+#### gzip fstab and view details: 
 ```
 gzip fstab
 ls -l fstab.gz
 ```
 
-#### Display compression info: #card
+#### Display compression info: 
 ```
 gzip -l fstab.gz
 ```
 
-#### Uncompress fstab.gz: #card
+#### Uncompress fstab.gz: 
 ```
 gunzip fstab.gz
 ls -l fstab
 ```
 
-### bzip2 (bunzip2) command #card
+### bzip2 (bunzip2) command
 * Adds .bz2 extension.
 - Better compression/ decompression ratio but is slower than gzip.
 
-#### Compress fstab using bzip and view details: #card
+#### Compress fstab using bzip and view details:
 ```
 bzip2 fstab
 ls -l fstab.bz2
 ```
 
-#### Unzip fstab.bz2 and view details: #card
+#### Unzip fstab.bz2 and view details:
 ```
 bunzip2 fstab.bz2
 ls -l fstab
@@ -185,7 +186,7 @@ ls -l fstab
 ## File Editing
 
 ### Vim
-[vimguide]
+[vimguide](vimguide.md)
 
 ### File and Directory Operations
 ### touch command
@@ -194,52 +195,52 @@ ls -l fstab
 
 Flags
 
-#### Set date on file1 to 2019-09-20: #card
+#### Set date on file1 to 2019-09-20: 
 ```
 touch -d 2019-09-20 file1
 ```
 
-#### Change modification time on file1 to current system time: #card
+#### Change modification time on file1 to current system time: 
 ```
 touch -m file1
 ```
 
-### mkdir command #card
+### mkdir command 
 - Create a new directory.
 
 flags
 
-#### Create dir1 verbosely: #card
+#### Create dir1 verbosely: 
 ```
 mkdir dir1 -v
 ```
 
-#### Create dir2/perl/perl5: #card
+#### Create dir2/perl/perl5: 
 ```
 mkdir -vp dir2/perl/perl5
 ```
 
-## Commands for displaying file contents #card
+## Commands for displaying file contents 
 - cat
 - more
 - less
 - head
 - tail
 
-### cat command #card
+### cat command 
 - Concatenate and print files to standard output.
 
 Flags
 
-#### Redirect output to specified file: #card
+#### Redirect output to specified file: 
 ```
 cat > catfile1
 ```
 
-### tac command #card
+### tac command 
 - Display file contents in reverse
 
-### more command #card
+### more command 
 - Display files on page-by-page basis.
 - Forward text searching only.
 
@@ -254,19 +255,19 @@ less /usr/bin/znew
 
 #### Navigation
 
-### head command #head
+### head command
 - Displays first 10 lines of a file.
 
 ```
 head /etc/profile
 ```
 
-#### View top 3 lines of a file: #card
+#### View top 3 lines of a file: 
 ```
 head -3 /etc/profile
 ```
 
-### tail command #card
+### tail command
 - Display last 10 lines of a file.
 
 Flags
@@ -275,19 +276,19 @@ Flags
 tail /etc/profile
 ```
 
-#### View last 3 lines of /etc/profile: #card
+#### View last 3 lines of /etc/profile: 
 ```
 tail -3 /etc/profile
 ```
 
-#### View updates to the system log file /varlog/messages in real time: #card
+#### View updates to the system log file /varlog/messages in real time: 
 ```
 sudo tail -f /var/log/messages
 ```
 
 ## Counting Words, Lines, and Characters in Text Files
 
-### wc (word count) command #card
+### wc (word count) command
 - Display the number of lines, words, and characters (or bytes) contained in a text file or input supplied.
  
 Flags
@@ -297,14 +298,14 @@ Flags
   85  294 2123 /etc/profile
 ```
 
-#### Display count of characters on /etc/profile: #card
+#### Display count of characters on /etc/profile: 
 ```
 wc -m /etc/profile
 ```
 
 ## Copying Files and Directories
 
-### cp command #card
+### cp command 
 - Copy files or directories.
 - Overwrites destination without warning.
 - root has a custom alias in their .bashrc file that automatically adds the -i option.
@@ -318,31 +319,31 @@ Flags
 cp file1 newfile1
 ```
 
-#### Copy file to new directory: #card
+#### Copy file to new directory: 
 ```
 cp file1 dir1
 ```
 
-#### Get confirmation before overwriting: #card
+#### Get confirmation before overwriting: 
 ```
 cp file1 dir1 -i
 cp: overwrite 'dir1/file1'? y
 ```
 
-#### Copy a directory and view hierarchy: #card
+#### Copy a directory and view hierarchy: 
 ```
 cp -r dir1 dir2
 ls -l dir2 -R
 ```
 
-#### Copy file while preserving attributes: #card
+#### Copy file while preserving attributes: 
 ```
 cp -p file1 /tmp
 ```
 
 ## Moving and renaming Files and Directories
 
-### mv command #card
+### mv command
 - Move or rename files and directories.
 - Can move a directory into another directory.
 	- Target directory must exist otherwise you are just renaming the directory.
@@ -361,41 +362,41 @@ mv -i file1 dir1
 mv newfile1 newfile2
 ```
 
-#### Move a dir into another dir (target exists):  #card
+#### Move a dir into another dir (target exists):  
 ```
 mv dir1 dir2
 ```
 
-#### Rename a directory (Target does not exist): #card
+#### Rename a directory (Target does not exist): 
 ```
 mv dir2 dir20
 ```
 
 ## Removing files
 
-### rm command #card
+### rm command 
 - Delete one or more specified files or directories.
 - Alias—“alias rm=’rm -i’”— in the .bashrc file in the root user’s home directory.
 - Remember to backslash "\" any wildcard characters in filenames.
 
 Flags
 
-#### Erase newfile2: #card
+#### Erase newfile2: 
 ```
 rm -i newfile2
 ```
 
-#### rm a directory: #card
+#### rm a directory: 
 ```
  rm -dv emptydir
  ```
 
-#### rm a directory recursively: #card
+#### rm a directory recursively: 
 ```
 rm -r dir20
 ```
 
-#### rmdir command #card
+#### rmdir command 
 - Remove empty directories.
 
 Flags
@@ -406,7 +407,7 @@ rmdir emptydir -v
 
 ## File Linking
 
-### inode (index node) #card
+### inode (index node)
 - Contains metadata about a file (128 bytes)
 	- File type, Size, permissions, owner name, owning group, access times, link count, etc.
 	- Also shows number of allocated blocks and pointers to the data storage location.  
@@ -415,7 +416,7 @@ rmdir emptydir -v
 - Filename and corresponding inode number mapping is maintained in the directory’s metadata where the file resides.
 - Links are not created between files and directories
 
-### Hard links #card
+### Hard links
 - Mapping between one or more filenames and an inode number.
 - Hard-linked files are indistinguishable from one another.
 - All hard-linked files will have identical metadata.
@@ -424,11 +425,11 @@ rmdir emptydir -v
 - Cannot link directories.
 
 
-#### ls -li output #card
+#### ls -li output
 - Column 1 inode number.
 - Column 3 link count.
 
-## Soft Links #card
+## Soft Links 
 - Symbolic (symlink).
 - Like a Windows shortcut.
 - Unique inode number for each symlink.
@@ -445,10 +446,10 @@ rmdir emptydir -v
 	4. sbin -> usr/sbin
 - Same syntax for creating linked directories
 
-### ln command #card
+### ln command
 - Create links between files.
 - Creates hard link by default.
-##### Hard link file10 and file20 and verify the inode number: #card
+##### Hard link file10 and file20 and verify the inode number:
 ```
 touch file10
 ln file10 file20
@@ -573,29 +574,29 @@ sudo tar -xf etc.tar.bz2 ; sudo tar -xf etc.tar.gz
 
 As user1 on server1, create a file called vipractice in the home directory using vim. Type (do not copy and paste) each sentence from Lab 3-1 on a separate line (do not worry about line wrapping). Save the file and quit the editor. 
 
-#### Open vipractice in vim again and reveal line numbering. Copy lines 2 and 3 to the end of the file to make the total number of lines in the file to 6. #card
+#### Open vipractice in vim again and reveal line numbering. Copy lines 2 and 3 to the end of the file to make the total number of lines in the file to 6. 
 ```
 :set number!
 #then
 yy and p
 ```
 
-#### Move line 3 to make it line 1. #card
+#### Move line 3 to make it line 1. 
 ```
 3m0
 ```
 
-#### Go to the last line and append the contents of the .bash_profile. #card
+#### Go to the last line and append the contents of the .bash_profile. 
 ```
 :r ~/.bashrc
 ```
 
-#### Substitute all occurrences of the string “Profile” with “Pro File”, and all occurrences of the string “profile” with “pro file”. #card
+#### Substitute all occurrences of the string “Profile” with “Pro File”, and all occurrences of the string “profile” with “pro file”. 
 ```
 :%s/profile/pro file/gi
 ```
 
-#### Erase lines 5 to 8. #card
+#### Erase lines 5 to 8. 
 ```
 :5,8d
 ```

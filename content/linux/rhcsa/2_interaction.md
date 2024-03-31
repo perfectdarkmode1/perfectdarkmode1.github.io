@@ -7,31 +7,31 @@
 - Foundation for running GUI apps.
 - Better graphics capabilities, features, and performance than X.
 
-### Core Components #card
+### Core Components
 
 - Display manager (login manager)
 - Desktop environment
 
-### Display/ Login Manager #card
+### Display/ Login Manager 
 - Presentation of graphical login screen
 - Allows users to enter credentials to log on to the system
 - Preconfigured graphical desktop manager appears after the credentials are verified
 
 - Default display manager for RHEL8 :: GNOME Display Manager (GDM).
 
-#### Desktop Environment #card
+#### Desktop Environment 
 
-- after login, the display/login manager establishes a Desktop Environment (DE)
+- After login, the display/login manager establishes a Desktop Environment (DE).
 
 # Linux Directory Structure and Filesystems
 
 Filesystem Hierarchy Standard (FHS) :: Describes names, locations, and permissions for many file types and directories.
 
-## Top-Level Directories #card
+## Top-Level Directories
 
 - Key top-level directories under /
 - Some of these directories hold static data
-- others contain dynamic (or variable) information.
+- Others contain dynamic (or variable) information.
 
 ### Static directories
 
@@ -80,11 +80,11 @@ Size of the root file system is automatically determined by the installer progra
 - etcetera (extended text configuration)
 - system configuration files
 - common subdirectories
-	syst
+	systemd
 	sysconfig
 	lvm
 	skel
--   comprise configuration files for syst
+-   comprise configuration files for systemd
 -   most system services
 -   Logical Volume Manager
 -   per-user shell startup template files
@@ -110,31 +110,31 @@ Size of the root file system is automatically determined by the installer progra
 - hold additional software that may need to be installed on the system
 - subdirectory is created for each installed software.
 
-#### UNIX System Resources Directory (/usr) #card
+#### UNIX System Resources Directory (/usr)
 
 - most of the system files.
 
-##### /usr/bin #card
+##### /usr/bin
 - binary directory
 - crucial user executable commands.
 
-##### /usr/sbin #card
+##### /usr/sbin
 - Most commands are required at system boot,
 - system binary
 - crucial system administration commands not intended for execution by normal users (although they can still run a few of them).
 - not included in the default search path for normal users
 
-##### /usr/lib and /usr/lib64 #card
+##### /usr/lib and /usr/lib64
 - shared library routines
 - required by many commands/programs located in /usr/bin and /usr/sbin
-- used kernel and other applications and programs for their successful installation and operation
+- used by kernel and other applications and programs for their successful installation and operation
 - /usr/lib directory also stores system initialization and service management programs
 - /usr/lib64 contains 64-bit shared library routines.
 
-##### /usr/include #card
+##### /usr/include
 - header files for C language.
 
-##### /usr/local: #card
+##### /usr/local:
 - system administrator repository for storing commands and tools
 - commands not generally included with the original Linux distribution.
 	/usr/local/bin
@@ -147,40 +147,40 @@ Size of the root file system is automatically determined by the installer progra
 		directory location for manual pages, documentation, sample templates, configuration files, etc.
 		may be shared with other Linux platforms.
 
-##### /usr/src: #card
+##### /usr/src:
 - used to store source code.
 
-#### Variable Directory (/var) #card
+#### Variable Directory (/var)
 
 - data that frequently changes while the system is operational.
 - log, status, spool, lock, and other dynamic data.
 
 common subdirectories
 
-##### /var/log #card
-- most system log files
--   system logs, boot logs, user logs, failed user logs, installation logs, cron logs, mail logs, etc.
+##### /var/log
+- Most system log files
+- system logs, boot logs, user logs, failed user logs, installation logs, cron logs, mail logs, etc.
 
-##### /var/opt #card
+##### /var/opt
 
 - log, status, and other variable data files for additional software installed in /opt, t.
 
-##### /var/spool #card
+##### /var/spool
 - print jobs, cron jobs, mail messages, and other queued items.
 
-##### /var/tmp #card
+##### /var/tmp
 
 - Large temporary files or temporary files that need to exist for longer periods of time than what is typically allowed in /tmp
 - survive system reboots
 - deleted if they are not accessed or modified for a period of 30 days.
 
-#### Temporary Directory (/tmp) #card
+#### Temporary Directory (/tmp)
 
 - temporary files
 - programs can create temporary files here during runtime or installation.
 - These files survive system reboots and are automatically removed if they are not accessed or modified for a period of 10 days.
 
-#### Devices File System (/dev) #card
+#### Devices File System (/dev)
 
 - Device nodes for (physical  and virtual)
 - Linux kernel talks to devices through device nodes.
@@ -192,18 +192,18 @@ Two types of device files :: Character (or raw), and block.
 
 kernel accesses devices using :: Character (or raw), and/or  block Device files.
 
-#### Character devices #card
+#### Character devices
 
 - Accessed serially.
 - Console, serial printers, mice, keyboards, terminals, etc.
 
-#### Block devices #card
+#### Block devices
 
 - Accessed in a parallel fashion with data exchanged in blocks.
 - Data on block devices is accessed randomly.
 - Hard disk drives, optical drives, parallel printers, etc.
 
-## Procfs File System (/proc) #card
+## Procfs File System (/proc)
 
 - Config and status info on:
 	- Kernel, CPU, memory, disks, partitioning, file systems, networking, running processes, etc.
@@ -211,21 +211,21 @@ kernel accesses devices using :: Character (or raw), and/or  block Device files.
 - Interface to interact with kernel-maintained information.
 - Contents created in memory at system boot time, updated during runtime, and destroyed at system shutdown.
 
-## Runtime File System (/run) #card
+## Runtime File System (/run)
 
 - Data for processes running on the system.
 	- /run/media
 - Used to automatically mount external file systems (CD, DVD, flash USB.)
 - Contents deleted at shutdown.
 
-## The System File System (/sys) #card
+## The System File System (/sys)
 
 - Info about hardware devices, drivers, and some kernel features.
 - Used by the kernel to load necessary support for devices, create device nodes in /dev, and configure devices.
 - Auto-maintained.
 # Essential System Commands
 
-### tree command #card
+### tree command
 - List hierarchy of directories and files.
 - Column 2
 	- Size.
@@ -241,12 +241,12 @@ Options.
 
 ## Labs
 
-### List only the directories (-d) in the root user’s home directory (/root). #card
+### List only the directories (-d) in the root user’s home directory (/root).
 ```
 tree -d /root
 ```
 
-### List files in the /etc/sysconfig directory along with their permissions, sizes in human-readable format, and full path. #card
+### List files in the /etc/sysconfig directory along with their permissions, sizes in human-readable format, and full path.
 ```
 tree -phf /etc/sysconfig
 ```
@@ -256,11 +256,11 @@ tree -phf /etc/sysconfig
 man tree
 ```
 
-# Prompt Symbols #card
+# Prompt Symbols
 - Hash sign (#) for root user.
 - Dollar sign ($) for normal users.
 
-# Linux Commands #card
+# Linux Commands
 
 Two types of commands:
 1. User 
@@ -270,7 +270,7 @@ Two types of commands:
 	- Superuser.
 	- Require elevated privileges.
 
-# Command Mechanics #card
+# Command Mechanics
 
 Basic Syntax
 - command option(s) argument(s)
@@ -295,32 +295,32 @@ ls -R ::: List contents recursively.
 ls -i ::: View inode information.
 ### labs:
 
-#### Show the long listing of only /usr without showing its contents. #card
+#### Show the long listing of only /usr without showing its contents.
 ```
 ls -ld /usr
 ```
 
-#### Display all files in the current directory with their sizes in human-friendly format. #card
+#### Display all files in the current directory with their sizes in human-friendly format.
 ```
 ls -lh
 ```
 
-#### List all files, including the hidden files, in the current directory with detailed information. #card
+#### List all files, including the hidden files, in the current directory with detailed information.
 ```
 ls -la
 ```
 
-#### Sort output by date and time with the newest file first. #card
+#### Sort output by date and time with the newest file first. 
 ```
 ls -lt
 ```
 
-#### List contents of the /etc directory recursively. #card
+#### List contents of the /etc directory recursively.
 ```
 ls -R /etc
 ```
 
-#### List directory info and the contents of a directory recursively. #card
+#### List directory info and the contents of a directory recursively.
 ```
 ls -lR /etc
 ```
@@ -330,7 +330,7 @@ ls -lR /etc
 man ls
 ```
 
-### Printing Working Directory (pwd) command #card
+### Printing Working Directory (pwd) command
 
 - Returns the absolute path to a file or directory.
 
@@ -342,28 +342,28 @@ Relative path :: Points to a file or directory in relation to your current locat
 
 ### Labs:
 
-#### Go one level up into the parent directory using the relative path #card
+#### Go one level up into the parent directory using the relative path
 ```
 cd ..
 ```
 
-#### cd into /etc/sysconfig using the absolute path (/etc/sysconfig), or the relative path (etc/sysconfig) #card
+#### cd into /etc/sysconfig using the absolute path (/etc/sysconfig), or the relative path (etc/sysconfig) 
 ```
 cd /etc/sysconfig
 cd /
 cd etc/sysconfig
 ```
 
-#### Change into the /usr/bin directory from /etc/sysconfig using relative or absolute path #card
+#### Change into the /usr/bin directory from /etc/sysconfig using relative or absolute path 
 ```
 cd /usr/bin
 ```
 or
 ```
-cd ../../bin
+cd ../usr/bin
 ```
 
-#### Return to your home directory #card
+#### Return to your home directory
 ```
 cd
 ```
@@ -372,22 +372,22 @@ or
 cd ~
 ```
 
-#### Use the absolute path to change into the home directory of the root user from /etc/sysconfig #card
+#### Use the absolute path to change into the home directory of the root user from /etc/sysconfig
 ```
 cd ../../root
 ```
 
-#### Switch between the current and previous directories #card
+#### Switch between the current and previous directories 
 ```
 cd ..
 ```
 
-#### use the cd command to print the home directory of the current user #card
+#### use the cd command to print the home directory of the current user
 ```
 cd -
 ```
 
-# Terminal Device Files #card
+# Terminal Device Files
 
 - Unique pseudo (or virtual) numbered device files that represent terminal sessions opened by users.
 - Used to communicate with individual sessions. 
@@ -396,7 +396,7 @@ cd -
 - Removed when a session closes.
 
 
-## tty command #card
+## tty command
 
 - Identify current terminal session.
 - Displays filename and location.
@@ -404,7 +404,7 @@ cd -
 
 # Inspecting System’s Uptime and Processor Load
 
-## uptime command #card
+## uptime command
 
 - Displays:
 	- System’s current time.
@@ -421,7 +421,6 @@ cd -
 clear
 ```
 
-Shortcut for the clear command ::: ctrl+l
 ## Determining Command Path
 
 tools for identifying the absolute path of the command that will be executed when you run it without specifying its full path.
@@ -430,7 +429,7 @@ which, whereis, and type
 
 show the full location of the ls command:
 
-## which command #card
+## which command 
 - Show command aliases and location.
 ```
 [root@server1 bin]# which ls
@@ -438,14 +437,14 @@ alias ls='ls --color=auto'
         /usr/bin/ls
 ```
 
-## whereis command #card
+## whereis command
 - Locates binary, source, and manual files for specified command name. 
 ```
 [root@server1 bin]# whereis ls
 ls: /usr/bin/ls /usr/share/man/man1/ls.1.gz /usr/share/man/man1p/ls.1p.gz>)
 ```
 
-## type command #card
+## type command
 - Find whether the given command is an alias, shell built-in, file, function, or keyword.
 ```
 type ls
@@ -490,7 +489,7 @@ uname -a
 
 ## Viewing CPU Specs
 
-## lscpu command #card
+## lscpu command
 - Shows CPU:
 	- Architecture.
 	- Operating modes.
@@ -518,7 +517,7 @@ lscpu
 
 ## Getting Help
 
-### Manual pages #card
+### Manual pages
 - Informational pages stored in /usr/share/man for each program. 
 
 #### man command
@@ -526,7 +525,7 @@ lscpu
 man -k {keyword} ::: perform a keyword search on manual pages.
 man -f ::: Equivalent to whatis.
 	
-#### Commands to find information/help about programs. #card
+#### Commands to find information/help about programs.
 - apropos 
 - whatis 
 - info 
@@ -538,15 +537,7 @@ Directory with additional program documentation ::: /usr/share/doc/
 man passwd
 ```
 
-	name of the command, the 
-		section of the manual pages it is documented in within the parentheses
-		type (User utilities) of the command on line 1
-		short description (NAME)
-		command’s usage (SYNOPSIS)
-		long description (DESCRIPTION)
-		detailed explanation of each option that the command supports 
-		0ther relevant data
-		highlighted line at the bottom indicates the line number of the manual page. 
+line at the bottom indicates the line number of the manual page. 
 
 ### Man page navigation
 h ::: Help on navigation.
@@ -573,7 +564,7 @@ SEE ALSO :: Reference to other manual pages or topics.
 BUGS :: Any reported bugs or issues.
 AUTHOR :: Contributor information.
 
-## Manual Sections #card
+## Manual Sections
 - Manual information is split into nine sections for organization and clarity.
 - Man searches through each section until it finds a match. 
 	- Starts at section 1, then section 2, etc.
@@ -590,31 +581,31 @@ Section 8 :: Documents system administration and privileged commands designed fo
 
 ## Searching by Keyword
 
-#### apropos command #card
+#### apropos command
 - search all sections of the manual pages and show a list of all entries matching the specified keyword in their names or descriptions.
 - Must mandb command in order to build an indexed database of the manual pages prior to using.
 ```
 mandb
 ```
 
-#### mandb command #card
+#### mandb command
 - Build an indexed database of the manual pages.
 
-#### Lab: Find a forgotten XFS administration command. #card
+#### Lab: Find a forgotten XFS administration command.
 ```
 man -k xfs
 or
 apropos xfs
 ```
 
-#### Lab: Show a brief list of options and a description. #card
+#### Lab: Show a brief list of options and a description.
 ```
 passwd --help
 or
 passwd -?
 ```
 
-#### whatis command #card
+#### whatis command
 - same output as ```man -f```
 - Display one-line manual page descriptions.
 		
@@ -649,7 +640,7 @@ s :: Search
 ls -l /usr/share/doc/gzip
 ```
 
-## Online RHEL Documentation #card
+## Online RHEL Documentation
 - docs.redhat.com 
 - Release notes and guides on planning, installation, administration, security, storage management, virtualization, etc. 
 - access.redhat.com

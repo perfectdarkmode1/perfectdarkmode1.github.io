@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="Describe package groups Understand application streams and modules Software repositories and how to access them Review module streams and module profiles Perform software management operations using dnf List, install, update, and delete individual packages, package groups, and modules Show package information, determine provider, and search metadata Exhibit package group and module information Install module from alternative stream
+RHCSA Objectives:
+44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system 45.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="Describe package groups Understand application streams and modules Software repositories and how to access them Review module streams and module profiles Perform software management operations using dnf List, install, update, and delete individual packages, package groups, and modules Show package information, determine provider, and search metadata Exhibit package group and module information Install module from alternative stream
+RHCSA Objectives:
+44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system 45.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/10_adv_package_management/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'git' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/10_adv_package_management/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#packagegroups">Package Groups</a>
+      <ul>
+        <li><a href="#package-group">package group</a></li>
+      </ul>
+    </li>
+    <li><a href="#application-streams-and-modules">Application Streams and Modules</a>
+      <ul>
+        <li><a href="#module-streams">Module Streams</a></li>
+        <li><a href="#module-profiles">Module Profiles</a></li>
+        <li><a href="#dnf-yum-repository">dnf yum Repository</a></li>
+        <li><a href="#software-management-with-dnf">Software Management with dnf</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-dnf-command">The dnf Command</a>
+      <ul>
+        <li><a href="#lab-configure-access-to-pre-built-repositories">Lab: Configure Access to Pre-Built Repositories</a></li>
+      </ul>
+    </li>
+    <li><a href="#individual-packages-package-groups-and-modules">individual packages, package groups, and modules:</a>
+      <ul>
+        <li><a href="#individual-package-management">Individual Package Management</a></li>
+        <li><a href="#lab-list-all-packages-available-for-installation-from-all-enabled-repos">Lab: list all packages available for installation from all enabled repos,</a></li>
+        <li><a href="#lab-list-of-packages-that-are-available-only-from-a-specific-repo">Lab: list of packages that are available only from a specific repo:</a></li>
+        <li><a href="#lab-grep-for-an-expression-to-narrow-down-your-search">Lab: grep for an expression to narrow down your search.</a></li>
+        <li><a href="#lab-list-all-installed-packages-on-the-system">Lab: list all installed packages on the system:</a></li>
+        <li><a href="#installing-and-updating-packages">Installing and Updating Packages</a></li>
+        <li><a href="#exhibiting-package-information">Exhibiting Package Information</a></li>
+        <li><a href="#removing-packages">Removing Packages</a></li>
+        <li><a href="#lab-manipulate-individual-packages">Lab: Manipulate Individual Packages</a></li>
+        <li><a href="#determining-provider-and-searching-package-metadata">Determining Provider and Searching Package Metadata</a></li>
+      </ul>
+    </li>
+    <li><a href="#package-group-management">Package Group Management</a>
+      <ul>
+        <li><a href="#listing-available-and-installed-package-groups">Listing Available and Installed Package Groups</a></li>
+        <li><a href="#installing-and-updating-package-groups">Installing and Updating Package Groups</a></li>
+        <li><a href="#removing-package-groups">Removing Package Groups</a></li>
+        <li><a href="#lab-manipulate-package-groups">Lab: Manipulate Package Groups</a></li>
+      </ul>
+    </li>
+    <li><a href="#module-management">Module Management</a>
+      <ul>
+        <li><a href="#listing-available-and-installed-modules">Listing Available and Installed Modules</a></li>
+        <li><a href="#installing-and-updating-modules">Installing and Updating Modules</a></li>
+        <li><a href="#displaying-module-information">Displaying Module Information</a></li>
+        <li><a href="#removing-modules">Removing Modules</a></li>
+        <li><a href="#lab-manipulate-modules">Lab: Manipulate Modules</a></li>
+        <li><a href="#switching-module-streams">Switching Module Streams</a></li>
+        <li><a href="#lab-install-a-module-from-an-alternative-stream">Lab: Install a Module from an Alternative Stream</a></li>
+      </ul>
+    </li>
+    <li><a href="#review-questions">Review Questions</a></li>
+    <li><a href="#labs">Labs:</a>
+      <ul>
+        <li><a href="#lab--install-and-manage-individual-packages">Lab:  Install and Manage Individual Packages</a></li>
+        <li><a href="#lab-install-and-manage-package-groups">Lab Install and Manage Package Groups</a></li>
+        <li><a href="#lab-install-and-manage-modules">Lab: Install and Manage Modules</a></li>
+        <li><a href="#lab-switch-module-streams-and-install-software">Lab Switch Module Streams and Install Software</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p>Describe package groups
+Understand application streams and modules
+Software repositories and how to access them
+Review module streams and module profiles
+Perform software management operations using dnf
+List, install, update, and delete individual packages, package groups, and modules
+Show package information, determine provider, and search metadata
+Exhibit package group and module information
+Install module from alternative stream</p>
+<p>RHCSA Objectives:</p>
+<p>44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system
+45.Work with package module streams</p>
+<p>dnf command (the yum command</p>
+<ul>
+<li>performs automatic dependency checks and marks any identified extra packages for installation</li>
+</ul>
+<h2 id="packagegroups">Package Groups</h2>
+<h3 id="package-group">package group</h3>
+<ul>
+<li>Collection of correlated packages designed to serve a common purpose.</li>
+<li>Provides the convenience of querying, installing, and deleting as a single unit rather than dealing with packages individually.</li>
+<li>Two types of package groups: <em>environment groups</em> and <em>package groups</em>.
+<ul>
+<li>environment groups available in RHEL 8 are server, server with GUI, minimal install, workstation, virtualization host, and custom operating system.</li>
+<li>Listed on the software selection window during RHEL 8 installation.</li>
+<li>Package groups include container management, smart card support, security tools, system tools, network servers, <em>etc.</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="application-streams-and-modules">Application Streams and Modules</h2>
+<p><em>Application Streams</em> is a</p>
+<ul>
+<li>new concept introduced in RHEL 8. It</li>
+<li>employs a modular approach to organize multiple versions of a software application alongside its dependencies to be available for installation from a single repository. A <em>module</em> can be thought of as a logical set of application packages that includes everything required to install it, including the executables, libraries, documentation, tools, and utilities as well as dependent components. Modularity gives the flexibility to choose the version of software based on need.</li>
+</ul>
+<ul>
+<li>In older RHEL releases, each version of a package would have to come from a separate repository. (This has changed in RHEL 8.)</li>
+<li>Now modules of a single application with different versions can be stored and made available for installation from a common repository.</li>
+<li>The package management tool has also been enhanced to manipulate modules.</li>
+</ul>
+<ul>
+<li>RHEL 8 is shipped with two core repositories called <em>BaseOS</em> and <em>Application Stream</em> (AppStream).</li>
+</ul>
+<p>BaseOS repository</p>
+<ul>
+<li>includes the core set of RHEL 8 components</li>
+<li>kernel, modules, bootloader, and other foundational
+software packages.</li>
+<li>lays the foundation to install and run software applications and programs.</li>
+<li>BaseOS repository components are
+available in the traditional rpm format.</li>
+</ul>
+<p>AppStream repository</p>
+<ul>
+<li>comes standard with core applications,</li>
+<li>as well as several add-on applications</li>
+<li>many of them in the traditional rpm format and</li>
+<li>some in the new modular format. These</li>
+<li>add-ons include web server software, development languages, database software, <em>etc.</em></li>
+</ul>
+<p>Benefits of Segregation</p>
+<p>Benefits to a segregation of the BaseOS components from other applications:</p>
+<p>(1)  separates application components from the core operating system elements.<br>
+(2) allows publishers to deliver and administrators to apply application updates more frequently.</p>
+<p>In previous RHEL versions, an OS update would update
+all installed components including the kernel, service, and application
+components to the latest versions by default.</p>
+<p>This could result in an unstable system or a misbehaving application due to an unwanted upgrade
+of one or more packages.</p>
+<p>By detaching the base OS components from the applications, either of the two can be updated independent of the other.</p>
+<p>This provides enhanced flexibility in tailoring the system components
+and application workloads without impacting the underlying stability of
+the system.</p>
+<h3 id="module-streams">Module Streams</h3>
+<ul>
+<li>collection of packages organized by version.</li>
+<li>Each module can have multiple streams, and</li>
+<li>each stream receives updates independent of the other streams. A</li>
+<li>stream can be enabled or disabled.
+enabled stream</li>
+<li>allows the packages it contains to be queried or
+installed.</li>
+<li>Only one stream of a specific module can be enabled at a
+time.</li>
+<li>Each module has a default stream, which provides the latest or the
+recommended version.i</li>
+</ul>
+<h3 id="module-profiles">Module Profiles</h3>
+<ul>
+<li>a list of recommended packages organized for purpose-built, convenient deployments to support a variety of use cases
+such as</li>
+<li>minimal, development, common, client, server, <em>etc.</em></li>
+<li>A profile may also include packages from the BaseOS repository or the dependencies
+of the stream. Each module stream can have zero, one, or more profiles
+associated with it with only one of them marked as the <em>default</em>.</li>
+</ul>
+<h3 id="dnf-yum-repository">dnf yum Repository</h3>
+<p>A <em>dnf repository</em> (<em>yum repository</em> or a <em>repo</em>) is a</p>
+<ul>
+<li>
+<p>digital library for storing software packages. A</p>
+</li>
+<li>
+<p>repository is accessed for package retrieval, query, update, and installation, and it</p>
+</li>
+<li>
+<p>The two repositories&mdash;</p>
+<ul>
+<li>BaseOS and AppStream&mdash;
+<ul>
+<li>come preconfigured with the RHEL 8 ISO image. There are a</li>
+<li>number of other repositories available on the Internet that are maintained by software publishers
+such as Red Hat and CentOS.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>can build private custom repositories for internal IT use for stocking and delivering software.</p>
+</li>
+<li>
+<p>may prove to be a good practice for an organization with a large Linux server base, as it manages dependencies automatically and aids in maintaining software consistency across the board. T</p>
+</li>
+<li>
+<p>can also be used to store in-house developed packages.</p>
+</li>
+<li>
+<p>It is important to obtain software packages from authentic and reliable
+sources such as Red Hat to prevent potential damage to your system and
+to circumvent possible software corruption.</p>
+</li>
+<li>
+<p>There is a process to create repositories and to access preconfigured repositories.</p>
+</li>
+<li>
+<p>there are two pre-set repositories available on the RHEL 8 image. You will configure access to them via a definition file to support the exercises and lab environment.</p>
+</li>
+</ul>
+<p>Sample repo definition file and key directives:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[BaseOS_RHEL_8]
+name= RHEL 8 base operating system components
+baseurl=file://*mnt*BaseOS
+enabled=1
+gpgcheck=0</code></pre></div><p><strong>EXAM TIP:</strong></p>
+<ul>
+<li>Knowing how to configure a dnf/yum repository using a URL plays an important role in completing some of the RHCSA exam tasks successfully.</li>
+<li>Use two forward slash characters (//) with the baseurl directive for an FTP, HTTP, or HTTPS source.</li>
+</ul>
+<p>Five lines from a sample repo file:
+Line 1 defines an exclusive ID within the square brackets.
+Line 2 is a brief description of the repo with the &ldquo;name&rdquo; directive.
+Line 3 is the location of the repodata directory with the &ldquo;baseurl&rdquo; directive.
+Line 4 shows whether this repository is active.
+Line 5 shows if packages are to be GPGchecked for authenticity.</p>
+<ul>
+<li>
+<p>Each repository definition file must have:</p>
+<ul>
+<li>a unique ID,</li>
+<li>a description, and</li>
+<li>a baseurl directive defined</li>
+<li>other directives are set as required.</li>
+</ul>
+</li>
+<li>
+<p>The baseurl directive for a local directory path is defined as file:///local_path (</p>
+<ul>
+<li>the first two forward slash characters represent the URL convention, and the third forward slash is for the absolute path to the destination directory), and</li>
+<li>FTP and HTTP(S) sources as ftp://hostname/network_path and http(s)://hostname/network_path, respectively.
+<ul>
+<li>network path must include a resolvable hostname or an IP address.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="software-management-with-dnf">Software Management with dnf</h3>
+<ul>
+<li>RH and Centos offer tools to work with individual packages as well as package groups and modules.</li>
+<li><em>rpm</em> command is limited to managing one package at a time.</li>
+<li>has an associated configuration file that can define settings to control its behavior.</li>
+</ul>
+<h4 id="dnf-configuration-file">dnf Configuration File</h4>
+<ul>
+<li>key configuration file: /etc/dnf/dnf.conf</li>
+<li>&ldquo;main&rdquo; section
+- sets directives that have a global effect on dnf operations. You</li>
+<li>can define separate sections for each custom repository that you plan to set up on the
+system.</li>
+<li>preferred location to store configuration for each custom repository in their own definition files is in /etc/yum.repos.d
+<ul>
+<li>default location created for this purpose.</li>
+</ul>
+</li>
+</ul>
+<p>Default content of this configuration file:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/dnf/dnf.conf
+
+[main]
+gpgcheck=1
+installonly_limit=3
+clean_requirements_on_remove=True
+best=True
+skip_if_unavailable=False</code></pre></div><p>The above and a few other directives that you may define in the file:
+Directive Settings in dnf.conf File:</p>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>best</td>
+<td>Whether to install (or upgrade to) the latest available version.</td>
+</tr>
+<tr>
+<td>clean_requirements_on_remove</td>
+<td>Whether to remove dependencies during a package removal process that are no longer in use.</td>
+</tr>
+<tr>
+<td>debuglevel</td>
+<td>Sets debug from 1 (minimum) and 10 (maximum). Default is 2. A value of 0 disables this feature.</td>
+</tr>
+<tr>
+<td>gpgcheck</td>
+<td>Whether to check the GPG signature for package authenticity. Default is 1 (enabled).</td>
+</tr>
+<tr>
+<td>installonly_limit</td>
+<td>Count of packages that can be installed concurrently. Default is 3.</td>
+</tr>
+<tr>
+<td>keepcache</td>
+<td>Defines whether to store the package and header cache following a successful installation. Default is 0 (disabled).</td>
+</tr>
+<tr>
+<td>logdir</td>
+<td>Sets the directory location to store the log files. Default is **var<em>log.</em></td>
+</tr>
+<tr>
+<td>obsoletes</td>
+<td>Checks and removes any obsolete dependent packages during installs and updates. Default is 1 (enabled).</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>For other directives: <code>man 5 dnf.conf</code></p>
+<h2 id="the-dnf-command">The dnf Command</h2>
+<ul>
+<li>introduced in RHEL 8</li>
+<li>can use interchangeably with yum in RHEL
+<ul>
+<li>yum is a soft link to the <em>dnf</em> utility.</li>
+</ul>
+</li>
+<li>requires the system to have access to either:
+<ul>
+<li>a local or remote software repository</li>
+<li>a local installable package file.</li>
+</ul>
+</li>
+</ul>
+<p>Subscription Management* (RHSM) service</p>
+<ul>
+<li>
+<p>available in the Red Hat Customer Portal</p>
+</li>
+<li>
+<p>offers access to official Red Hat software repositories.</p>
+</li>
+<li>
+<p>Other web-based repositories that host packages are available</p>
+</li>
+<li>
+<p>You can also set up a local, custom repository on your system and add packages of your choice to it.</p>
+</li>
+</ul>
+<p>Promary benefit of using <em>dnf</em> over <em>rpm</em>:</p>
+<ul>
+<li>
+<p>Resolve dependencies automatically</p>
+<ul>
+<li>by identifying and installing any additional required packages</li>
+</ul>
+</li>
+<li>
+<p>With multiple repositories set up, <em>dnf</em> extracts the software from wherever it finds it.</p>
+</li>
+<li>
+<p>Perform abundant software administration tasks.</p>
+</li>
+<li>
+<p>Invokes the <em>rpm</em> utility in the background. <em>dnf</em></p>
+</li>
+<li>
+<p>can perform a number of operations on individual packages, package groups, and modules:</p>
+<ul>
+<li>listing</li>
+<li>querying</li>
+<li>installing</li>
+<li>removing them</li>
+<li>enabling and disabling specific module streams.</li>
+</ul>
+</li>
+</ul>
+<p>Software handling tasks that dnf can perform on packages:</p>
+<ul>
+<li>(clean and repolist) that are specific to repositories.</li>
+<li>Refer to the manual pages of <em>dnf</em> for additional subcommands, operators, options, examples, and other details.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Subcommand</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>check-update</td>
+<td>Checks if updates are available for installed packages</td>
+</tr>
+<tr>
+<td>clean</td>
+<td>Removes cached data</td>
+</tr>
+<tr>
+<td>history</td>
+<td>Display previous dnf activities as recorded in /var/lib/dnf/history/</td>
+</tr>
+<tr>
+<td>info</td>
+<td>Show details for a package</td>
+</tr>
+<tr>
+<td>install</td>
+<td>Install or update a package</td>
+</tr>
+<tr>
+<td>list</td>
+<td>List installed and available packages</td>
+</tr>
+<tr>
+<td>provides</td>
+<td>Search for packages that contain the specified file or feature</td>
+</tr>
+<tr>
+<td>reinstall</td>
+<td>Reinstall the exact version of an installed package</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>Remove a package and its dependencies</td>
+</tr>
+<tr>
+<td>repolist</td>
+<td>List enabled repositories</td>
+</tr>
+<tr>
+<td>repoquery</td>
+<td>Runs queries on available packages</td>
+</tr>
+<tr>
+<td>search</td>
+<td>Searches package metadata for the specified string</td>
+</tr>
+<tr>
+<td>upgrade</td>
+<td>Updates each installed package to the latest version</td>
+</tr>
+</tbody>
+</table>
+<p>dnf subcommands that are intended for operations on package
+groups and modules:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Subcommand</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>group install</td>
+<td>Install or updates a package group</td>
+</tr>
+<tr>
+<td>group info</td>
+<td>Return details for a package group</td>
+</tr>
+<tr>
+<td>group list</td>
+<td>List available package groups</td>
+</tr>
+<tr>
+<td>group remove</td>
+<td>Remove a package group</td>
+</tr>
+<tr>
+<td>module disable</td>
+<td>Disable a module along with all the streams it contains</td>
+</tr>
+<tr>
+<td>module enable</td>
+<td>Enable a module along with all the streams it contains</td>
+</tr>
+<tr>
+<td>module install</td>
+<td>Install a module profile including its packages</td>
+</tr>
+<tr>
+<td>module info</td>
+<td>Show details for a module</td>
+</tr>
+<tr>
+<td>module list</td>
+<td>Lists all available module streams along with their profiles and status</td>
+</tr>
+<tr>
+<td>module remove</td>
+<td>Removes a module profile including its packages</td>
+</tr>
+<tr>
+<td>module reset</td>
+<td>Resets a module so that it is neither in enable nor in disable state</td>
+</tr>
+<tr>
+<td>module update</td>
+<td>Updates packages in a module profile</td>
+</tr>
+</tbody>
+</table>
+<p>For labs, you&rsquo;ll need to create a definition file and configure access to the two repositories available on the RHEL 8 ISO
+image.</p>
+<h3 id="lab-configure-access-to-pre-built-repositories">Lab: Configure Access to Pre-Built Repositories</h3>
+<p>Set up access to the two dnf repositories that are available on RHEL 8 image. (You should have already configured an
+automatic mounting of RHEL 8 image on <em>/mnt</em>.) Create a definition file for the repositories and
+confirm.</p>
+<ol>
+<li>Verify that the image is currently mounted:</li>
+</ol>
+<p><code>df -h | grep mnt</code></p>
+<ol start="2">
+<li>Create a definition file called local.repo in /etc/yum.repos.d/ using the <em>vim</em> editor and define the
+following data for both repositories in it:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[BaseOS] 
+name=BaseOS 
+baseurl=file:///mnt/BaseOS 
+gpgcheck=0 
+
+[AppStrean] 
+name=AppStream 
+baseurl=file:///mnt/AppStream 
+gpgcheck=0</code></pre></div><ol start="3">
+<li>Confirm access to the repositories:</li>
+</ol>
+<p><code>sudo dnf repolist</code></p>
+<ul>
+<li>Ignore lines 1-4 in the output that are related to subscription and
+system registration.</li>
+<li>Lines 5 and 6 show the rate at which the command read the repo data.</li>
+<li>Line 7 displays the timestamp of the last metadata check.</li>
+<li>last two lines show the repo IDs, repo names, and a count of packages they hold.</li>
+<li>AppStream repo consists of 4,672 packages</li>
+<li>BaseOS repo contains 1,658 packages.</li>
+<li>Both repos are enabled by default and are ready for use.</li>
+</ul>
+<h2 id="individual-packages-package-groups-and-modules">individual packages, package groups, and modules:</h2>
+<h3 id="individual-package-management">Individual Package Management</h3>
+<p>List, install, query, and remove packages.</p>
+<h4 id="listing-available-and-installed-packages">Listing Available and Installed Packages</h4>
+<ul>
+<li>dnf lists available packages as well as installed packages.</li>
+</ul>
+<h3 id="lab-list-all-packages-available-for-installation-from-all-enabled-repos">Lab: list all packages available for installation from all enabled repos,</h3>
+<p><code>sudo dnf repoquery</code></p>
+<h3 id="lab-list-of-packages-that-are-available-only-from-a-specific-repo">Lab: list of packages that are available only from a specific repo:</h3>
+<p><code>sudo dnf repoquery --repo &quot;BaseOS&quot;</code></p>
+<h3 id="lab-grep-for-an-expression-to-narrow-down-your-search">Lab: grep for an expression to narrow down your search.</h3>
+<p>For example, to find whether the BaseOS repo includes the <em>zsh</em> package.</p>
+<p><code>sudo dnf repoquery --repo BaseOS | grep zsh</code></p>
+<h3 id="lab-list-all-installed-packages-on-the-system">Lab: list all installed packages on the system:</h3>
+<p><code>sudo dnf list installed</code></p>
+<p>Three columns:
+- package name
+- package version
+- repo it was installed from.
+- @anaconda means the package was installed at the time of RHEL installation.</p>
+<p>List all installed packages and all packages available for installation from all enabled repositories:</p>
+<p><code>sudo dnf list</code></p>
+<ul>
+<li>@ sign identifies the package as installed.</li>
+</ul>
+<p>List all packages available from all enabled repositories that should be able to update:</p>
+<p><code>sudo dnf list updates</code></p>
+<p>List whether a package (<em>bc</em>, for instance) is installed or available for installation from any enabled repository:</p>
+<p><code>sudo dnf list bc</code></p>
+<p>List all installed packages whose names begin with the string &ldquo;gnome&rdquo; followed by any number of characters:</p>
+<p><code>sudo dnf list installed gnome</code></p>
+<p>List recently added packages:</p>
+<p><code>suod dnf list recent</code></p>
+<p>Refer to the <em>repoquery</em> and <em>list</em> subsections of the <em>dnf</em> command
+manual pages for more options and examples.</p>
+<h3 id="installing-and-updating-packages">Installing and Updating Packages</h3>
+<p>Installing a package:</p>
+<ul>
+<li>creates the necessary directory</li>
+<li>installs the required files</li>
+<li>runs any post-installation steps.</li>
+<li>If already installed, <em>dnf</em> command updates it to the latest available version.</li>
+</ul>
+<p>Attempt to install a package called <em>ypbind</em>, proceed to update if it detects the presence of an older version:</p>
+<p><code>sudo dnf install ypbind</code></p>
+<p>Install or update a package called <em>dcraw</em> located locally at /mnt/AppStream/Packages/</p>
+<p><code>sudo dnf localinstall /mnt/AppStream/Packages/dcraw*</code></p>
+<p>Update an installed package (<em>autofs</em>, for example) to the latest available version. Dnf will fail if the specified package is not already installed:</p>
+<p><code>sudo dnf update autofs</code></p>
+<p>Update all installed packages to the latest available versions:</p>
+<p><code>sudo dnf -y update</code></p>
+<p>Refer to the <em>install</em> and <em>update</em> subsections of the <em>dnf</em> command manual pages for more options and examples.</p>
+<h3 id="exhibiting-package-information">Exhibiting Package Information</h3>
+<p>Show:</p>
+<ul>
+<li>name</li>
+<li>architecture it is built for</li>
+<li>version</li>
+<li>release</li>
+<li>size</li>
+<li>whether it is installed or available for installation</li>
+<li>repo name it was installed or is available from</li>
+<li>short and long descriptions</li>
+<li>license</li>
+<li>so on</li>
+</ul>
+<p>dnf info subcommand</p>
+<p>View information about a package called <em>autofs</em>:</p>
+<p><code>dnf info autofs</code></p>
+<ul>
+<li>Determines whether the specified package is installed or
+not.</li>
+</ul>
+<p>Refer to the <em>info</em> subsection of the <em>dnf</em> command manual pages.</p>
+<h3 id="removing-packages">Removing Packages</h3>
+<p>Removing a package:</p>
+<ul>
+<li>uninstalls it and removes all associated files and directory structure.</li>
+<li>erases any dependencies as part of the deletion process.</li>
+</ul>
+<p>Remove a package called <em>ypbind</em>:</p>
+<p><code>sudo dnf remove ypbind</code></p>
+<p>Output</p>
+<ul>
+<li>resolved dependencies</li>
+<li>list of the packages that it would remove.</li>
+<li>disk space that their removal would free up.</li>
+<li>After confirmation, it erased the identified packages and verified their removal.</li>
+<li>list of the removed packages</li>
+</ul>
+<p>Refer to the <em>remove</em> subsection of the <em>dnf</em> command manual pages for more options and examples available for removing packages.</p>
+<h3 id="lab-manipulate-individual-packages">Lab: Manipulate Individual Packages</h3>
+<p>Perform management operations on a package
+called <em>cifs-utils</em>. Determine if this package is already installed and if it is available for installation. Display its information before installing it. Install the package and exhibit its information. Erase the package along with
+its dependencies and confirm the removal.</p>
+<ol>
+<li>Check whether the <em>cifs-utils</em> package is already installed:</li>
+</ol>
+<p><code>dnf list installed | grep cifs-utils</code></p>
+<ol start="2">
+<li>
+<p>Determine if the <em>cifs-utils</em> package is available for installation:
+<code>dnf repoquery cifs-utils</code></p>
+</li>
+<li>
+<p>Display detailed information about the package:
+<code>dnf info cifs-utils</code></p>
+</li>
+<li>
+<p>Install the package:
+<code>dnf install -y cifs-utils</code></p>
+</li>
+<li>
+<p>Display the package information again:
+<code>dnf info cifs-utils</code></p>
+</li>
+<li>
+<p>Remove the package:
+<code> dnf remove -y cifs-utils</code></p>
+</li>
+<li>
+<p>Confirm the removal:
+<code>dnf list installed | grep cif</code></p>
+</li>
+</ol>
+<h3 id="determining-provider-and-searching-package-metadata">Determining Provider and Searching Package Metadata</h3>
+<ul>
+<li>You can determine what package a specific file belongs to or which package comprises a certain string.</li>
+</ul>
+<p>Search for packages that contain a specific file such as /etc/passwd/, use the <em>provides</em> or the <em>whatprovides</em> subcommand with dnf:
+<code>dnf provides /etc/passwd</code></p>
+<ul>
+<li>
+<p>indicates file is part of a package called <em>setup</em>, installed during RHEL installation</p>
+</li>
+<li>
+<p>second instance, setup package is part of the BaseOS repository.</p>
+</li>
+<li>
+<p>can also use a wildcard character for filename expansion.</p>
+</li>
+</ul>
+<p>List all packages that contain filenames beginning with &ldquo;system-config&rdquo; followed by any number of characters:
+<code>dnf whatprovides /usr/bin system-config*</code></p>
+<p>To search for all the packages that match the specified string in their
+name or summary:
+<code>dnf search system-config</code></p>
+<h2 id="package-group-management">Package Group Management</h2>
+<ul>
+<li>group subcommand</li>
+<li>list, install, query, and remove groups of packages.</li>
+</ul>
+<h3 id="listing-available-and-installed-package-groups">Listing Available and Installed Package Groups</h3>
+<p>group list subcommand:</p>
+<ul>
+<li>list the package groups available for installation from either or both repos</li>
+<li>list the package groups that are already installed on the system.</li>
+</ul>
+<p>List all available and installed package groups from all repositories:
+<code>dnf group list</code></p>
+<p>output:</p>
+<ul>
+<li>two categories of package groups: an
+<ul>
+<li>environment group</li>
+<li>group. An</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>environment group</p>
+<ul>
+<li>larger collection of RHEL packages that provides all necessary software to build the
+operating system foundation for a desired purpose.</li>
+</ul>
+<p>group</p>
+<ul>
+<li>small bunch of RHEL packages that serve a common purpose.</li>
+<li>saves time on the deployment of individual and dependent packages.</li>
+<li>output shows installed and available package groups.</li>
+</ul>
+<p>Display the number of installed and available package groups:
+<code>sudo dnf group summary</code></p>
+<p>List all installed and available package groups including those that
+are hidden:
+<code>sudo dnf group list hidden</code></p>
+<p>Try <em>group list</em> with --installed and --available options to narrow
+down the output list.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo dnf group list --installed
+sudo dnf group list --available</code></pre></div><p>List all packages that a specific package group such as Base contains:
+<code>sudo dnf group info Base</code></p>
+<p>-v option with the group info subcommand for more
+information.</p>
+<p>Review group list and group info subsections of the <em>dnf</em> man pages.</p>
+<h3 id="installing-and-updating-package-groups">Installing and Updating Package Groups</h3>
+<ul>
+<li>creates the necessary directory structure for all the packages included in the group and all dependent packages</li>
+<li>installs the required files</li>
+<li>runs any post-installation steps.</li>
+<li>attempts to update all the packages included in the group to the latest available versions.</li>
+</ul>
+<p>Install a package group called Emacs. Update if it detects the presence of
+an older version.
+<code>sudo dnf -y groupinstall emacs</code></p>
+<p>Update the <em>smart card support</em> package group to the latest version:
+<code>sudo dnf -y groupinstall emacs</code></p>
+<p>Refer to the <em>group install</em> and <em>group update</em> subsections of the <em>dnf</em> command manual
+pages for more details.</p>
+<h3 id="removing-package-groups">Removing Package Groups</h3>
+<ul>
+<li>Uninstalls all the included packages and deletes all associated files and directory structure.</li>
+<li>erases any dependencies</li>
+</ul>
+<p>Erase the <em>smart card support</em> package group that was installed:</p>
+<p><code>sudo dnf -y groupremove 'smart card support'</code></p>
+<p>Refer to the <em>remove</em> subsection of the <em>dnf</em> command manual pages for
+more details.</p>
+<h3 id="lab-manipulate-package-groups">Lab: Manipulate Package Groups</h3>
+<p>Perform management operations on a package group called <em>system tools</em>. Determine if this group is already installed and if it is available for installation. List the packages it contains and install it. Remove the group along with its dependencies and confirm the removal.</p>
+<ol>
+<li>
+<p>Check whether the <em>system tools</em> package group is already installed:
+<code>dnf group list installed</code></p>
+</li>
+<li>
+<p>Determine if the <em>system tools</em> group is available for installation:
+<code>dnf group list available</code></p>
+</li>
+</ol>
+<p>The group name is exhibited at the bottom of the list under the
+available groups.</p>
+<ol start="3">
+<li>Display the list of packages this group contains:
+<code>dnf group info 'system tools'</code></li>
+</ol>
+<ul>
+<li>All of the packages will be installed as part of the group
+installation.</li>
+</ul>
+<ol start="4">
+<li>
+<p>Install the group:
+<code>sudo dnf group install 'system tools'</code></p>
+</li>
+<li>
+<p>Remove the group:
+<code>sudo dnf group remove 'system tools' -y</code></p>
+</li>
+<li>
+<p>Confirm the removal:
+<code>dnf group list installed</code></p>
+</li>
+</ol>
+<h2 id="module-management">Module Management</h2>
+<p><strong>Modules</strong> are special package groups usually representing an application, a language runtime, or a set of tools. They are available in one or <strong>multiple streams</strong> which usually represent a major version of a piece of software, giving you an option to choose what versions of packages you want to consume.
+<a href="https://docs.fedoraproject.org/en-US/modularity/using-modules/" target="_blank">https://docs.fedoraproject.org/en-US/modularity/using-modules/</a></p>
+<p>Modules are a way to deliver different versions of software (such as programming languages, databases, or web servers) independently of the base operating system&rsquo;s release cycle.</p>
+<p>Each module can contain multiple streams, representing different versions or configurations of the software. For example, a module for Python might have streams for Python 2 and Python 3.</p>
+<p><em>module</em> dnf subcommand</p>
+<ul>
+<li>list, enable, install, query, remove, and disable
+modules.</li>
+</ul>
+<h3 id="listing-available-and-installed-modules">Listing Available and Installed Modules</h3>
+<p>List all modules along with their stream, profile, and summary
+information available from all configured repos:
+<code>dnf module list</code></p>
+<p>Limit the output to a list of modules available from a specific
+repo such as AppStream by adding --repo AppStream:
+<code>dnf module list --repo AppStream</code></p>
+<p>Output:</p>
+<ul>
+<li>default (d)</li>
+<li>enabled (e)</li>
+<li>disabled (x)</li>
+<li>installed (i)</li>
+</ul>
+<p>List all the streams for a specific module such as <em>perl</em> and display their status:
+<code>dnf module list perl</code></p>
+<p>Modify the above and list only the specified stream (5.24) for the module <em>perl</em>:
+<code>dnf module list perl:5.24</code></p>
+<p>List all enabled module streams:
+<code>dnf module list --enabled</code></p>
+<p>Similarly, you can use the --installed and --disabled options with
+<strong>dnf module list</strong> to output only the installed or the disabled
+streams.</p>
+<p>Refer to the <em>module list</em> subsection of the <em>dnf</em> command manual pages.</p>
+<h3 id="installing-and-updating-modules">Installing and Updating Modules</h3>
+<p>Installing a module</p>
+<ul>
+<li>creates directory tree for all packages included in the module and all dependent packages</li>
+<li>installs required files for the selected profile</li>
+<li>runs any post-installation steps.</li>
+<li>If module being loaded or a part of it is already present, the command attempts to update all the packages included in the profile to the latest available versions.</li>
+</ul>
+<p>Install the <em>perl</em> module using its default stream and default
+profile:
+<code>sudo dnf -y module install perl</code></p>
+<p>Update a module called <em>squid</em> to the latest version:
+<code>sudo dnf module update squid -y</code></p>
+<p>Install the profile &ldquo;common&rdquo; with stream &ldquo;rhel9&rdquo; for the <em>container-tools</em> module: (module:stream/profile)
+<code>sudo dnf module install container-tools:rhel9/common</code></p>
+<h3 id="displaying-module-information">Displaying Module Information</h3>
+<ul>
+<li>Shows
+<ul>
+<li>Name, stream, version, list of profiles, default profile, repo name module was installed or is available from</li>
+<li>Summary, description, and artifacts.</li>
+</ul>
+</li>
+<li>Can be viewed by supplying module info with dnf.</li>
+</ul>
+<p>List all profiles available for the module ruby:
+<code>dnf module info --profile ruby</code></p>
+<p>Limit the output to a particular stream such as 3.1:
+<code>dnf module info --profile ruby:3.1</code></p>
+<p>Refer to the <em>module info</em> subsection of the <em>dnf</em> command manual pages for more details.</p>
+<h3 id="removing-modules">Removing Modules</h3>
+<p>Removing a module will:</p>
+<ul>
+<li>uninstall all the included packages and</li>
+<li>delete all associated files and directory structure.</li>
+<li>erases any dependencies as part of the deletion process.</li>
+</ul>
+<p>Remove the ruby module with &ldquo;3.1&rdquo; stream:
+`sudo dnf module remove ruby:3.1</p>
+<p>Refer to the <em>module remove</em> subsection of the <em>dnf</em> command manual pages:</p>
+<h3 id="lab-manipulate-modules">Lab: Manipulate Modules</h3>
+<ul>
+<li>Perform management operations on a module called <em>postgresql</em>.</li>
+<li>determine if this module is already installed and if it is available for installation</li>
+<li>show its information and install the default profile for stream &ldquo;10&rdquo;.</li>
+<li>remove the module profile along with any dependencies</li>
+<li>confirm the removal.</li>
+</ul>
+<ol>
+<li>
+<p>Check whether the <em>postgresql</em> module is already installed(i):
+<code>dnf module list postgresql</code></p>
+</li>
+<li>
+<p>Display detailed information about the default stream of the
+module:
+<code>dnf module info postgresql:15</code></p>
+</li>
+<li>
+<p>Install the module with default profile for stream &ldquo;15&rdquo;:
+<code>sudo dnf -y module install --profile postgresql:15</code></p>
+</li>
+<li>
+<p>Display the module information again:
+<code>dnf module info postgresql:15</code></p>
+</li>
+<li>
+<p>Erase the module profile for the stream:
+<code>dnf module remove -y postgresql:15</code></p>
+</li>
+<li>
+<p>Confirm the removal (back to (d)):
+<code>dnf module info postgresql:15</code></p>
+</li>
+</ol>
+<h3 id="switching-module-streams">Switching Module Streams</h3>
+<ul>
+<li>Typically performed to upgrade or downgrade the version of an installed module.</li>
+</ul>
+<p>process:</p>
+<ul>
+<li>
+<p>uninstall the existing version provided by a stream alongside any dependencies that it has,</p>
+</li>
+<li>
+<p>switch to the other stream</p>
+</li>
+<li>
+<p>install the desired version.</p>
+</li>
+<li>
+<p>Installing a module from a stream automatically enables the stream if it was previously disabled</p>
+</li>
+<li>
+<p>you can manually enable or disable it with the <em>dnf</em> command.</p>
+</li>
+<li>
+<p>Only one stream of a given module enabled at a time.</p>
+</li>
+<li>
+<p>Attempting to enable another one for the same module automatically
+disables the current enabled stream.</p>
+</li>
+<li>
+<p>dnf module list and dnf module info expose the enable/disable status of the module stream.</p>
+</li>
+</ul>
+<h3 id="lab-install-a-module-from-an-alternative-stream">Lab: Install a Module from an Alternative Stream</h3>
+<ul>
+<li>Downgrade a module to a lower version.</li>
+<li>Remove the stream <em>perl</em> 5.26 and</li>
+<li>Confirm its removal.</li>
+<li>manually enable the stream <em>perl</em> 5.24 and confirm its new status.</li>
+<li>install the new version of the module and display its information.</li>
+</ul>
+<ol>
+<li>
+<p>Check the current state of all <em>perl</em> streams:
+<code>dnf module list perl</code></p>
+</li>
+<li>
+<p>Remove perl 5.26:
+<code>sudo dnf module remove perl -y</code></p>
+</li>
+<li>
+<p>Confirm the removal:
+<code>dnf module list perl</code></p>
+</li>
+<li>
+<p>Reset the module so that neither stream is enabled or
+disabled. This will remove the enabled (e) indication from perl 5.26.
+<code>sudo dnf module reset ruby</code>
+(perl not available)</p>
+</li>
+<li>
+<p>Install the non-default profile &ldquo;minimal&rdquo; for perl stream
+5.24. This will auto-enable the stream.</p>
+</li>
+</ol>
+<p>&ndash;allowerasing</p>
+<ul>
+<li>Will instruct the command to remove installed packages for dependency resolution.
+<code>sudo dnf module install perl:5.24/minimal --allowerasing</code></li>
+</ul>
+<ol start="6">
+<li>Check the status of the module:
+<code>dnf module list perl</code></li>
+</ol>
+<h2 id="review-questions">Review Questions</h2>
+<p>Q. A module profile is a list of recommended packages organized for purpose-built deployments. True or False?
+A. True.</p>
+<hr>
+<p>Q. What would the <em>dnf group info Base</em> command do?
+A. The command provided will list all packages in the specified package group.</p>
+<hr>
+<p>Q: What would you run to list all available profiles for the module postgresql?
+A. To view <em>postgresql</em> module profiles, you would run <code>dnf module info \--profile postgresql</code></p>
+<hr>
+<p>Q. Which <em>dnf</em> subcommand can be used to list all available repositories?
+A. The <em>repolist</em> subcommand.</p>
+<hr>
+<p>Q. What is the use of the -y option with the <em>dnf group install</em> and <em>dnf module remove</em> commands?
+A. dnf will not prompt for user confirmation if the -y option is used with it.</p>
+<hr>
+<p>Q. What is the main advantage of using <em>dnf</em> over <em>rpm</em>?
+A. dnf resolves and installs dependent packages automatically.</p>
+<hr>
+<p>Q. What would be the command to install <em>perl</em> 5.26?
+A. It would be <code>dnf module install perl:5.26</code></p>
+<hr>
+<p>Q. What <em>dnf</em> subcommand would we use to check available updates for installed packages?
+A. The check-update subcommand.</p>
+<hr>
+<p>Q. What is the concept of module in RHEL 8?
+A. A module is a collection of packages, including the dependent packages, that are required to install an application.</p>
+<hr>
+<p>Q. What must be the extension of a yum repository file?
+A. The extension of a yum repository configuration file must be .repo in order to be recognized as a valid repo file.</p>
+<hr>
+<p>Q. A module stream is a group of packages organized by version. True or False?
+A. True.</p>
+<hr>
+<p>Q. What would the <code>dnf list zsh</code> command do?
+A. The command provided will display installed and available <em>zsh</em> package.</p>
+<hr>
+<p>Q. What would the <code>dnf list installed gnome</code> command do?
+A. The command provided will display all installed packages that contain gnome in their names.</p>
+<hr>
+<p>Q. How many package names can be specified at a time with the dnf install command?
+A. There is no limit.</p>
+<hr>
+<p>Q. Name the two default yum repositories that contain all the packages for RHEL 8?
+A. The two yum repositories the BaseOS and AppStream.</p>
+<hr>
+<p>Q. We can update all the packages within a package group using the <code>groupupdate</code> subcommand with dnf. True or False?
+A. True.</p>
+<hr>
+<p>Q. What would you run to reset a module so that it is neither enabled nor disabled?
+A. You would run <code>dnf module reset</code> to reset a module.</p>
+<hr>
+<p>Q. What would the <code>dnf info zsh</code> command do?
+A. The command provided will display the header information for the <em>zsh</em> package.</p>
+<hr>
+<h2 id="labs">Labs:</h2>
+<ol>
+<li>Configure Access to RHEL 8 Repositories (Make sure the RHEL 8 ISO image is attached to the VM and mounted.)  Create a definition file under /etc/yum.repos.d/, and define two blocks (one for BaseOS and another for AppStream).</li>
+</ol>
+<p><code>vim /etc/yum.repos.d/local.repo</code></p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[BaseOS]
+name=BaseOS 
+baseurl=file:///mnt/BaseOS 
+gpgcheck=0 
+
+[AppStrean]
+name=AppStream 
+baseurl=file:///mnt/AppStream 
+gpgcheck=0</code></pre></div><ol start="4">
+<li>Verify the configuration with dnf repolist. You should see numbers in thousands under the Status column for both repositories.
+<code>dnf repolist</code></li>
+</ol>
+<h3 id="lab--install-and-manage-individual-packages">Lab:  Install and Manage Individual Packages</h3>
+<ol>
+<li>
+<p>List all installed and available packages separately.
+<code>dnf repoquery &amp;&amp; dnf list installed</code></p>
+</li>
+<li>
+<p>Show which package contains the /etc/group file.
+<code>dnf provides /etc/group</code></p>
+</li>
+<li>
+<p>Install the package <em>httpd</em>.
+<code>dnf -y install httpd</code></p>
+</li>
+<li>
+<p>Review /var/log/yum.log/ for confirmation. (/var/lib/dnf/history)
+<code>dnf history</code></p>
+</li>
+<li>
+<p>Perform the following on the httpd package:</p>
+</li>
+<li>
+<p>Show information
+<code>dnf info httpd</code></p>
+</li>
+<li>
+<p>List dependencies
+<code>dnf repoquery --requires httpd</code></p>
+</li>
+<li>
+<p>Remove it
+<code>dnf remove httpd</code></p>
+</li>
+</ol>
+<h3 id="lab-install-and-manage-package-groups">Lab Install and Manage Package Groups</h3>
+<ol>
+<li>
+<p>List all installed and available package groups separately.
+<code>dnf group list available &amp;&amp; dnf group list installed</code></p>
+</li>
+<li>
+<p>Install package groups <em>Security Tools</em> and *Scientific Support.
+<code>dnf group install 'Security Tools'</code></p>
+</li>
+<li>
+<p>Review /var/log/yum.log for confirmation.
+<code>dnf history</code></p>
+</li>
+<li>
+<p>Show the packages included in the Scientific Support package group, and delete this group.
+<code>dnf group info 'Scientific Support' &amp;&amp; dnf group remove 'Scientific Support'</code></p>
+</li>
+</ol>
+<h3 id="lab-install-and-manage-modules">Lab: Install and Manage Modules</h3>
+<ol>
+<li>
+<p>List all modules. Identify which modules, streams and profiles are installed, default, disabled, and enabled from the output.
+<code>dnf module list</code></p>
+</li>
+<li>
+<p>Install the default stream of the development profile for module <em>php</em>, and verify.
+<code>dnf module install php &amp;&amp; dnf module list</code></p>
+</li>
+<li>
+<p>Remove the module.
+<code>dnf module remove php</code></p>
+</li>
+</ol>
+<h3 id="lab-switch-module-streams-and-install-software">Lab Switch Module Streams and Install Software</h3>
+<ol>
+<li>
+<p>List <em>postgresql</em> module. This will display the streams and profiles, and their status.
+<code>dnf module list postgresql</code></p>
+</li>
+<li>
+<p>Reset both streams
+<code>dnf module reset postgresql</code></p>
+</li>
+<li>
+<p>enable the stream for the older version, and install its client profile.
+<code>dnf module install postgresql:15 </code></p>
+</li>
+</ol>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/10_adv_package_management/" class="active"><a class="padding" href="/linux/rhcsa/10_adv_package_management/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/10_adv_package_management/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1711887805" defer></script>
+  </body>
+</html>

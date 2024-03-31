@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/11_boot_grub2_kernel/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'git' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/11_boot_grub2_kernel/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#boot-process-grub2-and-the-linux-kernel"><strong>Boot Process, GRUB2, and the Linux Kernel</strong></a></li>
+    <li><a href="#rhcsa-objectives">RHCSA Objectives</a></li>
+    <li><a href="#kernel">Kernel</a></li>
+    <li><a href="#linux-boot-process">Linux Boot Process</a>
+      <ul>
+        <li><a href="#the-firmware-phase-bios-and-uefi">The Firmware Phase (BIOS and UEFI)</a></li>
+        <li><a href="#bootloader-phase">Bootloader Phase</a></li>
+        <li><a href="#kernel-phase">Kernel Phase</a></li>
+        <li><a href="#initialization-phase">Initialization Phase</a></li>
+        <li><a href="#grub2-bootloader">GRUB2 Bootloader</a></li>
+        <li><a href="#interacting-with-grub2">Interacting with GRUB2</a></li>
+        <li><a href="#grub2-commands">GRUB2 Commands</a></li>
+        <li><a href="#lab-change-default-system-boot-timeout">Lab: Change Default System Boot Timeout</a></li>
+      </ul>
+    </li>
+    <li><a href="#booting-into-specific-targets">Booting into Specific Targets</a></li>
+    <li><a href="#reset-the-root-user-password">Reset the root User Password</a>
+      <ul>
+        <li><a href="#the-linux-kernel">The Linux Kernel</a></li>
+        <li><a href="#kernel-packages">Kernel Packages</a></li>
+        <li><a href="#kernel-packages-1">Kernel Packages</a></li>
+        <li><a href="#analyzing-kernel-version">Analyzing Kernel Version</a></li>
+        <li><a href="#kernel-directory-structure">Kernel Directory Structure</a></li>
+        <li><a href="#boot">/boot</a></li>
+        <li><a href="#proc">/proc</a></li>
+        <li><a href="#usrlibmodules">/usrlib/modules/</a></li>
+      </ul>
+    </li>
+    <li><a href="#installing-the-kernel">Installing the Kernel</a>
+      <ul>
+        <li><a href="#lab-download-and-install-a-new-kernel">Lab: Download and Install a New Kernel</a></li>
+      </ul>
+    </li>
+    <li><a href="#labs">Labs</a>
+      <ul>
+        <li><a href="#lab-enable-verbose-system-boot">Lab: Enable Verbose System Boot</a></li>
+        <li><a href="#lab-reset-root-user-password">Lab: Reset root User Password</a></li>
+        <li><a href="#lab-install-new-kernel">Lab: Install New Kernel</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<h2 id="boot-process-grub2-and-the-linux-kernel"><strong>Boot Process, GRUB2, and the Linux Kernel</strong></h2>
+<ul>
+<li>Linux boot process: firmware, bootloader, kernel, and initialization</li>
+<li>Understand and interact with GRUB2 to boot into different targets</li>
+<li>Modify GRUB2 configuration</li>
+<li>Boot system into specific targets</li>
+<li>Reset lost or forgotten root user password</li>
+<li>Linux kernel, packages, version anatomy, and key directories</li>
+<li>Download and install a newer kernel version</li>
+</ul>
+<h2 id="rhcsa-objectives">RHCSA Objectives</h2>
+<ul>
+<li>Interrupt the boot process in order to gain access to a system</li>
+<li>Modify the system bootloader</li>
+</ul>
+<p>Multiple phases during the boot process.</p>
+<ul>
+<li>starts selective services during its transition from one phase into another.</li>
+<li>presents the administrator an opportunity to interact with a preboot program to boot the system into a non-default target,</li>
+<li>pass an option to the kernel</li>
+<li>reset the lost or forgotten root user password.</li>
+<li>launches a number of services during its transition to the default or specified target.</li>
+</ul>
+<h2 id="kernel">Kernel</h2>
+<ul>
+<li>controls everything on the system.
+<ul>
+<li>hardware</li>
+<li>enforces security and access controls</li>
+<li>runs, schedules, and manages processes and service daemons.</li>
+</ul>
+</li>
+<li>comprised of several modules. A</li>
+<li>new kernel must be installed or an existing kernel must be upgraded when the need arises from an application or functionality standpoint.</li>
+</ul>
+<h2 id="linux-boot-process">Linux Boot Process</h2>
+<ul>
+<li>boot process after the system has been powered up or restarted.</li>
+<li>lasts until all enabled services are started.</li>
+<li>login prompt will appear on the screen</li>
+<li>boot process is automatic, but you
+<ul>
+<li>may need to interact with it to take a non-default action, such as
+<ul>
+<li>booting an alternative kernel,</li>
+<li>booting into a non-default operational state,</li>
+<li>repairing the system,</li>
+<li>recovering from an unbootable state
+boot process on an x86 computer may be split into four major phases:
+(1) the firmware phase
+(2) the bootloader phase
+(3) the kernel phase
+(4) the initialization phase.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The system accomplishes these phases
+one after the other while performing and attempting to complete the
+tasks identified in each phase.</p>
+<h3 id="the-firmware-phase-bios-and-uefi">The Firmware Phase (BIOS and UEFI)</h3>
+<p>firmware:</p>
+<ul>
+<li>BIOS (<em>Basic Input/Output System</em>) or the UEFI (<em>Unified Extensible Firmware Interface</em>) code that is stored in flash memory on the x86-based system board. It</li>
+<li>runs the <em>Power-On-Self-Test</em> (POST) to detect, test, and initialize the system hardware components.</li>
+<li>Installs appropriate drivers for the video hardware</li>
+<li>exhibits system messages on the screen.</li>
+<li>scans available storage devices to locate a boot device,
+<ul>
+<li>starting with a 512-byte image that contains
+<ul>
+<li>446 bytes of the bootloader program,</li>
+<li>64 bytes for the partition table, and the</li>
+<li>last two bytes with the boot signature.</li>
+<li>referred to as the <em>Master Boot Record</em> (MBR)</li>
+<li>located on the first sector of the boot disk.</li>
+<li>As soon as it discovers a usable boot device, it loads the bootloader into memory and passes control over to it.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>BIOS</p>
+<ul>
+<li>small memory chip in the computer that stores
+<ul>
+<li>system date and time,</li>
+<li>list and sequence of boot devices,</li>
+<li>I/O configuration,</li>
+<li><em>etc.</em></li>
+</ul>
+</li>
+<li>configuration is customizable.</li>
+<li>hardware initialization phase
+<ul>
+<li>detecting and diagnosing peripheral devices.</li>
+<li>runs the POST on the devices as it finds them,</li>
+<li>installs drivers for the graphics card and the attached monitor,</li>
+<li>begins exhibiting system messages on the video hardware.</li>
+<li>discovers a usable boot device,</li>
+<li>loads the bootloader program into memory, and passes control over to it.</li>
+</ul>
+</li>
+</ul>
+<p>UEFI</p>
+<ul>
+<li>new 32/64-bit architecture-independent specification replacing BIOS.</li>
+<li>delivers enhanced boot and runtime services</li>
+<li>superior features such as speed over the legacy 16-bit BIOS. It</li>
+<li>has its own device drivers, is</li>
+<li>able to mount and read extended file systems,</li>
+<li>includes UEFI-compliant application tools, and</li>
+<li>supports one or more bootloader programs. It</li>
+<li>comes with a boot manager that allows you to choose an alternative boot source.</li>
+</ul>
+<h3 id="bootloader-phase">Bootloader Phase</h3>
+<ul>
+<li>Once the firmware phase is over and a boot device is detected,</li>
+<li>system loads a piece of software called <em>bootloader</em> that is located in the boot sector of the boot device.</li>
+<li>RHEL uses GRUB2 (<em>GRand Unified Bootloader</em>) version 2 as the bootloader program. GRUB2 supports both BIOS and UEFI firmware.</li>
+</ul>
+<p>The primary job of the bootloader program is to</p>
+<ul>
+<li>spot the Linux kernel code in the <em>/boot</em> file system,</li>
+<li>decompress it, </li>
+<li>load it into memory based on the configuration defined in the **boot<em>grub2/grub.cfg</em> file,</li>
+<li>transfer control over to it to further the boot process.</li>
+</ul>
+<p>UEFI-based systems,</p>
+<ul>
+<li>GRUB2 looks for the EFI system partition **boot<em>efi</em> instead, and</li>
+<li>runs the kernel based on the configuration defined in the /boot/<em>efi/EFI/redhat/grub.efi</em> file.</li>
+</ul>
+<h3 id="kernel-phase">Kernel Phase</h3>
+<ul>
+<li>
+<p><em>kernel</em> is the central program of the operating system, providing access to hardware and system services.</p>
+</li>
+<li>
+<p>After getting control from the bootloader, the kernel:</p>
+</li>
+<li>
+<p>extracts the <em>initial RAM disk</em> (initrd) file system image found in the <em>/boot</em> file system into memory,</p>
+</li>
+<li>
+<p>decompresses it</p>
+</li>
+<li>
+<p>mounts it as read-only on <em>/sysroot</em> to serve as the temporary root file system. The kernel</p>
+</li>
+<li>
+<p>loads necessary modules from the initrd image to allow access to the physical disks and the partitions and file systems therein.</p>
+</li>
+<li>
+<p>loads any required drivers to support the boot process.</p>
+</li>
+<li>
+<p>Later, it unmounts the initrd image and mounts the actual physical root file system on <em>/</em> in read/write mode.</p>
+</li>
+<li>
+<p>At this point, the necessary foundation has been built for the boot process to carry on and to start loading the enabled services.</p>
+</li>
+<li>
+<p>kernel executes the <em>systemd</em> process with PID 1 and passes the control over to it.</p>
+</li>
+</ul>
+<h3 id="initialization-phase">Initialization Phase</h3>
+<ul>
+<li>
+<p>fourth and the last phase in the boot process.</p>
+</li>
+<li>
+<p>Systemd:</p>
+</li>
+<li>
+<p>takes control from the kernel and continues the boot process. It</p>
+</li>
+<li>
+<p>is the default system initialization scheme used in RHEL 8. It</p>
+</li>
+<li>
+<p>starts all enabled userspace system and network services and</p>
+</li>
+<li>
+<p>brings the system up to the preset boot target.</p>
+</li>
+<li>
+<p>A boot target is an operational level that is achieved after a series of services have been started to get to that state.</p>
+</li>
+<li>
+<p>system boot process is considered complete when all enabled services are operational for the boot target and users are able to log in to the system</p>
+</li>
+</ul>
+<h3 id="grub2-bootloader">GRUB2 Bootloader</h3>
+<ul>
+<li>
+<p>After the firmware phase has concluded, the</p>
+</li>
+<li>
+<p>bootloader presents a menu with a list of bootable kernels available on the syste</p>
+</li>
+<li>
+<p>waits for a predefined amount of time before it times out and boots the default kernel.</p>
+</li>
+<li>
+<p>You may want to interact with GRUB2 before the autoboot times out to boot with a non-default kernel, boot to a different target, or customize the kernel boot string.</p>
+</li>
+<li>
+<p>Press a key before the timeout expires to interrupt the autoboot process and interact with GRUB2.</p>
+</li>
+<li>
+<p>autoboot countdown default value is 5 seconds.</p>
+</li>
+</ul>
+<h3 id="interacting-with-grub2">Interacting with GRUB2</h3>
+<ul>
+<li>GRUB2 main menu shows a list of bootable kernels at the top.</li>
+<li>edit a selected kernel menu entry by pressing an <em>e</em> or go to the grub&gt; command prompt by pressing a <em>c</em>.</li>
+</ul>
+<p>edit mode,</p>
+<ul>
+<li>GRUB2 loads the configuration for the selected kernel entry from the /boot/grub2/grub.cfg file in an editor,</li>
+<li>enables you to make a desired modification before booting the system.</li>
+<li>you can boot the system into a less capable operating target by adding &ldquo;rescue&rdquo;, &ldquo;emergency&rdquo;, or &ldquo;3&rdquo; to the end of the line that begins with the keyword &ldquo;linux&rdquo;,</li>
+<li>Press Ctrl+x when done to boot.</li>
+<li>one-time temporary change and it won&rsquo;t touch the <em>grub.cfg</em> file.</li>
+<li>press ESC to discard the changes and return to the main menu.</li>
+<li>grub&gt; command prompt appears when you press Ctrl+c while in the edit window</li>
+<li>or a <em>c</em> from the main menu.</li>
+<li>command mode: execute debugging, recovery, etc.</li>
+<li>view available commands by pressing the TAB key.</li>
+</ul>
+<h3 id="grub2-commands">GRUB2 Commands</h3>
+<h4 id="understanding-grub2-configuration-files">Understanding GRUB2 Configuration Files</h4>
+<p>/boot/grub2/grub.cfg</p>
+<ul>
+<li>Referenced at boot time.</li>
+<li>Generated automatically when a new kernel is installed or upgraded</li>
+<li>not advisable to modify it directly, as your changes will be overwritten. The</li>
+<li>/etc/default/grub:
+<ul>
+<li>primary source file that is used to regenerate grub.cfg.</li>
+<li>Defines the directives that govern how GRUB2 should behave at boot time.</li>
+<li>Any changes made to the <em>grub</em> file will only take effect after the <em>grub2-mkconfig</em> utility has been executed.</li>
+</ul>
+</li>
+</ul>
+<h4 id="etcdefaultgrub">/etc/default/grub</h4>
+<ul>
+<li>Defines the directives that control the behavior of GRUB2 at boot time.</li>
+<li>Any changes in this file must be followed by the execution of the <em>grub2-mkconfig</em> command in order to be reflected in grub.cfg.</li>
+</ul>
+<p>Default settings:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost default]# nl /etc/default/grub
+     1	GRUB_TIMEOUT=5
+     2	GRUB_DISTRIBUTOR=&#34;$(sed &#39;s, release .*$,,g&#39; /etc/system-release)&#34;
+     3	GRUB_DEFAULT=saved
+     4	GRUB_DISABLE_SUBMENU=true
+     5	GRUB_TERMINAL_OUTPUT=&#34;console&#34;
+     6	GRUB_CMDLINE_LINUX=&#34;crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M resume=/dev/mapper/rhel-swap rd.lvm.lv=rhel/root rd.lvm.lv=rhel/swap rhgb quiet&#34;
+     7	GRUB_DISABLE_RECOVERY=&#34;true&#34;
+     8	GRUB_ENABLE_BLSCFG=true</code></pre></div><table>
+<thead>
+<tr>
+<th><strong>Directive</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GRUB_TIMEOUT</td>
+<td>Wait time, in seconds, before booting off the default kernel. Default is 5.</td>
+</tr>
+<tr>
+<td>GRUB_DISTRIBUTOR</td>
+<td>Name of the Linux distribution</td>
+</tr>
+<tr>
+<td>GRUB_DEFAULT</td>
+<td>Boots the selected option from the previous system boot</td>
+</tr>
+<tr>
+<td>GRUB_DISABLE_SUBMENU</td>
+<td>Enables/disables the appearance of GRUB2 submenu</td>
+</tr>
+<tr>
+<td>GRUB_TERMINAL_OUTPUT</td>
+<td>Sets the default terminal</td>
+</tr>
+<tr>
+<td>GRUB_CMDLINE_LINUX</td>
+<td>Specifies the command line options to pass to the kernel at boot time</td>
+</tr>
+<tr>
+<td>GRUB_DISABLE_RECOVERY</td>
+<td>Lists/hides system recovery entries in the GRUB2 menu</td>
+</tr>
+<tr>
+<td>GRUB_ENABLE_BLSCFG</td>
+<td>Defines whether to use the new bootloader specification to manage bootloader configuration</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Default settings are good enough for normal system operation.</li>
+</ul>
+<h4 id="bootgrub2grubcfg---bootefiefiredhatgrubcfg">/boot/grub2/grub.cfg - /boot/efi/EFI/redhat/grub.cfg</h4>
+<ul>
+<li>ain GRUB2 configuration file that supplies boot-time configuration information. This file is</li>
+<li>located in the /boot/grub2/ on BIOS-based systems</li>
+<li>/boot/efi/EFI/redhat/ on UEFI-based systems.</li>
+<li>can be recreated manually with the <em>grub2-mkconfig</em> utility</li>
+<li>automatically regenerated when a new kernel is installed or upgraded.</li>
+<li>file will lose any previous manual changes made to it.</li>
+</ul>
+<p>grub2-mkconfig command also</p>
+<ul>
+<li>uses the settings defined in helper scripts located in the /etc/grub.d directory.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost default]# ls -l /etc/grub.d
+total 104
+-rwxr-xr-x. 1 root root  9346 Jan  9 09:51 00_header
+-rwxr-xr-x. 1 root root  1046 Aug 29  2023 00_tuned
+-rwxr-xr-x. 1 root root   236 Jan  9 09:51 01_users
+-rwxr-xr-x. 1 root root   835 Jan  9 09:51 08_fallback_counting
+-rwxr-xr-x. 1 root root 19665 Jan  9 09:51 10_linux
+-rwxr-xr-x. 1 root root   833 Jan  9 09:51 10_reset_boot_success
+-rwxr-xr-x. 1 root root   892 Jan  9 09:51 12_menu_auto_hide
+-rwxr-xr-x. 1 root root   410 Jan  9 09:51 14_menu_show_once
+-rwxr-xr-x. 1 root root 13613 Jan  9 09:51 20_linux_xen
+-rwxr-xr-x. 1 root root  2562 Jan  9 09:51 20_ppc_terminfo
+-rwxr-xr-x. 1 root root 10869 Jan  9 09:51 30_os-prober
+-rwxr-xr-x. 1 root root  1122 Jan  9 09:51 30_uefi-firmware
+-rwxr-xr-x. 1 root root   218 Jan  9 09:51 40_custom
+-rwxr-xr-x. 1 root root   219 Jan  9 09:51 41_custom
+-rw-r--r--. 1 root root   483 Jan  9 09:51 README</code></pre></div><p>00_header</p>
+<ul>
+<li>sets the GRUB2 environment
+<em>10_linux</em></li>
+<li>searches for all installed kernels on the same disk partition
+30_os-prober</li>
+<li>searches for the presence of other operating systems
+40_custom and <em>41_custom</em> are to</li>
+<li>introduce any customization.</li>
+<li>like add custom entries to the boot menu.</li>
+</ul>
+<p>grub.cfg file</p>
+<ul>
+<li>Sources /boot/grub2/grubenv for kernel options and other settings.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost grub2]# cat grubenv
+# GRUB Environment Block
+# WARNING: Do not edit this file by tools other than grub-editenv!!!
+saved_entry=8215ac7e45d34823b4dce2e258c3cc47-5.14.0-362.24.1.el9_3.x86_64
+menu_auto_hide=1
+boot_success=0
+boot_indeterminate=0
+############################################################################
+############################################################################</code></pre></div><p>If a new kernel is installed:</p>
+<ul>
+<li>the existing kernel entries remain intact.</li>
+<li>All bootable kernels are listed in the GRUB2 menu, and</li>
+<li>any of the kernel entries can be selected to boot.</li>
+</ul>
+<h3 id="lab-change-default-system-boot-timeout">Lab: Change Default System Boot Timeout</h3>
+<ul>
+<li>change the default system boot timeout value to 8 seconds persistently, and validate.</li>
+</ul>
+<ol>
+<li>
+<p>Edit the /etc/default/grub file and change the setting as follows:
+`GRUB_TIMEOUT=8</p>
+</li>
+<li>
+<p>Execute the <em>grub2-mkconfig</em> command to reproduce <em>grub.cfg</em>:
+<code>grub2-mkconfig -o /boot/grub2/grub.cfg&gt;)</code></p>
+</li>
+</ol>
+<p>3.Restart the system with <em>sudo reboot</em> and confirm the new
+timeout value when GRUB2 menu appears.</p>
+<h2 id="booting-into-specific-targets">Booting into Specific Targets</h2>
+<p>RHEL</p>
+<ul>
+<li>
+<p>boots into graphical target state by default if the Server with GUI software selection is made during installation. It</p>
+</li>
+<li>
+<p>can also be directed to boot into non-default but less capable operating targets from the GRUB2 menu.</p>
+</li>
+<li>
+<p>offers emergency and rescue boot targets.</p>
+<ul>
+<li>special target levels can be launched from the GRUB2 interface by
+<ul>
+<li>selecting a kernel</li>
+<li>pressing <em>e</em> to enter the edit mode</li>
+<li>appending the desired target name to the line that begins with the keyword &ldquo;linux&rdquo;.</li>
+<li>Press ctrl+x to boot into the supplied target</li>
+<li>Enter root password</li>
+<li><code>reboot</code> when you are done</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>You must know how to boot a RHEL 8 system into a specific target from the GRUB2 menu to modify the fstab file or reset an unknown root user password.</p>
+</li>
+</ul>
+<p>Append &ldquo;emergency&rdquo; to the kernel line entry:</p>
+<p><a href="#R-image-9ea673c5afc86f96c7547db95ffd6177" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321045343.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ea673c5afc86f96c7547db95ffd6177"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321045343.png"></a></p>
+<p>Other options:</p>
+<ul>
+<li>&ldquo;rescue&rdquo;</li>
+<li>&ldquo;1&rdquo;</li>
+<li>&ldquo;s&rdquo;</li>
+<li>&ldquo;single&rdquo;</li>
+</ul>
+<h2 id="reset-the-root-user-password">Reset the root User Password</h2>
+<ul>
+<li>Terminate the boot process at an early stage to be placed in a special debug shell in order to reset the <em>root</em> password.</li>
+</ul>
+<ol>
+<li>
+<p>Reboot or reset <em>server1</em>, and interact with GRUB2 by pressing a key before the autoboot times out. Highlight the default kernel entry in the GRUB2 menu and press <em>e</em> to enter the edit mode. Scroll down to the line entry that begins with the keyword &ldquo;linux&rdquo; and press the End key to go to the end of that line:</p>
+</li>
+<li>
+<p>Modify this kernel string and append &ldquo;rd.break&rdquo; to the end of the line.</p>
+</li>
+</ol>
+<p><a href="#R-image-fd04ae2fb769903c3ebf064482a88bdf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321045933.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd04ae2fb769903c3ebf064482a88bdf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321045933.png"></a></p>
+<ol start="3">
+<li>
+<p>Press Ctrl+x when done to boot to the special shell. The system mounts the root file system read-only on the <em>/sysroot</em> directory. Make <em>/sysroot</em> appear as mounted on <em>/</em> using the <em>chroot</em> command:
+<a href="#R-image-451aa1676270b514ba199d9f58b72ab4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321050831.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-451aa1676270b514ba199d9f58b72ab4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321050831.png"></a></p>
+</li>
+<li>
+<p>Remount the root file system in read/write mode for the <em>passwd</em> command to be able to modify the <em>shadow</em> file with a new
+password:
+<code>mount -o remount,rw /</code></p>
+</li>
+<li>
+<p>Enter a new password for <em>root</em> by invoking the <em>passwd</em> command:
+<code>passwd</code></p>
+</li>
+<li>
+<p>Create a hidden file called <em>.autorelabel</em> to instruct the operating system to run SELinux relabeling on all files, including the <em>shadow</em> file that was updated with the new <em>root</em> password, on the next reboot:
+<code>touch .autorelabel</code></p>
+</li>
+<li>
+<p>Issue the <em>exit</em> command to quit the chroot shell and then the <em>reboot</em> command to restart the system and boot it to the default target.
+<code>exit</code> <code>reboot</code></p>
+</li>
+</ol>
+<h3 id="the-linux-kernel">The Linux Kernel</h3>
+<ul>
+<li>core of the Linux system. It</li>
+<li>manages</li>
+<li>hardware,</li>
+<li>enforces security,</li>
+<li>regulates access to the system, as well as</li>
+</ul>
+<p>handles</p>
+<ul>
+<li>
+<p>processes,</p>
+</li>
+<li>
+<p>services, and</p>
+</li>
+<li>
+<p>application workloads. It is a</p>
+</li>
+<li>
+<p>collection of software components called <em>modules</em></p>
+<ul>
+<li>Modules
+<ul>
+<li>device drivers that control hardware devices
+<ul>
+<li>processor</li>
+<li>memory</li>
+<li>storage</li>
+<li>controller cards</li>
+<li>peripheral equipment</li>
+</ul>
+</li>
+<li>interact with software subsystems
+<ul>
+<li>storage partitioning</li>
+<li>file systems</li>
+<li>networking</li>
+<li>virtualization</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Some modules are static to the kernel and are integral to system functionality,</p>
+</li>
+<li>
+<p>Some modules are loaded dynamically as needed</p>
+</li>
+<li>
+<p>RHEL 8.0 and RHEL 8.2 are shipped with kernel version 4.18.0 (4.18.0-80 and 4.18.0-193 to be specific) for the 64-bit Intel/AMD processor architecture computers with single, multi-core, and multi-processor configurations.</p>
+</li>
+<li>
+<p><code>uname -m</code> shows the architecture of the system.</p>
+</li>
+<li>
+<p>Kernel requires a rebuild when a new functionality is added or removed.</p>
+</li>
+<li>
+<p>functionality may be introduced by:</p>
+<ul>
+<li>installing a new kernel</li>
+<li>upgrading an existing one</li>
+<li>installing a new hardware device, or</li>
+<li>changing a critical system component.</li>
+</ul>
+</li>
+<li>
+<p>existing functionality that is no longer needed may be removed to make the overall footprint of the kernel smaller for improved performance and reduced memory utilization.</p>
+</li>
+<li>
+<p>tunable parameters are set that define a baseline for kernel functionality.</p>
+</li>
+<li>
+<p>Some parameters must be tuned for some applications and database software to be installed smoothly and operate properly.</p>
+</li>
+<li>
+<p>You can generate and store several custom kernels with varied configuration and required modules, but</p>
+</li>
+<li>
+<p>only one of them can be active at a time.</p>
+</li>
+<li>
+<p>different kernel may be loaded by interacting with GRUB2.</p>
+</li>
+</ul>
+<h3 id="kernel-packages">Kernel Packages</h3>
+<ul>
+<li>set of core kernel packages that must be installed on the system at a minimum to
+make it work.</li>
+<li>Additional packages providing supplementary kernel support
+are also available.</li>
+</ul>
+<p>Core and some add-on kernel packages.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Kernel Package</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kernel</td>
+<td>Contains no files, but ensures other kernel packages are accurately installed</td>
+</tr>
+<tr>
+<td>kernel-core</td>
+<td>Includes a minimal number of modules to provide core functionality</td>
+</tr>
+<tr>
+<td>kernel-devel</td>
+<td>Includes support for building kernel modules</td>
+</tr>
+<tr>
+<td>kernel-modules</td>
+<td>Contains modules for common hardware devices</td>
+</tr>
+<tr>
+<td>kernel-modules-extra</td>
+<td>Contains modules for not-so-common hardware devices</td>
+</tr>
+<tr>
+<td>kernel-headers</td>
+<td>Includes files to support the interface between the kernel and userspace</td>
+</tr>
+<tr>
+<td>kernel-tools-libs</td>
+<td>Includes the libraries to support the kernel tools</td>
+</tr>
+<tr>
+<td>libraries and programs kernel-tools</td>
+<td>Includes tools to manipulate the kernel</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kernel-packages-1">Kernel Packages</h3>
+<ul>
+<li>packages containing the source code for RHEL 8 are also available for those who wish to customize and recompile the code</li>
+</ul>
+<p>List kernel packages installed on the system:
+<code>dnf list installed kernel*</code></p>
+<ul>
+<li>Shows six kernel packages that were loaded during the OS installation.</li>
+</ul>
+<h3 id="analyzing-kernel-version">Analyzing Kernel Version</h3>
+<p>Check the version of the kernel running on the system to check for compatibility with an application or database:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>uname -r
+5.14.0-362.24.1.el9_3.x86_64</code></pre></div><p>5 - Major version
+14 - Major revision
+0 - Kernel patch version
+362 - Red Hat version
+el9 - Enterprise Linux 9
+x86_64 - Processor architecture</p>
+<h3 id="kernel-directory-structure">Kernel Directory Structure</h3>
+<p>Kernel and its support files (noteworthy locations)</p>
+<ul>
+<li>/boot</li>
+<li>/proc</li>
+<li>/usr/lib/modules</li>
+</ul>
+<h3 id="boot">/boot</h3>
+<ul>
+<li>Created at system installation. It</li>
+<li>Linux kernel</li>
+<li>GRUB2 configuration</li>
+<li>other kernel and boot support files. A</li>
+</ul>
+<p>View the /boot filesystem:
+<code>ls -l /boot</code></p>
+<ul>
+<li>four files are for the kernel and
+<ul>
+<li>vmlinuz - main kernel file</li>
+<li>initramfs - main kernel&rsquo;s boot image</li>
+<li>config - configuration</li>
+<li>System.map - mapping</li>
+</ul>
+</li>
+<li>two files for kernel rescue version
+<ul>
+<li>Have the current kernel version appended to their names.</li>
+<li>have the string &ldquo;rescue&rdquo; embedded within their names</li>
+</ul>
+</li>
+</ul>
+<p>/boot/efi/ and /boot/grub2/</p>
+<ul>
+<li>hold bootloader information specific to firmware type used on the system: UEFI or BIOS.</li>
+</ul>
+<p>List /boot/Grub2:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost ~]# ls -l /boot/grub2
+total 32
+-rw-r--r--. 1 root root   64 Feb 25 05:13 device.map
+drwxr-xr-x. 2 root root   25 Feb 25 05:13 fonts
+-rw-------. 1 root root 7049 Mar 21 04:47 grub.cfg
+-rw-------. 1 root root 1024 Mar 21 05:12 grubenv
+drwxr-xr-x. 2 root root 8192 Feb 25 05:13 i386-pc
+drwxr-xr-x. 2 root root 4096 Feb 25 05:13 locale</code></pre></div><ul>
+<li>grub.cfg
+<ul>
+<li>bootable kernel information</li>
+</ul>
+</li>
+<li>grub.env
+<ul>
+<li>environment information that the kernel uses.</li>
+</ul>
+</li>
+</ul>
+<p>/boot/loader</p>
+<ul>
+<li>storage location for configuration of the running and rescue kernels.</li>
+<li>Configuration is stored in files under the /boot/loader/entries/</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost ~]# ls -l /boot/loader/entries/
+total 12
+-rw-r--r--. 1 root root 484 Feb 25 05:13 8215ac7e45d34823b4dce2e258c3cc47-0-rescue.conf
+-rw-r--r--. 1 root root 460 Mar 16 06:17 8215ac7e45d34823b4dce2e258c3cc47-5.14.0-362.18.1.el9_3.x86_64.conf
+-rw-r--r--. 1 root root 459 Mar 16 06:17 8215ac7e45d34823b4dce2e258c3cc47-5.14.0-362.24.1.el9_3.x86_64.conf</code></pre></div><ul>
+<li>The files are named using the machine id of the system as stored in /etc/machine-id/ and the kernel version they are for.</li>
+</ul>
+<p>content of the kernel file:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost entries]# cat /boot/loader/entries/8215ac7e45d34823b4dce2e258c3cc47-5.14.0-362.18.1.el9_3.x86_64.conf
+title Red Hat Enterprise Linux (5.14.0-362.18.1.el9_3.x86_64) 9.3 (Plow)
+version 5.14.0-362.18.1.el9_3.x86_64
+linux /vmlinuz-5.14.0-362.18.1.el9_3.x86_64
+initrd /initramfs-5.14.0-362.18.1.el9_3.x86_64.img $tuned_initrd
+options root=/dev/mapper/rhel-root ro crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M resume=/dev/mapper/rhel-swap rd.lvm.lv=rhel/root rd.lvm.lv=rhel/swap rhgb quiet  $tuned_params
+grub_users $grub_users
+grub_arg --unrestricted
+grub_class rhel</code></pre></div><ul>
+<li>&ldquo;title&rdquo; is displayed on the bootloader screen</li>
+<li>&ldquo;kernelopts&rdquo; and &ldquo;tuned_params&rdquo; supply values to the booting kernel to control its behavior.</li>
+</ul>
+<h3 id="proc">/proc</h3>
+<ul>
+<li>Virtual, memory-based file system</li>
+<li>contents are created and updated in memory at system boot and during runtime</li>
+<li>destroyed at system shutdown</li>
+<li>current state of the kernel, which includes
+<ul>
+<li>hardware configuration and</li>
+<li>status information about
+<ul>
+<li>processor,</li>
+<li>memory, s</li>
+<li>storage,</li>
+<li>file systems,</li>
+<li>swap,</li>
+<li>processes,</li>
+<li>network interfaces and</li>
+<li>connections,</li>
+<li>routing, *</li>
+<li>etc.*</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Data kept in tens of thousands of zero-byte files organized in a hierarchy.</li>
+</ul>
+<p>List /proc:
+<code>ls -l /proc</code></p>
+<ul>
+<li>numerical subdirectories contain information about a specific process
+<ul>
+<li>process ID matches the subdirectory name.</li>
+</ul>
+</li>
+<li>other files and subdirectories contain information, such as
+<ul>
+<li>memory segments for processes and</li>
+<li>configuration data for system components. You</li>
+<li>can view the configuration in vim</li>
+</ul>
+</li>
+</ul>
+<p>Show selections from the cpuinfo and meminfo files that hold
+processor and memory information:
+<code>cat/proc/cpuinfo &amp;&amp; cat /proc/meminfo</code></p>
+<ul>
+<li>data used by top, ps, uname, free, uptime and w, to display information.</li>
+</ul>
+<h3 id="usrlibmodules">/usrlib/modules/</h3>
+<ul>
+<li>holds information about kernel modules.</li>
+<li>subdirectories are specific to the kernels installed on the system.</li>
+</ul>
+<p>Long listing of /usr/lib/modules/ shows two installed kernels:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@localhost entries]# ls -l /usr/lib/modules
+total 8
+drwxr-xr-x. 7 root root 4096 Mar 16 06:18 5.14.0-362.18.1.el9_3.x86_64
+drwxr-xr-x. 8 root root 4096 Mar 16 06:18 5.14.0-362.24.1.el9_3.x86_64</code></pre></div><p>View /usr/lib/modules/5.14.0-362.18.1.el9_3.x86_64/:
+<code>ls -l /usr/lib/modules/5.14.0-362.18.1.el9_3.x86_64</code></p>
+<ul>
+<li>Subdirectories hold module-specific information for the kernel version.</li>
+</ul>
+<p>/lib/modules/4.18.0-80.el8.x86_64/kernel/drivers/</p>
+<ul>
+<li>
+<p>stores modules for a variety of hardware and software components in various subdirectories:
+<code>ls -l /usr/lib/modules/5.14.0-362.18.1.el9_3.x86_64/kernel/drivers</code></p>
+</li>
+<li>
+<p>Additional modules may be installed on the system to support more
+components.</p>
+</li>
+</ul>
+<h2 id="installing-the-kernel">Installing the Kernel</h2>
+<ul>
+<li>
+<p>requires extra care</p>
+</li>
+<li>
+<p>could leave your system in an unbootable or undesirable state.</p>
+</li>
+<li>
+<p>have the bootable medium handy prior to starting the kernel install process.</p>
+</li>
+<li>
+<p>By default, the dnf command adds a new kernel to the system, leaving the existing kernel(s) intact. It does not replace or overwrite existing kernel files.</p>
+</li>
+<li>
+<p>Always install a new version of the kernel instead of upgrading it.</p>
+</li>
+<li>
+<p>The upgrade process removes any existing kernel and replaces it with a new one.</p>
+</li>
+<li>
+<p>In case of a post-installation issue, you will not be able to revert to the old working kernel.</p>
+</li>
+<li>
+<p>Newer version of the kernel is typically required:</p>
+<ul>
+<li>if an application needs to be deployed on the system that requires a different kernel to operate.</li>
+<li>When deficiencies or bugs are identified in the existing kernel, it can hamper the kernel&rsquo;s smooth operation.</li>
+</ul>
+</li>
+<li>
+<p>new kernel</p>
+<ul>
+<li>addresses existing issues</li>
+<li>adds bug fixes</li>
+<li>security updates</li>
+<li>new features</li>
+<li>improved support for hardware devices.</li>
+</ul>
+</li>
+<li>
+<p>dnf is the preferred tool to install a kernel</p>
+</li>
+<li>
+<p>it resolves and installs any required dependencies automatically.</p>
+</li>
+<li>
+<p>rpm may be used but you must install any dependencies manually.</p>
+</li>
+<li>
+<p>Kernel packages for RHEL are available to subscribers on Red Hat&rsquo;s Customer Portal.</p>
+</li>
+</ul>
+<h3 id="lab-download-and-install-a-new-kernel">Lab: Download and Install a New Kernel</h3>
+<ul>
+<li>download the latest available kernel packages from the Red Hat Customer Portal \</li>
+<li>install them using the dnf command. You will</li>
+<li>ensure that the existing kernel and its configuration remain intact.</li>
+</ul>
+<ul>
+<li>As an alternative (preferred) to downloading kernel packages individually and then installing them, you can follow the instructions provided in &ldquo;Containers&rdquo; chapter to register <em>server1</em> with RHSM and run <strong>sudo dnf install kernel</strong> to install the latest kernel and all the dependencies collectively.</li>
+</ul>
+<ol>
+<li>
+<p>Check the version of the running kernel:
+<code>uname -r</code></p>
+</li>
+<li>
+<p>List the kernel packages currently installed:
+<code>rpm -qa | grep kernel</code></p>
+</li>
+<li>
+<p>Sign in to the <a href="http://access.redhat.com" target="_blank">Red Hat Customer Portal</a>and click downloads.</p>
+</li>
+<li>
+<p>Click &ldquo;Red Hat Enterprise Linux 8&rdquo; under &ldquo;By Category&rdquo;:</p>
+</li>
+<li>
+<p>Click Packages and enter &ldquo;kernel&rdquo; in the Search bar to narrow the list of available packages:</p>
+</li>
+<li>
+<p>Click &ldquo;Download Latest&rdquo; against the packages kernel, kernel-core, kernel-headers, kernel-modules, kernel-tools, and kernel-tools-libs to download them.</p>
+</li>
+<li>
+<p>Once downloaded, move the packages to the <em>/tmp</em> directory using the <em>mv</em> command.</p>
+</li>
+<li>
+<p>List the packages after moving them:</p>
+</li>
+<li>
+<p>Install all the six packages at once using the <em>dnf</em> command:
+<code>dnf install /tmp/kernel* -y</code></p>
+</li>
+<li>
+<p>Confirm the installation alongside the previous version:
+<code>sudo dnf list installed kenel*</code></p>
+</li>
+<li>
+<p>The /boot/grub2/grubenv/ file now has the directive &ldquo;saved_entry&rdquo; set to the new kernel, which implies that this new kernel will boot up on the next system restart:
+<code>sudo cat /boot/grub2/grubenv</code></p>
+</li>
+<li>
+<p>Reboot the system. You will see the new kernel entry in the GRUB2 boot list at the top. The system will autoboot this new default kernel.</p>
+</li>
+<li>
+<p>Run the <em>uname</em> command once the system has been booted up to
+confirm the loading of the new kernel:
+<code>uname -r</code></p>
+</li>
+<li>
+<p>View the contents of the <em>version</em> and cmdline files under /proc to verify the active kernel:
+<code>cat /proc/version</code></p>
+</li>
+</ol>
+<hr>
+<p>Q. UEFI is replacing BIOS in newer computers. True or False?
+A. True.</p>
+<p>Q. You have changed the timeout value in the grub configuration
+file located in the /etc/default/ directory. Which command would you
+run now to ensure the change takes effect on next system reboots?
+A. <code>grub2-mkconfig</code></p>
+<p>Q. You want to view the parameters passed to the kernel at boot
+time. Which virtual file would you look at?
+A.  /proc/cmdline</p>
+<p>Q. Name the location of the grub.efi file in the UEFI-based
+systems.
+A. /boot/efi/EFI/redhat/</p>
+<p>Q. What is the name of the default bootloader program in RHEL 8?
+A. GRUB2.</p>
+<p>Q. The systemd command may be used to rebuild a new kernel.
+True or False?
+A. False.</p>
+<p>Q. What does the chroot command do?
+A. Changes the specified directory path to /.</p>
+<p>Q. At what stage should you interrupt the boot sequence to boot
+the system into a non-default target?
+A. At the GRUB2 stage.</p>
+<p>Q. Which two files would you view to obtain processor and memory
+information?
+A. The cpuinfo and meminfo files in /proc/</p>
+<p>Q. By default, GRUB2 is stored in the MBR on a BIOS-based
+system. True or False?
+A. True.</p>
+<p>Q. Which file stores the location of the boot partition on the
+BIOS systems?
+A. The <em>grub.cfg</em> file stores the location information of the
+boot partition.</p>
+<p>Q. You have lost the root user password and you need to reset
+it. What would you add to the default kernel boot string to break the
+boot process at an early stage?
+A. You would add rd.break to the kernel boot string.</p>
+<p>Q. You have installed a newer version of the kernel. What would
+you now have to do to make the new kernel the default boot kernel?
+A. Nothing. The install process takes care of that.</p>
+<p>Q. What is the system initialization and service management
+scheme called?
+A. It is called <em>systemd</em>.</p>
+<hr>
+<h2 id="labs">Labs</h2>
+<h3 id="lab-enable-verbose-system-boot">Lab: Enable Verbose System Boot</h3>
+<ul>
+<li>Remove &ldquo;quiet&rdquo; from the end of the value of the variable GRUB_CMDLINE_LINUX in the /etc/default/grub file</li>
+<li>run <em>grub2-mkconfig</em> to apply the update.</li>
+<li>Reboot the system and observe that the system now displays verbose information during the boot process.</li>
+</ul>
+<h3 id="lab-reset-root-user-password">Lab: Reset root User Password</h3>
+<ul>
+<li>reset the <em>root</em> user password by booting the system into emergency mode with SELinux disabled.</li>
+<li>Try to log in with root and enter the new password after the reboot.</li>
+</ul>
+<h3 id="lab-install-new-kernel">Lab: Install New Kernel</h3>
+<ul>
+<li>check the current version of the kernel using the <em>uname</em> or <em>rpm</em> command.</li>
+<li>Download a higher version from the Red Hat Customer Portal or <a href="http://rpmfind.net" target="_blank">rpmfind.net</a> and install it.</li>
+<li>Reboot the system and ensure the new kernel is listed on the bootloader menu.</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/11_boot_grub2_kernel/" class="active"><a class="padding" href="/linux/rhcsa/11_boot_grub2_kernel/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/11_boot_grub2_kernel/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1711887805" defer></script>
+  </body>
+</html>

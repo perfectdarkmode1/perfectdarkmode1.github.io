@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.122.0">
-    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
@@ -32,36 +32,34 @@ Virtual LAN Concepts
 reasons for choosing to create smaller broadcast domains (VLANs):
 -reduce CPU overhead on each devicereduce security risks different security policies per VLAN more flexible designs that -group users by department, or by groups that work together, instead of by physical location solve problems more quickly-failure domain for many problems is the same set of devices as those in the same broadcast domain reduce the workload for the Spanning Tree Protocol (STP) -by limiting a VLAN to a single access switch">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/networking/newccnanotes/8vlans/">
+    <meta property="og:url" content="http://localhost:1313/networking/newccnanotes/8vlans/">
     <meta property="article:section" content="Networking - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1708513026" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1708513026" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1708513026" rel="stylesheet">
-    <link href="/css/fonts.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1708513026" rel="stylesheet">
-    <link href="/css/theme-city2.css?1708513026" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1708513026" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1708513026" rel="stylesheet">
-    <link href="/css/print.css?1708513026" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1708513026" rel="stylesheet">
-    <script src="/js/url.js?1708513026"></script>
-    <script src="/js/variant.js?1708513026"></script>
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
-      window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
       window.relearn = window.relearn || {};
-      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
       // variant stuff
       window.relearn.themeVariantModifier='';
-      window.variants && variants.init( [ 'city2' ] );
+      window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -98,15 +96,15 @@ reasons for choosing to create smaller broadcast domains (VLANs):
             
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
             </div>
-            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
             </div>
-            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
             </div>
-            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
             </div>
-            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
             </div>
 
 
@@ -148,10 +146,10 @@ normal&ndash;1 to 1005. all switches can use-range<br>
 Only some switches can use 1006 to 4094<br>
 depends on the configuration of the VLAN Trunking Protocol (VTP)</li>
 </ul>
-<div class="wrap-code highlight"><pre tabindex="0"><code>Extended range</code></pre></div><ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>Extended range</code></pre></div><ul>
 <li>Cisco switches break the range of VLAN IDs (1–4094) into the normal range and the extended range.</li>
 </ul>
-<div class="wrap-code highlight"><pre tabindex="0"><code>231852+</code></pre></div><ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>231852+</code></pre></div><ul>
 <li>802.1Q simply does not add an 802.1Q header to frames in the native VLAN<br>
 <strong>#show vlan brief</strong><br>
 VLAN Trunking Protocol (VTP)<br>
@@ -159,7 +157,7 @@ VLAN Trunking Protocol (VTP)<br>
 <li>-The server switches can configure VLANs in the standard range only (1The client switches cannot configure VLANs. –1005).</li>
 <li>Both servers and clients may be learning new VLANs from other switches and seeing their VLANs deleted by other switches because of VTP.</li>
 </ul>
-<div class="wrap-code highlight"><pre tabindex="0"><code>If your switch usesVTP server or client mode</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>show running - does not list any vlan commands - confi g</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>show vtp status</code></pre></div><ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>If your switch usesVTP server or client mode</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>show running - does not list any vlan commands - confi g</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>show vtp status</code></pre></div><ul>
 <li>If possible to learn more about VTP for other purposes.in the lab, switch to disable VTP and ignore VTP for your switch configuration practice until you decide
 <ul>
 <li>negotiate ISL or 802.1q</li>
@@ -167,14 +165,14 @@ VLAN Trunking Protocol (VTP)<br>
 </ul>
 </li>
 </ul>
-<div class="wrap-code highlight"><pre tabindex="0"><code>Dynamic Trunking Protocol (DTP).
+<div class="highlight wrap-code"><pre tabindex="0"><code>Dynamic Trunking Protocol (DTP).
 switchport trunk encapsulation {dot1q | isl | negotiate} - configure the type or allow DTP to negotiate the type.
 Access-always access
 trunk-always trunk
 dynamic desirable--initiates negotiation messages and responds to negotiation messagesAccess if other side is access, otherwise trunk
 dynamic auto-passively waits to receive trunk negotiation messages</code></pre></div><p>VLAN Trunking Configuration</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>Quick Commands
-#show vtp status</code></pre></div><div class="wrap-code highlight"><pre tabindex="0"><code>VTP
+<div class="highlight wrap-code"><pre tabindex="0"><code>Quick Commands
+#show vtp status</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>VTP
 Trunking
 #switchport trunk encapsulation dot1q/isl/negotiate#switchport mode access/trunk/dynamic desirable/dynamic auto
 #switchport trunk allowed vlan#show interfaces trunk output
@@ -198,7 +196,7 @@ Data and Voice VLAN Concepts<br>
 <li>-see the voice vlanadministrative and operational mode</li>
 <li>access mode vlan</li>
 </ul>
-<div class="wrap-code highlight"><pre tabindex="0"><code>show interfaces FastEthernet 0/4 switchport</code></pre></div><p><strong>show interfaces trunkshow interfaces</strong> <em>f0/4</em> <strong>trunk</strong></p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>show interfaces FastEthernet 0/4 switchport</code></pre></div><p><strong>show interfaces trunkshow interfaces</strong> <em>f0/4</em> <strong>trunk</strong></p>
 <ul>
 <li>
 <p>vlans allowed on trunk&ndash; (^1) minus vlans removed by the - (^4094) <strong>switchport trunk allowed</strong> command</p>
@@ -250,7 +248,9 @@ Check the native VLAN settings on both ends</p>
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+Perfect Dark Mode
+
         </div>
         <div class="searchbox default-animation">
           <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
@@ -261,41 +261,42 @@ Check the native VLAN settings on both ends</p>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1708513026" defer></script>
-        <script src="/js/search.js?1708513026" defer></script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
         </ul>
         <hr class="padding">
       </div>
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669"><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/networking/" class="parent "><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/newccnanotes/8vlans/" class="active"><a class="padding" href="/networking/newccnanotes/8vlans/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41"><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" checked><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/newccnanotes/8vlans/" class="active"><a class="padding" href="/networking/newccnanotes/8vlans/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -311,11 +312,12 @@ Check the native VLAN settings on both ends</p>
             <ul>
               <li id="R-select-language-container" class="footerLangSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-language fa-fw"></i>
+                  <i class="fa-fw fas fa-language"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/newccnanotes/8vlans/" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -323,12 +325,12 @@ Check the native VLAN settings on both ends</p>
               </li>
               <li id="R-select-variant-container" class="footerVariantSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <i class="fa-fw fas fa-paint-brush"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-city2" value="city2" selected>City2</option>
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -337,7 +339,7 @@ Check the native VLAN settings on both ends</p>
               </li>
               <li class="footerVisitedLinks showVisitedLinks">
                 <div class="padding menu-control">
-                  <i class="fas fa-history fa-fw"></i>
+                  <i class="fa-fw fas fa-history"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <button onclick="clearHistory();">Clear History</button>
@@ -353,8 +355,8 @@ Check the native VLAN settings on both ends</p>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1708513026" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1708513026" defer></script>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -384,20 +386,20 @@ Check the native VLAN settings on both ends</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1708513026" defer></script>
-    <script src="/js/js-yaml.min.js?1708513026" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1708513026" defer></script>
+    <script src="/js/theme.js?1711887805" defer></script>
   </body>
 </html>

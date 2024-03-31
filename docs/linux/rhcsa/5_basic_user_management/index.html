@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.122.0">
-    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
@@ -14,36 +14,34 @@
     <meta property="og:title" content="">
     <meta property="og:description" content="Chapter 5 RHCSA Notes - Basic User Management Show who is currently logged in Review history of successful user login attempts and system reboots Report history of failed user log in attempts View recent user login attempts Examine user and group information Understand the content and syntax of local user authentication files Analyze user configuration files Add, modify, and delete local user accounts with default and custom values Set and modify user passwords Add user account with nologin access User account information is recorded in several files.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/5_basic_user_management/">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/5_basic_user_management/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1708513026" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1708513026" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1708513026" rel="stylesheet">
-    <link href="/css/fonts.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1708513026" rel="stylesheet">
-    <link href="/css/theme-city2.css?1708513026" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1708513026" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1708513026" rel="stylesheet">
-    <link href="/css/print.css?1708513026" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1708513026" rel="stylesheet">
-    <script src="/js/url.js?1708513026"></script>
-    <script src="/js/variant.js?1708513026"></script>
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
-      window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
       window.relearn = window.relearn || {};
-      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
       // variant stuff
       window.relearn.themeVariantModifier='';
-      window.variants && variants.init( [ 'city2' ] );
+      window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -141,15 +139,15 @@
             
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
             </div>
-            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
             </div>
-            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
             </div>
-            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
             </div>
-            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
             </div>
 
 
@@ -181,8 +179,15 @@
 <li>Set and modify user passwords</li>
 <li>Add user account with nologin access</li>
 </ul>
-<p>User account information is recorded in several files. These files may be edited manually if necessary; however, this practice is discouraged.</p>
+<p>User account information is recorded in several files. These files</p>
+<ul>
+<li>
+<p>may be edited manually if necessary (not recommended)</p>
+</li>
+<li>
 <p>service user accounts are added to the system when a corresponding service is installed, there may be situations when they need to be added manually. These accounts do not require login access; their presence is needed to support an installed application.</p>
+</li>
+</ul>
 <h2 id="listing-logged-in-users">Listing Logged-In Users</h2>
 <p>A list of the users who have successfully signed on to the system with valid credentials can be printed using who and w</p>
 <h3 id="who-command">who command</h3>
@@ -467,8 +472,8 @@
 </li>
 <li>Field 2 (Encrypted Password):
 <ul>
-<li>Can be empty or contain an “x” (points to the /etc/gshadow file for the actual password), or a hashed group-level password. You</li>
-<li>can set a password on a group for non-members to be able to change their group identity temporarily using the newgrp command. The</li>
+<li>Can be empty or contain an “x” (points to the /etc/gshadow file for the actual password), or a hashed group-level password.</li>
+<li>can set a password on a group for non-members to be able to change their group identity temporarily using the newgrp command.</li>
 <li>non-members must enter the correct password in order to do so.</li>
 </ul>
 </li>
@@ -724,173 +729,173 @@
 </ul>
 <h2 id="labs">Labs</h2>
 <h3 id="lab-who">Lab: who</h3>
-<div class="wrap-code highlight"><pre tabindex="0"><code>who</code></pre></div><h3 id="lab-what">Lab: what</h3>
-<div class="wrap-code highlight"><pre tabindex="0"><code>w</code></pre></div><h3 id="lab-last">Lab: last</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>who</code></pre></div><h3 id="lab-what">Lab: what</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>w</code></pre></div><h3 id="lab-last">Lab: last</h3>
 <ol>
 <li>List all user login, logout, and system reboot occurrences:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>last</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>last</code></pre></div><ol start="2">
 <li>List system reboot info only:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>last reboot</code></pre></div><h3 id="lab-lastb">Lab: lastb</h3>
-<div class="wrap-code highlight"><pre tabindex="0"><code>lastb</code></pre></div><h3 id="lab-lastlog">Lab: lastlog</h3>
-<div class="wrap-code highlight"><pre tabindex="0"><code>lastlog</code></pre></div><h3 id="lab-id">Lab: id</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>last reboot</code></pre></div><h3 id="lab-lastb">Lab: lastb</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>lastb</code></pre></div><h3 id="lab-lastlog">Lab: lastlog</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>lastlog</code></pre></div><h3 id="lab-id">Lab: id</h3>
 <ol>
 <li>View info about currently active user:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>id</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>id</code></pre></div><ol start="2">
 <li>View info about another user:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>id user1</code></pre></div><h3 id="lab-groups">Lab: groups</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>id user1</code></pre></div><h3 id="lab-groups">Lab: groups</h3>
 <ol>
 <li>View current user&rsquo;s groups:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>groups</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>groups</code></pre></div><ol start="2">
 <li>View groups of another user:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>groups user1</code></pre></div><h3 id="lab-user-authentication-files">Lab: user authentication files</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groups user1</code></pre></div><h3 id="lab-user-authentication-files">Lab: user authentication files</h3>
 <ol>
 <li>list of the four files and their backups from the /etc directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc/passwd* /etc/group* /etc/shadow* /etc/gshadow*</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/passwd* /etc/group* /etc/shadow* /etc/gshadow*</code></pre></div><ol start="2">
 <li>View first and last 3 lines of the passwd file</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>head -3 /etc/passwd ; tail -3 /etc/passwd</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>head -3 /etc/passwd ; tail -3 /etc/passwd</code></pre></div><ol start="3">
 <li>verify the permissions and ownership on the passwd file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc/passwd</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/passwd</code></pre></div><ol start="4">
 <li>View first and last 3 lines of the shadow file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>head -3 /etc/shadow ; tail -3 /etc/shadow</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>head -3 /etc/shadow ; tail -3 /etc/shadow</code></pre></div><ol start="5">
 <li>verify the permissions and ownership on the shadow file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc/shadow</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/shadow</code></pre></div><ol start="6">
 <li>View first and last 3 lines of the group file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>head -3 /etc/group ; tail -3 /etc/group</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>head -3 /etc/group ; tail -3 /etc/group</code></pre></div><ol start="7">
 <li>Verify the permissions and ownership on the group file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc/group</code></pre></div><ol start="8">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/group</code></pre></div><ol start="8">
 <li>View first and last 3 lines of the gshadow file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>head -3 /etc/gshadow ; tail -3 /etc/gshadow</code></pre></div><ol start="9">
+<div class="highlight wrap-code"><pre tabindex="0"><code>head -3 /etc/gshadow ; tail -3 /etc/gshadow</code></pre></div><ol start="9">
 <li>Verify the permissions and ownership on the gshadow file:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ls -l /etc/gshadow</code></pre></div><h3 id="lab-useradd-and-logindefs">Lab: useradd and login.defs</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/gshadow</code></pre></div><h3 id="lab-useradd-and-logindefs">Lab: useradd and login.defs</h3>
 <ol>
 <li>use the cat or less command to view the useradd file content or display the settings with the useradd command:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd -D</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd -D</code></pre></div><ol start="2">
 <li>grep on the/etc/login.defs with uncommented and non-empty lines:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep -v ^# /etc/login.defs | grep -v ^$</code></pre></div><h3 id="lab-create-a-user-account-with-default-attributes-root">Lab: Create a User Account with Default Attributes (root)</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep -v ^# /etc/login.defs | grep -v ^$</code></pre></div><h3 id="lab-create-a-user-account-with-default-attributes-root">Lab: Create a User Account with Default Attributes (root)</h3>
 <ol>
 <li>Create user2 with all the default directives:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd user2</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd user2</code></pre></div><ol start="2">
 <li>Assign this user a password and enter it twice when prompted:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>passwd user2</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd user2</code></pre></div><ol start="3">
 <li>grep for user2: on the authentication files to examine what the useradd command has added:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cd /etc ; grep user2: passwd shadow group gshadow</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd /etc ; grep user2: passwd shadow group gshadow</code></pre></div><ol start="4">
 <li>Test this new account by logging in as user2 and then run the id and groups commands to verify the UID, GID, and group membership information:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>su - user2
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user2
 id
 groups</code></pre></div><h3 id="lab-create-a-user-account-with-custom-values">Lab: Create a User Account with Custom Values</h3>
 <ol>
 <li>Create user3 with UID 1010 (-u), home directory /usr/user3a (-d), and shell /bin/sh (-s):</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd -u 1010 -d /usr/user3a -s /bin/sh user3</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd -u 1010 -d /usr/user3a -s /bin/sh user3</code></pre></div><ol start="2">
 <li>Assign user1234 as password (passwords assigned in the following way is not recommended; however, it is okay in a lab environment):</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo user1234 | passwd --stdin user3</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo user1234 | passwd --stdin user3</code></pre></div><ol start="3">
 <li>grep for user3: on the four authentication files to see what was added for this user:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cd /etc ; grep user3: passwd shadow group gshadow</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd /etc ; grep user3: passwd shadow group gshadow</code></pre></div><ol start="4">
 <li>Test this account by switching to or logging in as user3 and entering user1234 as the password. Run the id and groups commands for further verification.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>su - user3 
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user3 
 id
 groups</code></pre></div><h3 id="lab-modify-and-delete-a-user-account">Lab: Modify and Delete a User Account</h3>
 <ol>
 <li>Modify the login name for user2 to user2new (-l), UID to 2000 (-u), home directory to /home/user2new (-m and -d), and login shell to /sbin/nologin (-s).</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>usermod -l user2new -m -d /home/user2new -s /sbin/nologin -u 2000 user2</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>usermod -l user2new -m -d /home/user2new -s /sbin/nologin -u 2000 user2</code></pre></div><ol start="2">
 <li>Obtain the information for user2new from the passwd file for confirmation:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep user2new /etc/passwd</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep user2new /etc/passwd</code></pre></div><ol start="3">
 <li>Remove user2new along with their home and mail spool directories (-r):</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>userdel -r user2new</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>userdel -r user2new</code></pre></div><ol start="4">
 <li>Confirm the user deletion:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep user2new /etc/passwd</code></pre></div><h2 id="lab-create-a-user-account-with-no-login-access-root">Lab: Create a User Account with No-Login Access (root)</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep user2new /etc/passwd</code></pre></div><h2 id="lab-create-a-user-account-with-no-login-access-root">Lab: Create a User Account with No-Login Access (root)</h2>
 <ol>
 <li>Look at the current nologin users:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep nologin /etc/passwd</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep nologin /etc/passwd</code></pre></div><ol start="2">
 <li>Create user4 with non-interactive shell file /sbin/nologin:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd -s /sbin/nologin user4</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd -s /sbin/nologin user4</code></pre></div><ol start="3">
 <li>Assign user1234 as password:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>echo user1234 | passwd --stdin user4</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>echo user1234 | passwd --stdin user4</code></pre></div><ol start="4">
 <li>grep for user4 on the passwd file and verify the shell field containing the nologin shell:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>grep user4 /etc/passwd</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep user4 /etc/passwd</code></pre></div><ol start="5">
 <li>Test this account by attempting to log in or switch:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>su - user4</code></pre></div><h2 id="lab-check-user-login-attempts-root">Lab: Check User Login Attempts (root)</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user4</code></pre></div><h2 id="lab-check-user-login-attempts-root">Lab: Check User Login Attempts (root)</h2>
 <ol>
 <li>execute the last, lastb, and lastlog commands, and observe the outputs.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>last
+<div class="highlight wrap-code"><pre tabindex="0"><code>last
 lastb
 lastlog</code></pre></div><ol start="2">
 <li>List the timestamps when the system was last rebooted (last).</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>last | grep reboot</code></pre></div><h2 id="lab-5-2-verify-user-and-group-identity-user1">Lab 5-2: Verify User and Group Identity (user1)</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code>last | grep reboot</code></pre></div><h2 id="lab-5-2-verify-user-and-group-identity-user1">Lab 5-2: Verify User and Group Identity (user1)</h2>
 <ol>
 <li>run the who and w commands one at a time, and compare the outputs.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>who
+<div class="highlight wrap-code"><pre tabindex="0"><code>who
 w</code></pre></div><ol start="2">
 <li>Execute the id and groups commands, and compare the outcomes. Examine the extra information that the id command shows, but not the groups command.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>id
+<div class="highlight wrap-code"><pre tabindex="0"><code>id
 groups</code></pre></div><h2 id="lab-5-3-create-users-root">Lab 5-3: Create Users (root)</h2>
 <ol>
 <li>create user account user4100 with UID 4100 and home directory under /usr.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd -m -d /usr/user4100 -u 4100 user4100 </code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd -m -d /usr/user4100 -u 4100 user4100 </code></pre></div><ol start="2">
 <li>Create another user account user4200 with default attributes.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd user4200</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd user4200</code></pre></div><ol start="3">
 <li>Assign both users a password.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>passwd user4100
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd user4100
 passwd user4200</code></pre></div><ol start="4">
 <li>View the contents of the passwd, shadow, group, and gshadow files, and observe what has been added for the two new users.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat /etc/passwd
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/passwd
 cat /etc/shadow
 cat /etc/group
 cat /etc/gshadow</code></pre></div><h2 id="lab-create-user-with-non-interactive-shell-root">Lab: Create User with Non-Interactive Shell (root)</h2>
 <ol>
 <li>Create user account user4300 with the disability of logging in.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>useradd -s /sbin/nologin user4300</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd -s /sbin/nologin user4300</code></pre></div><ol start="3">
 <li>Assign this user a password.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>passwd user4300</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd user4300</code></pre></div><ol start="5">
 <li>Try to log on with this user and see is displayed on the screen.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>su - user4300</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user4300</code></pre></div><ol start="7">
 <li>View the content of the passwd file, and see what is there that prevents this user from logging in.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat /etc/passwd</code></pre></div><h2 id="review-questions">Review Questions</h2>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/passwd</code></pre></div><h2 id="review-questions">Review Questions</h2>
 <p>Q. What would the command useradd -D do?
 A. This command displays the defaults settings used at the time of user creation or modification.</p>
 <p>Q. What does the lastlog command do?
@@ -942,7 +947,9 @@ A. You need to run the lastb command as root or with the root privilege.</p>
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+Perfect Dark Mode
+
         </div>
         <div class="searchbox default-animation">
           <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
@@ -953,41 +960,42 @@ A. You need to run the lastb command as root or with the root privilege.</p>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1708513026" defer></script>
-        <script src="/js/search.js?1708513026" defer></script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
         </ul>
         <hr class="padding">
       </div>
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/5_basic_user_management/" class="active"><a class="padding" href="/linux/rhcsa/5_basic_user_management/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/5_basic_user_management/" class="active"><a class="padding" href="/linux/rhcsa/5_basic_user_management/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -1003,11 +1011,12 @@ A. You need to run the lastb command as root or with the root privilege.</p>
             <ul>
               <li id="R-select-language-container" class="footerLangSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-language fa-fw"></i>
+                  <i class="fa-fw fas fa-language"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/5_basic_user_management/" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1015,12 +1024,12 @@ A. You need to run the lastb command as root or with the root privilege.</p>
               </li>
               <li id="R-select-variant-container" class="footerVariantSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <i class="fa-fw fas fa-paint-brush"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-city2" value="city2" selected>City2</option>
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1029,7 +1038,7 @@ A. You need to run the lastb command as root or with the root privilege.</p>
               </li>
               <li class="footerVisitedLinks showVisitedLinks">
                 <div class="padding menu-control">
-                  <i class="fas fa-history fa-fw"></i>
+                  <i class="fa-fw fas fa-history"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <button onclick="clearHistory();">Clear History</button>
@@ -1045,8 +1054,8 @@ A. You need to run the lastb command as root or with the root privilege.</p>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1708513026" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1708513026" defer></script>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1076,20 +1085,20 @@ A. You need to run the lastb command as root or with the root privilege.</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1708513026" defer></script>
-    <script src="/js/js-yaml.min.js?1708513026" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1708513026" defer></script>
+    <script src="/js/theme.js?1711887805" defer></script>
   </body>
 </html>

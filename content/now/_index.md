@@ -10,7 +10,7 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 
 ![The 12 Week Year](https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/71ZMsYuwELL._SL1500_.jpg?classes=inline&height=175px) 
 
-![The Dispossessed](https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/915IxfbfvSL._SL1500_.jpg?classes=inline&height=175px) 
+
 
 
 ## Plans for my website
@@ -27,3 +27,10 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 - [ ] Add a newsletter.
 - [ ] Custom avatar.
 - [ ] Write 20 posts. (3/20)
+
+## Things to Learn
+
+- Containers
+- Linux networking
+- openshift
+- KATE Stack https://blog.container-solutions.com/introducing-the-kate-stack

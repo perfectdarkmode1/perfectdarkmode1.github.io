@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.122.0">
-    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
@@ -14,36 +14,34 @@
     <meta property="og:title" content="">
     <meta property="og:description" content="Chapter 8 RHCSA Notes - Process and Task Scheduling Identify and display system and user executed processes. View process states and priorities. Examine and change process niceness and priority. Understand signals and their use in controlling processes. Review job scheduling. Control who can schedule jobs. Schedule and manage jobs using at. Comprehend crontab and understand the syntax of crontables. Schedule and manage jobs using cron. Understand anacron and its function. RHCSA Objectives: 20.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/8_process_and_task_scheduling/">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/8_process_and_task_scheduling/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1708513026" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1708513026" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1708513026" rel="stylesheet">
-    <link href="/css/fonts.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1708513026" rel="stylesheet">
-    <link href="/css/theme-city2.css?1708513026" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1708513026" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1708513026" rel="stylesheet">
-    <link href="/css/print.css?1708513026" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1708513026" rel="stylesheet">
-    <script src="/js/url.js?1708513026"></script>
-    <script src="/js/variant.js?1708513026"></script>
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
-      window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
       window.relearn = window.relearn || {};
-      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
       // variant stuff
       window.relearn.themeVariantModifier='';
-      window.variants && variants.init( [ 'city2' ] );
+      window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -147,15 +145,15 @@
             
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
             </div>
-            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
             </div>
-            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
             </div>
-            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
             </div>
-            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
             </div>
 
 
@@ -1044,185 +1042,185 @@ example crontable line</li>
 <ol>
 <li>ps</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps</code></pre></div><ol start="2">
 <li>Check manual pages:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man ps</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>man ps</code></pre></div><ol start="3">
 <li>Run with &ldquo;every&rdquo; and &ldquo;full format&rdquo; flags:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -ef</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -ef</code></pre></div><ol start="4">
 <li>Produce an output with the command name in column 1, PID in column 2, PPID in column 3, and owner name in column 4, run it as follows:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -o comm,pid,ppid,user</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -o comm,pid,ppid,user</code></pre></div><ol start="5">
 <li>Check how many sshd processes are currently running on the system:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -C sshd</code></pre></div><h3 id="lab-top">Lab: top</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -C sshd</code></pre></div><h3 id="lab-top">Lab: top</h3>
 <ol>
 <li>top</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>top</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>top</code></pre></div><ol start="2">
 <li>View manual page:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man top</code></pre></div><h3 id="lab-list-a-specific-process">Lab: List a specific process</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>man top</code></pre></div><h3 id="lab-list-a-specific-process">Lab: List a specific process</h3>
 <ol>
 <li>list the PID of the rsyslogd daemon</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>pidof rsyslogd
+<div class="highlight wrap-code"><pre tabindex="0"><code>pidof rsyslogd
 or
 pgrep rsyslogd</code></pre></div><h3 id="lab-listing-processes-by-user-and-group-ownership">Lab: Listing Processes by User and Group Ownership</h3>
 <ol>
 <li>List processes owned by user1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -U user1</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -U user1</code></pre></div><ol start="2">
 <li>List processes owned by group root:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -G root</code></pre></div><h3 id="lab-nice">Lab: nice</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -G root</code></pre></div><h3 id="lab-nice">Lab: nice</h3>
 <ol>
 <li>View the default nice value:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>nice</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>nice</code></pre></div><ol start="2">
 <li>List priority and niceness for all processes:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl</code></pre></div><h3 id="lab-start-processes-at-non-default-priorities-2-terminals">Lab: Start Processes at Non-Default Priorities (2 terminals)</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl</code></pre></div><h3 id="lab-start-processes-at-non-default-priorities-2-terminals">Lab: Start Processes at Non-Default Priorities (2 terminals)</h3>
 <ol>
 <li>Run the top command at the default priority/niceness in Terminal 1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>top</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>top</code></pre></div><ol start="2">
 <li>Check the priority and niceness for the top command in Terminal 2 using the ps command:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="3">
 <li>Terminate the top session in Terminal 1 by pressing the letter q and relaunch it at a lower priority with a nice value of +2:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>nice -n 2 top</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>nice -n 2 top</code></pre></div><ol start="4">
 <li>\Check the priority and niceness for the top command in Terminal 2 using the ps command:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="5">
 <li>Terminate the top session in Terminal 1 by pressing the letter q and relaunch it at a higher priority with a nice value of -10. Use sudo for root privileges.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo nice -n -10 top</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo nice -n -10 top</code></pre></div><ol start="6">
 <li>Check the priority and niceness for the top command in Terminal 2 using the ps command:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="7">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="7">
 <li>Terminate the top session by pressing the letter q.</li>
 </ol>
 <h3 id="lab-alter-process-priorities-2-terminals">Lab: Alter Process Priorities (2 terminals)</h3>
 <ol>
 <li>Run the top command at the default priority/niceness in Terminal 1:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>top</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>top</code></pre></div><ol start="2">
 <li>Check the priority and niceness for the top command in Terminal 2 using the ps command:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="3">
 <li>While the top session is running in Terminal 1, increase its priority by renicing it to -5. Use the command substitution to get the PID of top. Prepend the renice command by sudo. The output indicates the old (0) and new (-5) priorities for the process.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo renice -n -5 $(pidof top)</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo renice -n -5 $(pidof top)</code></pre></div><ol start="4">
 <li>Validate the above change with ps. Focus on columns 7 and 8.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="5">
 <li>Repeat the above but set the process to run at a lower priority by renicing it to 8: The output indicates the old (-5) and new (8) priorities for the process.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo renice -n 8 $(pidof top)</code></pre></div><ol start="6">
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo renice -n 8 $(pidof top)</code></pre></div><ol start="6">
 <li>Validate the above change with ps. Focus on columns 7 and 8.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><h3 id="lab-controlling-processes-with-signals">Lab: Controlling Processes with Signals</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><h3 id="lab-controlling-processes-with-signals">Lab: Controlling Processes with Signals</h3>
 <ol>
 <li>Pass the soft termination signal to the crond daemon, use either of the following:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo pkill crond
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo pkill crond
 # or
 sudo kill $(pidof crond)</code></pre></div><ol start="2">
 <li>Confirm:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -ef | grep crond</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -ef | grep crond</code></pre></div><ol start="3">
 <li>Forcefully kill crond:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo pkill -9 crond
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo pkill -9 crond
 # or
 sudo pkill -s SIGKILL crond
 # or
 sudo kill -9 $(pgrep crond)</code></pre></div><ol start="4">
 <li>Kill all crond processes:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo killall crond</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo killall crond</code></pre></div><ol start="5">
 <li>View manual pages:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man kill
+<div class="highlight wrap-code"><pre tabindex="0"><code>man kill
 man pkill
 man killall</code></pre></div><h3 id="lab-cron-and-atd">Lab: cron and atd</h3>
 <ol>
 <li>View log files for cron and atd</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo cat /var/log/cron</code></pre></div><h3 id="lab-at-and-crond">Lab: at and crond</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo cat /var/log/cron</code></pre></div><h3 id="lab-at-and-crond">Lab: at and crond</h3>
 <ol>
 <li>run /home/user1/.bash_profile file for user1 2 hours from now:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>at -f ~/.bash_profile now + 2 hours</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>at -f ~/.bash_profile now + 2 hours</code></pre></div><ol start="2">
 <li>Consult crontab manual pages:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man crontab</code></pre></div><h3 id="lab-submit-view-list-and-erase-an-at-job">Lab: Submit, View, List, and Erase an at Job</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>man crontab</code></pre></div><h3 id="lab-submit-view-list-and-erase-an-at-job">Lab: Submit, View, List, and Erase an at Job</h3>
 <p>1.Run the at command and specify the correct execution time and date for the job. Type the entire command at the first at&gt; prompt and press Enter. Press Ctrl+d at the second at&gt; prompt to complete the job submission and return to the shell prompt.</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>at 11:30pm 3/31/20
+<div class="highlight wrap-code"><pre tabindex="0"><code>at 11:30pm 3/31/20
 date &amp;&gt; /tmp/date.out</code></pre></div><p>The system assigned job ID 5 to it, and the output also pinpoints the job’s execution time.</p>
 <p>2.List the job file created in the /var/spool/at directory:</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo ls -l /var/spool/at/</code></pre></div><p>3.List the spooled job with the at command. You may alternatively use atq to list it.</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>at -l
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo ls -l /var/spool/at/</code></pre></div><p>3.List the spooled job with the at command. You may alternatively use atq to list it.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>at -l
 # or
 atq</code></pre></div><p>4.Display the contents of this file with the at command and specify the job ID:</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>at -c 5</code></pre></div><p>5.Remove the spooled job with the at command by specifying its job ID. You may alternatively run atrm 5 to delete it.</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>at -d 5</code></pre></div><p>This should erase the job file from the /var/spool/at directory. You can</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>at -c 5</code></pre></div><p>5.Remove the spooled job with the at command by specifying its job ID. You may alternatively run atrm 5 to delete it.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>at -d 5</code></pre></div><p>This should erase the job file from the /var/spool/at directory. You can</p>
 <ol start="6">
 <li>confirm the deletion by running atq or at -l.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>atq</code></pre></div><h3 id="lab-add-list-and-erase-a-cron-job">Lab: Add, List, and Erase a Cron Job</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>atq</code></pre></div><h3 id="lab-add-list-and-erase-a-cron-job">Lab: Add, List, and Erase a Cron Job</h3>
 <p>assume that all users are currently denied access to cron</p>
 <ol>
 <li>Edit the /etc/cron.allow file and add user1 to it:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo vim /etc/cron.allow
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo vim /etc/cron.allow
 user1</code></pre></div><ol start="2">
 <li>Open the crontable and append the following schedule to it. Save the file when done and exit out of the editor.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>crontab -e
+<div class="highlight wrap-code"><pre tabindex="0"><code>crontab -e
 */5 10-11 5,20 * * echo &#34;Hello, this is a cron test.&#34; &gt; /tmp/hello.out</code></pre></div><ol start="3">
 <li>Check for the presence of a new file by the name user1 under the /var/spool/cron directory:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo ls -l /var/spool/cron</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo ls -l /var/spool/cron</code></pre></div><ol start="4">
 <li>List the contents of the crontable:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>crontab -l</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>crontab -l</code></pre></div><ol start="5">
 <li>Remove the crontable and confirm the deletion:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>crontab -r
+<div class="highlight wrap-code"><pre tabindex="0"><code>crontab -r
 crontab -l</code></pre></div><h3 id="lab-anacron">Lab: Anacron</h3>
 <ol>
 <li>View the default content of /etc/anacrontab without commented or empty lines:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>cat /etc/anacrontab | grep -ve ^# -ve ^$</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/anacrontab | grep -ve ^# -ve ^$</code></pre></div><ol start="2">
 <li>View anacron man pages:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>man anacron</code></pre></div><h3 id="lab-8-1-nice-and-renice-a-process">Lab 8-1: Nice and Renice a Process</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>man anacron</code></pre></div><h3 id="lab-8-1-nice-and-renice-a-process">Lab 8-1: Nice and Renice a Process</h3>
 <ol>
 <li>As user1 with sudo on server1, open two terminal sessions. Run the top command in terminal 1. Run the pgrep or ps command in terminal 2 to determine the PID and the nice value of top.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="2">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="2">
 <li>Stop top on terminal 1 and relaunch at a lower priority (+8).</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>nice -n 8 top</code></pre></div><ol start="3">
+<div class="highlight wrap-code"><pre tabindex="0"><code>nice -n 8 top</code></pre></div><ol start="3">
 <li>Confirm the new nice value of the process in terminal 2.</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="4">
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><ol start="4">
 <li>Issue the renice command in terminal 2 and increase the priority of top to -10:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>renice -n -10 $(pidof top)</code></pre></div><ol start="5">
+<div class="highlight wrap-code"><pre tabindex="0"><code>renice -n -10 $(pidof top)</code></pre></div><ol start="5">
 <li>Confirm:</li>
 </ol>
-<div class="wrap-code highlight"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><h3 id="lab-8-2-configure-a-user-crontab-file">Lab 8-2: Configure a User Crontab File</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ps -efl | grep top</code></pre></div><h3 id="lab-8-2-configure-a-user-crontab-file">Lab 8-2: Configure a User Crontab File</h3>
 <p>As user1 on server1, run the tty and date commands to determine the terminal file (assume /dev/pts/1) and current system time.</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>tty
+<div class="highlight wrap-code"><pre tabindex="0"><code>tty
 date</code></pre></div><p>Create a cron entry to display “Hello World” on the terminal. Schedule echo “Hello World” &gt; /dev/tty/1 to run 3 minutes from the current system time.</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>crontab -e
+<div class="highlight wrap-code"><pre tabindex="0"><code>crontab -e
 */3 * * * * echo &#34;Hello World&#34; &gt; /dev/pts/2</code></pre></div><p>As root, ensure user1 can schedule cron jobs.</p>
-<div class="wrap-code highlight"><pre tabindex="0"><code>sudo vim /etc/cron.allow
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo vim /etc/cron.allow
 user1</code></pre></div><h2 id="review-questions">Review Questions</h2>
 <p>Q. What are the two commands to list the PID of a specific process?
 A. The pidof and pgrep commands.</p>
@@ -1277,7 +1275,9 @@ A. True.</p>
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+Perfect Dark Mode
+
         </div>
         <div class="searchbox default-animation">
           <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
@@ -1288,41 +1288,42 @@ A. True.</p>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1708513026" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1708513026" defer></script>
-        <script src="/js/search.js?1708513026" defer></script>
+        <script src="/js/auto-complete.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711887805" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711887805" defer></script>
+        <script src="/js/search.js?1711887805" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
         </ul>
         <hr class="padding">
       </div>
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-db801fcabe18fdefdb1b34d275e81669" aria-controls="R-subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="R-section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/" class="active"><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/"><i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-32ba51710c14dbc40b371b19ad442e93" aria-controls="R-subsections-32ba51710c14dbc40b371b19ad442e93"><label for="R-section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-119695d21223206d3a21952913ee96ab" aria-controls="R-subsections-119695d21223206d3a21952913ee96ab"><label for="R-section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fas fa-check read-icon"></i></a><ul id="R-subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/" class="active"><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -1338,11 +1339,12 @@ A. True.</p>
             <ul>
               <li id="R-select-language-container" class="footerLangSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-language fa-fw"></i>
+                  <i class="fa-fw fas fa-language"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = baseUri + this.value;">
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/8_process_and_task_scheduling/" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1350,12 +1352,12 @@ A. True.</p>
               </li>
               <li id="R-select-variant-container" class="footerVariantSwitch">
                 <div class="padding menu-control">
-                  <i class="fas fa-paint-brush fa-fw"></i>
+                  <i class="fa-fw fas fa-paint-brush"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-city2" value="city2" selected>City2</option>
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1364,7 +1366,7 @@ A. True.</p>
               </li>
               <li class="footerVisitedLinks showVisitedLinks">
                 <div class="padding menu-control">
-                  <i class="fas fa-history fa-fw"></i>
+                  <i class="fa-fw fas fa-history"></i>
                   <span>&nbsp;</span>
                   <div class="control-style">
                     <button onclick="clearHistory();">Clear History</button>
@@ -1380,8 +1382,8 @@ A. True.</p>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1708513026" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1708513026" defer></script>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1411,20 +1413,20 @@ A. True.</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1708513026" defer></script>
-    <script src="/js/js-yaml.min.js?1708513026" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1708513026" defer></script>
+    <script src="/js/theme.js?1711887805" defer></script>
   </body>
 </html>

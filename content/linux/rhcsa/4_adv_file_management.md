@@ -20,21 +20,21 @@
 56. Create and use file access control lists
 
 Setting a default ACL on a directory :: Allows content sharing among user's without having to modify access on each new file and subdirectory.
-## Permission Classes #card
+## Permission Classes
 - user (u)
 - group (g)
 - other (o) (public)
 - all (a) <- all combined
 
-## Permission types #card
+## Permission types
 - r,w,x
-- work differently on files and directories
+- works differently on files and directories
 - hyphen (-) represents no permissions set
 
-### ls results permissions groupings #card
+### ls results permissions groupings 
 - - rwx rw- r--
 	- user (owner), group, and other (public)
-### ls results first character meaning #card
+### ls results first character meaning
 - regular file
 d directory
 l symbolic link
@@ -46,17 +46,17 @@ s socket
 
 ## Modifying Access Permission Bits
 ---
-### chmod  command #card
+### chmod  command 
 - Modify permissions using symbolic or octal notation.
 - Used by root or the file owner.
 
 Flags
 chmod -v ::: Verbose.
 
-### Symbolic notation #card
+### Symbolic notation 
 - Letters (ugo/rwx) and symbols (+, -, =) used to add, revoke, or assign permission bits.
 
-### Octal Notation #card
+### Octal Notation 
 Three-digit numbering system ranging from 0 to 7.
 	0 ---
 	1 --x
@@ -67,7 +67,7 @@ Three-digit numbering system ranging from 0 to 7.
 	6 rw-
 	7 rwx
 
-### Default Permissions #card
+### Default Permissions
 - Calculated based on the umask (user mask) value subtracted from the initial permissions value.
 
 #### umask 
@@ -75,7 +75,7 @@ Three-digit numbering system ranging from 0 to 7.
 - Default umask value ::: 0022 for the root user and 0002 normal users.
 - The left-most 0 has no significance.
 - If umask is set to 000 files will get max of 666
-- If the initial permissions are 666 and the umask is 002 then the default permissionss are 664. (666-002)
+- If the initial permissions are 666 and the umask is 002 then the default permissions are 664. (666-002)
 - Any new files or directories creating after changing the umask will have the new default permissions set. 
 - umask settings are lost when you log off. Add it to the appropriate startup file to make it permanent.
 
@@ -191,23 +191,23 @@ g:GID:perms
 - If no group specified, permissions are given to the owning group of the file/directory
 
 o:perms
-- Nither owner not owning group
+- Neither owner or owning group
 
 m:perms
 - Maximum permissions for named user or named group
 
 Switches
 
-|Switch|Description|
-|---|---|
-|-b|Remove all Access ACLs|
-|-d|Applies to default ACLs|
-|-k|Removes all default ACLs|
-|-m|Sets or modifies ACLs|
-|-n|Prevent auto mask recalculation|
-|-R|Apply Recursively to directory|
-|-x|Remove Access ACL|
-|-c|Display output without header|
+| Switch | Description                     |
+| ------ | ------------------------------- |
+| -b     | Remove all Access ACLs          |
+| -d     | Applies to default ACLs         |
+| -k     | Removes all default ACLs        |
+| -m     | Sets or modifies ACLs           |
+| -n     | Prevent auto mask recalculation |
+| -R     | Apply Recursively to directory  |
+| -x     | Remove Access ACL               |
+| -c     | Display output without header   |
 
 ## Mask Value
 
@@ -277,11 +277,6 @@ Switches
 
 10. To find files in the /var/log directory that have been modified (-mmin) in the past (the - sign) 100 minutes:
 ```
-[vagrant@server1 etc]$ sudo find /etc -mtime +2000
-/etc/libuser.conf
-/etc/xattr.conf
-/etc/whois.conf
-[vagrant@server1 etc]$ sudo find /etc -mtime 12
 [vagrant@server1 etc]$ sudo find /var/log -mmin -100
 /var/log/rhsm/rhsmcertd.log
 /var/log/rhsm/rhsm.log
@@ -318,9 +313,9 @@ Switches
 [vagrant@server1 etc]$ sudo find /dev -type c -perm -222
 ```
 
-14. Find files in the /etc/syst directory that are executable by at least their owner or group members:
+14. Find files in the /etc/systemd directory that are executable by at least their owner or group members:
 ```
-[vagrant@server1 etc]$ sudo find /etc/syst -perm /110
+[vagrant@server1 etc]$ sudo find /etc/systemd -perm /110
 ```
 
 15. Search for symlinked files (-type) in /usr with permissions (-perm) set to read and write for the owner and owning group:
@@ -747,7 +742,7 @@ sudo chmod -v +1000 /tmp
 ### Lab: Manipulate File Permissions (user1)
 1. Create file file11 and directory dir11 in the home directory. Make a note of the permissions on them. 
 ```
-touch 1
+touch file11
 mkdir dir11
 ```
 
@@ -799,7 +794,7 @@ chmod o+t sdir
 chmod g+s sdir
 ```
 
-3. Log on as user1000 and create a file under /sdir. 
+3. Log on as user100 and create a file under /sdir. 
 ```
 su - user1000
 cd /sdir
@@ -807,9 +802,9 @@ touch testfile
 
 ```
 
-4. Log on as user2000 and try to edit that file. You should be able to edit the file successfully. 
+4. Log on as user200 and try to edit that file. You should be able to edit the file successfully. 
 ```
-su - user2000
+su - user200
 cd /sdir
 vim testfile
 cat testfile

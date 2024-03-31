@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.122.0">
-    <meta name="generator" content="Relearn 5.23.2+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
@@ -27,28 +27,28 @@ ls
 stat
 file
 
-Regular files #card
+Regular files
 
 Text or binary data.
 Represented by hyphen (-).
 
-Directory Files #card
+Directory Files
 
 Identified by the letter &ldquo;d&rdquo; in the beginning of ls output.
 
-Block and Character (raw) Special Device Files #card
+Block and Character (raw) Special Device Files
 
 All hardware has device file in /dev/.
 Used by system to communicate with device.
 Identified by &ldquo;c&rdquo; or &ldquo;b&rdquo; in ls listing.
 Each device driver is assigned a unique number called the major number
 
-Major Number #card
+Major Number
 
 Used by kernel to recognize device driver type.
 Column 5 of ls listing.
 
-ls -l /dev/sdaMinor Number #card
+ls -l /dev/sdaMinor Number
 
 Each device controlled by the same device driver gets a Minor Number
 Applies to disk partitions as well.
@@ -62,14 +62,14 @@ Begins with &ldquo;l&rdquo; in ls listing.
 
 ls -l /usr/sbin/vigr
 lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving
-Archiving #card
+Archiving
 
 Preserves file attributes such as ownership, owning group, and timestamp.
 Preserves extended file attributes such as ACLs and SELinux contexts.
 Syntax of tar and star are identical.
 
 star command
-tar (tape archive) command #card
+tar (tape archive) command
 
 Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile)
 Can compress a tarball after it&rsquo;s been created.
@@ -82,47 +82,50 @@ tar -p :: Preserve file permissions. Default for the root user. Specify this if 
 tar -r :: Append files to the end of an existing uncompressed tarball.
 tar -t :: List contents of a tarball.
 tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer.
-Archive entire home directory: #card
-tar -cvf /tmp/home.tar /homeArchive two specific files: #card
-tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: #card
-tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: #card
-tar -tvf /tmp/files.tarRestore single file and confirm: #card
+-z
+-j
+-C
+Archive entire home directory:
+tar -cvf /tmp/home.tar /homeArchive two specific files:
+tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball:
+tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball:
+tar -tvf /tmp/files.tarRestore single file and confirm:
 tar -xf /tmp/files.tar etc/yum.conf
-ls -l etc/yum.confRestore all files and confirm: #card
+ls -l etc/yum.confRestore all files and confirm:
 tar -xf /tmp/files.tar
-lsCreate a gzip-compressed tarball under /tmp for /home: #card
-tar -czf /tmp/hom.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: #card
-sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: #card
-tar -tf /tmp/hom.tar.gzExtract files from gzip-compressed tarball in the current directory: #card
-tar -xf /tmp/hom.tar.gzExtract files from the bzip2-compressed tarball under /tmp: #card
+lsCreate a gzip-compressed tarball under /tmp for /home:
+tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home:
+sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it:
+tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory:
+tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp:
 tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools
-gzip (gunzip) command #card
+gzip (gunzip) command
 
 Create a compressed file for each of the specified files.
 Adds .gz extension.
 
 Flags
-Copy /etc/fstab to the current directory and display filename when uncompressed: #card
+Copy /etc/fstab to the current directory and display filename when uncompressed:
 cp /etc/fstab .
-ls -l fstabgzip fstab and view details: #card
+ls -l fstabgzip fstab and view details:
 gzip fstab
-ls -l fstab.gzDisplay compression info: #card
-gzip -l fstab.gzUncompress fstab.gz: #card
+ls -l fstab.gzDisplay compression info:
+gzip -l fstab.gzUncompress fstab.gz:
 gunzip fstab.gz
-ls -l fstabbzip2 (bunzip2) command #card
+ls -l fstabbzip2 (bunzip2) command
 
 Adds .bz2 extension.
 
 
 Better compression/ decompression ratio but is slower than gzip.
 
-Compress fstab using bzip and view details: #card
+Compress fstab using bzip and view details:
 bzip2 fstab
-ls -l fstab.bz2Unzip fstab.bz2 and view details: #card
+ls -l fstab.bz2Unzip fstab.bz2 and view details:
 bunzip2 fstab.bz2
 ls -l fstabFile Editing
 Vim
-[vimguide]
+vimguide
 File and Directory Operations
 touch command
 
@@ -130,16 +133,16 @@ File is created with 0 bytes in size.
 Run touch on it and it will get a new timestamp
 
 Flags
-Set date on file1 to 2019-09-20: #card
-touch -d 2019-09-20 file1Change modification time on file1 to current system time: #card
-touch -m file1mkdir command #card
+Set date on file1 to 2019-09-20:
+touch -d 2019-09-20 file1Change modification time on file1 to current system time:
+touch -m file1mkdir command
 
 Create a new directory.
 
 flags
-Create dir1 verbosely: #card
-mkdir dir1 -vCreate dir2/perl/perl5: #card
-mkdir -vp dir2/perl/perl5Commands for displaying file contents #card
+Create dir1 verbosely:
+mkdir dir1 -vCreate dir2/perl/perl5:
+mkdir -vp dir2/perl/perl5Commands for displaying file contents
 
 cat
 more
@@ -147,13 +150,13 @@ less
 head
 tail
 
-cat command #card
+cat command
 
 Concatenate and print files to standard output.
 
 Flags
-Redirect output to specified file: #card
-cat &gt; catfile1tac command #card
+Redirect output to specified file:
+cat &gt; catfile1tac command
 
 Display file contents in reverse
 
@@ -176,28 +179,28 @@ ls
 stat
 file
 
-Regular files #card
+Regular files
 
 Text or binary data.
 Represented by hyphen (-).
 
-Directory Files #card
+Directory Files
 
 Identified by the letter &ldquo;d&rdquo; in the beginning of ls output.
 
-Block and Character (raw) Special Device Files #card
+Block and Character (raw) Special Device Files
 
 All hardware has device file in /dev/.
 Used by system to communicate with device.
 Identified by &ldquo;c&rdquo; or &ldquo;b&rdquo; in ls listing.
 Each device driver is assigned a unique number called the major number
 
-Major Number #card
+Major Number
 
 Used by kernel to recognize device driver type.
 Column 5 of ls listing.
 
-ls -l /dev/sdaMinor Number #card
+ls -l /dev/sdaMinor Number
 
 Each device controlled by the same device driver gets a Minor Number
 Applies to disk partitions as well.
@@ -211,14 +214,14 @@ Begins with &ldquo;l&rdquo; in ls listing.
 
 ls -l /usr/sbin/vigr
 lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving
-Archiving #card
+Archiving
 
 Preserves file attributes such as ownership, owning group, and timestamp.
 Preserves extended file attributes such as ACLs and SELinux contexts.
 Syntax of tar and star are identical.
 
 star command
-tar (tape archive) command #card
+tar (tape archive) command
 
 Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile)
 Can compress a tarball after it&rsquo;s been created.
@@ -231,47 +234,50 @@ tar -p :: Preserve file permissions. Default for the root user. Specify this if 
 tar -r :: Append files to the end of an existing uncompressed tarball.
 tar -t :: List contents of a tarball.
 tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer.
-Archive entire home directory: #card
-tar -cvf /tmp/home.tar /homeArchive two specific files: #card
-tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: #card
-tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: #card
-tar -tvf /tmp/files.tarRestore single file and confirm: #card
+-z
+-j
+-C
+Archive entire home directory:
+tar -cvf /tmp/home.tar /homeArchive two specific files:
+tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball:
+tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball:
+tar -tvf /tmp/files.tarRestore single file and confirm:
 tar -xf /tmp/files.tar etc/yum.conf
-ls -l etc/yum.confRestore all files and confirm: #card
+ls -l etc/yum.confRestore all files and confirm:
 tar -xf /tmp/files.tar
-lsCreate a gzip-compressed tarball under /tmp for /home: #card
-tar -czf /tmp/hom.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: #card
-sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: #card
-tar -tf /tmp/hom.tar.gzExtract files from gzip-compressed tarball in the current directory: #card
-tar -xf /tmp/hom.tar.gzExtract files from the bzip2-compressed tarball under /tmp: #card
+lsCreate a gzip-compressed tarball under /tmp for /home:
+tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home:
+sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it:
+tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory:
+tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp:
 tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools
-gzip (gunzip) command #card
+gzip (gunzip) command
 
 Create a compressed file for each of the specified files.
 Adds .gz extension.
 
 Flags
-Copy /etc/fstab to the current directory and display filename when uncompressed: #card
+Copy /etc/fstab to the current directory and display filename when uncompressed:
 cp /etc/fstab .
-ls -l fstabgzip fstab and view details: #card
+ls -l fstabgzip fstab and view details:
 gzip fstab
-ls -l fstab.gzDisplay compression info: #card
-gzip -l fstab.gzUncompress fstab.gz: #card
+ls -l fstab.gzDisplay compression info:
+gzip -l fstab.gzUncompress fstab.gz:
 gunzip fstab.gz
-ls -l fstabbzip2 (bunzip2) command #card
+ls -l fstabbzip2 (bunzip2) command
 
 Adds .bz2 extension.
 
 
 Better compression/ decompression ratio but is slower than gzip.
 
-Compress fstab using bzip and view details: #card
+Compress fstab using bzip and view details:
 bzip2 fstab
-ls -l fstab.bz2Unzip fstab.bz2 and view details: #card
+ls -l fstab.bz2Unzip fstab.bz2 and view details:
 bunzip2 fstab.bz2
 ls -l fstabFile Editing
 Vim
-[vimguide]
+vimguide
 File and Directory Operations
 touch command
 
@@ -279,16 +285,16 @@ File is created with 0 bytes in size.
 Run touch on it and it will get a new timestamp
 
 Flags
-Set date on file1 to 2019-09-20: #card
-touch -d 2019-09-20 file1Change modification time on file1 to current system time: #card
-touch -m file1mkdir command #card
+Set date on file1 to 2019-09-20:
+touch -d 2019-09-20 file1Change modification time on file1 to current system time:
+touch -m file1mkdir command
 
 Create a new directory.
 
 flags
-Create dir1 verbosely: #card
-mkdir dir1 -vCreate dir2/perl/perl5: #card
-mkdir -vp dir2/perl/perl5Commands for displaying file contents #card
+Create dir1 verbosely:
+mkdir dir1 -vCreate dir2/perl/perl5:
+mkdir -vp dir2/perl/perl5Commands for displaying file contents
 
 cat
 more
@@ -296,49 +302,47 @@ less
 head
 tail
 
-cat command #card
+cat command
 
 Concatenate and print files to standard output.
 
 Flags
-Redirect output to specified file: #card
-cat &gt; catfile1tac command #card
+Redirect output to specified file:
+cat &gt; catfile1tac command
 
 Display file contents in reverse
 
 ">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/3_file_management/">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/3_file_management/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1708513026" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711887805" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1708513026" rel="stylesheet">
-    <link href="/css/auto-complete.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1708513026" rel="stylesheet">
-    <link href="/css/fonts.css?1708513026" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1708513026" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1708513026" rel="stylesheet">
-    <link href="/css/theme-city2.css?1708513026" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-light.css?1708513026" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1708513026" rel="stylesheet">
-    <link href="/css/print.css?1708513026" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1708513026" rel="stylesheet">
-    <link href="/css/ie.css?1708513026" rel="stylesheet">
-    <script src="/js/url.js?1708513026"></script>
-    <script src="/js/variant.js?1708513026"></script>
+    <link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711887805" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711887805" rel="stylesheet">
+    <link href="/css/fonts.css?1711887805" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711887805" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711887805" rel="stylesheet">
+    <link href="/css/theme-git.css?1711887805" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711887805" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711887805" rel="stylesheet">
+    <link href="/css/print.css?1711887805" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1711887805" rel="stylesheet">
+    <link href="/css/ie.css?1711887805" rel="stylesheet">
+    <script src="/js/url.js?1711887805"></script>
+    <script src="/js/variant.js?1711887805"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
-      window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
       window.relearn = window.relearn || {};
-      window.relearn.baseUriFull='http:\/\/perfectdarkmode.com/';
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
+      window.index_js_url="/index.search.js";
       // variant stuff
       window.relearn.themeVariantModifier='';
-      window.variants && variants.init( [ 'city2' ] );
+      window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -369,15 +373,15 @@ Display file contents in reverse
             
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> About</a>
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
             </div>
-            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> Now</a>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
             </div>
-            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> Recommended</a>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
             </div>
-            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> Book Notes</a>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
             </div>
-            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> Contact</a>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
             </div>
 
 
@@ -394,8 +398,8 @@ Display file contents in reverse
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1708513026" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1708513026" defer></script>
+    <script src="/js/clipboard.min.js?1711887805" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711887805" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -425,20 +429,20 @@ Display file contents in reverse
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1708513026" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1708513026" defer></script>
-    <script src="/js/js-yaml.min.js?1708513026" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711887805" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711887805" defer></script>
+    <script src="/js/js-yaml.min.js?1711887805" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1708513026" defer></script>
+    <script src="/js/theme.js?1711887805" defer></script>
   </body>
 </html>

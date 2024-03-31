@@ -417,12 +417,29 @@ dd {
     }
 }
 
-.topbar-breadcrumbs a:hover,
-.topbar-breadcrumbs a:active,
-.topbar-breadcrumbs a:focus,
-.topbar-breadcrumbs a:hover *,
-.topbar-breadcrumbs a:active *,
-.topbar-breadcrumbs a:focus *,
+#R-topbar a:hover:empty,
+#R-topbar a:active:empty,
+#R-topbar a:focus:empty,
+#R-topbar a:hover :not(i),
+#R-topbar a:active :not(i),
+#R-topbar a:focus :not(i),
+#R-topbar button:hover :not(i),
+#R-topbar button:active :not(i),
+#R-topbar button:focus :not(i),
+#R-topbar .title:hover,
+#R-topbar .title:active,
+#R-topbar .title:focus,
+.topbar-content a:hover,
+.topbar-content a:active,
+.topbar-content a:focus,
+article a:hover,
+article a:active,
+article a:focus,
+article a:hover .copy-to-clipboard,
+article a:active .copy-to-clipboard,
+article a:focus .copy-to-clipboard {
+    text-decoration: underline;
+}
 .topbar-content a:hover,
 .topbar-content a:active,
 .topbar-content a:focus,
@@ -433,7 +450,6 @@ article a:hover .copy-to-clipboard,
 article a:active .copy-to-clipboard,
 article a:focus .copy-to-clipboard {
     outline: none;
-    text-decoration: underline;
 }
 article a:hover > img:only-child:empty,
 article a:active > img:only-child:empty,
@@ -454,20 +470,18 @@ article a:focus > img:only-child:empty{
 #R-body .flex-block-wrapper {
     margin-left: auto;
     margin-right: auto;
-    max-width: calc( 81.25rem - var(--INTERNAL-MENU-WIDTH-L) - 2 * 3.25rem );
+    max-width: calc( var(--INTERNAL-MAIN-WIDTH-MAX) - var(--INTERNAL-MENU-WIDTH-L) - 2 * 3.25rem );
     width: 100%;
 }
 body:not(.print) #R-body .narrow .flex-block-wrapper {
-    max-width: calc( 81.25rem - var(--INTERNAL-MENU-WIDTH-L) - 2 * 9.75rem );
+    max-width: calc( var(--INTERNAL-MAIN-WIDTH-MAX) - var(--INTERNAL-MENU-WIDTH-L) - 2 * 9.75rem );
 }
 /* we limit width if we have large screens */
-@media screen and ( min-width: 81.25rem ){ /* #R-sidebar/width + ./max-width */
-    #R-body .flex-block-wrapper {
-        width: calc( 81.25rem - var(--INTERNAL-MENU-WIDTH-L) - 2 * 3.25rem );
-    }
-    body:not(.print) #R-body .narrow .flex-block-wrapper {
-        width: calc( 81.25rem - var(--INTERNAL-MENU-WIDTH-L) - 2 * 9.75rem );
-    }
+body.main-width-max #R-body .flex-block-wrapper {
+    width: calc( var(--INTERNAL-MAIN-WIDTH-MAX) - var(--INTERNAL-MENU-WIDTH-L) - 2 * 3.25rem );
+}
+body.main-width-max:not(.print) #R-body .narrow .flex-block-wrapper {
+    width: calc( var(--INTERNAL-MAIN-WIDTH-MAX) - var(--INTERNAL-MENU-WIDTH-L) - 2 * 9.75rem );
 }
 
 body:not(.print) #R-body-inner.narrow {
@@ -651,7 +665,7 @@ p:empty {
     margin-bottom: 0;
 }
 
-/* attachments shortcode */
+/* resources shortcode */
 
 div.attachments .box-content {
     display: block;
@@ -1093,7 +1107,6 @@ html[dir="rtl"] .topbar-button-next i {
 
 .topbar-breadcrumbs {
     flex-grow: 1;
-    line-height: 1.2;
     margin: 0;
     padding: 0 1rem;
 }
@@ -1143,7 +1156,10 @@ html[dir="rtl"] .topbar-button-next i {
 @media screen and (max-width: 47.999rem) {
     /* we don't support sidebar flyout in mobile */
     .mobile-support #R-sidebar {
-        inset-inline-start: calc( -1 * var(--INTERNAL-MENU-WIDTH-M) );
+        inset-inline-start: calc( -1 * var(--INTERNAL-MENU-WIDTH-S) );
+        min-width: var(--INTERNAL-MENU-WIDTH-S);
+        max-width: var(--INTERNAL-MENU-WIDTH-S);
+        width: var(--INTERNAL-MENU-WIDTH-S);
     }
     .mobile-support #navshow{
         display: inline;
@@ -1164,7 +1180,7 @@ html[dir="rtl"] .topbar-button-next i {
         z-index: 90;
     }
     .mobile-support.sidebar-flyout #R-body {
-        margin-inline-start: var(--INTERNAL-MENU-WIDTH-M);
+        margin-inline-start: var(--INTERNAL-MENU-WIDTH-S);
         overflow: hidden;
     }
     .mobile-support.sidebar-flyout #R-body-overlay{
@@ -1351,26 +1367,26 @@ html[dir="rtl"] .expand > .expand-label > i.fa-chevron-right {
 }
 
 .mermaid {
-    border: 1px solid transparent;
     display: inline-block;
+    border: 1px solid transparent;
     padding: .5rem .5rem 0 .5rem;
     position: relative;
     /* don't use display: none, as this will cause no renderinge by Mermaid */
     visibility: hidden;
     width: 100%;
 }
+.mermaid-container.zoomable > .mermaid:hover {
+    border-color: rgba( 134, 134, 134, .333 );
+}
 .mermaid.mermaid-render {
     visibility: visible;
-}
-.mermaid.zoomable:hover {
-    border-color: rgba( 134, 134, 134, .333 );
 }
 
 .mermaid > svg {
     /* remove inline height from generated diagram */
     height: initial !important;
 }
-.mermaid.zoomable > svg {
+.mermaid-container.zoomable > .mermaid > svg {
     cursor: grab;
 }
 
@@ -1716,6 +1732,10 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration { display: none; }
 
+span.math:has(> mjx-container[display]) {
+    display: block;
+}
+
 @supports selector(.math:has(> mjx-container)){
     .math{
         visibility: hidden;
@@ -1724,7 +1744,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
         visibility: visible;
     }
 }
-
 .math.align-left > mjx-container{
     text-align: left !important;
 }
