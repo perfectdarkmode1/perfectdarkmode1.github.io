@@ -3,6 +3,7 @@ archetype = "home"
 title = ""
 +++
 
+-> [[linux]
 ### Recent Posts:
 
 [![RHCSA Vagrant Lab](/images/vagrantmultivmdeployment.jpg?classes=inline&height=225px&lightbox=false)](linux/rhcsavagrantlabsetup/)
