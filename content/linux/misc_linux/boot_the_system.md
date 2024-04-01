@@ -5,7 +5,7 @@ draft: false
 ---
 Boot Process Overview
 
-4 stages
+4 stages the
 
 1 BIOS
 

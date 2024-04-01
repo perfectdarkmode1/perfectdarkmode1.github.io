@@ -5,36 +5,39 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
     <meta name="generator" content="Relearn 5.26.2+tip">
-    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="Notes Jail similar to a virtual machine. You can only access what is in the jail. Programs must be available within the jail (in /jail/bin) To get a chroot shell, copy /bin and /lib to the chroot environment folder:
+    <meta name="twitter:title" content="chroot - Perfect Dark Mode">
+    <meta name="twitter:description" content="title = &ldquo;Chroot&rdquo; date = 2023-11-06T06:20:36-07:00 draft = false alwaysopen = false
+Notes Jail similar to a virtual machine. You can only access what is in the jail. Programs must be available within the jail (in /jail/bin) To get a chroot shell, copy /bin and /lib to the chroot environment folder:
 sudo mkdir /jail/bin sudo mkdir /jail/lib sudo mkdir lib64 sudo cp -r /bin/* /jail/bin sudo cp -r /lib/* /jail/lib sudo cp -r /lib64/* /jail/lib64Enter chroot sudo chroot /jail">
-    <meta property="og:title" content="">
-    <meta property="og:description" content="Notes Jail similar to a virtual machine. You can only access what is in the jail. Programs must be available within the jail (in /jail/bin) To get a chroot shell, copy /bin and /lib to the chroot environment folder:
+    <meta property="og:title" content="chroot - Perfect Dark Mode">
+    <meta property="og:description" content="title = &ldquo;Chroot&rdquo; date = 2023-11-06T06:20:36-07:00 draft = false alwaysopen = false
+Notes Jail similar to a virtual machine. You can only access what is in the jail. Programs must be available within the jail (in /jail/bin) To get a chroot shell, copy /bin and /lib to the chroot environment folder:
 sudo mkdir /jail/bin sudo mkdir /jail/lib sudo mkdir lib64 sudo cp -r /bin/* /jail/bin sudo cp -r /lib/* /jail/lib sudo cp -r /lib64/* /jail/lib64Enter chroot sudo chroot /jail">
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/misc_linux/chroot/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
-    <title></title>
-    <link href="/images/favicon.png?1711900673" rel="icon" type="image/png">
+    <title>chroot - Perfect Dark Mode</title>
+    <link href="/linux/misc_linux/chroot/index.xml" rel="alternate" type="application/rss+xml" title="chroot - Perfect Dark Mode">
+    <link href="/linux/misc_linux/chroot/index.print.html" rel="alternate" type="text/html" title="chroot - Perfect Dark Mode">
+    <link href="/images/favicon.png?1711966966" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1711900673" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711900673" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1711900673" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711900673" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711900673" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1711900673" rel="stylesheet">
-    <link href="/css/fonts.css?1711900673" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711900673" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1711900673" rel="stylesheet">
-    <link href="/css/theme-git.css?1711900673" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1711900673" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1711900673" rel="stylesheet">
-    <link href="/css/print.css?1711900673" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1711900673" rel="stylesheet">
-    <script src="/js/url.js?1711900673"></script>
-    <script src="/js/variant.js?1711900673"></script>
+    <link href="/css/fontawesome-all.min.css?1711966966" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711966966" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711966966" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711966966" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711966966" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711966966" rel="stylesheet">
+    <link href="/css/fonts.css?1711966966" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711966966" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711966966" rel="stylesheet">
+    <link href="/css/theme-git.css?1711966966" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711966966" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711966966" rel="stylesheet">
+    <link href="/css/print.css?1711966966" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711966966" rel="stylesheet">
+    <script src="/js/url.js?1711966966"></script>
+    <script src="/js/variant.js?1711966966"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -81,7 +84,7 @@ sudo mkdir /jail/bin sudo mkdir /jail/lib sudo mkdir lib64 sudo cp -r /bin/* /ja
 
           </div>
           <span class="topbar-breadcrumbs highlightable">
-            
+            chroot
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
@@ -109,8 +112,12 @@ sudo mkdir /jail/bin sudo mkdir /jail/lib sudo mkdir lib64 sudo cp -r /bin/* /ja
           <article class="default">
             <header class="headline">
             </header>
-<h1 id=""></h1>
+<h1 id="chroot">chroot</h1>
 
+<p>title = &ldquo;Chroot&rdquo;
+date = 2023-11-06T06:20:36-07:00
+draft = false
+alwaysopen = false</p>
 <h2 id="notes">Notes</h2>
 <ul>
 <li>Jail similar to a virtual machine. You can only access what is in the jail.</li>
@@ -148,12 +155,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1711900673" defer></script>
-        <script src="/js/lunr/lunr.min.js?1711900673" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1711900673" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1711900673" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1711900673" defer></script>
-        <script src="/js/search.js?1711900673" defer></script>
+        <script src="/js/auto-complete.js?1711966966" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711966966" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711966966" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711966966" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711966966" defer></script>
+        <script src="/js/search.js?1711966966" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -169,7 +176,7 @@ Perfect Dark Mode
           <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/chroot/" class="active"><a class="padding" href="/linux/misc_linux/chroot/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/linux/misc_linux/chroot/" class="active"><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
           <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
@@ -242,8 +249,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1711900673" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1711900673" defer></script>
+    <script src="/js/clipboard.min.js?1711966966" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711966966" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -273,20 +280,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1711900673" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1711900673" defer></script>
-    <script src="/js/js-yaml.min.js?1711900673" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711966966" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711966966" defer></script>
+    <script src="/js/js-yaml.min.js?1711966966" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1711900673" defer></script>
+    <script src="/js/theme.js?1711966966" defer></script>
   </body>
 </html>
