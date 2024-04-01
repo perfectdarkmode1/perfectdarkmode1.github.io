@@ -10,8 +10,7 @@ These are books I have read and would recommend. I do not agree with every word 
 
 ![Caffeine Blues](/images/caffeinebluescover.jpg?classes=inline&height=175px) 
 ![Deskbound](/images/deskboundcover.jpg?classes=inline&height=175px)
-![Ready to Run](https://m.media-amazon.com/images/I/71b-9yEjgjL._SL1500_.jpg?classes=inline&height=175px)
-![5/3/1](https://m.media-amazon.com/images/I/81CZMIFT2UL._SL1500_.jpg?classes=inline&height=175px)
+![Ready to Run](https://m.media-amazon.com/images/I/71b-9yEjgjL._SL1500_.jpg?classes=inline&height=175px)![5/3/1](https://m.media-amazon.com/images/I/81CZMIFT2UL._SL1500_.jpg?classes=inline&height=175px)
 ![Becoming a Supple Leopard](https://m.media-amazon.com/images/I/81WWSQg6VvL._SL1500_.jpg?classes=inline&height=175px)
 ![Breath](https://m.media-amazon.com/images/I/81NygdDiGRL._SL1500_.jpg?classes=inline&height=175px)
 

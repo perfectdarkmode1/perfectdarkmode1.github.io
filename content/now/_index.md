@@ -1,5 +1,4 @@
 
-
 This is a page to help me stay focused and keep track of what I am doing. It is also to show others what I am currently working on and thinking about. Credit goes to Derrick Sivers for starting a "Now" page movement. Read about "Now" pages [here](https://nownownow.com/about).
 
 ## Career
@@ -8,8 +7,7 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 
 ## What I am Reading
 
-![Dopamine Nation](https://m.media-amazon.com/images/I/91HfbGNPsKL._SL1500_.jpg?classes=inline&height=175px) 
-
+![Dopamine Nation](https://m.media-amazon.com/images/I/91HfbGNPsKL._SL1500_.jpg?classes=inline&height=175px)
 ![Playful Parenting](https://m.media-amazon.com/images/I/71Z8lnOQgmL._SL1200_.jpg?classes=inline&height=175px) 
 
 ## Current Health Goal:
