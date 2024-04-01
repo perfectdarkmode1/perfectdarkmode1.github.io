@@ -18,5 +18,8 @@ Here are my notes from Asghar Gori's RHCSA book. Buy the book or read the review
 - [Chapter 7: The Bash Shell](/linux/rhcsa/7_bash_shell)
 - [Chapter 8: Process and Task Scheduling](/linux/rhcsa/8_process_and_task_scheduling)
 - [Chapter 9: Basic Package Management](/linux/rhcsa/9_basic_package_management)
+- [Chapter 10: Advanced Package Management](10_adv_package_management.md)
+- [Chapter 11: Boot, Grub2, Kernel](11_boot_grub2_kernel.md)
+- [Chapter 12: Sysinit, Logging, Tuning](12_sysinit_logging_tuning.md)
 - [Chapter 16: Networking](/linux/rhcsa/16_networking)
 - [Chapter 17: Network File System](/linux/rhcsa/17_Network_File_System)

@@ -92,3 +92,9 @@ Zellij
 
  eza
  - ls but more info
+
+Containers
+
+openshift
+
+KATE Stack https://blog.container-solutions.com/introducing-the-kate-stack

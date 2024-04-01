@@ -4,14 +4,23 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 
 ## Career
 
-I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goal is to take the test at the end of June 2024. 
+I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goal is to take the test at the end of June 2024. Follow my progress here: [RHCSA_Tracker](RHCSA_Tracker.md)
 
 ## What I am Reading
 
-![The 12 Week Year](https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/71ZMsYuwELL._SL1500_.jpg?classes=inline&height=175px) 
+![Dopamine Nation](https://m.media-amazon.com/images/I/91HfbGNPsKL._SL1500_.jpg?classes=inline&height=175px) 
 
+![Playful Parenting](https://m.media-amazon.com/images/I/71Z8lnOQgmL._SL1200_.jpg?classes=inline&height=175px) 
 
+## Current Health Goal:
+Taper off of caffeine over the next 12 weeks. [Quit Caffine Tracker](quit_caffeine.md)
 
+## Current Family goal:
+Help my son eat healthier, get more sleep (in his own room), and be able to regulate his emotions better. [Family goal](child-2.0)
+
+## Things to Learn
+
+I keep a page of projects that I want to do and tech that I want to learn [here.](perfectdarkmode1.github.io/content/now/Projects.md) Then, instead of trying to learn every new shiny thing as it pops up. I continue to focus on my current goal. 
 
 ## Plans for my website
 - [x] Build out basic theme and layout. 
@@ -22,15 +31,8 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 - [x] Create a "Contact me" page.
 - [x] Change "now" icon.
 - [ ] Make a page with all of the tools I use.
-- [ ] Make a script that updates website every time I update my markdown files in VSCodium.
+- [ ] Make a script that updates website every time I update my markdown files.
 - [ ] Add comments functionality to pages.
 - [ ] Add a newsletter.
 - [ ] Custom avatar.
 - [ ] Write 20 posts. (3/20)
-
-## Things to Learn
-
-- Containers
-- Linux networking
-- openshift
-- KATE Stack https://blog.container-solutions.com/introducing-the-kate-stack

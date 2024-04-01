@@ -81,7 +81,7 @@ var relearn_search_index = [
   },
   {
     "breadcrumb": "Linux",
-    "content": " RHCSA Red Hat Enterprise Linux 8 (UPDATED) - Asghar Ghori\nHere are my notes from Asghar Gori’s RHCSA book. Buy the book or read the reviews here.\nChapter 1: Installation Chapter 2: Interaction Chapter 3: File Management Chapter 4: Advanced File Management Chapter 5: Basic User Management Chapter 6: Advanced User Management Chapter 7: The Bash Shell Chapter 8: Process and Task Scheduling Chapter 9: Basic Package Management Chapter 16: Networking Chapter 17: Network File System ",
+    "content": " RHCSA Red Hat Enterprise Linux 8 (UPDATED) - Asghar Ghori\nHere are my notes from Asghar Gori’s RHCSA book. Buy the book or read the reviews here.\nChapter 1: Installation Chapter 2: Interaction Chapter 3: File Management Chapter 4: Advanced File Management Chapter 5: Basic User Management Chapter 6: Advanced User Management Chapter 7: The Bash Shell Chapter 8: Process and Task Scheduling Chapter 9: Basic Package Management Chapter 10: Advanced Package Management Chapter 11: Boot, Grub2, Kernel Chapter 12: Sysinit, Logging, Tuning Chapter 16: Networking Chapter 17: Network File System ",
     "description": "",
     "tags": null,
     "title": "RHCSA Notes",
