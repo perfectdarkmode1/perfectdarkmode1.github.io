@@ -1,3 +1,8 @@
+---
+draft: false
+title: Calibre Web With Docker
+---
+
 I couldn’t find a guide on how to set up Calibre web step-by-step as a Docker container. Especially not one that used Nginx as a reverse proxy.
 
 The good news is that it is really fast and simple. You’ll need a few tools to get this done:

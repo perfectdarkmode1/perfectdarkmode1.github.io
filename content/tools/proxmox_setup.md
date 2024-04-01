@@ -1,3 +1,8 @@
+---
+draft: false
+title: Proxmox Setup
+---
+
 Add the following to the end of /etc/apt/sources.list
 ```
 # not for production use

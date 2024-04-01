@@ -1,7 +1,7 @@
 ---
-title: "Pandoc Guide"
+title: Pandoc Guide
 date: 2023-04-22T06:37:25-07:00
-draft: true
+draft: false
 ---
 # Pandoc
 Used for converting file formats

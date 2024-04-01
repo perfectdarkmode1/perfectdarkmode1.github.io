@@ -1,3 +1,7 @@
+---
+draft: true
+title: TMUX 2 Book Notes
+---
 
 
 Links:

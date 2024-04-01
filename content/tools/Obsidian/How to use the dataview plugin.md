@@ -1,3 +1,8 @@
+---
+draft: false
+title: Obsidian Dataview Plugin
+---
+
 Dataview Documentation https://blacksmithgu.github.io/obsidian-dataview/annotation/add-metadata/
 Blog post https://dannyhatcher.com/obsidian-dataview-for-beginners/
 

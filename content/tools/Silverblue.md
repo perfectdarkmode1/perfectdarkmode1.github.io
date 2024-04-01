@@ -1,7 +1,7 @@
 ---
-title: "Fedora Silverblue"
+title: Fedora Silverblue
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Automated setup https://universal-blue.org/
 

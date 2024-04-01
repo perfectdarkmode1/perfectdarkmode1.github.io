@@ -1,3 +1,7 @@
+---
+draft: false
+title: Hosting Your Own Email Server
+---
 
 Make sure your VSP unblocks port 25
 
