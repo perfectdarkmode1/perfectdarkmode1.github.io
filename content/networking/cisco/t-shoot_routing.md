@@ -1,7 +1,7 @@
 ---
-title: "Troubleshooting Routing"
+title: Troubleshooting Routing
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Problem Isolation Using the ping Command
 

@@ -1,7 +1,7 @@
 ---
-title: "DHCP Configuration"
+title: DHCP Configuration
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 
 1.0 Network Fundamentals

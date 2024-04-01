@@ -1,3 +1,7 @@
+---
+draft: false
+title: The Power of Positive Dog Training Notes
+---
 
 # Principles
 

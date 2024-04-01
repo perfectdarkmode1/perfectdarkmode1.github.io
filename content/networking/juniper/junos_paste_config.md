@@ -1,3 +1,8 @@
+---
+draft: false
+title: How to Copy and Paste a Junos Config
+---
+
 cli
 top
 delete

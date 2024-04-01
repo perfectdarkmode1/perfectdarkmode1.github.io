@@ -1,7 +1,7 @@
 ---
-title: "Cisco CML VMWARE Guide"
+title: Cisco CML VMWARE Guide
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 
 You can find a detailed installation guide here [https://developer.cisco.com/docs/modeling-labs/#!system-requirements](https://developer.cisco.com/docs/modeling-labs/#!system-requirements "https://developer.cisco.com/docs/modeling-labs/#!system-requirements")

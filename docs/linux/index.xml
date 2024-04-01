@@ -33,6 +33,68 @@ performs integrity checks
 main goal: find the system bootloader</description>
     </item>
     <item>
+      <title>Command Line</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/command_line/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/command_line/</guid>
+      <description>The Shell
+A program that takes your commands from the keyboard and sends them to the operating system to perform.
+Almost all Linux distros will default to the bash shell.
+Shell prompt , for the most part, adheres to the following format
+username@hostname:current_directory
+david@David-Thomas:/$
+The $ is for a normal user using bash
+Some commands: (Case sensitive)
+$ echo
+Echo Hello World
+Output: Hello World
+$ date
+Output: Mon Nov 30 09:57:25 MST 2020</description>
+    </item>
+    <item>
+      <title>Consoling in on Linux</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/consoling_in_on_linux/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/consoling_in_on_linux/</guid>
+      <description>Consoling in on Linux Plug console cable in
+find out what your serial line name is:
+$ dmesg | grep -i FTDI
+Open putty &amp;gt; change to serial &amp;gt; change the tty line name
+Ex: /dev/ttyUSB0
+Make sure your serial settings are correct
+Press open &amp;gt; when terminal appears press enter</description>
+    </item>
+    <item>
+      <title>Devices</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/devices/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/devices/</guid>
+      <description>/dev directory
+You can interact with device drivers through device files or device nodes, these are special files that look like regular files. You can use ls,cat, etc to interact with them. Generally stored in /dev directory
+$ ls /dev
+When you send output to /dev/null, the kernal knows that this device takes all of our input and just discards it, so nothing gets returned.
+Device Types
+$ ls -l /dev</description>
+    </item>
+    <item>
+      <title>DNS</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/dns/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/dns/</guid>
+      <description>DNS Components
+Name server
+- authoritive or recursive
+Zone file
+- how the name server stores info about domain and how to get there
+Resource records
+- located in zone file
+record name
+TTL - time in which the record is discarded
+class - Namespace of record info, usually IN for internet
+type - type of info stored (A, MX, etc.)
+Data - can contain IP address or other info depending on type</description>
+    </item>
+    <item>
       <title>Fedora Desktop Setup</title>
       <link>http://perfectdarkmode.com/linux/fedora_setup/</link>
       <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
@@ -43,6 +105,261 @@ Add badname user $ adduser --badname firstname.lastname $ sudo usermod -aG wheel
 # uncomment this line in the visudo file $ sudo visudo %wheel ALL=(ALL) ALLDelete other user:
 $ userdel username
 DNF Config (for speed) DNF is one of the package managers that comes with Fedora.</description>
+    </item>
+    <item>
+      <title>File Permissions</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/file_permissions/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/file_permissions/</guid>
+      <description>File permissions
+$ls -l Desktop/
+drwxr-xr-x 2 pete penguins 4096 Dec 1 11:45 .
+Four parts to file permissions
+Filetype (d (for directory) in the example) a is for regular file
+These 3 parts are the actual file permissions.
+d | rwx | r-x | r-x
+Filetype | User Permissions | Group Permissions | Other Permissions
+r - readable
+w - writable
+x - executable
+empty Modifying Permissions
+$ chmod u+x myfile</description>
+    </item>
+    <item>
+      <title>General Linux and History</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/getting_started/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/getting_started/</guid>
+      <description>Richard Stallman started working on the GNU (GNU is Not UNIX) project, the GNU kernel called Hurd, which unfortunately never came to completion. The GNU General Public License (GPL), a free software license, was also created as a result of this.
+The Kernel allows hardware to talk to software.
+A Linux system is divided into 3 main parts:
+Hardware - This includes all the hardware that your system runs on as well as memory, CPU, disks, etc.</description>
+    </item>
+    <item>
+      <title>How to Get Putty to Work in Ubuntu</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/ubuntu_stuff/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/ubuntu_stuff/</guid>
+      <description>Add this stuff to the top of /etc/ssh/ssh_config
+KexAlgorithms=+diffie-hellman-group1-sha1
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc
+HostKeyAlgorithms ssh-rsa
+PubkeyAcceptedKeyTypes ssh-rsa
+Getting putty to work in Ubuntu sudo apt-get update
+sudo apt install putty
+Go to fonts menu and change fonts to Ubuntu.</description>
+    </item>
+    <item>
+      <title>Init</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/init/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/init/</guid>
+      <description>System V Overview (sys v) (&amp;ldquo;system five&amp;rdquo;)
+- init stops and starts essential processes
+- 3 major versions of init
+1. system V (most traditional version)
+2. upstart
+3. syst
+- Starts and stops processes sequentially
+- uses scripts to start and stop processes
+- Easy to solve dependencies (A comes before B)
+- Con: Only one service stops or starts at a time.
+- State of the machine is defined by runlevels (0-6) (varies by distro)</description>
+    </item>
+    <item>
+      <title>IO Monitoring</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/i_o_monitoring/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/i_o_monitoring/</guid>
+      <description>$ iostat
+- cpu and disk usage
+cpu info section
+%user:utilization at user level
+%nice: user level w/ nice priority &amp;amp; cpu utilization with nice priorities
+%system: system level (kernel)
+%iowait: time(s) cpu was idle when system had outstandingdisk i/o request
+%steal: involuntary wait time by cpu while hypervisor was servicing another virtual processor
+%idle: cpu idle time w/ no outstanding disk i/o request
+Disk utilization section (2nd part)
+tps: transfers per second issued to device</description>
+    </item>
+    <item>
+      <title>Keyboard Shortcuts</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/keyboard_shortcuts/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/keyboard_shortcuts/</guid>
+      <description>https://help.gnome.org/users/gnome-help/stable/shell-keyboard-shortcuts.html.en
+https://www.howtogeek.com/41418/how-to-be-more-productive-in-ubuntu-using-keyboard-shortcuts/</description>
+    </item>
+    <item>
+      <title>Linux Kernel</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/kernel/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/kernel/</guid>
+      <description>Overview
+Linux systems can be organized into 3 levels of abstraction
+1 Hardware (physical Layer)
+Memory, Hard disks, networking, parts, etc.
+2 Kernel (Kernel Mode)
+- Process and memory management, device communication, system calls, sets up filesystem,etc.
+- Talks to hardware to make sure ut does what processes need it to do
+3 User Space
+- Shell, Programs that you run, graphics, etc.
+Privilege Levels (protection rings)
+Kernel Mode (ring 0)</description>
+    </item>
+    <item>
+      <title>Logging</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/logging/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/logging/</guid>
+      <description>System Logging
+- log data usually kept in /var
+- service called syslog sends info to system logger
+syslog components
+syslogd
+- daemon
+- new distros use rsyslogd
+- waits for event messages and filters them
+- send to file, console, or do nothing with it.
+/var/log/syslog
+- view logs
+syslog
+- manages and sends logs to system logger
+- rsyslog (new version)
+- output found at /var/log/syslog
+- except auth messages</description>
+    </item>
+    <item>
+      <title>ls</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/ls/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/ls/</guid>
+      <description>Options
+-l long listing file type, permissions, link count, owner, group, size, date and time of last modification, and name of the file -a Include hidden files and directories -d listing of the specified directory but hides its contents -h file sizes shown in human-friendly format -t sorted by date and time with the newest file first -r oldest file first (reverse) -R Lists contents of the specified directory and all its subdirectories (recursive listing) Column 1: The first character (hyphen or d) divulges the file type, and the next nine characters (rw-rw-r&amp;ndash;) indicate permissions.</description>
+    </item>
+    <item>
+      <title>Network Troubleshooting</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/network_troubleshooting/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/network_troubleshooting/</guid>
+      <description>ICMP
+- type, code, and checksum fields
+Type 0 - Echo Reply
+Type 3 - Destination unreachable (16 values)
+Type 8 - Echo Request
+Type 11 - Time exceded
+Ping
+$ ping -c 3 www.google.com
+- count 3 times
+Traceroute
+$traceroute
+Netstat
+- displays network connections, routing tables, int info, etc.
+socket (ip and port)
+- interface that allows programs to send and receive data
+Port
+- used to identify which application should send or receive data</description>
+    </item>
+    <item>
+      <title>Networking in Linux</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/network_basics/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/network_basics/</guid>
+      <description>fing install: fing.com/products/development-toolkit
+used to scan network for ip addresses
+view routing table
+$ sudo route -n
+ug: Network is up &amp;amp; gateway is up
+u: Network is up
+Network config
+create an interface and bring it up
+$ ifconfig eth0 192.168.2.1 netmask 255.255.255.0 up
+bring an interface up or down
+$ ifup eth0
+$ ifdown eth0
+IP command
+- Manipulate network stack of system
+show info for all interfaces</description>
+    </item>
+    <item>
+      <title>Open source and Linux Community</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/linux_community_and_a_career_in_open_source/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/linux_community_and_a_career_in_open_source/</guid>
+      <description>Distributions
+Debian
+- dpkg
+- GNU/Linux
+- Ubuntu
+- Rasbian
+Major Open source apllications
+software packages
+Debian, Ubuntu, Linux mint
+- dpkg, apt-get, and apt package managers
+- deb packages
+RedHat, Fedora, Centos
+- rpm, yum, and dnf package managers
+- rpm packages
+Dependencies = auxiliary packages needed by programs
+Individual package files operate on .dpkg and .rpm
+Catalogues (works with)
+- apt get, apt, yum, dnf
+- download new packages and their dependencies</description>
+    </item>
+    <item>
+      <title>Packages and Their Management</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/packages/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/packages/</guid>
+      <description>Software Distribution
+Packages such as internet browsers, text editors, media players, etc. are managed via package managers that install and maintain the software on the system. Packages can be installed using sources code instead of by a package manager.
+Packages are really just lot and lots of files compiled into one.
+The people who write them are called upstream providers. They send updates to package maintainers who get the software into the hands of the users.</description>
+    </item>
+    <item>
+      <title>Process Utilization</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/process_utilization/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/process_utilization/</guid>
+      <description>Tracking Processes: top
+- realtime view of system utilization
+1st line
+- current time - system uptime - # of users logged in - load average
+2nd line
+- tasks running, sleeping, stopped, or zombied
+3rd line
+- us: user cpu time spent running non-niced user processes
+- sy: system cpu time running kernel/ kernel processes
+- ni: nice cpu time spent running niced processes
+- id: cpu idle time %</description>
+    </item>
+    <item>
+      <title>Processes</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/ps_processes/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/ps_processes/</guid>
+      <description>Ps (Processes)
+Processes are the programs that are running on your machine. The are managed by the kernel.
+PID
+ID associated with each process. Assigned in the order that the processes are created.
+$ ps - shows a list of running processes.
+PID: Process ID
+TTY: Controlling terminal associated with the process
+STAT: Process status code
+TIME: Total CPU usage time
+CMD: Name of executable/ command
+$ ps aux
+a - displays all processes running - even by other users</description>
+    </item>
+    <item>
+      <title>Resources for learning Linux</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/linux_resources/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/linux_resources/</guid>
+      <description>Going Down the Linux Rabbit Hole
+Now that I have finished my CCNA, it&amp;rsquo;s time to go down the Linux rabbit hole. I may or may not be getting any Linux certifications. I mostly just want a foundation of basic Linux and bash scripting skills. This will help expand the areas of technology that I am able to work with.
+After searching Reddit and asking professionals on Discord, these are the beginner friendly resources for learning Linux that I came up with.</description>
     </item>
     <item>
       <title>RHCSA Lab Using Vagrant</title>
@@ -62,13 +379,192 @@ Here are my notes from Asghar Gori&amp;rsquo;s RHCSA book. Buy the book or read 
 Chapter 1: Installation Chapter 2: Interaction Chapter 3: File Management Chapter 4: Advanced File Management Chapter 5: Basic User Management Chapter 6: Advanced User Management Chapter 7: The Bash Shell Chapter 8: Process and Task Scheduling Chapter 9: Basic Package Management Chapter 10: Advanced Package Management Chapter 11: Boot, Grub2, Kernel Chapter 12: Sysinit, Logging, Tuning Chapter 16: Networking Chapter 17: Network File System </description>
     </item>
     <item>
+      <title>scp</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/scp_command/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/scp_command/</guid>
+      <description>scp command
+https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
+scp file.txt remote_username@10.</description>
+    </item>
+    <item>
+      <title>Sharing Resources</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/network_sharing/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/network_sharing/</guid>
+      <description>file sharing
+scp (secure copy)
+- uses ssh to copy files to a host on the network
+$ scp myfile.txt username@remotehost.com:/remote/directory
+- copy file to remote host from local host
+$ scp username@remotehost.com:/remote/directory/file.txt /local/directory
+- copy file to local host from remote host
+$ scp -r mydir username@remotehost.com: /remote/directory
+- copy directory to remote host from local host
+rsync
+- can check for data before copying and only copy differences</description>
+    </item>
+    <item>
+      <title>Shell</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/finding_your_way_on_a_linux_system/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/finding_your_way_on_a_linux_system/</guid>
+      <description>Different Linux Shells
+Bourne-again shell (Bash) C shell (csh/tcsh) Korn Shell (ksh) Z shell (zsh) View your system&amp;rsquo;s hostname by running the hostname command:
+hostname2 types of commands
+- internal (~30 built in commands) (builtins)
+- External
+- reside in individual files
+- usually binary programs or scripts
+- shellusys PATH variable to find the command (the executable file)
+Quoting
+Double quotes
+- text in between is regular characters
+- except $ \ `</description>
+    </item>
+    <item>
+      <title>Skills that go with Bash Scripting</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/skills_that_go_with_bash_scripting/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/skills_that_go_with_bash_scripting/</guid>
+      <description>What are supplementary skills that go well with Bash Scripting for landing a job in Systems Administration?
+I went through Dozens of job listings that mentioned Bash Scripting. I then tallied up devices/ vendors, certifications, and technologies mentioned. I left out anything that wasn&amp;rsquo;t mentioned more than twice.
+The point here is to target the most sought after technologies and skills by employers. And lastly, I left out soft skills and any job that wasn&amp;rsquo;t a Systems Administration specific role.</description>
+    </item>
+    <item>
+      <title>Switching to Linux</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/switching_to_linux/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/switching_to_linux/</guid>
+      <description>Finding program replacements
+Office
+Kindle
+Cloud reader:
+https://read.amazon.com/kindle-library
+Calibre:
+sudo -v &amp;amp;&amp;amp; wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+Virtual box: https://linuxhint.com/install-virtualbox-linux-mint/
+$ sudo apt install virtualbox virtualbox-ext-pack
+https://linuxhint.com/install-virtualbox-linux-mint/
+Onedrive replacement (nextcloud)
+https://blog.containerize.com/2021/06/18/how-to-install-nextcloud-with-apache-on-ubuntu-server/
+You can access microsoft products at portal.office.com
+Selecting a distribution
+https://distrochooser.de/en&amp;quot;&amp;gt;https://distrochooser.de/en
+Create a boot disk
+https://linuxmint-installation-guide.readthedocs.io/en/latest/burn.html
+Download Iso image: https://www.linuxmint.com/download.php
+Download rufus: https://rufus.ie/en/#google_vignette
+Find a usb drive: 8 gigs should be enough
+Instructions: https://linuxhint.com/installing_linux_mint_20_from_usb/
+getting drivers for your current network card</description>
+    </item>
+    <item>
+      <title>Symbols in Bash</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/the_power_of_the_linux_command_line/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/the_power_of_the_linux_command_line/</guid>
+      <description>3.1 Archiving Files on the Command Line
+2 types of compression
+lossless
+- can be decompressed back to original form
+- bzip2, gzip, and xz
+- file compressed with one tool can&amp;rsquo;t be decompressed by another
+lossy
+- cannot be recovered
+- used for images, video, and audio
+Archiving
+- tools that are used to bundle files and directories into a single file.
+- can install zip and unzip for working with windows files</description>
+    </item>
+    <item>
+      <title>Tar Stuff</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/tar/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/tar/</guid>
+      <description>#tar -c creates tarball -f specifies tarball name -p Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user -r appends files to the end of an extant uncompressed tarball -t List contents of a tarball -u Appends files to the end of an extant uncompressed tarball provided the specified files being added are newer -v verbose -x Extracts or restores from a tarball -P override the removing of &amp;ldquo;/&amp;rdquo; -j Compress tarball with bzip2 -z Compress tarball with gzip</description>
+    </item>
+    <item>
+      <title>Text Editors</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/text_fu/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/text_fu/</guid>
+      <description>stdout (Standard Out)
+I/O (input/output streams)
+$ echo Hello World &amp;gt; Peanuts.txt
+Writes Hello World to a new file called Peanuts.txt
+Processes use I/O streams to receive input and return output.
+echo takes the input of the keyboard and returns it as output to the screen. &amp;gt; Is an I/O redirection operator that changes where the standard output goes. if the file already exist the contents will be overwritten.
+$ echo Hello World &amp;raquo; Peanuts.</description>
+    </item>
+    <item>
+      <title>The Linux Filesystem</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/the_filesystem/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/the_filesystem/</guid>
+      <description>Filesystem Hierarchy
+$ ls -l /
+/ - The root directory of the entire filesystem hierarchy, everything is nested under this directory.
+/bin - Essential ready-to-run programs (binaries), includes the most basic commands such as ls and cp.
+/boot - Contains kernal boot loader files.
+/dev - Device files.
+/etc - Core system configuration directory, should hold only configuration files and not any binaries.
+/home - Personal directories for users</description>
+    </item>
+    <item>
+      <title>User Management</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/user_management/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/user_management/</guid>
+      <description>Users and groups
+Exist soley for access and permissions
+home/ username : where each user&amp;rsquo;s specific files get stored
+can vary in different distros
+user ids (UID) are used to manage users. The system identifies user by UID.
+Groups are also used to manage permissions
+sets of users with permissions set by that group
+system identifies groups by group ID (GID)
+users can be humans or system daemons that run processes to keep the system running</description>
+    </item>
+    <item>
+      <title>Windows Subsystem for Linux</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/wsl2/</link>
+      <pubDate>Mon, 06 Nov 2023 06:20:36 -0700</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/wsl2/</guid>
+      <description>Add a permanent home alias in WSL2 Vim
+vim ~/.bashrc alias home=&amp;#39;cd /mnt/c/Users/david.thomas$&amp;#39; &amp;lt;--- Add this line to file, not a command. $ source ~/.bashrcYank entire file to clipboard in vim sudo apt install vim-gtk3 # open vim :%y+Create new user with . in the name add user --force-badname david.thomasand add them to sudoer file
+sudo usermod -aG sudo david.thomasCreate and edit- /etc/wsl.conf Ceate a /etc/wsl.conf with the following setting:</description>
+    </item>
+    <item>
       <title>chroot</title>
       <link>http://perfectdarkmode.com/linux/misc_linux/chroot/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://perfectdarkmode.com/linux/misc_linux/chroot/</guid>
-      <description>title = &amp;ldquo;Chroot&amp;rdquo; date = 2023-11-06T06:20:36-07:00 draft = false alwaysopen = false
-Notes Jail similar to a virtual machine. You can only access what is in the jail. Programs must be available within the jail (in /jail/bin) To get a chroot shell, copy /bin and /lib to the chroot environment folder:
+      <description>Notes Jail similar to a virtual machine. You can only access what is in the jail. Programs must be available within the jail (in /jail/bin) To get a chroot shell, copy /bin and /lib to the chroot environment folder:
 sudo mkdir /jail/bin sudo mkdir /jail/lib sudo mkdir lib64 sudo cp -r /bin/* /jail/bin sudo cp -r /lib/* /jail/lib sudo cp -r /lib64/* /jail/lib64Enter chroot sudo chroot /jail</description>
+    </item>
+    <item>
+      <title>Container Stuff</title>
+      <link>http://perfectdarkmode.com/linux/containers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://perfectdarkmode.com/linux/containers/</guid>
+      <description>Why you don&amp;rsquo;t run all processes on the same OS
+Blast radius Dependency deconfliction Different versions of programs emulate hardware use different processing architectures. Why use containers instead of vms
+Less CPU Less overhead Do you use Podman more? Does not use Docker Redhat doesn&amp;rsquo;t support Docker (not in repos)
+podman feature complete with docker including docker compose kubernetes does not work with docker?
+docker runs a daemon as root on system</description>
+    </item>
+    <item>
+      <title>Run Command as Another User</title>
+      <link>http://perfectdarkmode.com/linux/misc_linux/run_command_as_another_user/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://perfectdarkmode.com/linux/misc_linux/run_command_as_another_user/</guid>
+      <description>To invoke a login shell using sudo just use -i. When command is not specified you&amp;rsquo;ll get a login shell prompt, otherwise you&amp;rsquo;ll get the output of your command.
+Example (login shell):
+sudo -iExample (with a specified user):
+sudo -i -u userExample (with a command):
+sudo -i -u user whoamiExample (print user&amp;rsquo;s $HOME):
+sudo -i -u user echo \$HOMENote: The backslash character ensures that the dollar sign reaches the target user&amp;rsquo;s shell and is not interpreted in the calling user&amp;rsquo;s shell.</description>
     </item>
   </channel>
 </rss>

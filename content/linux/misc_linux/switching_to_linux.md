@@ -1,7 +1,7 @@
 ---
-title: "Switching to Linux"
+title: Switching to Linux
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Finding program replacements
 

@@ -1,7 +1,7 @@
 ---
-title: "Tar Stuff"
+title: Tar Stuff
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 #tar
 **-c** creates tarball

@@ -1,7 +1,7 @@
 ---
-title: "Consoling in on Linux"
+title: Consoling in on Linux
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Consoling in on Linux
 Plug console cable in

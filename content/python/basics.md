@@ -1,3 +1,7 @@
+---
+draft: false
+title: Python Basics
+---
 
 Expressions consist of values (such as 2) and operators (such as +), and they can always evaluate (that is, reduce) down to a single value.
 

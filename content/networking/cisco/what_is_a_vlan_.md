@@ -1,7 +1,7 @@
 ---
-title: "What is a VLAN?"
+title: What is a VLAN?
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 
 VLANs create smaller broadcast domains. Why create smaller broadcast domains?

@@ -22,21 +22,21 @@ Understand systemd, units, and targets Analyze service and target unit configura
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1711969949" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711972135" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1711969949" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711969949" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1711969949" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711969949" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711969949" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1711969949" rel="stylesheet">
-    <link href="/css/fonts.css?1711969949" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711969949" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1711969949" rel="stylesheet">
-    <link href="/css/theme-git.css?1711969949" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1711969949" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1711969949" rel="stylesheet">
-    <link href="/css/print.css?1711969949" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1711969949" rel="stylesheet">
-    <script src="/js/url.js?1711969949"></script>
-    <script src="/js/variant.js?1711969949"></script>
+    <link href="/css/fontawesome-all.min.css?1711972135" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711972135" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711972135" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711972135" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711972135" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711972135" rel="stylesheet">
+    <link href="/css/fonts.css?1711972135" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711972135" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711972135" rel="stylesheet">
+    <link href="/css/theme-git.css?1711972135" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711972135" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711972135" rel="stylesheet">
+    <link href="/css/print.css?1711972135" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711972135" rel="stylesheet">
+    <script src="/js/url.js?1711972135"></script>
+    <script src="/js/variant.js?1711972135"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -73,7 +73,13 @@ Understand systemd, units, and targets Analyze service and target unit configura
               <div class="topbar-content">
                 <div class="topbar-content-wrapper"><nav class="TableOfContents">
   <ul>
-    <li><a href="#calibre_pb_0">Chapter 12</a></li>
+    <li><a href="#chapter-12">Chapter 12</a>
+      <ul>
+        <li><a href="#logging-custom-messages">Logging Custom Messages</a></li>
+        <li><a href="#the-systemd-journal">The systemd Journal</a></li>
+        <li><a href="#retrieving-and-viewing-messages">Retrieving and Viewing Messages</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
                 </div>
@@ -113,7 +119,7 @@ Understand systemd, units, and targets Analyze service and target unit configura
             </header>
 <h1 id=""></h1>
 
-<h2 id="calibre_pb_0" class="calibre11">Chapter 12</h2>
+<h2 id="chapter-12">Chapter 12</h2>
 <p><strong>System Initialization, Message Logging, and System Tuning</strong></p>
 <p>This chapter describes the following major topics:</p>
 <ul>
@@ -142,7 +148,7 @@ Configure network services to start automatically at boot
 Manage tuning profiles
 Locate and interpret system log files and journals
 Preserve system journals</p>
-<p>Systemd is the</p>
+<p>Systemd</p>
 <ul>
 <li>default system initialization and service management scheme.</li>
 <li>boots the system into one of several predefined targets</li>
@@ -155,8 +161,7 @@ configuration files that define the default and custom locations to direct the l
 configure rotation settings. The
 system log file</p>
 <ul>
-<li>records custom messages sent to it. systemd includes a service for viewing and managing system
-logs in addition to the traditional logging service. This service
+<li>records custom messages sent to it. systemd includes a service for viewing and managing system logs in addition to the traditional logging service. This service
 maintains a log of runtime activities for faster retrieval and can be
 configured to store the information permanently.</li>
 </ul>
@@ -175,16 +180,22 @@ supports snapshotting of system states, tracks processes using control
 groups, and automatically maintains mount points. systemd is the first
 process with PID 1 that spawns at boot and it is the last process that
 terminates at shutdown.</p>
-<p><a href="#R-image-6422661fd01ed5d1a66ef5b62da1ed16" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6422661fd01ed5d1a66ef5b62da1ed16"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} systemd spawns several processes during a
-service startup. It places the processes in a private hierarchy composed
-of <em>control groups</em> (or <em>cgroups</em> for short) to organize processes for
-the purposes of monitoring and controlling system resources such as
-processor, memory, network bandwidth, and disk I/O. This includes
-limiting, isolating, and prioritizing their usage of resources. This way
+<p>systemd</p>
+<ul>
+<li>spawns several processes during a service startup. It</li>
+<li>places the processes in a private hierarchy composed of <em>control groups</em> (or <em>cgroups</em> for short) to organize processes for the purposes of monitoring and controlling system resources such as
+<ul>
+<li>processor,</li>
+<li>memory,</li>
+<li>network bandwidth, and</li>
+<li>disk I/O. This
+includes limiting, isolating, and prioritizing their usage of resources. This way
 resources can be distributed among users, databases, and applications
 based on need and priority, resulting in overall improved system
-performance.</p>
+performance.</li>
+</ul>
+</li>
+</ul>
 <p>In order to benefit from parallelism, systemd initiates distinct
 services concurrently, taking advantage of multiple CPU cores and other
 compute resources. To that end, systemd creates sockets for all enabled
@@ -198,8 +209,7 @@ systemd creates sockets first, starts daemons next, and caches any
 client requests to daemons that have not yet started in the socket
 buffer. It fills the pending client requests when the daemons they were
 awaiting come online.</p>
-<p><a href="#R-image-6b3f27907c45cbe2234b97e3df574dd1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6b3f27907c45cbe2234b97e3df574dd1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Socket is a communication method that
+<p>Socket is a communication method that
 allows a single process to talk to another process on the same or remote
 system.</p>
 <p>During the operational state, systemd maintains the sockets and uses
@@ -212,8 +222,7 @@ systemd for activation are device-based and path-based, with the former
 starting the service when a specific hardware type such as USB is
 plugged in, and the latter starting the service when a particular file
 or directory alters its state.</p>
-<p><a href="#R-image-05df076d9f8165ad53c24a0cf37b29c3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-05df076d9f8165ad53c24a0cf37b29c3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} D-Bus is another communication method
+<p>D-Bus is another communication method
 that allows multiple services running in parallel on a system to talk to
 one another on the same or remote system.</p>
 <p>With on-demand activation, systemd defers the startup of
@@ -229,7 +238,7 @@ temporarily mounted on their normal mount points, and as soon as the
 checks on the file systems are finished, systemd remounts them using
 their standard devices. Parallelism in file system mounts does not
 affect the root and virtual file systems.</p>
-<p><strong>[Units]{#part0024_split_001.html#id_330 .calibre10}</strong></p>
+<p>Units</p>
 <p><em>Units</em> are systemd objects used for organizing boot and maintenance
 tasks, such as hardware initialization, socket creation, file system
 mounts, and service startups. Unit configuration is stored in their
@@ -249,15 +258,14 @@ directory, and (2) user unit files that are user-defined and stored in
 the **etc<em>systemd/user</em> directory (run <strong>ls -l</strong> on both directories to
 list their contents). This information can be vetted with the
 <em>pkg-config</em> command:</p>
-<p><a href="#R-image-ec74b95828a02282abf9ee387d20bf9c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00587.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ec74b95828a02282abf9ee387d20bf9c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00587.jpeg"></a></p>
+<p><a href="#R-image-05be977c526689c70e8646a00e837f3a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00587.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-05be977c526689c70e8646a00e837f3a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00587.jpeg"></a></p>
 <p>Furthermore, there are additional system units that are created at
 runtime and destroyed when they are no longer needed. They are located
 in the **run<em>systemd/system</em> directory. These runtime unit files take
 precedence over the system unit files, and the user unit files take
 priority over the runtime files.</p>
-<p><a href="#R-image-d33aef58e2ee879b83b6c42e9d978dce" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d33aef58e2ee879b83b6c42e9d978dce"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Unit configuration files are a direct
+<p>Unit configuration files are a direct
 replacement of the initialization scripts found in the
 **etc<em>rc.d/init.d</em> directory in older RHEL releases.</p>
 <p>systemd includes 11 unit types, which are described in <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_734">Table
@@ -277,8 +285,7 @@ Swap            Encapsulates swap partitions
 Target          Defines logical grouping of units
 Timer           Useful for triggering activation of other units based on timers</p>
 <hr>
-<p><strong>[Table]{#part0024_split_001.html#id_734} 12-1 systemd Unit Types</strong>
-:::</p>
+<p>Tablesystemd Unit Types</p>
 <p>Unit files contain common and specific configuration elements. Common
 elements fall under the [Unit] and [Install] sections, and comprise
 the description, documentation location, dependency information,
@@ -287,8 +294,8 @@ of unit. The unit-specific configuration data is located under the unit
 type section: [Service] for the service unit type, [Socket] for the
 socket unit type, and so forth. A sample unit file for <em>sshd.service</em> is
 shown below from the **usr<em>lib/systemd/system</em> directory:</p>
-<p><a href="#R-image-16e4c4ecd626de27cf1e605faf469b0e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00588.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-16e4c4ecd626de27cf1e605faf469b0e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00588.jpeg"></a></p>
+<p><a href="#R-image-922cd940c317b0fd75b50af3e218da7f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00588.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-922cd940c317b0fd75b50af3e218da7f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00588.jpeg"></a></p>
 <p>Units can have dependency relationships among themselves based on a
 sequence (ordering) or a requirement. A sequence outlines one or more
 actions that need to be taken before or after the activation of a unit
@@ -306,7 +313,7 @@ systemd unit files.</p>
 unit configuration files. systemd generally sets and maintains
 inter-service dependencies automatically; however, this can be done
 manually if needed.</p>
-<p><strong>[Targets]{#part0024_split_001.html#id_331 .calibre10}</strong></p>
+<p>Targets</p>
 <p><em>Targets</em> are simply logical collections of units. They are a special
 systemd unit type with the .target file extension. They share the
 directory locations with other unit configuration files. Targets are
@@ -314,9 +321,8 @@ used to execute a series of units. This is typically true for booting
 the system to a desired operational run level with all the required
 services up and running. Some targets inherit services from other
 targets and add their own to them. systemd includes several predefined
-targets that are described in <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_735">Table
-12-2</a>{.calibre5}.</p>
-<p>::: c49</p>
+targets that are described in Table
+12-2</p>
 <hr>
 <p><strong>Target</strong>   <strong>Description</strong>
 halt         Shuts down and halts the system
@@ -330,28 +336,26 @@ reboot       Shuts down and reboots the system
 default      A special soft link that points to the default system boot target (multi-user.target or graphical.target)
 hibernate    Puts the system into hibernation by saving the running state of the system on the hard disk and powering it off. When powered up, the system restores from its saved state rather than booting up.</p>
 <hr>
-<p><strong>[Table]{#part0024_split_001.html#id_735} 12-2 systemd Targets</strong>
-:::</p>
+<p>systemd Targets</p>
 <p>Target unit files contain all information under the [Unit] section,
 and it comprises the description, documentation location, and dependency
 and conflict information. A sample file for the <em>graphical.target</em>
 target is shown below from the **usr<em>lib/systemd/system</em> directory:</p>
-<p><a href="#R-image-d5ca4f71d63223c671e6277888a2d3d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00589.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d5ca4f71d63223c671e6277888a2d3d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00589.jpeg"></a></p>
+<p><a href="#R-image-cf2f16ec1d913b19401c9350e898fdd5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00589.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cf2f16ec1d913b19401c9350e898fdd5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00589.jpeg"></a></p>
 <p>The file shows four dependencies: Requires, Wants, Conflicts, and After.
 It suggests that the system must have already accomplished the
 rescue.service, rescue.target, multi-user.target, and
 display-manager.service levels in order to be declared running in the
 graphical target. Run <strong>man systemd.target</strong> for details on systemd
 targets.</p>
-<p><strong>[The]{#part0024_split_001.html#id_332 .calibre10} systemctl Command</strong></p>
+<p>Thesystemctl Command**</p>
 <p>systemd comes with a set of management tools for querying and
 controlling operations. The primary tool for interaction in this command
 suite is <em>systemctl</em>. The <em>systemctl</em> command performs administrative
 functions and supports plentiful subcommands and flags. <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_736">Table
 12-3</a>{.calibre5} lists and describes
 some common operations.</p>
-<p>::: c49</p>
 <hr>
 <p><strong>Subcommand</strong>                <strong>Description</strong>
 daemon-reload                 Re-reads and reloads all unit configuration files and recreates the entire user dependency tree.
@@ -374,12 +378,10 @@ show                          Shows unit properties
 start (stop)                  Starts (stops) a unit
 status                        Presents the unit status information</p>
 <hr>
-<p><strong>[Table]{#part0024_split_001.html#id_736} 12-3 systemctl Subcommands</strong>
-:::</p>
+<p>Tablesystemctl Subcommands**</p>
 <p>You will use a majority of these subcommands with <em>systemctl</em> going
 forward. Refer to the manual pages of the command for more details.</p>
-<p><strong>[Listing]{#part0024_split_001.html#id_333 .calibre10} and Viewing
-Units</strong></p>
+<p>Listing and Viewing Units</p>
 <p>The <em>systemctl</em> command is used to view and manage all types of units.
 The following examples demonstrate common operations pertaining to
 viewing and querying units.</p>
@@ -387,8 +389,8 @@ viewing and querying units.</p>
 status and description, run the <em>systemctl</em> command without any options
 or subcommands. A long output is generated. The graphic below shows a
 few starting and concluding lines followed by a brief explanation.</p>
-<p><a href="#R-image-80fee3b917248f03f6e27ada9a31dffa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00590.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-80fee3b917248f03f6e27ada9a31dffa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00590.jpeg"></a></p>
+<p><a href="#R-image-ced734dd6fa6969a461b166ef4420522" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00590.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ced734dd6fa6969a461b166ef4420522"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00590.jpeg"></a></p>
 <p>Here is a breakdown of the graphic above: the UNIT column shows the name
 of the unit and its location in the tree, the LOAD column reflects
 whether the unit configuration file was properly loaded (other
@@ -401,33 +403,33 @@ unit&rsquo;s content and functionality.</p>
 <p>By default, the <em>systemctl</em> command lists only the active units. You can
 use the --all option to include the inactive units too.</p>
 <p>To list all (--all) active and inactive units of type (-t) socket:</p>
-<p><a href="#R-image-a9ac370e5df8aff156c3f95e1f11fe43" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00591.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a9ac370e5df8aff156c3f95e1f11fe43"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00591.jpeg"></a></p>
+<p><a href="#R-image-3f96766d815ebdb26f84f05e857d43cd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00591.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3f96766d815ebdb26f84f05e857d43cd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00591.jpeg"></a></p>
 <p>To list all units of type socket (column 2) currently loaded in memory
 and the service they activate (column 3), sorted by the listening
 address (column 1):</p>
-<p><a href="#R-image-04b9376036d92d8ea15f29a1d17e841d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00592.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-04b9376036d92d8ea15f29a1d17e841d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00592.jpeg"></a></p>
+<p><a href="#R-image-f1bf355856445e287e2ba3e71bf3d516" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00592.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f1bf355856445e287e2ba3e71bf3d516"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00592.jpeg"></a></p>
 <p>To list all unit files (column 1) installed on the system and their
 current state (column 2). This will generate a long list of units in the
 output. The following only shows a selection.</p>
-<p><a href="#R-image-c4ec389c783d21b1a149d6bcf1db0a99" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00593.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c4ec389c783d21b1a149d6bcf1db0a99"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00593.jpeg"></a></p>
+<p><a href="#R-image-b79967d35207862d281fe8ba3a27bf56" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00593.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b79967d35207862d281fe8ba3a27bf56"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00593.jpeg"></a></p>
 <p>To list all units that failed (--failed) to start at the last system
 boot:</p>
-<p><a href="#R-image-964116df974621c7d366ddd75858feb5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00594.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-964116df974621c7d366ddd75858feb5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00594.jpeg"></a></p>
+<p><a href="#R-image-13c399ab387d39d15c58361ff9669b80" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00594.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-13c399ab387d39d15c58361ff9669b80"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00594.jpeg"></a></p>
 <p>To list the hierarchy of all dependencies (required and wanted units)
 for the current default target:</p>
-<p><a href="#R-image-a2b06ba5cf39865c1e905e4a8a2f7626" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00595.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a2b06ba5cf39865c1e905e4a8a2f7626"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00595.jpeg"></a></p>
+<p><a href="#R-image-41b5e51428c7010f012d80b66d5df21c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00595.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-41b5e51428c7010f012d80b66d5df21c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00595.jpeg"></a></p>
 <p>To list the hierarchy of all dependencies (required and wanted units)
 for a specific unit such as <em>atd.service</em>:</p>
-<p><a href="#R-image-d5df90ade3e410369f5dc5381794bc18" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00596.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d5df90ade3e410369f5dc5381794bc18"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00596.jpeg"></a></p>
+<p><a href="#R-image-675f29d28851d709868a2fd274d48da3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00596.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-675f29d28851d709868a2fd274d48da3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00596.jpeg"></a></p>
 <p>There are other listing subcommands and additional flags available that
 can be used to produce a variety of reports.</p>
-<p><strong>[Managing]{#part0024_split_001.html#id_334 .calibre10} Service Units</strong></p>
+<p>Managing Service Units</p>
 <p>The <em>systemctl</em> command offers several subcommands to manage service
 units, including starting, stopping, restarting, and checking their
 status. These and other management operations are summarized in <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_736">Table
@@ -435,8 +437,8 @@ status. These and other management operations are summarized in <a href="/linux/
 examples demonstrate their use on a service unit called <em>atd</em>.</p>
 <p>To check the current operational status and other details for the <em>atd</em>
 service:</p>
-<p><a href="#R-image-4b3beac0dcbdc3c825f9a5aa5045e7cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00597.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4b3beac0dcbdc3c825f9a5aa5045e7cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00597.jpeg"></a></p>
+<p><a href="#R-image-6d9e9d969d687df947ee0ba698de47c4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00597.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6d9e9d969d687df947ee0ba698de47c4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00597.jpeg"></a></p>
 <p>The above output reveals a lot of information about the <em>atd</em> service.
 On line 1, it shows the service description (read from the
 **usr<em>lib/systemd/system/atd.service</em> file). Line 2 illustrates the load
@@ -461,45 +463,45 @@ service. Possible states include:</p>
 information.</p>
 <p>To disable the <em>atd</em> service from autostarting at the next system
 reboot:</p>
-<p><a href="#R-image-d16702883e2150ef080b5224d79652bf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00598.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d16702883e2150ef080b5224d79652bf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00598.jpeg"></a></p>
+<p><a href="#R-image-0794be25870afff75b3993c5f89510fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00598.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0794be25870afff75b3993c5f89510fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00598.jpeg"></a></p>
 <p>To re-enable <em>atd</em> to autostart at the next system reboot:</p>
-<p><a href="#R-image-0ece884470dca6846288eb2958c108f2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00599.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0ece884470dca6846288eb2958c108f2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00599.jpeg"></a></p>
+<p><a href="#R-image-8a4208f200d0176bb3d65ef2926865cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00599.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8a4208f200d0176bb3d65ef2926865cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00599.jpeg"></a></p>
 <p>To check whether <em>atd</em> is set to autostart at the next system reboot:</p>
-<p><a href="#R-image-24cb37906179a135f19b561140956d95" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00600.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-24cb37906179a135f19b561140956d95"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00600.jpeg"></a></p>
+<p><a href="#R-image-df5b8bad412ac5f24c4b7d3980e4eb65" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00600.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-df5b8bad412ac5f24c4b7d3980e4eb65"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00600.jpeg"></a></p>
 <p>To check whether the <em>atd</em> service is running:</p>
-<p><a href="#R-image-728c863f76a3936a44e491431942b3b0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00601.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-728c863f76a3936a44e491431942b3b0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00601.jpeg"></a></p>
+<p><a href="#R-image-c853ae75fa830b447eeb3a0162db6b3d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00601.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c853ae75fa830b447eeb3a0162db6b3d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00601.jpeg"></a></p>
 <p>To stop and restart <em>atd</em>, run either of the following:</p>
-<p><a href="#R-image-00888a970abc18c1c0a620e933d277b4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00602.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-00888a970abc18c1c0a620e933d277b4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00602.jpeg"></a></p>
+<p><a href="#R-image-897a7782138f1c8d35daa82ce3d3df9d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00602.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-897a7782138f1c8d35daa82ce3d3df9d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00602.jpeg"></a></p>
 <p>To show the details of the <em>atd</em> service:</p>
-<p><a href="#R-image-779617b0dab74ccb4f8868f838063c98" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00603.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-779617b0dab74ccb4f8868f838063c98"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00603.jpeg"></a></p>
+<p><a href="#R-image-6938a66093d27b18f4e1021dddd81d84" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00603.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6938a66093d27b18f4e1021dddd81d84"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00603.jpeg"></a></p>
 <p>To prohibit <em>atd</em> from being enabled or disabled:</p>
-<p><a href="#R-image-f06272c80148a335d3c80ee9fca4ef63" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00604.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f06272c80148a335d3c80ee9fca4ef63"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00604.jpeg"></a></p>
+<p><a href="#R-image-12367fb4e0f48acd8b8f009747ab76b2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00604.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-12367fb4e0f48acd8b8f009747ab76b2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00604.jpeg"></a></p>
 <p>Try disabling or enabling <em>atd</em> and observe the effect of the previous
 command:</p>
-<p><a href="#R-image-fc296d516df4344bfeb4f6c55fe0e18d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00605.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fc296d516df4344bfeb4f6c55fe0e18d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00605.jpeg"></a></p>
+<p><a href="#R-image-68873fc5b1b4a06350b6a642dcdff428" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00605.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-68873fc5b1b4a06350b6a642dcdff428"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00605.jpeg"></a></p>
 <p>Reverse the effect of the <em>mask</em> subcommand and try disable and enable
 operations:</p>
-<p><a href="#R-image-18a52490bd173a0ee8f1db684166d055" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00606.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-18a52490bd173a0ee8f1db684166d055"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00606.jpeg"></a></p>
+<p><a href="#R-image-514921663f0aafb0386a7bd7f154c2fc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00606.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-514921663f0aafb0386a7bd7f154c2fc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00606.jpeg"></a></p>
 <p>Notice that the <em>unmask</em> subcommand has removed the restriction that was
 placed on the <em>atd</em> service.</p>
-<p><strong>[Managing]{#part0024_split_001.html#id_335 .calibre10} Target Units</strong></p>
+<p>ManagingTarget Units</p>
 <p>The <em>systemctl</em> command is also used to manage the target units. It can
 be used to view or change the default boot target, switch from one
 running target into another, and so on. These operations are briefed in
 <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_736">Table 12-3</a>{.calibre5}. Let&rsquo;s look at
 some examples.</p>
 <p>To view what units of type (-t) target are currently loaded and active:</p>
-<p><a href="#R-image-090c4e573233305d67ff2a406aa368ea" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00607.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-090c4e573233305d67ff2a406aa368ea"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00607.jpeg"></a></p>
+<p><a href="#R-image-c0128352c4d32b09033414f97365d5e3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00607.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c0128352c4d32b09033414f97365d5e3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00607.jpeg"></a></p>
 <p>For each target unit, the above output returns the target unit&rsquo;s name,
 load state, high-level and low-level activation states, and a short
 description. Add the --all option to the above to see all loaded
@@ -509,14 +511,13 @@ targets in either active or inactive state.</p>
 and to set it. Let&rsquo;s use the <em>get-default</em> and <em>set-default</em> subcommands
 with <em>systemctl</em> to perform these operations.</p>
 <p>To check the current default boot target:</p>
-<p><a href="#R-image-f807ce62ae631dd4f269db9d44c9969a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00608.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f807ce62ae631dd4f269db9d44c9969a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00608.jpeg"></a></p>
-<p>[<strong>EXAM TIP:</strong>]{.c56} You may have to modify the default boot target
-persistently.</p>
+<p><a href="#R-image-4667ac5178a474c7e5fce7a0ff49b9f7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00608.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4667ac5178a474c7e5fce7a0ff49b9f7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00608.jpeg"></a></p>
+<p>You may have to modify the default boot target persistently for the exam.</p>
 <p>To change the current default boot target from graphical.target to
 multi-user.target:</p>
-<p><a href="#R-image-8d04479e347318b6385e4e2d9f2bdd16" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00609.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8d04479e347318b6385e4e2d9f2bdd16"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00609.jpeg"></a></p>
+<p><a href="#R-image-f8f3bb59d00d14fae16295f25fab9a39" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00609.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f8f3bb59d00d14fae16295f25fab9a39"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00609.jpeg"></a></p>
 <p>The command simply removes the existing symlink (<em>default.target</em>)
 pointing to the old boot target and replaces it with the new target file
 path.</p>
@@ -534,32 +535,32 @@ hibernate is suitable for mobile devices. Consider the following
 examples that demonstrate switching targets.</p>
 <p>The current default target on <em>server1</em> is graphical. To switch into
 multi-user, use the <em>isolate</em> subcommand with <em>systemctl</em>:</p>
-<p><a href="#R-image-09789408a389888df9f5a671044b6252" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00610.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-09789408a389888df9f5a671044b6252"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00610.jpeg"></a></p>
+<p><a href="#R-image-ae08737055e5911cb71515e42054c5ff" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00610.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ae08737055e5911cb71515e42054c5ff"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00610.jpeg"></a></p>
 <p>This should stop the graphical service on the system and display the
 text-based console login screen, as shown below:</p>
-<p><a href="#R-image-f964722c8280c161b53735a558e1d3f4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00611.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f964722c8280c161b53735a558e1d3f4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00611.jpeg"></a></p>
+<p><a href="#R-image-c6977144b5e1b6f61b935acdcdd72e4b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00611.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c6977144b5e1b6f61b935acdcdd72e4b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00611.jpeg"></a></p>
 <p>Type in a username such as <em>user1</em> and enter the password to log in:</p>
-<p><a href="#R-image-e088bcc5e20fadceffa6c0352e38e0e2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00612.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e088bcc5e20fadceffa6c0352e38e0e2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00612.jpeg"></a></p>
+<p><a href="#R-image-22ace58694100d3c87bfa2144b1ab5c8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00612.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-22ace58694100d3c87bfa2144b1ab5c8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00612.jpeg"></a></p>
 <p>To return to the graphical target:</p>
-<p><a href="#R-image-8fdd8561f2235ec3833f65c1a227b621" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00613.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8fdd8561f2235ec3833f65c1a227b621"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00613.jpeg"></a></p>
+<p><a href="#R-image-c96cf0443de9d19dce430413be7b4eb2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00613.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c96cf0443de9d19dce430413be7b4eb2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00613.jpeg"></a></p>
 <p>The graphical login screen should appear shortly and you should be able
 to log back in.</p>
 <p>To shut down the system and power it off, use the following or simply
 run the <em>poweroff</em> command:</p>
-<p><a href="#R-image-ec797929c4d764abb6faaf8219077cc4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00614.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ec797929c4d764abb6faaf8219077cc4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00614.jpeg"></a></p>
+<p><a href="#R-image-bee02c21fd80145a7b9b25f387a9d1a7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00614.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bee02c21fd80145a7b9b25f387a9d1a7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00614.jpeg"></a></p>
 <p>To shut down and reboot the system, use the following or simply run the
 <em>reboot</em> command:</p>
-<p><a href="#R-image-2132503cb02d3803c70770175bd45895" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00615.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2132503cb02d3803c70770175bd45895"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00615.jpeg"></a></p>
+<p><a href="#R-image-355b508c58db6bd7b448c92c0cfcac83" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00615.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-355b508c58db6bd7b448c92c0cfcac83"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00615.jpeg"></a></p>
 <p>The <em>halt</em>, <em>poweroff</em>, and <em>reboot</em> commands are mere symbolic links to
 the <em>systemctl</em> command, as the following long listing suggests:</p>
-<p><a href="#R-image-102788f5cf7c57509f3a00faf453134b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00616.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-102788f5cf7c57509f3a00faf453134b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00616.jpeg"></a></p>
+<p><a href="#R-image-a88e82175896950b43f0199605f6da0c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00616.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a88e82175896950b43f0199605f6da0c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00616.jpeg"></a></p>
 <p>The <em>halt</em>, <em>poweroff</em>, and <em>reboot</em> commands are available in RHEL 8
 for compatibility reasons only. It is recommended to use the <em>systemctl</em>
 command instead when switching system states.</p>
@@ -570,7 +571,7 @@ message to all logged-in users, blocks new user login attempts, waits
 for the specified amount of time for users to save their work and log
 off, stops the services, and eventually shut the system down to the
 specified target state.</p>
-<p><strong>[System]{#part0024_split_001.html#id_336 .calibre10} Logging</strong></p>
+<p>System Logging</p>
 <p><em>System logging</em> (<em>syslog</em> for short) is one of the most rudimentary
 elements of an operating system. Its purpose is to capture messages
 generated by the kernel, daemons, commands, user activities,
@@ -598,14 +599,13 @@ appropriate.</p>
 <em>rsyslogd.pid</em> is created in the <em>/run</em> directory to save the PID. The
 reason this file is created and stores the PID is to prevent the
 initiation of multiple instances of this daemon.</p>
-<p><strong>[The]{#part0024_split_001.html#id_337 .calibre10} Syslog Configuration
-File</strong></p>
+<p>TheSyslog Configuration File</p>
 <p>The <em>rsyslog.conf</em> is the primary syslog configuration file located in
 the <em>/etc</em> directory . The default uncommented line entries from the
 file are shown below and explained thereafter. Section headings have
 been added to separate the directives in each section.</p>
-<p><a href="#R-image-435a95c935f9538f078be8f6efd1cd99" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00617.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-435a95c935f9538f078be8f6efd1cd99"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00617.jpeg"></a></p>
+<p><a href="#R-image-5150bf473143bf09b23515c46bf26860" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00617.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5150bf473143bf09b23515c46bf26860"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00617.jpeg"></a></p>
 <p>As depicted, the syslog configuration file contains three sections:
 Modules, Global Directives, and Rules. The Modules section defines two
 modules&mdash;<em>imuxsock</em> and <em>imjournal</em>&mdash;and they are loaded on demand.
@@ -653,20 +653,20 @@ startup status to the **var<em>log/boot.log</em> file.</p>
 need to run the <em>rsyslogd</em> command with the -N switch and specify a
 numeric verbosity level to inspect the file for any syntax or typing
 issues:</p>
-<p><a href="#R-image-2476e8662961ae9e4cd51cbeb5f049e4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00618.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2476e8662961ae9e4cd51cbeb5f049e4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00618.jpeg"></a></p>
+<p><a href="#R-image-5b44994d8354d51e6ef3df5e63939dea" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00618.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5b44994d8354d51e6ef3df5e63939dea"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00618.jpeg"></a></p>
 <p>The validation returns the version of the command, verbosity level used,
 and the configuration file path. With no issues reported, the <em>rsyslog</em>
 service can be restarted (or reloaded) in order for the changes to take
 effect.</p>
-<p><strong>[Rotating]{#part0024_split_001.html#id_338 .calibre10} Log Files</strong></p>
+<p>Rotating Log Files</p>
 <p>RHEL records all system activities in log files that are stored in a
 central location under the **var<em>log</em> directory, as defined in the
 rsyslog configuration file. A long listing of this directory reveals the
 files along with subdirectories that may have multiple service-specific
 logs. Here is a listing from <em>server1</em>:</p>
-<p><a href="#R-image-913f9f8aab9405b022cd61dc7b550581" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00619.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-913f9f8aab9405b022cd61dc7b550581"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00619.jpeg"></a></p>
+<p><a href="#R-image-c3b482cecc008d7e81fc0224e1d48438" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00619.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c3b482cecc008d7e81fc0224e1d48438"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00619.jpeg"></a></p>
 <p>The output shows log files for various services. Depending on the usage
 and the number of events generated and captured, log files may quickly
 fill up the <em>/var</em> file system, resulting in unpredictable system
@@ -682,12 +682,12 @@ services located in the **etc<em>logrotate.d</em> directory. The configuration
 files may be modified to alter the schedule or include additional tasks
 such as removing, compressing, and emailing selected log files.</p>
 <p>Here is what the **etc<em>cron.daily/logrotate</em> script contains:</p>
-<p><a href="#R-image-85bbee3e25decf43bc03dd41f46c2b90" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00620.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-85bbee3e25decf43bc03dd41f46c2b90"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00620.jpeg"></a></p>
+<p><a href="#R-image-34bcef4bc12e8d38b2d30e1962ada734" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00620.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-34bcef4bc12e8d38b2d30e1962ada734"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00620.jpeg"></a></p>
 <p>The following returns the default content of the **etc<em>logrotate.conf</em>
 file:</p>
-<p><a href="#R-image-aaa60f1191caf3218a5fb598fae702d4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00621.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-aaa60f1191caf3218a5fb598fae702d4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00621.jpeg"></a></p>
+<p><a href="#R-image-33bc595f5f70305fdb082b884efeaf7c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00621.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-33bc595f5f70305fdb082b884efeaf7c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00621.jpeg"></a></p>
 <p>The file content shows the default log rotation frequency (weekly). It
 indicates the period of time (4 weeks) to retain the rotated logs before
 deleting them. Each time a log file is rotated, an empty replacement
@@ -703,30 +703,30 @@ the **etc<em>logrotate.d</em> directory. Any settings defined in user-defined
 files overrides the global settings.</p>
 <p>The **etc<em>logrotate.d</em> directory includes additional configuration files
 for other service logs, as shown below:</p>
-<p><a href="#R-image-4218de655edac7a076b9c8c639e7abeb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00622.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4218de655edac7a076b9c8c639e7abeb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00622.jpeg"></a></p>
+<p><a href="#R-image-5cbaeee8e4dc86c8e418a56ed79df8c4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00622.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5cbaeee8e4dc86c8e418a56ed79df8c4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00622.jpeg"></a></p>
 <p>Here there are log configuration files for a number of
 services&mdash;<em>chrony</em>, <em>cups</em>, <em>dnf</em>, and <em>samba</em>&mdash;all with their own
 rules defined. The following shows the file content for <em>btmp</em> (records
 of failed user login attempts) that is used to control the rotation
 behavior for the **var<em>log/btmp</em> file:</p>
-<p><a href="#R-image-3aaf756b00b6acd4fb756d7fee76aae3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00623.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3aaf756b00b6acd4fb756d7fee76aae3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00623.jpeg"></a></p>
+<p><a href="#R-image-1255e7477ce2e59f162057e7653010a8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00623.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1255e7477ce2e59f162057e7653010a8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00623.jpeg"></a></p>
 <p>The rotation is once a month. The replacement file created will get
 read/write permission bits for the owner (<em>root</em>), the owning group will
 be set to <em>utmp</em>, and the <em>rsyslog</em> service will maintain one rotated
 copy of the <em>btmp</em> log file.</p>
-<p><strong>[The]{#part0024_split_001.html#id_339 .calibre10} Boot Log File</strong></p>
+<p>The Boot Log File</p>
 <p>Logs generated during the system startup display the service startup
 sequence with a status showing whether the service was started
 successfully. This information may help in any post-boot troubleshooting
 if required. Boot logs are stored in the <em>boot.log</em> file under
 **var<em>log</em>. Here are a few lines from the beginning of the file:</p>
-<p><a href="#R-image-8caf590e48787bf5e25ebcbb4ffbe958" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00624.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8caf590e48787bf5e25ebcbb4ffbe958"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00624.jpeg"></a></p>
+<p><a href="#R-image-7f7e403be8cb3ee562c4033607118667" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00624.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7f7e403be8cb3ee562c4033607118667"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00624.jpeg"></a></p>
 <p>OK or FAILED within the square brackets indicates if the service was
 started successfully or not.</p>
-<p><strong>[The]{#part0024_split_001.html#id_340 .calibre10} System Log File</strong></p>
+<p>The System Log File</p>
 <p>The default location for storing most system activities, as defined in
 the <em>rsyslog.conf</em> file, is the **var<em>log/messages</em> file. This file
 saves log information in plain text format and may be viewed with any
@@ -735,15 +735,14 @@ file display utility, such as <em>cat</em>, <em>more</em>, <em>pg</em>, <em>less
 with the -f switch. The <em>messages</em> file captures the date and time of
 the activity, hostname of the system, name and PID of the service, and a
 short description of the event being logged.</p>
-<p>[<strong>EXAM TIP:</strong>]{.c56} It is helpful to &ldquo;tail&rdquo; the messages file when
+<p>EXAM TIP: It is helpful to &ldquo;tail&rdquo; the messages file when
 starting or restarting a system service or during testing to identify
 any issues encountered.</p>
 <p>The following illustrates some recent entries from this file:</p>
-<p><a href="#R-image-f207a62786fb42dd7d8f12e85ade7443" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00625.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f207a62786fb42dd7d8f12e85ade7443"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00625.jpeg"></a></p>
+<p><a href="#R-image-9898901f2cb0a36f49a2fa10d8c6dfb4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00625.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9898901f2cb0a36f49a2fa10d8c6dfb4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00625.jpeg"></a></p>
 <p>Each line entry represents the detail for one event.</p>
-<p><strong>[Logging]{#part0024_split_001.html#id_341 .calibre10} Custom
-Messages</strong></p>
+<h3 id="logging-custom-messages">Logging Custom Messages</h3>
 <p>Many times it is worthwhile to add a manual note to the system log file
 to mark the start or end of an activity for future reference. This is
 especially important when you run a script to carry out certain tasks
@@ -755,17 +754,17 @@ the imuxsock module to record custom messages to the <em>messages</em> file
 using the <em>logger</em> command. This command may be run by normal users or
 the <em>root</em> user. The following example shows how to add a note
 indicating the calling user has rebooted the system:</p>
-<p><a href="#R-image-4c66786ef1b486c35d06a170933f7bc9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00626.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4c66786ef1b486c35d06a170933f7bc9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00626.jpeg"></a></p>
+<p><a href="#R-image-55095a56003e5a1b15dcb8ff7c0eae60" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00626.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-55095a56003e5a1b15dcb8ff7c0eae60"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00626.jpeg"></a></p>
 <p><em>tail</em> the last line from the <em>messages</em> file and you&rsquo;ll observe the
 message recorded along with the timestamp, hostname, and PID:</p>
-<p><a href="#R-image-d0ebe1310eb3a041fb9806d837e24492" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00627.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d0ebe1310eb3a041fb9806d837e24492"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00627.jpeg"></a></p>
+<p><a href="#R-image-13d5e2f4c619ee58af5a286ab5b4a844" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00627.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-13d5e2f4c619ee58af5a286ab5b4a844"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00627.jpeg"></a></p>
 <p>You may add the -p option and specify a priority level either as a
 numerical value or in the facility.priority format. The default priority
 at which the events are recorded is user.notice. See the manual pages
 for the <em>logger</em> command for more details.</p>
-<p><strong>[The]{#part0024_split_001.html#id_342 .calibre10} systemd Journal</strong></p>
+<h3 id="the-systemd-journal">The systemd Journal</h3>
 <p>In addition to the <em>rsyslog</em> service, RHEL offers a systemd-based
 logging service for the collection and storage of logging data. This
 service is implemented via the <em>systemd-journald</em> daemon. The function
@@ -787,15 +786,14 @@ for further processing and persistent storage in text format.</p>
 **etc<em>systemd/journald.conf</em>, which contains numerous default settings
 that affect the overall functionality of the service. These settings may
 be modified as required.</p>
-<p><strong>[Retrieving]{#part0024_split_001.html#id_343 .calibre10} and Viewing
-Messages</strong></p>
+<h3 id="retrieving-and-viewing-messages">Retrieving and Viewing Messages</h3>
 <p>RHEL provides the <em>journalctl</em> command to retrieve messages from the
 journal for viewing in a variety of ways using different options. One
 common usage is to run the command without any options to see all the
 messages generated since the last system reboot. The following shows a
 few initial entries from the journal:</p>
-<p><a href="#R-image-81e08eec3d872e58f0f5de7a21db4bd6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00628.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-81e08eec3d872e58f0f5de7a21db4bd6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00628.jpeg"></a></p>
+<p><a href="#R-image-6f224d2077066ca8e5313b2c86d2840b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00628.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6f224d2077066ca8e5313b2c86d2840b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00628.jpeg"></a></p>
 <p>Notice that the format of the messages is similar to that of the events
 logged to the **var<em>log/messages</em> file that you saw earlier. Each line
 begins with a timestamp followed by the system hostname, process name
@@ -803,51 +801,50 @@ with or without a PID, and the actual message.</p>
 <p>Let&rsquo;s run the <em>journalctl</em> command with different options to produce
 various reports.</p>
 <p>To display detailed output for each entry, use the -o verbose option:</p>
-<p><a href="#R-image-a863eed23258348baa85f3a06089553b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00629.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a863eed23258348baa85f3a06089553b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00629.jpeg"></a></p>
+<p><a href="#R-image-ee0ca61d4c1f211f2b6ee73dee051534" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00629.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ee0ca61d4c1f211f2b6ee73dee051534"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00629.jpeg"></a></p>
 <p>To view all events since the last system reboot, use the -b options:</p>
-<p><a href="#R-image-a26e19b08fb29007e8e7b46385952bd2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00630.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a26e19b08fb29007e8e7b46385952bd2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00630.jpeg"></a></p>
+<p><a href="#R-image-481eabe0ac40d3c4ea9c20908a4ae159" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00630.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-481eabe0ac40d3c4ea9c20908a4ae159"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00630.jpeg"></a></p>
 <p>You may specify -0 (default, since the last system reboot), -1 (the
 previous system reboot), -2 (two reboots before), and so on to view
 messages from previous system reboots.</p>
 <p>To view only kernel-generated alerts since the last system reboot:</p>
-<p><a href="#R-image-3ba720413efa9cb0e067d5f19798873f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00631.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3ba720413efa9cb0e067d5f19798873f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00631.jpeg"></a></p>
+<p><a href="#R-image-147c8ff9d0c1d5ba04fce281a03d487f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00631.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-147c8ff9d0c1d5ba04fce281a03d487f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00631.jpeg"></a></p>
 <p>To limit the output to view a specific number of entries only (3 in the
 example below), use the -n option:</p>
-<p><a href="#R-image-88533f1221c70b7afd05a91d0cda13cb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00632.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-88533f1221c70b7afd05a91d0cda13cb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00632.jpeg"></a></p>
+<p><a href="#R-image-5390f054103cf996e9b6714dc09e3bb2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00632.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5390f054103cf996e9b6714dc09e3bb2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00632.jpeg"></a></p>
 <p>To show all alerts generated by a particular service, such as <em>crond</em>:</p>
-<p><a href="#R-image-c186349c45e59771172c3752958ca6df" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00633.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c186349c45e59771172c3752958ca6df"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00633.jpeg"></a></p>
+<p><a href="#R-image-21ca3118f35a9d1c853849441cf2f267" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00633.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-21ca3118f35a9d1c853849441cf2f267"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00633.jpeg"></a></p>
 <p>To retrieve all messages logged for a certain process, such as the PID
 associated with the <em>chronyd</em> service:</p>
-<p><a href="#R-image-8e64332975d8a5052f1d8d5b5aabeca6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00634.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e64332975d8a5052f1d8d5b5aabeca6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00634.jpeg"></a></p>
+<p><a href="#R-image-93da763ba5d15d2295e44cc6cacee1a2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00634.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-93da763ba5d15d2295e44cc6cacee1a2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00634.jpeg"></a></p>
 <p>To reveal all messages for a particular system unit, such as
 sshd.service:</p>
-<p><a href="#R-image-7c86d1e7f364a1a385bd5576109699bb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00635.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7c86d1e7f364a1a385bd5576109699bb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00635.jpeg"></a></p>
+<p><a href="#R-image-55d05f01f97cfdb971d2ba79e2732d49" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00635.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-55d05f01f97cfdb971d2ba79e2732d49"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00635.jpeg"></a></p>
 <p>To view all error messages logged between a date range, such as October
 10, 2019 and October 16, 2019:</p>
-<p><a href="#R-image-79c18189e898eae0782a324cf00f7c4d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00636.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-79c18189e898eae0782a324cf00f7c4d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00636.jpeg"></a></p>
+<p><a href="#R-image-e9a87185426fc927e185b21fb83b90f5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00636.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e9a87185426fc927e185b21fb83b90f5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00636.jpeg"></a></p>
 <p>To get all warning messages that have appeared today and display them in
 reverse chronological order:</p>
-<p><a href="#R-image-d492ec72c6eeebaf6e9c6741e9069d83" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00637.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d492ec72c6eeebaf6e9c6741e9069d83"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00637.jpeg"></a></p>
+<p><a href="#R-image-cb0c157bc59719a34c1896a75d540f09" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00637.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cb0c157bc59719a34c1896a75d540f09"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00637.jpeg"></a></p>
 <p>You can specify the time range in hh:mm:ss format, or yesterday, today,
 or tomorrow instead.</p>
 <p>Similar to the -f (follow) option that is used with the <em>tail</em> command
 for real-time viewing of a log file, you can use the same switch with
 <em>journalctl</em> as well. Press Ctrl+c to terminate.</p>
-<p><a href="#R-image-4fc85d489323414653ef8bb046c9b65d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00638.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4fc85d489323414653ef8bb046c9b65d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00638.jpeg"></a></p>
+<p><a href="#R-image-d9b5f49fdc00dde619f0ee35f7e2e16d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00638.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d9b5f49fdc00dde619f0ee35f7e2e16d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00638.jpeg"></a></p>
 <p>Check the manual pages of the <em>journalctl</em> command and the
 <em>systemd-journald</em> service for more details.</p>
-<p><strong>[Preserving]{#part0024_split_001.html#id_344 .calibre10} Journal
-Information</strong></p>
+<p>Preserving Journal Information</p>
 <p>By default, journals are stored in the **run<em>log/journal</em> directory for
 the duration of system runtime. This data is transient and it does not
 survive across reboots. The <em>journalctl</em> command examples demonstrated
@@ -859,9 +856,7 @@ persistently. The default is under the **var<em>log/journal</em> directory.
 This will make the journal information available for future reference.</p>
 <p>The <em>systemd-journald</em> service supports four options with the Storage
 directive in its configuration file <em>journald.conf</em> to control how the
-logging data is handled. These options are described in <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_737">Table
-12-4</a>{.calibre5}.</p>
-<p>::: c49</p>
+logging data is handled. These options are described in</p>
 <hr>
 <p><strong>Option</strong>   <strong>Description</strong>
 volatile     Stores data in memory only
@@ -869,9 +864,7 @@ persistent   Stores data permanently under <em>var</em>log/journal and falls bac
 auto         Similar to &ldquo;persistent&rdquo; but does not create <em>var</em>log/journal if it does not exist. This is the default option.
 none         Disables both volatile and persistent storage options. Not recommended.</p>
 <hr>
-<p><strong>[Table]{#part0024_split_001.html#id_737} 12-4 Journal Data Storage
-Options</strong>
-:::</p>
+<p>Journal Data Storage Options</p>
 <p>The default (auto) option appears more suitable as it stores data in
 both volatile and on-disk storage; however, you need to create the
 **var<em>log/journal</em> directory manually. This option provides two
@@ -886,29 +879,28 @@ persistent storage for the journals.</p>
 <li>Create a subdirectory called <em>journal</em> under the **var<em>log</em>
 directory and confirm:</li>
 </ol>
-<p><a href="#R-image-659140474025472e4f60b7bb5c55f95f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00639.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-659140474025472e4f60b7bb5c55f95f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00639.jpeg"></a></p>
+<p><a href="#R-image-51af487b515a0b0321b0311035b2c770" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00639.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-51af487b515a0b0321b0311035b2c770"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00639.jpeg"></a></p>
 <ol start="2">
 <li>Restart the <em>systemd-journald</em> service and confirm:</li>
 </ol>
-<p><a href="#R-image-de54df6d169b277eb0ac549b24ad5a8d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00640.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-de54df6d169b277eb0ac549b24ad5a8d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00640.jpeg"></a></p>
+<p><a href="#R-image-5d1f2ac58478c38440bd0e5fa6d342ae" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00640.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5d1f2ac58478c38440bd0e5fa6d342ae"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00640.jpeg"></a></p>
 <ol start="3">
 <li>List the new directory and observe a subdirectory matching the
 machine ID of the system as defined in the **etc<em>machine-id</em> file is
 created:</li>
 </ol>
-<p><a href="#R-image-7c4d8fdd5fb2a2108a3c9407441120e0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00641.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7c4d8fdd5fb2a2108a3c9407441120e0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00641.jpeg"></a></p>
+<p><a href="#R-image-455dfe16539318609a832094b6647195" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00641.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-455dfe16539318609a832094b6647195"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00641.jpeg"></a></p>
 <p>Compare the name of the subdirectory with the ID stored in the
 **etc<em>machine-id</em> file. They are identical.</p>
-<p><a href="#R-image-0de2f3c9160684d536f42ff057eafe74" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0de2f3c9160684d536f42ff057eafe74"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} This log file is rotated automatically
+<p>This log file is rotated automatically
 once a month based on the settings in the <em>journald.conf</em> file. Check
 the manual pages of the configuration file for details and relevant
 directives.</p>
 <p>This concludes the exercise.</p>
-<p><strong>[System]{#part0024_split_001.html#id_345 .calibre10} Tuning</strong></p>
+<p>System Tuning</p>
 <p>RHEL uses a system tuning service called <em>tuned</em> to monitor storage,
 networking, processor, audio, video, and a variety of other connected
 devices, and adjusts their parameters for better performance or power
@@ -925,7 +917,7 @@ vary throughout the day. For example, a disk and processor&rsquo;s utilization
 increases during a program startup and the network connection use goes
 up during a large file transfer. A surge in a system component activity
 results in heightened power consumption.</p>
-<p><strong>[Tuning]{#part0024_split_001.html#id_346 .calibre10} Profiles</strong></p>
+<p>Tuning Profiles</p>
 <p><em>tuned</em> includes nine predefined profiles to support a variety of use
 cases. In addition, you can create custom profiles from nothing or by
 using one of the existing profiles as a template. In either case, you
@@ -934,10 +926,8 @@ order to be recognized by the <em>tuned</em> service.</p>
 <p>Tuning profiles may be separated into three groups: (1) optimized for
 better performance, (2) geared more towards power consumption, and (3)
 that offers a balance between the other two and the maximum
-performance/power combination. <a href="/linux/rhcsa/12_sysinit_logging_tuning/#part0024_split_001.html#id_738">Table
-12-5</a>{.calibre5} lists and describes
-these profiles.</p>
-<p>::: c49</p>
+performance/power combination.</p>
+<p>lists and describes these profiles.</p>
 <hr>
 <p><strong>Profile</strong>                                     <strong>Description</strong>
 <strong>Profiles Optimized for Better Performance</strong><br>
@@ -953,17 +943,16 @@ Powersave                                       Saves maximum power at the cost 
 Balanced                                        Preferred choice for systems that require a balance between performance and power saving
 Throughput-performance                          Provides maximum performance and consumes maximum power</p>
 <hr>
-<p><strong>[Table]{#part0024_split_001.html#id_738} 12-5 Tuning Profiles</strong>
-:::</p>
+<p>Tuning Profiles</p>
 <p>Predefined profiles are located in the **usr<em>lib/tuned</em> directory in
 subdirectories matching their names. The following shows a long listing
 of the directory:</p>
-<p><a href="#R-image-1aed3c5b671e48f2ca6f8a4e67783cd6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00642.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1aed3c5b671e48f2ca6f8a4e67783cd6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00642.jpeg"></a></p>
+<p><a href="#R-image-e38b7f1ee83ec79e02cae9f8a7b956da" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00642.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e38b7f1ee83ec79e02cae9f8a7b956da"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00642.jpeg"></a></p>
 <p>The default active profile set on <em>server1</em> and <em>server2</em> is the
 <em>virtual-guest</em> profile, as the two systems are hosted in a VirtualBox
 virtualized environment.</p>
-<p><strong>[The]{#part0024_split_001.html#id_347 .calibre10} tuned-adm Command</strong></p>
+<p>The tuned-adm Command</p>
 <p><em>tuned</em> comes with a single profile management command called
 <em>tuned-adm</em>. This tool can list active and available profiles, query
 current settings, switch between profiles, and turn the tuning off. This
@@ -972,8 +961,7 @@ system attributes. Refer to the manual pages of the command for more
 details.</p>
 <p>The following exercise demonstrates the use of most of the management
 operations listed above.</p>
-<p><strong>[Exercise]{#part0024_split_001.html#id_348 .calibre10} 12-2: Manage
-Tuning Profiles</strong></p>
+<p>Exercise 12-2: Manage Tuning Profiles</p>
 <p>This exercise should be done on <em>server1</em> as <em>user1</em> with <em>sudo</em> where
 required.</p>
 <p>In this exercise, you will install the <em>tuned</em> service, start it now,
@@ -986,43 +974,43 @@ activation to conclude the exercise.</p>
 <ol>
 <li>Install the <em>tuned</em> package if it is not already installed:</li>
 </ol>
-<p><a href="#R-image-09da516225f9d169b0f0b59bc81af012" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00643.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-09da516225f9d169b0f0b59bc81af012"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00643.jpeg"></a></p>
+<p><a href="#R-image-f144135cc1473fe0c127bb0521cd7c93" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00643.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f144135cc1473fe0c127bb0521cd7c93"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00643.jpeg"></a></p>
 <p>The output indicates that the software is already installed.</p>
 <ol start="2">
 <li>Start the <em>tuned</em> service and set it to autostart at reboots:</li>
 </ol>
-<p><a href="#R-image-4ae8dc1073591bad530598b956184956" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00644.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4ae8dc1073591bad530598b956184956"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00644.jpeg"></a></p>
+<p><a href="#R-image-b30b0cbef9f003288311337e0e552a07" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00644.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b30b0cbef9f003288311337e0e552a07"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00644.jpeg"></a></p>
 <ol start="3">
 <li>Confirm the startup:</li>
 </ol>
-<p><a href="#R-image-5802095520d81e5fc79e1c33d59f1ccf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00645.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5802095520d81e5fc79e1c33d59f1ccf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00645.jpeg"></a></p>
+<p><a href="#R-image-42a1e6d8a1062fcb4c5fb25e675f4158" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00645.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-42a1e6d8a1062fcb4c5fb25e675f4158"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00645.jpeg"></a></p>
 <ol start="4">
 <li>Display the list of available tuning profiles:</li>
 </ol>
-<p><a href="#R-image-40d4437002b5a00b5ce4ea4774e95a0e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00646.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-40d4437002b5a00b5ce4ea4774e95a0e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00646.jpeg"></a></p>
+<p><a href="#R-image-58523cfbb03ee40c5abd59db971a4979" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00646.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-58523cfbb03ee40c5abd59db971a4979"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00646.jpeg"></a></p>
 <p>The output shows the nine predefined profiles. It also exhibits the
 current active profile.</p>
 <ol start="5">
 <li>List only the current active profile:</li>
 </ol>
-<p><a href="#R-image-94bf1e644ede01b8b46e41f14b5dfec2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00647.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-94bf1e644ede01b8b46e41f14b5dfec2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00647.jpeg"></a></p>
+<p><a href="#R-image-fff4e7bd0b25717455487c268e65ea48" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00647.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fff4e7bd0b25717455487c268e65ea48"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00647.jpeg"></a></p>
 <ol start="6">
 <li>Switch to the <em>powersave</em> profile and confirm:</li>
 </ol>
-<p><a href="#R-image-18995b219e39f784b2f6e90b2d86a01f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00648.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-18995b219e39f784b2f6e90b2d86a01f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00648.jpeg"></a></p>
+<p><a href="#R-image-53516903074b4a0d507f3dda4edb29f1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00648.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-53516903074b4a0d507f3dda4edb29f1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00648.jpeg"></a></p>
 <p>The active profile is now <em>powersave</em>.</p>
 <ol start="7">
 <li>Determine the recommended profile for <em>server1</em> and switch to
 it:</li>
 </ol>
-<p><a href="#R-image-616f614720a1264b5b7b82f2c4cc5333" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00649.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-616f614720a1264b5b7b82f2c4cc5333"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00649.jpeg"></a></p>
+<p><a href="#R-image-807c102c18cd814ff22299bb06585734" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00649.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-807c102c18cd814ff22299bb06585734"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00649.jpeg"></a></p>
 <p>The first instance of the command shows the best recommended profile for
 <em>server1</em> based on its characteristics, the second command instance
 switched to the recommended profile, and the third instance confirmed
@@ -1030,17 +1018,17 @@ the switching.</p>
 <ol start="8">
 <li>Turn off tuning:</li>
 </ol>
-<p><a href="#R-image-5a31b9ab4defafbcba251725ae9e62c5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00650.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5a31b9ab4defafbcba251725ae9e62c5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00650.jpeg"></a></p>
+<p><a href="#R-image-5eeba0dadc72f8ab66c75fba979864b8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00650.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5eeba0dadc72f8ab66c75fba979864b8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00650.jpeg"></a></p>
 <p>The service will not perform any tuning until it is reactivated.</p>
 <ol start="9">
 <li>Reactivate tuning and confirm:</li>
 </ol>
-<p><a href="#R-image-4c84812823254e50eb1f8e1bed6ebe0d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00651.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4c84812823254e50eb1f8e1bed6ebe0d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00651.jpeg"></a></p>
+<p><a href="#R-image-2d762cbb2d93b011fe6727cb0f42f3fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00651.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2d762cbb2d93b011fe6727cb0f42f3fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00651.jpeg"></a></p>
 <p>The tuning is re-enabled and the <em>virtual-guest</em> profile is in effect.
 This concludes the exercise.</p>
-<p><strong>[Chapter]{#part0024_split_001.html#id_349 .calibre10} Summary</strong></p>
+<p>Chapter Summary</p>
 <p>This chapter started with a discussion of systemd, the default service
 management and system initialization scheme used in RHEL. We explored
 key components of systemd, its key directories, and examined unit and
@@ -1057,61 +1045,111 @@ troubleshooting, auditing, or reporting purpose.</p>
 <p>Finally, we explored preconfigured tuning profiles and analyzed pros and
 cons associated with each one of them. We demonstrated how to determine
 a recommended profile for the system and how to set and activate it.</p>
-<p><strong>[Review]{#part0024_split_001.html#id_350 .calibre10} Questions</strong></p>
+<p>Review Questions</p>
 <ol>
 <li>
 <p>The <em>systemd</em> command may be used to rebuild a new kernel.
 True or False?</p>
 </li>
 <li>
+<p>False.</p>
+</li>
+<li>
 <p>Which command is used to manage system services?</p>
+</li>
+<li>
+<p>The <em>systemctl</em> command.</p>
 </li>
 <li>
 <p>Which configuration file must be modified to ensure journal
 log entries are stored persistently?</p>
 </li>
 <li>
+<p>The <em>journald.conf</em> file under the **etc<em>systemd</em> directory.</p>
+</li>
+<li>
 <p>What is the PID of the <em>systemd</em> process?</p>
 </li>
 <li>
+<p>The PID of the <em>systemd</em> process is 1.</p>
+</li>
+<li>
 <p>What is a target in <em>systemd</em>?</p>
+</li>
+<li>
+<p>A target is a collection of units.</p>
 </li>
 <li>
 <p>You need to append a text string &ldquo;Hello world&rdquo; to the system
 log file. What would be the command to achieve this?</p>
 </li>
 <li>
+<p>The command to accomplish the desired result would be <em>logger
+-i &ldquo;Hello world&rdquo;</em>.</p>
+</li>
+<li>
 <p>What is the recommended location to store custom log
 configuration files?</p>
 </li>
 <li>
+<p>The recommended location to store custom log configuration
+files is **etc<em>rsyslog.d</em> directory.</p>
+</li>
+<li>
 <p>What would the command <em>systemctl list-dependencies crond</em> do?</p>
+</li>
+<li>
+<p>The command provided will display all dependent units
+associated with the specified service.</p>
 </li>
 <li>
 <p>Name the two directory paths where <em>systemd</em> unit files are
 stored.</p>
 </li>
 <li>
+<p>The directory locations are **etc<em>systemd/system</em> and
+**usr<em>lib/systemd/system</em>.</p>
+</li>
+<li>
 <p>What would you run to identify the recommended tuning profile
 for the system?</p>
 </li>
 <li>
+<p>The <em>tuned-adm recommend</em> command.</p>
+</li>
+<li>
 <p>What would the command <em>systemctl get-default</em> do?</p>
+</li>
+<li>
+<p>The command provided will reveal the current default boot
+target.</p>
 </li>
 <li>
 <p><em>systemd</em> starts multiple services concurrently during system
 boot. True or False?</p>
 </li>
 <li>
+<p>True.</p>
+</li>
+<li>
 <p>What is the name of the boot log file?</p>
+</li>
+<li>
+<p>The <em>boot.log</em> file in the **var<em>log</em> directory.</p>
 </li>
 <li>
 <p>Which <em>systemctl</em> subcommand is executed after a unit
 configuration file has been modified to apply the changes?</p>
 </li>
 <li>
+<p>The <em>daemon-reload</em> subcommand.</p>
+</li>
+<li>
 <p>Which other logging service complements the <em>rsyslog</em>
 service?</p>
+</li>
+<li>
+<p>The <em>systemd-journald</em> service.</p>
 </li>
 <li>
 <p>A RHEL system is booted up. You want to view all messages
@@ -1119,86 +1157,31 @@ that were generated during the boot process. Which log file would you
 look at?</p>
 </li>
 <li>
+<p>The **var<em>log/boot.log</em> file.</p>
+</li>
+<li>
 <p>What would the command <em>systemctl restart rsyslog</em> do?</p>
+</li>
+<li>
+<p>The command provided will restart the <em>rsyslog</em> service.</p>
 </li>
 <li>
 <p>What are the two common <em>systemd</em> targets production RHEL
 servers are typically configured to run at?</p>
 </li>
 <li>
-<p>By default, log files are rotated automatically every week.
-True or False?</p>
-</li>
-</ol>
-<p><strong>[Answers]{#part0024_split_001.html#id_351 .calibre10} to Review
-Questions</strong></p>
-<ol>
-<li>
-<p>False.</p>
-</li>
-<li>
-<p>The <em>systemctl</em> command.</p>
-</li>
-<li>
-<p>The <em>journald.conf</em> file under the **etc<em>systemd</em> directory.</p>
-</li>
-<li>
-<p>The PID of the <em>systemd</em> process is 1.</p>
-</li>
-<li>
-<p>A target is a collection of units.</p>
-</li>
-<li>
-<p>The command to accomplish the desired result would be <em>logger
--i &ldquo;Hello world&rdquo;</em>.</p>
-</li>
-<li>
-<p>The recommended location to store custom log configuration
-files is **etc<em>rsyslog.d</em> directory.</p>
-</li>
-<li>
-<p>The command provided will display all dependent units
-associated with the specified service.</p>
-</li>
-<li>
-<p>The directory locations are **etc<em>systemd/system</em> and
-**usr<em>lib/systemd/system</em>.</p>
-</li>
-<li>
-<p>The <em>tuned-adm recommend</em> command.</p>
-</li>
-<li>
-<p>The command provided will reveal the current default boot
-target.</p>
-</li>
-<li>
-<p>True.</p>
-</li>
-<li>
-<p>The <em>boot.log</em> file in the **var<em>log</em> directory.</p>
-</li>
-<li>
-<p>The <em>daemon-reload</em> subcommand.</p>
-</li>
-<li>
-<p>The <em>systemd-journald</em> service.</p>
-</li>
-<li>
-<p>The **var<em>log/boot.log</em> file.</p>
-</li>
-<li>
-<p>The command provided will restart the <em>rsyslog</em> service.</p>
-</li>
-<li>
 <p>The two common <em>systemd</em> boot targets are multi-user and
 graphical.</p>
 </li>
 <li>
+<p>By default, log files are rotated automatically every week.
+True or False?</p>
+</li>
+<li>
 <p>True.</p>
 </li>
 </ol>
-<p><strong>[Do-]{#part0024_split_001.html#id_352 .calibre10}It-Yourself Challenge
-Labs</strong></p>
+<p>Do It-Yourself Challenge Labs</p>
 <p>The following labs are useful to strengthen most of the concepts and
 topics learned in this chapter. It is expected that you perform the labs
 without external help. A step-by-step guide is not supplied, as the
@@ -1211,19 +1194,16 @@ graphical to multi-user, and reboot the system to test it. Run the
 <em>systemctl</em> and <em>who</em> commands after the reboot for validation. Restore
 the default boot target back to graphical and reboot to verify. (Hint:
 System Initialization and Service Management).</p>
-<p><strong>[Lab]{#part0024_split_001.html#id_353 .calibre10} 12-2: Record Custom
-Alerts</strong></p>
+<p>Lab Record Custom Alerts</p>
 <p>As <em>user1</em> with <em>sudo</em> on <em>server1</em>, write the message &ldquo;This is
 $LOGNAME adding this marker on $(date)&rdquo; to **var<em>log/messages</em> file.
 Ensure that variable and command expansions work. Verify the entry in
 the file. (Hint: System Logging).</p>
-<p><strong>[Lab]{#part0024_split_001.html#id_354 .calibre10} 12-3: Apply Tuning
-Profile</strong></p>
+<p>Lab 12-3: Apply Tuning Profile</p>
 <p>As <em>user1</em> with <em>sudo</em> on <em>server1</em>, identify the current system tuning
 profile with the <em>tuned-adm</em> command. List all available profiles. List
 the recommended profile for <em>server1</em>. Apply the &ldquo;balanced&rdquo; profile and
 verify with <em>tuned-adm</em>. (Hint: System Tuning).</p>
-<p>[]{#part0025_split_000.html}</p>
 
             <footer class="footline">
             </footer>
@@ -1248,12 +1228,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1711969949" defer></script>
-        <script src="/js/lunr/lunr.min.js?1711969949" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1711969949" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1711969949" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1711969949" defer></script>
-        <script src="/js/search.js?1711969949" defer></script>
+        <script src="/js/auto-complete.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711972135" defer></script>
+        <script src="/js/search.js?1711972135" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1266,16 +1246,101 @@ Perfect Dark Mode
           <ul class="enlarge morespace collapsible-menu">
           <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
           <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/" class=""><a class="padding" href="/linux/misc_linux/command_line/">Command Line<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/">Consoling in on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/" class=""><a class="padding" href="/linux/misc_linux/devices/">Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/" class=""><a class="padding" href="/linux/misc_linux/dns/">DNS<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/" class=""><a class="padding" href="/linux/misc_linux/file_permissions/">File Permissions<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/" class=""><a class="padding" href="/linux/misc_linux/getting_started/">General Linux and History<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/">How to Get Putty to Work in Ubuntu<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/" class=""><a class="padding" href="/linux/misc_linux/init/">Init<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/">IO Monitoring<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/">Keyboard Shortcuts<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/" class=""><a class="padding" href="/linux/misc_linux/kernel/">Linux Kernel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/" class=""><a class="padding" href="/linux/misc_linux/logging/">Logging<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/" class=""><a class="padding" href="/linux/misc_linux/ls/">ls<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/">Network Troubleshooting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/" class=""><a class="padding" href="/linux/misc_linux/network_basics/">Networking in Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/">Open source and Linux Community<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/" class=""><a class="padding" href="/linux/misc_linux/packages/">Packages and Their Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/" class=""><a class="padding" href="/linux/misc_linux/process_utilization/">Process Utilization<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/" class=""><a class="padding" href="/linux/misc_linux/ps_processes/">Processes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/" class=""><a class="padding" href="/linux/misc_linux/linux_resources/">Resources for learning Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/" class=""><a class="padding" href="/linux/misc_linux/scp_command/">scp<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/" class=""><a class="padding" href="/linux/misc_linux/network_sharing/">Sharing Resources<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/">Shell<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/">Skills that go with Bash Scripting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/">Switching to Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/">Symbols in Bash<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/" class=""><a class="padding" href="/linux/misc_linux/tar/">Tar Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/" class=""><a class="padding" href="/linux/misc_linux/text_fu/">Text Editors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/">The Linux Filesystem<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/" class=""><a class="padding" href="/linux/misc_linux/user_management/">User Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/" class=""><a class="padding" href="/linux/misc_linux/wsl2/">Windows Subsystem for Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/rhcsa/12_sysinit_logging_tuning/" class="active"><a class="padding" href="/linux/rhcsa/12_sysinit_logging_tuning/"><i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/containers/" class=""><a class="padding" href="/linux/containers/">Container Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/run_command_as_another_user/" class=""><a class="padding" href="/linux/misc_linux/run_command_as_another_user/">Run Command as Another User<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/cli/" class=""><a class="padding" href="/networking/cisco/cli/">Cisco CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/">Cisco CML VMWARE Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/">Cisco Devnet Sandbox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/">Cisco to Juniper Cheat Sheet<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/">Cisco VLAN Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/" class=""><a class="padding" href="/networking/cisco/classful_ipv4/">Classfull IPv4<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/" class=""><a class="padding" href="/networking/cisco/management/">Device Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/" class=""><a class="padding" href="/networking/cisco/device_management_protocols/">Device Management Protocols<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/" class=""><a class="padding" href="/networking/cisco/dhcp_config/">DHCP Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/">DHCP Snooping and ARP Inspection<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/" class=""><a class="padding" href="/networking/cisco/ethernet_lans/">Ethernet LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/" class=""><a class="padding" href="/networking/cisco/extended_acls/">Extended ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/" class=""><a class="padding" href="/networking/cisco/ip_services/">IP Services<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/">IPv6 Addressing and Subnetting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/" class=""><a class="padding" href="/networking/cisco/ipv6/">IPv6 Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/" class=""><a class="padding" href="/networking/cisco/ipv6_config/">IPv6 Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/" class=""><a class="padding" href="/networking/cisco/ipv6_routing/">IPv6 Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/" class=""><a class="padding" href="/networking/juniper/junos_fundementals/">Junos Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/" class=""><a class="padding" href="/networking/cisco/lan_architecture/">LAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/">Layer 2 Etherchannel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/" class=""><a class="padding" href="/networking/cisco/spanning_tree/">More Spanning Tree<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/" class=""><a class="padding" href="/networking/cisco/nat/">Network Address Translation (NAT)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/" class=""><a class="padding" href="/networking/cisco/ospf_concepts/">OSPF Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/" class=""><a class="padding" href="/networking/cisco/ospf_config/">OSPF Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/" class=""><a class="padding" href="/networking/cisco/ospf_lab/">OSPF Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/">OSPF Network Types and Neighbors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/" class=""><a class="padding" href="/networking/cisco/qos/">QoS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/" class=""><a class="padding" href="/networking/cisco/rstp/">Rapid Spanning Tree (RSTP)<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/python/" class=""><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/" class=""><a class="padding" href="/networking/cisco/router_operation/">Router Operation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/">Routing in the LAN<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/" class=""><a class="padding" href="/networking/cisco/securing_network_devices/">Securing Network Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/" class=""><a class="padding" href="/networking/cisco/security_architectures/">Security Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/">Spanning Tree Protocol Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/" class=""><a class="padding" href="/networking/cisco/standard_acls/">Standard ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/" class=""><a class="padding" href="/networking/cisco/static_routes/">Static Routes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/" class=""><a class="padding" href="/networking/cisco/switch_interfaces/">Switch Interfaces<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/" class=""><a class="padding" href="/networking/cisco/switchport_security_config/">Switchport Security Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/">TCP/UDP<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/">Troubleshooting Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/" class=""><a class="padding" href="/networking/cisco/vlans/">VLANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/" class=""><a class="padding" href="/networking/cisco/wan_architecture/">WAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/">WANs and IP Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/">What is a VLAN?<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/" class=""><a class="padding" href="/networking/cisco/wireless_architectures/">Wireless Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/" class=""><a class="padding" href="/networking/cisco/wireless_lan/">Wireless LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/" class=""><a class="padding" href="/networking/cisco/wireless/">Wireless Principles<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/" class=""><a class="padding" href="/networking/cisco/wireless_security/">Wireless Security<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/consoling_in_to_mx80_from_linux/" class=""><a class="padding" href="/networking/juniper/consoling_in_to_mx80_from_linux/">Console into a Juniper MX80 from Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_paste_config/" class=""><a class="padding" href="/networking/juniper/junos_paste_config/">How to Copy and Paste a Junos Config<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/toggle_poe/" class=""><a class="padding" href="/networking/juniper/toggle_poe/">How to Toggle POE on a Juniper Switch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/juniper_cli_basics/" class=""><a class="padding" href="/networking/juniper/juniper_cli_basics/">Juniper CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><input type="checkbox" id="R-section-36a3ed262b315ff04085d7b53a448994" aria-controls="R-subsections-36a3ed262b315ff04085d7b53a448994"><label for="R-section-36a3ed262b315ff04085d7b53a448994"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Python</span></label><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-36a3ed262b315ff04085d7b53a448994" class="morespace collapsible-menu">
+          <li data-nav-id="/python/basics/" class=""><a class="padding" href="/python/basics/">Python Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
           <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
@@ -1283,8 +1348,10 @@ Perfect Dark Mode
           <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/aws/" class=""><a class="padding" href="/aws/">Aws<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/writing/" class=""><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/dog-training/" class="alwaysopen"><input type="checkbox" id="R-section-e7921c828f75ed049d3d4591c099a410" aria-controls="R-subsections-e7921c828f75ed049d3d4591c099a410" checked><label for="R-section-e7921c828f75ed049d3d4591c099a410"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Dog Trainings</span></label><a class="padding" href="/dog-training/">Dog Trainings<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e7921c828f75ed049d3d4591c099a410" class="morespace collapsible-menu">
+          <li data-nav-id="/dog-training/the-power-of-positive-dog-training/" class=""><a class="padding" href="/dog-training/the-power-of-positive-dog-training/">The Power ofPositive Dog Training Summary<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -1343,8 +1410,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1711969949" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1711969949" defer></script>
+    <script src="/js/clipboard.min.js?1711972135" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711972135" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1374,20 +1441,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1711969949" defer></script>
-    <script src="/js/js-yaml.min.js?1711969949" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711972135" defer></script>
+    <script src="/js/js-yaml.min.js?1711972135" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1711969949" defer></script>
+    <script src="/js/theme.js?1711972135" defer></script>
   </body>
 </html>

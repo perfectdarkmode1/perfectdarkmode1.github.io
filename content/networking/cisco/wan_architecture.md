@@ -1,7 +1,7 @@
 ---
-title: "WAN Architecture"
+title: WAN Architecture
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Network Fundamentals
 - network topology architecture

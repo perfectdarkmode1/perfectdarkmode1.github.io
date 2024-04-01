@@ -1,7 +1,7 @@
 ---
-title: "Skills that go with Bash Scripting"
+title: Skills that go with Bash Scripting
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 
 What are supplementary skills that go well with Bash Scripting for landing a job in Systems Administration?

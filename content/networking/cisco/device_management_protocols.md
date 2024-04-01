@@ -1,7 +1,7 @@
 ---
-title: "Device Management Protocols"
+title: Device Management Protocols
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 
 2.0 Network Access

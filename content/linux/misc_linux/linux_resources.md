@@ -1,7 +1,7 @@
 ---
-title: "Resources for learning Linux"
+title: Resources for learning Linux
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Going Down the Linux Rabbit Hole
 

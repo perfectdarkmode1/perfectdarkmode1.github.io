@@ -5,11 +5,10 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
     <meta name="generator" content="Relearn 5.26.2+tip">
-    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
+    <meta name="twitter:title" content="Console into a Juniper MX80 from Linux - Perfect Dark Mode">
     <meta name="twitter:description" content="Plug console cable in
 find out what your serial line name is:
 $ dmesg | grep -i FTDI
@@ -22,7 +21,7 @@ ttps://www.juniper.net/documentation/en_US/junos/topics/task/configuration/authe
 https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/rescue-and-recovery-config-file.html#load-commit-configuration
 accidentally deleted the wrong line in Juniper.conf file ? failing over to juniper.conf
 https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configuration-files.html">
-    <meta property="og:title" content="">
+    <meta property="og:title" content="Console into a Juniper MX80 from Linux - Perfect Dark Mode">
     <meta property="og:description" content="Plug console cable in
 find out what your serial line name is:
 $ dmesg | grep -i FTDI
@@ -39,23 +38,25 @@ https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configura
     <meta property="og:url" content="http://perfectdarkmode.com/networking/juniper/consoling_in_to_mx80_from_linux/">
     <meta property="article:section" content="Networking - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
-    <title></title>
-    <link href="/images/favicon.png?1711969949" rel="icon" type="image/png">
+    <title>Console into a Juniper MX80 from Linux - Perfect Dark Mode</title>
+    <link href="http://perfectdarkmode.com/networking/juniper/consoling_in_to_mx80_from_linux/" rel="canonical" type="text/html" title="Console into a Juniper MX80 from Linux - Perfect Dark Mode">
+    <link href="/networking/juniper/consoling_in_to_mx80_from_linux/index.xml" rel="alternate" type="application/rss+xml" title="Console into a Juniper MX80 from Linux - Perfect Dark Mode">
+    <link href="/images/favicon.png?1711972135" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1711969949" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711969949" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1711969949" rel="stylesheet">
-    <link href="/css/auto-complete.css?1711969949" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711969949" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1711969949" rel="stylesheet">
-    <link href="/css/fonts.css?1711969949" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711969949" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1711969949" rel="stylesheet">
-    <link href="/css/theme-git.css?1711969949" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1711969949" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1711969949" rel="stylesheet">
-    <link href="/css/print.css?1711969949" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1711969949" rel="stylesheet">
-    <link href="/css/ie.css?1711969949" rel="stylesheet">
-    <script src="/js/url.js?1711969949"></script>
-    <script src="/js/variant.js?1711969949"></script>
+    <link href="/css/fontawesome-all.min.css?1711972136" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711972136" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711972136" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711972136" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711972136" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711972136" rel="stylesheet">
+    <link href="/css/fonts.css?1711972136" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711972136" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711972136" rel="stylesheet">
+    <link href="/css/theme-git.css?1711972136" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711972136" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711972136" rel="stylesheet">
+    <link href="/css/print.css?1711972136" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1711972136" rel="stylesheet">
+    <link href="/css/ie.css?1711972136" rel="stylesheet">
+    <script src="/js/url.js?1711972136"></script>
+    <script src="/js/variant.js?1711972136"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -92,7 +93,7 @@ https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configura
 
           </div>
           <span class="topbar-breadcrumbs highlightable">
-            
+            Console into a Juniper MX80 from Linux
           </span>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
@@ -117,11 +118,33 @@ https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configura
       <div id="R-main-overlay"></div>
       <main id="R-body-inner" class="highlightable default" tabindex="-1">
         <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id="console-into-a-juniper-mx80-from-linux">Console into a Juniper MX80 from Linux</h1>
+
+<p>Plug console cable in</p>
+<p>find out what your serial line name is:</p>
+<p>$ dmesg | grep -i FTDI</p>
+<p>Open putty &gt; change to serial &gt; change the tty line name</p>
+<p>Make sure your serial settings are correct</p>
+<p><a href="https://www.juniper.net/documentation/us/en/hardware/mx5-mx10-mx40-mx80/topics/task/management-devices-mx5-mx10-mx40-mx80-connecting.html" target="_blank">https://www.juniper.net/documentation/us/en/hardware/mx5-mx10-mx40-mx80/topics/task/management-devices-mx5-mx10-mx40-mx80-connecting.html</a></p>
+<p>Press open &gt; when terminal appears press enter</p>
+<p>Juniper Password recovery</p>
+<p>ttps://www.juniper.net/documentation/en_US/junos/topics/task/configuration/authentication-root-password-recovering-mx80.html</p>
+<p><a href="https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/rescue-and-recovery-config-file.html#load-commit-configuration" target="_blank">https://www.juniper.net/documentation/us/en/software/junos/junos-install-upgrade/topics/topic-map/rescue-and-recovery-config-file.html#load-commit-configuration</a></p>
+<p>accidentally deleted the wrong line in Juniper.conf file ? failing over to juniper.conf</p>
+<p><a href="https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configuration-files.html" target="_blank">https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configuration-files.html</a></p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1711969949" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1711969949" defer></script>
+    <script src="/js/clipboard.min.js?1711972136" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711972136" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -151,20 +174,20 @@ https://www.juniper.net/documentation/en_US/junos/topics/concept/junos-configura
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1711969949" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1711969949" defer></script>
-    <script src="/js/js-yaml.min.js?1711969949" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711972136" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711972136" defer></script>
+    <script src="/js/js-yaml.min.js?1711972136" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1711969949" defer></script>
+    <script src="/js/theme.js?1711972136" defer></script>
   </body>
 </html>

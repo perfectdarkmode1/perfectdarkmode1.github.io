@@ -1,7 +1,7 @@
 ---
-title: "How to Get Putty to Work in Ubuntu"
+title: How to Get Putty to Work in Ubuntu
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 **Add this stuff to the top of /etc/ssh/ssh_config**
 

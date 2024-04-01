@@ -1,76 +1,88 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-us" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.111.3">
-    <meta name="generator" content="Relearn 5.17.1+tip">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
     <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
     <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Device Management Protocols - Perfect Dark Mode">
+    <meta name="twitter:description" content="2.0 Network Access
+2.3 Configure and verify Layer 2 discovery protocols (Cisco Discovery Protocol and LLDP)
+4.0 IP Services
+4.2 Configure and verify NTP operating in a client and server mode
+4.5 Describe the use of syslog features including facilities and levels
+System Message Logging (Syslog) Sending Messages in Real Time to Current Users
+Telnet and SSH users, the device requires a two-step process before the user sees the messages.">
+    <meta property="og:title" content="Device Management Protocols - Perfect Dark Mode">
+    <meta property="og:description" content="2.0 Network Access
+2.3 Configure and verify Layer 2 discovery protocols (Cisco Discovery Protocol and LLDP)
+4.0 IP Services
+4.2 Configure and verify NTP operating in a client and server mode
+4.5 Describe the use of syslog features including facilities and levels
+System Message Logging (Syslog) Sending Messages in Real Time to Current Users
+Telnet and SSH users, the device requires a two-step process before the user sees the messages.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/cisco/device_management_protocols/">
+    <meta property="article:section" content="Networking - Perfect Dark Mode">
+    <meta property="article:published_time" content="2023-11-06T06:20:36-07:00">
+    <meta property="article:modified_time" content="2023-11-06T06:20:36-07:00">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <title>Device Management Protocols - Perfect Dark Mode</title>
     <link href="/networking/cisco/device_management_protocols/index.xml" rel="alternate" type="application/rss+xml" title="Device Management Protocols - Perfect Dark Mode">
     <link href="/networking/cisco/device_management_protocols/index.print.html" rel="alternate" type="text/html" title="Device Management Protocols - Perfect Dark Mode">
-    <link href="/images/favicon.png?1700252831" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1711972135" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1700252831" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1700252831" rel="stylesheet">
-    <link href="/css/auto-complete.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1700252831" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1700252831" rel="stylesheet">
-    <link href="/css/fonts.css?1700252831" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1700252831" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1700252831" rel="stylesheet">
-    <link href="/css/theme-city2.css?1700252831" rel="stylesheet" id="variant-style">
-    <link href="/css/variant.css?1700252831" rel="stylesheet">
-    <link href="/css/print.css?1700252831" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1700252831" rel="stylesheet">
-    <script src="/js/url.js?1700252831"></script>
-    <script src="/js/variant.js?1700252831"></script>
+    <link href="/css/fontawesome-all.min.css?1711972135" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1711972135" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1711972135" rel="stylesheet">
+    <link href="/css/auto-complete.css?1711972135" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1711972135" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1711972135" rel="stylesheet">
+    <link href="/css/fonts.css?1711972135" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1711972135" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1711972135" rel="stylesheet">
+    <link href="/css/theme-git.css?1711972135" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1711972135" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1711972135" rel="stylesheet">
+    <link href="/css/print.css?1711972135" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1711972135" rel="stylesheet">
+    <script src="/js/url.js?1711972135"></script>
+    <script src="/js/variant.js?1711972135"></script>
     <script>
-      // hack to let hugo tell us how to get to the root when using relativeURLs, it needs to be called *url= for it to do its magic:
-      // https://github.com/gohugoio/hugo/blob/145b3fcce35fbac25c7033c91c1b7ae6d1179da8/transform/urlreplacers/absurlreplacer.go#L72
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
-      var root_url="/";
-      var baseUri=root_url.replace(/\/$/, '');
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'git' ] );
       // translations
-      window.T_Copy_to_clipboard = 'Copy to clipboard';
-      window.T_Copied_to_clipboard = 'Copied to clipboard!';
-      window.T_Copy_link_to_clipboard = 'Copy link to clipboard';
-      window.T_Link_copied_to_clipboard = 'Copied link to clipboard!';
-      window.T_No_results_found = 'No results found for \u0022{0}\u0022';
-      window.T_N_results_found = '{1} results found for \u0022{0}\u0022';
-      // some further base stuff
-      var baseUriFull='http:\/\/perfectdarkmode.com/';
-      window.variants && variants.init( [ 'city2' ] );
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
     </script>
   </head>
-  <body class="mobile-support html" data-url="/networking/cisco/device_management_protocols/index.html">
-    <div id="body" class="default-animation">
-      <div id="sidebar-overlay"></div>
-      <div id="toc-overlay"></div>
-      <nav id="topbar" class="highlightable">
-        <div>
-          <div class="navigation">
-            <span class="nav nav-next topbar-link"><i class="fa fa-chevron-right fa-fw"></i></span>
-          </div>
-          <div class="navigation">
-            <a class="nav nav-prev topbar-link" href="/index.html" title=" (&#129104;)"><i class="fas fa-chevron-left fa-fw"></i></a>
-          </div>
-          <div id="top-print-link">
-            <a class="print-link topbar-link" title='Print whole chapter (CTRL+ALT+p)' href="/networking/cisco/device_management_protocols/index.print.html">
-              <i class="fas fa-print fa-fw"></i>
-            </a>
-          </div>
-          <div id="breadcrumbs">
-            <span id="sidebar-toggle-span">
-              <a href="#" id="sidebar-toggle" class="topbar-link" title='Menu (CTRL+ALT+n)'><i class="fas fa-bars fa-fw"></i></a>
-            </span>
-            <span id="toc-menu" title='Table of Contents (CTRL+ALT+t)'><i class="fas fa-list-alt fa-fw"></i></span>
-            <ol class="links" itemscope itemtype="http://schema.org/BreadcrumbList">
-              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/index.html"><span itemprop="name">Perfect Dark Mode</span></a><meta itemprop="position" content="1"> &gt; </li>
-              <li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Device Management Protocols</span><meta itemprop="position" content="2"></li>
-            </ol>
-          </div>
-          <div class="default-animation progress">
-            <div class="toc-wrapper"><nav id="TableOfContents">
+  <body class="mobile-support html" data-url="/networking/cisco/device_management_protocols/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
   <ul>
     <li><a href="#network-time-protocol-ntp">Network Time Protocol (NTP)</a></li>
   </ul>
@@ -96,11 +108,37 @@
     </li>
   </ul>
 </nav>
+                </div>
+              </div>
             </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            Device Management Protocols
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
           </div>
         </div>
       </nav>
-      <main id="body-inner" class="highlightable default" tabindex="-1">
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
         <div class="flex-block-wrapper">
           <article class="default">
             <header class="headline">
@@ -143,13 +181,8 @@ Figure 9-1 IOS Processing for Log Messages to Current Users &ldquo;&gt;</p>
 <p>store log messages centrally to a syslog server.</p>
 <p>syslog protocol - a UDP protocol to send messages to a syslog server for storage</p>
 <p>To configure a router or switch to send log messages to a syslog server, add the logging host {address | hostname } global command</p>
-<p>
-<a href="#image-ed6847dec1ab2fbec443d579a2f79580" class="lightbox-link">
-<img src="Pasted%20image%2020230120151144.png" alt="Pasted image 20230120151144.png" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-ed6847dec1ab2fbec443d579a2f79580">
-<img src="Pasted%20image%2020230120151144.png" alt="Pasted image 20230120151144.png" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-9599d0952a15e0e69045be01368881b7" class="lightbox-link"><img alt="Pasted image 20230120151144.png" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020230120151144.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9599d0952a15e0e69045be01368881b7"><img alt="Pasted image 20230120151144.png" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020230120151144.png"></a></p>
 <p>Log Message Format</p>
 <p>*Dec 18 17:10:15.079: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down</p>
 <p>A timestamp: *Dec 18 17:10:15.079</p>
@@ -167,250 +200,24 @@ Rl(config)# end
 000011: %SYS-5-CONFIG I: Configured from console by console</p>
 <p>Log Message Severity Levels</p>
 <p>the lower the number, the more severe the event that caused the message.</p>
-<p>
-<a href="#image-562a160c7539625179b1d8ac6981d348" class="lightbox-link">
-<img src="blob:file:///980bce15-c623-489b-bd14-11e70f4fffc2" alt="Keyword
-Emergency
-Alert
-Critical
-Error
-Warning
-Notification
-Informational
-Debug
-Numeral
-2
-3
-4
-5
-6
-7
-Description
-System unusable
-Immediate action required
-Critical Event (Highest Of 3)
-Error Event (Middle Of 3)
-Warning Event (Lowest Of 3)
-Normal, More Important
-Normal, Less Important
-Requested by User Debug
-Impactful
-Normal
-Debug
-Figure 9-3 Syslog Message Severity Levels by Keyword and Numeral" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-562a160c7539625179b1d8ac6981d348">
-<img src="blob:file:///980bce15-c623-489b-bd14-11e70f4fffc2" alt="Keyword
-Emergency
-Alert
-Critical
-Error
-Warning
-Notification
-Informational
-Debug
-Numeral
-2
-3
-4
-5
-6
-7
-Description
-System unusable
-Immediate action required
-Critical Event (Highest Of 3)
-Error Event (Middle Of 3)
-Warning Event (Lowest Of 3)
-Normal, More Important
-Normal, Less Important
-Requested by User Debug
-Impactful
-Normal
-Debug
-Figure 9-3 Syslog Message Severity Levels by Keyword and Numeral" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-70ddf647d5d401c78ceaea622a5b0eb2" class="lightbox-link"><img alt="Keyword\nEmergency\nAlert\nCritical\nError\nWarning\nNotification\nInformational\nDebug\nNumeral\n2\n3\n4\n5\n6\n7\nDescription\nSystem unusable\nImmediate action required\nCritical Event (Highest Of 3)\nError Event (Middle Of 3)\nWarning Event (Lowest Of 3)\nNormal, More Important\nNormal, Less Important\nRequested by User Debug\nImpactful\nNormal\nDebug\nFigure 9-3 Syslog Message Severity Levels by Keyword and Numeral" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///980bce15-c623-489b-bd14-11e70f4fffc2" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-70ddf647d5d401c78ceaea622a5b0eb2"><img alt="Keyword\nEmergency\nAlert\nCritical\nError\nWarning\nNotification\nInformational\nDebug\nNumeral\n2\n3\n4\n5\n6\n7\nDescription\nSystem unusable\nImmediate action required\nCritical Event (Highest Of 3)\nError Event (Middle Of 3)\nWarning Event (Lowest Of 3)\nNormal, More Important\nNormal, Less Important\nRequested by User Debug\nImpactful\nNormal\nDebug\nFigure 9-3 Syslog Message Severity Levels by Keyword and Numeral" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///980bce15-c623-489b-bd14-11e70f4fffc2"></a></p>
 <p>last level in the figure is used for messages requested by the debug command</p>
 <p>Table 9-2 summarizes the configuration commands used to enable logging and to set the severity level for each type.</p>
 <p>For example, the command logging console 4 causes IOS to send severity level 0–4 messages to the console</p>
-<p>
-<a href="#image-2505c9f14ea9d605ad8a4dff683a39b5" class="lightbox-link">
-<img src="blob:file:///b598183b-1e6d-47a2-bd46-61cdb8416e46" alt="Table 9-2 How to Configure Logging Message Levels for Each Log Service
-Key
-Topic
-Service
-Console
-Monitor
-Buffered
-Syslog
-To Enable Logging
-logging console
-logging monitor
-logging buffered
-logging host address I
-hostname
-To Set Message Levels
-logging console level-name I level-
-number
-logging monitor level-name I
-level-number
-logging buffered level-name I
-level-number
-logging trap level-name I level-
-number" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-2505c9f14ea9d605ad8a4dff683a39b5">
-<img src="blob:file:///b598183b-1e6d-47a2-bd46-61cdb8416e46" alt="Table 9-2 How to Configure Logging Message Levels for Each Log Service
-Key
-Topic
-Service
-Console
-Monitor
-Buffered
-Syslog
-To Enable Logging
-logging console
-logging monitor
-logging buffered
-logging host address I
-hostname
-To Set Message Levels
-logging console level-name I level-
-number
-logging monitor level-name I
-level-number
-logging buffered level-name I
-level-number
-logging trap level-name I level-
-number" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-755eed01a1931e55c8711c47d5033239" class="lightbox-link"><img alt="Table 9-2 How to Configure Logging Message Levels for Each Log Service\nKey\nTopic\nService\nConsole\nMonitor\nBuffered\nSyslog\nTo Enable Logging\nlogging console\nlogging monitor\nlogging buffered\nlogging host address I\nhostname\nTo Set Message Levels\nlogging console level-name I level-\nnumber\nlogging monitor level-name I\nlevel-number\nlogging buffered level-name I\nlevel-number\nlogging trap level-name I level-\nnumber" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///b598183b-1e6d-47a2-bd46-61cdb8416e46" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-755eed01a1931e55c8711c47d5033239"><img alt="Table 9-2 How to Configure Logging Message Levels for Each Log Service\nKey\nTopic\nService\nConsole\nMonitor\nBuffered\nSyslog\nTo Enable Logging\nlogging console\nlogging monitor\nlogging buffered\nlogging host address I\nhostname\nTo Set Message Levels\nlogging console level-name I level-\nnumber\nlogging monitor level-name I\nlevel-number\nlogging buffered level-name I\nlevel-number\nlogging trap level-name I level-\nnumber" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///b598183b-1e6d-47a2-bd46-61cdb8416e46"></a></p>
 <p>Configuring and Verifying System Logging</p>
-<p>
-<a href="#image-47162fd4da5acc6fb60f4031568fc233" class="lightbox-link">
-<img src="blob:file:///441c47eb-3766-4f0d-8251-7181b1dd2aee" alt="172.16.1.0/24
-172.16.1.1
-GO/I
-RI
-17216.21
-GO/2
-172.162.2
-172.16.3.0/24
-SW2
-172.16.3.9
-Figure 9-4 Sample Network Used in Logging Examples" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-47162fd4da5acc6fb60f4031568fc233">
-<img src="blob:file:///441c47eb-3766-4f0d-8251-7181b1dd2aee" alt="172.16.1.0/24
-172.16.1.1
-GO/I
-RI
-17216.21
-GO/2
-172.162.2
-172.16.3.0/24
-SW2
-172.16.3.9
-Figure 9-4 Sample Network Used in Logging Examples" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-a9c4f0d9d24e209658ac252ab95e112f" class="lightbox-link">
-<img src="blob:file:///89cbe1a2-0745-46e2-923a-30bb5f816e43" alt="Example 9-2 Syslog Configuration on RI
-Click here to view code image
-logging
-logging
-logging
-logging
-logging
-console 7
-monitor debug
-buffered 4
-host 172.16.3.9
-trap warning" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-a9c4f0d9d24e209658ac252ab95e112f">
-<img src="blob:file:///89cbe1a2-0745-46e2-923a-30bb5f816e43" alt="Example 9-2 Syslog Configuration on RI
-Click here to view code image
-logging
-logging
-logging
-logging
-logging
-console 7
-monitor debug
-buffered 4
-host 172.16.3.9
-trap warning" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-ef9ba3433d8cb06d9957635ac5ef7692" class="lightbox-link"><img alt="172.16.1.0/24\n172.16.1.1\nGO/I\nRI\n17216.21\nGO/2\n172.162.2\n172.16.3.0/24\nSW2\n172.16.3.9\nFigure 9-4 Sample Network Used in Logging Examples" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///441c47eb-3766-4f0d-8251-7181b1dd2aee" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ef9ba3433d8cb06d9957635ac5ef7692"><img alt="172.16.1.0/24\n172.16.1.1\nGO/I\nRI\n17216.21\nGO/2\n172.162.2\n172.16.3.0/24\nSW2\n172.16.3.9\nFigure 9-4 Sample Network Used in Logging Examples" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///441c47eb-3766-4f0d-8251-7181b1dd2aee"></a></p>
+<p><a href="#R-image-70b6d9c034117a6e85a869d97f2cc210" class="lightbox-link"><img alt="Example 9-2 Syslog Configuration on RI\nClick here to view code image\nlogging\nlogging\nlogging\nlogging\nlogging\nconsole 7\nmonitor debug\nbuffered 4\nhost 172.16.3.9\ntrap warning" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///89cbe1a2-0745-46e2-923a-30bb5f816e43" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-70b6d9c034117a6e85a869d97f2cc210"><img alt="Example 9-2 Syslog Configuration on RI\nClick here to view code image\nlogging\nlogging\nlogging\nlogging\nlogging\nconsole 7\nmonitor debug\nbuffered 4\nhost 172.16.3.9\ntrap warning" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///89cbe1a2-0745-46e2-923a-30bb5f816e43"></a></p>
 <p>the example configures the same message level at the console and for terminal monitoring (level 7, or debug), and the same level for both buffered and logging to the syslog server (level 4, or warning). The levels may be set using the numeric severity level or the name as shown earlier in Figure 9-3.</p>
 <p>show logging command confirms those same configuration settings and also lists the log messages per the logging buffered configuration.</p>
-<p>
-<a href="#image-0b4ece62f4431a8affdd5357554bdca4" class="lightbox-link">
-<img src="blob:file:///09d59061-71bc-43e6-a415-cca2e3f9e5a8" alt="Example 9-3 Viewing the Configured Log Settings per the Earlier Example
-Click here to view code image
-Rl# show logging
-Syslog logging: enabled (0 messages dropped,
-No Active Message Discriminator.
-No Inactive Message Discriminator.
-3 messages rate-limited
-Console logging: level debugging, 45 messages logged, xml disabl
-filtering disabled
-Monitor logging: level debugging, 0 messages logged, xml disable
-filtering disabled
-Buffer logging: level warnings, e messages logged, xml disabled,
-filtering disabled
-Exception Logging: size (8192 bytes)
-Count and timestamp logging messages:
-Persistent logging: disabled
-disabled" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-0b4ece62f4431a8affdd5357554bdca4">
-<img src="blob:file:///09d59061-71bc-43e6-a415-cca2e3f9e5a8" alt="Example 9-3 Viewing the Configured Log Settings per the Earlier Example
-Click here to view code image
-Rl# show logging
-Syslog logging: enabled (0 messages dropped,
-No Active Message Discriminator.
-No Inactive Message Discriminator.
-3 messages rate-limited
-Console logging: level debugging, 45 messages logged, xml disabl
-filtering disabled
-Monitor logging: level debugging, 0 messages logged, xml disable
-filtering disabled
-Buffer logging: level warnings, e messages logged, xml disabled,
-filtering disabled
-Exception Logging: size (8192 bytes)
-Count and timestamp logging messages:
-Persistent logging: disabled
-disabled" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-d1f68268ba5e5c91fad218fd70f80998" class="lightbox-link">
-<img src="blob:file:///b920da0f-adeb-4912-8aeb-78422dee63af" alt="No active filter modules.
-Trap logging: level warnings, e message lines logged
-Logging to 172.16.3.9 (udp port 514, audit disabled,
-link up),
-0 message lines logged,
-0 message lines rate-limited,
-0 message lines dropped-by-MD,
-xml disabled, sequence number disabled
-filtering disabled
-Logging Source-Interface:
-Log Buffer (8192 bytes):
-VRF Name:" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-d1f68268ba5e5c91fad218fd70f80998">
-<img src="blob:file:///b920da0f-adeb-4912-8aeb-78422dee63af" alt="No active filter modules.
-Trap logging: level warnings, e message lines logged
-Logging to 172.16.3.9 (udp port 514, audit disabled,
-link up),
-0 message lines logged,
-0 message lines rate-limited,
-0 message lines dropped-by-MD,
-xml disabled, sequence number disabled
-filtering disabled
-Logging Source-Interface:
-Log Buffer (8192 bytes):
-VRF Name:" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-67e3fe19a4692db0de550e23062f0911" class="lightbox-link"><img alt="Example 9-3 Viewing the Configured Log Settings per the Earlier Example\nClick here to view code image\nRl# show logging\nSyslog logging: enabled (0 messages dropped,\nNo Active Message Discriminator.\nNo Inactive Message Discriminator.\n3 messages rate-limited\nConsole logging: level debugging, 45 messages logged, xml disabl\nfiltering disabled\nMonitor logging: level debugging, 0 messages logged, xml disable\nfiltering disabled\nBuffer logging: level warnings, e messages logged, xml disabled,\nfiltering disabled\nException Logging: size (8192 bytes)\nCount and timestamp logging messages:\nPersistent logging: disabled\ndisabled" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///09d59061-71bc-43e6-a415-cca2e3f9e5a8" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-67e3fe19a4692db0de550e23062f0911"><img alt="Example 9-3 Viewing the Configured Log Settings per the Earlier Example\nClick here to view code image\nRl# show logging\nSyslog logging: enabled (0 messages dropped,\nNo Active Message Discriminator.\nNo Inactive Message Discriminator.\n3 messages rate-limited\nConsole logging: level debugging, 45 messages logged, xml disabl\nfiltering disabled\nMonitor logging: level debugging, 0 messages logged, xml disable\nfiltering disabled\nBuffer logging: level warnings, e messages logged, xml disabled,\nfiltering disabled\nException Logging: size (8192 bytes)\nCount and timestamp logging messages:\nPersistent logging: disabled\ndisabled" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///09d59061-71bc-43e6-a415-cca2e3f9e5a8"></a></p>
+<p><a href="#R-image-932b1006c4664971034eb53c66e18367" class="lightbox-link"><img alt="No active filter modules.\nTrap logging: level warnings, e message lines logged\nLogging to 172.16.3.9 (udp port 514, audit disabled,\nlink up),\n0 message lines logged,\n0 message lines rate-limited,\n0 message lines dropped-by-MD,\nxml disabled, sequence number disabled\nfiltering disabled\nLogging Source-Interface:\nLog Buffer (8192 bytes):\nVRF Name:" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///b920da0f-adeb-4912-8aeb-78422dee63af" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-932b1006c4664971034eb53c66e18367"><img alt="No active filter modules.\nTrap logging: level warnings, e message lines logged\nLogging to 172.16.3.9 (udp port 514, audit disabled,\nlink up),\n0 message lines logged,\n0 message lines rate-limited,\n0 message lines dropped-by-MD,\nxml disabled, sequence number disabled\nfiltering disabled\nLogging Source-Interface:\nLog Buffer (8192 bytes):\nVRF Name:" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///b920da0f-adeb-4912-8aeb-78422dee63af"></a></p>
 <p>If any log messages had been buffered, the actual log messages would be listed at the end of the command</p>
 <p>clear out the old messages from the log with the clear logging EXEC command.</p>
 <dl>
@@ -441,43 +248,8 @@ Interface GigabitEthernetØ/1,](blob:file:///50a65acc-0691-4338-a954-5e888ca303e
 <p>The debug Command and Log Messages</p>
 <p>debug EXEC command gives the network engineer a way to ask IOS to monitor for certain internal events, with that monitoring process continuing over time, so that IOS can issue log messages when those events occur</p>
 <p>debug remains active until some user issues the no debug command with the same parameters, disabling the debug.</p>
-<p>
-<a href="#image-11ba3016f53ffc08f8bc7b3ba5c7f6ee" class="lightbox-link">
-<img src="blob:file:///0a51c53d-835e-4dcd-ae27-8ad10d86b942" alt="Example 9-5 Using debug ip ospf hello from RI&amp;rsquo;s Console
-Click here to view code image
-Rl# debug ip ospf hello
-OSPF
-*Aug
-*Aug
-*Aug
-hello
-IS on
-10 OSPF-I HELLO GiØ/1:
-10 OSPF-I HELLO GiØ/2:
-10 OSPF-I HELLO GiØ/2:
-debuggi ng
-Send hello to 224.Ø.Ø.5 area
-Rcv hello from 2.2.2.2 area
-Send hello to 224.0.0.5 area" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-11ba3016f53ffc08f8bc7b3ba5c7f6ee">
-<img src="blob:file:///0a51c53d-835e-4dcd-ae27-8ad10d86b942" alt="Example 9-5 Using debug ip ospf hello from RI&amp;rsquo;s Console
-Click here to view code image
-Rl# debug ip ospf hello
-OSPF
-*Aug
-*Aug
-*Aug
-hello
-IS on
-10 OSPF-I HELLO GiØ/1:
-10 OSPF-I HELLO GiØ/2:
-10 OSPF-I HELLO GiØ/2:
-debuggi ng
-Send hello to 224.Ø.Ø.5 area
-Rcv hello from 2.2.2.2 area
-Send hello to 224.0.0.5 area" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-47ac74ba11e079d67baa422a65e21b3d" class="lightbox-link"><img alt="Example 9-5 Using debug ip ospf hello from RI&rsquo;s Console\nClick here to view code image\nRl# debug ip ospf hello\nOSPF\n*Aug\n*Aug\n*Aug\nhello\nIS on\n10 OSPF-I HELLO GiØ/1:\n10 OSPF-I HELLO GiØ/2:\n10 OSPF-I HELLO GiØ/2:\ndebuggi ng\nSend hello to 224.Ø.Ø.5 area\nRcv hello from 2.2.2.2 area\nSend hello to 224.0.0.5 area" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///0a51c53d-835e-4dcd-ae27-8ad10d86b942" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-47ac74ba11e079d67baa422a65e21b3d"><img alt="Example 9-5 Using debug ip ospf hello from RI&rsquo;s Console\nClick here to view code image\nRl# debug ip ospf hello\nOSPF\n*Aug\n*Aug\n*Aug\nhello\nIS on\n10 OSPF-I HELLO GiØ/1:\n10 OSPF-I HELLO GiØ/2:\n10 OSPF-I HELLO GiØ/2:\ndebuggi ng\nSend hello to 224.Ø.Ø.5 area\nRcv hello from 2.2.2.2 area\nSend hello to 224.0.0.5 area" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///0a51c53d-835e-4dcd-ae27-8ad10d86b942"></a></p>
 <p>anyone logged in with SSH at the time Example 9-4’s output was gathered would not have seen the output, even with the logging monitor debug command configured on router R1, without first issuing a terminal monitor command.</p>
 <p>all enabled debug options use router CPU, which can cause problems for the router. You can monitor CPU use with the show process cpu command</p>
 <p>use caution when using debug commands carefully on production devices.</p>
@@ -489,37 +261,8 @@ Send hello to 224.0.0.5 area" class="lightbox-image" loading="lazy">
 <p>NTP works best if you set the device clock to a reasonably close time before enabling the NTP client function with the ntp server command</p>
 <p>I should set the time to 8:52 p.m., set the correct date and timezone, and even tell the device to adjust for daylight savings time—and then enable NTP</p>
 <p>Example 9-7 shows how to set the date, time, timezone, and daylight savings time.</p>
-<p>
-<a href="#image-a8131f083cef29502165931801039f4b" class="lightbox-link">
-<img src="blob:file:///12712855-da00-4f5f-9301-b908790790c9" alt="Example 9-7 Setting the Date/Time with clock set, Plus Timezone/DST
-Click here to view code image
-Rl# configure terminal
-Enter configuration commands, one per line. End with CNTL/Z.
-RI (config)# clock timezone EST -5
-RI clock summer-time EDT recurring
-RI (config)# AZ
-clock set 21 October 2ø15
-*Oct 21 me: %SYS-6-CLOCKUPDATE:
-System clock has been upda
-Rl# show clock
-EDT Wed
-Oct 21 2015" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-a8131f083cef29502165931801039f4b">
-<img src="blob:file:///12712855-da00-4f5f-9301-b908790790c9" alt="Example 9-7 Setting the Date/Time with clock set, Plus Timezone/DST
-Click here to view code image
-Rl# configure terminal
-Enter configuration commands, one per line. End with CNTL/Z.
-RI (config)# clock timezone EST -5
-RI clock summer-time EDT recurring
-RI (config)# AZ
-clock set 21 October 2ø15
-*Oct 21 me: %SYS-6-CLOCKUPDATE:
-System clock has been upda
-Rl# show clock
-EDT Wed
-Oct 21 2015" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-1816d422ad02750c0ccf0e925a102af1" class="lightbox-link"><img alt="Example 9-7 Setting the Date/Time with clock set, Plus Timezone/DST\nClick here to view code image\nRl# configure terminal\nEnter configuration commands, one per line. End with CNTL/Z.\nRI (config)# clock timezone EST -5\nRI clock summer-time EDT recurring\nRI (config)# AZ\nclock set 21 October 2ø15\n*Oct 21 me: %SYS-6-CLOCKUPDATE:\nSystem clock has been upda\nRl# show clock\nEDT Wed\nOct 21 2015" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///12712855-da00-4f5f-9301-b908790790c9" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1816d422ad02750c0ccf0e925a102af1"><img alt="Example 9-7 Setting the Date/Time with clock set, Plus Timezone/DST\nClick here to view code image\nRl# configure terminal\nEnter configuration commands, one per line. End with CNTL/Z.\nRI (config)# clock timezone EST -5\nRI clock summer-time EDT recurring\nRI (config)# AZ\nclock set 21 October 2ø15\n*Oct 21 me: %SYS-6-CLOCKUPDATE:\nSystem clock has been upda\nRl# show clock\nEDT Wed\nOct 21 2015" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///12712855-da00-4f5f-9301-b908790790c9"></a></p>
 <p>You should set the first two commands before setting the time of day with the clock set EXEC command because the two configuration commands impact the time that is set.</p>
 <p>chose EDT because it is the acronym for daylight savings time in that same EST time zone. Finally, the recurring keyword tells the router to spring forward an hour and fall back an hour automatically over the years.</p>
 <p>clock set EXEC command</p>
@@ -529,95 +272,14 @@ Oct 21 2015" class="lightbox-image" loading="lazy">
 <p>two ntp configuration commands</p>
 <p>ntp master {stratum-level}: NTP server mode—the device acts only as an NTP server, and not as an NTP client. The device gets its time information from the internal clock on the device.</p>
 <p>ntp server {address | hostname} : NTP client/server mode—the device acts as both client and server. First, it acts as an NTP client, to synchronize time with a server. Once synchronized, the device can then act as an NTP server, to supply time to other NTP clients.</p>
-<p>
-<a href="#image-6795d9c229bd4b7b4efaa182c8f19b08" class="lightbox-link">
-<img src="blob:file:///ad94907d-f81d-499c-ad54-b5db7eb548e3" alt="ntp server 172.162.2
-NTP Client/ server
-Stratum 4
-ntp server 172.16.3.3
-NTP Client / server
-Stratum 3
-172.16.3_3
-GOII
-Mp master
-GO,&amp;lsquo;2
-NTP server
-Stratum 2
-Figure 9-5 RI as NTP Client, R2 as Client/Server, R3 as Server" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-6795d9c229bd4b7b4efaa182c8f19b08">
-<img src="blob:file:///ad94907d-f81d-499c-ad54-b5db7eb548e3" alt="ntp server 172.162.2
-NTP Client/ server
-Stratum 4
-ntp server 172.16.3.3
-NTP Client / server
-Stratum 3
-172.16.3_3
-GOII
-Mp master
-GO,&amp;lsquo;2
-NTP server
-Stratum 2
-Figure 9-5 RI as NTP Client, R2 as Client/Server, R3 as Server" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-f0dbeeebeb3c4a9c6357e4ad95277e10" class="lightbox-link">
-<img src="blob:file:///643a88fe-2d60-4ee1-9684-09c87d798ae2" alt="Example 9-8 NTP Client/Server Configuration
-Click here to view code image
-! Configuration on RI:
-ntp server 172.16.2.2
-Click here to view code image
-! Configuration on R2:
-ntp server 172.16.3.3
-Click here to view code image
-! Configuration on R3:
-ntp master 2" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-f0dbeeebeb3c4a9c6357e4ad95277e10">
-<img src="blob:file:///643a88fe-2d60-4ee1-9684-09c87d798ae2" alt="Example 9-8 NTP Client/Server Configuration
-Click here to view code image
-! Configuration on RI:
-ntp server 172.16.2.2
-Click here to view code image
-! Configuration on R2:
-ntp server 172.16.3.3
-Click here to view code image
-! Configuration on R3:
-ntp master 2" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-7250a724dd50b4ba1ac98f9f5d41f838" class="lightbox-link"><img alt="ntp server 172.162.2\nNTP Client/ server\nStratum 4\nntp server 172.16.3.3\nNTP Client / server\nStratum 3\n172.16.3_3\nGOII\nMp master\nGO,&lsquo;2\nNTP server\nStratum 2\nFigure 9-5 RI as NTP Client, R2 as Client/Server, R3 as Server" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///ad94907d-f81d-499c-ad54-b5db7eb548e3" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7250a724dd50b4ba1ac98f9f5d41f838"><img alt="ntp server 172.162.2\nNTP Client/ server\nStratum 4\nntp server 172.16.3.3\nNTP Client / server\nStratum 3\n172.16.3_3\nGOII\nMp master\nGO,&lsquo;2\nNTP server\nStratum 2\nFigure 9-5 RI as NTP Client, R2 as Client/Server, R3 as Server" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///ad94907d-f81d-499c-ad54-b5db7eb548e3"></a></p>
+<p><a href="#R-image-f8c9249df623752cbaaa8b69d2000aac" class="lightbox-link"><img alt="Example 9-8 NTP Client/Server Configuration\nClick here to view code image\n! Configuration on RI:\nntp server 172.16.2.2\nClick here to view code image\n! Configuration on R2:\nntp server 172.16.3.3\nClick here to view code image\n! Configuration on R3:\nntp master 2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///643a88fe-2d60-4ee1-9684-09c87d798ae2" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f8c9249df623752cbaaa8b69d2000aac"><img alt="Example 9-8 NTP Client/Server Configuration\nClick here to view code image\n! Configuration on RI:\nntp server 172.16.2.2\nClick here to view code image\n! Configuration on R2:\nntp server 172.16.3.3\nClick here to view code image\n! Configuration on R3:\nntp master 2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///643a88fe-2d60-4ee1-9684-09c87d798ae2"></a></p>
 <p>show ntp status command</p>
 <p>lists a status of synchronized, which confirms the NTP client has completed the process of changing its time to match the server’s time. Any router acting as an NTP client will list “unsynchronized” in that first line until the NTP synchronization process completes with at least one server. It also confirms the IP address of the server—this device’s reference clock—with the IP address configured in Example 9-8 (172.16.2.2).</p>
-<p>
-<a href="#image-2e085d352a2282313964db599679164e" class="lightbox-link">
-<img src="blob:file:///43b9da43-57f0-4a98-a836-4e093bd06ef3" alt="Example 9-9 Verifying NTP Client Status on RI
-Click here to view code image
-Rl# show ntp status
-Clock is synchronized, stratum 4, reference is 172.16.2.2
-nominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision is
-ntp uptime is 1553800 (1/100 of seconds), resolution is 4000
-reference time is DA5E7147.56CADEA7 (19:54:31.339 EST Thu Feb 4 2016)
-clock offset is 0.0986 msec, root delay is 2.46 msec
-root dispersion is 22.19 msec, peer dispersion is 5.33 msec
-loopfilter state is &amp;lsquo;CTRL &amp;rsquo;
-system poll interval is 64,
-(Normal Controlled Loop), drift is e. 000000G
-last update was 530 sec ago." style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-2e085d352a2282313964db599679164e">
-<img src="blob:file:///43b9da43-57f0-4a98-a836-4e093bd06ef3" alt="Example 9-9 Verifying NTP Client Status on RI
-Click here to view code image
-Rl# show ntp status
-Clock is synchronized, stratum 4, reference is 172.16.2.2
-nominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision is
-ntp uptime is 1553800 (1/100 of seconds), resolution is 4000
-reference time is DA5E7147.56CADEA7 (19:54:31.339 EST Thu Feb 4 2016)
-clock offset is 0.0986 msec, root delay is 2.46 msec
-root dispersion is 22.19 msec, peer dispersion is 5.33 msec
-loopfilter state is &amp;lsquo;CTRL &amp;rsquo;
-system poll interval is 64,
-(Normal Controlled Loop), drift is e. 000000G
-last update was 530 sec ago." class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-7cfaa26203e08bb9252cac76bf201c83" class="lightbox-link"><img alt="Example 9-9 Verifying NTP Client Status on RI\nClick here to view code image\nRl# show ntp status\nClock is synchronized, stratum 4, reference is 172.16.2.2\nnominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision is\nntp uptime is 1553800 (1/100 of seconds), resolution is 4000\nreference time is DA5E7147.56CADEA7 (19:54:31.339 EST Thu Feb 4 2016)\nclock offset is 0.0986 msec, root delay is 2.46 msec\nroot dispersion is 22.19 msec, peer dispersion is 5.33 msec\nloopfilter state is &lsquo;CTRL &rsquo;\nsystem poll interval is 64,\n(Normal Controlled Loop), drift is e. 000000G\nlast update was 530 sec ago." class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///43b9da43-57f0-4a98-a836-4e093bd06ef3" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7cfaa26203e08bb9252cac76bf201c83"><img alt="Example 9-9 Verifying NTP Client Status on RI\nClick here to view code image\nRl# show ntp status\nClock is synchronized, stratum 4, reference is 172.16.2.2\nnominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision is\nntp uptime is 1553800 (1/100 of seconds), resolution is 4000\nreference time is DA5E7147.56CADEA7 (19:54:31.339 EST Thu Feb 4 2016)\nclock offset is 0.0986 msec, root delay is 2.46 msec\nroot dispersion is 22.19 msec, peer dispersion is 5.33 msec\nloopfilter state is &lsquo;CTRL &rsquo;\nsystem poll interval is 64,\n(Normal Controlled Loop), drift is e. 000000G\nlast update was 530 sec ago." class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///43b9da43-57f0-4a98-a836-4e093bd06ef3"></a></p>
 <p>show ntp associations</p>
 <p>lists all the NTP servers that the local device can attempt to use, with status information about the association between the local device (client) and the various NTP servers.</p>
 <p>Status on RI and R2<br>
@@ -681,107 +343,16 @@ falseticker, &ldquo;&gt;</li>
 <p>Routers and switches use the default stratum level of 8 for their internal reference clock based on the default setting of 8 for the stratum level in the ntp master [stratum-level] command. The command allows you to set a value from 1 through 15; in Example 9-8, the ntp master 2 command set router R3’s stratum level to 2.</p>
 <p>Note</p>
 <p>NTP considers 15 to be the highest useful stratum level, so any devices that calculate their stratum as 16 consider the time data unusable and do not trust the time. So, avoid setting higher stratum values on the ntp master command.</p>
-<p>
-<a href="#image-c8745e37c6497680a684d9e4bc6bb9bb" class="lightbox-link">
-<img src="blob:file:///f789da20-724e-41ae-9ebd-7fe1c5ef7c68" alt="Example 9-11 Examining NTP Server, Reference Clock, and Stratum Data
-Click here to view code image
-R3# show ntp status
-Clock is synchronized, stratum 2, reference is 127.127.1.1
-nominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision i
-ntp uptime is 595300 (1/100 of seconds), resolution is 4000
-reference time is EOF9174C.87277EBB (16:13:32.527 daylight sat Aug 1
-clock offset is 0.0000 msec, root delay is 0.00 msec
-root dispersion is 0.33 msec, peer dispersion is 0.23 msec
-loopfilter state is &amp;lsquo;CTRL&amp;rsquo; (Normal Controlled Loop), drift is e. 00001
-system poll interval is 16, last update was 8 sec ago.
-R3# show ntp associations
-address
-*n.127 • 127 • 1.1
-ref clock
-. LOCL
-st
-1
-when
-15
-poll
-16
-reach delay
-377 0.øoe
-falseticker,
-off
-o.
-sys .peer, # selected, &#43; candidate,
-outlyer, x" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-c8745e37c6497680a684d9e4bc6bb9bb">
-<img src="blob:file:///f789da20-724e-41ae-9ebd-7fe1c5ef7c68" alt="Example 9-11 Examining NTP Server, Reference Clock, and Stratum Data
-Click here to view code image
-R3# show ntp status
-Clock is synchronized, stratum 2, reference is 127.127.1.1
-nominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision i
-ntp uptime is 595300 (1/100 of seconds), resolution is 4000
-reference time is EOF9174C.87277EBB (16:13:32.527 daylight sat Aug 1
-clock offset is 0.0000 msec, root delay is 0.00 msec
-root dispersion is 0.33 msec, peer dispersion is 0.23 msec
-loopfilter state is &amp;lsquo;CTRL&amp;rsquo; (Normal Controlled Loop), drift is e. 00001
-system poll interval is 16, last update was 8 sec ago.
-R3# show ntp associations
-address
-*n.127 • 127 • 1.1
-ref clock
-. LOCL
-st
-1
-when
-15
-poll
-16
-reach delay
-377 0.øoe
-falseticker,
-off
-o.
-sys .peer, # selected, &#43; candidate,
-outlyer, x" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-44b2941fd7ce6f82a623f87917f03a24" class="lightbox-link"><img alt="Example 9-11 Examining NTP Server, Reference Clock, and Stratum Data\nClick here to view code image\nR3# show ntp status\nClock is synchronized, stratum 2, reference is 127.127.1.1\nnominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision i\nntp uptime is 595300 (1/100 of seconds), resolution is 4000\nreference time is EOF9174C.87277EBB (16:13:32.527 daylight sat Aug 1\nclock offset is 0.0000 msec, root delay is 0.00 msec\nroot dispersion is 0.33 msec, peer dispersion is 0.23 msec\nloopfilter state is &lsquo;CTRL&rsquo; (Normal Controlled Loop), drift is e. 00001\nsystem poll interval is 16, last update was 8 sec ago.\nR3# show ntp associations\naddress\n*n.127 • 127 • 1.1\nref clock\n. LOCL\nst\n1\nwhen\n15\npoll\n16\nreach delay\n377 0.øoe\nfalseticker,\noff\no.\nsys .peer, # selected, + candidate,\noutlyer, x" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///f789da20-724e-41ae-9ebd-7fe1c5ef7c68" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-44b2941fd7ce6f82a623f87917f03a24"><img alt="Example 9-11 Examining NTP Server, Reference Clock, and Stratum Data\nClick here to view code image\nR3# show ntp status\nClock is synchronized, stratum 2, reference is 127.127.1.1\nnominal freq is 250.0000 Hz, actual freq is 250.0000 Hz, precision i\nntp uptime is 595300 (1/100 of seconds), resolution is 4000\nreference time is EOF9174C.87277EBB (16:13:32.527 daylight sat Aug 1\nclock offset is 0.0000 msec, root delay is 0.00 msec\nroot dispersion is 0.33 msec, peer dispersion is 0.23 msec\nloopfilter state is &lsquo;CTRL&rsquo; (Normal Controlled Loop), drift is e. 00001\nsystem poll interval is 16, last update was 8 sec ago.\nR3# show ntp associations\naddress\n*n.127 • 127 • 1.1\nref clock\n. LOCL\nst\n1\nwhen\n15\npoll\n16\nreach delay\n377 0.øoe\nfalseticker,\noff\no.\nsys .peer, # selected, + candidate,\noutlyer, x" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///f789da20-724e-41ae-9ebd-7fe1c5ef7c68"></a></p>
 <h3 id="redundant-ntp-configuration">Redundant NTP Configuration</h3>
 <p>an enterprise could use NTP to reference NTP servers that use an atomic clock as their reference source, like the NTP primary servers in Figure 9-6, which happen to be run by the US National Institute of Standards and Technology (NIST) (see tf.nist.gov).</p>
-<p>
-<a href="#image-183ec74f61a4e3ca49307115cfa22234" class="lightbox-link">
-<img src="blob:file:///b0dca087-9689-487e-86ec-04b89f2d82ee" alt="Stratum 1
-Stratum 2
-NTP Primary
-servers (MST)
-Internet
-NTP Clienvserver
-Stratum 3
-9-6 Stratum Levels VVhen Using an Internet-based Stratum 1 NTP Server" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-183ec74f61a4e3ca49307115cfa22234">
-<img src="blob:file:///b0dca087-9689-487e-86ec-04b89f2d82ee" alt="Stratum 1
-Stratum 2
-NTP Primary
-servers (MST)
-Internet
-NTP Clienvserver
-Stratum 3
-9-6 Stratum Levels VVhen Using an Internet-based Stratum 1 NTP Server" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-d6f14bb12f94a09ccd9dce674baeae0e" class="lightbox-link"><img alt="Stratum 1\nStratum 2\nNTP Primary\nservers (MST)\nInternet\nNTP Clienvserver\nStratum 3\n9-6 Stratum Levels VVhen Using an Internet-based Stratum 1 NTP Server" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///b0dca087-9689-487e-86ec-04b89f2d82ee" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d6f14bb12f94a09ccd9dce674baeae0e"><img alt="Stratum 1\nStratum 2\nNTP Primary\nservers (MST)\nInternet\nNTP Clienvserver\nStratum 3\n9-6 Stratum Levels VVhen Using an Internet-based Stratum 1 NTP Server" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///b0dca087-9689-487e-86ec-04b89f2d82ee"></a></p>
 <p>NTP primary server and NTP secondary server.</p>
 <p>An NTP primary server acts only as a server, with a reference clock external to the device, and has a stratum level of 1, like the two NTP primary servers shown in Figure 9-6. NTP secondary servers are servers that use client/server mode as described throughout this section, relying on synchronization with some other NTP server.</p>
-<p>
-<a href="#image-8c78ddb226ddd6303a222b01dba078ce" class="lightbox-link">
-<img src="blob:file:///77c1af69-5be5-421e-983f-f15baed94077" alt="Example 9-12 NTP Configuration on RI, R2 per Eigure 9-6
-Click here to view code image
-ntp server time-a-b-nist .gov
-ntp server time-a-g.nist.gov" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-8c78ddb226ddd6303a222b01dba078ce">
-<img src="blob:file:///77c1af69-5be5-421e-983f-f15baed94077" alt="Example 9-12 NTP Configuration on RI, R2 per Eigure 9-6
-Click here to view code image
-ntp server time-a-b-nist .gov
-ntp server time-a-g.nist.gov" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-472c7d2594fbc0a0f78e86d1b40500b6" class="lightbox-link"><img alt="Example 9-12 NTP Configuration on RI, R2 per Eigure 9-6\nClick here to view code image\nntp server time-a-b-nist .gov\nntp server time-a-g.nist.gov" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///77c1af69-5be5-421e-983f-f15baed94077" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-472c7d2594fbc0a0f78e86d1b40500b6"><img alt="Example 9-12 NTP Configuration on RI, R2 per Eigure 9-6\nClick here to view code image\nntp server time-a-b-nist .gov\nntp server time-a-g.nist.gov" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///77c1af69-5be5-421e-983f-f15baed94077"></a></p>
 <p>After losing their reference clock, R1 and R2 could no longer be useful NTP servers to the rest of the enterprise.</p>
 <p>To overcome this potential issue, the routers can also be configured with the ntp master command, resulting in this logic:</p>
 <p>Establish an association with the NTP servers per the ntp server command.</p>
@@ -789,92 +360,24 @@ ntp server time-a-g.nist.gov" class="lightbox-image" loading="lazy">
 <p>Set the stratum level of the internal clock (per the ntp master {stratum-level} command) to a higher (worse) stratum level than the Internet-based NTP servers.</p>
 <p>Synchronize with the best (lowest) known time source, which will be one of the Internet NTP servers in this scenario</p>
 <p>ntp master 7 command, with a much higher stratum,</p>
-<p>
-<a href="#image-e63c070462a914de38a383e8b83dce1e" class="lightbox-link">
-<img src="blob:file:///6679839f-8a17-4d63-a07f-e4e09cda1598" alt="Example 9-13 NTP Configuration on RI and R2 to Protect Against Internet
-Failures
-Click here to view code image
-ntp server time-a-b-nist .gov
-ntp server time-a-g.nist.gov
-ntp master 7" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-e63c070462a914de38a383e8b83dce1e">
-<img src="blob:file:///6679839f-8a17-4d63-a07f-e4e09cda1598" alt="Example 9-13 NTP Configuration on RI and R2 to Protect Against Internet
-Failures
-Click here to view code image
-ntp server time-a-b-nist .gov
-ntp server time-a-g.nist.gov
-ntp master 7" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-ee201b9cbbf6110dc1e244805ef4fce4" class="lightbox-link"><img alt="Example 9-13 NTP Configuration on RI and R2 to Protect Against Internet\nFailures\nClick here to view code image\nntp server time-a-b-nist .gov\nntp server time-a-g.nist.gov\nntp master 7" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///6679839f-8a17-4d63-a07f-e4e09cda1598" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ee201b9cbbf6110dc1e244805ef4fce4"><img alt="Example 9-13 NTP Configuration on RI and R2 to Protect Against Internet\nFailures\nClick here to view code image\nntp server time-a-b-nist .gov\nntp server time-a-g.nist.gov\nntp master 7" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///6679839f-8a17-4d63-a07f-e4e09cda1598"></a></p>
 <h3 id="ntp-using-a-loopback-interface-for-better-availability">NTP Using a Loopback Interface for Better Availability</h3>
 <p>what happens when one interface on R4 fails</p>
 <p>for any NTP clients that had referred to that specific IP address</p>
 <p>There would likely still be a route to reach R4 itself.</p>
 <p>The NTP client would not be able to send packets to the configured address because that interface is down.</p>
-<p>
-<a href="#image-f5022d76879fbcbc09f37569f5bf613b" class="lightbox-link">
-<img src="blob:file:///efe7ee03-a9b4-4d2e-ad83-ba6db3b913a7" alt="R2
-NTP server
-Figure 9-7 The Availability Issue ofReferencing an NTP Server&amp;rsquo;s Physical Interface IP Address" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-f5022d76879fbcbc09f37569f5bf613b">
-<img src="blob:file:///efe7ee03-a9b4-4d2e-ad83-ba6db3b913a7" alt="R2
-NTP server
-Figure 9-7 The Availability Issue ofReferencing an NTP Server&amp;rsquo;s Physical Interface IP Address" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-9a3ef9bfc128745831ec885f341b64ca" class="lightbox-link"><img alt="R2\nNTP server\nFigure 9-7 The Availability Issue ofReferencing an NTP Server&rsquo;s Physical Interface IP Address" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///efe7ee03-a9b4-4d2e-ad83-ba6db3b913a7" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9a3ef9bfc128745831ec885f341b64ca"><img alt="R2\nNTP server\nFigure 9-7 The Availability Issue ofReferencing an NTP Server&rsquo;s Physical Interface IP Address" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///efe7ee03-a9b4-4d2e-ad83-ba6db3b913a7"></a></p>
 <p>loopback interface to meet that exact need</p>
 <p>once configured, it remains in an up/up state as long as</p>
 <p>Key Topic.</p>
 <p>The router remains up.</p>
 <p>You do not issue a shutdown command on that loopback interface.</p>
-<p>
-<a href="#image-9ca53d7863a5a33295125567d3972801" class="lightbox-link">
-<img src="blob:file:///46fedc78-dcd4-46c6-86d5-61d91857c93b" alt="Example 9-14 NTP Client/Server Configuration on RI and R2 Using a Loopback
-Interface
-Click here to view code image
-! Configuration on RI,
-ntp server 172.16.9.9
-Click here to view code image
-a client
-! Configuration on R2 for its server function
-interface loopback ø
-L
-ip address 172.16.9.9 255.255.255.ø
-ntp master 4
-ntp source loopback
-! Verification on router R2
-R2# show interfaces loopback ø
-Loopback0 is up, line protocol is up
-Hardware is Loopback" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-9ca53d7863a5a33295125567d3972801">
-<img src="blob:file:///46fedc78-dcd4-46c6-86d5-61d91857c93b" alt="Example 9-14 NTP Client/Server Configuration on RI and R2 Using a Loopback
-Interface
-Click here to view code image
-! Configuration on RI,
-ntp server 172.16.9.9
-Click here to view code image
-a client
-! Configuration on R2 for its server function
-interface loopback ø
-L
-ip address 172.16.9.9 255.255.255.ø
-ntp master 4
-ntp source loopback
-! Verification on router R2
-R2# show interfaces loopback ø
-Loopback0 is up, line protocol is up
-Hardware is Loopback" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-2096c130f7329e7c3c57b71d3e2c29d4" class="lightbox-link">
-<img src="blob:file:///a0215c7c-df76-4921-8d73-7d5d7b11785c" alt="Internet address is 172.16.9.9/24
-! lines omitted for brevity" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-2096c130f7329e7c3c57b71d3e2c29d4">
-<img src="blob:file:///a0215c7c-df76-4921-8d73-7d5d7b11785c" alt="Internet address is 172.16.9.9/24
-! lines omitted for brevity" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-79a6fd441e26e59788b57e1aa7d994a2" class="lightbox-link"><img alt="Example 9-14 NTP Client/Server Configuration on RI and R2 Using a Loopback\nInterface\nClick here to view code image\n! Configuration on RI,\nntp server 172.16.9.9\nClick here to view code image\na client\n! Configuration on R2 for its server function\ninterface loopback ø\nL\nip address 172.16.9.9 255.255.255.ø\nntp master 4\nntp source loopback\n! Verification on router R2\nR2# show interfaces loopback ø\nLoopback0 is up, line protocol is up\nHardware is Loopback" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///46fedc78-dcd4-46c6-86d5-61d91857c93b" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-79a6fd441e26e59788b57e1aa7d994a2"><img alt="Example 9-14 NTP Client/Server Configuration on RI and R2 Using a Loopback\nInterface\nClick here to view code image\n! Configuration on RI,\nntp server 172.16.9.9\nClick here to view code image\na client\n! Configuration on R2 for its server function\ninterface loopback ø\nL\nip address 172.16.9.9 255.255.255.ø\nntp master 4\nntp source loopback\n! Verification on router R2\nR2# show interfaces loopback ø\nLoopback0 is up, line protocol is up\nHardware is Loopback" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///46fedc78-dcd4-46c6-86d5-61d91857c93b"></a></p>
+<p><a href="#R-image-be99895d329b5ad7cf24407aa42f44e6" class="lightbox-link"><img alt="Internet address is 172.16.9.9/24\n! lines omitted for brevity" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///a0215c7c-df76-4921-8d73-7d5d7b11785c" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-be99895d329b5ad7cf24407aa42f44e6"><img alt="Internet address is 172.16.9.9/24\n! lines omitted for brevity" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///a0215c7c-df76-4921-8d73-7d5d7b11785c"></a></p>
 <h2 id="analyzing-topology-using-cdp-and-lldp">Analyzing Topology Using CDP and LLDP</h2>
 <h3 id="examining-information-learned-by-cdp">Examining Information Learned by CDP</h3>
 <p>Cisco-proprietary</p>
@@ -888,77 +391,11 @@ Hardware is Loopback" class="lightbox-image" loading="lazy">
 <p>Capabilities list: Information on what type of device it is (for example, a router or a switch)</p>
 <p>Platform: The model and OS level running on the device</p>
 <p>Cisco IP Phones use CDP to learn the data and voice VLAN IDs as configured on the access switch.</p>
-<p>
-<a href="#image-e494a22b3ab4e860e8ef7f9602ad9def" class="lightbox-link">
-<img src="blob:file:///2398a655-1078-49a1-bd8e-0103fbbca8ff" alt="Table 9-3 show cdp Commands That List Information About Neighbors
-Command
-show cdp neigh-
-bors [type number]
-show cdp neigh-
-bors detail
-show cdp entry
-name
-Description
-Lists one summary line of information about each
-neighbor or just the neighbor found on a specific inter-
-face if an interface was listed
-Lists one large set (approximately 15 lines) of informa-
-tion, one set for every neighbor
-Lists the same information as the show cdp neighbors
-detail command, but only for the named neighbor
-(case sensitive)" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-e494a22b3ab4e860e8ef7f9602ad9def">
-<img src="blob:file:///2398a655-1078-49a1-bd8e-0103fbbca8ff" alt="Table 9-3 show cdp Commands That List Information About Neighbors
-Command
-show cdp neigh-
-bors [type number]
-show cdp neigh-
-bors detail
-show cdp entry
-name
-Description
-Lists one summary line of information about each
-neighbor or just the neighbor found on a specific inter-
-face if an interface was listed
-Lists one large set (approximately 15 lines) of informa-
-tion, one set for every neighbor
-Lists the same information as the show cdp neighbors
-detail command, but only for the named neighbor
-(case sensitive)" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-c5b1b67f81da27763ac2b849fc774c85" class="lightbox-link"><img alt="Table 9-3 show cdp Commands That List Information About Neighbors\nCommand\nshow cdp neigh-\nbors [type number]\nshow cdp neigh-\nbors detail\nshow cdp entry\nname\nDescription\nLists one summary line of information about each\nneighbor or just the neighbor found on a specific inter-\nface if an interface was listed\nLists one large set (approximately 15 lines) of informa-\ntion, one set for every neighbor\nLists the same information as the show cdp neighbors\ndetail command, but only for the named neighbor\n(case sensitive)" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///2398a655-1078-49a1-bd8e-0103fbbca8ff" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c5b1b67f81da27763ac2b849fc774c85"><img alt="Table 9-3 show cdp Commands That List Information About Neighbors\nCommand\nshow cdp neigh-\nbors [type number]\nshow cdp neigh-\nbors detail\nshow cdp entry\nname\nDescription\nLists one summary line of information about each\nneighbor or just the neighbor found on a specific inter-\nface if an interface was listed\nLists one large set (approximately 15 lines) of informa-\ntion, one set for every neighbor\nLists the same information as the show cdp neighbors\ndetail command, but only for the named neighbor\n(case sensitive)" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///2398a655-1078-49a1-bd8e-0103fbbca8ff"></a></p>
 <p>routers and switches support the same CDP commands, with the same parameters and same types of output.</p>
-<p>
-<a href="#image-023eedd452931cbd41b2c6929057c687" class="lightbox-link">
-<img src="blob:file:///65b036b9-4ce9-4ab5-abbf-e54bbaa228fb" alt="Cisco 2960XR Switches (WS-2960XR-24TS-l)
-Gil/0/1
-Fred
-GilW24
-SWI
-Gil /0/2
-Barney
-02002222.2222
-Gil,W21
-Gil/O&#39;2
-GiO,W1 0200.5555.5555
-Cisco ISRIK Router
-Figure 9-8 Small Network Used in CDP Examples" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-023eedd452931cbd41b2c6929057c687">
-<img src="blob:file:///65b036b9-4ce9-4ab5-abbf-e54bbaa228fb" alt="Cisco 2960XR Switches (WS-2960XR-24TS-l)
-Gil/0/1
-Fred
-GilW24
-SWI
-Gil /0/2
-Barney
-02002222.2222
-Gil,W21
-Gil/O&#39;2
-GiO,W1 0200.5555.5555
-Cisco ISRIK Router
-Figure 9-8 Small Network Used in CDP Examples" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-9517024f064a3945d9b60fc6b3b0547b" class="lightbox-link"><img alt="Cisco 2960XR Switches (WS-2960XR-24TS-l)\nGil/0/1\nFred\nGilW24\nSWI\nGil /0/2\nBarney\n02002222.2222\nGil,W21\nGil/O'2\nGiO,W1 0200.5555.5555\nCisco ISRIK Router\nFigure 9-8 Small Network Used in CDP Examples" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///65b036b9-4ce9-4ab5-abbf-e54bbaa228fb" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9517024f064a3945d9b60fc6b3b0547b"><img alt="Cisco 2960XR Switches (WS-2960XR-24TS-l)\nGil/0/1\nFred\nGilW24\nSWI\nGil /0/2\nBarney\n02002222.2222\nGil,W21\nGil/O'2\nGiO,W1 0200.5555.5555\nCisco ISRIK Router\nFigure 9-8 Small Network Used in CDP Examples" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///65b036b9-4ce9-4ab5-abbf-e54bbaa228fb"></a></p>
 <p>Example 9-15 show cdp neighbors Command Examples: SW2<br>
 Click here to view code image<br>
 SW2# show cdp neighbors<br>
@@ -1001,119 +438,12 @@ Total cdp entries displayed<br>
 <p>the device processes the message and then discards it, rather than forwarding it</p>
 <p>show cdp neighbors detail</p>
 <p>lists the full name of the switch model (WS-2960XR-24TS-I) and the IP address configured on the neighboring device.</p>
-<p>
-<a href="#image-c90a51b3cfbb22ccaca2fb6c84a1d19e" class="lightbox-link">
-<img src="blob:file:///79b58992-46ce-4683-8122-3a240e3e3588" alt="SW2# show cdp neighbors detail
-Device ID: SWI
-Entry address(es):
-IP address: 1.1.1.1
-Platform: cisco WS-C2960XR-24TS-1,
-Capabilities: Switch IGMP
-Interface:
-Holdtime .
-Version :
-GigabitEthernet1/0/21,
-144 sec
-Port ID (outgoing port):
-GigabitE
-Version
-Cisco IOS Software, Software (C2960X-UNIVERSALK9-M),
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2018 by Cisco Systems, Inc.
-Compiled Thu 13-Sep-18 03 by prod rel team" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-c90a51b3cfbb22ccaca2fb6c84a1d19e">
-<img src="blob:file:///79b58992-46ce-4683-8122-3a240e3e3588" alt="SW2# show cdp neighbors detail
-Device ID: SWI
-Entry address(es):
-IP address: 1.1.1.1
-Platform: cisco WS-C2960XR-24TS-1,
-Capabilities: Switch IGMP
-Interface:
-Holdtime .
-Version :
-GigabitEthernet1/0/21,
-144 sec
-Port ID (outgoing port):
-GigabitE
-Version
-Cisco IOS Software, Software (C2960X-UNIVERSALK9-M),
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2018 by Cisco Systems, Inc.
-Compiled Thu 13-Sep-18 03 by prod rel team" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-8443df1ebce084774f0b52f3ec5d3506" class="lightbox-link">
-<img src="blob:file:///41b70243-659b-48eb-8a21-e4eeb14899e3" alt="advertisement version: 2
-Protocol Hello: OUI=oxoeoooc,
-VTP Management Domain: &amp;lsquo;fred&amp;rsquo;
-Native VLAN: 1
-Duplex: full
-Management address(es) :
-IP address: 1.1.1.1
-Device ID: RI
-Entry address(es):
-IP address: 10.12.25.5
-Protocol ID=oxØ112;
-payload len=27,
-Interface:
-Holdtime .
-Capabilities: Router Switch IGMP
-Port ID (outgoing port): GigabitEt
-GigabitEthernet1/0/2,
-151 sec" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-8443df1ebce084774f0b52f3ec5d3506">
-<img src="blob:file:///41b70243-659b-48eb-8a21-e4eeb14899e3" alt="advertisement version: 2
-Protocol Hello: OUI=oxoeoooc,
-VTP Management Domain: &amp;lsquo;fred&amp;rsquo;
-Native VLAN: 1
-Duplex: full
-Management address(es) :
-IP address: 1.1.1.1
-Device ID: RI
-Entry address(es):
-IP address: 10.12.25.5
-Protocol ID=oxØ112;
-payload len=27,
-Interface:
-Holdtime .
-Capabilities: Router Switch IGMP
-Port ID (outgoing port): GigabitEt
-GigabitEthernet1/0/2,
-151 sec" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-ad0fef4388a83134a0c77362d7a90ddd" class="lightbox-link">
-<img src="blob:file:///b8cc1ddc-e463-4ddf-9f81-4ecebf1796c2" alt="Version :
-Cisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2018 by Cisco Systems, Inc.
-Compiled Tue 27-Mar-18 10:56 by mcpre
-advertisement version :
-2
-VTP Management Domain: &amp;rsquo; &amp;rsquo;
-Duplex: full
-Management address(es) :
-IP address: 10.12.25.5
-Total cdp entries displayed
-.2" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-ad0fef4388a83134a0c77362d7a90ddd">
-<img src="blob:file:///b8cc1ddc-e463-4ddf-9f81-4ecebf1796c2" alt="Version :
-Cisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2018 by Cisco Systems, Inc.
-Compiled Tue 27-Mar-18 10:56 by mcpre
-advertisement version :
-2
-VTP Management Domain: &amp;rsquo; &amp;rsquo;
-Duplex: full
-Management address(es) :
-IP address: 10.12.25.5
-Total cdp entries displayed
-.2" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-9ae1a1dfad2e1b1957c67c48432cc3f4" class="lightbox-link"><img alt="SW2# show cdp neighbors detail\nDevice ID: SWI\nEntry address(es):\nIP address: 1.1.1.1\nPlatform: cisco WS-C2960XR-24TS-1,\nCapabilities: Switch IGMP\nInterface:\nHoldtime .\nVersion :\nGigabitEthernet1/0/21,\n144 sec\nPort ID (outgoing port):\nGigabitE\nVersion\nCisco IOS Software, Software (C2960X-UNIVERSALK9-M),\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2018 by Cisco Systems, Inc.\nCompiled Thu 13-Sep-18 03 by prod rel team" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///79b58992-46ce-4683-8122-3a240e3e3588" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ae1a1dfad2e1b1957c67c48432cc3f4"><img alt="SW2# show cdp neighbors detail\nDevice ID: SWI\nEntry address(es):\nIP address: 1.1.1.1\nPlatform: cisco WS-C2960XR-24TS-1,\nCapabilities: Switch IGMP\nInterface:\nHoldtime .\nVersion :\nGigabitEthernet1/0/21,\n144 sec\nPort ID (outgoing port):\nGigabitE\nVersion\nCisco IOS Software, Software (C2960X-UNIVERSALK9-M),\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2018 by Cisco Systems, Inc.\nCompiled Thu 13-Sep-18 03 by prod rel team" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///79b58992-46ce-4683-8122-3a240e3e3588"></a></p>
+<p><a href="#R-image-c2474c7b78122f288490d8681e1bac54" class="lightbox-link"><img alt="advertisement version: 2\nProtocol Hello: OUI=oxoeoooc,\nVTP Management Domain: &lsquo;fred&rsquo;\nNative VLAN: 1\nDuplex: full\nManagement address(es) :\nIP address: 1.1.1.1\nDevice ID: RI\nEntry address(es):\nIP address: 10.12.25.5\nProtocol ID=oxØ112;\npayload len=27,\nInterface:\nHoldtime .\nCapabilities: Router Switch IGMP\nPort ID (outgoing port): GigabitEt\nGigabitEthernet1/0/2,\n151 sec" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///41b70243-659b-48eb-8a21-e4eeb14899e3" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c2474c7b78122f288490d8681e1bac54"><img alt="advertisement version: 2\nProtocol Hello: OUI=oxoeoooc,\nVTP Management Domain: &lsquo;fred&rsquo;\nNative VLAN: 1\nDuplex: full\nManagement address(es) :\nIP address: 1.1.1.1\nDevice ID: RI\nEntry address(es):\nIP address: 10.12.25.5\nProtocol ID=oxØ112;\npayload len=27,\nInterface:\nHoldtime .\nCapabilities: Router Switch IGMP\nPort ID (outgoing port): GigabitEt\nGigabitEthernet1/0/2,\n151 sec" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///41b70243-659b-48eb-8a21-e4eeb14899e3"></a></p>
+<p><a href="#R-image-a3138198d5e4cf1f86d41a1547373051" class="lightbox-link"><img alt="Version :\nCisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2018 by Cisco Systems, Inc.\nCompiled Tue 27-Mar-18 10:56 by mcpre\nadvertisement version :\n2\nVTP Management Domain: &rsquo; &rsquo;\nDuplex: full\nManagement address(es) :\nIP address: 10.12.25.5\nTotal cdp entries displayed\n.2" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///b8cc1ddc-e463-4ddf-9f81-4ecebf1796c2" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a3138198d5e4cf1f86d41a1547373051"><img alt="Version :\nCisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2018 by Cisco Systems, Inc.\nCompiled Tue 27-Mar-18 10:56 by mcpre\nadvertisement version :\n2\nVTP Management Domain: &rsquo; &rsquo;\nDuplex: full\nManagement address(es) :\nIP address: 10.12.25.5\nTotal cdp entries displayed\n.2" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///b8cc1ddc-e463-4ddf-9f81-4ecebf1796c2"></a></p>
 <p>The show cdp entry name command lists the exact same details shown in the output of the show cdp neighbors detail command, but for only the one neighbor listed in the command.</p>
 <p>Cisco recommends that CDP be disabled on any interface that might not have a need for CDP. For switches, any switch port connected to another switch, a router, or to an IP phone should use CDP.</p>
 <h3 id="configuring-and-verifying-cdp">Configuring and Verifying CDP</h3>
@@ -1121,285 +451,21 @@ Total cdp entries displayed
 <p>re-enable it with the cdp enable interface subcommand</p>
 <p>disable and re-enable CDP globally on the device</p>
 <p>no cdp run and cdp run global commands</p>
-<p>
-<a href="#image-4a644e0ff5579dd3b12bec9088918d7c" class="lightbox-link">
-<img src="blob:file:///518b3cfe-18e1-4a81-9187-be7eea7b496b" alt="Table 9-4 Commands Used to Verify CDP Operations
-Command
-show cdp
-show cdp inter-
-face [type
-number]
-show cdp traffic
-Description
-States whether CDP is enabled globally and lists the de-
-fault update and holdtime timers
-States whether CDP is enabled on each interface, or a
-single interface if the interface is listed, and states up-
-date and holdtime timers on those interfaces
-Lists global statistics for the number of CDP advertise-
-ments sent and received" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-4a644e0ff5579dd3b12bec9088918d7c">
-<img src="blob:file:///518b3cfe-18e1-4a81-9187-be7eea7b496b" alt="Table 9-4 Commands Used to Verify CDP Operations
-Command
-show cdp
-show cdp inter-
-face [type
-number]
-show cdp traffic
-Description
-States whether CDP is enabled globally and lists the de-
-fault update and holdtime timers
-States whether CDP is enabled on each interface, or a
-single interface if the interface is listed, and states up-
-date and holdtime timers on those interfaces
-Lists global statistics for the number of CDP advertise-
-ments sent and received" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-ef83984a112aa38193f0fe9f496d1a1b" class="lightbox-link">
-<img src="blob:file:///7787792d-cb59-4452-b119-10c3deeda082" alt="Example 9-17 show cdp Commands That Show CDP Status
-Click here to view code image
-SW2# show cdp
-Global CDP information:
-Sending CDP packets every 60 seconds
-Sending a holdtime value of 180 seconds
-Sending CDPv2 advertisements is enabled
-SW2# show cdp interface GigabitEthernet1/0/2
-GigabitEthernet1/Ø/2 is up, line protocol is up
-Encapsulation ARPA
-Sending CDP packets every 60 seconds
-Holdtime is 180 seconds
-SW2# show cdp traffic
-CDP counters :
-Total packets
-Hdr syntax: 0,
-No memory: 0,
-CDP version 1
-CDP version 2
-output: 304, Input: 305
-Chksum error:
-Invalid packet
-advertisements
-advertisements
-0, Encaps failed
-output :
-output :
-0, Input
-304, Input: 305" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-ef83984a112aa38193f0fe9f496d1a1b">
-<img src="blob:file:///7787792d-cb59-4452-b119-10c3deeda082" alt="Example 9-17 show cdp Commands That Show CDP Status
-Click here to view code image
-SW2# show cdp
-Global CDP information:
-Sending CDP packets every 60 seconds
-Sending a holdtime value of 180 seconds
-Sending CDPv2 advertisements is enabled
-SW2# show cdp interface GigabitEthernet1/0/2
-GigabitEthernet1/Ø/2 is up, line protocol is up
-Encapsulation ARPA
-Sending CDP packets every 60 seconds
-Holdtime is 180 seconds
-SW2# show cdp traffic
-CDP counters :
-Total packets
-Hdr syntax: 0,
-No memory: 0,
-CDP version 1
-CDP version 2
-output: 304, Input: 305
-Chksum error:
-Invalid packet
-advertisements
-advertisements
-0, Encaps failed
-output :
-output :
-0, Input
-304, Input: 305" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-bb39872fa9b329e6e4d3583a4542bf74" class="lightbox-link"><img alt="Table 9-4 Commands Used to Verify CDP Operations\nCommand\nshow cdp\nshow cdp inter-\nface [type\nnumber]\nshow cdp traffic\nDescription\nStates whether CDP is enabled globally and lists the de-\nfault update and holdtime timers\nStates whether CDP is enabled on each interface, or a\nsingle interface if the interface is listed, and states up-\ndate and holdtime timers on those interfaces\nLists global statistics for the number of CDP advertise-\nments sent and received" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///518b3cfe-18e1-4a81-9187-be7eea7b496b" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bb39872fa9b329e6e4d3583a4542bf74"><img alt="Table 9-4 Commands Used to Verify CDP Operations\nCommand\nshow cdp\nshow cdp inter-\nface [type\nnumber]\nshow cdp traffic\nDescription\nStates whether CDP is enabled globally and lists the de-\nfault update and holdtime timers\nStates whether CDP is enabled on each interface, or a\nsingle interface if the interface is listed, and states up-\ndate and holdtime timers on those interfaces\nLists global statistics for the number of CDP advertise-\nments sent and received" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///518b3cfe-18e1-4a81-9187-be7eea7b496b"></a></p>
+<p><a href="#R-image-1b8951e46c0b9b9126d76e309a525a91" class="lightbox-link"><img alt="Example 9-17 show cdp Commands That Show CDP Status\nClick here to view code image\nSW2# show cdp\nGlobal CDP information:\nSending CDP packets every 60 seconds\nSending a holdtime value of 180 seconds\nSending CDPv2 advertisements is enabled\nSW2# show cdp interface GigabitEthernet1/0/2\nGigabitEthernet1/Ø/2 is up, line protocol is up\nEncapsulation ARPA\nSending CDP packets every 60 seconds\nHoldtime is 180 seconds\nSW2# show cdp traffic\nCDP counters :\nTotal packets\nHdr syntax: 0,\nNo memory: 0,\nCDP version 1\nCDP version 2\noutput: 304, Input: 305\nChksum error:\nInvalid packet\nadvertisements\nadvertisements\n0, Encaps failed\noutput :\noutput :\n0, Input\n304, Input: 305" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///7787792d-cb59-4452-b119-10c3deeda082" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1b8951e46c0b9b9126d76e309a525a91"><img alt="Example 9-17 show cdp Commands That Show CDP Status\nClick here to view code image\nSW2# show cdp\nGlobal CDP information:\nSending CDP packets every 60 seconds\nSending a holdtime value of 180 seconds\nSending CDPv2 advertisements is enabled\nSW2# show cdp interface GigabitEthernet1/0/2\nGigabitEthernet1/Ø/2 is up, line protocol is up\nEncapsulation ARPA\nSending CDP packets every 60 seconds\nHoldtime is 180 seconds\nSW2# show cdp traffic\nCDP counters :\nTotal packets\nHdr syntax: 0,\nNo memory: 0,\nCDP version 1\nCDP version 2\noutput: 304, Input: 305\nChksum error:\nInvalid packet\nadvertisements\nadvertisements\n0, Encaps failed\noutput :\noutput :\n0, Input\n304, Input: 305" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///7787792d-cb59-4452-b119-10c3deeda082"></a></p>
 <p>send time and the hold time. CDP sends messages every 60 seconds by default, with a hold time of 180 seconds. The hold time tells the device how long to wait after no longer hearing from a device before removing those details from the CDP tables. You can override the defaults with the cdp timer seconds and cdp holdtime seconds global commands, respectively.</p>
 <h2 id="examining-information-learned-by-lldp">Examining Information Learned by LLDP</h2>
-<p>
-<a href="#image-612325a8ae6942a0c8ca1beb9154b77f" class="lightbox-link">
-<img src="blob:file:///c3dc6bd1-0f19-4496-9d7a-8b042e9acc13" alt="SW2# show Ildp neighbors
-Capability codes:
-(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
-Hold-time
-(W) WLAN Access Point, (P) Repeater,
-(S)
-Station, (O) Other
-Device ID
-RI
-SWI
-Local Intf
-Gil/O/2
-Gil /0/21
-Capability
-120
-120
-Trans
-Host,
-CVTA,
-Port
-GiO/O/
-Gil/Oj
-Total entries displayed: 2
-SW2# show cdp neighbors
-Capability Codes: R
-S
-D
-Router,
-Switch,
-Remote,
-T
-c
-Bridge, B
-Source Route Bri
-1
-IGMP, r
-Repeater, p
-M - Two-port Mac
-Device ID
-Local Intrfce
-Gig 1/0/21
-Gig 1/0/2
-displayed: 2
-Holdtme
-155
-131
-Capability
-SWI
-RI
-Total
-Relay
-Platform
-ws-C296ex
-Cili1-8P
-entries" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-612325a8ae6942a0c8ca1beb9154b77f">
-<img src="blob:file:///c3dc6bd1-0f19-4496-9d7a-8b042e9acc13" alt="SW2# show Ildp neighbors
-Capability codes:
-(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
-Hold-time
-(W) WLAN Access Point, (P) Repeater,
-(S)
-Station, (O) Other
-Device ID
-RI
-SWI
-Local Intf
-Gil/O/2
-Gil /0/21
-Capability
-120
-120
-Trans
-Host,
-CVTA,
-Port
-GiO/O/
-Gil/Oj
-Total entries displayed: 2
-SW2# show cdp neighbors
-Capability Codes: R
-S
-D
-Router,
-Switch,
-Remote,
-T
-c
-Bridge, B
-Source Route Bri
-1
-IGMP, r
-Repeater, p
-M - Two-port Mac
-Device ID
-Local Intrfce
-Gig 1/0/21
-Gig 1/0/2
-displayed: 2
-Holdtme
-155
-131
-Capability
-SWI
-RI
-Total
-Relay
-Platform
-ws-C296ex
-Cili1-8P
-entries" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-4839f47fe619dd5f5221bdfd104dee9c" class="lightbox-link"><img alt="SW2# show Ildp neighbors\nCapability codes:\n(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device\nHold-time\n(W) WLAN Access Point, (P) Repeater,\n(S)\nStation, (O) Other\nDevice ID\nRI\nSWI\nLocal Intf\nGil/O/2\nGil /0/21\nCapability\n120\n120\nTrans\nHost,\nCVTA,\nPort\nGiO/O/\nGil/Oj\nTotal entries displayed: 2\nSW2# show cdp neighbors\nCapability Codes: R\nS\nD\nRouter,\nSwitch,\nRemote,\nT\nc\nBridge, B\nSource Route Bri\n1\nIGMP, r\nRepeater, p\nM - Two-port Mac\nDevice ID\nLocal Intrfce\nGig 1/0/21\nGig 1/0/2\ndisplayed: 2\nHoldtme\n155\n131\nCapability\nSWI\nRI\nTotal\nRelay\nPlatform\nws-C296ex\nCili1-8P\nentries" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///c3dc6bd1-0f19-4496-9d7a-8b042e9acc13" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4839f47fe619dd5f5221bdfd104dee9c"><img alt="SW2# show Ildp neighbors\nCapability codes:\n(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device\nHold-time\n(W) WLAN Access Point, (P) Repeater,\n(S)\nStation, (O) Other\nDevice ID\nRI\nSWI\nLocal Intf\nGil/O/2\nGil /0/21\nCapability\n120\n120\nTrans\nHost,\nCVTA,\nPort\nGiO/O/\nGil/Oj\nTotal entries displayed: 2\nSW2# show cdp neighbors\nCapability Codes: R\nS\nD\nRouter,\nSwitch,\nRemote,\nT\nc\nBridge, B\nSource Route Bri\n1\nIGMP, r\nRepeater, p\nM - Two-port Mac\nDevice ID\nLocal Intrfce\nGig 1/0/21\nGig 1/0/2\ndisplayed: 2\nHoldtme\n155\n131\nCapability\nSWI\nRI\nTotal\nRelay\nPlatform\nws-C296ex\nCili1-8P\nentries" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///c3dc6bd1-0f19-4496-9d7a-8b042e9acc13"></a></p>
 <p>the LLDP output in the example does differ from CDP in a few important ways:</p>
 <p>LLDP uses B as the capability code for switching, referring to bridge, a term for the device type that existed before switches that performed the same basic functions.</p>
 <p>LLDP does not identify IGMP as a capability, while CDP does (I).</p>
 <p>CDP lists the neighbor’s platform, a code that defines the device type, while LLDP does not.</p>
 <p>LLDP lists capabilities with different conventions (see upcoming Example 9-19).</p>
-<p>
-<a href="#image-14efd182f37c279337c964fcdb357ea1" class="lightbox-link">
-<img src="blob:file:///947e4912-5bcb-4289-be21-d45a96066b85" alt="SW2# show Ildp entry RI
-Capability codes:
-(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
-(W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
-Local Intf: Gil/0/2
-Chassis id: 70ea .1a9a.d3Ø0
-Port id: GiØ/0/1
-Port Description: GigabitEthernet0/Ø/1
-System Name: RI
-System Description:
-Cisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2018 by Cisco Systems, Inc.
-Compiled Tue 27-Mar-18 10:56 by mcpre
-Time remaining: 100 seconds
-System Capabilities: B,R
-Enabled Capabilities: R
-Management Addresses :
-IP: 10.12.25.5
-Auto Negotiation
-not supported
-Physical media capabilities
-not advertised
-Media Attachment Unit type
-not advertised
-Vlan ID:
-not advertised" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-14efd182f37c279337c964fcdb357ea1">
-<img src="blob:file:///947e4912-5bcb-4289-be21-d45a96066b85" alt="SW2# show Ildp entry RI
-Capability codes:
-(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device
-(W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other
-Local Intf: Gil/0/2
-Chassis id: 70ea .1a9a.d3Ø0
-Port id: GiØ/0/1
-Port Description: GigabitEthernet0/Ø/1
-System Name: RI
-System Description:
-Cisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA
-Technical Support: http://www.cisco.com/techsupport
-Copyright (c) 1986-2018 by Cisco Systems, Inc.
-Compiled Tue 27-Mar-18 10:56 by mcpre
-Time remaining: 100 seconds
-System Capabilities: B,R
-Enabled Capabilities: R
-Management Addresses :
-IP: 10.12.25.5
-Auto Negotiation
-not supported
-Physical media capabilities
-not advertised
-Media Attachment Unit type
-not advertised
-Vlan ID:
-not advertised" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-15c732b2684e3f44f64237f336855d89" class="lightbox-link"><img alt="SW2# show Ildp entry RI\nCapability codes:\n(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device\n(W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other\nLocal Intf: Gil/0/2\nChassis id: 70ea .1a9a.d3Ø0\nPort id: GiØ/0/1\nPort Description: GigabitEthernet0/Ø/1\nSystem Name: RI\nSystem Description:\nCisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2018 by Cisco Systems, Inc.\nCompiled Tue 27-Mar-18 10:56 by mcpre\nTime remaining: 100 seconds\nSystem Capabilities: B,R\nEnabled Capabilities: R\nManagement Addresses :\nIP: 10.12.25.5\nAuto Negotiation\nnot supported\nPhysical media capabilities\nnot advertised\nMedia Attachment Unit type\nnot advertised\nVlan ID:\nnot advertised" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///947e4912-5bcb-4289-be21-d45a96066b85" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-15c732b2684e3f44f64237f336855d89"><img alt="SW2# show Ildp entry RI\nCapability codes:\n(R) Router, (B) Bridge, (T) Telephone, (C) DOCSIS Cable Device\n(W) WLAN Access Point, (P) Repeater, (S) Station, (O) Other\nLocal Intf: Gil/0/2\nChassis id: 70ea .1a9a.d3Ø0\nPort id: GiØ/0/1\nPort Description: GigabitEthernet0/Ø/1\nSystem Name: RI\nSystem Description:\nCisco IOS Software [Fuji], ISR Software (ARMV8EB LINUX IOSD-UNIVERSA\nTechnical Support: http://www.cisco.com/techsupport\nCopyright (c) 1986-2018 by Cisco Systems, Inc.\nCompiled Tue 27-Mar-18 10:56 by mcpre\nTime remaining: 100 seconds\nSystem Capabilities: B,R\nEnabled Capabilities: R\nManagement Addresses :\nIP: 10.12.25.5\nAuto Negotiation\nnot supported\nPhysical media capabilities\nnot advertised\nMedia Attachment Unit type\nnot advertised\nVlan ID:\nnot advertised" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///947e4912-5bcb-4289-be21-d45a96066b85"></a></p>
 <p>System Capabilities: What the device can do</p>
 <p>Enabled Capabilities: What the device does now with its current configuration</p>
 <p>LLDP uses the same messaging concepts as CDP, encapsulating messages directly in data-link headers. Devices do not forward LLDP messages so that LLDP learns only of directly connected neighbors. LLDP does use a different multicast MAC address (0180.C200.000E)</p>
@@ -1411,313 +477,221 @@ not advertised" class="lightbox-image" loading="lazy">
 <p>[no] lldp run: A global configuration command that sets the default mode of LLDP operation for any interface that does not have more specific LLDP subcommands (lldp transmit, lldp receive). The lldp run global command enables LLDP in both directions on those interfaces, while no lldp run disables LLDP.</p>
 <p>[no] lldp transmit: An interface sub-command that defines the operation of LLDP on the interface regardless of the global [no] lldp run command. The lldp transmit interface subcommand causes the device to transmit LLDP messages, while no lldp transmit causes it to not transmit LLDP messages.</p>
 <p>[no] lldp receive: An interface subcommand that defines the operation of LLDP on the interface regardless of the global [no] lldp run command. The lldp receive interface subcommand causes the device to process received LLDP messages, while no lldp receive causes it to not process received LLDP messages.</p>
-<p>
-<a href="#image-85d837ce4190c09fd197605c5efe9269" class="lightbox-link">
-<img src="blob:file:///48b49040-6e65-45ee-a590-a3b5e0fcc11b" alt="Example 9-20 Enabling LLDP on All Ports, Disabling on a Few Ports
-Click here to view code image
-lldp run
-interface gigabitEthernet1/Ø/17
-no lldp transmit
-no lldp receive
-interface gigabitEthernet1/Ø/18
-no lldp receive" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-85d837ce4190c09fd197605c5efe9269">
-<img src="blob:file:///48b49040-6e65-45ee-a590-a3b5e0fcc11b" alt="Example 9-20 Enabling LLDP on All Ports, Disabling on a Few Ports
-Click here to view code image
-lldp run
-interface gigabitEthernet1/Ø/17
-no lldp transmit
-no lldp receive
-interface gigabitEthernet1/Ø/18
-no lldp receive" class="lightbox-image" loading="lazy">
-</a></p>
-<p>
-<a href="#image-a0117dca0daabae3650daeb33775fa55" class="lightbox-link">
-<img src="blob:file:///7640bbe6-77fa-41fe-97a7-8d5fd4d05b6e" alt="Example 9-21 Enabling LLDP on Limited Ports, Leaving Disabled on Most
-Click here to view code image
-interface gigabitEthernet1/Ø/19
-lldp transmit
-lldp receive
-interface gigabitEthernet1/0/20
-lldp receive" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-a0117dca0daabae3650daeb33775fa55">
-<img src="blob:file:///7640bbe6-77fa-41fe-97a7-8d5fd4d05b6e" alt="Example 9-21 Enabling LLDP on Limited Ports, Leaving Disabled on Most
-Click here to view code image
-interface gigabitEthernet1/Ø/19
-lldp transmit
-lldp receive
-interface gigabitEthernet1/0/20
-lldp receive" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-107b0b48edac45e53f31bfc5ee5aff9d" class="lightbox-link"><img alt="Example 9-20 Enabling LLDP on All Ports, Disabling on a Few Ports\nClick here to view code image\nlldp run\ninterface gigabitEthernet1/Ø/17\nno lldp transmit\nno lldp receive\ninterface gigabitEthernet1/Ø/18\nno lldp receive" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///48b49040-6e65-45ee-a590-a3b5e0fcc11b" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-107b0b48edac45e53f31bfc5ee5aff9d"><img alt="Example 9-20 Enabling LLDP on All Ports, Disabling on a Few Ports\nClick here to view code image\nlldp run\ninterface gigabitEthernet1/Ø/17\nno lldp transmit\nno lldp receive\ninterface gigabitEthernet1/Ø/18\nno lldp receive" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///48b49040-6e65-45ee-a590-a3b5e0fcc11b"></a></p>
+<p><a href="#R-image-0f2c7d62c4e84a3e8ff9d68427917179" class="lightbox-link"><img alt="Example 9-21 Enabling LLDP on Limited Ports, Leaving Disabled on Most\nClick here to view code image\ninterface gigabitEthernet1/Ø/19\nlldp transmit\nlldp receive\ninterface gigabitEthernet1/0/20\nlldp receive" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///7640bbe6-77fa-41fe-97a7-8d5fd4d05b6e" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0f2c7d62c4e84a3e8ff9d68427917179"><img alt="Example 9-21 Enabling LLDP on Limited Ports, Leaving Disabled on Most\nClick here to view code image\ninterface gigabitEthernet1/Ø/19\nlldp transmit\nlldp receive\ninterface gigabitEthernet1/0/20\nlldp receive" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///7640bbe6-77fa-41fe-97a7-8d5fd4d05b6e"></a></p>
 <p>show lldp interface lists the interfaces on which LLDP is enabled.</p>
-<p>
-<a href="#image-b7351dbe6d8ecde4ca70228b6748b0c8" class="lightbox-link">
-<img src="blob:file:///56b09a3a-ac43-4d2d-9691-279d8f24afdb" alt="SW2# show Ildp
-Global LLDP Information:
-status: ACTIVE
-LLDP advertisements are sent every 30 seconds
-LLDP hold time advertised is 120 seconds
-LLDP interface reinitialisation delay is 2 seconds
-SW2# show Ildp interface gl/Ø/2
-GigabitEthernet1/Ø/2:
-Tx: enabled
-Rx: enabled
-Tx state: IDLE
-Rx state: WAIT FOR FRAME
-SW2# show Ildp traffic
-LLDP traffic statistics:
-Total
-Total
-Total
-Total
-Total
-Total
-Total
-frames out: 259
-entries aged: 0
-frames in: 257
-frames received in error
-frames discarded: 0
-TLVs discarded: 0
-TLVs unrecognized: 0" style="height: auto; width: auto;" loading="lazy">
-</a>
-<a href="javascript:history.back();" class="lightbox" id="image-b7351dbe6d8ecde4ca70228b6748b0c8">
-<img src="blob:file:///56b09a3a-ac43-4d2d-9691-279d8f24afdb" alt="SW2# show Ildp
-Global LLDP Information:
-status: ACTIVE
-LLDP advertisements are sent every 30 seconds
-LLDP hold time advertised is 120 seconds
-LLDP interface reinitialisation delay is 2 seconds
-SW2# show Ildp interface gl/Ø/2
-GigabitEthernet1/Ø/2:
-Tx: enabled
-Rx: enabled
-Tx state: IDLE
-Rx state: WAIT FOR FRAME
-SW2# show Ildp traffic
-LLDP traffic statistics:
-Total
-Total
-Total
-Total
-Total
-Total
-Total
-frames out: 259
-entries aged: 0
-frames in: 257
-frames received in error
-frames discarded: 0
-TLVs discarded: 0
-TLVs unrecognized: 0" class="lightbox-image" loading="lazy">
-</a></p>
+<p><a href="#R-image-f68c2ceb1e77703599f3568e43d1836b" class="lightbox-link"><img alt="SW2# show Ildp\nGlobal LLDP Information:\nstatus: ACTIVE\nLLDP advertisements are sent every 30 seconds\nLLDP hold time advertised is 120 seconds\nLLDP interface reinitialisation delay is 2 seconds\nSW2# show Ildp interface gl/Ø/2\nGigabitEthernet1/Ø/2:\nTx: enabled\nRx: enabled\nTx state: IDLE\nRx state: WAIT FOR FRAME\nSW2# show Ildp traffic\nLLDP traffic statistics:\nTotal\nTotal\nTotal\nTotal\nTotal\nTotal\nTotal\nframes out: 259\nentries aged: 0\nframes in: 257\nframes received in error\nframes discarded: 0\nTLVs discarded: 0\nTLVs unrecognized: 0" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="blob:file:///56b09a3a-ac43-4d2d-9691-279d8f24afdb" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f68c2ceb1e77703599f3568e43d1836b"><img alt="SW2# show Ildp\nGlobal LLDP Information:\nstatus: ACTIVE\nLLDP advertisements are sent every 30 seconds\nLLDP hold time advertised is 120 seconds\nLLDP interface reinitialisation delay is 2 seconds\nSW2# show Ildp interface gl/Ø/2\nGigabitEthernet1/Ø/2:\nTx: enabled\nRx: enabled\nTx state: IDLE\nRx state: WAIT FOR FRAME\nSW2# show Ildp traffic\nLLDP traffic statistics:\nTotal\nTotal\nTotal\nTotal\nTotal\nTotal\nTotal\nframes out: 259\nentries aged: 0\nframes in: 257\nframes received in error\nframes discarded: 0\nTLVs discarded: 0\nTLVs unrecognized: 0" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="blob:file:///56b09a3a-ac43-4d2d-9691-279d8f24afdb"></a></p>
 <p>like CDP, LLDP uses a send timer and hold timer for the same purposes as CDP. The example shows the default settings of 30 seconds for the send timer and 120 seconds for the hold timer. You can override the defaults with the lldp timer seconds and lldp holdtime seconds global commands</p>
 
             <footer class="footline">
-
             </footer>
           </article>
         </div>
       </main>
     </div>
-    <aside id="sidebar" class="default-animation showVisitedLinks">
-      <div id="header-wrapper" class="default-animation">
-        <div id="header" class="default-animation">
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
 Perfect Dark Mode
 
         </div>
         <div class="searchbox default-animation">
           <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
-          <label class="a11y-only" for="search-by">Search</label>
-          <input data-search-input id="search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
-          <span data-search-clear=""><i class="fas fa-times"></i></span>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
         </div>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1700252831" defer></script>
-        <script src="/js/lunr/lunr.min.js?1700252831" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1700252831" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1700252831" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1700252831" defer></script>
-        <script src="/js/search.js?1700252831" defer></script>
+        <script src="/js/auto-complete.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.min.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1711972135" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1711972135" defer></script>
+        <script src="/js/search.js?1711972135" defer></script>
       </div>
-      <div id="homelinks" class="default-animation">
+      <div id="R-homelinks" class="default-animation homelinks">
         <ul>
-          <li><a class="padding" href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
         </ul>
+        <hr class="padding">
       </div>
-      <div id="content-wrapper" class="highlightable">
-        <ul class="topics enlarge morespace collapsible-menu">
-          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-db801fcabe18fdefdb1b34d275e81669" aria-controls="subsections-db801fcabe18fdefdb1b34d275e81669" checked><label for="section-db801fcabe18fdefdb1b34d275e81669"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="">Linux<i class="fas fa-check read-icon"></i></a><ul id="subsections-db801fcabe18fdefdb1b34d275e81669" class="morespace collapsible-menu">
-          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" aria-controls="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" checked><label for="section-e10d7e60ac28a2cff5a8bc5aaf0e7aa3"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Fedora</span></label><a class="padding" href="">Fedora<i class="fas fa-check read-icon"></i></a><ul id="subsections-e10d7e60ac28a2cff5a8bc5aaf0e7aa3" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/fedora/fedora_setup/index.html" class=""><a class="padding" href="/linux/fedora/fedora_setup/index.html">Fedora Desktop Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/fedora/hotkeys/index.html" class=""><a class="padding" href="/linux/fedora/hotkeys/index.html">Fedora Hotkeys<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/fedora/silverblue/index.html" class=""><a class="padding" href="/linux/fedora/silverblue/index.html">Fedora Silverblue<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/fedora/starcraftonfedora/index.html" class=""><a class="padding" href="/linux/fedora/starcraftonfedora/index.html">How to Install Starcraft on Fedora<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-2c366602ce05ece354fb0e76680a93b8" aria-controls="subsections-2c366602ce05ece354fb0e76680a93b8" checked><label for="section-2c366602ce05ece354fb0e76680a93b8"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu misc</span></label><a class="padding" href="">misc<i class="fas fa-check read-icon"></i></a><ul id="subsections-2c366602ce05ece354fb0e76680a93b8" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/misc_linux/boot_the_system/index.html" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/index.html">Boot<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/command_line/index.html">Command Line<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/index.html">Consoling in on Linux<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/devices/index.html" class=""><a class="padding" href="/linux/misc_linux/devices/index.html">Devices<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/dns/index.html" class=""><a class="padding" href="/linux/misc_linux/dns/index.html">DNS<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/file_permissions/index.html" class=""><a class="padding" href="/linux/misc_linux/file_permissions/index.html">File Permissions<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/getting_started/index.html" class=""><a class="padding" href="/linux/misc_linux/getting_started/index.html">General Linux and History<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/index.html" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/index.html">How to Get Putty to Work in Ubuntu<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/init/index.html" class=""><a class="padding" href="/linux/misc_linux/init/index.html">Init<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/i_o_monitoring/index.html" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/index.html">IO Monitoring<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/index.html" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/index.html">Keyboard Shortcuts<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/kernel/index.html" class=""><a class="padding" href="/linux/misc_linux/kernel/index.html">Linux Kernel<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/logging/index.html" class=""><a class="padding" href="/linux/misc_linux/logging/index.html">Logging<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/ls/index.html" class=""><a class="padding" href="/linux/misc_linux/ls/index.html">ls<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/network_troubleshooting/index.html" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/index.html">Network Troubleshooting<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/network_basics/index.html" class=""><a class="padding" href="/linux/misc_linux/network_basics/index.html">Networking in Linux<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/index.html">Open source and Linux Community<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/packages/index.html" class=""><a class="padding" href="/linux/misc_linux/packages/index.html">Packages and Their Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/process_utilization/index.html" class=""><a class="padding" href="/linux/misc_linux/process_utilization/index.html">Process Utilization<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/ps_processes/index.html" class=""><a class="padding" href="/linux/misc_linux/ps_processes/index.html">Processes<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/linux_resources/index.html" class=""><a class="padding" href="/linux/misc_linux/linux_resources/index.html">Resources for learning Linux<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/scp_command/index.html" class=""><a class="padding" href="/linux/misc_linux/scp_command/index.html">scp<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/network_sharing/index.html" class=""><a class="padding" href="/linux/misc_linux/network_sharing/index.html">Sharing Resources<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/index.html">Shell<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/index.html">Skills that go with Bash Scripting<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/switching_to_linux/index.html" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/index.html">Switching to Linux<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/index.html" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/index.html">Symbols in Bash<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/tar/index.html" class=""><a class="padding" href="/linux/misc_linux/tar/index.html">Tar Stuff<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/text_fu/index.html" class=""><a class="padding" href="/linux/misc_linux/text_fu/index.html">Text Editors<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/the_filesystem/index.html" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/index.html">The Linux Filesystem<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/user_management/index.html" class=""><a class="padding" href="/linux/misc_linux/user_management/index.html">User Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/wsl2/index.html" class=""><a class="padding" href="/linux/misc_linux/wsl2/index.html">Windows Subsystem for Linux<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-7ed069a6f41a18ead2ddedfda31e7113" aria-controls="subsections-7ed069a6f41a18ead2ddedfda31e7113" checked><label for="section-7ed069a6f41a18ead2ddedfda31e7113"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu RHCSA</span></label><a class="padding" href="">RHCSA<i class="fas fa-check read-icon"></i></a><ul id="subsections-7ed069a6f41a18ead2ddedfda31e7113" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/rhcsa/4_adv_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/4_adv_file_management/index.html">Advanced File Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/6_adv_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/6_adv_user_management/index.html">Advanced User Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/7_bash_shell/index.html" class=""><a class="padding" href="/linux/rhcsa/7_bash_shell/index.html">Bash<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/9_basic_package_management/index.html" class=""><a class="padding" href="/linux/rhcsa/9_basic_package_management/index.html">Basic Package Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/5_basic_user_management/index.html" class=""><a class="padding" href="/linux/rhcsa/5_basic_user_management/index.html">Basic User Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/3_file_management/index.html" class=""><a class="padding" href="/linux/rhcsa/3_file_management/index.html">File Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/2_interaction/index.html" class=""><a class="padding" href="/linux/rhcsa/2_interaction/index.html">Interaction<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/17_network_file_system/index.html" class=""><a class="padding" href="/linux/rhcsa/17_network_file_system/index.html">Network File System (NFS)<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/16_networking/index.html" class=""><a class="padding" href="/linux/rhcsa/16_networking/index.html">Networking<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/8_process_and_task_scheduling/index.html" class=""><a class="padding" href="/linux/rhcsa/8_process_and_task_scheduling/index.html">Process and Task Scheduling<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsa/1_installation/index.html" class=""><a class="padding" href="/linux/rhcsa/1_installation/index.html">RHEL Installation<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
-          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-32ba51710c14dbc40b371b19ad442e93" aria-controls="subsections-32ba51710c14dbc40b371b19ad442e93" checked><label for="section-32ba51710c14dbc40b371b19ad442e93"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="">Networking<i class="fas fa-check read-icon"></i></a><ul id="subsections-32ba51710c14dbc40b371b19ad442e93" class="morespace collapsible-menu">
-          <li data-nav-id="" class="parent alwaysopen"><input type="checkbox" id="section-e7b43009273138043ffb9c6ae58c8cce" aria-controls="subsections-e7b43009273138043ffb9c6ae58c8cce" checked><label for="section-e7b43009273138043ffb9c6ae58c8cce"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Cisco</span></label><a class="padding" href="">Cisco<i class="fas fa-check read-icon"></i></a><ul id="subsections-e7b43009273138043ffb9c6ae58c8cce" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/cisco/tcp_ip_basic/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_basic/index.html">Basics of TCP/IP<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/cli/index.html" class=""><a class="padding" href="/networking/cisco/cli/index.html">Cisco CLI Basics<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/index.html" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/index.html">Cisco CML VMWARE Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/index.html" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/index.html">Cisco Devnet Sandbox Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/cisco_vlan_lab/index.html" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/index.html">Cisco VLAN Lab<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/classful_ipv4/index.html" class=""><a class="padding" href="/networking/cisco/classful_ipv4/index.html">Classfull IPv4<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/management/index.html" class=""><a class="padding" href="/networking/cisco/management/index.html">Device Management<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/device_management_protocols/index.html" class="active"><a class="padding" href="/networking/cisco/device_management_protocols/index.html">Device Management Protocols<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/dhcp_config/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_config/index.html">DHCP Configuration<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/index.html">DHCP Snooping and ARP Inspection<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ethernet_lans/index.html" class=""><a class="padding" href="/networking/cisco/ethernet_lans/index.html">Ethernet LANs<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/extended_acls/index.html" class=""><a class="padding" href="/networking/cisco/extended_acls/index.html">Extended ACLs<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ccna_spaced_repetition/index.html" class=""><a class="padding" href="/networking/cisco/ccna_spaced_repetition/index.html">How to Study for CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ip_services/index.html" class=""><a class="padding" href="/networking/cisco/ip_services/index.html">IP Services<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/index.html">IPv6 Addressing and Subnetting<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6/index.html" class=""><a class="padding" href="/networking/cisco/ipv6/index.html">IPv6 Basics<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6_config/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_config/index.html">IPv6 Configuration<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6_routing/index.html" class=""><a class="padding" href="/networking/cisco/ipv6_routing/index.html">IPv6 Routing<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/lan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/lan_architecture/index.html">LAN Architecture<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/l2-etherchannel/index.html" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/index.html">Layer 2 Etherchannel<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/spanning_tree/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree/index.html">More Spanning Tree<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/nat/index.html" class=""><a class="padding" href="/networking/cisco/nat/index.html">Network Address Translation (NAT)<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_concepts/index.html" class=""><a class="padding" href="/networking/cisco/ospf_concepts/index.html">OSPF Basics<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_config/index.html" class=""><a class="padding" href="/networking/cisco/ospf_config/index.html">OSPF Configuration<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_lab/index.html" class=""><a class="padding" href="/networking/cisco/ospf_lab/index.html">OSPF Lab<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/index.html" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/index.html">OSPF Network Types and Neighbors<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/qos/index.html" class=""><a class="padding" href="/networking/cisco/qos/index.html">QoS<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/rstp/index.html" class=""><a class="padding" href="/networking/cisco/rstp/index.html">Rapid Spanning Tree (RSTP)<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/resources_for_passing_ccna/index.html" class=""><a class="padding" href="/networking/cisco/resources_for_passing_ccna/index.html">Resources I used to Pass CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/router_operation/index.html" class=""><a class="padding" href="/networking/cisco/router_operation/index.html">Router Operation<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/routing_in_the_lan/index.html" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/index.html">Routing in the LAN<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/securing_network_devices/index.html" class=""><a class="padding" href="/networking/cisco/securing_network_devices/index.html">Securing Network Devices<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/security_architectures/index.html" class=""><a class="padding" href="/networking/cisco/security_architectures/index.html">Security Architectures<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/index.html" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/index.html">Spanning Tree Protocol Basics<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/standard_acls/index.html" class=""><a class="padding" href="/networking/cisco/standard_acls/index.html">Standard ACLs<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/static_routes/index.html" class=""><a class="padding" href="/networking/cisco/static_routes/index.html">Static Routes<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/switch_interfaces/index.html" class=""><a class="padding" href="/networking/cisco/switch_interfaces/index.html">Switch Interfaces<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/switchport_security_config/index.html" class=""><a class="padding" href="/networking/cisco/switchport_security_config/index.html">Switchport Security Configuration<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/index.html" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/index.html">TCP/UDP<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/t-shoot_routing/index.html" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/index.html">Troubleshooting Routing<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/vlans/index.html" class=""><a class="padding" href="/networking/cisco/vlans/index.html">VLANs<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wan_architecture/index.html" class=""><a class="padding" href="/networking/cisco/wan_architecture/index.html">WAN Architecture<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wans_and_ip_routing/index.html" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/index.html">WANs and IP Routing<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/what_is_a_vlan_/index.html" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/index.html">What is a VLAN?<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/things_to_learn_after_ccna/index.html" class=""><a class="padding" href="/networking/cisco/things_to_learn_after_ccna/index.html">What to Learn After CCNA<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless_architectures/index.html" class=""><a class="padding" href="/networking/cisco/wireless_architectures/index.html">Wireless Architectures<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless_lan/index.html" class=""><a class="padding" href="/networking/cisco/wireless_lan/index.html">Wireless LANs<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless/index.html" class=""><a class="padding" href="/networking/cisco/wireless/index.html">Wireless Principles<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless_security/index.html" class=""><a class="padding" href="/networking/cisco/wireless_security/index.html">Wireless Security<i class="fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-671e08f4a7e985c9c54ec2c3658b1e25" aria-controls="subsections-671e08f4a7e985c9c54ec2c3658b1e25" checked><label for="section-671e08f4a7e985c9c54ec2c3658b1e25"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Juniper</span></label><a class="padding" href="">Juniper<i class="fas fa-check read-icon"></i></a><ul id="subsections-671e08f4a7e985c9c54ec2c3658b1e25" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/index.html" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/index.html">Cisco to Juniper Cheat Sheet<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/junos_fundementals/index.html" class=""><a class="padding" href="/networking/juniper/junos_fundementals/index.html">Junos Basics<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li>
-          <li data-nav-id="" class="alwaysopen"><input type="checkbox" id="section-119695d21223206d3a21952913ee96ab" aria-controls="subsections-119695d21223206d3a21952913ee96ab" checked><label for="section-119695d21223206d3a21952913ee96ab"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="">Tools<i class="fas fa-check read-icon"></i></a><ul id="subsections-119695d21223206d3a21952913ee96ab" class="morespace collapsible-menu">
-          <li data-nav-id="/tools/calibre_server/index.html" class=""><a class="padding" href="/tools/calibre_server/index.html">Calibre Server<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/calibre-web-with-docker/index.html" class=""><a class="padding" href="/tools/calibre-web-with-docker/index.html">Calibre Web with Docker Setup<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/distrobox/index.html" class=""><a class="padding" href="/tools/distrobox/index.html">Distrobox Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/githubpageshugo/index.html" class=""><a class="padding" href="/tools/githubpageshugo/index.html">Github Pages with Hugo<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/nextcloud/index.html" class=""><a class="padding" href="/tools/nextcloud/index.html">Nextcloud Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/vimguide/index.html" class=""><a class="padding" href="/tools/vimguide/index.html">Vim Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/vagrantguide/index.html" class=""><a class="padding" href="/tools/vagrantguide/index.html">Vagrant Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/pandoc/index.html" class=""><a class="padding" href="/tools/pandoc/index.html">Pandoc Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/rsync/index.html" class=""><a class="padding" href="/tools/rsync/index.html">Rsync Guide<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/gitguide/index.html" class=""><a class="padding" href="/tools/gitguide/index.html">Beginners Guide to Git<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/hugorelearn/index.html" class=""><a class="padding" href="/tools/hugorelearn/index.html">How to Set up Hugo Relearn Theme<i class="fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/tools/buildawebsite/index.html" class=""><a class="padding" href="/tools/buildawebsite/index.html">Building a Minimalist Website with Hugo<i class="fas fa-check read-icon"></i></a></li></ul></li>
-        </ul>
-        <div id="shortcuts">
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41"><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/" class=""><a class="padding" href="/linux/misc_linux/command_line/">Command Line<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/">Consoling in on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/" class=""><a class="padding" href="/linux/misc_linux/devices/">Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/" class=""><a class="padding" href="/linux/misc_linux/dns/">DNS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/" class=""><a class="padding" href="/linux/misc_linux/file_permissions/">File Permissions<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/" class=""><a class="padding" href="/linux/misc_linux/getting_started/">General Linux and History<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/">How to Get Putty to Work in Ubuntu<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/" class=""><a class="padding" href="/linux/misc_linux/init/">Init<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/">IO Monitoring<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/">Keyboard Shortcuts<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/" class=""><a class="padding" href="/linux/misc_linux/kernel/">Linux Kernel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/" class=""><a class="padding" href="/linux/misc_linux/logging/">Logging<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/" class=""><a class="padding" href="/linux/misc_linux/ls/">ls<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/">Network Troubleshooting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/" class=""><a class="padding" href="/linux/misc_linux/network_basics/">Networking in Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/">Open source and Linux Community<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/" class=""><a class="padding" href="/linux/misc_linux/packages/">Packages and Their Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/" class=""><a class="padding" href="/linux/misc_linux/process_utilization/">Process Utilization<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/" class=""><a class="padding" href="/linux/misc_linux/ps_processes/">Processes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/" class=""><a class="padding" href="/linux/misc_linux/linux_resources/">Resources for learning Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/" class=""><a class="padding" href="/linux/misc_linux/scp_command/">scp<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/" class=""><a class="padding" href="/linux/misc_linux/network_sharing/">Sharing Resources<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/">Shell<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/">Skills that go with Bash Scripting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/">Switching to Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/">Symbols in Bash<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/" class=""><a class="padding" href="/linux/misc_linux/tar/">Tar Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/" class=""><a class="padding" href="/linux/misc_linux/text_fu/">Text Editors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/">The Linux Filesystem<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/" class=""><a class="padding" href="/linux/misc_linux/user_management/">User Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/" class=""><a class="padding" href="/linux/misc_linux/wsl2/">Windows Subsystem for Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/containers/" class=""><a class="padding" href="/linux/containers/">Container Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/run_command_as_another_user/" class=""><a class="padding" href="/linux/misc_linux/run_command_as_another_user/">Run Command as Another User<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" checked><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/cli/" class=""><a class="padding" href="/networking/cisco/cli/">Cisco CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/">Cisco CML VMWARE Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/">Cisco Devnet Sandbox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/">Cisco to Juniper Cheat Sheet<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/">Cisco VLAN Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/" class=""><a class="padding" href="/networking/cisco/classful_ipv4/">Classfull IPv4<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/" class=""><a class="padding" href="/networking/cisco/management/">Device Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/" class="active"><a class="padding" href="/networking/cisco/device_management_protocols/">Device Management Protocols<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/" class=""><a class="padding" href="/networking/cisco/dhcp_config/">DHCP Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/">DHCP Snooping and ARP Inspection<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/" class=""><a class="padding" href="/networking/cisco/ethernet_lans/">Ethernet LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/" class=""><a class="padding" href="/networking/cisco/extended_acls/">Extended ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/" class=""><a class="padding" href="/networking/cisco/ip_services/">IP Services<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/">IPv6 Addressing and Subnetting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/" class=""><a class="padding" href="/networking/cisco/ipv6/">IPv6 Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/" class=""><a class="padding" href="/networking/cisco/ipv6_config/">IPv6 Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/" class=""><a class="padding" href="/networking/cisco/ipv6_routing/">IPv6 Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/" class=""><a class="padding" href="/networking/juniper/junos_fundementals/">Junos Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/" class=""><a class="padding" href="/networking/cisco/lan_architecture/">LAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/">Layer 2 Etherchannel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/" class=""><a class="padding" href="/networking/cisco/spanning_tree/">More Spanning Tree<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/" class=""><a class="padding" href="/networking/cisco/nat/">Network Address Translation (NAT)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/" class=""><a class="padding" href="/networking/cisco/ospf_concepts/">OSPF Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/" class=""><a class="padding" href="/networking/cisco/ospf_config/">OSPF Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/" class=""><a class="padding" href="/networking/cisco/ospf_lab/">OSPF Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/">OSPF Network Types and Neighbors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/" class=""><a class="padding" href="/networking/cisco/qos/">QoS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/" class=""><a class="padding" href="/networking/cisco/rstp/">Rapid Spanning Tree (RSTP)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/" class=""><a class="padding" href="/networking/cisco/router_operation/">Router Operation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/">Routing in the LAN<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/" class=""><a class="padding" href="/networking/cisco/securing_network_devices/">Securing Network Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/" class=""><a class="padding" href="/networking/cisco/security_architectures/">Security Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/">Spanning Tree Protocol Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/" class=""><a class="padding" href="/networking/cisco/standard_acls/">Standard ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/" class=""><a class="padding" href="/networking/cisco/static_routes/">Static Routes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/" class=""><a class="padding" href="/networking/cisco/switch_interfaces/">Switch Interfaces<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/" class=""><a class="padding" href="/networking/cisco/switchport_security_config/">Switchport Security Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/">TCP/UDP<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/">Troubleshooting Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/" class=""><a class="padding" href="/networking/cisco/vlans/">VLANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/" class=""><a class="padding" href="/networking/cisco/wan_architecture/">WAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/">WANs and IP Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/">What is a VLAN?<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/" class=""><a class="padding" href="/networking/cisco/wireless_architectures/">Wireless Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/" class=""><a class="padding" href="/networking/cisco/wireless_lan/">Wireless LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/" class=""><a class="padding" href="/networking/cisco/wireless/">Wireless Principles<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/" class=""><a class="padding" href="/networking/cisco/wireless_security/">Wireless Security<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/consoling_in_to_mx80_from_linux/" class=""><a class="padding" href="/networking/juniper/consoling_in_to_mx80_from_linux/">Console into a Juniper MX80 from Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_paste_config/" class=""><a class="padding" href="/networking/juniper/junos_paste_config/">How to Copy and Paste a Junos Config<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/toggle_poe/" class=""><a class="padding" href="/networking/juniper/toggle_poe/">How to Toggle POE on a Juniper Switch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/juniper_cli_basics/" class=""><a class="padding" href="/networking/juniper/juniper_cli_basics/">Juniper CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><input type="checkbox" id="R-section-36a3ed262b315ff04085d7b53a448994" aria-controls="R-subsections-36a3ed262b315ff04085d7b53a448994"><label for="R-section-36a3ed262b315ff04085d7b53a448994"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Python</span></label><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-36a3ed262b315ff04085d7b53a448994" class="morespace collapsible-menu">
+          <li data-nav-id="/python/basics/" class=""><a class="padding" href="/python/basics/">Python Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class=""><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/cybersecurity/" class=""><a class="padding" href="/cybersecurity/">Cybersecurity<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/dog-training/" class="alwaysopen"><input type="checkbox" id="R-section-e7921c828f75ed049d3d4591c099a410" aria-controls="R-subsections-e7921c828f75ed049d3d4591c099a410" checked><label for="R-section-e7921c828f75ed049d3d4591c099a410"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Dog Trainings</span></label><a class="padding" href="/dog-training/">Dog Trainings<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e7921c828f75ed049d3d4591c099a410" class="morespace collapsible-menu">
+          <li data-nav-id="/dog-training/the-power-of-positive-dog-training/" class=""><a class="padding" href="/dog-training/the-power-of-positive-dog-training/">The Power ofPositive Dog Training Summary<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
           <div class="nav-title padding">More</div>
           <ul class="space">
             <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
-            <li><a class="padding" href="/now/index.html"><i class='fas fa-fw fa-play'></i> now</a></li>
-            <li><a class="padding" href="/tags/index.html"><i class='fas fa-fw fa-tags'></i> Tags</a></li>
           </ul>
         </div>
         <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
-        <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
-        <div id="prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
-          <ul>
-            <li id="select-language-container" class="footerLangSwitch">
-              <div class="padding select-container">
-                <i class="fas fa-language fa-fw"></i>
-                <span>&nbsp;</span>
-                <div class="select-style">
-                  <label class="a11y-only" for="select-language">Language</label>
-                  <select id="select-language" onchange="location = baseUri + this.value;">
-                  </select>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/cisco/device_management_protocols/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
                 </div>
-                <div class="select-clear"></div>
-              </div>
-            </li>
-            <li id="select-variant-container" class="footerVariantSwitch">
-              <div class="padding select-container">
-                <i class="fas fa-paint-brush fa-fw"></i>
-                <span>&nbsp;</span>
-                <div class="select-style">
-                  <label class="a11y-only" for="select-variant">Theme</label>
-                  <select id="select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                    <option id="city2" value="city2" selected>City2</option>
-                  </select>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
                 </div>
-                <div class="select-clear"></div>
-              </div>
-              <script>window.variants && variants.markSelectedVariant();</script>
-            </li>
-            <li class="footerVisitedLinks showVisitedLinks"><button class="padding" onclick="clearHistory();"><i class="fas fa-history fa-fw"></i><span>&nbsp;</span>Clear History</button></li>
-          </ul>
-        </div>
-        <div id="footer" class="footerFooter showFooter">
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
 	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1700252831" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1700252831" defer></script>
+    <script src="/js/clipboard.min.js?1711972135" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1711972135" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1747,19 +721,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1700252831" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1700252831" defer></script>
+    <script src="/js/d3/d3-color.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1711972135" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1711972135" defer></script>
+    <script src="/js/js-yaml.min.js?1711972135" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1700252831" defer></script>
+    <script src="/js/theme.js?1711972135" defer></script>
   </body>
 </html>

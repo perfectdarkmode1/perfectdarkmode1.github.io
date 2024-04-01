@@ -98,3 +98,17 @@ Containers
 openshift
 
 KATE Stack https://blog.container-solutions.com/introducing-the-kate-stack
+
+Fedora SilverBlue
+
+Vimwiki
+
+Switch to Firefox?
+
+Switch to Android or graphene os
+
+
+Hugo
+[Hugo: Add Table of Contents Anywhere in Markdown File (ruddra.com)](https://ruddra.com/hugo-add-toc-anywhere/)
+
+BTL1 and CCD certifications (security)

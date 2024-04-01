@@ -1,7 +1,7 @@
 ---
-title: "IPv6 Routing"
+title: IPv6 Routing
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 3.0 IP Connectivity
 

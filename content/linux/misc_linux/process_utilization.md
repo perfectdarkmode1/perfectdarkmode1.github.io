@@ -1,7 +1,7 @@
 ---
-title: "Process Utilization"
+title: Process Utilization
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 Tracking Processes: top
 
@@ -114,3 +114,8 @@ $ uptime
 $ cat /proc/cpuinfo
 
 \- take into account # of cores when looking at load
+
+Show disk usage on a specific directory:
+```
+du -sch /var/www/nextcloud/data/david/files/Games/battlenet/*
+```

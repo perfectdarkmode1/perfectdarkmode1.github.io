@@ -1,4 +1,4 @@
-## Chapter 12 {#part0024_split_000.html#calibre_pb_0 .calibre11}
+## Chapter 12 
 
 **System Initialization, Message Logging, and System Tuning**
 
@@ -32,7 +32,7 @@ Locate and interpret system log files and journals
 Preserve system journals
 
 
-Systemd is the 
+Systemd
 - default system initialization and service management scheme.
 - boots the system into one of several predefined targets 
 - used to handle operational states of services. 
@@ -43,8 +43,7 @@ space from filling up.
 configuration files that define the default and custom locations to direct the log messages to and to
 configure rotation settings. The 
 system log file
-- records custom messages sent to it. systemd includes a service for viewing and managing system
-logs in addition to the traditional logging service. This service
+- records custom messages sent to it. systemd includes a service for viewing and managing system logs in addition to the traditional logging service. This service
 maintains a log of runtime activities for faster retrieval and can be
 configured to store the information permanently.
 
@@ -66,12 +65,14 @@ groups, and automatically maintains mount points. systemd is the first
 process with PID 1 that spawns at boot and it is the last process that
 terminates at shutdown.
 
-![](images/00002.jpeg){.image} systemd spawns several processes during a
-service startup. It places the processes in a private hierarchy composed
-of *control groups* (or *cgroups* for short) to organize processes for
-the purposes of monitoring and controlling system resources such as
-processor, memory, network bandwidth, and disk I/O. This includes
-limiting, isolating, and prioritizing their usage of resources. This way
+systemd 
+- spawns several processes during a service startup. It 
+- places the processes in a private hierarchy composed of *control groups* (or *cgroups* for short) to organize processes for the purposes of monitoring and controlling system resources such as
+	- processor, 
+	- memory, 
+	- network bandwidth, and 
+	- disk I/O. This 
+includes limiting, isolating, and prioritizing their usage of resources. This way
 resources can be distributed among users, databases, and applications
 based on need and priority, resulting in overall improved system
 performance.
@@ -90,7 +91,7 @@ client requests to daemons that have not yet started in the socket
 buffer. It fills the pending client requests when the daemons they were
 awaiting come online.
 
-![](images/00002.jpeg){.image} Socket is a communication method that
+Socket is a communication method that
 allows a single process to talk to another process on the same or remote
 system.
 
@@ -105,7 +106,7 @@ starting the service when a specific hardware type such as USB is
 plugged in, and the latter starting the service when a particular file
 or directory alters its state.
 
-![](images/00002.jpeg){.image} D-Bus is another communication method
+D-Bus is another communication method
 that allows multiple services running in parallel on a system to talk to
 one another on the same or remote system.
 
@@ -124,7 +125,7 @@ checks on the file systems are finished, systemd remounts them using
 their standard devices. Parallelism in file system mounts does not
 affect the root and virtual file systems.
 
-**[Units]{#part0024_split_001.html#id_330 .calibre10}**
+Units
 
 *Units* are systemd objects used for organizing boot and maintenance
 tasks, such as hardware initialization, socket creation, file system
@@ -155,7 +156,7 @@ in the **run*systemd/system* directory. These runtime unit files take
 precedence over the system unit files, and the user unit files take
 priority over the runtime files.
 
-![](images/00002.jpeg){.image} Unit configuration files are a direct
+Unit configuration files are a direct
 replacement of the initialization scripts found in the
 **etc*rc.d/init.d* directory in older RHEL releases.
 
@@ -178,8 +179,8 @@ systemd includes 11 unit types, which are described in [Table
   Timer           Useful for triggering activation of other units based on timers
   --------------- ------------------------------------------------------------------------------------------------------------
 
-**[Table]{#part0024_split_001.html#id_734} 12-1 systemd Unit Types**
-:::
+Tablesystemd Unit Types
+
 
 Unit files contain common and specific configuration elements. Common
 elements fall under the \[Unit\] and \[Install\] sections, and comprise
@@ -211,7 +212,7 @@ unit configuration files. systemd generally sets and maintains
 inter-service dependencies automatically; however, this can be done
 manually if needed.
 
-**[Targets]{#part0024_split_001.html#id_331 .calibre10}**
+Targets
 
 *Targets* are simply logical collections of units. They are a special
 systemd unit type with the .target file extension. They share the
@@ -220,10 +221,8 @@ used to execute a series of units. This is typically true for booting
 the system to a desired operational run level with all the required
 services up and running. Some targets inherit services from other
 targets and add their own to them. systemd includes several predefined
-targets that are described in [Table
-12-2](#part0024_split_001.html#id_735){.calibre5}.
-
-::: c49
+targets that are described in Table
+12-2
   ------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **Target**   **Description**
   halt         Shuts down and halts the system
@@ -238,8 +237,8 @@ targets that are described in [Table
   hibernate    Puts the system into hibernation by saving the running state of the system on the hard disk and powering it off. When powered up, the system restores from its saved state rather than booting up.
   ------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**[Table]{#part0024_split_001.html#id_735} 12-2 systemd Targets**
-:::
+systemd Targets
+
 
 Target unit files contain all information under the \[Unit\] section,
 and it comprises the description, documentation location, and dependency
@@ -255,7 +254,7 @@ display-manager.service levels in order to be declared running in the
 graphical target. Run **man systemd.target** for details on systemd
 targets.
 
-**[The]{#part0024_split_001.html#id_332 .calibre10} systemctl Command**
+Thesystemctl Command**
 
 systemd comes with a set of management tools for querying and
 controlling operations. The primary tool for interaction in this command
@@ -264,7 +263,6 @@ functions and supports plentiful subcommands and flags. [Table
 12-3](#part0024_split_001.html#id_736){.calibre5} lists and describes
 some common operations.
 
-::: c49
   ----------------------------- -------------------------------------------------------------------------------------------------------------------
   **Subcommand**                **Description**
   daemon-reload                 Re-reads and reloads all unit configuration files and recreates the entire user dependency tree.
@@ -288,14 +286,12 @@ some common operations.
   status                        Presents the unit status information
   ----------------------------- -------------------------------------------------------------------------------------------------------------------
 
-**[Table]{#part0024_split_001.html#id_736} 12-3 systemctl Subcommands**
-:::
+Tablesystemctl Subcommands**
 
 You will use a majority of these subcommands with *systemctl* going
 forward. Refer to the manual pages of the command for more details.
 
-**[Listing]{#part0024_split_001.html#id_333 .calibre10} and Viewing
-Units**
+Listing and Viewing Units
 
 The *systemctl* command is used to view and manage all types of units.
 The following examples demonstrate common operations pertaining to
@@ -355,7 +351,7 @@ for a specific unit such as *atd.service*:
 There are other listing subcommands and additional flags available that
 can be used to produce a variety of reports.
 
-**[Managing]{#part0024_split_001.html#id_334 .calibre10} Service Units**
+Managing Service Units
 
 The *systemctl* command offers several subcommands to manage service
 units, including starting, stopping, restarting, and checking their
@@ -442,7 +438,7 @@ operations:
 Notice that the *unmask* subcommand has removed the restriction that was
 placed on the *atd* service.
 
-**[Managing]{#part0024_split_001.html#id_335 .calibre10} Target Units**
+ManagingTarget Units
 
 The *systemctl* command is also used to manage the target units. It can
 be used to view or change the default boot target, switch from one
@@ -469,8 +465,7 @@ To check the current default boot target:
 
 ![](images/00608.jpeg) 
 
-[**EXAM TIP:**]{.c56} You may have to modify the default boot target
-persistently.
+You may have to modify the default boot target persistently for the exam.
 
 To change the current default boot target from graphical.target to
 multi-user.target:
@@ -544,7 +539,7 @@ for the specified amount of time for users to save their work and log
 off, stops the services, and eventually shut the system down to the
 specified target state.
 
-**[System]{#part0024_split_001.html#id_336 .calibre10} Logging**
+System Logging
 
 *System logging* (*syslog* for short) is one of the most rudimentary
 elements of an operating system. Its purpose is to capture messages
@@ -578,8 +573,7 @@ A PID is assigned to the daemon at startup and a file by the name
 reason this file is created and stores the PID is to prevent the
 initiation of multiple instances of this daemon.
 
-**[The]{#part0024_split_001.html#id_337 .calibre10} Syslog Configuration
-File**
+TheSyslog Configuration File
 
 The *rsyslog.conf* is the primary syslog configuration file located in
 the */etc* directory . The default uncommented line entries from the
@@ -649,7 +643,7 @@ and the configuration file path. With no issues reported, the *rsyslog*
 service can be restarted (or reloaded) in order for the changes to take
 effect.
 
-**[Rotating]{#part0024_split_001.html#id_338 .calibre10} Log Files**
+Rotating Log Files
 
 RHEL records all system activities in log files that are stored in a
 central location under the **var*log* directory, as defined in the
@@ -716,7 +710,7 @@ read/write permission bits for the owner (*root*), the owning group will
 be set to *utmp*, and the *rsyslog* service will maintain one rotated
 copy of the *btmp* log file.
 
-**[The]{#part0024_split_001.html#id_339 .calibre10} Boot Log File**
+The Boot Log File
 
 Logs generated during the system startup display the service startup
 sequence with a status showing whether the service was started
@@ -729,7 +723,7 @@ if required. Boot logs are stored in the *boot.log* file under
 OK or FAILED within the square brackets indicates if the service was
 started successfully or not.
 
-**[The]{#part0024_split_001.html#id_340 .calibre10} System Log File**
+The System Log File
 
 The default location for storing most system activities, as defined in
 the *rsyslog.conf* file, is the **var*log/messages* file. This file
@@ -740,7 +734,7 @@ with the -f switch. The *messages* file captures the date and time of
 the activity, hostname of the system, name and PID of the service, and a
 short description of the event being logged.
 
-[**EXAM TIP:**]{.c56} It is helpful to "tail" the messages file when
+EXAM TIP: It is helpful to "tail" the messages file when
 starting or restarting a system service or during testing to identify
 any issues encountered.
 
@@ -750,8 +744,7 @@ The following illustrates some recent entries from this file:
 
 Each line entry represents the detail for one event.
 
-**[Logging]{#part0024_split_001.html#id_341 .calibre10} Custom
-Messages**
+### Logging Custom Messages
 
 Many times it is worthwhile to add a manual note to the system log file
 to mark the start or end of an activity for future reference. This is
@@ -778,7 +771,7 @@ numerical value or in the facility.priority format. The default priority
 at which the events are recorded is user.notice. See the manual pages
 for the *logger* command for more details.
 
-**[The]{#part0024_split_001.html#id_342 .calibre10} systemd Journal**
+### The systemd Journal
 
 In addition to the *rsyslog* service, RHEL offers a systemd-based
 logging service for the collection and storage of logging data. This
@@ -804,8 +797,7 @@ The main configuration file for this service is
 that affect the overall functionality of the service. These settings may
 be modified as required.
 
-**[Retrieving]{#part0024_split_001.html#id_343 .calibre10} and Viewing
-Messages**
+### Retrieving and Viewing Messages
 
 RHEL provides the *journalctl* command to retrieve messages from the
 journal for viewing in a variety of ways using different options. One
@@ -880,8 +872,7 @@ for real-time viewing of a log file, you can use the same switch with
 Check the manual pages of the *journalctl* command and the
 *systemd-journald* service for more details.
 
-**[Preserving]{#part0024_split_001.html#id_344 .calibre10} Journal
-Information**
+Preserving Journal Information
 
 By default, journals are stored in the **run*log/journal* directory for
 the duration of system runtime. This data is transient and it does not
@@ -895,10 +886,7 @@ This will make the journal information available for future reference.
 
 The *systemd-journald* service supports four options with the Storage
 directive in its configuration file *journald.conf* to control how the
-logging data is handled. These options are described in [Table
-12-4](#part0024_split_001.html#id_737){.calibre5}.
-
-::: c49
+logging data is handled. These options are described in 
   ------------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **Option**   **Description**
   volatile     Stores data in memory only
@@ -907,9 +895,7 @@ logging data is handled. These options are described in [Table
   none         Disables both volatile and persistent storage options. Not recommended.
   ------------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-**[Table]{#part0024_split_001.html#id_737} 12-4 Journal Data Storage
-Options**
-:::
+Journal Data Storage Options
 
 The default (auto) option appears more suitable as it stores data in
 both volatile and on-disk storage; however, you need to create the
@@ -943,14 +929,14 @@ created:
 Compare the name of the subdirectory with the ID stored in the
 **etc*machine-id* file. They are identical.
 
-![](images/00002.jpeg){.image} This log file is rotated automatically
+This log file is rotated automatically
 once a month based on the settings in the *journald.conf* file. Check
 the manual pages of the configuration file for details and relevant
 directives.
 
 This concludes the exercise.
 
-**[System]{#part0024_split_001.html#id_345 .calibre10} Tuning**
+System Tuning
 
 RHEL uses a system tuning service called *tuned* to monitor storage,
 networking, processor, audio, video, and a variety of other connected
@@ -971,7 +957,7 @@ increases during a program startup and the network connection use goes
 up during a large file transfer. A surge in a system component activity
 results in heightened power consumption.
 
-**[Tuning]{#part0024_split_001.html#id_346 .calibre10} Profiles**
+Tuning Profiles
 
 *tuned* includes nine predefined profiles to support a variety of use
 cases. In addition, you can create custom profiles from nothing or by
@@ -982,11 +968,9 @@ order to be recognized by the *tuned* service.
 Tuning profiles may be separated into three groups: (1) optimized for
 better performance, (2) geared more towards power consumption, and (3)
 that offers a balance between the other two and the maximum
-performance/power combination. [Table
-12-5](#part0024_split_001.html#id_738){.calibre5} lists and describes
-these profiles.
+performance/power combination.
 
-::: c49
+lists and describes these profiles.
   ----------------------------------------------- -------------------------------------------------------------------------------------------------------------
   **Profile**                                     **Description**
   **Profiles Optimized for Better Performance**   
@@ -1003,8 +987,8 @@ these profiles.
   Throughput-performance                          Provides maximum performance and consumes maximum power
   ----------------------------------------------- -------------------------------------------------------------------------------------------------------------
 
-**[Table]{#part0024_split_001.html#id_738} 12-5 Tuning Profiles**
-:::
+Tuning Profiles
+
 
 Predefined profiles are located in the **usr*lib/tuned* directory in
 subdirectories matching their names. The following shows a long listing
@@ -1016,7 +1000,7 @@ The default active profile set on *server1* and *server2* is the
 *virtual-guest* profile, as the two systems are hosted in a VirtualBox
 virtualized environment.
 
-**[The]{#part0024_split_001.html#id_347 .calibre10} tuned-adm Command**
+The tuned-adm Command
 
 *tuned* comes with a single profile management command called
 *tuned-adm*. This tool can list active and available profiles, query
@@ -1028,8 +1012,7 @@ details.
 The following exercise demonstrates the use of most of the management
 operations listed above.
 
-**[Exercise]{#part0024_split_001.html#id_348 .calibre10} 12-2: Manage
-Tuning Profiles**
+Exercise 12-2: Manage Tuning Profiles
 
 This exercise should be done on *server1* as *user1* with *sudo* where
 required.
@@ -1096,7 +1079,7 @@ The service will not perform any tuning until it is reactivated.
 The tuning is re-enabled and the *virtual-guest* profile is in effect.
 This concludes the exercise.
 
-**[Chapter]{#part0024_split_001.html#id_349 .calibre10} Summary**
+Chapter Summary
 
 This chapter started with a discussion of systemd, the default service
 management and system initialization scheme used in RHEL. We explored
@@ -1117,108 +1100,86 @@ Finally, we explored preconfigured tuning profiles and analyzed pros and
 cons associated with each one of them. We demonstrated how to determine
 a recommended profile for the system and how to set and activate it.
 
-**[Review]{#part0024_split_001.html#id_350 .calibre10} Questions**
+Review Questions
 
 1. The *systemd* command may be used to rebuild a new kernel.
 True or False?
+1. False.
 
 2. Which command is used to manage system services?
+2. The *systemctl* command.
 
 3. Which configuration file must be modified to ensure journal
 log entries are stored persistently?
-
-4. What is the PID of the *systemd* process?
-
-5. What is a target in *systemd*?
-
-6. You need to append a text string "Hello world" to the system
-log file. What would be the command to achieve this?
-
-7. What is the recommended location to store custom log
-configuration files?
-
-8. What would the command *systemctl list-dependencies crond* do?
-
-9. Name the two directory paths where *systemd* unit files are
-stored.
-
-10. What would you run to identify the recommended tuning profile
-for the system?
-
-11. What would the command *systemctl get-default* do?
-
-12. *systemd* starts multiple services concurrently during system
-boot. True or False?
-
-13. What is the name of the boot log file?
-
-14. Which *systemctl* subcommand is executed after a unit
-configuration file has been modified to apply the changes?
-
-15. Which other logging service complements the *rsyslog*
-service?
-
-16. A RHEL system is booted up. You want to view all messages
-that were generated during the boot process. Which log file would you
-look at?
-
-17. What would the command *systemctl restart rsyslog* do?
-
-18. What are the two common *systemd* targets production RHEL
-servers are typically configured to run at?
-
-19. By default, log files are rotated automatically every week.
-True or False?
-
-**[Answers]{#part0024_split_001.html#id_351 .calibre10} to Review
-Questions**
-
-1. False.
-
-2. The *systemctl* command.
-
 3. The *journald.conf* file under the **etc*systemd* directory.
 
+4. What is the PID of the *systemd* process?
 4. The PID of the *systemd* process is 1.
 
+6. What is a target in *systemd*?
 5. A target is a collection of units.
 
+1. You need to append a text string "Hello world" to the system
+log file. What would be the command to achieve this?
 6. The command to accomplish the desired result would be *logger
 -i "Hello world"*.
 
+7. What is the recommended location to store custom log
+configuration files?
 7. The recommended location to store custom log configuration
 files is **etc*rsyslog.d* directory.
 
+8. What would the command *systemctl list-dependencies crond* do?
 8. The command provided will display all dependent units
 associated with the specified service.
 
+9. Name the two directory paths where *systemd* unit files are
+stored.
 9. The directory locations are **etc*systemd/system* and
 **usr*lib/systemd/system*.
 
+10. What would you run to identify the recommended tuning profile
+for the system?
 10. The *tuned-adm recommend* command.
 
+11. What would the command *systemctl get-default* do?
 11. The command provided will reveal the current default boot
 target.
 
+12. *systemd* starts multiple services concurrently during system
+boot. True or False?
 12. True.
 
+1. What is the name of the boot log file?
 13. The *boot.log* file in the **var*log* directory.
 
+1. Which *systemctl* subcommand is executed after a unit
+configuration file has been modified to apply the changes?
 14. The *daemon-reload* subcommand.
 
+1. Which other logging service complements the *rsyslog*
+service?
 15. The *systemd-journald* service.
 
+1. A RHEL system is booted up. You want to view all messages
+that were generated during the boot process. Which log file would you
+look at?
 16. The **var*log/boot.log* file.
 
+17. What would the command *systemctl restart rsyslog* do?
 17. The command provided will restart the *rsyslog* service.
 
+1. What are the two common *systemd* targets production RHEL
+servers are typically configured to run at?
 18. The two common *systemd* boot targets are multi-user and
 graphical.
 
+19. By default, log files are rotated automatically every week.
+True or False?
 19. True.
 
-**[Do-]{#part0024_split_001.html#id_352 .calibre10}It-Yourself Challenge
-Labs**
+
+Do It-Yourself Challenge Labs
 
 The following labs are useful to strengthen most of the concepts and
 topics learned in this chapter. It is expected that you perform the labs
@@ -1235,20 +1196,18 @@ graphical to multi-user, and reboot the system to test it. Run the
 the default boot target back to graphical and reboot to verify. (Hint:
 System Initialization and Service Management).
 
-**[Lab]{#part0024_split_001.html#id_353 .calibre10} 12-2: Record Custom
-Alerts**
+Lab Record Custom Alerts
 
 As *user1* with *sudo* on *server1*, write the message "This is
 \$LOGNAME adding this marker on \$(date)" to **var*log/messages* file.
 Ensure that variable and command expansions work. Verify the entry in
 the file. (Hint: System Logging).
 
-**[Lab]{#part0024_split_001.html#id_354 .calibre10} 12-3: Apply Tuning
-Profile**
+Lab 12-3: Apply Tuning Profile
 
 As *user1* with *sudo* on *server1*, identify the current system tuning
 profile with the *tuned-adm* command. List all available profiles. List
 the recommended profile for *server1*. Apply the "balanced" profile and
 verify with *tuned-adm*. (Hint: System Tuning).
 
-[]{#part0025_split_000.html}
+

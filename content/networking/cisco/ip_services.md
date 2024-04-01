@@ -1,7 +1,7 @@
 ---
-title: "IP Services"
+title: IP Services
 date: 2023-11-06T06:20:36-07:00
-draft: true
+draft: false
 ---
 3.0 IP Connectivity
 

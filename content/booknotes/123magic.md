@@ -1,3 +1,8 @@
+---
+draft: false
+title: 123 Magic Notes
+---
+
 # The 3 jobs for you as a parent
 
 1.  Control obnoxious Behavior (STOP behaviors)

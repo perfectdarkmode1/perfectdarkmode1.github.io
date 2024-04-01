@@ -1,3 +1,8 @@
+---
+draft: false
+title: Console into a Juniper MX80 from Linux
+---
+
 Plug console cable in
 
 find out what your serial line name is:
