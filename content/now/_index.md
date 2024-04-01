@@ -8,7 +8,7 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 ## What I am Reading
 
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91HfbGNPsKL._SL1500_.jpg?classes=inline&height=175px)
-![Playful Parenting](https://m.media-amazon.com/images/I/71Z8lnOQgmL._SL1200_.jpg?classes=inline&height=175px) 
+![Playful Parenting](https://m.media-amazon.com/images/I/71Z8lnOQgmL._SL1200_.jpg?classes=inline&height=175px) ![The Blog Startup](https://m.media-amazon.com/images/I/61Lm6P0rPsL._SL1360_.jpg?classes=inline&height=175px) 
 
 ## Current Health Goal:
 Taper off of caffeine over the next 12 weeks. [Quit Caffine Tracker](quit_caffeine.md)
