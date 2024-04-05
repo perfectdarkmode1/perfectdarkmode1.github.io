@@ -10,12 +10,6 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91HfbGNPsKL._SL1500_.jpg?classes=inline&height=175px)
 ![Playful Parenting](https://m.media-amazon.com/images/I/71Z8lnOQgmL._SL1200_.jpg?classes=inline&height=175px) ![The Blog Startup](https://m.media-amazon.com/images/I/61Lm6P0rPsL._SL1360_.jpg?classes=inline&height=175px) 
 
-## Current Health Goal:
-Taper off of caffeine over the next 12 weeks. [Quit Caffine Tracker](quit_caffeine.md)
-
-## Current Family goal:
-Help my son eat healthier, get more sleep (in his own room), and be able to regulate his emotions better. [Family goal](child-2.0)
-
 ## Things to Learn
 
 I keep a page of projects that I want to do and tech that I want to learn [here.](perfectdarkmode1.github.io/content/now/Projects.md) Then, instead of trying to learn every new shiny thing as it pops up. I continue to focus on my current goal. 
