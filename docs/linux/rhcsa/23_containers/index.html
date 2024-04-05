@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Understand container technology
+[ {.c37}]{.c36}Identify key Linux features that establish the foundation to run containers
+[ {.c37}]{.c36}Analyze container benefits
+[ {.c37}]{.c36}A better home for containers
+[ {.c37}]{.c36}Grasp the concepts of container images and registries
+[ {.c37}]{.c36}Compare pros and cons of root and rootless containers
+[ {.c37}]{.c36}Examine registry configuration file
+[ {.c37}]{.c36}Work with container images (find, inspect, pull, list, and delete)
+[ {.c37}]{.c36}Administer basic containers (start, list, stop, remove, interact with, run commands from outside, attach to, run custom entry point commands, etc.">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Understand container technology
+[ {.c37}]{.c36}Identify key Linux features that establish the foundation to run containers
+[ {.c37}]{.c36}Analyze container benefits
+[ {.c37}]{.c36}A better home for containers
+[ {.c37}]{.c36}Grasp the concepts of container images and registries
+[ {.c37}]{.c36}Compare pros and cons of root and rootless containers
+[ {.c37}]{.c36}Examine registry configuration file
+[ {.c37}]{.c36}Work with container images (find, inspect, pull, list, and delete)
+[ {.c37}]{.c36}Administer basic containers (start, list, stop, remove, interact with, run commands from outside, attach to, run custom entry point commands, etc.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/23_containers/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1712315598" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1712315598" rel="stylesheet">
+    <link href="/css/auto-complete.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1712315598" rel="stylesheet">
+    <link href="/css/fonts.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1712315598" rel="stylesheet">
+    <link href="/css/theme-git.css?1712315598" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1712315598" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1712315598" rel="stylesheet">
+    <link href="/css/print.css?1712315598" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1712315598" rel="stylesheet">
+    <script src="/js/url.js?1712315598"></script>
+    <script src="/js/variant.js?1712315598"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'git' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/23_containers/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p>This chapter describes the following major topics:</p>
+<p>[<a href="#R-image-dbe53ba0d939a5c1b40918befa471964" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dbe53ba0d939a5c1b40918befa471964"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand container technology</p>
+<p>[<a href="#R-image-9724ad2e6193c2da9f68b1785ae2f57e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9724ad2e6193c2da9f68b1785ae2f57e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Identify key Linux features that
+establish the foundation to run containers</p>
+<p>[<a href="#R-image-830d6acf18512b46c6ac4e1d9b0aa984" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-830d6acf18512b46c6ac4e1d9b0aa984"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Analyze container benefits</p>
+<p>[<a href="#R-image-e6a8faeed4419624b0fe8175199d68b9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e6a8faeed4419624b0fe8175199d68b9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}A better home for containers</p>
+<p>[<a href="#R-image-3b9d47399e912f452ba1b6003aab876f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3b9d47399e912f452ba1b6003aab876f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Grasp the concepts of container
+images and registries</p>
+<p>[<a href="#R-image-863b7d78d55639b44996a57080ce0aaa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-863b7d78d55639b44996a57080ce0aaa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Compare pros and cons of root and
+rootless containers</p>
+<p>[<a href="#R-image-1836bd653b7838c31d56f53a3ca57c43" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1836bd653b7838c31d56f53a3ca57c43"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Examine registry configuration file</p>
+<p>[<a href="#R-image-67283472ef3342bbccef31d7a3eb51f1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-67283472ef3342bbccef31d7a3eb51f1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Work with container images (find,
+inspect, pull, list, and delete)</p>
+<p>[<a href="#R-image-792c4c0d0e6cd9bac4b4d06e1ad6ccb2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-792c4c0d0e6cd9bac4b4d06e1ad6ccb2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Administer basic containers (start,
+list, stop, remove, interact with, run commands from outside, attach to,
+run custom entry point commands, etc.)</p>
+<p>[<a href="#R-image-00150b4b11cf46ce78997101d9ab40e2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-00150b4b11cf46ce78997101d9ab40e2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Implement advanced container
+features (port mapping, environment variables, and persistent storage)</p>
+<p>[<a href="#R-image-9cc187261918bbf20d29dadb8ceffe8c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9cc187261918bbf20d29dadb8ceffe8c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Control container operational states
+via systemd</p>
+<p>[RHCSA Objectives:]{.c39}</p>
+<p>[63]{#part0035_split_000.html#id_827 .calibre10}. Find and retrieve
+container images from a remote registry</p>
+<p>[64]{#part0035_split_000.html#id_828 .calibre10}. Inspect container
+images</p>
+<p>[65]{#part0035_split_000.html#id_829 .calibre10}. Perform container
+management using commands such as podman and skopeo</p>
+<p>[66]{#part0035_split_000.html#id_830 .calibre10}. Perform basic
+container management such as running, starting, stopping, and listing
+running containers</p>
+<p>[67]{#part0035_split_000.html#id_831 .calibre10}. Run a service inside a
+container</p>
+<p>[68]{#part0035_split_000.html#id_832 .calibre10}. Configure a container
+to start automatically as a systemd service</p>
+<p>[69]{#part0035_split_000.html#id_833 .calibre10}. Attach persistent
+storage to a container</p>
+<p>::: {#part0035_split_000.html#calibre_pb_1 .calibre12}
+:::</p>
+<p>[]{#part0035_split_001.html}</p>
+<p>[ C]{.c42}[ontainers]{.c43} and containerization technologies such as
+Docker and Kubernetes have received an overwhelming appreciation and
+massive popularity in recent years. They are now part of many new
+deployments. Containers offer an improved method to package distributed
+applications, deploy them in a consistent manner, and run them in
+isolation from one another on the same or different virtual or physical
+server(s). Containers take advantage of the native virtualization
+features available in the Linux kernel. Each container typically
+encapsulates one self-contained application that includes all
+dependencies such as library files, configuration files, software
+binaries, and services.</p>
+<p>This chapter presents an overview of container images, container
+registries, and containers. It shows how to interact with images and
+registries. It demonstrates how to launch, manage, and interact with
+containers. It discusses advanced topics such as mapping a host port
+with a container port, passing and setting environment variables, and
+attaching host storage for data persistence. The chapter ends with a
+detailed look at controlling the operational states of containers via
+the systemd service. There are numerous exercises in the chapter to
+support the concepts learned.</p>
+<p><strong>[Introduction]{#part0035_split_001.html#id_597 .calibre10} to
+Containers</strong></p>
+<p>A <em>container</em> is essentially a set of processes that runs in complete
+seclusion on a Linux system. A single Linux system running on bare metal
+hardware or in a virtual machine may have tens or hundreds of containers
+running. The underlying hardware may be located either on the ground or
+in the cloud.</p>
+<p>Traditionally, one or more software applications are deployed on a
+single server. These applications may have conflicting requirements in
+terms of shared library files, package dependencies, and software
+version. Moreover, patching or an update to the operating system may
+result in breaking an application functionality. To address these and
+other potential challenges, developers perform an analysis on their
+current deployments before they decide whether to collocate a new
+application with an existing one or to go with a new server without
+taking the risk of breaking the current operation.</p>
+<p>Fortunately, there is a better choice available now in the form of
+containers. Developers can now package their application alongside
+dependencies, shared library files, environment variables, and other
+specifics in a single image file and use that file to run the
+application in a unique, isolated &ldquo;virtual computer&rdquo; called container.
+Each container is treated as a complete whole, which can be tagged,
+started, stopped, restarted, or even transported to another server
+independent of other containers. This way any conflicts that may exist
+among applications, within application components, or with the operating
+system can be evaded. Applications encapsulated to run inside containers
+are called <em>containerized applications</em>, and this is a growing trend for
+architecting and deploying applications, application components, and
+databases in real world environments.</p>
+<p><strong>[Containers]{#part0035_split_001.html#id_598 .calibre10} and the Linux
+Features</strong></p>
+<p>The container technology employs some of the core features available in
+the Linux kernel. These include control groups, namespaces, seccomp
+(<em>secure computing mode</em>), and SELinux. A short description of each
+feature is provided below:</p>
+<p><strong>Control Groups</strong></p>
+<p><em>Control groups</em> (abbreviated as <em>cgroups</em>) splits processes into groups
+to set limits on their consumption of compute resources&mdash;CPU, memory,
+disk, and network I/O. These restrictions result in controlling
+individual processes from over utilizing available resources.</p>
+<p><strong>Namespaces</strong></p>
+<p><em>Namespaces</em> restrict the ability of process groups from seeing or
+accessing system resources&mdash;PIDs, network interfaces, mount points,
+hostname, etc.&mdash;thus instituting a layer of isolation between process
+groups and the rest of the system. This feature guarantees a secure,
+performant, and stable environment for containerized applications as
+well as the host operating system.</p>
+<p><strong>Secure Computing Mode (seccomp) and SELinux</strong></p>
+<p>These Linux features impose security constraints thereby protecting
+processes from one another and the host operating system from running
+processes.</p>
+<p>The container technology employs these characteristics to run processes
+isolated in a highly secure environment with full control over what they
+can or cannot do.</p>
+<p><strong>[Benefits]{#part0035_split_001.html#id_599 .calibre10} of Using
+Containers</strong></p>
+<p>There are several benefits linked with using containers. These benefits
+range from security to manageability and from independence to velocity.
+The following provides a quick look at common containerization benefits:</p>
+<p><strong>Isolation</strong></p>
+<p>Containers are not affected due to changes in the host operating system
+or in other hosted or containerized applications, as they run fully
+isolated from the rest of the environment.</p>
+<p><strong>Loose Coupling</strong></p>
+<p>Containerized applications are loosely coupled with the underlying
+operating system due to their self-containment and minimal level of
+dependency.</p>
+<p><strong>Maintenance Independence</strong></p>
+<p>Maintenance is performed independently on individual containers.</p>
+<p><strong>Less Overhead</strong></p>
+<p>Containers require fewer system resources than do bare metal and virtual
+servers.</p>
+<p><strong>Transition Time</strong></p>
+<p>Containers require a few seconds to start and stop.</p>
+<p><strong>Transition Independence</strong></p>
+<p>Transitioning from one state to another (start or stop) is independent
+of other containers, and it does not affect or require a restart of any
+underlying host operating system service.</p>
+<p><strong>Portability</strong></p>
+<p>Containers can be migrated to other servers without modifications to the
+contained applications. The target servers may be bare metal or virtual
+and located on-premises or in the cloud.</p>
+<p><strong>Reusability</strong></p>
+<p>The same container image can be used to run identical containers in
+development, test, preproduction, and production environments. There is
+no need to rebuild the image.</p>
+<p><strong>Rapidity</strong></p>
+<p>The container technology allows for accelerated application development,
+testing, deployment, patching, and scaling. Also, there is no need for
+an exhaustive testing.</p>
+<p><strong>Version Control</strong></p>
+<p>Container images can be version-controlled, which gives users the
+flexibility in choosing the right version to run a container.</p>
+<p><strong>[Container]{#part0035_split_001.html#id_600 .calibre10} Home: Bare
+Metal or Virtual Machine</strong></p>
+<p>A hypervisor software such as VMware ESXi, Oracle VirtualBox, Microsoft
+Hyper-V, or KVM allows multiple virtual machines to run on the same bare
+metal physical server. Each virtual machine runs an isolated,
+independent instance of its own guest operating system. All virtual
+machines run in parallel and share the resources of the underlying
+hardware of the bare metal server. Each virtual machine may run multiple
+applications that share the virtualized resources allocated to it. The
+hypervisor runs a set of services on the bare metal server to enable
+virtualization and support virtual machines, which introduces management
+and operational overheads. Besides, any updates to the guest operating
+system may require a reboot or result in an application failure.</p>
+<p>Containers, in contrast, run directly on the underlying operating system
+whether it be running on a bare metal server or in a virtual machine.
+They share hardware and operating system resources securely among
+themselves. This allows containerized applications to stay lightweight
+and isolated, and run in parallel. Containers share the same Linux
+kernel and require far fewer hardware resources than do virtual
+machines, which contributes to their speedy start and stop. Given the
+presence of an extra layer of hypervisor services, it may be more
+beneficial and economical to run containers directly on non-virtualized
+physical servers.</p>
+<p><a href="/linux/rhcsa/23_containers/#part0035_split_001.html#page_505">Figure 23-1</a>{.calibre5} depicts how
+applications are placed on traditional bare metal hardware, in virtual
+machines, and to run as containers on bare metal servers.</p>
+<p>::: c49
+::: width_
+<a href="#R-image-ab7ed6c79669a905dd7ee0f42fcdb0c4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01049.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ab7ed6c79669a905dd7ee0f42fcdb0c4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01049.jpeg"></a>{.calibre13}
+:::</p>
+<p><strong>Figure 23-1 Container Home: Bare Metal or Virtual Machine</strong>
+:::</p>
+<p>The added layer of hypervisor is shown in the middle stack. Any of the
+above implementation can run multiple applications concurrently. A
+decision as to which option to go with requires a careful use case
+study; however, the benefits of running containers on bare metal servers
+are obvious.</p>
+<p><strong>[Container]{#part0035_split_001.html#id_601 .calibre10} Images and
+Container Registries</strong></p>
+<p>Launching a container requires a pre-packaged image to be available. A
+container <em>image</em> is essentially a file that is built with all necessary
+components&mdash;application binaries, library files, configuration
+settings, environment variables, static data files, etc.&mdash;required by
+an application to run smoothly, securely, and successfully included.
+RHEL follows the <em>open container initiative</em> (OCI) to allow users to
+build images based on industry standard specifications. An OCI-compliant
+image can be executed and managed with OCI-compliant tools such as
+<em>podman</em> (<em>pod manager</em>) and Docker. Images can be version-controlled
+giving users the suppleness to use the latest or any of the previous
+versions to launch their containers. A single image can be used to run
+several containers at once.</p>
+<p>Container images adhere to a standard naming convention for
+identification. This is referred to as <em>fully qualified image name</em>
+(FQIN). An FQIN is comprised of four components: (1) the storage
+location (registry_name), (2) the owner or organization name
+(user_name), (3) a unique repository name (repo_name), and (4) an
+optional version (tag). The syntax of an FQIN is
+<em>registry_name/user_name/repo_name:tag</em>.</p>
+<p>Images are stored and maintained in public or private <em>registries</em>;
+however, they need to be downloaded and made locally available for
+consumption. There are several registries available on the Internet.
+These include Red Hat Container Catalog at <em>registry.redhat.io</em> (or
+<em><a href="http://registry.access.redhat.com" target="_blank">registry.access.redhat.com</a>{.calibre5}</em><a href="http://registry.access.redhat.com" target="_blank">),</a>{.calibre5}
+Red Hat Quay at <em>quay.io</em>, and Docker Hub at
+<em><a href="http://hub.docker.com.Additional" target="_blank">hub.docker.com</a>{.calibre5}</em><a href="http://hub.docker.com.Additional" target="_blank">.Additional</a>{.calibre5}
+registries may be added as required. Private registries may require
+authentication for access.</p>
+<p><strong>Root vs. Rootless Containers</strong></p>
+<p>Containers can be launched with the <em>root</em> user privileges. This gives
+containers full access to perform administrative functions including the
+ability to map privileged network ports (1024 and below). However,
+launching containers with superuser rights opens a gate to potential
+unauthorized access if a container is compromised due to a vulnerability
+or misconfiguration.</p>
+<p>To secure containers and the underlying operating system, the concept of
+<em>rootless</em> container was instituted. Rootless containers allow normal,
+unprivileged Linux users to run containers and interact with them just
+like the <em>root</em> user, but without the ability to perform tasks that
+require privileged access. Running containers without <em>root</em> is gaining
+traction.</p>
+<p><strong>[Working]{#part0035_split_001.html#id_602 .calibre10} with Images and
+Containers</strong></p>
+<p>To work with images and containers, a good comprehension of the
+management commands and the configuration files involved is crucial. It
+is also important to have the minimum required version of the necessary
+software installed on the system to ensure the features you&rsquo;re looking
+to implement are available. RHEL offers two commands&mdash;<em>podman</em> and
+<em>skopeo</em>&mdash;to manage and interact with images, registries, and
+containers. These tools can also be used to troubleshoot issues and
+perform advanced management tasks; however, a discussion on those is
+beyond the scope of this book.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_603 .calibre10} 23-1: Install
+Necessary Container Support</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will install the necessary software to set the
+foundation for completing the exercises in the remainder of the chapter.
+The standard RHEL 8.0 (and RHEL 8.2) image includes a module called
+<em>container-tools</em> that consists of all the required components and
+commands; however, a newer version is available in the Red Hat
+Subscription Management (RHSM) service and that&rsquo;s what you will be
+installing here to take advantage of the latest features and bug fixes.
+You will use the standard <em>dnf</em> command to install the module.</p>
+<p>1[.]{.c19}Register the system with RHSM to access the latest version of
+the <em>container-tools</em> module. Use the credentials you created in
+<a href="/linux/rhcsa/23_containers/#part0013_split_000.html#page_1">Chapter 01</a>{.calibre5} &ldquo;Local
+Installation&rdquo; to connect to the service. Enter your username at the
+command line with the --username option. Enter the <em>root</em> user password
+first if you have invoked the <em>subscription-manager</em> command as a normal
+user and then your Red Hat password.</p>
+<p><a href="#R-image-369530b28f7c347129cca2157f4e380a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01050.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-369530b28f7c347129cca2157f4e380a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01050.jpeg"></a>{.image2}</p>
+<p>The system has been registered as indicated.</p>
+<p>2[.]{.c19}Next, attach the server with the RHEL subscription using the
+<em>attach</em> subcommand:</p>
+<p><a href="#R-image-a16a264e7c7199ddf71afbe9573b3198" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01051.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a16a264e7c7199ddf71afbe9573b3198"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01051.jpeg"></a>{.image2}</p>
+<p><em>server20</em> is attached to the indicated subscription (Product Name) and
+it has access to the Red Hat-maintained BaseOS and AppStream
+repositories, which contain newer versions of the packages that the
+corresponding repositories on the DVD image provide. The Red Hat repos
+also incorporate a lot more software packages than do the DVD repos.</p>
+<p>3[.]{.c19}Pull the metadata information for the Red Hat repositories:</p>
+<p><a href="#R-image-4dca296ff56c1f764e1316ed0f065ee5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01052.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4dca296ff56c1f764e1316ed0f065ee5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01052.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Install the <em>container-tools</em> module:</p>
+<p><a href="#R-image-cec8df5bdd36c2ee66826bbcf7da7c25" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01053.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cec8df5bdd36c2ee66826bbcf7da7c25"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01053.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-32447a5c261a392cc73652198d6f69d4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01054.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-32447a5c261a392cc73652198d6f69d4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01054.jpeg"></a>{.image2}</p>
+<p>See the <em>skopeo</em> and <em>podman</em> commands and their versions on the list of
+installed packages above. They are now available on the system for
+managing images and containers.</p>
+<p>5[.]{.c19}Verify the module installation:</p>
+<p><a href="#R-image-c67a859ae867cdfd835d32c20fb88981" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01055.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c67a859ae867cdfd835d32c20fb88981"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01055.jpeg"></a>{.image2}</p>
+<p>The output confirms a successful installation ([i] beside the common
+profile) of the <em>container-tools</em> module from RHSM.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[The]{#part0035_split_001.html#id_604 .calibre10} podman Command</strong></p>
+<p>Managing images and containers involves several operations such as
+finding, inspecting, retrieving, and deleting images and running,
+stopping, listing, and deleting containers. The <em>podman</em> command is used
+for most of these operations. It supports numerous subcommands and
+options. <a href="/linux/rhcsa/23_containers/#part0035_split_001.html#id_762">Table 23-1</a>{.calibre5}
+describes the ones that are used in this chapter.</p>
+<p>::: c49</p>
+<hr>
+<p><strong>Subcommand</strong>             <strong>Description</strong>
+<strong>Image Management</strong>    <br>
+images                     Lists downloaded images from local storage
+inspect                    Examines an image and displays its details
+login/logout               Logs in/out to/from a container registry. A login may be required to access private and protected registries.
+pull                       Downloads an image to local storage from a registry
+rmi                        Removes an image from local storage
+search                     Searches for an image. The following options can be included with this subcommand:
+1. A partial image name in the search will produce a list of all images containing the partial name.
+2. The --no-trunc option makes the command exhibit output without truncating it.
+3. The --limit &lt;number&gt; option limits the displayed results to the specified number.
+tag                        Adds a name to an image. The default is &rsquo;latest&rsquo; to classify the image as the latest version. Older images may have specific version identifiers.
+<strong>Container Management</strong><br>
+attach                     Attaches to a running container
+exec                       Runs a process in a running container
+generate                   Generates a systemd unit configuration file that can be used to control the operational state of a container. The --new option is important and is employed in later exercises.
+info                       Reveals system information, including the defined registries
+inspect                    Exhibits the configuration of a container
+ps                         Lists running containers (includes stopped containers with the -a option)
+rm                         Removes a container
+run                        Launches a new container from an image. Some options such as -d (detached), -i (interactive), and -t (terminal) are important and are employed in exercises where needed.
+start/stop/restart         Starts, stops, or restarts a container</p>
+<hr>
+<p><strong>[Table]{#part0035_split_001.html#id_762} 23-1 Common podman
+Subcommands</strong>
+:::</p>
+<p>All the subcommands described in <a href="/linux/rhcsa/23_containers/#part0035_split_001.html#id_762">Table
+23-1</a>{.calibre5} are used in the
+upcoming exercises. Consult the manual pages of the <em>podman</em> command for
+details on the usage of these and other subcommands.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} A solid understanding of the usage of the podman
+command is key to completing container tasks.</p>
+<p><strong>[The]{#part0035_split_001.html#id_605 .calibre10} skopeo Command</strong></p>
+<p>The <em>skopeo</em> command is utilized for interacting with local and remote
+images and registries. It has numerous subcommands available; however,
+you will be using only the <em>inspect</em> subcommand to examine the details
+of an image stored in a remote registry. View the manual pages of
+<em>skopeo</em> for details on the usage of the <em>inspect</em> and other
+subcommands.</p>
+<p><strong>[The]{#part0035_split_001.html#id_606 .calibre10} registries.conf
+File</strong></p>
+<p>The system-wide configuration file for image registries is the
+<em>registries.conf</em> file and it resides in the **etc<em>containers</em>
+directory. Normal Linux users may store a customized copy of this file,
+if required, under the <em>~/.config/containers</em> directory. The settings
+stored in the peruser file will take precedence over those stored in the
+system-wide file. This is especially useful for running rootless
+containers.</p>
+<p>This file defines searchable and blocked registries. There are three
+sections&mdash;registries.search, registries.insecure, and registries.block,
+as evident from the below output:</p>
+<p><a href="#R-image-bd6fa2233184533522fa6ce43f35c6d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01056.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd6fa2233184533522fa6ce43f35c6d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01056.jpeg"></a>{.image2}</p>
+<p>The registries.search section lists the registries that are searched if
+an FQIN is not specified at the command line. By default, there are
+three registries on the list (see the above output). You will be using
+<em>registry.redhat.io</em> (old name
+<em><a href="http://registry.access.redhat.com" target="_blank">registry.access.redhat.com</a>{.calibre5}</em>)
+primarily and the other two if needed. If access to an additional
+registry is necessary, simply add it to the list and place it according
+to the preference. For instance, if you want a private registry called
+<em>registry.private.myorg.io</em> to be added with the highest priority, edit
+the <em>registries.conf</em> file and make the following change:</p>
+<p>[registries.search]</p>
+<p>registries = [&lsquo;registry.private.myorg.io&rsquo;, &lsquo;registry.redhat.io&rsquo;,
+&lsquo;quay.io&rsquo;, &lsquo;docker.io&rsquo;]</p>
+<p>If this private registry is the only one to be used, you can take the
+rest of the registry entries out of the list. In that case, the line
+entry will look like: registries = registry.private.myorg.io.</p>
+<p>The registries.insecure section lists the registries that do not have
+valid SSL/TLS certificates. Insecure registries may also be added to the
+registries.search section. There are none included in the file by
+default.</p>
+<p>The regsitries.block section lists registries that must not be used.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} As there is no Internet access provided during Red
+Hat exams, you may have to access a network-based registry to download
+images.</p>
+<p>The default content of the file is good for many use cases; however, you
+may see additional or different entries on busy systems.</p>
+<p><strong>[Viewing]{#part0035_split_001.html#id_607 .calibre10} Podman
+Configuration and Version</strong></p>
+<p>The <em>podman</em> command references various system runtime and configuration
+files and runs certain Linux commands in the background to gather and
+display information. For instance, it looks for registries and storage
+data in the system-wide and peruser configuration files, pulls memory
+information from the **proc<em>meminfo</em> file, executes <strong>uname -r</strong> to
+obtain the kernel version, and so on. <em>podman</em>&rsquo;s <em>info</em> subcommand shows
+all this information. Here is a sample when this command is executed as
+a normal user (<em>user1</em>):</p>
+<p><a href="#R-image-4dee727175366c19bfa227e43feed2d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01057.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4dee727175366c19bfa227e43feed2d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01057.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4180366b5630d0a63b6e190646719cd3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01058.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4180366b5630d0a63b6e190646719cd3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01058.jpeg"></a>{.image2}</p>
+<p>The above output is self-explanatory.</p>
+<p>Now, re-run the command as <em>root</em> (precede by <em>sudo</em> if running as
+<em>user1</em>) and compare the values for the settings &ldquo;rootless&rdquo; under host
+and &ldquo;ConfigFile&rdquo; and &ldquo;ImageStore&rdquo; under store. The differences lie
+between where the root and rootless (normal) users store and obtain
+configuration data, the number of container images they have locally
+available, and so on.</p>
+<p>Similarly, you can run the <em>podman</em> command as follows to check its
+version:</p>
+<p><a href="#R-image-3949f09825394d108842cf2348d1c55d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01059.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3949f09825394d108842cf2348d1c55d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01059.jpeg"></a>{.image2}</p>
+<p>The output reveals the version (1.9.3) of the <em>podman</em> utility and this
+is what you will be using to perform the forthcoming exercises.</p>
+<p><strong>Image Management</strong></p>
+<p>Images are stored in private or public registries and are pulled locally
+for consumption. They can be searched through one or more registries and
+their metadata can be examined before download. Downloaded images can be
+removed when no longer needed to conserve local storage. The same pair
+of commands&mdash;<em>podman</em> and <em>skopeo</em>&mdash;is employed for these operations.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_608 .calibre10} 23-2: Search,
+Examine, Download, and Remove an Image</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will look for an image called <em>mysql</em> in the
+<em>quay.io</em> registry, examine its details, pull it to your system, confirm
+the retrieval, and finally erase it from the local storage. You will use
+the <em>podman</em> and <em>skopeo</em> commands as required for these operations.</p>
+<p>1[.]{.c19}Find the <em>mysql</em> image in the specified registry (<em>quay.io</em>)
+using <em>podman search</em>. You may add the --no-trunc option to view full
+output.</p>
+<p><a href="#R-image-894b82098695bca9d7ac28d2d86243c5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01060.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-894b82098695bca9d7ac28d2d86243c5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01060.jpeg"></a>{.image2}</p>
+<p>There are several images containing the searched name. You will pick
+app-sre/mysql for use in this exercise.</p>
+<p>2[.]{.c19}Inspect the image without downloading it using <em>skopeo
+inspect</em>. A long output will be generated. The command uses the
+docker:// mechanism to access the image.</p>
+<p><a href="#R-image-3ffd352e3c9fa76904c8ca16aa5bed64" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01061.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3ffd352e3c9fa76904c8ca16aa5bed64"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01061.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-11f8953a95ca13639d4fc38b7553a471" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01062.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11f8953a95ca13639d4fc38b7553a471"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01062.jpeg"></a>{.image2}</p>
+<p>The output shows older versions under RepoTags, creation timestamp for
+the latest version, the Docker version that was used to build this
+image, and other information. It is a good practice to analyze the
+metadata of an image prior to downloading and consuming it.</p>
+<p>3[.]{.c19}Download the image by specifying the fully qualified image
+name using <em>podman pull</em>:</p>
+<p><a href="#R-image-9ebcc1e3a32b20e88aec85b43288d1da" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01063.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ebcc1e3a32b20e88aec85b43288d1da"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01063.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}List the image to confirm the retrieval using <em>podman images</em>:</p>
+<p><a href="#R-image-b35298b09e5d8e6295375fe85d9bdb70" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01064.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b35298b09e5d8e6295375fe85d9bdb70"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01064.jpeg"></a>{.image2}</p>
+<p>The output indicates the FQIN of the image, version (tag), image ID,
+when it was created, and size.</p>
+<p>5[.]{.c19}Display this image&rsquo;s details using <em>podman inspect</em>. The
+command will generate a long output. You may pipe the output to the
+<em>less</em> command to view one screenful of information at a time.</p>
+<p><a href="#R-image-9fa0911fd8319a2c8b5127ca74342095" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01065.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9fa0911fd8319a2c8b5127ca74342095"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01065.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Remove the mysql image from local storage using <em>podman rmi</em>:</p>
+<p><a href="#R-image-d75f6317aeee3cfe4baa8dc88d34ba44" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01066.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d75f6317aeee3cfe4baa8dc88d34ba44"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01066.jpeg"></a>{.image2}</p>
+<p>The <em>podman</em> command shows the ID of the image after deletion.</p>
+<p>7[.]{.c19}Confirm the removal using <em>podman images</em>:</p>
+<p><a href="#R-image-4a616cf5a56d797a6450ce1aca9fc8f6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01067.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4a616cf5a56d797a6450ce1aca9fc8f6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01067.jpeg"></a>{.image2}</p>
+<p>The image is no longer available in the local storage, which confirms
+the removal.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Basic]{#part0035_split_001.html#id_609 .calibre10} Container
+Management</strong></p>
+<p>Managing containers involves common tasks such as starting, stopping,
+listing, viewing information about, and deleting them. Depending on the
+use case, containers can be launched in different ways. They can have a
+name assigned or be nameless, have a terminal session opened for
+interaction, execute an entry point command (the command specified at
+the launch time) and be auto-terminated right after, and so on. Running
+containers can be stopped and restarted, or discarded if no longer
+needed. The <em>podman</em> command is utilized to start containers and manage
+their lifecycle. This command is also employed to list stopped and
+running containers, and view their details.</p>
+<p><strong>Exercise 23-3: Run, Interact with, and Remove a Named Container</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will run a container based on the latest version
+of a <em>universal base image</em> (ubi) for RHEL 8 available in the Red Hat
+Container Registry. This image provides the base operating system layer
+for the deployment of containerized applications. You will assign this
+container a name and run a few native Linux commands in a terminal
+window interactively. You will exit out of the container and invoke a
+command inside the container from <em>server20</em>. Finally, you will
+reconnect to the container, exit out, and delete it to mark the
+completion of the exercise.</p>
+<p>1[.]{.c19}Delete the directory **etc<em>docker</em> (if it exists) to avoid
+permission issues:</p>
+<p><a href="#R-image-addf105bad75639bd016e6368db9dce5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01068.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-addf105bad75639bd016e6368db9dce5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01068.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Launch a container using ubi8 (RHEL 8 image). Name this
+container <em>rhel8-base-os</em> and open a terminal session (-t) for
+interaction (-i). Use the <em>podman run</em> command.</p>
+<p><a href="#R-image-1c488015221a0c4d03b055d9ca07268e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01069.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1c488015221a0c4d03b055d9ca07268e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01069.jpeg"></a>{.image2}</p>
+<p>The above command downloaded the latest version of the specified image
+automatically even though no FQIN was provided. This is because it
+searched through the registries listed in the
+**etc<em>containers/registries.conf</em> file and retrieved the image from
+wherever it found it first (<em>registry.redhat.io</em>). It also opened a
+terminal session inside the container as the <em>root</em> user to interact
+with the containerized RHEL 8 OS. The container ID is reflected as the
+hostname in the container&rsquo;s command prompt (last line in the output).
+This is an auto-generated ID.</p>
+<p>3[.]{.c19}Run a few basic commands such as <em>pwd</em>, <em>ls</em>, <em>cat</em>, and
+<em>date</em> inside the container for verification:</p>
+<p><a href="#R-image-7a91cadb444fde74ffe585a8b62a8609" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01070.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7a91cadb444fde74ffe585a8b62a8609"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01070.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Close the terminal session when done:</p>
+<p><a href="#R-image-c8f0b65029044aa1c7c7c9e13246f595" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01071.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c8f0b65029044aa1c7c7c9e13246f595"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01071.jpeg"></a>{.image2}</p>
+<p>5[.]{.c19}Execute a command inside the container directly from the host
+using <em>podman exec</em>:</p>
+<p><a href="#R-image-b6eb0029c2bdfaaed31d6bc73ab1d536" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01072.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b6eb0029c2bdfaaed31d6bc73ab1d536"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01072.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Reconnect to the container using <em>podman attach</em>:</p>
+<p><a href="#R-image-c820d28fd55b7be409acda068fcd6b29" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01073.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c820d28fd55b7be409acda068fcd6b29"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01073.jpeg"></a>{.image2}</p>
+<p>7[.]{.c19}Close the terminal session to return to the host system&rsquo;s
+command prompt:</p>
+<p><a href="#R-image-566bd502f79b628024b4dffef6689264" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01074.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-566bd502f79b628024b4dffef6689264"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01074.jpeg"></a>{.image2}</p>
+<p>8[.]{.c19}Delete the container using <em>podman rm</em>:</p>
+<p><a href="#R-image-06ed32b83c5355f522ba4c11dc097639" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01075.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06ed32b83c5355f522ba4c11dc097639"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01075.jpeg"></a>{.image2}</p>
+<p>Confirm the removal with <strong>podman ps</strong>.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_610 .calibre10} 23-4: Run a
+Nameless Container and Auto-Remove it After Entry Point Command
+Execution</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em>.</p>
+<p>In this exercise, you will launch a container based on the latest
+version of a <em>universal base image</em> (ubi) for RHEL 7 available in the
+Red Hat Container Registry. This image provides the base operating
+system layer to deploy containerized applications. You will enter a
+Linux command at the command line for execution inside the container as
+an entry point command and ensure that the container is deleted right
+after that.</p>
+<p>1[.]{.c19}Start a container using ubi7 (RHEL 7 image) and run <em>ls</em> as an
+entry point command. Use <em>podman run</em> with the --rm option to remove
+the container as soon as the entry point command has finished running.</p>
+<p><a href="#R-image-c0d3ddd87ada5a4f74370805cc3a425e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01076.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c0d3ddd87ada5a4f74370805cc3a425e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01076.jpeg"></a>{.image2}</p>
+<p>The <em>ls</em> command was executed successfully and the container was
+terminated thereafter.</p>
+<p>2[.]{.c19}Confirm the container removal with <em>podman ps</em>:</p>
+<p><a href="#R-image-1ad11ffed2be98c43ebc985913f3ae66" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01077.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1ad11ffed2be98c43ebc985913f3ae66"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01077.jpeg"></a>{.image2}</p>
+<p>The container no longer exists.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Advanced]{#part0035_split_001.html#id_611 .calibre10} Container
+Management</strong></p>
+<p>Containers run a variety of applications and databases that may need to
+communicate with applications or databases running in other containers
+on the same or different host system over certain network ports. Preset
+environment variables may be passed when launching containers or new
+variables may be set for containerized applications to consume for
+proper operation. Information stored during an application execution is
+lost when a container is restarted or erased. This behavior can be
+overridden by making a directory on the host available inside the
+container for saving data persistently. Containers may be configured to
+start and stop with the transitioning of the host system via the systemd
+service. These advanced tasks are also performed with the <em>podman</em>
+command. Let&rsquo;s take a closer look.</p>
+<p><strong>[Containers]{#part0035_split_001.html#id_612 .calibre10} and Port
+Mapping</strong></p>
+<p>Applications running in different containers often need to exchange data
+for proper operation. For instance, a containerized Apache web server
+may need to talk to a MySQL database instance running in a different
+container. It may also need to talk to the outside world over a port
+such as 80 or 8080. To support this traffic flow, appropriate port
+mappings are established between the host system and each container.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} As a normal user, you cannot map a host port below
+1024 to a container port.</p>
+<p><strong>Exercise 23-5: Configure Port Mapping</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>root</em>.</p>
+<p>In this exercise, you will launch a container called <em>rhel7-port-map</em> in
+detached mode (as a daemon) with host port 10000 mapped to port 8000
+inside the container. You will use a version of the RHEL 7 image with
+Apache web server software pre-installed. This image is available in the
+Red Hat Container Registry. You will list the running container and
+confirm the port mapping.</p>
+<p>1[.]{.c19}Search for an Apache web server image for RHEL 7 using <em>podman
+search</em>:</p>
+<p><a href="#R-image-136ff07352004517fcb955028a0d5a06" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01078.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-136ff07352004517fcb955028a0d5a06"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01078.jpeg"></a>{.image2}</p>
+<p>The Red Hat Container Registry has an Apache web server image called
+<em>httpd-24-rhel7</em> available as evident from the output.</p>
+<p>2[.]{.c19}Log in to <em>registry.redhat.io</em> using the Red Hat credentials
+to access the image:</p>
+<p><a href="#R-image-03d6606ea03f304e1665b98cfb4013b6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01079.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-03d6606ea03f304e1665b98cfb4013b6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01079.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Download the latest version of the Apache image using <em>podman
+pull</em>:</p>
+<p><a href="#R-image-29231c4c7774313e6856aa6984000b7a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01080.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-29231c4c7774313e6856aa6984000b7a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01080.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Verify the download using <em>podman images</em>:</p>
+<p><a href="#R-image-fde33a5b7f3c81bb3730c49280612c2c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01081.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fde33a5b7f3c81bb3730c49280612c2c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01081.jpeg"></a>{.image2}</p>
+<p>5[.]{.c19}Launch a container named (--name) <em>rhel7-port-map</em> in
+detached mode (-d) to run the containerized Apache web server with host
+port 10000 mapped to container port 8000 (-p). Use the <em>podman run</em>
+command with appropriate flags.</p>
+<p><a href="#R-image-9752abd28d18614a75fc9abed4c03873" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01082.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9752abd28d18614a75fc9abed4c03873"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01082.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Verify that the container was launched successfully using
+<em>podman ps</em>:</p>
+<p><a href="#R-image-166cbf7ee12a5c944188e80ec5fcfc6d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01083.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-166cbf7ee12a5c944188e80ec5fcfc6d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01083.jpeg"></a>{.image2}</p>
+<p>The container is running (up for 50 seconds and created 51 seconds ago).
+The output also indicates the port mapping.</p>
+<p>7[.]{.c19}You can also use <em>podman port</em> to view the mapping:</p>
+<p><a href="#R-image-fa1240b645234b950d2fafc28b271a60" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01084.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fa1240b645234b950d2fafc28b271a60"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01084.jpeg"></a>{.image2}</p>
+<p>Now any inbound web traffic on host port 10000 will be redirected to the
+container.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_613 .calibre10} 23-6: Stop,
+Restart, and Remove a Container</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>root</em>.</p>
+<p>This exercise is a continuation of <a href="/linux/rhcsa/23_containers/#part0035_split_000.html#page_518">Exercise
+23-5</a>{.calibre5} in which a container
+named <em>rhel7-port-map</em> was launched.</p>
+<p>In this exercise, you will stop the container, restart it, stop it
+again, and then erase it. You will use appropriate <em>podman</em> subcommands
+and verify each transition.</p>
+<p>1[.]{.c19}Verify the current operational state of the container
+<em>rhel7-port-map</em>:</p>
+<p><a href="#R-image-443d5bbe2c93cd404c0a05319bb65b68" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01085.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-443d5bbe2c93cd404c0a05319bb65b68"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01085.jpeg"></a>{.image2}</p>
+<p>The container has been up and running for 8 minutes. It was created 8
+minutes ago.</p>
+<p>2[.]{.c19}Stop the container and confirm using the <em>stop</em> and <em>ps</em>
+subcommands (the -a option with <em>ps</em> also includes the stopped
+containers in the output):</p>
+<p><a href="#R-image-8699ec3db1534612408609e264e79058" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01086.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8699ec3db1534612408609e264e79058"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01086.jpeg"></a>{.image2}</p>
+<p>The container is in stopped (Exited) state for the past 5 seconds. It
+was created 10 minutes ago.</p>
+<p>3[.]{.c19}Start the container and confirm with the <em>start</em> and <em>ps</em>
+subcommands:</p>
+<p><a href="#R-image-bf9aa926cce4b6fdefc49407be0d1b34" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01087.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bf9aa926cce4b6fdefc49407be0d1b34"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01087.jpeg"></a>{.image2}</p>
+<p>Observe the creation and running times.</p>
+<p>4[.]{.c19}Stop the container and remove it using the <em>stop</em> and <em>rm</em>
+subcommands:</p>
+<p><a href="#R-image-1a7ad6682d11f6175d3e9809a1ea262a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01088.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1a7ad6682d11f6175d3e9809a1ea262a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01088.jpeg"></a>{.image2}</p>
+<p>5[.]{.c19}Confirm the removal using the -a option with <em>podman ps</em> to
+also include any stopped containers:</p>
+<p><a href="#R-image-4142109c232bb7cda0d77158d39bea3f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01089.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4142109c232bb7cda0d77158d39bea3f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01089.jpeg"></a>{.image2}</p>
+<p>The container no longer exists.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Containers]{#part0035_split_001.html#id_614 .calibre10} and
+Environment Variables</strong></p>
+<p>Many a times, it is necessary to pass a host&rsquo;s pre-defined environment
+variable, such as PATH, to a containerized application for consumption.
+Moreover, it may also be necessary at times to set new variables to
+inject debugging flags or sensitive information such as passwords,
+access keys, or other secrets for use inside containers. Passing host
+environment variables and setting new environment variables is done at
+the time of launching a container. The <em>podman</em> command allows multiple
+variables to be passed or set with the -e option.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} Use the -e option with each variable that you want
+to pass or set.</p>
+<p>Refer to <a href="/linux/rhcsa/23_containers/#part0019_split_000.html#page_151">Chapter 07</a>{.calibre5} &ldquo;The
+Bash Shell&rdquo; for more information on variables, their types, and how to
+define and view them.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_615 .calibre10} 23-7: Pass and
+Set Environment Variables</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em>.</p>
+<p>In this exercise, you will launch a container using the latest version
+of a ubi for RHEL 8 available in the Red Hat Container Registry. You
+will inject the HISTSIZE environment variable and a variable called
+SECRET with the value &ldquo;secret123&rdquo;. You will name this container
+<em>rhel8-env-vars</em> and have a shell terminal opened to check the variable
+settings. Finally, you will remove this container.</p>
+<p>1[.]{.c19}Launch a container with an interactive terminal session (-it)
+and inject (-e) variables HISTSIZE and SECRET as directed. Use the
+specified container image.</p>
+<p><a href="#R-image-b2866b96579f01ba2520d152766d670d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01090.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b2866b96579f01ba2520d152766d670d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01090.jpeg"></a>{.image2}</p>
+<p>The container is launched with a terminal opened for interaction.</p>
+<p>2[.]{.c19}Verify both variables using the <em>echo</em> command:</p>
+<p><a href="#R-image-504a766a58a81630892c918b0cf9626e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01091.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-504a766a58a81630892c918b0cf9626e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01091.jpeg"></a>{.image2}</p>
+<p>Both variables are set and show their respective values.</p>
+<p>3[.]{.c19}Disconnect from the container using the <em>exit</em> command, and
+stop and remove it using the <em>stop</em> and <em>rm</em> subcommands:</p>
+<p><a href="#R-image-f6aafdea805ede1c1e6438ab89d9254a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01092.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f6aafdea805ede1c1e6438ab89d9254a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01092.jpeg"></a>{.image2}</p>
+<p>At this point, you may want to confirm the deletion by running <strong>podman
+ps -a</strong>.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Containers]{#part0035_split_001.html#id_616 .calibre10} and
+Persistent Storage</strong></p>
+<p>Containers are normally launched for a period of time to run an
+application and are then stopped or deleted when their job is finished.
+Any data that is produced during runtime is lost on their restart,
+failure, or termination. This data may be saved for persistence on a
+host directory by attaching it to a container. The containerized
+application will see the attached directory just like any other local
+directory and will use it to store data if it is configured to do so.
+Any data that is saved on the directory will be available even after the
+container is rebooted or removed. Later, this directory can be
+re-attached to other containers to give them access to the stored data
+or to save their own data. The source directory on the host may itself
+exist on any local or remote file system.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} Proper ownership, permissions, and SELinux file
+type must be set to ensure persistent storage is accessed and allows
+data writes without issues.</p>
+<p>There are a few simple steps that should be performed to configure a
+directory before it can be attached to a container. These steps include
+the correct ownership, permissions, and SELinux type (container_file_t).
+The special SELinux file type is applied to prevent containerized
+applications (especially those running in root containers) from gaining
+undesired privileged access to host files and processes, or other
+running containers on the host if compromised.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_617 .calibre10} 23-8: Attach
+Persistent Storage and Access Data Across Containers</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will set up a directory on <em>server20</em> and attach
+it to a new container. You will write some data to the directory while
+in the container. You will delete the container and launch another
+container with the same directory attached. You will observe that the
+saved data is available in the new container and is accessible. You will
+remove the container to mark the completion of this exercise.</p>
+<p>1[.]{.c19}Create a directory called <em>/host_data</em>, set full permissions
+on it, and confirm:</p>
+<p><a href="#R-image-99701596f4e3785d7c1045ca62d45c75" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01093.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-99701596f4e3785d7c1045ca62d45c75"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01093.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Launch a root container called <em>rhel7-persistent-data</em>
+(--name) in interactive mode (-it) using the latest ubi7 image. Specify
+the attachment point (<em>/container_data</em>) to be used inside the container
+for the host directory (<em>/host_data</em>) with the -v (volume) option. Add
+:Z as shown to ensure the SELinux type container_file_t is automatically
+set on the directory and files within.</p>
+<p><a href="#R-image-0134f0db1fcef9b79f25347f4924bee6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01094.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0134f0db1fcef9b79f25347f4924bee6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01094.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Confirm the presence of the directory inside the container
+using the <em>ls</em> command on <em>/container_host</em>:</p>
+<p><a href="#R-image-6095fc20e179217d19281d293d489b52" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01095.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6095fc20e179217d19281d293d489b52"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01095.jpeg"></a>{.image2}</p>
+<p>The host directory is available as <em>/container_data</em> inside the
+container with the correct SELinux type.</p>
+<p>4[.]{.c19}Create a file called <em>testfile</em> with the <em>echo</em> command under
+<em>/container_host</em>:</p>
+<p><a href="#R-image-94312da949824120f1669ab7a935426d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01096.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-94312da949824120f1669ab7a935426d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01096.jpeg"></a>{.image2}</p>
+<p>5[.]{.c19}Verify the file creation and the SELinux type on it:</p>
+<p><a href="#R-image-acc8274ed8cda30eb7b55b7bb62edbdf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01097.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-acc8274ed8cda30eb7b55b7bb62edbdf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01097.jpeg"></a>{.image2}</p>
+<p>The file inherits the SELinux type from the parent directory.</p>
+<p>6[.]{.c19}Exit out of the container and check the presence of the file
+in the host directory:</p>
+<p><a href="#R-image-883d1fda3e5683b84343262c14cf0007" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01098.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-883d1fda3e5683b84343262c14cf0007"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01098.jpeg"></a>{.image2}</p>
+<p>The output indicates the exact same attributes on the file.</p>
+<p>7[.]{.c19}Stop and remove the container using the <em>stop</em> and <em>rm</em>
+subcommands:</p>
+<p><a href="#R-image-b9173f9ea571369e1c0e8f2983c203c8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01099.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b9173f9ea571369e1c0e8f2983c203c8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01099.jpeg"></a>{.image2}</p>
+<p>8[.]{.c19}Launch a new root container called <em>rhel8-persistent-data</em>
+(--name) in interactive mode (-it) using the latest ubi8 image from any
+of the defined registries. Specify the attachment point
+(<em>/container_data2</em>) to be used inside the container for the host
+directory (<em>/host_data</em>) with the -v (volume) option. Add :Z as shown to
+ensure the SELinux type container_file_t is automatically set on the
+directory and files within.</p>
+<p><a href="#R-image-d889bb6fc20b0dd6afea908fa413e31f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01100.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d889bb6fc20b0dd6afea908fa413e31f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01100.jpeg"></a>{.image2}</p>
+<p>9[.]{.c19}Confirm the presence of the directory inside the container
+using the <em>ls</em> command on <em>/container_host2</em>:</p>
+<p><a href="#R-image-208f18c6b4eb501369dfe8ae6cbdb139" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01101.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-208f18c6b4eb501369dfe8ae6cbdb139"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01101.jpeg"></a>{.image2}</p>
+<p>The host directory is available as <em>/container_data2</em> inside this new
+container with the correct SELinux type. The output also confirms the
+persistence of the <em>testfile</em> data that was written in the previous
+container.</p>
+<p>10[.]{.c23}Create a file called <em>testfile2</em> with the <em>echo</em> command
+under <em>/container_data2</em>:</p>
+<p><a href="#R-image-5b819ce90505511c017e348fe486e543" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01102.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5b819ce90505511c017e348fe486e543"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01102.jpeg"></a>{.image2}</p>
+<p>11[.]{.c23}Exit out of the container and confirm the existence of both
+files in the host directory:</p>
+<p><a href="#R-image-fe03dbddb7ecc232b9e9a5a800729079" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01103.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fe03dbddb7ecc232b9e9a5a800729079"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01103.jpeg"></a>{.image2}</p>
+<p>12[.]{.c23}Stop and remove the container using the <em>stop</em> and <em>rm</em>
+subcommands:</p>
+<p><a href="#R-image-c8d2b9f4ec1221b015fa62a39de290a4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01104.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c8d2b9f4ec1221b015fa62a39de290a4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01104.jpeg"></a>{.image2}</p>
+<p>13[.]{.c23}Re-check the presence of the files in the host directory:</p>
+<p><a href="#R-image-042a55b4211a9a1dc7e21f73754e5e59" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01105.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-042a55b4211a9a1dc7e21f73754e5e59"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01105.jpeg"></a>{.image2}</p>
+<p>Both files still exist and they can be shared with other containers if
+required.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Container]{#part0035_split_001.html#id_618 .calibre10} State
+Management with systemd</strong></p>
+<p>So far you have seen how containers are started, stopped, and deleted by
+hand using the management command. In real life environments multiple
+containers run on a single host and it becomes a challenging task to
+change their operational state or delete them manually. In RHEL 8, these
+administrative functions can be automated via the systemd service (refer
+to <a href="/linux/rhcsa/23_containers/#part0024_split_000.html#page_271">Chapter 12</a>{.calibre5} &ldquo;System
+Initialization, Message Logging, and System Tuning&rdquo; for details on
+systemd).</p>
+<p>There are several steps that need to be completed to configure container
+state management via systemd. These steps vary for root and rootless
+container setups and include the creation of service unit files and
+their storage in appropriate directory locations
+(<em>~/.config/systemd/user</em> for rootless containers and
+**etc<em>systemd/system</em> for root containers). Once setup and enabled, the
+containers will start and stop automatically as a systemd service with
+the host state transition or manually with the <em>systemctl</em> command.</p>
+<p><a href="#R-image-f284ccf84c9d3be42fa6a2de4601befb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f284ccf84c9d3be42fa6a2de4601befb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The <em>podman</em> command to start and stop
+containers is no longer needed if the systemd setup is in place. You may
+experience issues if you continue to use <em>podman</em> for container state
+transitioning.</p>
+<p>The start and stop behavior for rootless containers differs slightly
+from that of root containers. For the rootless setup, the containers are
+started when the relevant user logs in to the host and stopped when that
+user logs off from all their open terminal sessions; however, this
+default behavior can be altered by enabling lingering for that user with
+the <em>loginctl</em> command.</p>
+<p><a href="#R-image-cfc0ecc6b4ba9105bae70a1a7569f062" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cfc0ecc6b4ba9105bae70a1a7569f062"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} User lingering is a feature that, if
+enabled for a particular user, spawns a user manager for that user at
+system startup and keeps it running in the background to support
+long-running services configured for that user. The user need not log
+in.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} Make sure that you use a normal user to launch
+rootless containers and the root user (or sudo) to launch root
+containers.</p>
+<p>Rootless setup does not require elevated privileges of the <em>root</em> user.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_619 .calibre10} 23-9: Configure
+a Root Container as a systemd Service</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will create a systemd unit configuration file for
+managing the state of your root containers. You will launch a new
+container and use it as a template to generate a service unit file. You
+will stop and remove the launched container to avoid conflicts with new
+containers that will start. You will use the <em>systemctl</em> command to
+verify the automatic container start, stop, and deletion.</p>
+<p>1[.]{.c19}Launch a new container called <em>root-container</em> (--name) in
+detached mode (-d) using the latest ubi8:</p>
+<p><a href="#R-image-682539842ca0f0adafc6a2e3c51fa6b3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01106.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-682539842ca0f0adafc6a2e3c51fa6b3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01106.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Confirm the new container using <em>podman ps</em>. Note the
+container ID.</p>
+<p><a href="#R-image-01ed0a8d2205b5cc02f37f3e6f4879a1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01107.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-01ed0a8d2205b5cc02f37f3e6f4879a1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01107.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Create (<em>generate</em>) a service unit file called
+<em>root-container.service</em> under **etc<em>systemd/system</em> while ensuring that
+the next new container that will be launched based on this configuration
+file will not require the source container (--new) to work. The <em>tee</em>
+command will show the generated file content on the screen as well as
+store it in the specified file.</p>
+<p><a href="#R-image-25123d3495786a033124280ac3c94f31" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01108.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-25123d3495786a033124280ac3c94f31"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01108.jpeg"></a>{.image2}</p>
+<p>The unit file has the same syntax as any other systemd service
+configuration file. There are three sections&mdash;Unit, Service, and
+Install. (1) The unit section provides a short description of the
+service, the manual page location, and the dependencies (wants and
+after). (2) The service section highlights the full commands for
+starting (ExecStart) and stopping (ExecStop) containers. It also
+highlights the commands that will be executed before the container start
+(ExecStartPre) and after the container stop (ExecStopPost). There are a
+number of options and arguments with the commands to ensure a proper
+transition. The restart on-failure stipulates that systemd will try to
+restart the container in the event of a failure. (3) The install section
+identifies the operational target the host needs to be running in before
+this container service can start. See <a href="/linux/rhcsa/23_containers/#part0024_split_000.html#page_271">Chapter
+12</a>{.calibre5} &ldquo;System
+Initialization, Message Logging, and System Tuning&rdquo; for details on
+systemd units and targets. Also check out the manual pages for
+<em>systemd.unit</em>, <em>systemd.target</em>, and <em>systemd.service</em> if interested.</p>
+<p>4[.]{.c19}Stop and delete the source container (<em>root-container</em>) using
+the <em>stop</em> and <em>rm</em> subcommands:</p>
+<p><a href="#R-image-e668470a9d2477b270d467c6507eb89d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01109.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e668470a9d2477b270d467c6507eb89d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01109.jpeg"></a>{.image2}</p>
+<p>Verify the removal by running <strong>podman ps -a</strong>.</p>
+<p>5[.]{.c19}Update systemd to bring the new service to its control (reboot
+the system if required):</p>
+<p><a href="#R-image-8fbc3e335d6663dc91c73df34b66b867" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01110.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8fbc3e335d6663dc91c73df34b66b867"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01110.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Enable (enable) and start (--now) the container service using
+the <em>systemctl</em> command:</p>
+<p><a href="#R-image-a64ddf8c618e65a1cd7db849420266a0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01111.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a64ddf8c618e65a1cd7db849420266a0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01111.jpeg"></a>{.image2}</p>
+<p>7[.]{.c19}Check the running status of the new service with the
+<em>systemctl</em> command:</p>
+<p><a href="#R-image-1da5abddab4b23b73f04880aba187171" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01112.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1da5abddab4b23b73f04880aba187171"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01112.jpeg"></a>{.image2}</p>
+<p>8[.]{.c19}Verify the launch of a new container (compare the container ID
+with that of the source root container):</p>
+<p><a href="#R-image-7722e4fb9d0a47b62fcde2e3585feff9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01113.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7722e4fb9d0a47b62fcde2e3585feff9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01113.jpeg"></a>{.image2}</p>
+<p>9[.]{.c19}Restart the container service using the <em>systemctl</em> command:</p>
+<p><a href="#R-image-981383f071a0247a1b1dc35526a04a79" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01114.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-981383f071a0247a1b1dc35526a04a79"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01114.jpeg"></a>{.image2}</p>
+<p>10[.]{.c23}Check the status of the container again. Observe the removal
+of the previous container and the launch of a new container (compare
+container IDs).</p>
+<p><a href="#R-image-01b89c3cc3d1aed90f9036b3c17d9de0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01115.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-01b89c3cc3d1aed90f9036b3c17d9de0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01115.jpeg"></a>{.image2}</p>
+<p>Each time the <em>root-container</em> service is restarted or <em>server20</em> is
+rebooted, a new container will be launched. You can verify this by
+comparing their container IDs.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Exercise]{#part0035_split_001.html#id_620 .calibre10} 23-10:
+Configure a Rootless Container as a systemd Service</strong></p>
+<p>This exercise should be done on <em>server20</em> as <em>user1</em> with <em>sudo</em> where
+required. Log in as <em>conuser1</em> as directed.</p>
+<p>In this exercise, you will create a systemd unit configuration file for
+managing the state of your rootless containers. You will launch a new
+container as <em>conuser1</em> (create this user) and use it as a template to
+generate a service unit file. You will stop and remove the launched
+container to avoid conflicts with new containers that will start. You
+will use the <em>systemctl</em> command as <em>conuser1</em> to verify the automatic
+container start, stop, and deletion.</p>
+<p>1[.]{.c19}Create a user account called <em>conuser1</em> and assign a simple
+password:</p>
+<p><a href="#R-image-691f29b10d92c3bb99087372f6539835" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01116.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-691f29b10d92c3bb99087372f6539835"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01116.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Open a new terminal window on <em>server20</em> and log in as
+<em>conuser1</em>. Create directory <em>~/.config/systemd/user</em> to store a
+service unit file:</p>
+<p><a href="#R-image-8fa7b59d97c4789c969d15dbe51a7796" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01117.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8fa7b59d97c4789c969d15dbe51a7796"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01117.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Launch a new container called <em>rootless-container</em> (--name)
+in detached mode (-d) using the latest ubi8:</p>
+<p><a href="#R-image-e4849443be14c893eac5cb778edbc2e4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01118.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e4849443be14c893eac5cb778edbc2e4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01118.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Confirm the new container using <em>podman ps</em>. Note the
+container ID.</p>
+<p><a href="#R-image-274d154a76cac0fc5e80df772a979ee0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01119.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-274d154a76cac0fc5e80df772a979ee0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01119.jpeg"></a>{.image2}</p>
+<p>5[.]{.c19}Create (<em>generate</em>) a service unit file called
+<em>rootless-container.service</em> under <em>~/.config/systemd/user</em> while
+ensuring that the next new container that will be launched based on this
+configuration file will not require the source container (--new) to
+work:</p>
+<p><a href="#R-image-fd856844716f37924639688d687bdb71" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01120.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd856844716f37924639688d687bdb71"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01120.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Display the content of the unit file:</p>
+<p><a href="#R-image-026ce343caafb07b20dab53fff118ed4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01121.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-026ce343caafb07b20dab53fff118ed4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01121.jpeg"></a>{.image2}</p>
+<p>See <a href="/linux/rhcsa/23_containers/#part0035_split_001.html#id_619">Exercise 23-9</a>{.calibre5} earlier
+for an analysis of the file content.</p>
+<p>7[.]{.c19}Stop and delete the source container <em>rootless-container</em>
+using the <em>stop</em> and <em>rm</em> subcommands:</p>
+<p><a href="#R-image-0eefd7d84f121cbb63390177d4d8e8cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01122.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0eefd7d84f121cbb63390177d4d8e8cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01122.jpeg"></a>{.image2}</p>
+<p>Verify the removal by running <strong>podman ps -a</strong>.</p>
+<p>8[.]{.c19}Update systemd to bring the new service to its control (reboot
+the system if required). Use the --user option with the <em>systemctl</em>
+command.</p>
+<p><a href="#R-image-dbc7fda9554fcf6ff85835d48119228b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01123.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dbc7fda9554fcf6ff85835d48119228b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01123.jpeg"></a>{.image2}</p>
+<p>9[.]{.c19}Enable (enable) and start (--now) the container service using
+the <em>systemctl</em> command:</p>
+<p><a href="#R-image-f0d63257fcbd66061f8e710d36261457" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01124.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f0d63257fcbd66061f8e710d36261457"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01124.jpeg"></a>{.image2}</p>
+<p>10[.]{.c23}Check the running status of the new service using the
+<em>systemctl</em> command:</p>
+<p><a href="#R-image-ab99d60e5b32836bee01e7f5b4d36a41" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01125.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ab99d60e5b32836bee01e7f5b4d36a41"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01125.jpeg"></a>{.image2}</p>
+<p>11[.]{.c23}Verify the launch of a new container (compare the container
+ID with that of the source rootless container):</p>
+<p><a href="#R-image-3095a064d7a2a9df1e5ef708dfed19c4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01126.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3095a064d7a2a9df1e5ef708dfed19c4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01126.jpeg"></a>{.image2}</p>
+<p>12[.]{.c23}Enable the container service to start and stop with host
+transition using the <em>loginctl</em> command (systemd login manager) and
+confirm:</p>
+<p><a href="#R-image-15ad9e660e1f0b6c07fc8ed59bd9e2f3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01127.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-15ad9e660e1f0b6c07fc8ed59bd9e2f3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01127.jpeg"></a>{.image2}</p>
+<p>13[.]{.c23}Restart the container service using the <em>systemctl</em> command:</p>
+<p><a href="#R-image-49daba748ae7f76ae607d9d79c3ffc5f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01128.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49daba748ae7f76ae607d9d79c3ffc5f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01128.jpeg"></a>{.image2}</p>
+<p>14[.]{.c23}Check the status of the container again. Observe the removal
+of the previous container and the launch of a new container (compare
+container IDs).</p>
+<p><a href="#R-image-42f1f3da52aac77b58bb2168244d8941" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01129.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-42f1f3da52aac77b58bb2168244d8941"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01129.jpeg"></a>{.image2}</p>
+<p>Each time the <em>rootless-container</em> service is restarted or <em>server20</em> is
+rebooted, a new container will be launched. You can verify this by
+comparing their container IDs.</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Chapter]{#part0035_split_001.html#id_621 .calibre10} Summary</strong></p>
+<p>In this last chapter, we discussed the container technology that has
+gained tremendous popularity and been deployed in massive numbers over
+the recent years. It offers benefits that are unmatched with any
+previous virtualization technology.</p>
+<p>We analyzed the core components of the technology: images, registries,
+and containers. We interacted with images located in remote registries
+and local storage. We looked at a variety of ways to launch containers,
+with and without a name. We examined the benefits and use cases for
+mapping network ports, injecting environment variables, and making host
+storage available inside containers for persistent data storage. The
+last topic expounded on controlling the operational states of root and
+rootless containers via systemd and ensuring that they are auto-started
+and auto-stopped with the host startup and shutdown. The chapter
+presented several exercises to reinforce the learning.</p>
+<p><strong>[Review]{#part0035_split_001.html#id_622 .calibre10} Questions</strong></p>
+<p>1[.]{.c19}How would you ensure that data stored inside a container will
+not be deleted automatically when the container is restarted?</p>
+<p>2[.]{.c19}What is the name of the primary tool that is used for
+container management?</p>
+<p>3[.]{.c19}Which option must be included with the <em>systemctl</em> command to
+manage the state of a rootless container?</p>
+<p>4[.]{.c19}Rootless containers are less secure than root containers. True
+or False?</p>
+<p>5[.]{.c19}What is one thing that you do not get with rootless
+containers? Select from: security, ability to map privileged ports,
+ability to pass environment variables, or can be managed via systemd.</p>
+<p>6[.]{.c19}What is the significance of a tag in a container image?</p>
+<p>7[.]{.c19}Which command would you use to inspect a container image
+sitting in a remote registry?</p>
+<p>8[.]{.c19}What would you run to remove all locally stored images in one
+shot?</p>
+<p>9[.]{.c19}Containers can be run on a bare metal server or in a virtual
+machine. True or False?</p>
+<p>10[.]{.c23}Which feature would you use to allow traffic flow for your
+Apache web server running inside a container?</p>
+<p>11[.]{.c23}It is mandatory to download an image prior to running a
+container based off it. True or False?</p>
+<p>12[.]{.c23}How would you connect to a container running in the
+background?</p>
+<p>13[.]{.c23}By default, any data saved inside a container is lost when
+the container is restarted. True or False?</p>
+<p>14[.]{.c23}Can a single host directory be attached to multiple
+containers at the same time?</p>
+<p>15[.]{.c23}Which of these&mdash;isolation, security, high transition time,
+less overhead&mdash;is not a benefit of the container technology?</p>
+<p>16[.]{.c23}What is the name and location of the system-wide file that
+stores a list of insecure registries?</p>
+<p>17[.]{.c23}How would you ensure that a rootless container for a specific
+user is automatically started with the host startup without the need for
+the user to log in?</p>
+<p>18[.]{.c23}What would you run to remove all stopped containers?</p>
+<p>19[.]{.c23}What is the default tag used with container images?</p>
+<p>20[.]{.c23}The peruser systemd service configuration file is stored
+under **etc<em>systemd/user</em> directory. True or False?</p>
+<p><strong>Answers to Review Questions</strong></p>
+<p>1[.]{.c19}Attach a host directory to the container and use it for
+storing data that requires persistence.</p>
+<p>2[.]{.c19}The primary container management tool is called <em>podman</em>.</p>
+<p>3[.]{.c19}The --user option is required with the <em>systemctl</em> command to
+control the state of a rootless container.</p>
+<p>4[.]{.c19}False.</p>
+<p>5[.]{.c19}The ability to map privileged ports is not directly supported
+with rootless containers.</p>
+<p>6[.]{.c19}A tag is typically used to identify a version of the image.</p>
+<p>7[.]{.c19}The <em>skopeo</em> command can be used to inspect an image located
+in a remote registry.</p>
+<p>8[.]{.c19}Execute <em>podman rmi -a</em> to remove all locally stored images.</p>
+<p>9[.]{.c19}True.</p>
+<p>10[.]{.c23}Map a host port with a container port.</p>
+<p>11[.]{.c23}False. The specified image is automatically downloaded when
+starting a container.</p>
+<p>12[.]{.c23}Use the <em>podman attach</em> command to connect to a running
+container.</p>
+<p>13[.]{.c23}True.</p>
+<p>14[.]{.c23}Yes, a single host directory can be attached to multiple
+containers simultaneously.</p>
+<p>15[.]{.c23}High transition time is not a container benefit.</p>
+<p>16[.]{.c23}The file that stores insecure registry list is called
+<em>registries.conf</em> and it lives in the **etc<em>containers</em> directory.</p>
+<p>17[.]{.c23}Use the <em>loginctl</em> command as that user and enable lingering.</p>
+<p>18[.]{.c23}Run <em>podman rm -a</em> to remove all stopped containers.</p>
+<p>19[.]{.c23}The default tag is &rsquo;latest&rsquo; that identifies the latest
+version of an image.</p>
+<p>20[.]{.c23}False. The peruser systemd unit configuration file is stored
+under the user&rsquo;s home directory at <em>~/.config/systemd/user</em>.</p>
+<p><strong>[DIY]{#part0035_split_001.html#id_623 .calibre10} Challenge Labs</strong></p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform these
+labs without any additional help. A step-by-step guide is not provided,
+as the implementation of these labs requires the knowledge that has been
+presented in this chapter. Use defaults or your own thinking for missing
+information.</p>
+<p><strong>[Lab]{#part0035_split_001.html#id_624 .calibre10} 23-1: Prepare to
+Launch Containers</strong></p>
+<p>Create a new user account called <em>conadm</em> on <em>server10</em> and give them
+full <em>sudo</em> rights. As <em>conadm</em>, register <em>server10</em> with RHSM using
+your Red Hat credentials. Install the module <em>container-tools</em> from RHSM
+and ensure that podman version is 1.9. (Hint: Chapters 05, 06, and 10).</p>
+<p><strong>[Lab]{#part0035_split_001.html#id_625 .calibre10} 23-2: Launch a Named
+Root Container with Port Mapping</strong></p>
+<p>As <em>conadm</em> with <em>sudo</em> (where required) on <em>server10</em>, inspect the
+latest version of RHEL 7 image and then download it to your computer.
+Launch a container called <em>root-cont-port</em> in attached terminal mode
+(-it) with host port 80 mapped to container port 8080. Run a few basic
+Linux commands such as <em>ls</em>, <em>pwd</em>, <em>df</em>, <em>cat <em>etc</em>redhat-release</em>, and
+<em>os-release</em> while in the container. Check to confirm the port mapping
+from <em>server10</em>. (Hint: use the <em>skopeo</em> and <em>podman</em> commands).
+<strong>Note:</strong> Do not remove the container yet.</p>
+<p><strong>Lab 23-3: Launch a Nameless Rootless Container with Two Variables</strong></p>
+<p>As <em>conadm</em> on <em>server10</em>, launch a container using the latest version
+of ubi8 image in detached mode (-d) with two environment variables
+VAR1=lab1 and VAR2=lab2 defined. Use the <em>exec</em> subcommand to check the
+settings for the variables directly from <em>server10</em>. Delete the
+container and the image when done. (Hint: use the <em>podman</em> command).</p>
+<p><strong>[Lab]{#part0035_split_001.html#id_626 .calibre10} 23-4: Launch a Named
+Rootless Container with Persistent Storage</strong></p>
+<p>As <em>conadm</em> with <em>sudo</em> (where required) on <em>server10</em>, create a
+directory called <em>/host_perm1</em> with full permissions, and a file called
+<em>str1</em> in it. Launch a container called <em>rootless-cont-str</em> in attached
+terminal mode (-it) with the created directory mapped to <em>/cont_perm1</em>
+inside the container. While in the container, check access to the
+directory and the presence of the file. Create a sub-directory and a
+file under <em>/cont_perm1</em> and exit out of the container shell. List
+<em>/host_perm1</em> on <em>server10</em> to verify the sub-directory and the file.
+Stop and delete the container. Remove <em>/host_perm1</em>. (Hint: use the
+<em>podman</em> command).</p>
+<p><strong>[Lab]{#part0035_split_001.html#id_627 .calibre10} 23-5: Launch a Named
+Rootless Container with Port Mapping, Environment Variables, and
+Persistent Storage</strong></p>
+<p>As <em>conadm</em> with <em>sudo</em> (where required) on <em>server10</em>, launch a named
+rootless container called <em>rootless-cont-adv</em> in attached mode (-it)
+with two variables (HISTSIZE=100 and MYNAME=RedHat), host port 9000
+mapped to container port 8080, and <em>/host_perm2</em> mounted at
+<em>/cont_perm2</em>. Check and confirm the settings while inside the
+container. Exit out of the container. <strong>Note:</strong> Do not remove the
+container yet. (Hint: use the <em>podman</em> command).</p>
+<p><strong>[Lab]{#part0035_split_001.html#id_628 .calibre10} 23-6: Control
+Rootless Container States via systemd</strong></p>
+<p>As <em>conadm</em> on <em>server10</em>, use the <em>rootless-cont-adv</em> container
+launched in Lab 23-5 as a template and generate a systemd service
+configuration file and store the file in the appropriate directory. Stop
+and remove the source container <em>rootless-cont-adv</em>. Add the support for
+the new service to systemd and enable the new service to auto-start at
+system reboots. Perform the required setup to ensure the container is
+launched without the need for the <em>conadm</em> user to log in. Reboot
+<em>server10</em> and confirm a successful start of the container service and
+the container. (Hint: use the <em>podman</em>, <em>systemctl</em>, and <em>loginctl</em>
+commands).</p>
+<p><strong>[Lab]{#part0035_split_001.html#id_629 .calibre10} 23-7: Control Root
+Container States via systemd</strong></p>
+<p>As <em>conadm</em> with <em>sudo</em> where required on <em>server10</em>, use the
+<em>root-cont-port</em> container launched in Lab 23-2 as a template and
+generate a systemd service configuration file and store the file in the
+appropriate directory. Stop and remove the source container
+<em>root-cont-port</em>. Add the support for the new service to systemd and
+enable the service to auto-start at system reboots. Reboot <em>server10</em>
+and confirm a successful start of the container service and the
+container. (Hint: use the <em>podman</em> and <em>systemctl</em> commands).</p>
+<p>[]{#part0036.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1712315598" defer></script>
+        <script src="/js/search.js?1712315598" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/" class=""><a class="padding" href="/linux/misc_linux/command_line/">Command Line<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/">Consoling in on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/" class=""><a class="padding" href="/linux/misc_linux/devices/">Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/" class=""><a class="padding" href="/linux/misc_linux/dns/">DNS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/" class=""><a class="padding" href="/linux/misc_linux/file_permissions/">File Permissions<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/" class=""><a class="padding" href="/linux/misc_linux/getting_started/">General Linux and History<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/">How to Get Putty to Work in Ubuntu<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/" class=""><a class="padding" href="/linux/misc_linux/init/">Init<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/">IO Monitoring<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/">Keyboard Shortcuts<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/" class=""><a class="padding" href="/linux/misc_linux/kernel/">Linux Kernel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/" class=""><a class="padding" href="/linux/misc_linux/logging/">Logging<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/" class=""><a class="padding" href="/linux/misc_linux/ls/">ls<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/">Network Troubleshooting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/" class=""><a class="padding" href="/linux/misc_linux/network_basics/">Networking in Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/">Open source and Linux Community<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/" class=""><a class="padding" href="/linux/misc_linux/packages/">Packages and Their Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/" class=""><a class="padding" href="/linux/misc_linux/process_utilization/">Process Utilization<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/" class=""><a class="padding" href="/linux/misc_linux/ps_processes/">Processes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/" class=""><a class="padding" href="/linux/misc_linux/linux_resources/">Resources for learning Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/" class=""><a class="padding" href="/linux/misc_linux/scp_command/">scp<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/" class=""><a class="padding" href="/linux/misc_linux/network_sharing/">Sharing Resources<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/">Shell<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/">Skills that go with Bash Scripting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/">Switching to Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/">Symbols in Bash<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/" class=""><a class="padding" href="/linux/misc_linux/tar/">Tar Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/" class=""><a class="padding" href="/linux/misc_linux/text_fu/">Text Editors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/">The Linux Filesystem<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/" class=""><a class="padding" href="/linux/misc_linux/user_management/">User Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/" class=""><a class="padding" href="/linux/misc_linux/wsl2/">Windows Subsystem for Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/23_containers/" class="active"><a class="padding" href="/linux/rhcsa/23_containers/"><i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/containers/" class=""><a class="padding" href="/linux/containers/">Container Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/run_command_as_another_user/" class=""><a class="padding" href="/linux/misc_linux/run_command_as_another_user/">Run Command as Another User<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/cli/" class=""><a class="padding" href="/networking/cisco/cli/">Cisco CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/">Cisco CML VMWARE Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/">Cisco Devnet Sandbox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/">Cisco to Juniper Cheat Sheet<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/">Cisco VLAN Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/" class=""><a class="padding" href="/networking/cisco/classful_ipv4/">Classfull IPv4<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/" class=""><a class="padding" href="/networking/cisco/management/">Device Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/" class=""><a class="padding" href="/networking/cisco/device_management_protocols/">Device Management Protocols<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/" class=""><a class="padding" href="/networking/cisco/dhcp_config/">DHCP Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/">DHCP Snooping and ARP Inspection<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/" class=""><a class="padding" href="/networking/cisco/ethernet_lans/">Ethernet LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/" class=""><a class="padding" href="/networking/cisco/extended_acls/">Extended ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/" class=""><a class="padding" href="/networking/cisco/ip_services/">IP Services<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/">IPv6 Addressing and Subnetting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/" class=""><a class="padding" href="/networking/cisco/ipv6/">IPv6 Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/" class=""><a class="padding" href="/networking/cisco/ipv6_config/">IPv6 Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/" class=""><a class="padding" href="/networking/cisco/ipv6_routing/">IPv6 Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/" class=""><a class="padding" href="/networking/juniper/junos_fundementals/">Junos Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/" class=""><a class="padding" href="/networking/cisco/lan_architecture/">LAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/">Layer 2 Etherchannel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/" class=""><a class="padding" href="/networking/cisco/spanning_tree/">More Spanning Tree<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/" class=""><a class="padding" href="/networking/cisco/nat/">Network Address Translation (NAT)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/" class=""><a class="padding" href="/networking/cisco/ospf_concepts/">OSPF Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/" class=""><a class="padding" href="/networking/cisco/ospf_config/">OSPF Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/" class=""><a class="padding" href="/networking/cisco/ospf_lab/">OSPF Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/">OSPF Network Types and Neighbors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/" class=""><a class="padding" href="/networking/cisco/qos/">QoS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/" class=""><a class="padding" href="/networking/cisco/rstp/">Rapid Spanning Tree (RSTP)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/" class=""><a class="padding" href="/networking/cisco/router_operation/">Router Operation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/">Routing in the LAN<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/" class=""><a class="padding" href="/networking/cisco/securing_network_devices/">Securing Network Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/" class=""><a class="padding" href="/networking/cisco/security_architectures/">Security Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/">Spanning Tree Protocol Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/" class=""><a class="padding" href="/networking/cisco/standard_acls/">Standard ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/" class=""><a class="padding" href="/networking/cisco/static_routes/">Static Routes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/" class=""><a class="padding" href="/networking/cisco/switch_interfaces/">Switch Interfaces<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/" class=""><a class="padding" href="/networking/cisco/switchport_security_config/">Switchport Security Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/">TCP/UDP<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/">Troubleshooting Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/" class=""><a class="padding" href="/networking/cisco/vlans/">VLANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/" class=""><a class="padding" href="/networking/cisco/wan_architecture/">WAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/">WANs and IP Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/">What is a VLAN?<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/" class=""><a class="padding" href="/networking/cisco/wireless_architectures/">Wireless Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/" class=""><a class="padding" href="/networking/cisco/wireless_lan/">Wireless LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/" class=""><a class="padding" href="/networking/cisco/wireless/">Wireless Principles<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/" class=""><a class="padding" href="/networking/cisco/wireless_security/">Wireless Security<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/consoling_in_to_mx80_from_linux/" class=""><a class="padding" href="/networking/juniper/consoling_in_to_mx80_from_linux/">Console into a Juniper MX80 from Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_paste_config/" class=""><a class="padding" href="/networking/juniper/junos_paste_config/">How to Copy and Paste a Junos Config<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/toggle_poe/" class=""><a class="padding" href="/networking/juniper/toggle_poe/">How to Toggle POE on a Juniper Switch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/juniper_cli_basics/" class=""><a class="padding" href="/networking/juniper/juniper_cli_basics/">Juniper CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><input type="checkbox" id="R-section-36a3ed262b315ff04085d7b53a448994" aria-controls="R-subsections-36a3ed262b315ff04085d7b53a448994"><label for="R-section-36a3ed262b315ff04085d7b53a448994"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Python</span></label><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-36a3ed262b315ff04085d7b53a448994" class="morespace collapsible-menu">
+          <li data-nav-id="/python/basics/" class=""><a class="padding" href="/python/basics/">Python Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/" class=""><a class="padding" href="/tools/calibre_server/">Calibre Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/silverblue/" class=""><a class="padding" href="/tools/silverblue/">Fedora Silverblue<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/" class=""><a class="padding" href="/tools/githubpageshugo/">Github Pages with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/iphonemigrate/" class=""><a class="padding" href="/tools/iphonemigrate/">Migrating Away from Iphone<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/scssandsassinhugo/" class=""><a class="padding" href="/tools/scssandsassinhugo/">SCSS &amp; SASS in Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/" class=""><a class="padding" href="/tools/pandoc/">Pandoc Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/building-a-dashboard/" class=""><a class="padding" href="/tools/obsidian/building-a-dashboard/">Building a Dashboard in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/emailserver/" class=""><a class="padding" href="/tools/emailserver/">Hosting Your Own Email Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/setup/" class=""><a class="padding" href="/tools/obsidian/setup/">My Obsidian Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/how-to-use-the-dataview-plugin/" class=""><a class="padding" href="/tools/obsidian/how-to-use-the-dataview-plugin/">Obsidian Dataview Plugin<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/image_to_text/" class=""><a class="padding" href="/tools/obsidian/image_to_text/">Obsidian Image to Text Extractor<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/tracker-plugin/" class=""><a class="padding" href="/tools/obsidian/tracker-plugin/">Obsidian Tracker Plugin<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/proxmox_setup/" class=""><a class="padding" href="/tools/proxmox_setup/">Proxmox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/serial-in-on-linux/" class=""><a class="padding" href="/tools/serial-in-on-linux/">Serial In on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/how-to-use-templates/" class=""><a class="padding" href="/tools/obsidian/how-to-use-templates/">Using Templates in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/yaml-in-obsidian/" class=""><a class="padding" href="/tools/obsidian/yaml-in-obsidian/">YAML in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class="alwaysopen"><input type="checkbox" id="R-section-e557a922d533a171e9a204b7e50265e2" aria-controls="R-subsections-e557a922d533a171e9a204b7e50265e2" checked><label for="R-section-e557a922d533a171e9a204b7e50265e2"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e557a922d533a171e9a204b7e50265e2" class="morespace collapsible-menu">
+          <li data-nav-id="/writing/writing-off-the-cuff/" class=""><a class="padding" href="/writing/writing-off-the-cuff/">Writing Off the Cuff<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/booknotes/" class="alwaysopen"><input type="checkbox" id="R-section-1cda010113b426a07bb6aec1adc15086" aria-controls="R-subsections-1cda010113b426a07bb6aec1adc15086" checked><label for="R-section-1cda010113b426a07bb6aec1adc15086"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Book Notes</span></label><a class="padding" href="/booknotes/">Book Notes<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-1cda010113b426a07bb6aec1adc15086" class="morespace collapsible-menu">
+          <li data-nav-id="/booknotes/123magic/" class=""><a class="padding" href="/booknotes/123magic/">123 Magic Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/master_reading_list/" class=""><a class="padding" href="/booknotes/master_reading_list/">Master Reading List<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/23_containers/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1712315598" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1712315598" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1712315598" defer></script>
+    <script src="/js/js-yaml.min.js?1712315598" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1712315598" defer></script>
+  </body>
+</html>

@@ -3,10 +3,15 @@ archetype = "home"
 title = ""
 +++
 Check out super interesting topics:
+
 -> [Linux](perfectdarkmode1.github.io/content/linux/_index.md)
+
 -> [Networking](perfectdarkmode1.github.io/content/networking/_index.md)
+
 -> [Python](perfectdarkmode1.github.io/content/python/_index.md)
+
 -> [Tools](perfectdarkmode1.github.io/content/tools/_index.md)
+
 -> [Writing](perfectdarkmode1.github.io/content/writing/_index.md)
 
 What I am doing [Now](perfectdarkmode1.github.io/content/now/_index.md).

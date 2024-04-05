@@ -3,7 +3,7 @@ This is a page to help me stay focused and keep track of what I am doing. It is 
 
 ## Career
 
-I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goal is to take the test at the end of June 2024. Follow my progress here: [RHCSA_Tracker](RHCSA_Tracker.md)
+I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goal is to take the test at the end of June 2024. Follow my progress here: [RHCSA_Tracker](/linux/rhcsa/RHCSA_Tracker.md)
 
 ## What I am Reading
 

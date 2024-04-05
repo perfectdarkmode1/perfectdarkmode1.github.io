@@ -1,4 +1,3 @@
-# Chapter 16 RHCSA Notes - Networking
 
 ## Networking, Network Devices, and Network Management
 
@@ -438,6 +437,123 @@ ping -c2 server20
 
 
 
+**[Review]{#part0028_split_001.html#id_460 .calibre10} Questions**
+
+1[.]{.c19}What is the use of *ifup* and *ifdown* commands?
+
+2[.]{.c19}Which service is responsible for maintaining consistent device
+naming?
+
+3[.]{.c19}List three key differences between TCP and UDP protocols.
+
+4[.]{.c19}What is the significance of the NAME and DEVICE directives in
+a connection profile?
+
+5[.]{.c19}Which class of IP addresses has the least number of node
+addresses?
+
+6[.]{.c19}Which command can you use to display the hardware address of a
+network device?
+
+7[.]{.c19}Define protocol.
+
+8[.]{.c19}Which directory stores the network connection profiles?
+
+9[.]{.c19}True or False. A network device is a physical or virtual
+network port and a network connection is a configuration file attached
+to it.
+
+10[.]{.c23}IPv4 is a 32-bit software address. How many bits does an IPv6
+address have?
+
+11[.]{.c23}Which file defines the port and protocol mapping?
+
+12[.]{.c23}What would the command *hostnamectl set-hostname host20* do?
+
+13[.]{.c23}Name the file that stores the hostname of the system.
+
+14[.]{.c23}What would the command *nmcli cs* do?
+
+15[.]{.c23}What is the purpose of the ONBOOT directive in the network
+connection profile?
+
+16[.]{.c23}The **etc*hosts* file maintains hostname to hardware address
+mappings. True or False?
+
+17[.]{.c23}Which file contains service, port, and protocol mappings?
+
+18[.]{.c23}What would the *ip addr* command produce?
+
+19[.]{.c23}Which file would you consult to identify the port number and
+protocol associated with a network service?
+
+20[.]{.c23}Adding a connection profile with the *nmcli* command creates
+a connection profile in the **etc*sysconfig/network-scripts* directory.
+True or False?
+
+21[.]{.c23}Name four commands that can be used to display the system
+hostname?
+
+22[.]{.c23}List any two benefits of subnetting.
+
+**[Answers]{#part0028_split_001.html#id_461 .calibre10} to Review
+Questions**
+
+1[.]{.c19}The *ifup* and *ifdown* commands are used to enable and
+disable a network connection, respectively.
+
+2[.]{.c19}The *udevd* service handles consistent naming of network
+devices.
+
+3[.]{.c19}TCP is connection-oriented, reliable, and point-to-point; UDP
+is connectionless, unreliable, and multi-point.
+
+4[.]{.c19}The NAME directive sets the name for the network connection
+and the DEVICE directive defines the network device the connection is
+associated with.
+
+5[.]{.c19}The C class supports the least number of node addresses.
+
+6[.]{.c19}The *ip* command.
+
+7[.]{.c19}A set of rules that govern the exchange of information between
+two network entities.
+
+8[.]{.c19}The **etc*sysconfig/network-scripts* directory.
+
+9[.]{.c19}True.
+
+10[.]{.c23}128.
+
+11[.]{.c23}The **etc*protocols* file.
+
+12[.]{.c23}The command provided will update the **etc*hostname* file
+with the specified hostname and restart the *systemd-hostnamed* daemon
+for the change to take effect.
+
+13[.]{.c23}The **etc*hostname* file.
+
+14[.]{.c23}The command provided will display the status information for
+all network connections.
+
+15[.]{.c23}The purpose of the ONBOOT directive is to direct the boot
+scripts whether to activate this connection.
+
+16[.]{.c23}False. This file maintains hostname to IP address mapping.
+
+17[.]{.c23}The **etc*services* file.
+
+18[.]{.c23}This command provided will display information about network
+connections including IP assignments and hardware address.
+
+19[.]{.c23}The **etc*services* file.
+
+20[.]{.c23}True.
+
+21[.]{.c23}The *hostname*, *uname*, *hostnamectl*, and *nmcli* commands
+can be used to view the system hostname.
+
+22[.]{.c23}Better manageability and less traffic.
 
 
 

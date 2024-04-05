@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Overview of shell scripts
+[ {.c37}]{.c36}Write scripts to display basic system information, employ shell and environment variables, use command substitution, and manipulate special and positional parameters
+[ {.c37}]{.c36}Execute and debug scripts
+[ {.c37}]{.c36}Know exit codes and test conditions
+[ {.c37}]{.c36}Understand logical constructs: if-then-fi, if-then-else-fi, and if-then-elif-fi
+[ {.c37}]{.c36}Write scripts using logical statements
+[ {.c37}]{.c36}Know arithmetic test conditions
+[ {.c37}]{.c36}Comprehend looping construct: for-do-done">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Overview of shell scripts
+[ {.c37}]{.c36}Write scripts to display basic system information, employ shell and environment variables, use command substitution, and manipulate special and positional parameters
+[ {.c37}]{.c36}Execute and debug scripts
+[ {.c37}]{.c36}Know exit codes and test conditions
+[ {.c37}]{.c36}Understand logical constructs: if-then-fi, if-then-else-fi, and if-then-elif-fi
+[ {.c37}]{.c36}Write scripts using logical statements
+[ {.c37}]{.c36}Know arithmetic test conditions
+[ {.c37}]{.c36}Comprehend looping construct: for-do-done">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/22_shell_scripting/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1712315598" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1712315598" rel="stylesheet">
+    <link href="/css/auto-complete.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1712315598" rel="stylesheet">
+    <link href="/css/fonts.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1712315598" rel="stylesheet">
+    <link href="/css/theme-git.css?1712315598" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1712315598" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1712315598" rel="stylesheet">
+    <link href="/css/print.css?1712315598" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1712315598" rel="stylesheet">
+    <script src="/js/url.js?1712315598"></script>
+    <script src="/js/variant.js?1712315598"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'git' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/22_shell_scripting/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p>This chapter describes the following major topics:</p>
+<p>[<a href="#R-image-913b5d3d54ba435bba8ce7b1366f825f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-913b5d3d54ba435bba8ce7b1366f825f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of shell scripts</p>
+<p>[<a href="#R-image-65d2fd4ccf649c3196815001539acf83" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-65d2fd4ccf649c3196815001539acf83"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts to display basic
+system information, employ shell and environment variables, use command
+substitution, and manipulate special and positional parameters</p>
+<p>[<a href="#R-image-039ac213b08dc28867679b8570f30aca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-039ac213b08dc28867679b8570f30aca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Execute and debug scripts</p>
+<p>[<a href="#R-image-768df48c4b611c82c92bc801668d7e85" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-768df48c4b611c82c92bc801668d7e85"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know exit codes and test conditions</p>
+<p>[<a href="#R-image-35898e450a2cf50b06d1dc493322fc8d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-35898e450a2cf50b06d1dc493322fc8d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand logical constructs:
+if-then-fi, if-then-else-fi, and if-then-elif-fi</p>
+<p>[<a href="#R-image-89ffd532b6f8c8a1fe755b8a007ccf36" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-89ffd532b6f8c8a1fe755b8a007ccf36"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts using logical
+statements</p>
+<p>[<a href="#R-image-17f691ff2cb84f3a9e4d42d76ebeb4ac" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-17f691ff2cb84f3a9e4d42d76ebeb4ac"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know arithmetic test conditions</p>
+<p>[<a href="#R-image-3454cef1236ba030b891bbd719c3470c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3454cef1236ba030b891bbd719c3470c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Comprehend looping construct:
+for-do-done</p>
+<p>[<a href="#R-image-cdfd80ac2c54f0453d2af0d303e86d8e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cdfd80ac2c54f0453d2af0d303e86d8e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts using looping
+statements</p>
+<p>[RHCSA Objectives:]{.c39}</p>
+<p>[12]{#part0034_split_000.html#id_778 .calibre10}. Conditionally execute
+code (use of: if, test, [], etc.)</p>
+<p>[13]{#part0034_split_000.html#id_779 .calibre10}. Use Looping constructs
+(for, etc.) to process file, command line input</p>
+<p>[14]{#part0034_split_000.html#id_780 .calibre10}. Process script inputs
+($1, $2, etc.)</p>
+<p>[15]{#part0034_split_000.html#id_781 .calibre10}. Processing output of
+shell commands within a script</p>
+<p>[16]{#part0034_split_000.html#id_782 .calibre10}. Processing shell
+command exit codes</p>
+<p>::: {#part0034_split_000.html#calibre_pb_1 .calibre12}
+:::</p>
+<p>[]{#part0034_split_001.html}</p>
+<p>[ S]{.c42}[hell]{.c43} scripts are essentially a group of Linux commands
+along with control structures and optional comments stored in a text
+file. Their primary purpose of creation is the automation of long and
+repetitive tasks. Scripts may include any simple to complex command and
+can be executed directly at the Linux command prompt. They do not need
+to be compiled as they are interpreted by the shell line by line. This
+chapter presents example scripts and analyzes them to solidify the
+learning. These scripts begin with simple programs and advance to more
+complicated ones. As with any other programming language, the scripting
+skill develops over time as more and more scripts are read, written, and
+examined. This chapter also discusses a debug technique that may be
+helpful in troubleshooting the code.</p>
+<p><strong>[Shell]{#part0034_split_001.html#id_565 .calibre10} Scripts</strong></p>
+<p>Shell scripts (a.k.a. <em>shell programs</em> or simply <em>scripts</em>) are text
+files that contain Linux commands and control structures to automate
+lengthy, complex, or repetitive tasks, such as managing packages and
+users, administering partitions and file systems, monitoring file system
+utilization, trimming log files, archiving and compressing files,
+finding and removing unnecessary files, starting and stopping database
+services and applications, and producing reports. Commands in a script
+are interpreted and run by the shell one at a time in the order in which
+they are listed. Each line is executed as if it is typed and run at the
+command prompt. Control structures are utilized for creating and
+managing conditional and looping constructs. Comments are also generally
+included to add information about the script such as the author name,
+creation date, previous modification dates, purpose, and usage. If the
+script encounters an error during execution, the error message is
+printed on the screen.</p>
+<p>Scripts presented in this chapter are written in the bash shell and may
+be used in other Linux shells with slight modifications.</p>
+<p>You can use any available text editor to write the scripts; however, it
+is suggested to use the <em>vim</em> editor so that you have an opportunity to
+practice it as you learn scripting. To quickly identify where things are
+in your scripts, you can use the <em>nl</em> command to enumerate the lines.
+You can store your scripts in the **usr<em>local/bin</em> directory, which is
+included in the PATH of all users by default.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_566 .calibre10}01: Displaying
+System Information</strong></p>
+<p>Let&rsquo;s create the first script called <em>sys_info.sh</em> on <em>server10</em> in the
+**usr<em>local/bin</em> directory and examine it line by line. Use the <em>vim</em>
+editor with <em>sudo</em> to write the script. Type what you see below. Do not
+enter the line numbers, as they are used for explanation and reference.</p>
+<p><a href="#R-image-2dce5b434e523bed0ea8b1d0e398f4ad" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01012.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2dce5b434e523bed0ea8b1d0e398f4ad"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01012.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-952fd4c5d8f4b5a62120e44eeecefab4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-952fd4c5d8f4b5a62120e44eeecefab4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Within vim, press the ESC key and then
+type :set nu to view line numbers associated with each line entry.</p>
+<p>In this script, comments and commands are used as follows:</p>
+<p>The first line indicates the shell that will run the commands in the
+script. This line must start with the &ldquo;#!&rdquo; character combination (called
+<em>shebang</em>) followed by the full pathname to the shell file.</p>
+<p>The next three lines contain comments: the script name, author name,
+creation time, default directory location for storage, and purpose. The
+number sign (#) implies that anything to the right of it is
+informational and will be ignored during script execution. Note that the
+first line also uses the number character (#), but it is followed by the
+exclamation mark (!); that combination has a special meaning to the
+shell.</p>
+<p>The fifth line has the first command of the script. The <em>echo</em> command
+prints on the screen whatever follows it (&ldquo;Display Basic System
+Information&rdquo; in this case). This may include general comments, errors,
+or script usage.</p>
+<p>The sixth line will highlight the text &ldquo;Display Basic System
+Information&rdquo; by underlining it.</p>
+<p>The seventh line has the <em>echo</em> command followed by nothing. This will
+insert an empty line in the output.</p>
+<p>The eighth line will print &ldquo;The hostname, hardware, and OS information
+is:&rdquo;.</p>
+<p>The ninth line will execute the <em>hostnamectl</em> command to display basic
+information about the system.</p>
+<p>The tenth line will insert an empty line.</p>
+<p>The eleventh line will print &ldquo;The following users are currently logged
+in:&rdquo; on the screen.</p>
+<p>The twelfth line will execute the <em>who</em> command to list the logged-in
+users.</p>
+<p>Here is the listing of the <em>sys_info.sh</em> file created in the
+**usr<em>local/bin</em> directory:</p>
+<p><a href="#R-image-9aad20ad1da7f58106d4f8cd07ad7ad1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01013.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9aad20ad1da7f58106d4f8cd07ad7ad1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01013.jpeg"></a>{.image2}</p>
+<p><strong>[Executing]{#part0034_split_001.html#id_567 .calibre10} a Script</strong></p>
+<p>The script created above does not have the execute permission bit since
+the default umask for the <em>root</em> user is set to 0022, which allows
+read/write access to the owner, and read-only access to the rest. You
+will need to run the <em>chmod</em> command on the file and add an execute bit
+for everyone:</p>
+<p><a href="#R-image-cba6696ec4b5baf76c1781f4ea731894" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01014.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cba6696ec4b5baf76c1781f4ea731894"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01014.jpeg"></a>{.image2}</p>
+<p>Any user on the system can now run this script using either its name or
+the full path.</p>
+<p>Let&rsquo;s run the script and see what the output will look like:</p>
+<p><a href="#R-image-76b2e77e7bb617ca7642e5111f041b8b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01015.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-76b2e77e7bb617ca7642e5111f041b8b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01015.jpeg"></a>{.image2}</p>
+<p>The output reflects the execution of the commands as scripted.</p>
+<p>The <em>hostnamectl</em> command displays the hostname of the system, type of
+platform (physical, virtual) it is running on, hypervisor vendor name,
+operating system name and version, current kernel version, hardware
+architecture, and other information.</p>
+<p><strong>[Debugging]{#part0034_split_001.html#id_568 .calibre10} a Script</strong></p>
+<p>Before you have a perfectly working script in place, you may have to run
+and modify it more than once. You can use a debugging technique that
+will help identify where the script might have failed or did not
+function as expected. You can either append the -x option to the
+&ldquo;#!/bin/bash&rdquo; at the beginning of the script to look like &ldquo;#!/bin/bash
+-x&rdquo;, or execute the script as follows:</p>
+<p><a href="#R-image-d9400c9ff0a408d3523e60dad722f07a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01016.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d9400c9ff0a408d3523e60dad722f07a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01016.jpeg"></a>{.image2}</p>
+<p>The above output now also includes the actual lines from the script
+prefixed by the + sign and followed by the command execution result. It
+also shows the line number of the problem line in the output if there is
+any. This way you can identify any issues pertaining to the path,
+command name, use of special characters, etc., and address it quickly.
+Try changing any of the <em>echo</em> commands in the script to &ldquo;iecho&rdquo; and
+re-run the script in the debug mode to confirm what has just been said.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_569 .calibre10}02: Using Local
+Variables</strong></p>
+<p>You had worked with variables earlier in the book and seen their usage.
+To recap, there are two types of variables: <em>local</em> (also called
+<em>private</em> or <em>shell</em>) and <em>environment</em>. Both can be defined and used in
+scripts and at the command line.</p>
+<p>The following script called <em>use_var.sh</em> will define a local variable
+and display its value on the screen. You will re-check the value of this
+variable after the script execution has completed. The comments have
+been excluded for brevity.</p>
+<p><a href="#R-image-de30121fa6c1a2d6e2c67b54f5fe80cf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01017.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-de30121fa6c1a2d6e2c67b54f5fe80cf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01017.jpeg"></a>{.image2}</p>
+<p>Add the execute bit to the script. The following output will be
+generated when you run it:</p>
+<p><a href="#R-image-79bdc859340f45e7c100ccdc6bba2304" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01018.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-79bdc859340f45e7c100ccdc6bba2304"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01018.jpeg"></a>{.image2}</p>
+<p>If you run the <em>echo</em> command to see what is stored in the SYSNAME
+variable, you will get nothing:</p>
+<p><a href="#R-image-ef5a67295d3a075d3ee4890814aa7af1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01019.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ef5a67295d3a075d3ee4890814aa7af1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01019.jpeg"></a>{.image2}</p>
+<p>The output is self-explanatory.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_570 .calibre10}03: Using
+Pre-Defined Environment Variables</strong></p>
+<p>The following script called <em>pre_env.sh</em> will display the values of
+SHELL and LOGNAME environment variables:</p>
+<p><a href="#R-image-5158e6ce486e717cc07c84903b4f4a45" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01020.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5158e6ce486e717cc07c84903b4f4a45"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01020.jpeg"></a>{.image2}</p>
+<p>Add the execute bit to the script, and run to view the result:</p>
+<p><a href="#R-image-6ebcc5ddc499f2fd1c77368903ec9a25" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01021.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6ebcc5ddc499f2fd1c77368903ec9a25"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01021.jpeg"></a>{.image2}</p>
+<p>The output is self-explanatory.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_571 .calibre10}04: Using Command
+Substitution</strong></p>
+<p>During the execution of a script, you can use the command substitution
+feature of the bash shell and store the output generated by the command
+into a variable. For example, the following script called <em>cmd_out.sh</em>
+will run the <em>hostname</em> and <em>uname</em> commands and save their outputs in
+variables. This script shows two different ways to use command
+substitution. Make sure to use the backticks (normally located with the
+~ character on the keyboard) to enclose the <em>uname</em> command.</p>
+<p><a href="#R-image-06bb87029386ae59942a29243da58d6a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01022.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06bb87029386ae59942a29243da58d6a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01022.jpeg"></a>{.image2}</p>
+<p>Add the execute bit and run the script:</p>
+<p><a href="#R-image-915635f10f94de8b735756daad4a01bc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01023.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-915635f10f94de8b735756daad4a01bc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01023.jpeg"></a>{.image2}</p>
+<p>The output is self-explanatory.</p>
+<p><strong>[Understanding]{#part0034_split_001.html#id_572 .calibre10} Shell
+Parameters</strong></p>
+<p>A <em>shell parameter</em> (or simply a <em>parameter</em>) is an entity that holds a
+value such as a name, special character, or number. The parameter that
+holds a name is referred to as a variable; a special character is
+referred to as a <em>special parameter</em>; and one or more digits, except for
+0 is referred to as a <em>positional parameter</em> (a.k.a. a <em>command line
+argument</em>). A special parameter represents the command or script itself
+($0), count of supplied arguments ($* or $@), all arguments ($#),
+and PID of the process ($$). A positional parameter ($1, $2, $3 . .
+.) is an argument supplied to a script at the time of its invocation,
+and its position is determined by the shell based on its location with
+respect to the calling script. <a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#page_487">Figure
+22-1</a>{.calibre5} gives a pictorial
+view of the special and positional parameters.</p>
+<p>::: c49
+::: width_
+<a href="#R-image-e32ae417de5005fcffeb79a7e69c4948" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01024.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e32ae417de5005fcffeb79a7e69c4948"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01024.jpeg"></a>{.calibre13}
+:::</p>
+<p><strong>Figure 22-1 Shell Parameters</strong>
+:::</p>
+<p><a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#page_487">Figure 22-1</a>{.calibre5} also shows
+that positional parameters beyond 9 are to be enclosed in curly
+brackets. Just like the variable and command substitutions, the shell
+uses the dollar ($) sign for special and positional parameter
+expansions as well.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_573 .calibre10}05: Using Special
+and Positional Parameters</strong></p>
+<p>The script <em>com_line_arg.sh</em> below will show the supplied arguments,
+total count, value of the first argument, and PID of the script:</p>
+<p><a href="#R-image-3d939e2b77987936e722dad7581d793b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01025.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3d939e2b77987936e722dad7581d793b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01025.jpeg"></a>{.image2}</p>
+<p>The result will be as follows when the script is executed with four
+arguments. Do not forget to add the execute bit prior to running it.</p>
+<p><a href="#R-image-9bd8ea64bd46cfa289e3992f43c6c9e8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01026.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9bd8ea64bd46cfa289e3992f43c6c9e8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01026.jpeg"></a>{.image2}</p>
+<p>The output is self-explanatory.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_574 .calibre10}06: Shifting
+Command Line Arguments</strong></p>
+<p>The <em>shift</em> command is used to move arguments one position to the left.
+During this move, the value of the first argument is lost. The
+<em>com_line_arg_shift.sh</em> script below is an extension to the
+<em>com_line_arg.sh</em> script. It uses the <em>shift</em> command to show what
+happens when arguments are moved.</p>
+<p><a href="#R-image-4b9a51bdaadcc7e46f54d03b18d2ff24" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01027.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4b9a51bdaadcc7e46f54d03b18d2ff24"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01027.jpeg"></a>{.image2}</p>
+<p>Let&rsquo;s execute the script with the same four arguments. Notice that a new
+value is assigned to $1 after each shift.</p>
+<p><a href="#R-image-a69d7e4aa2d552d5627e4dbb97110ac2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01028.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a69d7e4aa2d552d5627e4dbb97110ac2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01028.jpeg"></a>{.image2}</p>
+<p>Multiple shifts in a single attempt may be performed by furnishing a
+count of desired shifts to the <em>shift</em> command as an argument. For
+example, &ldquo;<em>shift</em> 2&rdquo; will carry out two shifts, &ldquo;<em>shift</em> 3&rdquo; will make
+three shifts, and so on.</p>
+<p><strong>[Logical]{#part0034_split_001.html#id_575 .calibre10} Constructs</strong></p>
+<p>So far, we have talked about simple scripts that run the code line by
+line. The shell lets us employ logical constructs to control the flow of
+scripts. It does this by allowing us to use test conditions, which
+decides what to do next based on the true or false status of the
+condition.</p>
+<p>The shell offers two logical constructs: the <em>if-then-fi</em> construct and
+the <em>case</em> construct. The if-then-fi construct has a few variations and
+those will be covered as well. A discussion on the case construct is
+beyond the scope.</p>
+<p>Before starting to look at the example scripts and see how logical
+constructs are used, let&rsquo;s discuss exit codes and various test
+conditions. You will use them later in the example scripts.</p>
+<p><strong>[Exit]{#part0034_split_001.html#id_576 .calibre10} Codes</strong></p>
+<p><em>Exit codes</em>, or <em>exit values</em>, refer to the value returned by a command
+when it finishes execution. This value is based on the outcome of the
+command. If the command runs successfully, you typically get a zero exit
+code, otherwise you get a non-zero value. This code is also referred to
+as a <em>return code,</em> and it is stored in a special shell parameter called
+<em>?</em> (question mark). Let&rsquo;s look at the following two examples to
+understand their usage:</p>
+<p><a href="#R-image-24bf7273a833934c35a76c889af97204" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01029.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-24bf7273a833934c35a76c889af97204"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01029.jpeg"></a>{.image2}</p>
+<p>In the first example, the <em>pwd</em> command ran successfully and it produced
+the desired result, hence a zero exit code was returned and stored in
+the ?. In the second example, the <em>man</em> command did not run successfully
+because of a missing argument, therefore a non-zero exit code was
+returned and stored in the ?.</p>
+<p>You can define exit codes within a script at different locations to help
+debug the script by knowing where exactly it terminated.</p>
+<p><strong>[Test]{#part0034_split_001.html#id_577 .calibre10} Conditions</strong></p>
+<p>Test conditions are used in logical constructs to decide what to do
+next. They can be set on integer values, string values, or files using
+the <em>test</em> command or by enclosing them within the square brackets [].
+<a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#id_760">Table 22-1</a>{.calibre5} describes
+various test condition operators.</p>
+<p>::: c49</p>
+<hr>
+<p><strong>Operation on Integer Value</strong>     <strong>Description</strong>
+integer1 -eq (-ne) integer2        Integer1 is equal (not equal) to integer2
+integer1 -lt (-gt) integer2        Integer1 is less (greater) than integer2
+integer1 -le (-ge) integer2        Integer1 is less (greater) than or equal to integer2
+<strong>Operation on String Value</strong>      <strong>Description</strong>
+string1=(!=)string2                Tests whether the two strings are identical (not identical)
+-l string or -z string             Tests whether the string length is zero
+string or -n string                Tests whether the string length is non-zero
+<strong>Operation on File</strong>              <strong>Description</strong>
+-b (-c) file                       Tests whether the file is a block (character) device file
+-d (-f) file                       Tests whether the file is a directory (normal file)
+-e (-s) file                       Tests whether the file exists (non-empty)
+-L file                            Tests whether the file is a symlink
+-r (-w) (-x) file                  Tests whether the file is readable (writable) (executable)
+-u (-g) (-k) file                  Tests whether the file has the setuid (setgid) (sticky) bit
+file1 -nt (-ot) file2              Tests whether file1 is newer (older) than file2
+<strong>Logical Operators</strong>              <strong>Description</strong>
+!                                  The logical NOT operator
+-a or &amp;&amp; (two ampersand            The logical AND operator. Both operands must be true for
+characters)                        the condition to be true. Syntax: [ -b file1 &amp;&amp; -r file1 ]
+-o or || (two pipe characters)   The logical OR operator. Either of the two or both operands must be true for the condition to be true. Syntax: [ (x == 1 -o y == 2) ]</p>
+<hr>
+<p><strong>[Table]{#part0034_split_001.html#id_760} 22-1 Test Conditions</strong>
+:::</p>
+<p>Having described the exit codes and test conditions, let&rsquo;s look at a few
+example scripts and observe their effects.</p>
+<p><strong>[The]{#part0034_split_001.html#id_578 .calibre10} if-then-fi
+Construct</strong></p>
+<p>The if-then-fi statement evaluates the condition for true or false. It
+executes the specified action if the condition is true; otherwise, it
+exits the construct. The if-then-fi statement begins with an &ldquo;if&rdquo; and
+ends with a &ldquo;fi&rdquo;, as depicted in the flow diagram in <a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#id_681">Figure
+22-2</a>{.calibre5}:</p>
+<p>::: c49
+::: width_
+<a href="#R-image-6aaf5d60b53c34866590d6e1c0fc32e5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01030.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6aaf5d60b53c34866590d6e1c0fc32e5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01030.jpeg"></a>{.calibre14}
+:::</p>
+<p><strong>Figure 22-2 The if-then-fi Construct</strong>
+:::</p>
+<p>The general syntax of this statement is as follows:</p>
+<hr>
+<p>if     condition
+then<br>
+action
+fi</p>
+<hr>
+<p>This construct is used in the following script.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_579 .calibre10}07: The if-then-fi
+Construct</strong></p>
+<p>You saw earlier how to check the number of arguments supplied at the
+command line. The following script called <em>if_then_fi.sh</em> determines the
+number of arguments and prints an error message if there are none
+provided:</p>
+<p><a href="#R-image-bd7aa584f6313cd2b0113c11476de835" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01031.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd7aa584f6313cd2b0113c11476de835"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01031.jpeg"></a>{.image2}</p>
+<p>This script will display the following messages on the screen if it is
+executed without exactly two arguments specified at the command line:</p>
+<p><a href="#R-image-e6fdac5a9a72603b661a43b387db8ba8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01032.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e6fdac5a9a72603b661a43b387db8ba8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01032.jpeg"></a>{.image2}</p>
+<p>A value of 2 will appear upon examining the return code as follows. This
+value reflects the exit code that you defined in the script on line 6.</p>
+<p><a href="#R-image-bd129cc60b832d9d43a7cf7633a7ddf8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01033.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd129cc60b832d9d43a7cf7633a7ddf8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01033.jpeg"></a>{.image2}</p>
+<p>Conversely, the return code will be 0 and the message will be as follows
+if you supply a pair of arguments:</p>
+<p><a href="#R-image-89f0cb1b75ccd6ab0ca6c84fc5d9820d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01034.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-89f0cb1b75ccd6ab0ca6c84fc5d9820d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01034.jpeg"></a>{.image2}</p>
+<p><strong>[The]{#part0034_split_001.html#id_580 .calibre10} if-then-else-fi
+Construct</strong></p>
+<p>The if-then-fi statement has a limitation and it can execute an action
+only if the specified condition is true. It quits the statement if the
+condition is untrue. The if-then-else-fi statement, in contrast, is more
+advanced in the sense that it can execute an action if the condition is
+true and another action if the condition is false. The flow diagram for
+this structure is shown in <a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#page_492">Figure
+22-3</a>{.calibre5}:</p>
+<p>::: c49
+::: width_
+<a href="#R-image-a50a685389dadbddb7255c1d53375bd5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01035.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a50a685389dadbddb7255c1d53375bd5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01035.jpeg"></a>{.calibre14}
+:::</p>
+<p><strong>Figure 22-3 The if-then-else-fi Construct</strong>
+:::</p>
+<p>The general syntax of this statement is as follows:</p>
+<hr>
+<p>if     condition
+then<br>
+action1
+else<br>
+action2
+fi</p>
+<hr>
+<p>action1 or action2 is performed based on the true or false evaluation of
+the condition.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_581 .calibre10}08: The
+if-then-else-fi Construct</strong></p>
+<p>The following script called <em>if_then_else_fi.sh</em> will accept an integer
+value as an argument and tell if the value is positive or negative:</p>
+<p><a href="#R-image-f1fe41371f796f205246917c8f998956" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01036.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f1fe41371f796f205246917c8f998956"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01036.jpeg"></a>{.image2}</p>
+<p>Run this script one time with a positive integer value and the next time
+with a negative value:</p>
+<p><a href="#R-image-6c3025fa20e408241e6156e9cc9e2d3a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01037.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6c3025fa20e408241e6156e9cc9e2d3a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01037.jpeg"></a>{.image2}</p>
+<p>Try the script again but with a non-integer value and see what it does.</p>
+<p><strong>[The]{#part0034_split_001.html#id_582 .calibre10} if-then-elif-fi
+Construct</strong></p>
+<p>The if-then-elif-fi is a more sophisticated construct than the other two
+conditional statements. You can define multiple conditions and associate
+an action with each one of them. During the evaluation, the action
+corresponding to the true condition is performed. The flow diagram for
+this structure is shown in <a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#id_682">Figure
+22-4</a>{.calibre5}:</p>
+<p>::: c49
+::: width_
+<a href="#R-image-bb6cc971edeedfef34b8a629ff2088c5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01038.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bb6cc971edeedfef34b8a629ff2088c5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01038.jpeg"></a>{.calibre13}
+:::</p>
+<p><strong>Figure 22-4 The if-then-elif-fi Construct</strong>
+:::</p>
+<p>The general syntax of this statement is as follows:</p>
+<hr>
+<p>if             condition1
+then        <br>
+action1
+elif           condition2
+then        <br>
+action2
+elif           condition3
+then        <br>
+action3
+&hellip;&hellip;&hellip;&hellip;<br>
+else        <br>
+action(n)
+fi</p>
+<hr>
+<p>Let&rsquo;s use the if-then-elif-fi construct in the following two example
+scripts.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_583 .calibre10}09: The
+if-then-elif-fi Construct (Example 1)</strong></p>
+<p>The <em>if_then_elif_fi.sh</em> script is an enhanced version of the
+<em>if_then_else_fi.sh</em> script. It accepts an integer value as an argument
+and tells if it is positive, negative, or zero. If a non-integer value
+or no argument is supplied, the script will complaint. Notice that the
+script employs the <em>exit</em> command after each action to help you identify
+where it exited.</p>
+<p><a href="#R-image-48c4bf24522d2fb66b8ed580e0a1ea75" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01039.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-48c4bf24522d2fb66b8ed580e0a1ea75"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01039.jpeg"></a>{.image2}</p>
+<p>Run this script four times: the first time with a positive integer, the
+second time with 0, the third time with a negative integer, and the
+fourth time with a non-integer value. Check the exit code after each
+execution to know where the script exited.</p>
+<p><a href="#R-image-f718e01da020d971e4df3d1964aae6c4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01040.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f718e01da020d971e4df3d1964aae6c4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01040.jpeg"></a>{.image2}</p>
+<p>The outputs and exit values reflect the program code.</p>
+<p><strong>[Script]{#part0034_split_001.html#id_584 .calibre10}10: The
+if-then-elif-fi Construct (Example 2)</strong></p>
+<p>The script <em>ex200_ex294.sh</em> will display the name of the Red Hat exam
+RHCSA or RHCE in the output based on the input argument (ex200 or
+ex294). If a random or no argument is provided, it will print &ldquo;Usage:
+Acceptable values are ex200 and ex294&rdquo;. Make sure to add white spaces in
+the conditions as shown.</p>
+<p><a href="#R-image-6479fb7325345744db397773c808d7f0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01041.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6479fb7325345744db397773c808d7f0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01041.jpeg"></a>{.image2}</p>
+<p>Run this script three times: the first time with argument ex200, the
+second time with argument ex294, and the third time with something
+random as an argument:</p>
+<p><a href="#R-image-548ee638492699e03ccb3a9051b30c9d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01042.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-548ee638492699e03ccb3a9051b30c9d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01042.jpeg"></a>{.image2}</p>
+<p>The results are as expected.</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} A good understanding of the usage of logical
+statements is important.</p>
+<p><strong>[Looping]{#part0034_split_001.html#id_585 .calibre10} Constructs</strong></p>
+<p>As a Linux user and administrator, you often want to perform certain
+task on a number of given elements or repeatedly until a specified
+condition becomes true or false. For instance, if plenty of disks need
+to be initialized for use in LVM, you can either run the <em>pvcreate</em>
+command on each disk one at a time manually or employ a loop to do it
+for you. Likewise, based on a condition, you may want a program to
+continue to run until that condition becomes true or false.</p>
+<p>There are three constructs&mdash;<em>for-do-done</em>, <em>while-do-done</em>, and
+<em>until-do-done</em>&mdash;that you can use to implement looping.</p>
+<p><a href="#R-image-0d5c6671a8ad00f6915e5477be89acbc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0d5c6671a8ad00f6915e5477be89acbc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The for loop is also referred to as the
+foreach loop.</p>
+<p>The for loop iterates on a list of given values until the list is
+exhausted. The while loop runs repeatedly until the specified condition
+becomes false. The until loop does just the opposite of the while loop;
+it performs an operation repeatedly until the specified condition
+becomes true. This chapter will discuss the for loop only; the other two
+are out of scope.</p>
+<p><strong>[Test]{#part0034_split_001.html#id_586 .calibre10} Conditions</strong></p>
+<p>The <em>let</em> command is used in looping constructs to evaluate a condition
+at each iteration. It compares the value stored in a variable against a
+pre-defined value. Each time the loop does an iteration, the variable
+value is altered. You can enclose the condition for arithmetic
+evaluation within a pair of parentheses (( )) or quotation marks (&quot; &ldquo;)
+instead of using the <em>let</em> command explicitly.</p>
+<p><a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#id_761">Table 22-2</a>{.calibre5} lists operators
+that can be used in test conditions.</p>
+<hr>
+<p><strong>Operator</strong>   <strong>Description</strong>
+!              Negation
++ <em>&ndash;</em> *     Addition <em>subtraction</em> multiplication / division
+%             Remainder
+&lt; / &lt;=       Less than / less than or equal to
+&gt; / &gt;=       Greater than / greater than or equal to
+=              Assignment
+== / !=        Comparison for equality / non-equality</p>
+<hr>
+<p><strong>[Table]{#part0034_split_001.html#id_761} 22-2 Arithmetic Operators</strong></p>
+<p>Having described various test condition operators, let&rsquo;s look at the
+syntax of the for loop and a few example scripts and observe the
+implications of some of the test conditions.</p>
+<p><strong>[The]{#part0034_split_001.html#id_587 .calibre10} for Loop</strong></p>
+<p>The for loop is executed on an array of elements until all the elements
+in the array are consumed. Each element is assigned to a variable one
+after the other for processing. The flow diagram for this construct is
+displayed in <a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#id_683">Figure 22-5</a>{.calibre5}:</p>
+<p>::: c49
+::: width_
+<a href="#R-image-fb4a85b2ca578a717c134563dce11281" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01043.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fb4a85b2ca578a717c134563dce11281"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01043.jpeg"></a>{.calibre14}
+:::</p>
+<p><strong>Figure 22-5 The for Loop</strong> The general syntax of this construct is as
+follows:
+:::</p>
+<hr>
+<p>for VAR in list<br>
+do             <br>
+action
+done</p>
+<hr>
+<p><strong>[Script]{#part0034_split_001.html#id_588 .calibre10}11: Print
+Alphabets Using for Loop</strong></p>
+<p>The <em>for_do_done.sh</em> script initializes the variable COUNT to 0. The for
+loop will read each letter sequentially from the range placed within
+curly brackets (no spaces before the letter A and after the letter Z),
+assign it to another variable LETTER, and display the value on the
+screen. The <em>expr</em> command is an arithmetic processor and it is used
+here to increment the COUNT by 1 at each loop iteration.</p>
+<p><a href="#R-image-49017ac98e3cf1d6261469e535ef988b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01044.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49017ac98e3cf1d6261469e535ef988b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01044.jpeg"></a>{.image2}</p>
+<p>The output of the script will be:</p>
+<p><a href="#R-image-e96e1f586c6f84585825776b3c16575d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01045.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e96e1f586c6f84585825776b3c16575d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01045.jpeg"></a>{.image2}</p>
+<p><strong>[Script]{#part0034_split_001.html#id_589 .calibre10}12: Create Users
+Using for Loop</strong></p>
+<p>The <em>create_user.sh</em> script can create several Linux user accounts. As
+each account is created, the value of the variable ? is checked. If the
+value is 0, a message saying the account is created successfully will be
+displayed, otherwise the script will terminate. In case of a successful
+account creation, the <em>passwd</em> command will be invoked to assign the
+user the same password as their username.</p>
+<p><a href="#R-image-289c35f93f6b4a4b7e13b296293d79ea" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01046.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-289c35f93f6b4a4b7e13b296293d79ea"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01046.jpeg"></a>{.image2}</p>
+<p>The result of the script execution below confirms the addition of three
+new user accounts:</p>
+<p><a href="#R-image-d09fde068015ce5d87910faf386652fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01047.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d09fde068015ce5d87910faf386652fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01047.jpeg"></a>{.image2}</p>
+<p>If this script is re-executed without modifying the list of elements
+(user names), the following will appear:</p>
+<p><a href="#R-image-eb10dddb2c95411a81681c8c4c32935e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01048.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eb10dddb2c95411a81681c8c4c32935e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01048.jpeg"></a>{.image2}</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} A good understanding of the looping construct will
+help on the exam.</p>
+<p><strong>[Chapter]{#part0034_split_001.html#id_590 .calibre10} Summary</strong></p>
+<p>In this chapter, we learned the basics of bash shell scripting. This
+chapter began with an overview of scripting and then demonstrated how to
+write and analyze test scripts using various built-in features of the
+bash shell. We wrote and examined simple code and gradually advanced to
+more advanced scripts, including those that employed logical and looping
+constructs. We learned how to identify problem lines in our scripts.
+After understanding and practicing the scripts presented in this
+chapter, you should be able to write your own programs, debug them, and
+examine those authored by others.</p>
+<p><strong>[Review]{#part0034_split_001.html#id_591 .calibre10} Questions</strong></p>
+<p>1[.]{.c19}What are the three major components in a shell script?</p>
+<p>2[.]{.c19}Which looping construct can be used to perform an action on
+listed items?</p>
+<p>3[.]{.c19}What is the function of the <em>shift</em> command?</p>
+<p>4[.]{.c19}You can script the startup and shutdown of a database. True or
+False?</p>
+<p>5[.]{.c19}What does the <em>echo</em> command do without any arguments?</p>
+<p>6[.]{.c19}What would the command <em>echo $?</em> do?</p>
+<p>7[.]{.c19}When would you want to use an exit code in your script?</p>
+<p>8[.]{.c19}What would you modify in a shell script to run it in the debug
+mode?</p>
+<p>9[.]{.c19}What are the two types of logical constructs mentioned in this
+chapter?</p>
+<p>10[.]{.c23}What would != imply in a looping condition?</p>
+<p>11[.]{.c23}What is the difference between a line in a script starting
+with a &ldquo;#&rdquo; and a &ldquo;#!&rdquo;?</p>
+<p>12[.]{.c23}What comments may you want to include in a shell script?
+Write any six.</p>
+<p>13[.]{.c23}What is one benefit of writing shell scripts?</p>
+<p>14[.]{.c23}What would the command <em>bash -x <em>usr</em>local/bin/script1.sh</em>
+do?</p>
+<p><strong>[Answers]{#part0034_split_001.html#id_592 .calibre10} to Review
+Questions</strong></p>
+<p>1[.]{.c19}The three major components in a shell script are commands,
+control structures, and comments.</p>
+<p>2[.]{.c19}The for loop.</p>
+<p>3[.]{.c19}The <em>shift</em> command moves an argument to the left.</p>
+<p>4[.]{.c19}True.</p>
+<p>5[.]{.c19}The <em>echo</em> command inserts an empty line in the output when
+used without arguments.</p>
+<p>6[.]{.c19}This command will display the exit code of the last command
+executed.</p>
+<p>7[.]{.c19}The purpose of using an exit code is to determine exactly
+where the script quits.</p>
+<p>8[.]{.c19}We would specify -x as an argument to the shell path.</p>
+<p>9[.]{.c19}The if and case constructs.</p>
+<p>10[.]{.c23}!= would check the value for non-equality.</p>
+<p>11[.]{.c23}The former is used to include general comments in the script
+and the latter combination dictates the full path to the shell file that
+is to be used to execute the script.</p>
+<p>12[.]{.c23}The author name, creation date, last modification date,
+location, purpose, and usage.</p>
+<p>13[.]{.c23}One major benefit of writing shell scripts is to automate
+lengthy and repetitive tasks.</p>
+<p>14[.]{.c23}This command will execute <em>script1.sh</em> in debug mode.</p>
+<p><strong>[DIY]{#part0034_split_001.html#id_593 .calibre10} Challenge Labs</strong></p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform these
+labs without any additional help. A step-by-step guide is not provided,
+as the implementation of these labs requires the knowledge that has been
+presented in this chapter. Use defaults or your own thinking for missing
+information.</p>
+<p><strong>[Lab]{#part0034_split_001.html#id_594 .calibre10} 22-1: Write a Script
+to Create Logical Volumes</strong></p>
+<p>For this lab, present 2x1GB virtual disks to your system in VirtualBox
+VM Manager. Write a single bash shell script to create 2x800MB
+partitions on each disk using <em>parted</em> and then bring both partitions
+into LVM control with the <em>pvcreate</em> command. Create a volume group
+called <em>vgscript</em> and add both PVs to it. Create three logical volumes
+each of size 500MB and name them <em>lvscript1</em>, <em>lvscript2</em>, and
+<em>lvscript3</em>.</p>
+<p><strong>[Lab]{#part0034_split_001.html#id_595 .calibre10} 22-2: Write a Script
+to Create File Systems</strong></p>
+<p>This lab is a continuation of Lab 22-1. Write another bash shell script
+to create xfs, ext4, and vfat file system structures in each logical
+volume, respectively. Create mount points **mnt<em>xfs</em>, **mnt<em>ext4</em>, and
+**mnt<em>vfat</em>, and mount the file systems. Include the <em>df</em> command with
+-h to list the mounted file systems.</p>
+<p><strong>[Lab]{#part0034_split_001.html#id_596 .calibre10} 22-3: Write a Script
+to Configure a New Network Profile</strong></p>
+<p>For this lab, present a new network interface to your system in
+VirtualBox VM Manager. Write a single bash shell script to run the
+<em>nmcli</em> command to configure custom IP assignments (choose your own
+settings) on the new network device and ensure that they are
+automatically applied to it on future system reboots. Make a copy of the
+**etc<em>hosts</em> file as part of this script. Choose a hostname of your
+choice and add a mapping to the **etc<em>hosts</em> file without overwriting
+existing file content.</p>
+<p>[]{#part0035_split_000.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1712315598" defer></script>
+        <script src="/js/search.js?1712315598" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/" class=""><a class="padding" href="/linux/misc_linux/command_line/">Command Line<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/">Consoling in on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/" class=""><a class="padding" href="/linux/misc_linux/devices/">Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/" class=""><a class="padding" href="/linux/misc_linux/dns/">DNS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/" class=""><a class="padding" href="/linux/misc_linux/file_permissions/">File Permissions<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/" class=""><a class="padding" href="/linux/misc_linux/getting_started/">General Linux and History<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/">How to Get Putty to Work in Ubuntu<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/" class=""><a class="padding" href="/linux/misc_linux/init/">Init<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/">IO Monitoring<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/">Keyboard Shortcuts<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/" class=""><a class="padding" href="/linux/misc_linux/kernel/">Linux Kernel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/" class=""><a class="padding" href="/linux/misc_linux/logging/">Logging<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/" class=""><a class="padding" href="/linux/misc_linux/ls/">ls<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/">Network Troubleshooting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/" class=""><a class="padding" href="/linux/misc_linux/network_basics/">Networking in Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/">Open source and Linux Community<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/" class=""><a class="padding" href="/linux/misc_linux/packages/">Packages and Their Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/" class=""><a class="padding" href="/linux/misc_linux/process_utilization/">Process Utilization<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/" class=""><a class="padding" href="/linux/misc_linux/ps_processes/">Processes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/" class=""><a class="padding" href="/linux/misc_linux/linux_resources/">Resources for learning Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/" class=""><a class="padding" href="/linux/misc_linux/scp_command/">scp<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/" class=""><a class="padding" href="/linux/misc_linux/network_sharing/">Sharing Resources<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/">Shell<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/">Skills that go with Bash Scripting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/">Switching to Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/">Symbols in Bash<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/" class=""><a class="padding" href="/linux/misc_linux/tar/">Tar Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/" class=""><a class="padding" href="/linux/misc_linux/text_fu/">Text Editors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/">The Linux Filesystem<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/" class=""><a class="padding" href="/linux/misc_linux/user_management/">User Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/" class=""><a class="padding" href="/linux/misc_linux/wsl2/">Windows Subsystem for Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/22_shell_scripting/" class="active"><a class="padding" href="/linux/rhcsa/22_shell_scripting/"><i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/containers/" class=""><a class="padding" href="/linux/containers/">Container Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/run_command_as_another_user/" class=""><a class="padding" href="/linux/misc_linux/run_command_as_another_user/">Run Command as Another User<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/cli/" class=""><a class="padding" href="/networking/cisco/cli/">Cisco CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/">Cisco CML VMWARE Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/">Cisco Devnet Sandbox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/">Cisco to Juniper Cheat Sheet<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/">Cisco VLAN Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/" class=""><a class="padding" href="/networking/cisco/classful_ipv4/">Classfull IPv4<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/" class=""><a class="padding" href="/networking/cisco/management/">Device Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/" class=""><a class="padding" href="/networking/cisco/device_management_protocols/">Device Management Protocols<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/" class=""><a class="padding" href="/networking/cisco/dhcp_config/">DHCP Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/">DHCP Snooping and ARP Inspection<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/" class=""><a class="padding" href="/networking/cisco/ethernet_lans/">Ethernet LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/" class=""><a class="padding" href="/networking/cisco/extended_acls/">Extended ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/" class=""><a class="padding" href="/networking/cisco/ip_services/">IP Services<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/">IPv6 Addressing and Subnetting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/" class=""><a class="padding" href="/networking/cisco/ipv6/">IPv6 Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/" class=""><a class="padding" href="/networking/cisco/ipv6_config/">IPv6 Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/" class=""><a class="padding" href="/networking/cisco/ipv6_routing/">IPv6 Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/" class=""><a class="padding" href="/networking/juniper/junos_fundementals/">Junos Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/" class=""><a class="padding" href="/networking/cisco/lan_architecture/">LAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/">Layer 2 Etherchannel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/" class=""><a class="padding" href="/networking/cisco/spanning_tree/">More Spanning Tree<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/" class=""><a class="padding" href="/networking/cisco/nat/">Network Address Translation (NAT)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/" class=""><a class="padding" href="/networking/cisco/ospf_concepts/">OSPF Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/" class=""><a class="padding" href="/networking/cisco/ospf_config/">OSPF Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/" class=""><a class="padding" href="/networking/cisco/ospf_lab/">OSPF Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/">OSPF Network Types and Neighbors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/" class=""><a class="padding" href="/networking/cisco/qos/">QoS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/" class=""><a class="padding" href="/networking/cisco/rstp/">Rapid Spanning Tree (RSTP)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/" class=""><a class="padding" href="/networking/cisco/router_operation/">Router Operation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/">Routing in the LAN<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/" class=""><a class="padding" href="/networking/cisco/securing_network_devices/">Securing Network Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/" class=""><a class="padding" href="/networking/cisco/security_architectures/">Security Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/">Spanning Tree Protocol Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/" class=""><a class="padding" href="/networking/cisco/standard_acls/">Standard ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/" class=""><a class="padding" href="/networking/cisco/static_routes/">Static Routes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/" class=""><a class="padding" href="/networking/cisco/switch_interfaces/">Switch Interfaces<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/" class=""><a class="padding" href="/networking/cisco/switchport_security_config/">Switchport Security Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/">TCP/UDP<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/">Troubleshooting Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/" class=""><a class="padding" href="/networking/cisco/vlans/">VLANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/" class=""><a class="padding" href="/networking/cisco/wan_architecture/">WAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/">WANs and IP Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/">What is a VLAN?<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/" class=""><a class="padding" href="/networking/cisco/wireless_architectures/">Wireless Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/" class=""><a class="padding" href="/networking/cisco/wireless_lan/">Wireless LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/" class=""><a class="padding" href="/networking/cisco/wireless/">Wireless Principles<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/" class=""><a class="padding" href="/networking/cisco/wireless_security/">Wireless Security<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/consoling_in_to_mx80_from_linux/" class=""><a class="padding" href="/networking/juniper/consoling_in_to_mx80_from_linux/">Console into a Juniper MX80 from Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_paste_config/" class=""><a class="padding" href="/networking/juniper/junos_paste_config/">How to Copy and Paste a Junos Config<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/toggle_poe/" class=""><a class="padding" href="/networking/juniper/toggle_poe/">How to Toggle POE on a Juniper Switch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/juniper_cli_basics/" class=""><a class="padding" href="/networking/juniper/juniper_cli_basics/">Juniper CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><input type="checkbox" id="R-section-36a3ed262b315ff04085d7b53a448994" aria-controls="R-subsections-36a3ed262b315ff04085d7b53a448994"><label for="R-section-36a3ed262b315ff04085d7b53a448994"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Python</span></label><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-36a3ed262b315ff04085d7b53a448994" class="morespace collapsible-menu">
+          <li data-nav-id="/python/basics/" class=""><a class="padding" href="/python/basics/">Python Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/" class=""><a class="padding" href="/tools/calibre_server/">Calibre Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/silverblue/" class=""><a class="padding" href="/tools/silverblue/">Fedora Silverblue<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/" class=""><a class="padding" href="/tools/githubpageshugo/">Github Pages with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/iphonemigrate/" class=""><a class="padding" href="/tools/iphonemigrate/">Migrating Away from Iphone<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/scssandsassinhugo/" class=""><a class="padding" href="/tools/scssandsassinhugo/">SCSS &amp; SASS in Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/" class=""><a class="padding" href="/tools/pandoc/">Pandoc Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/building-a-dashboard/" class=""><a class="padding" href="/tools/obsidian/building-a-dashboard/">Building a Dashboard in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/emailserver/" class=""><a class="padding" href="/tools/emailserver/">Hosting Your Own Email Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/setup/" class=""><a class="padding" href="/tools/obsidian/setup/">My Obsidian Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/how-to-use-the-dataview-plugin/" class=""><a class="padding" href="/tools/obsidian/how-to-use-the-dataview-plugin/">Obsidian Dataview Plugin<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/image_to_text/" class=""><a class="padding" href="/tools/obsidian/image_to_text/">Obsidian Image to Text Extractor<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/tracker-plugin/" class=""><a class="padding" href="/tools/obsidian/tracker-plugin/">Obsidian Tracker Plugin<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/proxmox_setup/" class=""><a class="padding" href="/tools/proxmox_setup/">Proxmox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/serial-in-on-linux/" class=""><a class="padding" href="/tools/serial-in-on-linux/">Serial In on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/how-to-use-templates/" class=""><a class="padding" href="/tools/obsidian/how-to-use-templates/">Using Templates in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/yaml-in-obsidian/" class=""><a class="padding" href="/tools/obsidian/yaml-in-obsidian/">YAML in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class="alwaysopen"><input type="checkbox" id="R-section-e557a922d533a171e9a204b7e50265e2" aria-controls="R-subsections-e557a922d533a171e9a204b7e50265e2" checked><label for="R-section-e557a922d533a171e9a204b7e50265e2"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e557a922d533a171e9a204b7e50265e2" class="morespace collapsible-menu">
+          <li data-nav-id="/writing/writing-off-the-cuff/" class=""><a class="padding" href="/writing/writing-off-the-cuff/">Writing Off the Cuff<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/booknotes/" class="alwaysopen"><input type="checkbox" id="R-section-1cda010113b426a07bb6aec1adc15086" aria-controls="R-subsections-1cda010113b426a07bb6aec1adc15086" checked><label for="R-section-1cda010113b426a07bb6aec1adc15086"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Book Notes</span></label><a class="padding" href="/booknotes/">Book Notes<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-1cda010113b426a07bb6aec1adc15086" class="morespace collapsible-menu">
+          <li data-nav-id="/booknotes/123magic/" class=""><a class="padding" href="/booknotes/123magic/">123 Magic Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/master_reading_list/" class=""><a class="padding" href="/booknotes/master_reading_list/">Master Reading List<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/22_shell_scripting/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1712315598" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1712315598" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1712315598" defer></script>
+    <script src="/js/js-yaml.min.js?1712315598" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1712315598" defer></script>
+  </body>
+</html>

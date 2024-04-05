@@ -21,15 +21,15 @@ This chapter describes the following major topics:
 
 RHCSA Objectives:
 
-Boot, reboot, and shut down a system normally
-Boot systems into different targets manually
-Start, stop, and check the status of network services
-Start and stop services and configure services to start automatically at boot
-Configure systems to boot into a specific target automatically
-Configure network services to start automatically at boot
-Manage tuning profiles
-Locate and interpret system log files and journals
-Preserve system journals
+- Boot, reboot, and shut down a system normally
+- Boot systems into different targets manually
+- Start, stop, and check the status of network services
+- Start and stop services and configure services to start automatically at boot
+- Configure systems to boot into a specific target automatically
+- Configure network services to start automatically at boot
+- Manage tuning profiles
+- Locate and interpret system log files and journals
+- Preserve system journals
 
 
 Systemd
@@ -38,40 +38,39 @@ Systemd
 - used to handle operational states of services. 
 - employs the concepts of units and targets for initialization, service administration, and state changes. 
 
-Log files need to be rotated periodically to prevent the file system
-space from filling up. 
-configuration files that define the default and custom locations to direct the log messages to and to
-configure rotation settings. The 
+- Log files need to be rotated periodically to prevent the file system space from filling up. 
+- configuration files that define the default and custom locations to direct the log messages to and to
+configure rotation settings. 
+
 system log file
-- records custom messages sent to it. systemd includes a service for viewing and managing system logs in addition to the traditional logging service. This service
-maintains a log of runtime activities for faster retrieval and can be
-configured to store the information permanently.
+- records custom messages sent to it. 
+- systemd includes a service for viewing and managing system logs in addition to the traditional logging service. 
+- This service maintains a log of runtime activities for faster retrieval and can be configured to store the information permanently.
 
-System tuning service is employed to monitor connected devices and to
-tweak their parameters to improve performance or conserve power. A
-recommended tuning profile may be identified and activated for optimal
-performance and power saving.
+System tuning service 
+- employed to monitor connected devices and to 
+- tweak their parameters to improve performance or conserve power. 
+- recommended tuning profile may be identified and activated for optimal performance and power saving.
 
-**[System]{#part0024_split_001.html#id_329 .calibre10} Initialization
-and Service Management**
+### System Initialization and Service Management
 
-*systemd* (short for *system daemon*) is the system initialization and
-service management mechanism. It has fast-tracked system initialization
-and state transitioning by introducing features such as parallel
-processing of startup scripts, improved handling of service
-dependencies, and on-demand activation of services. Moreover, it
-supports snapshotting of system states, tracks processes using control
-groups, and automatically maintains mount points. systemd is the first
-process with PID 1 that spawns at boot and it is the last process that
-terminates at shutdown.
-
-systemd 
+*systemd* (short for *system daemon*) is the 
+- system initialization and service management mechanism. It has 
+- has fast-tracked system initialization and state transitioning by introducing 
+	- parallel processing of startup scripts, 
+	- improved handling of service dependencies, and 
+	- on-demand activation of services. 
+- supports snapshotting of system states, 
+- tracks processes using control groups, and 
+- automatically maintains mount points.
+- first process with PID 1 that spawns at boot  
+- last process that terminates at shutdown.
 - spawns several processes during a service startup. It 
-- places the processes in a private hierarchy composed of *control groups* (or *cgroups* for short) to organize processes for the purposes of monitoring and controlling system resources such as
+- places the processes in a private hierarchy composed of *control groups* (or *cgroups* for short) to organize processes for the purposes of monitoring and controlling system resources such as:
 	- processor, 
 	- memory, 
-	- network bandwidth, and 
-	- disk I/O. This 
+	- network bandwidth
+	- disk I/O.
 includes limiting, isolating, and prioritizing their usage of resources. This way
 resources can be distributed among users, databases, and applications
 based on need and priority, resulting in overall improved system

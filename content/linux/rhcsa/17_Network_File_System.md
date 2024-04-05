@@ -339,3 +339,318 @@ mount | grep autodir
 ```
 
 ## Lab: Access NFS Share Using Indirect Map
+
+
+**[Exercise]{#part0029_split_001.html#id_477 .calibre10} 17-4: Access
+NFS Share Using Indirect Map**
+
+This exercise should be done on *server10* as *user1* with *sudo* where
+required.
+
+In this exercise, you will configure an indirect map to automount the
+NFS share */common* that is available from *server20*. You will install
+the relevant software and set up AutoFS maps to support the automatic
+mounting. You will observe that the specified mount point "autoindir" is
+created automatically under */misc*.
+
+Note that */common* is already mounted on the */local* mount point via
+the *fstab* file and it is also configured via a direct map for
+automounting on */autodir*. There should occur no conflict in
+configuration or functionality among the three.
+
+1[.]{.c19}Install the AutoFS software package called *autofs*:
+
+![](images/00877.jpeg){.image2}
+
+2[.]{.c19}Confirm the entry for the indirect map */misc* in the
+**etc*auto.master* file exists:
+
+![](images/00878.jpeg){.image2}
+
+3[.]{.c19}Edit the **etc*auto.misc* file and add the mount point, NFS
+server, and share information to it:
+
+![](images/00879.jpeg){.image2}
+
+4[.]{.c19}Start the AutoFS service now and set it to autostart at system
+reboots:
+
+![](images/00880.jpeg){.image2}
+
+5[.]{.c19}Verify the operational status of the AutoFS service. Use the
+-l and \--no-pager options to show full details without piping the
+output to a pager program (the *pg* command in this case):
+
+![](images/00881.jpeg){.image2}
+
+6[.]{.c19}Run the *ls* command on the mount point **misc*autoindir* and
+then *grep* for both *auto.misc* and *autoindir* on the *mount* command
+output to verify that the share is automounted and accessible:
+
+![](images/00882.jpeg){.image2}
+
+Observe the above outcomes. The *mount* command output illustrates the
+path of the AutoFS map (**etc*auto.misc*), the auto-generated mount
+point (**misc*autoindir*), file system type (autofs), and the options
+used during the mount process. An activity in the mount point (*ls*
+command in this case) caused AutoFS to mount the share */common* on
+**misc*autoindir*. You can use the same umbrella mount point */misc* to
+mount additional auto-generated mount points.
+
+This mount point will automatically disappear after five minutes of
+idling. You can verify that by issuing the *mount* command again. A
+*cd*, *ls*, or some other activity in the mount point will bring it
+back.
+
+This completes the AutoFS setup for an NFS share on the client using an
+indirect map.
+
+**[Automounting]{#part0029_split_001.html#id_478 .calibre10} User Home
+Directories**
+
+AutoFS allows us to automount user home directories by exploiting two
+special characters in indirect maps. The asterisk (\*) replaces the
+references to specific mount points and the ampersand (&) substitutes
+the references to NFS servers and shared subdirectories. With user home
+directories located under */home*, on one or more NFS servers, the
+AutoFS service will connect with all of them simultaneously when a user
+attempts to log on to a client. The service will mount only that
+specific user's home directory rather than the entire */home*. The
+indirect map entry for this type of substitution is defined in an
+indirect map, such as **etc*auto.master.d/auto.home*, and will look
+like:
+
+![](images/00883.jpeg){.image2}
+
+With this entry in place, there is no need to update any AutoFS
+configuration files if NFS servers with */home* shared are added or
+removed. Similarly, if user home directories are added or deleted, there
+will be no impact on the functionality of AutoFS. If there is only one
+NFS server sharing the home directories, you can simply specify its name
+in lieu of the first & symbol in the above entry.
+
+**[Exercise]{#part0029_split_001.html#id_479 .calibre10} 17-5: Automount
+User Home Directories Using Indirect Map**
+
+There are two portions for this exercise. The first portion should be
+done on *server20* (NFS server) and the second portion on *server10*
+(NFS client) as *user1* with *sudo* where required.
+
+In the first portion, you will create a user account called *user30*
+with UID 3000. You will add the */home* directory to the list of NFS
+shares so that it becomes available for remote mount.
+
+In the second portion, you will create a user account called *user30*
+with UID 3000, base directory */nfshome*, and no user home directory.
+You will create an umbrella mount point called */nfshome* for mounting
+the user home directory from the NFS server. You will install the
+relevant software and establish an indirect map to automount the remote
+home directory of *user30* under */nfshome*. You will observe that the
+home directory of *user30* is automounted under */nfshome* when you sign
+in as *user30*.
+
+**On NFS server *server20*:**
+
+1[.]{.c19}Create a user account called *user30* with UID 3000 (-u) and
+assign password "password1":
+
+![](images/00884.jpeg){.image2}
+
+2[.]{.c19}Edit the **etc*exports* file and add an entry for */home* (do
+not remove the previous entry):
+
+![](images/00885.jpeg){.image2}
+
+3[.]{.c19}Export all the shares listed in the **etc*exports* file:
+
+![](images/00886.jpeg){.image2}
+
+**On NFS client *server10*:**
+
+1[.]{.c19}Install the AutoFS software package called *autofs*:
+
+![](images/00887.jpeg){.image2}
+
+![](images/00888.jpeg){.image2}
+
+2[.]{.c19}Create a user account called *user30* with UID 3000 (-u), base
+home directory location */nfshome* (-b), no home directory (-M), and
+password "password1":
+
+![](images/00889.jpeg){.image2}
+
+This is to ensure that the UID for the user is consistent on the server
+and the client to avoid access issues.
+
+3[.]{.c19}Create the umbrella mount point */nfshome* to automount the
+user's home directory:
+
+![](images/00890.jpeg){.image2}
+
+4[.]{.c19}Edit the **etc*auto.master* file and add the mount point and
+indirect map location to it:
+
+![](images/00891.jpeg){.image2}
+
+5[.]{.c19}Create the **etc*auto.master.d/auto.home* file and add the
+following information to it:
+
+![](images/00892.jpeg){.image2}
+
+For multiple user setup, you can replace "user30" with the & character,
+but ensure that those users exist on both the server and the client with
+consistent UIDs.
+
+6[.]{.c19}Start the AutoFS service now and set it to autostart at system
+reboots. This step is not required if AutoFS is already running and
+enabled.
+
+![](images/00893.jpeg){.image2}
+
+7[.]{.c19}Verify the operational status of the AutoFS service. Use the
+-l and \--no-pager options to show full details without piping the
+output to a pager program (the *pg* command):
+
+![](images/00894.jpeg){.image2}
+
+8[.]{.c19}Log in as *user30* and run the *pwd*, *ls*, and *df* commands
+for verification:
+
+![](images/00895.jpeg){.image2}
+
+The user is successfully logged in with their home directory automounted
+from the NFS server. The *pwd* command confirms the path. The *df*
+command verifies the NFS server name and the source home directory path
+for *user30*, as well as the mount location. You can also use the
+*mount* command and pipe the output to *grep* for *user30* to view mount
+details (**mount \| grep user30**).
+
+[**EXAM TIP:**]{.c56}You may need to configure AutoFS for mounting a
+remote user home directory.
+
+This completes the setup for an automounted home directory share for a
+user.
+
+**[Chapter]{#part0029_split_001.html#id_480 .calibre10} Summary**
+
+This chapter discussed the sharing and mounting of remote file systems
+using the Network File System protocol. It elucidated the concepts,
+benefits, and versions of the NFS service, and described the commands
+and configuration files involved in NFS management on the server and the
+client.
+
+Next, we performed an exercise to demonstrate the configuration and
+sharing of a directory on one of the lab servers (NFS server) and
+another exercise on the second lab system (NFS client) to mount that
+share manually and persistently using the standard NFS mount method.
+
+We explored the client-side service called AutoFS for automounting NFS
+shares. We discussed the concepts, benefits, and components associated
+with AutoFS, and analyzed its maps. We performed exercises to mount,
+confirm, and unmount the remote NFS share using both direct and indirect
+methods.
+
+Finally, we described the AutoFS setting to automount user home
+directories from the NFS server.
+
+**[Review]{#part0029_split_001.html#id_481 .calibre10} Questions**
+
+1[.]{.c19}What would the entry *\* server10:/home/&* in an AutoFS
+indirect map imply?
+
+2[.]{.c19}Which command is used to export a share?
+
+3[.]{.c19}An NFS server exports a share and an NFS server mounts it.
+True or False?
+
+4[.]{.c19}Which command would you use to unexport a share?
+
+5[.]{.c19}What is the name of the NFS server configuration file?
+
+6[.]{.c19}What would the line entry */dir1 \*(rw)* in the **etc*exports*
+file mean?
+
+7[.]{.c19}What type of AutoFS map would have the */- *etc*auto.media*
+entry in the *auto.master* file?
+
+8[.]{.c19}AutoFS requires *root* privileges to automatically mount a
+network file system. True or False?
+
+9[.]{.c19}What is the default timeout value for a file system before
+AutoFS unmounts it automatically?
+
+10[.]{.c23}Name the three common types of maps that AutoFS support.
+
+11[.]{.c23}Arrange the tasks in three different correct sequences to
+export a share using NFS: (a) update **etc*exports*, (b) add service to
+firewalld, (c) run *exportfs*, (d) install *nfs-utils*, and (e) start
+nfs service.
+
+12[.]{.c23}What is the name of the AutoFS configuration file and where
+is it located?
+
+13[.]{.c23}The name of the AutoFS service daemon is *autofs*. True or
+False?
+
+**[Answers]{#part0029_split_001.html#id_482 .calibre10} to Review
+Questions**
+
+1[.]{.c19}This indirect map entry would mount individual user home
+directories from *server10*.
+
+2[.]{.c19}The *exportfs* command.
+
+3[.]{.c19}True.
+
+4[.]{.c19}The *exportfs* command with the -u switch.
+
+5[.]{.c19}The **etc*nfs.conf* file.
+
+6[.]{.c19}The line entry would export */dir1* in read/write mode to all
+systems.
+
+7[.]{.c19}A direct map.
+
+8[.]{.c19}False.
+
+9[.]{.c19}Five minutes.
+
+10[.]{.c23}The three common AutoFS maps are master, direct, and
+indirect.
+
+11[.]{.c23}d/e/b/a/c, d/e/a/c/b, or d/e/a/b/c.
+
+12[.]{.c23}The name of the AutoFS configuration file is *autofs.conf*
+and it is located in the */etc* directory.
+
+13[.]{.c23}False. The name of the AutoFS service daemon is *automount*.
+
+**[Do-]{#part0029_split_001.html#id_483 .calibre10}It-Yourself Challenge
+Labs**
+
+The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the lab has already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.
+
+**Lab 17-1: Configure NFS Share and Automount with Direct Map**
+
+As *user1* with *sudo* on *server10*, share directory */sharenfs*
+(create it) in read/write mode using NFS. On *server20* as *user1* with
+*sudo*, install the AutoFS software and start the service. Configure the
+master and a direct map to automount the share on */mntauto* (create
+it). Run *ls* on */mntauto* to trigger the mount. Use **df -h** to
+confirm. (Hint: NFS Server and Client Configuration, and Auto File
+System).
+
+**[Lab]{#part0029_split_001.html#id_484 .calibre10} 17-2: Automount NFS
+Share with Indirect Map**
+
+As *user1* with *sudo* on *server20*, configure the master and an
+indirect map to automount the share under */autoindir* (create it). Run
+*ls* on */autoindir/sharenfs* to trigger the mount. Use **df -h** to
+confirm. (Hint: Auto File System).
+
+[]{#part0030_split_000.html}

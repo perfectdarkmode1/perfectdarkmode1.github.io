@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Describe Logical Volume Manager and its components
+[ {.c37}]{.c36}Understand various Logical Volume Manager management operations
+[ {.c37}]{.c36}Know Logical Volume Manager administration commands
+[ {.c37}]{.c36}Create and confirm physical volumes, volume groups, and logical volumes
+[ {.c37}]{.c36}Rename, reduce, extend, and remove logical volumes
+[ {.c37}]{.c36}Extend, reduce, and remove volume groups
+[ {.c37}]{.c36}Remove physical volumes
+[ {.c37}]{.c36}Overview of Stratis (a volume-managing file system solution in RHEL) service and how it works">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Describe Logical Volume Manager and its components
+[ {.c37}]{.c36}Understand various Logical Volume Manager management operations
+[ {.c37}]{.c36}Know Logical Volume Manager administration commands
+[ {.c37}]{.c36}Create and confirm physical volumes, volume groups, and logical volumes
+[ {.c37}]{.c36}Rename, reduce, extend, and remove logical volumes
+[ {.c37}]{.c36}Extend, reduce, and remove volume groups
+[ {.c37}]{.c36}Remove physical volumes
+[ {.c37}]{.c36}Overview of Stratis (a volume-managing file system solution in RHEL) service and how it works">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/14_advanced_storage_partitioning/">
+    <meta property="article:section" content="Linux - Perfect Dark Mode">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <title></title>
+    <link href="/images/favicon.png?1712315598" rel="icon" type="image/png">
+    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
+    <link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1712315598" rel="stylesheet">
+    <link href="/css/auto-complete.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1712315598" rel="stylesheet">
+    <link href="/css/fonts.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1712315598" rel="stylesheet">
+    <link href="/css/theme-git.css?1712315598" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1712315598" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1712315598" rel="stylesheet">
+    <link href="/css/print.css?1712315598" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1712315598" rel="stylesheet">
+    <script src="/js/url.js?1712315598"></script>
+    <script src="/js/variant.js?1712315598"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.relearn.themeVariantModifier='';
+      window.variants && variants.init( [ 'git' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/14_advanced_storage_partitioning/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/about/" target="_blank" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/now/" target="_blank" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/recommended/" target="_blank" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/booknotes/" target="_blank" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://perfectdarkmode.com/contact/" target="_blank" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+<h1 id=""></h1>
+
+<p>This chapter describes the following major topics:</p>
+<p>[<a href="#R-image-2b1b6cf8ad08cdee07dde7a19d19e496" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2b1b6cf8ad08cdee07dde7a19d19e496"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Describe Logical Volume Manager and
+its components</p>
+<p>[<a href="#R-image-2ccd430d7fb98dd745fead7835b06da2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2ccd430d7fb98dd745fead7835b06da2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand various Logical Volume
+Manager management operations</p>
+<p>[<a href="#R-image-b5f180924a2926caa545f515ea0c458e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b5f180924a2926caa545f515ea0c458e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know Logical Volume Manager
+administration commands</p>
+<p>[<a href="#R-image-254b583e08d31badea2b6ec6b0d1664e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-254b583e08d31badea2b6ec6b0d1664e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and confirm physical volumes,
+volume groups, and logical volumes</p>
+<p>[<a href="#R-image-343aee7041b9373192fbb2843c7a515c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-343aee7041b9373192fbb2843c7a515c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Rename, reduce, extend, and remove
+logical volumes</p>
+<p>[<a href="#R-image-815448bf545d7b513177d33acb8363d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-815448bf545d7b513177d33acb8363d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Extend, reduce, and remove volume
+groups</p>
+<p>[<a href="#R-image-2c7a4f2ad1943cabe530e4df552afce5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2c7a4f2ad1943cabe530e4df552afce5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Remove physical volumes</p>
+<p>[<a href="#R-image-4018983878bd4b57961fc6db4fb7fd53" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4018983878bd4b57961fc6db4fb7fd53"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of Stratis (a
+volume-managing file system solution in RHEL) service and how it works</p>
+<p>[<a href="#R-image-b0c7ad61044c65ca1e1b90a0f8819397" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b0c7ad61044c65ca1e1b90a0f8819397"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand various Stratis
+management operations and the command</p>
+<p>[<a href="#R-image-8e618df6539b52f51d72ff07883cb36a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e618df6539b52f51d72ff07883cb36a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create, confirm, expand, rename, and
+destroy pools and file systems</p>
+<p>[RHCSA Objectives:]{.c39}</p>
+<p>[28]{#part0026_split_000.html#id_794 .calibre10}[.]{.c29}Create and
+remove physical volumes</p>
+<p>[29]{#part0026_split_000.html#id_795 .calibre10}[.]{.c29}Assign physical
+volumes to volume groups</p>
+<p>[30]{#part0026_split_000.html#id_796 .calibre10}[.]{.c29}Create and
+delete logical volumes</p>
+<p>32[.]{.c29}Add new partitions and logical volumes, and swap to a system
+non-destructively (the swap portion of this objective is covered in
+Chapter 15)</p>
+<p>[35]{#part0026_split_000.html#id_801 .calibre10}[.]{.c29}Extend existing
+logical volumes (additional coverage on this objective is available in
+Chapter 15)</p>
+<p>[38]{#part0026_split_000.html#id_804 .calibre10}[.]{.c29}Manage layered
+volumes</p>
+<p>::: {#part0026_split_000.html#calibre_pb_1 .calibre12}
+:::</p>
+<p>[]{#part0026_split_001.html}</p>
+<p>[ T]{.c42}[his]{.c43} chapter is the second of the three chapters (the
+other two being <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0025_split_000.html#page_301">Chapter
+13</a>{.calibre5} (previous) and
+<a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0027_split_000.html#page_345">Chapter 15</a>{.calibre5} (next)) that
+expounds upon storage management concepts and solutions available in
+RHEL. We discussed partitioning and thinly provisioned volumes in the
+previous chapter. This chapter presents a detailed coverage on Logical
+Volume Manager solution. LVM sets up an abstraction layer between the
+operating system and the storage hardware. It utilizes virtual objects
+for storage pooling and allocation, and offers a whole slew of
+management commands, each of which carries out a particular operation.</p>
+<p>The other advanced storage management solution discussed in this chapter
+is a volume-managing file system that capitalizes on the proven features
+of LVM and the kernel device driver software. This solution dynamically
+adjusts the size of the underlying volume, eliminating the need for
+manual expansion.</p>
+<p><strong>[Logical]{#part0026_split_001.html#id_379 .calibre10} Volume Manager
+(LVM)</strong></p>
+<p>The <em>Logical Volume Manager</em> (LVM) solution is widely used for managing
+block storage in Linux. LVM provides an abstraction layer between the
+physical storage and the file system, enabling the file system to be
+resized, span across multiple physical disks, use arbitrary disk space,
+<em>etc.</em> LVM accumulates spaces taken from partitions or entire disks
+(called <em>Physical Volumes</em>) to form a logical container (called <em>Volume
+Group</em>), which is then divided into logical partitions (called <em>Logical
+Volumes</em>). The other key benefits of LVM include online resizing of
+volume groups and logical volumes, online data migration between logical
+volumes and between physical volumes, user-defined naming for volume
+groups and logical volumes, mirroring and striping across multiple
+physical disks, and snapshotting of logical volumes. <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0026_split_001.html#id_678">Figure
+14-1</a>{.calibre5} depicts the LVM
+components.</p>
+<p>::: c49
+::: width_
+<a href="#R-image-33834e73f7c2b9972e860000be8e94d0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00692.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-33834e73f7c2b9972e860000be8e94d0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00692.jpeg"></a>{.calibre13}
+:::</p>
+<p><strong>Figure 14-1 LVM Structure</strong>
+:::</p>
+<p>As noted above, the LVM structure is made up of three key objects called
+physical volume, volume group, and logical volume. These objects are
+further virtually broken down into <em>Physical Extents</em> (PEs) and <em>Logical
+Extents</em> (LEs). The LVM components are explained in the following
+subsections.</p>
+<p><strong>Physical Volume</strong></p>
+<p>A <em>Physical Volume</em> (PV) is created when a block storage device such as
+a partition or an entire disk is initialized and brought under LVM
+control. This process constructs LVM data structures on the device,
+including a label on the second sector and metadata shortly thereafter.
+The label includes the UUID, size, and pointers to the locations of data
+and metadata areas. Given the criticality of metadata, LVM stores a copy
+of it at the end of the physical volume as well. The rest of the device
+space is available for use.</p>
+<p>You can use an LVM command called <em>pvs</em> (<em>physical volume scan</em> or
+<em>summary</em>) to scan and list available physical volumes on <em>server2</em>:</p>
+<p><a href="#R-image-acd4b0a7a03c22ebc4ffecea4bb6b6b3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00693.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-acd4b0a7a03c22ebc4ffecea4bb6b6b3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00693.jpeg"></a>{.image2}</p>
+<p>The output shows one physical volume (PV) **dev<em>sda2</em> of size 9GB in
+<em>rhel</em> volume group (VG). Additional information displays the metadata
+format (Fmt) used, status of the physical volume under the Attr column
+(a for allocatable), and the amount of free space available on the
+physical volume (PFree).</p>
+<p>Try running this command again with the -v flag to view more information
+about the physical volume.</p>
+<p><strong>[Volume]{#part0026_split_001.html#id_380 .calibre10} Group</strong></p>
+<p>A <em>Volume Group</em> (VG) is created when at least one physical volume is
+added to it. The space from all physical volumes in a volume group is
+aggregated to form one large pool of storage, which is then used to
+build logical volumes. The physical volumes added to a volume group may
+be of varying sizes. LVM writes volume group metadata on each physical
+volume that is added to it. The volume group metadata contains its name,
+date and time of creation, how it was created, the extent size used, a
+list of physical and logical volumes, a mapping of physical and logical
+extents, <em>etc.</em> A volume group can have a custom name assigned to it at
+the time of its creation. For example, it may be called <em>vg01</em>, <em>vgora</em>,
+or <em>vgweb</em> that identifies the type of information it is constructed to
+store. A copy of the volume group metadata is stored and maintained at
+two distinct locations on each physical volume within the volume group.</p>
+<p>You can use an LVM command called <em>vgs</em> (<em>volume group scan</em> or
+<em>summary</em>) to scan and list available volume groups on <em>server2</em>:</p>
+<p><a href="#R-image-e2314d1c54d5c813177206caee067021" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00694.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e2314d1c54d5c813177206caee067021"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00694.jpeg"></a>{.image2}</p>
+<p>The output shows one volume group (VG) <em>rhel</em> on <em>server2</em> containing
+one physical volume (#PV). Additional information displays the number of
+logical volumes (#LV) and snapshots (#SN) in the volume group, status of
+the volume group under the Attr column (w for writeable, z for
+resizable, and n for normal), size of the volume group (VSize), and the
+amount of free space available in the volume group (VFree).</p>
+<p>Try running this command again with the -v flag to view more information
+about the volume group.</p>
+<p><strong>Physical Extent</strong></p>
+<p>A physical volume is divided into several smaller logical pieces when it
+is added to a volume group. These logical pieces are known as <em>Physical
+Extents</em> (PE). An extent is the smallest allocatable unit of space in
+LVM. At the time of volume group creation, you can either define the
+size of the PE or leave it to the default value of 4MB. This implies
+that a 20GB physical volume would have approximately 5,000 PEs. Any
+physical volumes added to this volume group thereafter will use the same
+PE size.</p>
+<p>You can use an LVM command called <em>vgdisplay</em> (<em>volume group display</em>)
+on <em>server2</em> and <em>grep</em> for &lsquo;PE Size&rsquo; to view the PE size used in the
+<em>rhel</em> volume group:</p>
+<p><a href="#R-image-f455af1906981eba11d604b7976eeadd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00695.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f455af1906981eba11d604b7976eeadd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00695.jpeg"></a>{.image2}</p>
+<p>The output reveals the PE size used for the <em>rhel</em> VG.</p>
+<p><strong>[Logical]{#part0026_split_001.html#id_381 .calibre10} Volume</strong></p>
+<p>A volume group consists of a pool of storage taken from one or more
+physical volumes. This volume group space is used to create one or more
+<em>Logical Volumes</em> (LVs). A logical volume can be created or weeded out
+online, expanded or shrunk online, and can use space taken from one or
+multiple physical volumes inside the volume group.</p>
+<p>The default naming convention used for logical volumes is <em>lvol0, lvol1,
+lvol2</em>, and so on; however, you may assign custom names to them. For
+example, a logical volume may be called <em>system</em>, <em>undo</em>, or <em>webdata1</em>
+so as to establish the type of information it is constructed to store.</p>
+<p>You can use an LVM command called <em>lvs</em> (<em>logical volume scan</em> or
+<em>summary</em>) to scan and list available logical volumes on <em>server2</em>:</p>
+<p><a href="#R-image-5a6bb61b2ada4dce24f390fb9685e398" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00696.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5a6bb61b2ada4dce24f390fb9685e398"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00696.jpeg"></a>{.image2}</p>
+<p>The output shows two logical volumes <em>root</em> and <em>swap</em> in <em>rhel</em> volume
+group. Additional information displays the status of the logical volumes
+under the Attr column (w for writeable, i for inherited allocation
+policy, a for active, and o for open) and their sizes.</p>
+<p>Try running this command again with the -v flag to view more information
+about the logical volumes.</p>
+<p><strong>[Logical]{#part0026_split_001.html#id_382 .calibre10} Extent</strong></p>
+<p>A logical volume is made up of <em>Logical Extents</em> (LE). Logical extents
+point to physical extents, and they may be random or contiguous. The
+larger a logical volume is, the more logical extents it will have.
+Logical extents are a set of physical extents allocated to the logical
+volume.</p>
+<p>The PE and LE sizes are normally kept the same within a volume group;
+however, a logical extent can be smaller or larger than a physical
+extent. The default LE size is 4MB, which corresponds to the default PE
+size.</p>
+<p>You can use an LVM command called <em>lvdisplay</em> (<em>logical volume display</em>)
+on <em>server2</em> to view information about the <em>root</em> logical volume in the
+<em>rhel</em> volume group.</p>
+<p><a href="#R-image-594a8086602de162ae1b92bf93e3b12f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00697.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-594a8086602de162ae1b92bf93e3b12f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00697.jpeg"></a>{.image2}</p>
+<p>The output does not disclose the LE size; however, you can convert the
+LV size in MBs (8,000) and then divide the result by the Current LE
+count (2,047) to get the LE size (which comes close to 4MB).</p>
+<p><strong>[LVM]{#part0026_split_001.html#id_383 .calibre10} Operations and
+Commands</strong></p>
+<p>The LVM toolset offers a multitude of administrative commands to carry
+out various disk and volume management operations. These operations
+include creating and removing a physical volume, volume group, and
+logical volume; extending and reducing a volume group and logical
+volume; renaming a volume group and logical volume; and listing and
+displaying physical volume, volume group, and logical volume
+information.</p>
+<p><a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0026_split_001.html#id_741">Table 14-1</a>{.calibre5} summarizes the
+common LVM tasks and the commands that are employed to accomplish them.</p>
+<p>::: c49</p>
+<hr>
+<p><strong>Command</strong>                        <strong>Description</strong>
+<strong>Create and Remove Operations</strong><br>
+pvcreate/pvremove                  Initializes/uninitializes a disk or partition for LVM use
+vgcreate/vgremove                  Creates/removes a volume group
+lvcreate/lvremove                  Creates/removes a logical volume
+<strong>Extend and Reduce Operations</strong><br>
+vgextend/vgreduce                  Adds/removes a physical volume to/from a volume group
+lvextend/lvreduce                  Extends/reduces the size of a logical volume
+lvresize                           Resizes a logical volume. With the -r option, this command calls the resize2fs command and resizes the underlying file system as well. Applies to Ext2/Ext3/Ext4 file system types only.
+<strong>Rename Operations</strong>           <br>
+vgrename                           Renames a volume group
+lvrename                           Renames a logical volume
+<strong>Command</strong>                        <strong>Description</strong>
+<strong>List and Display Operations</strong> <br>
+pvs/pvdisplay                      Lists/displays physical volume information
+vgs/vgdisplay                      Lists/displays volume group information
+lvs/lvdisplay                      Lists/displays logical volume information</p>
+<hr>
+<p><strong>[Table]{#part0026_split_001.html#id_741} 14-1 Common LVM Operations
+and Commands</strong>
+:::</p>
+<p>All the tools accept the -v switch to support verbosity. Refer to the
+manual pages of the commands for usage and additional details.</p>
+<p>As noted earlier, there are seven disks available on <em>server2</em> for
+practice. Issue the <em>lsblk</em> command to confirm:</p>
+<p><a href="#R-image-44611c6342e3e2d8842ddd7ac2553391" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00698.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-44611c6342e3e2d8842ddd7ac2553391"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00698.jpeg"></a>{.image2}</p>
+<p>You will use the <em>sdd</em> and <em>sde</em> disks for LVM activities in the
+following exercises.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_384 .calibre10} 14-1: Create a
+Physical Volume and Volume Group</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will initialize one partition <em>sdd1</em> (90MB) and
+one disk <em>sde</em> (250MB) for use in LVM. You will create a volume group
+called <em>vgbook</em> and add both physical volumes to it. You will use the PE
+size of 16MB and list and display the volume group and the physical
+volumes.</p>
+<p>1[.]{.c19}Create a partition of size 90MB on <em>sdd</em> using the <em>parted</em>
+command and confirm. You need to label the disk first, as it is a new
+disk.</p>
+<p><a href="#R-image-5a954b0093f972ccce34b2bd11173abc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00699.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5a954b0093f972ccce34b2bd11173abc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00699.jpeg"></a>{.image2}</p>
+<p>The <em>print</em> subcommand confirms the creation of the partition. It is the
+first partition on the disk.</p>
+<p>2[.]{.c19}Set (<em>set</em>) the flag on the partition (1) to &ldquo;lvm&rdquo; using the
+<em>parted</em> command:</p>
+<p><a href="#R-image-735430500313e756600cf17b877228ba" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00700.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-735430500313e756600cf17b877228ba"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00700.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Verify flag activation using the <em>print</em> subcommand with
+<em>parted</em>:</p>
+<p><a href="#R-image-13d3f6509ce5a32395651aad335c32a9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00701.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-13d3f6509ce5a32395651aad335c32a9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00701.jpeg"></a>{.image2}</p>
+<p>The flag is applied and enabled on the partition as indicated under the
+Flags column.</p>
+<p>4[.]{.c19}Initialize the <em>sdd1</em> partition and the <em>sde</em> disk using the
+<em>pvcreate</em> command. Note that there is no need to apply a disk label on
+<em>sde</em> with <em>parted</em> as LVM does not require it.</p>
+<p><a href="#R-image-35cdd61545c8b4922d8b53ef39b08150" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00702.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-35cdd61545c8b4922d8b53ef39b08150"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00702.jpeg"></a>{.image2}</p>
+<p>The command generated a verbose output. You now have two physical
+volumes available for use.</p>
+<p>5[.]{.c19}Create <em>vgbook</em> volume group using the <em>vgcreate</em> command and
+add the two physical volumes to it. Use the -s option to specify the PE
+size in MBs.</p>
+<p><a href="#R-image-649f6260ce75388abe0c0c4a0b967ee7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00703.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-649f6260ce75388abe0c0c4a0b967ee7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00703.jpeg"></a>{.image2}</p>
+<p>The above command combines the two options with a single hyphen.</p>
+<p>6[.]{.c19}List the volume group information:</p>
+<p><a href="#R-image-3a912d870bb46b7f1e94da887cbc5fca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00704.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3a912d870bb46b7f1e94da887cbc5fca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00704.jpeg"></a>{.image5}<a href="#R-image-e5e0180c759137e65ed2feae73013e70" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00704.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e5e0180c759137e65ed2feae73013e70"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00704.jpeg"></a>{.image5}</p>
+<p>The total capacity available in the <em>vgbook</em> volume group is 320MB.</p>
+<p>7.Display detailed information about the volume group and the physical
+volumes it contains:</p>
+<p><a href="#R-image-3ee92dee47eabfefdff1a4f94f493521" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00705.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3ee92dee47eabfefdff1a4f94f493521"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00705.jpeg"></a>{.image2}</p>
+<p>The verbose output includes the physical volume attributes as well.
+There are a total of 20 PEs in the volume group (5 in <em>sdd1</em> and 15 in
+<em>sde</em>), and each PE is 16MB in size. The collective size of all the
+physical volumes represents the total size of the volume group, which is
+20x16 = 320MB.</p>
+<p>8[.]{.c19}List the physical volume information:</p>
+<p><a href="#R-image-5ec0b6112d498827675dd0562c9f2fb8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00706.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5ec0b6112d498827675dd0562c9f2fb8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00706.jpeg"></a>{.image2}</p>
+<p>The output shows the physical volumes in <em>vgbook</em>, along with their
+utilization status.</p>
+<p>9[.]{.c19}Display detailed information about the physical volumes:</p>
+<p><a href="#R-image-6662ecda8c9468edd050f6d263948881" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00707.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6662ecda8c9468edd050f6d263948881"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00707.jpeg"></a>{.image2}</p>
+<p>Once a partition or disk is initialized and added to a volume group,
+they are treated identically within the volume group. LVM does not
+prefer one over the other.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_385 .calibre10} 14-2: Create
+Logical Volumes</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will create two logical volumes, <em>lvol0</em> and
+<em>lvbook1</em>, in the <em>vgbook</em> volume group. You will use 120MB for <em>lvol0</em>
+and 192MB for <em>lvbook1</em> from the available pool of space. You will
+display the details of the volume group and the logical volumes.</p>
+<p>1[.]{.c19}Create a logical volume with the default name <em>lvol0</em> using
+the <em>lvcreate</em> command. Use the -L option to specify the logical volume
+size, 120MB. You may use the -v, -vv, or -vvv option with the command
+for verbosity.</p>
+<p><a href="#R-image-c358ee5ee82b7383e51f4a2416bbdf9f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00708.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c358ee5ee82b7383e51f4a2416bbdf9f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00708.jpeg"></a>{.image2}</p>
+<p>The size for the logical volume may be specified in units such as MBs,
+GBs, TBs, or as a count of LEs; however, MB is the default if no unit is
+specified (see the previous command). The size of a logical volume is
+always in multiples of the PE size. For instance, logical volumes
+created in <em>vgbook</em> with the PE size set at 16MB can be 16MB, 32MB,
+48MB, 64MB, and so on. The output above indicates that the logical
+volume is 128MB (16x8), and not 120MB as specified.</p>
+<p>2[.]{.c19}Create <em>lvbook1</em> of size 192MB (16x12) using the <em>lvcreate</em>
+command. Use the -l switch to specify the size in logical extents and -n
+for the custom name. You may use -v for verbose information.</p>
+<p><a href="#R-image-7fd726a85ecd066aeff3b7d9bf6c80e2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00709.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7fd726a85ecd066aeff3b7d9bf6c80e2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00709.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}List the logical volume information:</p>
+<p><a href="#R-image-a28d4dc4abef946bd6d61a409d3294fb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00710.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a28d4dc4abef946bd6d61a409d3294fb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00710.jpeg"></a>{.image2}</p>
+<p>Both logical volumes are listed in the output with their attributes and
+sizes.</p>
+<p>4[.]{.c19}Display detailed information about the volume group including
+the logical volumes and the physical volumes:</p>
+<p><a href="#R-image-f7c6535f784d9779435d8b898291dabe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00711.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f7c6535f784d9779435d8b898291dabe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00711.jpeg"></a>{.image2}</p>
+<p>Alternatively, you can run the following to view only the logical volume
+details:</p>
+<p><a href="#R-image-9d532a404664b35ce8e413b6adf7cd36" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00712.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9d532a404664b35ce8e413b6adf7cd36"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00712.jpeg"></a>{.image2}</p>
+<p>Review the attributes of the logical volumes as detailed above.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_386 .calibre10} 14-3: Extend a
+Volume Group and a Logical Volume</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will add another partition <em>sdd2</em> of size 158MB to
+<em>vgbook</em> to increase the pool of allocatable space. You will initialize
+the new partition prior to adding it to the volume group. You will
+increase the size of <em>lvbook1</em> to 336MB. You will display basic
+information for the physical volumes, volume group, and logical volume.</p>
+<p>1[.]{.c19}Create a partition of size 158MB on <em>sdd</em> and set the flag to
+&ldquo;lvm&rdquo; using the <em>parted</em> command. Display the new partition to confirm
+the partition number, size, and flag.</p>
+<p><a href="#R-image-ebb5fad738088c1fc2d6d1d609dac52d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00713.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ebb5fad738088c1fc2d6d1d609dac52d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00713.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Initialize <em>sdd2</em> using the <em>pvcreate</em> command:</p>
+<p><a href="#R-image-f1303cba5bb2883280144adedbe2a954" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00714.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f1303cba5bb2883280144adedbe2a954"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00714.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Extend <em>vgbook</em> by adding the new physical volume to it:</p>
+<p><a href="#R-image-c128fa356068fb18b3517b9b46c78e91" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00715.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c128fa356068fb18b3517b9b46c78e91"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00715.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}List the volume group:</p>
+<p><a href="#R-image-f81cebce8efc6a65a12b49eba1cb44c6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00716.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f81cebce8efc6a65a12b49eba1cb44c6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00716.jpeg"></a>{.image2}</p>
+<p>The output reflects the addition of a third physical volume to <em>vgbook</em>.
+The total capacity of the volume group has now increased to 464MB with
+144MB free.</p>
+<p>5[.]{.c19}Extend the size of <em>lvbook1</em> to 340MB by adding 144MB using
+the <em>lvextend</em> command:</p>
+<p><a href="#R-image-19403c257d4cbc8ebc8ed8d7613a8e8c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00717.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-19403c257d4cbc8ebc8ed8d7613a8e8c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00717.jpeg"></a>{.image2}</p>
+<p>[<strong>EXAM TIP:</strong>]{.c56} Make sure the expansion of a logical volume does
+not affect the file system and the data it contains. More details in
+Chapter 15.</p>
+<p>6[.]{.c19}Issue <em>vgdisplay</em> on <em>vgbook</em> with the -v switch for the
+updated details:</p>
+<p><a href="#R-image-eabd3df081d499d6c7cdb66268295afc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00718.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eabd3df081d499d6c7cdb66268295afc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00718.jpeg"></a>{.image2}</p>
+<p>The output will show a lot of information about the volume group and the
+logical and physical volumes it contains. It will reflect the updates
+made in this exercise. In fact, each time a volume group or a logical
+volume is resized, <em>vgdisplay</em> will reflect those changes. The above
+output will display three physical volumes with the combined allocatable
+space grown to 464MB. The number of PEs will have increased to 29, with
+all of them allocated to logical volumes and 0 unused. The Logical
+Volume sections will display the updated information for the logical
+volumes. And at the very bottom, the three physical volumes will show
+with their device names, and total and available PEs in each.</p>
+<p>7[.]{.c19}View a summary of the physical volumes:</p>
+<p><a href="#R-image-1f4c2dbcd58d92b9f8e72e4c5cb9ec6a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00719.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f4c2dbcd58d92b9f8e72e4c5cb9ec6a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00719.jpeg"></a>{.image2}</p>
+<p>8[.]{.c19}View a summary of the logical volumes:</p>
+<p><a href="#R-image-0b1a3d761b67ac51f8299feb48c261e8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00720.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0b1a3d761b67ac51f8299feb48c261e8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00720.jpeg"></a>{.image2}</p>
+<p>This brings the exercise to an end.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_387 .calibre10} 14-4: Rename,
+Reduce, Extend, and Remove Logical Volumes</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will rename <em>lvol0</em> to <em>lvbook2</em>. You will
+decrease the size of <em>lvbook2</em> to 50MB using the <em>lvreduce</em> command and
+then add 32MB with the <em>lvresize</em> command. You will then remove both
+logical volumes. You will display the summary for the volume groups,
+logical volumes, and physical volumes.</p>
+<p>1[.]{.c19}Rename <em>lvol0</em> to <em>lvbook2</em> using the <em>lvrename</em> command and
+confirm with <em>lvs</em>:</p>
+<p><a href="#R-image-21751c1269bba9cc5605e8614a2a54d6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00721.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-21751c1269bba9cc5605e8614a2a54d6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00721.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Reduce the size of <em>lvbook2</em> to 50MB with the <em>lvreduce</em>
+command. Specify the absolute desired size for the logical volume.
+Answer &ldquo;Do you really want to reduce vgbook/lvbook2?&rdquo; in the
+affirmative.</p>
+<p><a href="#R-image-ca0c988bc57d2055c1237b1e3c07ffd9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00722.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ca0c988bc57d2055c1237b1e3c07ffd9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00722.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Add 32MB to <em>lvbook2</em> with the <em>lvresize</em> command:</p>
+<p><a href="#R-image-c5d294f9a3fb2faa441636f42060141f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00723.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c5d294f9a3fb2faa441636f42060141f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00723.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Use the <em>pvs</em>, <em>lvs</em>, <em>vgs</em>, and <em>vgdisplay</em> commands to view
+the updated allocation.</p>
+<p>5[.]{.c19}Remove both <em>lvbook1</em> and <em>lvbook2</em> logical volumes using the
+<em>lvremove</em> command. Use the -f option to suppress the &ldquo;Do you really
+want to remove active logical volume&rdquo; message.</p>
+<p><a href="#R-image-24f83d1295a920cb73d4e209ae518904" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00724.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-24f83d1295a920cb73d4e209ae518904"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00724.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8e7c152dc0a24fb41d813873d99cd11f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e7c152dc0a24fb41d813873d99cd11f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Removing a logical volume is a
+destructive task. You need to ensure that you perform a backup of any
+data in the target logical volume prior to deleting it. You will need to
+unmount the file system or disable swap in the logical volume. See
+<a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0027_split_000.html#page_345">Chapter 15</a>{.calibre5} on how to
+unmount a file system and disable swap.</p>
+<p>6[.]{.c19}Execute the <em>vgdisplay</em> command and <em>grep</em> for &ldquo;Cur LV&rdquo; to see
+the number of logical volumes currently available in <em>vgbook</em>. It should
+show 0, as you have removed both logical volumes.</p>
+<p><a href="#R-image-1945a3d65b9c7e1fd06939e6f8798013" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00725.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1945a3d65b9c7e1fd06939e6f8798013"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00725.jpeg"></a>{.image2}</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_388 .calibre10} 14-5: Reduce
+and Remove a Volume Group</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will reduce <em>vgbook</em> by removing the <em>sdd1</em> and
+<em>sde</em> physical volumes from it, and then remove the volume group.
+Confirm the deletion of the volume group and the logical volumes at the
+end.</p>
+<p>1[.]{.c19}Remove <em>sdd1</em> and <em>sde</em> physical volumes from <em>vgbook</em> by
+issuing the <em>vgreduce</em> command:</p>
+<p><a href="#R-image-4d74cdd9887e84d3d43917d95d2626ed" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00726.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d74cdd9887e84d3d43917d95d2626ed"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00726.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Remove the volume group using the <em>vgremove</em> command. This
+will also remove the last physical volume, <em>sdd2</em>, from it.</p>
+<p><a href="#R-image-8034a30ded5bfc0895c3b3b94ab54155" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00727.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8034a30ded5bfc0895c3b3b94ab54155"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00727.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f07f7227df250a4029a74d43b8e9385c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f07f7227df250a4029a74d43b8e9385c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} You can also use the -f option with the
+<em>vgremove</em> command to force the volume group removal even if it contains
+any number of logical and physical volumes in it.</p>
+<p><a href="#R-image-8fe5028808ef911d6a7fb4c490cd3601" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8fe5028808ef911d6a7fb4c490cd3601"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Remember to proceed with caution whenever
+you perform reduce and erase operations.</p>
+<p>3[.]{.c19}Execute the <em>vgs</em> and <em>lvs</em> commands for confirmation:</p>
+<p><a href="#R-image-c958dfc31ecb0511f47931759c874691" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00728.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c958dfc31ecb0511f47931759c874691"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00728.jpeg"></a>{.image2}</p>
+<p>This concludes the exercise.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_389 .calibre10} 14-6:
+Uninitialize Physical Volumes</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will uninitialize all three physical
+volumes&mdash;<em>sdd1</em>, <em>sdd2</em>, and <em>sde</em>&mdash;by deleting the LVM structural
+information from them. Use the <em>pvs</em> command for confirmation. Remove
+the partitions from the <em>sdd</em> disk and verify that all disks used in
+Exercises 14-1 to 14-5 are now in their original raw state.</p>
+<p>1[.]{.c19}Remove the LVM structures from <em>sdd1</em>, <em>sdd2</em>, and <em>sde</em> using
+the <em>pvremove</em> command:</p>
+<p><a href="#R-image-5824cc87ded8f31ea11a0abad8359609" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00729.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5824cc87ded8f31ea11a0abad8359609"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00729.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Confirm the removal using the <em>pvs</em> command:</p>
+<p><a href="#R-image-83bb01475bdceec70060012c67030bcc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00730.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-83bb01475bdceec70060012c67030bcc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00730.jpeg"></a>{.image2}</p>
+<p>The partitions and the disk are now back to their raw state and can be
+repurposed.</p>
+<p>3[.]{.c19}Remove the partitions from <em>sdd</em> using the <em>parted</em> command:</p>
+<p><a href="#R-image-f6023b1bee4e8941e25da4bd504881e9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00731.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f6023b1bee4e8941e25da4bd504881e9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00731.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Verify that all disks used in previous exercises have returned
+to their original raw state using the <em>lsblk</em> command:</p>
+<p><a href="#R-image-11d746985a0a1d0c3ca98adfd17c9b8f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00732.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11d746985a0a1d0c3ca98adfd17c9b8f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00732.jpeg"></a>{.image2}</p>
+<p>This brings the exercise to an end.</p>
+<p>We will recreate logical volumes in <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0027_split_000.html#page_345">Chapter
+15</a>{.calibre5} and construct file
+system and swap structures in them.</p>
+<p><strong>[Stratis]{#part0026_split_001.html#id_390 .calibre10} Volume-Managing
+File System</strong></p>
+<p>RHEL 8 introduces a new simplified storage management solution called
+<em>Stratis</em>. Stratis capitalizes on three existing matured storage
+components: the <em>device mapper</em> (dm) kernel driver, the LVM solution,
+and the XFS file system. It implements the advanced features of these
+components to deliver file systems that are encapsulated within logical
+volumes. These logical volumes are created and expanded dynamically and
+transparently, hiding the underlying complexity. The Stratis solution
+delivers file systems that are referred to as <em>volume-managing file
+systems</em>. Stratis uses the thin provisioning technology as part of the
+solution.</p>
+<p><a href="#R-image-515cbaa473e11a55fe4771d513e1a4df" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-515cbaa473e11a55fe4771d513e1a4df"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} File systems are explained in <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0027_split_000.html#page_345">Chapter
+15</a>{.calibre5} &ldquo;Local File Systems
+and Swap&rdquo;.</p>
+<p>The central idea surrounding the Stratis solution is a storage <em>pool</em>. A
+storage pool is created using at least one disk or partition, which is
+referred to as a <em>blockdev</em>. There can be a combination of the two in a
+single pool and more can be added as the space requirement grows. The
+total capacity of the pool is the aggregate of the spaces taken from all
+the block devices that are part of the pool. Within a pool, <em>file
+systems</em> can be created, all sharing the entire pool capacity.</p>
+<p><a href="#R-image-a723895a491f08db5a45d2bdb05c9f8f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a723895a491f08db5a45d2bdb05c9f8f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} LVM logical volumes can also be used as
+block devices in a Stratis pool.</p>
+<p><a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0026_split_001.html#id_679">Figure 14-2</a>{.calibre5} provides a
+bird&rsquo;s-eye view of the three major objects&mdash;pool, blockdev, and file
+system&mdash;used in Stratis.</p>
+<p>::: c49
+::: width_
+<a href="#R-image-a9897294aa5db544535ddb0ef665e073" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00733.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a9897294aa5db544535ddb0ef665e073"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00733.jpeg"></a>{.calibre13}
+:::</p>
+<p><strong>Figure 14-2 Stratis Structure</strong>
+:::</p>
+<p>The diagram in <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0026_split_001.html#id_679">Figure 14-2</a>{.calibre5}
+shows a pool containing multiple disks and partitions. The pool capacity
+is the aggregate of all the block storage devices included in the pool,
+and this capacity is shared among all the file systems. Each Stratis
+file system appears to occupy the entire pool capacity exclusively;
+however, they are thinly provisioned. Their actual size grows as the
+amount of data stored in them increases. Stratis takes care of the
+dynamic expansion of the file systems and the underlying volumes as
+needed. As Stratis handles the creation, formatting, and expansion of
+the file systems, they must not be manually initialized or reconfigured.</p>
+<p><strong>Stratis Management Operations and Command</strong></p>
+<p>The primary command to manage Stratis is called <em>stratis</em>. This command
+has a set of subcommands available to perform management operations such
+as creating, viewing, renaming, and destroying pools and file systems,
+and expanding pools.</p>
+<p><a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0026_split_001.html#id_742">Table 14-2</a>{.calibre5} summarizes the
+common Stratis subcommands that are employed to accomplish various
+management tasks.</p>
+<p>::: c49</p>
+<hr>
+<p><strong>Command</strong>   <strong>Description</strong>
+pool          Administers storage pools. Subcommands are available to list, create, rename, expand, and destroy a pool.
+blockdev      Lists block devices
+filesystem    Administers file systems within storage pools. Subcommands are available to list, create, rename, and destroy a file system.</p>
+<hr>
+<p><strong>[Table]{#part0026_split_001.html#id_742} 14-2 Common Stratis
+Subcommands</strong>
+:::</p>
+<p>Stratis runs as a service, so its operational state can be managed with
+the <em>systemctl</em> command. The <em>stratis</em> command interacts with the
+Stratis service to manage the pool and file systems dynamically.</p>
+<p>For each pool added, Stratis creates a subdirectory under the <em>/stratis</em>
+directory matching the pool name. It then creates a symbolic link for
+each file system under that subdirectory to the actual device file
+located in the <em>/dev</em> directory.</p>
+<p>Stratis file systems are not fixed-sized; however, pool space can be
+reserved to assure availability if multiple file systems share a pool.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_391 .calibre10} 14-7: Install
+Software and Activate Stratis</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will install the Stratis software packages, start
+the Stratis service, and mark it for autostart on subsequent system
+reboots.</p>
+<p>1[.]{.c19}Install the packages <em>stratisd</em> and <em>stratis-cli</em>:</p>
+<p><a href="#R-image-220c742022fd55e7207d59c2b2af757e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00734.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-220c742022fd55e7207d59c2b2af757e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00734.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Start the service and enable it to start automatically on
+future system reboots:</p>
+<p><a href="#R-image-a8155b364a85650ed4d9ff2633d778bf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00735.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a8155b364a85650ed4d9ff2633d778bf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00735.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Check the operational status of the service:</p>
+<p><a href="#R-image-a87c5f0e764ae86a4f354fbe5e50370a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00736.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a87c5f0e764ae86a4f354fbe5e50370a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00736.jpeg"></a>{.image2}</p>
+<p>The relevant packages for the Stratis storage management solution are
+installed, and the Stratis service is started and activated. This
+concludes the exercise.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_392 .calibre10} 14-8: Create
+and Confirm a Pool and File System</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will create a Stratis pool and a file system in
+it. You will display information about the pool, file system, and device
+used.</p>
+<p>1[.]{.c19}You allocated 2x1GB disks: <em>sdg</em> and <em>sdh</em> for Stratis
+exercises. Use the <em>lsblk</em> command to confirm their availability:</p>
+<p><a href="#R-image-d28c32497e0527146c58f2ec2f3bdd00" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00737.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d28c32497e0527146c58f2ec2f3bdd00"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00737.jpeg"></a>{.image2}</p>
+<p>The 2x1GB disks are available and unused.</p>
+<p>2[.]{.c19}Create a pool called <em>bookpool</em> using the <em>sdg</em> disk and
+verify the creation:</p>
+<p><a href="#R-image-9186837f685b5dbad78b8e0231da08ff" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00738.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9186837f685b5dbad78b8e0231da08ff"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00738.jpeg"></a>{.image2}</p>
+<p>The specified pool <em>bookpool</em> is created. The second command output
+returns the basic information about the pool, including the number of
+physical devices used in the pool and their sizes, and the amount of
+in-use space in MiBs.</p>
+<p>3[.]{.c19}Display the block device that is used to form the pool:</p>
+<p><a href="#R-image-2a816e281d4d58ced55dbe45c3ddb37d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00739.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2a816e281d4d58ced55dbe45c3ddb37d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00739.jpeg"></a>{.image2}</p>
+<p>The pool <em>bookpool</em> has a single disk of size 1GiB and it is currently
+in use.</p>
+<p>4[.]{.c19}Create a file system called <em>bookfs</em> in the <em>bookpool</em> and
+verify the creation:</p>
+<p><a href="#R-image-237a17b14d6660a11a91497fd8ce35da" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00740.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-237a17b14d6660a11a91497fd8ce35da"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00740.jpeg"></a>{.image2}</p>
+<p>The pool <em>bookpool</em> has a single file system <em>bookfs</em> of used size
+546MiB. Its device file is **stratis<em>bookpool/bookfs</em>. The file system&rsquo;s
+UUID is also displayed.</p>
+<p>5[.]{.c19}Create a directory called <em>/bookfs1</em> and mount the new file
+system on it:</p>
+<p><a href="#R-image-9298ae01aa810e8504498eb09e8654aa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00741.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9298ae01aa810e8504498eb09e8654aa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00741.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Check the pool usage:</p>
+<p><a href="#R-image-fd54d7d429f59edaf9510497e0c9cbc8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00742.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd54d7d429f59edaf9510497e0c9cbc8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00742.jpeg"></a>{.image2}</p>
+<p>Observe how the usage grew from 52MiB to 598MiB. This brings this
+exercise to an end.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_393 .calibre10} 14-9: Expand
+and Rename a Pool and File System</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will expand the Stratis pool <em>bookpool</em> (created
+in <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0026_split_001.html#id_392">Exercise 14-8</a>{.calibre5}) using
+the <em>sdh</em> disk. You will rename the pool and the file system it
+contains.</p>
+<p>1[.]{.c19}Expand the <em>bookpool</em> pool by adding the <em>sdh</em> disk to it:</p>
+<p><a href="#R-image-8d7463c73a158b3c689f5a0cd663b098" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00743.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8d7463c73a158b3c689f5a0cd663b098"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00743.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Verify the new capacity of the pool:</p>
+<p><a href="#R-image-08e39ff0306121726d164862ced8a96c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00744.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-08e39ff0306121726d164862ced8a96c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00744.jpeg"></a>{.image2}</p>
+<p>The addition of another 1GB disk brings the total physical size to 2GiB.</p>
+<p>3[.]{.c19}Change the name of the pool from <em>bookpool</em> to <em>rhcsapool</em> and
+verify:</p>
+<p><a href="#R-image-cfd0bffd8b55f091f22eca718bb87e6f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00745.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cfd0bffd8b55f091f22eca718bb87e6f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00745.jpeg"></a>{.image2}</p>
+<p>The new name is depicted in the first column.</p>
+<p>4[.]{.c19}Change the name of the file system from <em>bookfs</em> to <em>rhcsafs</em>,
+and verify:</p>
+<p><a href="#R-image-51d043cf1c6c8f511d0c48ed3ade102f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00746.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-51d043cf1c6c8f511d0c48ed3ade102f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00746.jpeg"></a>{.image2}</p>
+<p>The file system name is changed and it&rsquo;s reflected in the output of the
+second command. The exercise is completed successfully.</p>
+<p><strong>[Exercise]{#part0026_split_001.html#id_394 .calibre10} 14-10: Destroy
+a File System and Pool</strong></p>
+<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will destroy the Stratis file system and the pool
+that was created, expanded, and renamed in Exercises 14-8 and 14-9. You
+will verify the deletion with appropriate commands.</p>
+<p>1[.]{.c19}The first step in the process is to unmount the file system
+<em>rhcsafs1</em> from its mount point <em>/bookfs1</em>:</p>
+<p><a href="#R-image-26095a4f8b5e7dbe3970dd30b34d338c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00747.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-26095a4f8b5e7dbe3970dd30b34d338c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00747.jpeg"></a>{.image2}</p>
+<p>Unmounting a file system ensures that the file system is not busy.</p>
+<p>2[.]{.c19}Remove the file system <em>rhcsafs</em> from the pool:</p>
+<p><a href="#R-image-e51d4b35f7f0cd01d236933f64fa3302" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00748.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e51d4b35f7f0cd01d236933f64fa3302"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00748.jpeg"></a>{.image2}</p>
+<p>3[.]{.c19}Remove the pool <em>rhcsapool</em> from the system:</p>
+<p><a href="#R-image-c9197d312611be1b24bb2b46d8c16d40" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00749.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c9197d312611be1b24bb2b46d8c16d40"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00749.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Confirm the removal of the file system and the pool:</p>
+<p><a href="#R-image-ce9c100a73dadf4eada476e6499624a5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00750.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ce9c100a73dadf4eada476e6499624a5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00750.jpeg"></a>{.image2}</p>
+<p>The above outputs confirm the removal of the file system and the pool.</p>
+<p>5[.]{.c19}Verify that both <em>sdg</em> and <em>sdh</em> disks used in the previous
+Stratis exercises have returned to their original raw state using the
+<em>lsblk</em> command:</p>
+<p><a href="#R-image-822ee6d4ffaab92f6d336b018ca0a6e8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00751.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-822ee6d4ffaab92f6d336b018ca0a6e8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00751.jpeg"></a>{.image2}</p>
+<p>This concludes the exercise.</p>
+<p>We will recreate Stratis file systems in <a href="/linux/rhcsa/14_advanced_storage_partitioning/#part0027_split_000.html#page_345">Chapter
+15</a>{.calibre5} and add them for
+persistent mounting.</p>
+<p><strong>[Chapter]{#part0026_split_001.html#id_395 .calibre10} Summary</strong></p>
+<p>This chapter explicated two advanced storage management solutions:
+Logical Volume Manager and Stratis. The LVM solution has been around in
+RHEL for decades. The Stratis solution, on the other hand, is recently
+added.</p>
+<p>We discovered how LVM works. We looked at various LVM objects and their
+relationship with one another. We explored LVM management commands and
+common options available with them. We performed a series of exercises
+to demonstrate the creation, expansion, renaming, reduction, and
+deletion of physical volumes, storage pools, and logical volumes.</p>
+<p>The next advanced storage solution we looked at is called Stratis, which
+is a volume-managing file system. Stratis takes advantage of the
+underlying LVM functionality and the device mapper kernel driver to
+create and expand the XFS file system that it holds. Stratis dynamically
+expands the underlying LVM volume without the need for manual
+administrative intervention. We executed a couple of step-by-step
+exercises to explain the creation, growth, renaming, and removal of
+Stratis pools and file systems.</p>
+<p><strong>[Review]{#part0026_split_001.html#id_396 .calibre10} Questions</strong></p>
+<p>1[.]{.c19}The <em>parted</em> utility may be used to create LVM logical
+volumes. True or False?</p>
+<p>2[.]{.c19}What are the two commands that you can use to reduce the
+number of logical extents from a logical volume?</p>
+<p>3[.]{.c19}Stratis uses LVM as the underlying logical volume management
+solution. True or False?</p>
+<p>4[.]{.c19}Provide the command to add physical volumes **dev<em>sdd1</em> and
+**dev<em>sdc</em> to <em>vg20</em> volume group.</p>
+<p>5[.]{.c19}What are the two commands that you can use to add logical
+extents to a logical volume?</p>
+<p>6[.]{.c19}Provide the command to create a volume group called <em>vg20</em> on
+**dev<em>sdd</em> disk with physical extent size 64MB.</p>
+<p>7[.]{.c19}Name the three Stratis objects?</p>
+<p>8[.]{.c19}Provide the command to remove <em>vg20</em> along with logical and
+physical volumes it contains.</p>
+<p>9[.]{.c19}What is the default size of a physical extent in LVM?</p>
+<p>10[.]{.c23}What is the default name for the first logical volume in a
+volume group?</p>
+<p>11[.]{.c23}What is one difference between the <em>pvs</em> and <em>pvdisplay</em>
+commands?</p>
+<p>12[.]{.c23}When can a disk or partition be referred to as a physical
+volume?</p>
+<p>13[.]{.c23}Provide the command to remove <em>webvol</em> logical volume from
+<em>vg20</em> volume group.</p>
+<p>14[.]{.c23}It is necessary to create file system structures in a logical
+volume before it can be used to store files in it. True or False?</p>
+<p>15[.]{.c23}What would the command <em>stratis pool create pool1 <em>dev</em>sdg</em>
+do?</p>
+<p>16[.]{.c23}Physical and logical extents are typically of the same size.
+True or False?</p>
+<p>17[.]{.c23}What is the purpose of the <em>pvremove</em> command?</p>
+<p>18[.]{.c23}What would the command <em>pvcreate <em>dev</em>sdd</em> do?</p>
+<p>19[.]{.c23}A disk or partition can be added to a volume group without
+being initialized. True or False?</p>
+<p>20[.]{.c23}What is the file system type that is created in a Stratis
+file system?</p>
+<p>21[.]{.c23}Provide the command to create a logical volume called
+<em>webvol</em> of size equal to 100 logical extents in <em>vg20</em> volume group.</p>
+<p>22[.]{.c23}A volume group can be created without any physical volume in
+it. True or False?</p>
+<p>23[.]{.c23}A single disk can be used by both <em>parted</em> and LVM solutions
+at the same time. True or False?</p>
+<p>24[.]{.c23}Provide the command to add **dev<em>sdh</em> to an existing pool
+called <em>pool1</em>.</p>
+<p>25[.]{.c23}Provide the command to erase **dev<em>sdd1</em> physical volume from
+<em>vg20</em> volume group.</p>
+<p>26[.]{.c23}A partition can be used as an LVM object. True or False?</p>
+<p>27[.]{.c23}Which command would you use to view the details of a volume
+group and its objects?</p>
+<p><strong>[Answers]{#part0026_split_001.html#id_397 .calibre10} to Review
+Questions</strong></p>
+<p>1[.]{.c19}False.</p>
+<p>2[.]{.c19}The <em>lvreduce</em> and <em>lvresize</em> commands.</p>
+<p>3[.]{.c19}True.</p>
+<p><em>4[.]{.c19}vgextend vg20 <em>dev</em>sdd1 <em>dev</em>sdc</em></p>
+<p>5[.]{.c19}The <em>lvextend</em> and <em>lvresize</em> commands.</p>
+<p><em>6[.]{.c19}vgcreate -s 64 vg20 <em>dev</em>sdd</em></p>
+<p>7[.]{.c19}The three Stratis objects are pool, block device, and file
+system.</p>
+<p><em>8[.]{.c19}vgremove -f vg20</em></p>
+<p>9[.]{.c19}The default PE size is 4MB.</p>
+<p>10[.]{.c23}<em>lvol0</em> is the default name for the first logical volume
+created in a volume group.</p>
+<p>11[.]{.c23}The <em>pvs</em> command lists basic information about physical
+volumes whereas the <em>pvdisplay</em> command shows the details.</p>
+<p>12[.]{.c23}After the <em>pvcreate</em> command has been executed on it
+successfully.</p>
+<p><em>13[.]{.c23}lvremove <em>dev</em>vg20/webvol</em></p>
+<p>14[.]{.c23}True.</p>
+<p>15[.]{.c23}The command provided will create a Stratis pool called
+<em>pool1</em> containing **dev<em>sdg</em> device.</p>
+<p>16[.]{.c23}True.</p>
+<p>17[.]{.c23}The <em>pvremove</em> command is used to remove LVM information from
+a physical volume.</p>
+<p>18[.]{.c23}The command provided will prepare the **dev<em>sdd</em> disk for use
+in a volume group.</p>
+<p>19[.]{.c23}False. A disk or partition must be initialized before it can
+be added to a volume group.</p>
+<p>20[.]{.c23}XFS.</p>
+<p><em>21[.]{.c23}lvcreate -l 100 -n webvol vg20</em></p>
+<p>22[.]{.c23}False.</p>
+<p>23[.]{.c23}True. A single disk can be shared between <em>parted</em>-created
+partitions and LVM.</p>
+<p><em>24[.]{.c23}stratis pool add-data pool1 <em>dev</em>sdh</em></p>
+<p><em>25[.]{.c23}vgreduce vg20 <em>dev</em>sdd1</em></p>
+<p>26[.]{.c23}True.</p>
+<p>27[.]{.c23}The <em>vgdisplay</em> command with the -v option.</p>
+<p><strong>[Do-]{#part0026_split_001.html#id_398 .calibre10}It-Yourself Challenge
+Labs</strong></p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the lab has already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p>Add more storage to <em>server2</em> if required.</p>
+<p><strong>[Lab]{#part0026_split_001.html#id_399 .calibre10} 14-1: Create Volume
+Group and Logical Volumes</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server2</em>, initialize 1x250MB disk for use in
+LVM (use <em>lsblk</em> to identify available disks). Create volume group
+<em>vg100</em> with PE size 16MB and add the physical volume. Create two
+logical volumes <em>lvol0</em> and <em>swapvol</em> of sizes 100MB and 120MB. Use the
+<em>vgs</em>, <em>pvs</em>, <em>lvs</em>, and <em>vgdisplay</em> commands for verification. (Hint:
+Logical Volume Manager).</p>
+<p><strong>[Lab]{#part0026_split_001.html#id_400 .calibre10} 14-2: Expand Volume
+Group and Logical Volume</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server2</em>, create a partition on an available
+250MB disk and initialize it for use in LVM (use <em>lsblk</em> to identify
+available disks). Add the new physical volume to <em>vg100</em>. Expand the
+<em>lvol0</em> logical volume to size 300MB. Use the <em>vgs</em>, <em>pvs</em>, <em>lvs</em>, and
+<em>vgdisplay</em> commands for verification. (Hint: Logical Volume Manager).</p>
+<p><strong>[Lab]{#part0026_split_001.html#id_401 .calibre10} 14-3: Reduce and
+Remove Logical Volumes</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server2</em>, reduce the size of <em>lvol0</em> logical
+volume to 80MB. Then erase both logical volumes <em>swapvol</em> and <em>lvol0</em>.
+Confirm the deletion with <em>vgs</em>, <em>pvs</em>, <em>lvs</em>, and <em>vgdisplay</em> commands.
+(Hint: Logical Volume Manager).</p>
+<p><strong>[Lab]{#part0026_split_001.html#id_402 .calibre10} 14-4: Remove Volume
+Group and Physical Volumes</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server2</em>, remove the volume group and
+uninitialized the physical volumes. Confirm the deletion with <em>vgs</em>,
+<em>pvs</em>, <em>lvs</em>, and <em>vgdisplay</em> commands. Use the <em>lsblk</em> command and
+verify that the disks used for the LVM labs no longer show LVM
+information. (Hint: Logical Volume Manager).</p>
+<p><strong>[Lab]{#part0026_split_001.html#id_403 .calibre10} 14-5: Create Stratis
+Pool</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server2</em>, check to see if Stratis software is
+installed and the Stratis service is enabled and started. Identify 2x1GB
+disks with the <em>lsblk</em> command and ensure they are not in use. Create
+pool <em>strpool</em> on one of the 1GB disks and verify the pool and the block
+device with the <em>stratis</em> command. (Hint: Stratis Volume-Managing File
+System).</p>
+<p><strong>[Lab]{#part0026_split_001.html#id_404 .calibre10} 14-6: Expand and
+Destroy Stratis Pool</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server2</em>, use the other 1GB disk and expand
+<em>strpool</em> using the <em>stratis</em> command. Verify the expansion. Finally,
+remove the entire pool and confirm the deletion. Use the <em>lsblk</em> command
+and verify that the disks used for the Stratis labs no longer show
+Stratis information. (Hint: Stratis Volume-Managing File System).</p>
+<p>[]{#part0027_split_000.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+
+Perfect Dark Mode
+
+        </div>
+        <div class="searchbox default-animation">
+          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+          <label class="a11y-only" for="R-search-by">Search</label>
+          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+        </div>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1712315598" defer></script>
+        <script src="/js/search.js?1712315598" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" checked><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/command_line/" class=""><a class="padding" href="/linux/misc_linux/command_line/">Command Line<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/">Consoling in on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/devices/" class=""><a class="padding" href="/linux/misc_linux/devices/">Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/dns/" class=""><a class="padding" href="/linux/misc_linux/dns/">DNS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/file_permissions/" class=""><a class="padding" href="/linux/misc_linux/file_permissions/">File Permissions<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/getting_started/" class=""><a class="padding" href="/linux/misc_linux/getting_started/">General Linux and History<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/">How to Get Putty to Work in Ubuntu<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/init/" class=""><a class="padding" href="/linux/misc_linux/init/">Init<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/i_o_monitoring/" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/">IO Monitoring<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/">Keyboard Shortcuts<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/kernel/" class=""><a class="padding" href="/linux/misc_linux/kernel/">Linux Kernel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/logging/" class=""><a class="padding" href="/linux/misc_linux/logging/">Logging<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ls/" class=""><a class="padding" href="/linux/misc_linux/ls/">ls<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_troubleshooting/" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/">Network Troubleshooting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_basics/" class=""><a class="padding" href="/linux/misc_linux/network_basics/">Networking in Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/">Open source and Linux Community<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/packages/" class=""><a class="padding" href="/linux/misc_linux/packages/">Packages and Their Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/process_utilization/" class=""><a class="padding" href="/linux/misc_linux/process_utilization/">Process Utilization<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/ps_processes/" class=""><a class="padding" href="/linux/misc_linux/ps_processes/">Processes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/linux_resources/" class=""><a class="padding" href="/linux/misc_linux/linux_resources/">Resources for learning Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/scp_command/" class=""><a class="padding" href="/linux/misc_linux/scp_command/">scp<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/network_sharing/" class=""><a class="padding" href="/linux/misc_linux/network_sharing/">Sharing Resources<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/">Shell<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/">Skills that go with Bash Scripting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/switching_to_linux/" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/">Switching to Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/">Symbols in Bash<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/tar/" class=""><a class="padding" href="/linux/misc_linux/tar/">Tar Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/text_fu/" class=""><a class="padding" href="/linux/misc_linux/text_fu/">Text Editors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/the_filesystem/" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/">The Linux Filesystem<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/user_management/" class=""><a class="padding" href="/linux/misc_linux/user_management/">User Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/wsl2/" class=""><a class="padding" href="/linux/misc_linux/wsl2/">Windows Subsystem for Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/14_advanced_storage_partitioning/" class="active"><a class="padding" href="/linux/rhcsa/14_advanced_storage_partitioning/"><i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/containers/" class=""><a class="padding" href="/linux/containers/">Container Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/misc_linux/run_command_as_another_user/" class=""><a class="padding" href="/linux/misc_linux/run_command_as_another_user/">Run Command as Another User<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/cisco/cli/" class=""><a class="padding" href="/networking/cisco/cli/">Cisco CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/">Cisco CML VMWARE Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/">Cisco Devnet Sandbox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/">Cisco to Juniper Cheat Sheet<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/cisco_vlan_lab/" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/">Cisco VLAN Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/classful_ipv4/" class=""><a class="padding" href="/networking/cisco/classful_ipv4/">Classfull IPv4<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/management/" class=""><a class="padding" href="/networking/cisco/management/">Device Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/device_management_protocols/" class=""><a class="padding" href="/networking/cisco/device_management_protocols/">Device Management Protocols<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_config/" class=""><a class="padding" href="/networking/cisco/dhcp_config/">DHCP Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/">DHCP Snooping and ARP Inspection<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ethernet_lans/" class=""><a class="padding" href="/networking/cisco/ethernet_lans/">Ethernet LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/extended_acls/" class=""><a class="padding" href="/networking/cisco/extended_acls/">Extended ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ip_services/" class=""><a class="padding" href="/networking/cisco/ip_services/">IP Services<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/">IPv6 Addressing and Subnetting<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6/" class=""><a class="padding" href="/networking/cisco/ipv6/">IPv6 Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_config/" class=""><a class="padding" href="/networking/cisco/ipv6_config/">IPv6 Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ipv6_routing/" class=""><a class="padding" href="/networking/cisco/ipv6_routing/">IPv6 Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_fundementals/" class=""><a class="padding" href="/networking/juniper/junos_fundementals/">Junos Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/lan_architecture/" class=""><a class="padding" href="/networking/cisco/lan_architecture/">LAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/l2-etherchannel/" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/">Layer 2 Etherchannel<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree/" class=""><a class="padding" href="/networking/cisco/spanning_tree/">More Spanning Tree<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/nat/" class=""><a class="padding" href="/networking/cisco/nat/">Network Address Translation (NAT)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_concepts/" class=""><a class="padding" href="/networking/cisco/ospf_concepts/">OSPF Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_config/" class=""><a class="padding" href="/networking/cisco/ospf_config/">OSPF Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_lab/" class=""><a class="padding" href="/networking/cisco/ospf_lab/">OSPF Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/">OSPF Network Types and Neighbors<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/qos/" class=""><a class="padding" href="/networking/cisco/qos/">QoS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/rstp/" class=""><a class="padding" href="/networking/cisco/rstp/">Rapid Spanning Tree (RSTP)<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/router_operation/" class=""><a class="padding" href="/networking/cisco/router_operation/">Router Operation<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/routing_in_the_lan/" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/">Routing in the LAN<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/securing_network_devices/" class=""><a class="padding" href="/networking/cisco/securing_network_devices/">Securing Network Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/security_architectures/" class=""><a class="padding" href="/networking/cisco/security_architectures/">Security Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/">Spanning Tree Protocol Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/standard_acls/" class=""><a class="padding" href="/networking/cisco/standard_acls/">Standard ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/static_routes/" class=""><a class="padding" href="/networking/cisco/static_routes/">Static Routes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switch_interfaces/" class=""><a class="padding" href="/networking/cisco/switch_interfaces/">Switch Interfaces<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/switchport_security_config/" class=""><a class="padding" href="/networking/cisco/switchport_security_config/">Switchport Security Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/">TCP/UDP<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/t-shoot_routing/" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/">Troubleshooting Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/vlans/" class=""><a class="padding" href="/networking/cisco/vlans/">VLANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wan_architecture/" class=""><a class="padding" href="/networking/cisco/wan_architecture/">WAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wans_and_ip_routing/" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/">WANs and IP Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/what_is_a_vlan_/" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/">What is a VLAN?<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_architectures/" class=""><a class="padding" href="/networking/cisco/wireless_architectures/">Wireless Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_lan/" class=""><a class="padding" href="/networking/cisco/wireless_lan/">Wireless LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless/" class=""><a class="padding" href="/networking/cisco/wireless/">Wireless Principles<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco/wireless_security/" class=""><a class="padding" href="/networking/cisco/wireless_security/">Wireless Security<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/consoling_in_to_mx80_from_linux/" class=""><a class="padding" href="/networking/juniper/consoling_in_to_mx80_from_linux/">Console into a Juniper MX80 from Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/junos_paste_config/" class=""><a class="padding" href="/networking/juniper/junos_paste_config/">How to Copy and Paste a Junos Config<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/toggle_poe/" class=""><a class="padding" href="/networking/juniper/toggle_poe/">How to Toggle POE on a Juniper Switch<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper/juniper_cli_basics/" class=""><a class="padding" href="/networking/juniper/juniper_cli_basics/">Juniper CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/python/" class=""><input type="checkbox" id="R-section-36a3ed262b315ff04085d7b53a448994" aria-controls="R-subsections-36a3ed262b315ff04085d7b53a448994"><label for="R-section-36a3ed262b315ff04085d7b53a448994"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Python</span></label><a class="padding" href="/python/">Python<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-36a3ed262b315ff04085d7b53a448994" class="morespace collapsible-menu">
+          <li data-nav-id="/python/basics/" class=""><a class="padding" href="/python/basics/">Python Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700"><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/calibre_server/" class=""><a class="padding" href="/tools/calibre_server/">Calibre Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/silverblue/" class=""><a class="padding" href="/tools/silverblue/">Fedora Silverblue<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/githubpageshugo/" class=""><a class="padding" href="/tools/githubpageshugo/">Github Pages with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/iphonemigrate/" class=""><a class="padding" href="/tools/iphonemigrate/">Migrating Away from Iphone<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/scssandsassinhugo/" class=""><a class="padding" href="/tools/scssandsassinhugo/">SCSS &amp; SASS in Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/pandoc/" class=""><a class="padding" href="/tools/pandoc/">Pandoc Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/rsync/" class=""><a class="padding" href="/tools/rsync/">Rsync Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/gitguide/" class=""><a class="padding" href="/tools/gitguide/">Beginners Guide to Git<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/building-a-dashboard/" class=""><a class="padding" href="/tools/obsidian/building-a-dashboard/">Building a Dashboard in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/emailserver/" class=""><a class="padding" href="/tools/emailserver/">Hosting Your Own Email Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/setup/" class=""><a class="padding" href="/tools/obsidian/setup/">My Obsidian Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/how-to-use-the-dataview-plugin/" class=""><a class="padding" href="/tools/obsidian/how-to-use-the-dataview-plugin/">Obsidian Dataview Plugin<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/image_to_text/" class=""><a class="padding" href="/tools/obsidian/image_to_text/">Obsidian Image to Text Extractor<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/tracker-plugin/" class=""><a class="padding" href="/tools/obsidian/tracker-plugin/">Obsidian Tracker Plugin<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/proxmox_setup/" class=""><a class="padding" href="/tools/proxmox_setup/">Proxmox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/serial-in-on-linux/" class=""><a class="padding" href="/tools/serial-in-on-linux/">Serial In on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/how-to-use-templates/" class=""><a class="padding" href="/tools/obsidian/how-to-use-templates/">Using Templates in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/obsidian/yaml-in-obsidian/" class=""><a class="padding" href="/tools/obsidian/yaml-in-obsidian/">YAML in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/writing/" class="alwaysopen"><input type="checkbox" id="R-section-e557a922d533a171e9a204b7e50265e2" aria-controls="R-subsections-e557a922d533a171e9a204b7e50265e2" checked><label for="R-section-e557a922d533a171e9a204b7e50265e2"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e557a922d533a171e9a204b7e50265e2" class="morespace collapsible-menu">
+          <li data-nav-id="/writing/writing-off-the-cuff/" class=""><a class="padding" href="/writing/writing-off-the-cuff/">Writing Off the Cuff<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/booknotes/" class="alwaysopen"><input type="checkbox" id="R-section-1cda010113b426a07bb6aec1adc15086" aria-controls="R-subsections-1cda010113b426a07bb6aec1adc15086" checked><label for="R-section-1cda010113b426a07bb6aec1adc15086"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Book Notes</span></label><a class="padding" href="/booknotes/">Book Notes<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-1cda010113b426a07bb6aec1adc15086" class="morespace collapsible-menu">
+          <li data-nav-id="/booknotes/123magic/" class=""><a class="padding" href="/booknotes/123magic/">123 Magic Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/master_reading_list/" class=""><a class="padding" href="/booknotes/master_reading_list/">Master Reading List<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/14_advanced_storage_partitioning/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1712315598" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1712315598" defer></script>
+    <script>
+      function useMathJax( config ){
+        if( !Object.assign ){
+          
+          return;
+        }
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          loader: {
+            load: ['[tex]/mhchem']
+          },
+          startup: {
+            elements: [
+              '.math'
+            ]
+          },
+          tex: {
+            inlineMath: [
+              ['$', '$'], 
+              ['\\(', '\\)']
+            ]
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1712315598" defer></script>
+    <script src="/js/js-yaml.min.js?1712315598" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1712315598" defer></script>
+  </body>
+</html>

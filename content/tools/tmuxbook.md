@@ -18,7 +18,7 @@ https://git.jharmison.com/james/dotfiles/src/branch/master/.config/alacritty/ala
 ### Productive Mouse-Free Development
 
 
-![images/basics/environment.png](images/image00114.jpeg)
+
 - easily manage a text editor, a database console, and a local web server within a single environment. 
 - split tmux windows into sections, so multiple apps can run side by side.
 - Quickly move between these windows and panes using only the keyboard. 
@@ -53,39 +53,14 @@ book aims to help you work faster.
 - If you  spend some time working with remote servers, you'll be interested in how you can leverage tmux to create a persistent dashboard for managing or monitoring servers.
 ## What's in This Book
 
-This book will show you how to incorporate tmux into your work by taking
-you through its basic features and showing you how you might apply them
-to everyday situations.
+- create sessions, panes, and windows and learn how to perform basic navigation.
+- redefine default keybindings and customize how tmux looks.
+- script your own development environment using the command-line interface, configuration files, and the tmuxinator program.
+- work with text and use the keyboard to move backwards through the buffer, select and copy text, and work with multiple paste buffers.
+- Set up tmux so that you and a coworker can work together on the same codebase from different computers using tmux.
+- Advanced ways to manage windows, panes, and sessions, and how to be even more productive with tmux.
 
-In Chapter 1, [​*Learning the Basics*​](#part0013.xhtml#ch.basics), you'll
-learn about the basic features of tmux as you create sessions, panes,
-and windows and learn how to perform basic navigation.
-
-In Chapter 2, [​*Configuring tmux*​](#part0023.xhtml#ch.config), you'll
-redefine many of the default keybindings and customize how tmux looks.
-
-In Chapter 3, [​*Scripting Customized tmux
-Environments*​](#part0030.xhtml#ch.scripting), you'll script your own
-development environment using the command-line interface, configuration
-files, and the tmuxinator program.
-
-After that, you'll work with text in Chapter 4, [​*Working With Text and
-Buffers*​](#part0036.xhtml#ch.buffers). You'll use the keyboard to move
-backwards through the buffer, select and copy text, and work with
-multiple paste buffers.
-
-Next, in Chapter 5, [​*Pair Programming with
-tmux*​](#part0043.xhtml#ch.pairing), you'll set up tmux so that you and a
-coworker can work together on the same codebase from different computers
-using tmux.
-
-Finally, Chapter 6, [​*Workflows*​](#part0050.xhtml#ch.workflows) covers
-more advanced ways to manage windows, panes, and sessions, and shows you
-how to be even more productive with tmux.
-
-[]{#part0009.xhtml}
-
-## Changes in the Second Edition {#part0009.xhtml#d24e189}
+## Changes in the Second Edition 
 
 This new edition has some notable changes from the first edition. tmux
 2.1 and 2.2 introduced several backwards-incompatible changes that this
@@ -93,67 +68,7 @@ edition addresses; this edition also introduces some new options. And
 tmux is now more popular than it was, so there are more tools and tricks
 you can use to improve your workflow. Here's what's new:
 
--   All examples require at least tmux 2.3.
-
--   This book now covers installation on Windows 10, where tmux is
-    supported under Microsoft's Windows Subsystem for Linux.
-
--   Chapter 2, [​*Configuring tmux*​](#part0023.xhtml#ch.config) includes
-    more options for identifying the active pane, uses more updated
-    methods for controlling tmux's visual styles, and removes some
-    outdated configuration options that no longer work.
-
--   Chapter 3, [​*Scripting Customized tmux
-    Environments*​](#part0030.xhtml#ch.scripting) contains updated
-    instructions for Tmuxinator and its new configuration format, as
-    well as information on how to export tmux scripts from Tmuxinator.
-
--   Chapter 4, [​*Working With Text and
-    Buffers*​](#part0036.xhtml#ch.buffers) has an updated method for
-    getting text to and from system clipboards on Linux and Mac.
-
--   Chapter 5, [​*Pair Programming with
-    tmux*​](#part0043.xhtml#ch.pairing) now includes instructions on
-    generating an SSH key, and discusses how to use [tmate]{.cf .ic} as
-    a quick alternative.
-
--   Chapter 6, [​*Workflows*​](#part0050.xhtml#ch.workflows) contains
-    several new sections:
-
-    -   [​*Opening a Pane in the Current
-        Directory*​](#part0051.xhtml#sec.opening.pane.in.current.dir)
-
-    -   [​*Keeping Specific Configuration
-        Separate*​](#part0053.xhtml#sec.specific.config)
-
-    -   [​*Integrating Seamlessly with
-        Vim*​](#part0053.xhtml#sec.vim.integration)
-
-    -   [​*Extending tmux with Plugins*​](#part0054.xhtml#sec.plugins)
-
-[]{#part0010.xhtml}
-
-## What You Need {#part0010.xhtml#d24e237}
-
-In order to use tmux, you'll need a computer that runs Mac OS X, Windows
-10 with Bash support, or a flavor of Unix or Linux. Unfortunately, tmux
-doesn't run under the regular Windows Command Prompt or Powershell, but
-it will run great on a virtual machine, VPS, or shared hosting
-environment running Linux or FreeBSD.
-
-You should also have a good grasp of using command-line tools on a Linux
-or Unix system. We'll use the Bash shell in this book, and being
-comfortable with creating directories and text files, as well as some
-basic scripting, will help you move more quickly through the examples.
-
-While not required, experience with text editors such as Vim or Emacs
-might be helpful. tmux works much the same way, and it has some
-predefined keyboard shortcuts that you may find familiar if you use one
-of these text editors.
-
-[]{#part0011.xhtml}
-
-## Conventions {#part0011.xhtml#sec.ch1.conventions}
+## Conventions 
 
 tmux is a tool that's driven by the keyboard. You'll encounter many
 keyboard shortcuts throughout the book. Since tmux supports both
@@ -162,1112 +77,474 @@ which key the book is referencing.
 
 To keep it simple, these are the conventions I've used.
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`b`{.cf
-    .keystroke} means "press the `Ctrl`{.cf .keystroke
-    style="font-variant:small-caps"} and `b`{.cf .keystroke} keys
+-   `Ctrl`-`b`means "press the `Ctrl``b` keys
     simultaneously."
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`R`{.cf
-    .keystroke style="font-variant:small-caps"} means you'll press the
-    `Ctrl`{.cf .keystroke style="font-variant:small-caps"} and `r`{.cf
-    .keystroke} keys simultaneously, but you'll need to use the
-    `Shift`{.cf .keystroke style="font-variant:small-caps"} key to
-    produce the capital "R." I won't explicitly show the `Shift`{.cf
-    .keystroke style="font-variant:small-caps"} key in any of these
+-   `Ctrl`-`R` means you'll press the
+    `Ctrl`and `r`keys simultaneously, but you'll need to use the
+    `Shift` key to produce the capital "R." I won't explicitly show the `Shift` key in any of these
     keystrokes.
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`b`{.cf
-    .keystroke} `d`{.cf .keystroke} means "press the `Ctrl`{.cf
-    .keystroke style="font-variant:small-caps"} and `b`{.cf .keystroke}
-    keys simultaneously, then release, and then press `d`{.cf
-    .keystroke}." In Chapter 1, [​*Learning the
-    Basics*​](#part0013.xhtml#ch.basics), you'll learn about the [command
-    prefix]{.firstuseinline}, which will use this notation, but
-    shortened to `Prefix`{.cf .keystroke
-    style="font-variant:small-caps"} `d`{.cf .keystroke}.
+-   `Ctrl`-`b` `d` means "press the `Ctrl` and `b`
+    keys simultaneously, then release, and then press `d`
+    In Chapter 1, , you'll learn about the [command
+    prefix], which will use this notation, but
+    shortened to `Prefix` `d`
 
 -   I'll show some terminal commands throughout the book, like
 
-      ------------------ -------------------------------------------
-      ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​
-      ------------------ -------------------------------------------
+`tmux ​​new-session`
 
-    The dollar sign represents the prompt from the Bash shell session.
-    You won't need to type it when you type the command. It just denotes
-    that this is a command you should type.
+you can configure tmux with a configuration file called tmux.conf 
 
--   Finally, as you'll see in Chapter 2, [​*Configuring
-    tmux*​](#part0023.xhtml#ch.config), you can configure tmux with a
-    configuration file called [tmux.conf]{.cf .filename}. Filenames
-    starting with a period don't show up in directory listings on most
-    systems or text editors by default. Code listings in this book have
-    a header that points to the file in the book's source code download,
-    like this:
 
-    ::: livecodelozenge
-    [config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
-    :::
+config/tmux.conf
 
-      ------------------ -----------------------------------------
-      ​[ ]{.codeprefix}   ​*\# Setting the prefix from C-b to C-a*​
-      ​[ ]{.codeprefix}   set -g prefix C-a
-      ------------------ -----------------------------------------
+```
+# Setting the prefix from C-b to C-a
+​set -g prefix C-a
+```
 
-    To make it easy for you to find the file in the source code
-    download, I've named the example file [tmux.conf]{.cf .filename},
+To make it easy for you to find the file in the source code download, I've named the example file [tmux.conf] ,
     without the leading period. The headers above the code listing
     reference that file.
 
-[]{#part0012.xhtml}
+## Chapter 1 Learning the Basics
 
-## Online Resources {#part0012.xhtml#d24e361}
-
-The book's
-website^[\[1\]](#part0012.xhtml#FOOTNOTE-1){#part0012.xhtml#FNPTR-1
-.footnote}^ has links to an interactive discussion forum as well as a
-place to submit errata for the book. You'll also find the source code
-for the configuration files and scripts we use in this book. You can
-click the box above the code excerpts to download that source code
-directly.
-
-Working with tmux has made me much more productive, and I'm excited to
-share my experiences with you. Let's get started by installing tmux and
-working with its basic features.
-
-::: footnotes
-#### Footnotes
-
-[\[1\]](#part0012.xhtml#FNPTR-1){#part0012.xhtml#FOOTNOTE-1}
-
-:   <http://pragprog.com/titles/bhtmux2>
-:::
-
-::: {.copyright style=";color:black;"}
-Copyright © 2016, The Pragmatic Bookshelf.
-:::
-
-[]{#part0013.xhtml}
-
-# [ Chapter 1]{.chapter-number} [Learning the Basics]{.chapter-name} {#part0013.xhtml#ch.basics .chapter-title}
-
-tmux can be an incredible productivity booster once you get the hang of
-it. In this chapter, you'll get acquainted with tmux's basic features as
-you manage applications within sessions, windows, and panes. These
-simple concepts make up the foundation of what makes tmux an amazing
-environment for developers and system administrators alike.
-
-But before you can learn how to use these basic features, you need to
-- [ ] get tmux installed.
-
-[]{#part0014.xhtml}
-
-## Installing tmux {#part0014.xhtml#sec.Insalling.tmux}
+- incredible productivity booster 
+- manage applications within sessions, windows, and panes. 
+### Installing tmux 
 
 You can install tmux in one of two ways: using a package manager for
 your operating system, or building tmux from source.
 
-Whichever method you choose, you'll want to ensure you install tmux
-version 2.2 or higher. Earlier versions of tmux don't support some of
-the features we're going to cover in this book, or have configuration
-that's incompatible.
+- you install tmux version 2.2 or higher. 
 
-### Installing on a Mac
+View tmux version: 
+`tmux -V`
+### Installing on Linux 
 
-The easiest way to install tmux on the Mac is with
-Homebrew.^[\[2\]](#part0022.xhtml#FOOTNOTE-2){#part0014.xhtml#FNPTR-2
-.footnote}^
+`sudo dnf install tmux`
+ 
+### Starting tmux 
 
-First, install Xcode through the Mac App Store. Once Xcode is installed,
-open a new terminal and run the command
+Start tmux:
+`​tmux`​
 
-  ------------------ --------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**xcode-select**​​ ​​**\--install**​
-  ------------------ --------------------------------------------------
-
-to install the command-line tools that Homebrew needs.
-
-Next, install Homebrew by following the instructions on the Homebrew
-website.
-
-Finally, install tmux with the following terminal command:
-
-  ------------------ -------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**brew**​​ ​​**install**​​ ​​**tmux**​
-  ------------------ -------------------------------------------------
-
-To ensure that tmux is installed properly, and to check that you have
-the correct version, execute this command from your terminal:
-
-  ------------------ ----------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**-V**​
-  ​[ ]{.codeprefix}   tmux 2.3
-  ------------------ ----------------------------------
-
-### Installing on Windows 10
-
-In August of 2016, Microsoft released an update to Windows 10 that
-brings the Bash shell to Windows. This shell is powered by Ubuntu and
-supports tmux. To use it, first put your machine in Developer mode. Open
-the Settings app, select Update & Security, and then choose For
-Developers. Enable the "Developer Mode" option.
-
-Next, open the Control Panel and select Programs. Then click Turn
-Windows Features On Or Off. Locate and enable the option for "Windows
-Subsystem For Linux." Then reboot your computer.
-
-When the computer reboots, open a Command Prompt and type
-
-  ------------------ -------------------------------
-  ​[ ]{.codeprefix}   ​[C:\\\>]{.coprompt}​​ ​​**bash**​
-  ------------------ -------------------------------
-
-You'll be prompted to install Bash from the Windows Store. It's a free
-download that takes several minutes to download and extract, but in a
-short time you'll be ready to install tmux.
-
-Once Bash is installed, move on to the next section, as you'll install
-tmux from source as if you were using Ubuntu.
-
-### Installing on Linux {#part0014.xhtml#sec.Installing.From.Source}
-
-On Linux, your best bet is to install tmux by downloading the source
-code and compiling it yourself. Package managers don't always have the
-most recent version of tmux available. The process of installing tmux is
-the same on all platforms. You'll need the GCC compiler, and
-[libevent]{.cf .ic} and [ncurses]{.cf .ic}, which tmux depends on.
-
-For Ubuntu, you can install all of these with the [apt]{.cf .ic} package
-manager:
-
-  ------------------ ---------------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**sudo**​​ ​​**apt-get**​​ ​​**install**​​ ​​**build-essential**​​ ​​**libevent-dev**​​ ​​**libncurses-dev**​
-  ------------------ ---------------------------------------------------------------------------------------------------------------
-
-Once you have the compilers and prerequisites installed, grab the tmux
-source code and download
-it.^[\[3\]](#part0022.xhtml#FOOTNOTE-3){#part0014.xhtml#FNPTR-3
-.footnote}^ Untar the downloaded version and install it like this:
-
-  ------------------ ---------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tar**​​ ​​**-zxvf**​​ ​​**tmux-2.3.tar.gz**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**cd**​​ ​​**tmux-2.3**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**./configure**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**make**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**sudo**​​ ​​**make**​​ ​​**install**​
-  ------------------ ---------------------------------------------------------
-
-You can test out the installation by executing this from the terminal,
-which returns the currently installed version of tmux:
-
-  ------------------ ----------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**-V**​
-  ​[ ]{.codeprefix}   tmux 2.3
-  ------------------ ----------------------------------
-
-Now that you have tmux properly installed, let's explore the core
-features of tmux, starting with a basic session.
-
-[]{#part0015.xhtml}
-
-## Starting tmux {#part0015.xhtml#d24e590}
-
-Starting tmux is as easy as typing
-
-  ------------------ --------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​
-  ------------------ --------------------------
 
 from a terminal window. You'll see something that looks like the
 following image appear on your screen.
 
-::: ss
-![images/basics/tmux_basic.png](images/image00115.jpeg){#d24e604}
-:::
+![](Pasted%20image%2020240403103153.png)
 
-This is a tmux "session," and it works just like your normal terminal
-session. You can issue any terminal command you'd like, and everything
-will work as expected.
 
-To close the tmux session, simply type
 
-  ------------------ --------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**exit**​
-  ------------------ --------------------------
+This is a tmux "session," and it works just like your normal terminal session. 
 
-in the session itself. This will close tmux and then return you to the
-standard terminal.
+You can issue any terminal command you'd like, and everything will work as expected.
 
-But, unless you're only using tmux for a very brief period, this isn't
-the best way to work with sessions in tmux. You can instead create
-"named sessions" that you can then identify and work with later.
+To close the tmux session:
+`exit`​
 
-### Creating Named Sessions {#part0015.xhtml#sec.Creating.Named.Sessions}
+You can instead create "named sessions" that you can then identify and work with later.
 
-You can have multiple sessions on a single computer, and you'll want to
-be able to keep them organized. For example, you might have one session
-for each application you're developing, or a session for work and a
-session for your cool side project. You can keep these sessions
-organized by giving each session you create its own unique name. Try it
-out right now. Create a named session called "basic" with the following
-command:
+### Creating Named Sessions 
 
-  ------------------ --------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-s**​​ ​​**basic**​
-  ------------------ --------------------------------------------------------------
+You can have multiple sessions on a single computer, and you'll want to be able to keep them organized. For example, you might have 
+- one session for each application you're developing, or a 
+- session for work and a
+- session for your cool side project. You can 
+- keep these sessions organized by giving each session you create its own unique name. 
 
-You can shorten this command to
+Create a named session called "basic":
+`tmux​​ new-session -s ​​basic`​
 
-  ------------------ ------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**basic**​
-  ------------------ ------------------------------------------------------
+Shortened version:
+`tmux new -s basic​`
 
-When you enter this command, you'll be brought into a brand-new tmux
-session, but you won't really notice anything special or different than
-if you started things up normally. If you typed [exit]{.cf .ic}, you'd
-just be right back at the terminal. Named sessions come in handy when
-you want to leave tmux running in the background, which we'll discuss
-shortly. But before you continue, type
+Named sessions come in handy when you want to leave tmux running in the background
 
-  ------------------ --------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**exit**​
-  ------------------ --------------------------
+### The Command Prefix 
 
-to exit tmux.
+- use a command prefix to tell tmux that the command we're typing is for tmux and not for the underlying application. 
+- `Ctrl-b` is the default command prefix.
+- Prefix tmux commands with the command prefix
+- Hit the prefix keys, release, then press the command key.
 
-Before we look at how to work with tmux sessions and run programs in the
-background, let's talk about how we send commands to tmux.
+Open the tmux clock: (press enter to dismiss the clock)
+`prefix-t`
 
-[]{#part0016.xhtml}
+![](Pasted%20image%2020240403135641.png)
 
-## The Command Prefix {#part0016.xhtml#sec.The.Prefix}
+Detach from a session:
+`Prefix-d`
 
-Since our command-line programs run inside tmux, we need a way to tell
-tmux that the command we're typing is for tmux and not for the
-underlying application. The `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`b`{.cf .keystroke} combination does
-just that. This combination is called the [command
-prefix]{.firstuseinline}.
+- you can remap the prefix to an easier combination
+### Detaching and Attaching Sessions 
+- you can run programs then detach and the programs will run in the background.
+-  when you detach from a tmux session, you're not actually closing tmux. 
+- You can then "attach" to the session and pick up where you left off. 
 
-You prefix each tmux command with this key combination. To get a feel
-for how this works, open tmux again:
+Within a tmux session, start top:
+`top`​
 
-  ------------------ --------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​
-  ------------------ --------------------------
+![](Pasted%20image%2020240403141320.png)
 
-Then, inside of tmux, press `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`b`{.cf .keystroke}, then press `t`{.cf
-.keystroke}. A large clock will appear on the screen.
+Detach from the tmux session: 
+`prefix-d`
 
-::: ss
-![images/basics/clock.png](images/image00116.jpeg){#d24e724}
-:::
+Close your terminal window.
 
-It's important to note that you don't hold all these keys down together.
-Instead, first press `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`b`{.cf .keystroke} simultaneously,
-release those keys, and then immediately press the key for the command
-you want to send to tmux.
+#### Reattaching to Existing Sessions 
 
-Throughout the rest of this book, I'll use the notation `Prefix`{.cf
-.keystroke style="font-variant:small-caps"}, followed by the shortcut
-key for tmux commands, like `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `d`{.cf .keystroke} for detaching from
-a session. In Chapter 2, [​*Configuring
-tmux*​](#part0023.xhtml#ch.config), you'll remap the prefix to an easier
-combination, but until then, you'll use the default of `Ctrl`{.cf
-.keystroke style="font-variant:small-caps"}-`b`{.cf .keystroke} whenever
-you see `Prefix`{.cf .keystroke style="font-variant:small-caps"}.
+Open a terminal window.
 
-Press the `Enter`{.cf .keystroke style="font-variant:small-caps"} key to
-dismiss the clock, and exit tmux by typing [exit]{.cf .ic}. Now let's
-look at how to run programs in the background.
+List existing tmux sessions:
+`tmux list-sessions`​
 
-[]{#part0017.xhtml}
+Shortened version of above:
+`tmux​​ ​​ls`​
 
-## Detaching and Attaching Sessions {#part0017.xhtml#sec.Detatching.and.Attaching.Sessions}
+Attach to the session:
+`tmux attach`​
 
-One of tmux's biggest advantages is that you can fire it up, start up
-programs or processes inside the tmux environment, and then leave it
-running in the background by "detaching" from the session.
+Detach from the session again (prefix-d) and create a new session in the background:
 
-If you close a regular terminal session, all the programs you have
-running in that session are killed off. But when you detach from a tmux
-session, you're not actually closing tmux. Any programs you started up
-in that session will stay running. You can then "attach" to the session
-and pick up where you left off. To demonstrate, let's create a new named
-tmux session, start up a program, and detach from the session. First,
-create the session:
+`tmux​​ ​​new ​​-s​​ ​​second_session​​ ​​-d`
 
-  ------------------ ------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**basic**​
-  ------------------ ------------------------------------------------------
 
-Then, within the tmux session, start an application called [top]{.cf
-.ic}, which monitors our memory and CPU usage, like this:
+List sections again and you will see both:
+`tmux ​​ls`
 
-  ------------------ -------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**top**​
-  ------------------ -------------------------
+Attach to a specific section (-t)
+`tmux ​​attach ​​-t ​​second_session`
 
-You'll have something that looks like the following figure running in
-your terminal.
-
-::: ss
-![images/basics/top.png](images/image00117.jpeg){#d24e805}
-:::
-
-Now, detach from the tmux session by pressing `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `d`{.cf .keystroke}. This returns you
-to your regular terminal prompt.
-
-Now, let's look at how to get back in to that tmux session we left
-running. But before we do, close your terminal window.
-
-### Reattaching to Existing Sessions {#part0017.xhtml#sec.Reattaching.to.Existing.Sessions}
-
-We've set up a tmux session, fired up a program inside the session,
-detached from it, and closed our terminal session, but the tmux session
-is still chugging along, along with the [top]{.cf .ic} application we
-launched.
-
-You can list existing tmux sessions using the command
-
-  ------------------ ---------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**list-sessions**​
-  ------------------ ---------------------------------------------
-
-in a new terminal window. You can shorten the command to this:
-
-  ------------------ ----------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**ls**​
-  ------------------ ----------------------------------
-
-The command shows that there's one session currently running:
-
-  ------------------ ----------------------------------------------------------------
-  ​[ ]{.codeprefix}   basic: 1 windows (created Tue Aug 23 16:58:26 2016) \[105x25\]
-  ------------------ ----------------------------------------------------------------
-
-To attach to the session, use the [attach]{.cf .ic} keyword. If you only
-have one session running, you can simply use
-
-  ------------------ --------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​
-  ------------------ --------------------------------------
-
-and you'll be attached to the session again. Things get more tricky if
-you have more than one session running. Detach from the [basic]{.cf .ic}
-session with `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`d`{.cf .keystroke}.
-
-Now create a new tmux session in the background using the command
-
-  ------------------ -----------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**second_session**​​ ​​**-d**​
-  ------------------ -----------------------------------------------------------------------
-
-This creates a new session, but doesn't attach to the session
-automatically.
-
-Now list the sections, and you'll see two sessions running:
-
-  ------------------ -------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**ls**​
-  ​[ ]{.codeprefix}   basic: 1 windows (created Tue Aug 23 16:58:26 2016) \[105x25\]
-  ​[ ]{.codeprefix}   second_session: 1 windows (created Tue Aug 23 17:49:21 2016) \[105x25\]
-  ------------------ -------------------------------------------------------------------------
-
-You can attach to the session you want by using the [-t]{.cf .ic} flag,
-followed by the session name. Run the following command:
-
-  ------------------ ------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**second_session**​
-  ------------------ ------------------------------------------------------------------
-
-This attaches you to the [second_session]{.cf .ic} tmux session. You can
-detach from this session just as you did previously, using `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `d`{.cf .keystroke}, and
-then attach to a different session. In [​*Moving Between
-Sessions*​](#part0052.xhtml#sec.Moving.Between.Sessions), you'll see some
-other ways to move between active sessions. But for now, let's remove
-the active sessions.
+- you can detach then attach the other session this way. Or switch between sessions using a faster way described later.
 
 ### Killing Sessions
 
-You can type [exit]{.cf .ic} within a session to destroy the session,
-but you can also kill off sessions with the [kill-session]{.cf .ic}
-command. It works just like [tmux attach]{.cf .ic}:
+- type exit or use the kill-session command
 
-  ------------------ ------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**kill-session**​​ ​​**-t**​​ ​​**basic**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**kill-session**​​ ​​**-t**​​ ​​**second_session**​
-  ------------------ ------------------------------------------------------------------------
+`tmux ​​kill-session​ ​​-t ​​basic​
+​​`kill-session​​ -t​​ ​second_session​`
 
-This is useful for situations where a program in a session is hanging.
+### Working with Windows 
 
-If you list the sessions again, you'll get this message:
+- run multiple, simultaneous commands within a tmux session. 
+- keep these organized with windows
+- Can create many windows and they will persist when session is detached
 
-  ------------------ ---------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**ls**​
-  ​[ ]{.codeprefix}   no server running on /tmp/tmux-1002/default
-  ------------------ ---------------------------------------------
+Create a new session that has two windows. one with a normal prompt and the other with top. 
 
-Since there are no tmux sessions running, tmux itself isn't running, so
-it isn't able to handle the request.
+Create a named session called "windows," like this: (-n names the first window)
 
-Now that you know the basics of creating and working with sessions,
-let's look at how we can work with multiple programs within a single
+`tmux ​​new ​​-s ​​windows ​​-n ​​shell`
+
+
+Add a window to this session.
+### Creating and Naming Windows 
+
+Create a window in a current session:
+`Prefix` `c`
+
+Creating a window like this automatically brings the new window into focus. From here, you
+can start up another application. Let's 
+
+start top in this new window:
+ `top`
+
+- second window now appears to have the name "top." 
+- window name defaults to program running if a name wasn't specified.
+
+To rename a window, press `Prefix` `,`, type the name and press enter. Rename the window to "Processes."
+
+#### Moving Between Windows 
+
+- `Prefix` `n` (next window) cycles through the windows you have open. 
+
+- `Prefix` `p` (previous) go to the previous window.
+- Window numbers start at 0 by default (You can change this)
+- `Prefix` `0` Jump to a specific window. '0' in this case
+- `Prefix` `w` display a visual menu of windows to select one.
+- `Prefix` `f` find a window that contains a string of text. 
+- close a window with exit or `Prefix` `&` (previous windows becomes active)
+- close all the windows in the session to completely kill the session.
+
+### Working with Panes 
+
+- divide a single session into panes.
+
+Create a new tmux session called "panes":
+​​`tmux​​ ​​new​​ ​​-s​ ​​panes`​
+
+- can split windows vertically or horizontally. 
+
+
+
+- `Prefix` `%` window will divide down the middle and start up a second terminal session in the new pane.
+- the focus will move to this new pane
+- `Prefix` `"` split this new pane in half horizontally. 
+- By default, new panes split the existing pane in half evenly.
+
+- `Prefix` `o` Cycle through panes. 
+- `Prefix` `Up` `down` `left` or `right` Move around panes using arrow keys
+
+Split the window in half vertically first, and then horizontally, creating one large pane on the left and two smaller panes on the right: 
+`Prefix` `%` `Prefix` `"`
+
+![](Pasted%20image%2020240403150606.png)
+### Pane Layouts 
+
+- resize a pane using incremental resizing or templates.
+- Resizing panes incrementally using the default keybindings is quite awkward. 
+- Later we'll define some shortcuts to make resizing panes easier. 
+
+For now, we'll use one of tmux's several default pane layouts:
+
+even-horizontal 
+- stacks all panes horizontally, left to right.
+
+even-vertical 
+- stacks all panes vertically, top to bottom.
+
+main-horizontal 
+- creates one larger pane on the top and smaller panes underneath.
+
+main-vertical 
+- creates one large pane on the left side of the screen, and stacks the rest of the panes vertically on the right.
+
+tiled a
+	- arranges all panes evenly on the screen.
+
+`Prefix` `Spacebar` cycle through the layouts 
+
+### Closing Panes 
+
+- Type exit while in a pane to close it
+- `Prefix` `x` Kill a pane and closes the window if there's only one pane in that window.
+
+### Working with Command Mode 
+
+execute tmux commands two ways: 
+	from the terminal itself 
+	from the command area in the tmux status line. 
+
+tmux's Command mode 
+
+`Prefix` `:` enter command mode from within a running tmux
 session.
 
-[]{#part0018.xhtml}
+Create a new window with the name "console" while in command mode:
+`new-window -n console`
 
-## Working with Windows {#part0018.xhtml#sec.Working.with.Windows}
+launch a new window named "processes" that starts top while in command mode:
+`new-window -n processes "top"`
 
-It's possible, and very common, to run multiple, simultaneous commands
-within a tmux session. We can keep these organized with windows, which
-are similar to tabs in modern graphical terminal emulators or web
-browsers.
+- if you exit the top by pressing `q` the tmux window you
+created will also close. 
+- You can use configuration settings to get around this
+- if you want the window to persist,  create it without specifying an initial command, and then execute your  command in the new window.
 
-When we create a new tmux session, the environment sets up an initial
-window for us. We can create as many as we'd like, and they will persist
-when we detach and reattach.
+- You can use Command mode to create new windows, new panes, or new sessions, or even set other environmental options.
 
-Let's create a new session that has two windows. The first window will
-have our normal prompt, and the second window will run the [top]{.cf
-.ic} command. Create a named session called "windows," like this:
+### What's Next? 
 
-  ------------------ ---------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**windows**​​ ​​**-n**​​ ​​**shell**​
-  ------------------ ---------------------------------------------------------------------------
+`Prefix` `?` get a list of predefined tmux keybindings and  associated commands.
 
-By using the [-n]{.cf .ic} flag, we tell tmux to name the first window
-so we can identify it easily.
+- think about how you can create different environments for your work. If you're monitoring servers, you could use tmux panes to create a dashboard that shows your various monitoring scripts and log files.
 
-Now let's add a window to this session.
-
-### Creating and Naming Windows {#part0018.xhtml#sec.Creating.Windows}
-
-To create a window in a current session, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `c`{.cf .keystroke}. Creating a window
-like this automatically brings the new window into focus. From here, you
-can start up another application. Let's start [top]{.cf .ic} in this new
-window.
-
-  ------------------ -------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**top**​
-  ------------------ -------------------------
-
-The first window has a name you defined, called "shell," but the second
-window now appears to have the name "top." This window's name changes
-based on the app that's currently running because you never gave it a
-default name when you created it. So let's give this window a proper
-name.
-
-To rename a window, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} followed by `,`{.cf .keystroke
-style="font-variant:small-caps"} (a comma), and the status line changes,
-letting you rename the current window. Go ahead and rename the window to
-"Processes."
-
-You can create as many windows in a tmux session as you'd like. But once
-you have more than one, you need to be able to move between them.
-
-### Moving Between Windows {#part0018.xhtml#sec.Moving.Between.Windows}
-
-So far, you've created two windows in your environment, and you can
-navigate around these windows in several ways. When you only have two
-windows, you can quickly move between windows with `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `n`{.cf .keystroke}, for
-"next window." This cycles through the windows you have open. Since you
-only have two windows right now, this just toggles between them.
-
-You can use `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`p`{.cf .keystroke} to go to the [previous]{.emph} window.
-
-By default, windows in tmux each have a number, starting at 0. You can
-quickly jump to the first window with `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `0`{.cf .keystroke
-style="font-variant:small-caps"}, and the second window with
-`Prefix`{.cf .keystroke style="font-variant:small-caps"} `1`{.cf
-.keystroke style="font-variant:small-caps"}. This zero-based array of
-windows isn't always intuitive, and in Chapter 2, [​*Configuring
-tmux*​](#part0023.xhtml#ch.config), you'll see how to make the list of
-windows start at one instead of zero.
-
-If you end up with more than nine windows, you can use `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `w`{.cf .keystroke} to
-display a visual menu of your windows so you can select the one you'd
-like. You can also use `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `f`{.cf .keystroke} to find a window
-that contains a string of text. Typing the text and pressing `Enter`{.cf
-.keystroke style="font-variant:small-caps"} displays a list of windows
-containing that text.
-
-From here, you can continue creating new windows and launching programs.
-When you detach from your session and reattach later, your windows will
-all be where you left them.
-
-To close a window, you can either type "exit" into the prompt in the
-window, or you can use `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `&`{.cf .keystroke
-style="font-variant:small-caps"}, which displays a confirmation message
-in the status bar before killing off the window. If you accept, your
-previous window comes into focus. To completely close out the tmux
-session, you have to close all the windows in the session.
-
-Creating windows is great, but we can make tmux even more useful by
-splitting a window into panes.
-
-[]{#part0019.xhtml}
-
-## Working with Panes {#part0019.xhtml#sec.Working.with.Panes}
-
-Having programs in separate windows is fine for stuff we don't mind
-having out of the way. But with tmux, we can divide a single session
-into panes.
-
-Create a new tmux session called "panes" so we can experiment with how
-panes work. Exit any existing tmux sessions and create a new one like
-this:
-
-  ------------------ ------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**panes**​
-  ------------------ ------------------------------------------------------
-
-We can split windows vertically or horizontally. Let's split the window
-in half vertically first, and then horizontally, creating one large pane
-on the left and two smaller panes on the right, as shown in the
-[figure](#part0019.xhtml#ibpp).
-
-<div>
-
-<div>
-
-![images/basics/panes.png](images/image00118.jpeg){#ibpp}
-
-</div>
-
-</div>
-
-In the tmux session, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `%`{.cf .keystroke
-style="font-variant:small-caps"}, and the window will divide down the
-middle and start up a second terminal session in the new pane. In
-addition, the focus will move to this new pane. Pressing `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `"`{.cf .keystroke
-style="font-variant:small-caps"} (double quote) will split this new pane
-in half horizontally. By default, new panes split the existing pane in
-half evenly.
-
-To cycle through the panes, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `o`{.cf .keystroke}. You can also use
-`Prefix`{.cf .keystroke style="font-variant:small-caps"}, followed by
-the `Up`{.cf .keystroke style="font-variant:small-caps"}, `Down`{.cf
-.keystroke style="font-variant:small-caps"}, `Left`{.cf .keystroke
-style="font-variant:small-caps"}, or `Right`{.cf .keystroke
-style="font-variant:small-caps"} keys to move around the panes.
-
-With just a couple keystrokes, we've divided one window into a workspace
-with three panes. Let's look at how we can rearrange these panes with
-layouts.
-
-### Pane Layouts {#part0019.xhtml#sec.Pane.Layouts}
-
-We can resize a pane, either using incremental resizing or by using
-templates. Resizing panes incrementally using the default keybindings is
-quite awkward. In Chapter 2, [​*Configuring
-tmux*​](#part0023.xhtml#ch.config), we'll define some shortcuts to make
-resizing panes easier. For now, we'll use one of tmux's several default
-pane layouts:
-
--   [even-horizontal]{.cf .ic} stacks all panes horizontally, left to
-    right.
-
--   [even-vertical]{.cf .ic} stacks all panes vertically, top to bottom.
-
--   [main-horizontal]{.cf .ic} creates one larger pane on the top and
-    smaller panes underneath.
-
--   [main-vertical]{.cf .ic} creates one large pane on the left side of
-    the screen, and stacks the rest of the panes vertically on the
-    right.
-
--   [tiled]{.cf .ic} arranges all panes evenly on the screen.
-
-You can cycle through these layouts by pressing `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `Spacebar`{.cf .keystroke
-style="font-variant:small-caps"}.
-
-### Closing Panes {#part0019.xhtml#sec.Closing.Panes}
-
-You close a pane the same way you exit a terminal session or a tmux
-window: you simply type "exit" in the pane. You can also kill a pane
-with `Prefix`{.cf .keystroke style="font-variant:small-caps"} `x`{.cf
-.keystroke}, which also closes the window if there's only one pane in
-that window.
-
-You'll be asked to confirm if you want to kill the specified pane.
-Killing a pane like this is great for situations where the pane has
-gotten stuck, or you can't interact with it anymore.
-
-So far, we've been able to create new sessions, create windows and
-panes, and move around a bit. Before we move on to more advanced topics,
-let's explore some additional tmux commands.
-
-[]{#part0020.xhtml}
-
-## Working with Command Mode {#part0020.xhtml#sec.Commands}
-
-So far, we've used key combinations to create windows and panes, but
-those keybindings are actually just shortcuts for tmux commands with
-some preset options. We can execute tmux commands two ways: from the
-terminal itself or from the command area in the tmux status line. You'll
-learn about using tmux commands from the terminal in Chapter 3,
-[​*Scripting Customized tmux
-Environments*​](#part0030.xhtml#ch.scripting), but for now, let's explore
-tmux's Command mode by using it to create some new windows and panes in
-our workspace.
-
-To enter Command mode, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `:`{.cf .keystroke
-style="font-variant:small-caps"} (the colon) from within a running tmux
-session. The status line changes color and we get a prompt that
-indicates that we can type our command. Create a new window by using the
-[new-window]{.cf .ic} command, like this:
-
-[new-window -n console]{.cf .ic}
-
-By using a command rather than the shortcut, you can create a new window
-and give it a name at the same time by using the [-n]{.cf .ic} flag.
-Let's take this a step further and launch a new window that starts the
-[top]{.cf .ic} program. To do that, we enter Command mode and type this
-command:
-
-[new-window -n processes \"top\"]{.cf .ic}
-
-When you press `Enter`{.cf .keystroke style="font-variant:small-caps"},
-a new window appears and the [top]{.cf .ic} application runs, showing
-your running processes.
-
-Specifying an initial command for a window is extremely handy for
-short-term tasks, but there's a slight wrinkle; if you exit the
-[top]{.cf .ic} app by pressing `q`{.cf .keystroke}, the tmux window you
-created will also close. You can use configuration settings to get
-around this, but if you want the window to persist, simply create it
-without specifying an initial command, and then execute your own command
-in the new window.
-
-You can use Command mode to create new windows, new panes, or new
-sessions, or even set other environmental options. In Chapter 2,
-[​*Configuring tmux*​](#part0023.xhtml#ch.config), we'll create a few
-custom keybindings to make some of these commands easier to use.
-
-[]{#part0021.xhtml}
-
-## What's Next? {#part0021.xhtml#d24e1369}
-
-In this chapter, you explored the very basic usage of tmux sessions,
-panes, windows, and commands, but there's a lot more you can try.
-
-By pressing `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`?`{.cf .keystroke style="font-variant:small-caps"}, you can get a list
-of all predefined tmux keybindings and the associated commands these
-trigger.
-
-As you work with tmux, think about how you can create different
-environments for your work. If you're monitoring servers, you could use
-tmux panes to create a dashboard that shows your various monitoring
-scripts and log files.
-
-With the basics under our belt, let's put together a custom
-configuration we can use for the rest of our work.
-
-[]{#part0022.xhtml}
-
-## For Future Reference {#part0022.xhtml#sec.forFutureReferece}
+## For Future Reference 
 
 ### Creating Sessions
 
   Command                                        Description
   ---------------------------------------------- ----------------------------------------------------------------------------------------------------------
-  [tmux new-session]{.cf .ic}                    Creates a new session without a name. Can be shortened to [tmux new]{.cf .ic} or simply [tmux]{.cf .ic}.
-  [tmux new -s development]{.cf .ic}             Creates a new session called "development."
-  [tmux new -s development -n editor]{.cf .ic}   Creates a session named "development" and names the first window "editor."
-  [tmux attach -t development]{.cf .ic}          Attaches to a session named "development."
+  tmux new-session 
+	Creates a new session without a name. Can be shortened to tmux new or simply tmux
+  tmux new -s development            
+	Creates a new session called "development."
+  tmux new -s development -n editor  
+	  Creates a session named "development" and names the first window "editor."
+  tmux attach -t development       
+	  Attaches to a session named "development."
 
 ### Default Commands for Sessions, Windows, and Panes
 
   Command                                                                                                                                                              Description
   -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------------------------------------------------
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `d`{.cf .keystroke}                                                                                         Detaches from the session, leaving the session running in the background.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `:`{.cf .keystroke style="font-variant:small-caps"}                                                         Enters Command mode.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `c`{.cf .keystroke}                                                                                         Creates a new window from within an existing tmux session. Shortcut for [new-window]{.cf .ic}.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `n`{.cf .keystroke}                                                                                         Moves to the next window.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `p`{.cf .keystroke}                                                                                         Moves to the previous window.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `0`{.cf .keystroke style="font-variant:small-caps"}...`9`{.cf .keystroke style="font-variant:small-caps"}   Selects windows by number.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `w`{.cf .keystroke}                                                                                         Displays a selectable list of windows in the current session.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `f`{.cf .keystroke}                                                                                         Searches for a window that contains the text you specify. Displays a selectable list of windows containing that text in the current session.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `,`{.cf .keystroke style="font-variant:small-caps"}                                                         Displays a prompt to rename a window.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `&`{.cf .keystroke style="font-variant:small-caps"}                                                         Closes the current window after prompting for confirmation.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `%`{.cf .keystroke style="font-variant:small-caps"}                                                         Divides the current window in half vertically.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `"`{.cf .keystroke style="font-variant:small-caps"}                                                         Divides the current window in half horizontally.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `o`{.cf .keystroke}                                                                                         Cycles through open panes.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `q`{.cf .keystroke}                                                                                         Momentarily displays pane numbers in each pane.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `x`{.cf .keystroke}                                                                                         Closes the current pane after prompting for confirmation.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `Space`{.cf .keystroke style="font-variant:small-caps"}                                                     Cycles through the various pane layouts.
+  `Prefix`  `d` Detaches from the session, leaving the session running in the background.
+  `Prefix`  `:` Enters Command mode.
+  `Prefix`  `c` Creates a new window from within an existing tmux session. Shortcut for [new-window].
+  `Prefix`  `n` Moves to the next window.
+  `Prefix`  `p` Moves to the previous window.
+  `Prefix`  `0` ...`9`   Selects windows by number.
+  `Prefix`  `w` Displays a selectable list of windows in the current session.
+  `Prefix`  `f` Searches for a window that contains the text you specify. Displays a selectable list of windows containing that text in the current session.
+  `Prefix`  `,`  Displays a prompt to rename a window.
+  `Prefix`  `&`  Closes the current window after prompting for confirmation.
+  `Prefix`  `%` Divides the current window in half vertically.
+  `Prefix`  `"` Divides the current window in half horizontally.
+  `Prefix`  `o` Cycles through open panes.
+  `Prefix`  `q` Momentarily displays pane numbers in each pane.
+  `Prefix`  `x`  Closes the current pane after prompting for confirmation.
+  `Prefix`  `Space` Cycles through the various pane layouts.
 
-::: footnotes
-#### Footnotes
+### Chapter 2 Configuring tmux
 
-[\[2\]](#part0014.xhtml#FNPTR-2){#part0022.xhtml#FOOTNOTE-2}
+- build a basic configuration file for your environment 
+- customizing how you navigate around the screen and how you create and resize panes, 
+- and more advanced settings. 
+- learn how to make sure your terminal is properly configured so that some of the settings you'll make to tmux's appearance look good on your screen. 
 
-:   <http://brew.sh>
+## .tmux.conf
 
-[\[3\]](#part0014.xhtml#FNPTR-3){#part0022.xhtml#FOOTNOTE-3}
+- tmux looks for configuration settings in two places.
+	- /etc/tmux.conf for a system-wide configuration. It 
+	- then ~/.tmux.conf (current user's home directory). 
+	- If these files don't exist, tmux uses its default settings.
 
-:   <https://tmux.github.io/>
-:::
+ `touch​​ ​​~/.tmux.conf​`
 
-::: {.copyright style=";color:black;"}
-Copyright © 2016, The Pragmatic Bookshelf.
-:::
 
-[]{#part0023.xhtml}
+- define new key shortcuts to
+- setting up a default environment with multiple windows, panes, and running programs. 
 
-# [ Chapter 2]{.chapter-number} [Configuring tmux]{.chapter-name} {#part0023.xhtml#ch.config .chapter-title}
+### Defining an Easier Prefix 
 
-tmux, by default, doesn't have the most friendly commands. Many of the
-most important and useful features are assigned to hard-to-reach
-keystrokes or consist of long, verbose command strings. And tmux's
-default color scheme isn't very easy on the eyes. In this chapter,
-you'll build a basic configuration file for your environment that you'll
-then use for the rest of this book. You'll start out by customizing how
-you navigate around the screen and how you create and resize panes, and
-then you'll explore some more advanced settings. You'll also learn how
-to make sure your terminal is properly configured so that some of the
-settings you'll make to tmux's appearance look good on your screen. When
-you're done, you'll have a better understanding of how flexible tmux is,
-and you can start making it your own. Let's start by talking about how
-to configure tmux in the first place.
+ - `Ctrl` -`a`  is an excellent choice for a prefix because it's easier to trigger, especially if you remap your computer's `Caps Lock`  key to `Ctrl` 
+ - This keeps your hands on the home row of your keyboard.
 
-[]{#part0024.xhtml}
 
-## Introducing the .tmux.conf File {#part0024.xhtml#sec.tmux.conf}
-
-By default, tmux looks for configuration settings in two places. It
-first looks in [/etc/tmux.conf]{.cf .filename} for a system-wide
-configuration. It then looks for a file called [.tmux.conf]{.cf
-.filename} in the current user's home directory. If these files don't
-exist, tmux simply uses its default settings. We don't need to create a
-system-wide configuration, so let's create a brand-new configuration
-file in our home directory. Execute the following command in your shell:
-
-  ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**touch**​​ ​​**\~/.tmux.conf**​
-  ------------------ ----------------------------------------------
-
-In this file we can do everything from defining new key shortcuts to
-setting up a default environment with multiple windows, panes, and
-running programs. Let's start by setting a couple basic options that
-will make working with tmux much easier.
-
-  ------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  ![images/aside-icons/warning.png](images/image00119.jpeg){#d24e1742 style="width: 100%"}   The [.tmux.conf]{.cf .filename} file is a hidden file and doesn't show up in file explorers or directory listings by default. The labels above the code listings in this book reference the file as [tmux.conf]{.cf .filename}, without the leading period, so it corresponds with the file in the book's source code download.
-  ------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-### Defining an Easier Prefix {#part0024.xhtml#sec.Defining.an.Easier.Prefix}
-
-As you saw earlier, tmux uses `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`b`{.cf .keystroke} as its command
-prefix. Many tmux users started out using GNU-Screen, which uses
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`a`{.cf
-.keystroke} for its command prefix. `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`a`{.cf .keystroke} is an excellent
-choice for a prefix because it's easier to trigger, especially if you
-remap your computer's `Caps Lock`{.cf .keystroke
-style="font-variant:small-caps"} key to `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"} as explained in the sidebar that
-follows. This keeps your hands on the home row of your keyboard.
-
-::: {#part0024.xhtml#sb.capslock .sidebar}
-::: sidebar-title
 Remapping the Caps Lock Key
-:::
+- Can do this in the keyboard section of gnome-tweaks. Or Google it fool!
 
-::: sidebar-content
-On many keyboards, the `Caps Lock`{.cf .keystroke
-style="font-variant:small-caps"} key sits right next to the `a`{.cf
-.keystroke} key on the home row of the keyboard. By remapping this key
-to `Ctrl`{.cf .keystroke style="font-variant:small-caps"}, you can make
-triggering commands more comfortable.
+- `set-option` Set options in the .tmux.conf  file, 
+- `set` Same as above but shortened.
 
-On your Mac, you can remap the `Caps Lock`{.cf .keystroke
-style="font-variant:small-caps"} key under the Keyboard preference pane,
-under System Preferences. Just press the Modifier Keys button and change
-the action for `Caps Lock`{.cf .keystroke
-style="font-variant:small-caps"} to "Control."
+You define the tmux prefix by adding this to the .tmux.conf file:
 
-Under Linux, the process can be a little more tricky depending on your
-distribution or window manager, but you can find several methods
-described on the Emacs
-wiki.^[\[4\]](#part0029.xhtml#FOOTNOTE-4){#part0024.xhtml#FNPTR-4
-.footnote}^
+```
+# Setting the prefix from C-b to C-a
+set -g prefix C-a
+```
 
-This small change to your configuration can save you a surprising amount
-of time over the course of a day.
-:::
-:::
+-g (global) sets the option for all tmux sessions we create.
 
-To set options in the [.tmux.conf]{.cf .filename} file, use the
-[set-option]{.cf .ic} command, which you can shorten to [set]{.cf .ic}.
-You define the tmux prefix by adding this to the [.tmux.conf]{.cf
-.filename} file:
+unbind-key, or unbind command, to remove a defined keybinding for later use
 
-::: livecodelozenge
-[config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
-:::
+Free up ctrl-b by unbinding it in the configuration file:
+```
+​# Free the original Ctrl-b prefix keybinding
+unbind C-b
+```
 
-  ------------------ -----------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Setting the prefix from C-b to C-a*​
-  ​[ ]{.codeprefix}   set -g prefix C-a
-  ------------------ -----------------------------------------
 
-In this example, we're using the [-g]{.cf .ic} switch, for "global,"
-which sets the option for all tmux sessions we create.
+Must restart tmux for changes to take effect or enter command mode in tmux and run the source-file command:
+`source-file ~/.tmux.conf`
 
-The line starting with [\#]{.cf .ic} is a comment. It's a good idea to
-put comments in your configuration files; they'll jog your memory later
-on when you go back and look at your configuration a few months from
-now. Comments in a tmux configuration file work just like comments in
-source code.
+### Changing the Default Delay 
 
-While not necessary, we can use the [unbind-key]{.cf .ic}, or
-[unbind]{.cf .ic} command, to remove a keybinding that's been defined,
-so we can assign a different command to this key later. Let's free up
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`b`{.cf
-.keystroke} like this:
+- tmux adds a very small delay when sending commands, and this delay can interfere with other programs such as the Vim text editor. 
+- Set this delay so it's much more responsive by adding this line to your configuration file:
 
-::: livecodelozenge
-[config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
-:::
 
-  ------------------ -------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Free the original Ctrl-b prefix keybinding*​
-  ​[ ]{.codeprefix}   unbind C-b
-  ------------------ -------------------------------------------------
+```
+#setting the delay between prefix and command*​
+set -s escape-time 1
+```
 
-Changes to the file aren't read by tmux automatically. So if you're
-editing your [.tmux.conf]{.cf .filename} file while tmux is running,
-you'll either need to completely close [all]{.emph} tmux sessions, or
-enter tmux's Command mode with `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `:`{.cf .keystroke
-style="font-variant:small-caps"} and type this whenever you make a
-change:
+### Setting the Window and Panes Index 
 
-  ------------------ ---------------------------
-  ​[ ]{.codeprefix}   source-file \~/.tmux.conf
-  ------------------ ---------------------------
+Set window index numbers to start at 1 instead of 0:
+```
+# Set the base index for windows to 1 instead of 0
+set -g base-index 1
+```
 
-You can now use `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`a`{.cf .keystroke} for your prefix.
-The rest of the examples in this book will continue to refer to it as
-`Prefix`{.cf .keystroke style="font-variant:small-caps"}, though.
+`set-window-option` or `setw` 
+- configure options that affect how you interact with windows
 
-### Changing the Default Delay {#part0024.xhtml#sec.Changing.the.Prefix.Delay}
+`pane-base-index` Set the starting index number for panes:
+  
+```
+# Set the base index for panes to 1 instead of 0*​
+setw -g pane-base-index 1
+```
 
-tmux adds a very small delay when sending commands, and this delay can
-interfere with other programs such as the Vim text editor. We can set
-this delay so it's much more responsive. Add this line to your
-configuration file:
+### Customizing Keys, Commands, and User Input 
 
-  ------------------ -------------------------------------------------
-  ​[ ]{.codeprefix}   ​*#setting the delay between prefix and command*​
-  ​[ ]{.codeprefix}   set -s escape-time 1
-  ------------------ -------------------------------------------------
 
-Once you reload the configuration file, you'll be able to issue
-keystrokes without delay.
+### Creating a Shortcut to Reload the Configuration 
 
-### Setting the Window and Panes Index {#part0024.xhtml#sec.Setting.the.Window.Index}
-
-In Chapter 1, [​*Learning the Basics*​](#part0013.xhtml#ch.basics), you
-learned about windows and how when you create more than one window in a
-session, you have to reference windows by their index. This index starts
-at zero, which can be a little awkward, since you'd have to use
-`Prefix`{.cf .keystroke style="font-variant:small-caps"} `0`{.cf
-.keystroke style="font-variant:small-caps"} to access the first window.
-By adding this line to your configuration file
-
-  ------------------ -------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Set the base index for windows to 1 instead of 0*​
-  ​[ ]{.codeprefix}   set -g base-index 1
-  ------------------ -------------------------------------------------------
-
-the window index will start at 1, so you can use `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `1`{.cf .keystroke
-style="font-variant:small-caps"} to jump to the first window. That's a
-lot easier since the keys on the keyboard now directly correspond with
-the windows listed in the status line.
-
-You can also set the starting index for panes using the
-[pane-base-index]{.cf .ic} option. Add this line to your configuration
-so you have some consistency between pane and window numbering.
-
-::: livecodelozenge
-[config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
-:::
-
-  ------------------ -----------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Set the base index for panes to 1 instead of 0*​
-  ​[ ]{.codeprefix}   setw -g pane-base-index 1
-  ------------------ -----------------------------------------------------
-
-Up until now, we've used the [set]{.cf .ic} command, which sets options
-for the tmux session. In order to configure options that affect how we
-interact with windows, we have to use another command, called
-[set-window-option]{.cf .ic}, which we can shorten to [setw]{.cf .ic}.
-In this book, I've used the shortened versions of commands to make the
-configuration examples fit on one line.
-
-Now let's build some useful shortcuts that will increase your
-productivity.
-
-[]{#part0025.xhtml}
-
-## Customizing Keys, Commands, and User Input {#part0025.xhtml#d24e1964}
-
-Many of the default keyboard shortcuts in tmux are a bit of a stretch,
-both physically and mentally. Not only is `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `%`{.cf .keystroke
-style="font-variant:small-caps"} hard to press, as it involves holding
-three keys, but without looking at the command reference, there's no
-easy way to remember what it does.
-
-In this section, we'll define, or redefine, some of the most-used tmux
-commands. Let's start by creating a custom keybinding to reload the tmux
-configuration.
-
-### Creating a Shortcut to Reload the Configuration {#part0025.xhtml#sec.Reloading.the.Configuration}
-
-Every time you make a change to your configuration file, you either have
-to shut down [all]{.emph} sessions and then restart tmux, or issue the
-[source]{.cf .ic} command to reload your configuration from within the
-running instances. Let's create a custom keybinding to reload the
+create a custom keybinding to reload the
 configuration file.
 
-The [bind]{.cf .ic} command defines a new keybinding. You specify the
-key you want to use, followed by the command you want to perform.
+`bind` 
+- Defines a new keybinding. Specify the key you want to use, followed by the command you want to perform.
 
-Let's define `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`r`{.cf .keystroke} so it reloads the [.tmux.conf]{.cf .filename} file
-in the current session. Add this line to your configuration file:
+Set `Prefix` `r`  so it reloads `.tmux.conf` (Add too config file):
+```
+# Remap reloading of config file to prefix + r
+bind r source-file ~/.tmux.conf
+```
 
-  ------------------ ----------------------------------
-  ​[ ]{.codeprefix}   bind r source-file \~/.tmux.conf
-  ------------------ ----------------------------------
+Reload the config file in command mode with the with `Prefix` `:` and type `source-file \~/.tmux.conf`
 
-When you define keybindings using [bind]{.cf .ic}, you still have to
-push the `Prefix`{.cf .keystroke style="font-variant:small-caps"} key
-before you can press the newly defined key. And while you just defined a
-new command to make reloading the tmux configuration easier, you can't
-use it until you reload the configuration file. So be sure to enter
-Command mode with `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `:`{.cf .keystroke
-style="font-variant:small-caps"} and type
+ Then you can use `Prefix`  `r` to reload the config file. 
 
-  ------------------ ---------------------------
-  ​[ ]{.codeprefix}   source-file \~/.tmux.conf
-  ------------------ ---------------------------
+`display`
+- put a message in the status line.
+`\;`
+- Combine a series of commands
 
-one more time.
+Modify your reload command to display the text "Reloaded!" when the configuration file loads:
 
-When you reload the file, you might not always be able to tell that
-anything changed, but you can use the [display]{.cf .ic} command to put
-a message in the status line. Modify your reload command to display the
-text "Reloaded!" when the configuration file loads:
+```
+# Reload the file with Prefix r
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+```
 
-::: livecodelozenge
-[config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
-:::
+#### Defining Keybindings That Don't Require a Prefix
 
-  ------------------ ----------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Reload the file with Prefix r*​
-  ​[ ]{.codeprefix}   bind r source-file \~/.tmux.conf ​*\\;*​ display ​*\"Reloaded!\"*​
-  ------------------ ----------------------------------------------------------------
 
-As you can see, you can bind a key to a series of commands by separating
-the commands with the [\\;]{.cf .ic} character combination.
+bind -n
+- tells tmux that the keybinding doesn't require pressing the prefix. 
+- Use this with care. This will mess up this key combo for any application running within a tmux session.
 
-::: {#part0025.xhtml#sb.canIDefineKeybindingsThatDontRequirePrefix .sidebar}
-::: sidebar-title
-Defining Keybindings That Don\'t Require a Prefix
-:::
-
-::: sidebar-content
-Using the [bind]{.cf .ic} command with the [-n]{.cf .ic} prefix tells
-tmux that the keybinding doesn't require pressing the prefix. For
-example,
-
-  ------------------ -------------------------------------------
-  ​[ ]{.codeprefix}   bind-key -n C-r source-file \~/.tmux.conf
-  ------------------ -------------------------------------------
-
-would make `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`r`{.cf .keystroke} reload the
-configuration file. Unfortunately, this would completely disable that
-key combination in any application that's running in a tmux session, so
-you'll want to use this with care.
-:::
-:::
+Make `ctrl`-`r` reload the tmux session: (Comment out the previous bind for `source-file` this to work)
+```
+# Make is so ctrl+r reloads tmux instead of having to press prefix first
+bind-key -n C-r source-file ~/.tmux.conf
+```
 
 With this keybinding in place, you can make additional changes to the
 configuration file and then immediately activate them by pressing
-`Prefix`{.cf .keystroke style="font-variant:small-caps"} `r`{.cf
-.keystroke}.
+`Prefix`  `r`
+.
 
 ### Sending the Prefix to Other Applications
 
-We've remapped `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`a`{.cf .keystroke} as the Prefix, but
-programs such as Vim, Emacs, and even the regular Bash shell also use
-that combination. You'll probably want to configure tmux to send that
-command through when you need it. You can do that by binding the
-[send-prefix]{.cf .ic} command to a keystroke, like this:
+`send-prefix`
+- Send tmux bound prefix keys to another app.
 
-  ------------------ ---------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Ensure that we can send Ctrl-A to other apps*​
-  ​[ ]{.codeprefix}   bind C-a send-prefix
-  ------------------ ---------------------------------------------------
+Make it so you can use ctrl-a in other apps like vim: (Then you would just press ctrl-a twice)
+```
+# Ensure that we can send Ctrl-A to other apps
+bind C-a send-prefix
+```
 
-After reloading the configuration file, you can send `Ctrl`{.cf
-.keystroke style="font-variant:small-caps"}-`a`{.cf .keystroke} to an
-application running within tmux simply by pressing `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`a`{.cf .keystroke} twice.
+### Splitting Panes
 
-### Splitting Panes {#part0025.xhtml#sec.Splitting.Panes}
+set the horizontal split to `Prefix` `|` and the vertical split to `Prefix` `-`:
 
-The default keys for splitting panes can be difficult to remember, so
-let's set our own keys that we won't be able to forget. We'll set the
-horizontal split to `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `|`{.cf .keystroke
-style="font-variant:small-caps"} and the vertical split to `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `-`{.cf .keystroke
-style="font-variant:small-caps"}. To do that, add these lines to your
-configuration:
+```
+# splitting panes with | and -
+bind | split-window -h
+bind - split-window -v
+```
 
-::: livecodelozenge
-[config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
-:::
-
-  ------------------ ------------------------------------
-  ​[ ]{.codeprefix}   ​*\# splitting panes with \| and -*​
-  ​[ ]{.codeprefix}   bind \| split-window -h
-  ​[ ]{.codeprefix}   bind - split-window -v
-  ------------------ ------------------------------------
-
-At first glance, this may look backwards. The [-v]{.cf .ic} and [-h]{.cf
-.ic} flags on [split-window]{.cf .ic} stand for "vertical" and
+At first glance, this may look backwards. The [-v] and [-h]
+.ic} flags on [split-window] stand for "vertical" and
 "horizontal" splits, but to tmux, a vertical split means creating a new
 pane below the existing pane so the panes are stacked vertically on top
 of each other. A horizontal split means creating a new pane
@@ -1280,72 +557,72 @@ These new shortcuts give us a nice visual association. If we want our
 windows split, we simply press the key that looks like the split we want
 to create.
 
-### Remapping Movement Keys {#part0025.xhtml#sec.Remapping.Movement.Keys}
+### Remapping Movement Keys 
 
-Moving from pane to pane with `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `o`{.cf .keystroke} is cumbersome, and
+Moving from pane to pane with `Prefix`
+ `o`  is cumbersome, and
 using the arrow keys means you have to take your fingers off the home
 row. If you use the Vim text editor, you're probably familiar with its
-use of `h`{.cf .keystroke}, `j`{.cf .keystroke}, `k`{.cf .keystroke},
-and `l`{.cf .keystroke} for movement keys. You can remap the movement
+use of `h` , `j` , `k` ,
+and `l`  for movement keys. You can remap the movement
 keys in tmux to these same keys.
 
   ------------------ -----------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# moving between panes with Prefix h,j,k,l*​
-  ​[ ]{.codeprefix}   bind h ​**select**​-pane -L
-  ​[ ]{.codeprefix}   bind j ​**select**​-pane -D
-  ​[ ]{.codeprefix}   bind k ​**select**​-pane -U
-  ​[ ]{.codeprefix}   bind l ​**select**​-pane -R
+  ​[ ]   ​*\# moving between panes with Prefix h,j,k,l*​
+  ​[ ]   bind h ​select​-pane -L
+  ​[ ]   bind j ​select​-pane -D
+  ​[ ]   bind k ​select​-pane -U
+  ​[ ]   bind l ​select​-pane -R
   ------------------ -----------------------------------------------
 
-In addition, you can use `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`h`{.cf .keystroke} and `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`l`{.cf .keystroke} to cycle through
+In addition, you can use `Prefix`
+ `Ctrl`
+-`h`  and `Prefix`
+.keystroke  `Ctrl`
+-`l`  to cycle through
 the windows by binding those keystrokes to the respective commands:
 
   ------------------ -------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Quick window selection*​
-  ​[ ]{.codeprefix}   bind -r C-h ​**select**​-window -t :-
-  ​[ ]{.codeprefix}   bind -r C-l ​**select**​-window -t :+
+  ​[ ]   ​*\# Quick window selection*​
+  ​[ ]   bind -r C-h ​select​-window -t :-
+  ​[ ]   bind -r C-l ​select​-window -t :+
   ------------------ -------------------------------------
 
-Provided you've mapped your `Caps Lock`{.cf .keystroke
-style="font-variant:small-caps"} key to the `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"} key, you can now move between panes
+Provided you've mapped your `Caps Lock`
+ key to the `Ctrl`
+ key, you can now move between panes
 without moving your hands off the home row.
 
 ### Resizing Panes {#part0025.xhtml#sec.Resizing.Panes}
 
 To resize a pane, you can enter Command mode and type [resize-pane
--D]{.cf .ic} to resize a pane downward one row at a time. You can
+-D] to resize a pane downward one row at a time. You can
 increase the resizing increment by passing a number after the direction,
-such as [resize-pane -D 5]{.cf .ic}. The command itself is pretty
+such as [resize-pane -D 5]. The command itself is pretty
 verbose, but you can make some keybindings to make resizing panes
 easier.
 
 Let's use a variation of the Vim movement keys to resize windows. We'll
-use `Prefix`{.cf .keystroke style="font-variant:small-caps"} `H`{.cf
-.keystroke style="font-variant:small-caps"}, `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `J`{.cf .keystroke
-style="font-variant:small-caps"}, `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `K`{.cf .keystroke
-style="font-variant:small-caps"}, and `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `L`{.cf .keystroke
-style="font-variant:small-caps"} to change the size of the panes. Add
+use `Prefix`  `H`
+.keystroke , `Prefix`
+ `J`
+, `Prefix`
+ `K`
+, and `Prefix`
+ `L`
+ to change the size of the panes. Add
 these lines to your configuration file:
 
   ------------------ -------------------------
-  ​[ ]{.codeprefix}   bind H resize-pane -L 5
-  ​[ ]{.codeprefix}   bind J resize-pane -D 5
-  ​[ ]{.codeprefix}   bind K resize-pane -U 5
-  ​[ ]{.codeprefix}   bind L resize-pane -R 5
+  ​[ ]   bind H resize-pane -L 5
+  ​[ ]   bind J resize-pane -D 5
+  ​[ ]   bind K resize-pane -U 5
+  ​[ ]   bind L resize-pane -R 5
   ------------------ -------------------------
 
 Notice that we're using uppercase letters in the configuration file.
 tmux allows both lowercase and uppercase letters for keystrokes. You'll
-need to use the `Shift`{.cf .keystroke style="font-variant:small-caps"}
+need to use the `Shift` 
 key to trigger the uppercase keystroke.
 
 Using these movement keys will help us keep track of which way we want
@@ -1353,51 +630,51 @@ the window size to change. For example, if we have a window divided into
 two panes stacked vertically, like this
 
   ------------------ ---------------------------------------
-  ​[ ]{.codeprefix}   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
-  ​[ ]{.codeprefix}   \| \|
-  ​[ ]{.codeprefix}   \| Pane 1 \|
-  ​[ ]{.codeprefix}   \| \|
-  ​[ ]{.codeprefix}   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
-  ​[ ]{.codeprefix}   \| \|
-  ​[ ]{.codeprefix}   \| Pane 2 \|
-  ​[ ]{.codeprefix}   \| \|
-  ​[ ]{.codeprefix}   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+  ​[ ]   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+  ​[ ]   \| \|
+  ​[ ]   \| Pane 1 \|
+  ​[ ]   \| \|
+  ​[ ]   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+  ​[ ]   \| \|
+  ​[ ]   \| Pane 2 \|
+  ​[ ]   \| \|
+  ​[ ]   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
   ------------------ ---------------------------------------
 
 and we want to increase the size of Pane 1, then we'd place our cursor
-inside Pane 1 and then press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `J`{.cf .keystroke
-style="font-variant:small-caps"}, which moves the horizontal divider
-[downward]{.emph}. If we pressed `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `K`{.cf .keystroke
-style="font-variant:small-caps"}, we would move the horizontal divider
+inside Pane 1 and then press `Prefix`
+ `J`
+, which moves the horizontal divider
+[downward]{.emph}. If we pressed `Prefix`
+ `K`
+, we would move the horizontal divider
 up.
 
-With the configuration we just used, you have to use the `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} each time you want to resize
-the pane. But if you use the [-r]{.cf .ic} flag with the [bind]{.cf .ic}
+With the configuration we just used, you have to use the `Prefix`
+.keystroke  each time you want to resize
+the pane. But if you use the [-r] flag with the [bind]
 command, you can specify that you want the key to be
 [repeatable]{.emph}, meaning you can press the prefix key only once and
 then continuously press the defined key within a given window of time,
 called the repeat limit.
 
-Redefine the window resizing commands by adding the [-r]{.cf .ic}
+Redefine the window resizing commands by adding the [-r]
 option:
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Pane resizing panes with Prefix H,J,K,L*​
-  ​[ ]{.codeprefix}   bind -r H resize-pane -L 5
-  ​[ ]{.codeprefix}   bind -r J resize-pane -D 5
-  ​[ ]{.codeprefix}   bind -r K resize-pane -U 5
-  ​[ ]{.codeprefix}   bind -r L resize-pane -R 5
+  ​[ ]   ​*\# Pane resizing panes with Prefix H,J,K,L*​
+  ​[ ]   bind -r H resize-pane -L 5
+  ​[ ]   bind -r J resize-pane -D 5
+  ​[ ]   bind -r K resize-pane -U 5
+  ​[ ]   bind -r L resize-pane -R 5
   ------------------ ----------------------------------------------
 
-Now you can resize the panes by pressing `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `J`{.cf .keystroke
-style="font-variant:small-caps"} once, and then press `J`{.cf .keystroke
-style="font-variant:small-caps"} until the window is the size you want.
+Now you can resize the panes by pressing `Prefix`
+ `J`
+ once, and then press `J`
+ until the window is the size you want.
 The default repeat limit is 500 milliseconds, and can be changed by
-setting the [repeat-time]{.cf .ic} option to a higher value.
+setting the [repeat-time] option to a higher value.
 
 Now let's turn our attention to how tmux can work with the mouse.
 
@@ -1414,7 +691,7 @@ you're just getting started with tmux. To configure tmux so we can use
 the mouse, we need to enable mouse mode.
 
   ------------------ -----------------
-  ​[ ]{.codeprefix}   set -g mouse on
+  ​[ ]   set -g mouse on
   ------------------ -----------------
 
 This setting configures tmux so it will let us use the mouse to select a
@@ -1434,8 +711,8 @@ disable the mouse.
 :::
 
   ------------------ -------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# mouse support - set to on if you want to use the mouse*​
-  ​[ ]{.codeprefix}   set -g mouse off
+  ​[ ]   ​*\# mouse support - set to on if you want to use the mouse*​
+  ​[ ]   set -g mouse off
   ------------------ -------------------------------------------------------------
 
 Setting this option prevents us from accidentally doing things when we
@@ -1463,18 +740,18 @@ vital information about our environment.
 To get the best visual experience out of tmux, make sure that both your
 terminal and tmux are configured for 256 colors.
 
-Using the [tput]{.cf .ic} command, you can quickly determine the number
+Using the [tput] command, you can quickly determine the number
 of colors supported by your terminal session. Enter the command
 
   ------------------ --------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tput**​​ ​​**colors**​
-  ​[ ]{.codeprefix}   256
+  ​[ ]   ​[\$ ]​​tput​​ ​​colors​
+  ​[ ]   256
   ------------------ --------------------------------------
 
-into your terminal. If you don't see [256]{.cf .ic} as the result,
+into your terminal. If you don't see [256] as the result,
 you'll need to do a little configuration.
 
-You may need to configure your terminal to use [xterm]{.cf .ic}'s 256
+You may need to configure your terminal to use [xterm]'s 256
 mode. On the Mac, you can configure this in the Terminal app by editing
 the profile as shown in the following figure:
 
@@ -1486,7 +763,7 @@ style="width: 90%"}
 If you're using
 iTerm2,^[\[5\]](#part0029.xhtml#FOOTNOTE-5){#part0026.xhtml#FNPTR-5
 .footnote}^ you can find this by editing the default profile and
-changing the terminal mode to [xterm-256color]{.cf .ic}, as shown in the
+changing the terminal mode to [xterm-256color], as shown in the
 following figure:
 
 ::: ss
@@ -1497,11 +774,11 @@ style="width: 90%"}
 If you're using Linux, you might need to add
 
   ------------------ -------------------------------------------------------
-  ​[ ]{.codeprefix}   \[ -z ​*\"*​\$TMUX​*\"*​ \] && export TERM=xterm-256color
+  ​[ ]   \[ -z ​*\"*​\$TMUX​*\"*​ \] && export TERM=xterm-256color
   ------------------ -------------------------------------------------------
 
-to your [.bashrc]{.cf .filename} file to enable a 256-color terminal.
-This conditional statement ensures that the [TERM]{.cf .ic} variable is
+to your [.bashrc]  file to enable a 256-color terminal.
+This conditional statement ensures that the [TERM] variable is
 only set outside of tmux, since tmux sets its own terminal.
 
 Also, ensure that your terminal emulator supports displaying UTF-8
@@ -1509,15 +786,15 @@ characters so that visual elements such as the pane dividers appear as
 dashed lines.
 
 To make tmux display things in 256 colors, add this line to our
-[.tmux.conf]{.cf .filename} file:
+[.tmux.conf]  file:
 
 ::: livecodelozenge
 [config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
 :::
 
   ------------------ -----------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Set the default terminal mode to 256color mode*​
-  ​[ ]{.codeprefix}   set -g default-terminal ​*\"screen-256color\"*​
+  ​[ ]   ​*\# Set the default terminal mode to 256color mode*​
+  ​[ ]   set -g default-terminal ​*\"screen-256color\"*​
   ------------------ -----------------------------------------------------
 
 Once the right color mode is set, you'll find it much easier to use
@@ -1540,10 +817,10 @@ including the status line, window list, message area, and even the pane
 borders.
 
 tmux provides variables you can use to specify colors, including
-[black]{.cf .variable}, [red]{.cf .variable}, [green]{.cf .variable},
-[yellow]{.cf .variable}, [blue]{.cf .variable}, [magenta]{.cf
-.variable}, [cyan]{.cf .variable}, or [white]{.cf .variable}. You can
-also use [colour0]{.cf .variable} to [colour255]{.cf .variable} to
+[black] .variable}, [red] .variable}, [green] .variable},
+[yellow] .variable}, [blue] .variable}, [magenta]
+.variable}, [cyan] .variable}, or [white] .variable}. You can
+also use [colour0] .variable} to [colour255] .variable} to
 reference more specific colors on the 256 color palette.
 
 To find the numbers for those colors, you can run this simple shell
@@ -1552,9 +829,9 @@ use:^[\[6\]](#part0029.xhtml#FOOTNOTE-6){#part0026.xhtml#FNPTR-6
 .footnote}^
 
   ------------------ -----------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​**for** ​i ​**in**​ {0..255} ; ​**do**​
-  ​[ ]{.codeprefix}   ​​printf ​*\"*​​*\\x*​​*1b\[38;5;*​​**\${**​i​**}**​​*m*​​**\${**​i​**}**​​ *\"*​
-  ​[ ]{.codeprefix}   ​**done**​
+  ​[ ]   ​for ​i ​in​ {0..255} ; ​do​
+  ​[ ]   ​​printf ​*\"*​​*\\x*​​*1b\[38;5;*​​\${​i​}​​*m*​​\${​i​}​​ *\"*​
+  ​[ ]   ​done​
   ------------------ -----------------------------------------------------------------
 
 When you execute this command, you'll see the following output in your
@@ -1580,7 +857,7 @@ default, so it looks like this:
 ![images/config/statusline1.png](images/image00123.jpeg){#d24e2613}
 :::
 
-The [status-style]{.cf .ic} option sets the foreground and background
+The [status-style] option sets the foreground and background
 colors of the status line, as well as the style. Add the following line
 to your configuration to set the status line colors:
 
@@ -1589,23 +866,23 @@ to your configuration to set the status line colors:
 :::
 
   ------------------ ---------------------------------------
-  ​[ ]{.codeprefix}   ​*\# set the status line\'s colors*​
-  ​[ ]{.codeprefix}   set -g status-style fg=white,bg=black
+  ​[ ]   ​*\# set the status line\'s colors*​
+  ​[ ]   set -g status-style fg=white,bg=black
   ------------------ ---------------------------------------
 
 You can set the foreground color and the background color, and you can
 control the appearance of the text, depending on whether or not your
-terminal supports it. As you can probably guess, the [fg]{.cf .ic}
-option sets the foreground color, and the [bg]{.cf .ic} option sets the
+terminal supports it. As you can probably guess, the [fg]
+option sets the foreground color, and the [bg] option sets the
 background color.
 
-This command supports the options [dim]{.cf .ic}, [bright]{.cf .ic} (or
-[bold]{.cf .ic}), [reverse]{.cf .ic}, and [blink]{.cf .ic} in addition
+This command supports the options [dim], [bright] (or
+[bold]), [reverse], and [blink] in addition
 to colors. For example, to make the status line's text white and bold,
 you'd use the following configuration:
 
   ------------------ --------------------------------------------
-  ​[ ]{.codeprefix}   set -g status-style fg=white,bold,bg=black
+  ​[ ]   set -g status-style fg=white,bold,bg=black
   ------------------ --------------------------------------------
 
 You can also customize the colors of the items within the status line.
@@ -1615,11 +892,11 @@ Let's start by customizing the window list.
 
 tmux displays a list of windows in the status line. Let's make it more
 apparent which window is active by styling the active window red and the
-inactive windows cyan. The option [window-status-style]{.cf .ic}
+inactive windows cyan. The option [window-status-style]
 controls how regular windows look, and the
-[window-status-current-style]{.cf .ic} option controls how the active
+[window-status-current-style] option controls how the active
 window looks. To configure the colors, you use the same syntax you used
-for the [status-style]{.cf .ic} option.
+for the [status-style] option.
 
 Let's make the names of the windows cyan, like this:
 
@@ -1634,19 +911,19 @@ Add this to your configuration file:
 :::
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# set the color of the window list*​
-  ​[ ]{.codeprefix}   setw -g window-status-style fg=cyan,bg=black
+  ​[ ]   ​*\# set the color of the window list*​
+  ​[ ]   setw -g window-status-style fg=cyan,bg=black
   ------------------ ----------------------------------------------
 
-You can use [default]{.cf .ic} for a value so it inherits from the color
+You can use [default] for a value so it inherits from the color
 of the status line.
 
 To style the active window with a red background and bold white text,
 add this to your configuration:
 
   ------------------ ----------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# set colors for the active window*​
-  ​[ ]{.codeprefix}   setw -g window-status-current-style fg=white,bold,bg=red
+  ​[ ]   ​*\# set colors for the active window*​
+  ​[ ]   setw -g window-status-current-style fg=white,bold,bg=red
   ------------------ ----------------------------------------------------------
 
 Now inactive windows are cyan, and the active window is easily
@@ -1683,15 +960,15 @@ environment:
 :::
 
   ------------------ -----------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# colors for pane borders*​
-  ​[ ]{.codeprefix}   setw -g pane-border-style fg=green,bg=black
-  ​[ ]{.codeprefix}   setw -g pane-active-border-style fg=white,bg=yellow
+  ​[ ]   ​*\# colors for pane borders*​
+  ​[ ]   setw -g pane-border-style fg=green,bg=black
+  ​[ ]   setw -g pane-active-border-style fg=white,bg=yellow
   ------------------ -----------------------------------------------------
 
 Finally, you may want to be able to more easily determine what the
 active pane is by changing the color of the foreground or background of
 the current pane. Or, you might want to fade out panes that are not in
-use. The [set-window-style]{.cf .ic} and [set-window-active-style]{.cf
+use. The [set-window-style] and [set-window-active-style]
 .ic} options let you control the foreground and background colors,
 although you have to specify both the foreground and background colors
 as part of the value you set for the option.
@@ -1701,9 +978,9 @@ dimming all of the panes, and then making the active pane look normal.
 Add these lines to your configuration:
 
   ------------------ ------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# active pane normal, other shaded out*​
-  ​[ ]{.codeprefix}   setw -g window-style fg=colour240,bg=colour235
-  ​[ ]{.codeprefix}   setw -g window-active-style fg=white,bg=black
+  ​[ ]   ​*\# active pane normal, other shaded out*​
+  ​[ ]   setw -g window-style fg=colour240,bg=colour235
+  ​[ ]   setw -g window-active-style fg=white,bg=black
   ------------------ ------------------------------------------------
 
 To create the dimming effect, we set the foreground text color to a
@@ -1727,8 +1004,8 @@ message stands out in more detail. Add this to your configuration:
 :::
 
   ------------------ ---------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Command / message line*​
-  ​[ ]{.codeprefix}   set -g message-style fg=white,bold,bg=black
+  ​[ ]   ​*\# Command / message line*​
+  ​[ ]   set -g message-style fg=white,bold,bg=black
   ------------------ ---------------------------------------------
 
 That was easy. Now let's change the areas of the status line on both
@@ -1746,7 +1023,7 @@ The status line consists of three components: a left panel, the window
 list, and a right panel. By default, it looks like this:
 
   ------------------ ------------------------------------------------------------
-  ​[ ]{.codeprefix}   \[development\] 0:bash\* \"example.local\" 13:37 31-Oct-16
+  ​[ ]   \[development\] 0:bash\* \"example.local\" 13:37 31-Oct-16
   ------------------ ------------------------------------------------------------
 
 On the left side, we have the name of the tmux session followed by the
@@ -1769,33 +1046,33 @@ Table 1. Status Line Variables
 
   Variable                      Description
   ----------------------------- ------------------------------------------------
-  [#H]{.cf .ic}                 Hostname of local host
-  [#h]{.cf .ic}                 Hostname of local host without the domain name
-  [#F]{.cf .ic}                 Current window flag
-  [#I]{.cf .ic}                 Current window index
-  [#P]{.cf .ic}                 Current pane index
-  [#S]{.cf .ic}                 Current session name
-  [#T]{.cf .ic}                 Current window title
-  [#W]{.cf .ic}                 Current window name
-  [\##]{.cf .ic}                A literal \#
-  [#(shell-command)]{.cf .ic}   First line of the shell command's output
-  [#\[attributes\]]{.cf .ic}    Color or attribute change
+  [#H]                 Hostname of local host
+  [#h]                 Hostname of local host without the domain name
+  [#F]                 Current window flag
+  [#I]                 Current window index
+  [#P]                 Current pane index
+  [#S]                 Current session name
+  [#T]                 Current window title
+  [#W]                 Current window name
+  [\##]                A literal \#
+  [#(shell-command)]   First line of the shell command's output
+  [#\[attributes\]]    Color or attribute change
 
 ------------------------------------------------------------------------
 
 For example, if you wanted to show just the name of the current tmux
-session on the left, you'd use the [set-option -g status-left]{.cf .ic}
-option with the [#S]{.cf .ic} value, like this:
+session on the left, you'd use the [set-option -g status-left]
+option with the [#S] value, like this:
 
   ------------------ -----------------------------
-  ​[ ]{.codeprefix}   set -g status-left ​*\"#S\"*​
+  ​[ ]   set -g status-left ​*\"#S\"*​
   ------------------ -----------------------------
 
 But you can also make it stand out more by using an attribute to set the
 foreground color, like this:
 
   ------------------ ------------------------------------------
-  ​[ ]{.codeprefix}   set -g status-left ​*\"#\[fg=green\]#S\"*​
+  ​[ ]   set -g status-left ​*\"#\[fg=green\]#S\"*​
   ------------------ ------------------------------------------
 
 You can add as many attributes and items to the status line as you want.
@@ -1804,7 +1081,7 @@ the session name in green, the current window number in yellow, and the
 current pane in cyan. Add this line to your configuration file:
 
   ------------------ --------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   set -g status-left ​*\"#\[fg=green\]#S #\[fg=yellow\]#I #\[fg=cyan\]#P\"*​
+  ​[ ]   set -g status-left ​*\"#\[fg=green\]#S #\[fg=yellow\]#I #\[fg=cyan\]#P\"*​
   ------------------ --------------------------------------------------------------------------
 
 You can add any arbitrary text into the status line, too. Let's add text
@@ -1815,12 +1092,12 @@ to make the session, window, and pane more noticeable, like this:
 :::
 
   ------------------ -----------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Status line left side to show Session:window:pane*​
-  ​[ ]{.codeprefix}   set -g status-left-length 40
-  ​[ ]{.codeprefix}   set -g status-left ​*\"#\[fg=green\]Session: #S #\[fg=yellow\]#I #\[fg=cyan\]#P\"*​
+  ​[ ]   ​*\# Status line left side to show Session:window:pane*​
+  ​[ ]   set -g status-left-length 40
+  ​[ ]   set -g status-left ​*\"#\[fg=green\]Session: #S #\[fg=yellow\]#I #\[fg=cyan\]#P\"*​
   ------------------ -----------------------------------------------------------------------------------
 
-We set the [status-left-length]{.cf .ic} option because the output we've
+We set the [status-left-length] option because the output we've
 specified is too long for the default length, so we have to make that
 region wider.
 
@@ -1832,12 +1109,12 @@ date and time, like this:
 :::
 
   ------------------ ------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Status line right side - 31-Oct 13:37*​
-  ​[ ]{.codeprefix}   set -g status-right ​*\"#\[fg=cyan\]%d %b %R\"*​
+  ​[ ]   ​*\# Status line right side - 31-Oct 13:37*​
+  ​[ ]   set -g status-right ​*\"#\[fg=cyan\]%d %b %R\"*​
   ------------------ ------------------------------------------------
 
 This formats the date as "31-Oct 13:37," but you can format it however
-you'd like, using the standard [strftime]{.cf .methodname} time
+you'd like, using the standard [strftime] .methodname} time
 formatting mechanism used in many programming
 languages.^[\[7\]](#part0029.xhtml#FOOTNOTE-7){#part0027.xhtml#FNPTR-7
 .footnote}^ Your status line should now look like this:
@@ -1847,7 +1124,7 @@ languages.^[\[7\]](#part0029.xhtml#FOOTNOTE-7){#part0027.xhtml#FNPTR-7
 :::
 
 You can take things a step further by incorporating shell commands into
-the mix by using the [#(shell-command)]{.cf .ic} variable to return the
+the mix by using the [#(shell-command)] variable to return the
 result of any external command-line program into the status line. We'll
 go into this in detail in [​*Adding Battery Life to the Status
 Line*​](#part0053.xhtml#sec.Showing.Battery.Life).
@@ -1858,12 +1135,12 @@ We've added the current time and some other dynamic information to our
 status line, but we need to tell tmux how often to refresh that
 information periodically. By default, tmux refreshes the status line
 every 15 seconds. We can specify exactly how quickly tmux refreshes its
-status line with [set-option]{.cf .ic} [-g status-interval]{.cf .ic}
+status line with [set-option] [-g status-interval]
 followed by the refresh interval in seconds, like this:
 
   ------------------ -------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Update the status line every sixty seconds*​
-  ​[ ]{.codeprefix}   set -g status-interval 60
+  ​[ ]   ​*\# Update the status line every sixty seconds*​
+  ​[ ]   set -g status-interval 60
   ------------------ -------------------------------------------------
 
 This would refresh the status line every 60 seconds. Keep in mind that
@@ -1882,8 +1159,8 @@ change:
 :::
 
   ------------------ ------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Center the window list in the status line*​
-  ​[ ]{.codeprefix}   set -g status-justify centre
+  ​[ ]   ​*\# Center the window list in the status line*​
+  ​[ ]   set -g status-justify centre
   ------------------ ------------------------------------------------
 
 With this in place, the window list appears centered:
@@ -1907,14 +1184,14 @@ notification, like this:
 :::
 
   ------------------ -----------------------------
-  ​[ ]{.codeprefix}   ​*\# enable activity alerts*​
-  ​[ ]{.codeprefix}   setw -g monitor-activity on
-  ​[ ]{.codeprefix}   set -g visual-activity on
+  ​[ ]   ​*\# enable activity alerts*​
+  ​[ ]   setw -g monitor-activity on
+  ​[ ]   set -g visual-activity on
   ------------------ -----------------------------
 
-The [monitor-activity on]{.cf .ic} command highlights the window name in
+The [monitor-activity on] command highlights the window name in
 the status line when there's activity in that window. The
-[visual-activity on]{.cf .ic} line tells tmux to show a message in the
+[visual-activity on] line tells tmux to show a message in the
 status line as well.
 
 Now when one of the other windows has some activity, it'll stand out
@@ -1926,7 +1203,7 @@ with a cyan background, like the "top" window shown here:
 
 Once you switch to that window, the colors will revert back to normal.
 If you want to configure different colors, you can do so with [setw -g
-window-status-activity-style]{.cf .ic} and the colors of your choice.
+window-status-activity-style] and the colors of your choice.
 
 []{#part0028.xhtml}
 
@@ -1935,15 +1212,15 @@ window-status-activity-style]{.cf .ic} and the colors of your choice.
 We've built up a pretty solid configuration file throughout this
 chapter. Look at Appendix 1, [​*Our
 Configuration*​](#part0057.xhtml#ap.config) to see the whole
-[.tmux.conf]{.cf .filename} file.
+[.tmux.conf]  file.
 
-You can define additional options in your [.tmux.conf]{.cf .filename}
+You can define additional options in your [.tmux.conf] 
 file. For example, in Chapter 3, [​*Scripting Customized tmux
 Environments*​](#part0030.xhtml#ch.scripting), you'll set up a custom
 default work environment using project-specific configuration files.
 
 In addition, you can configure a default configuration for your system
-in [/etc/tmux.conf]{.cf .filename}. This is great for situations where
+in [/etc/tmux.conf] . This is great for situations where
 you've set up a shared server so members of your team can collaborate,
 or if you just want to ensure that every user on the system has some
 sensible defaults.
@@ -1961,120 +1238,120 @@ every day.
 
   Command                                                                                                                                                                                                                                                                                                                                                                                                                                                      Description
   ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ -----------------------------------------------------------------------------------------------------------------------------------
-  `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`a`{.cf .keystroke}                                                                                                                                                                                                                                                                                                                                                                                   The new `Prefix`{.cf .keystroke style="font-variant:small-caps"}.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `a`{.cf .keystroke}                                                                                                                                                                                                                                                                                                                                                                                 Sends `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`a`{.cf .keystroke} to the program running in a tmux window or pane.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `r`{.cf .keystroke}                                                                                                                                                                                                                                                                                                                                                                                 Reloads the tmux configuration file.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `|`{.cf .keystroke style="font-variant:small-caps"}                                                                                                                                                                                                                                                                                                                                                 Splits the window horizontally.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `-`{.cf .keystroke style="font-variant:small-caps"}                                                                                                                                                                                                                                                                                                                                                 Splits the window vertically.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `h`{.cf .keystroke}, `Prefix`{.cf .keystroke style="font-variant:small-caps"} `j`{.cf .keystroke}, `Prefix`{.cf .keystroke style="font-variant:small-caps"} `k`{.cf .keystroke}, and `Prefix`{.cf .keystroke style="font-variant:small-caps"} `l`{.cf .keystroke}                                                                                                                                   Moves between panes.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `H`{.cf .keystroke style="font-variant:small-caps"}, `Prefix`{.cf .keystroke style="font-variant:small-caps"} `J`{.cf .keystroke style="font-variant:small-caps"}, `Prefix`{.cf .keystroke style="font-variant:small-caps"} `K`{.cf .keystroke style="font-variant:small-caps"}, and `Prefix`{.cf .keystroke style="font-variant:small-caps"} `L`{.cf .keystroke style="font-variant:small-caps"}   Resizes the current pane.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`h`{.cf .keystroke} and `Prefix`{.cf .keystroke style="font-variant:small-caps"} `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`l`{.cf .keystroke}                                                                                                                                                                                  Moves forward and backward through windows.
+  `Ctrl` -`a`                                                                                                                                                                                                                                                                                                                                                                                    The new `Prefix` .
+  `Prefix`  `a`                                                                                                                                                                                                                                                                                                                                                                                  Sends `Ctrl` -`a`  to the program running in a tmux window or pane.
+  `Prefix`  `r`                                                                                                                                                                                                                                                                                                                                                                                  Reloads the tmux configuration file.
+  `Prefix`  `|`                                                                                                                                                                                                                                                                                                                                                  Splits the window horizontally.
+  `Prefix`  `-`                                                                                                                                                                                                                                                                                                                                                  Splits the window vertically.
+  `Prefix`  `h` , `Prefix`  `j` , `Prefix`  `k` , and `Prefix`  `l`                                                                                                                                    Moves between panes.
+  `Prefix`  `H` , `Prefix`  `J` , `Prefix`  `K` , and `Prefix`  `L`    Resizes the current pane.
+  `Prefix`  `Ctrl` -`h`  and `Prefix`  `Ctrl` -`l`                                                                                                                                                                                   Moves forward and backward through windows.
 
 ### Commands to control tmux's behavior
 
   Command                                                             Description
   ------------------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  [set -g prefix C-a]{.cf .ic}                                        Sets the key combination for the Prefix key.
-  [set -sg escape-time n]{.cf .ic}                                    Sets the amount of time (in milliseconds) tmux waits for a keystroke after pressing `Prefix`{.cf .keystroke style="font-variant:small-caps"}.
-  [set -g base-index 1]{.cf .ic}                                      Sets the base index for windows to 1 instead of 0.
-  [setw -g pane-base-index 1]{.cf .ic}                                Sets the base index for panes to 1 instead of 0.
-  [source-file \[file\]]{.cf .ic}                                     Loads a configuration file. Use this to reload the existing configuration or bring in additional configuration options later.
-  [bind C-a send-prefix]{.cf .ic}                                     Configures tmux to send the prefix when pressing the `Prefix`{.cf .keystroke style="font-variant:small-caps"} combination twice consecutively.
-  [bind-key \[key\] \[command\]]{.cf .ic}                             Creates a keybinding that executes the specified command. Can be shortened to [bind]{.cf .ic}.
-  [bind-key -r \[key\] \[command\]]{.cf .ic}                          Creates a keybinding that is repeatable, meaning you only need to press the `Prefix`{.cf .keystroke style="font-variant:small-caps"} key once, and you can press the assigned key repeatedly afterwards. This is useful for commands where you want to cycle through elements or resize panes. Can be shortened to [bind]{.cf .ic}.
-  [unbind-key \[key\]]{.cf .ic}                                       Removes a defined keybinding so it can be bound to a different command. Can be shortened to [unbind]{.cf .ic}.
-  [display-message]{.cf .ic} or [display]{.cf .ic}                    Displays the given text in the status message.
-  [set-option \[flags\] \[option\] \[value\]]{.cf .ic}                Sets options for sessions. Using the [-g]{.cf .ic} flag sets the option for all sessions.
-  [set-window-option \[option\] \[value\]]{.cf .ic}                   Sets options for windows, such as activity notifications, cursor movement, or other elements related to windows and panes.
-  [set -a]{.cf .ic}                                                   Appends values onto existing options rather than replacing the option's value.
-  [set -g mouse off]{.cf .ic}                                         Disables mouse support in tmux. Set to [on]{.cf .ic} if you wish to use the mouse.
-  [set -g default-terminal]{.cf .ic} [\"screen-256color\"]{.cf .ic}   Defines the terminal type for windows. Sets the value of [TERM]{.cf .ic}, which other programs will use. [screen-256color]{.cf .ic} ensures the widest compatibility with programs originally written for the [screen]{.cf .ic} program.
+  [set -g prefix C-a]                                        Sets the key combination for the Prefix key.
+  [set -sg escape-time n]                                    Sets the amount of time (in milliseconds) tmux waits for a keystroke after pressing `Prefix` .
+  [set -g base-index 1]                                      Sets the base index for windows to 1 instead of 0.
+  [setw -g pane-base-index 1]                                Sets the base index for panes to 1 instead of 0.
+  [source-file \[file\]]                                     Loads a configuration file. Use this to reload the existing configuration or bring in additional configuration options later.
+  [bind C-a send-prefix]                                     Configures tmux to send the prefix when pressing the `Prefix`  combination twice consecutively.
+  [bind-key \[key\] \[command\]]                             Creates a keybinding that executes the specified command. Can be shortened to [bind].
+  [bind-key -r \[key\] \[command\]]                          Creates a keybinding that is repeatable, meaning you only need to press the `Prefix`  key once, and you can press the assigned key repeatedly afterwards. This is useful for commands where you want to cycle through elements or resize panes. Can be shortened to [bind].
+  [unbind-key \[key\]]                                       Removes a defined keybinding so it can be bound to a different command. Can be shortened to [unbind].
+  [display-message] or [display]                    Displays the given text in the status message.
+  [set-option \[flags\] \[option\] \[value\]]                Sets options for sessions. Using the [-g] flag sets the option for all sessions.
+  [set-window-option \[option\] \[value\]]                   Sets options for windows, such as activity notifications, cursor movement, or other elements related to windows and panes.
+  [set -a]                                                   Appends values onto existing options rather than replacing the option's value.
+  [set -g mouse off]                                         Disables mouse support in tmux. Set to [on] if you wish to use the mouse.
+  [set -g default-terminal] [\"screen-256color\"]   Defines the terminal type for windows. Sets the value of [TERM], which other programs will use. [screen-256color] ensures the widest compatibility with programs originally written for the [screen] program.
 
 ### Commands to control tmux's appearance
 
 +-----------------------------------+-----------------------------------+
 | Command                           | Description                       |
 +===================================+===================================+
-| [set -g status-style]{.cf .ic}    | Sets the foreground and           |
+| [set -g status-style]    | Sets the foreground and           |
 |                                   | background color for the status   |
 |                                   | line. Supports the options        |
-|                                   | [dim]{.cf .ic}, [bright]{.cf .ic} |
-|                                   | (or [bold]{.cf .ic}),             |
-|                                   | [reverse]{.cf .ic}, and           |
-|                                   | [blink]{.cf .ic} in addition to   |
+|                                   | [dim], [bright] |
+|                                   | (or [bold]),             |
+|                                   | [reverse], and           |
+|                                   | [blink] in addition to   |
 |                                   | colors.                           |
 |                                   |                                   |
 |                                   | Example: [set -g status-style     |
-|                                   | fg=white,bold,bg=black]{.cf .ic}  |
+|                                   | fg=white,bold,bg=black]  |
 +-----------------------------------+-----------------------------------+
-| [setw -g window-status-style]{.cf | Sets the foreground and           |
+| [setw -g window-status-style] | Sets the foreground and           |
 | .ic}                              | background color of the window    |
 |                                   | list in the status line. Uses the |
 |                                   | same options as                   |
-|                                   | [status-style]{.cf .ic}.          |
+|                                   | [status-style].          |
 +-----------------------------------+-----------------------------------+
 | [setw -g                          | Sets the foreground and           |
-| window-status-current-style]{.cf  | background color of the active    |
+| window-status-current-style]  | background color of the active    |
 | .ic}                              | window in the window list in the  |
 |                                   | status line. Uses the same        |
-|                                   | options as [status-style]{.cf     |
+|                                   | options as [status-style]     |
 |                                   | .ic}.                             |
 +-----------------------------------+-----------------------------------+
 | [setw -g                          | Sets the foreground and           |
-| window-status-activity-style]{.cf | background color of any window    |
+| window-status-activity-style] | background color of any window    |
 | .ic}                              | with background activity. Uses    |
 |                                   | the same options as               |
-|                                   | [status-style]{.cf .ic}.          |
+|                                   | [status-style].          |
 +-----------------------------------+-----------------------------------+
-| [setw -g pane-border-style]{.cf   | Sets the foreground and           |
+| [setw -g pane-border-style]   | Sets the foreground and           |
 | .ic}                              | background color of the pane      |
 |                                   | borders. Uses the same options as |
-|                                   | [status-style]{.cf .ic}.          |
+|                                   | [status-style].          |
 +-----------------------------------+-----------------------------------+
 | [setw -g                          | Sets the foreground and           |
-| pane-active-border-style]{.cf     | background color of the active    |
+| pane-active-border-style]     | background color of the active    |
 | .ic}                              | pane's border. Uses the same      |
-|                                   | options as [status-style]{.cf     |
+|                                   | options as [status-style]     |
 |                                   | .ic}.                             |
 +-----------------------------------+-----------------------------------+
-| [setw -g window-style]{.cf .ic}   | Sets the foreground and           |
+| [setw -g window-style]   | Sets the foreground and           |
 |                                   | background color of the window.   |
 |                                   | Uses the same options as          |
-|                                   | [status-style]{.cf .ic}.          |
+|                                   | [status-style].          |
 +-----------------------------------+-----------------------------------+
-| [setw -g window-active-style]{.cf | Sets the foreground and           |
+| [setw -g window-active-style] | Sets the foreground and           |
 | .ic}                              | background color of the active    |
 |                                   | window. Uses the same options as  |
-|                                   | [status-style]{.cf .ic}.          |
+|                                   | [status-style].          |
 +-----------------------------------+-----------------------------------+
-| [setw -g message-style]{.cf .ic}  | Sets the foreground and           |
+| [setw -g message-style]  | Sets the foreground and           |
 |                                   | background color of the message   |
 |                                   | area and tmux command line. Uses  |
 |                                   | the same options as               |
-|                                   | [status-style]{.cf .ic}.          |
+|                                   | [status-style].          |
 +-----------------------------------+-----------------------------------+
-| [set -g status-length-left]{.cf   | Controls the number of visible    |
+| [set -g status-length-left]   | Controls the number of visible    |
 | .ic} and [set -g                  | characters in the left and right  |
-| status-length-right]{.cf .ic}     | sides of the status line.         |
+| status-length-right]     | sides of the status line.         |
 +-----------------------------------+-----------------------------------+
-| [set -g status-left ]{.cf .ic}    | Configures the items that appear  |
-| and [set -g status-right]{.cf     | in the left and right sides of    |
+| [set -g status-left ]    | Configures the items that appear  |
+| and [set -g status-right]     | in the left and right sides of    |
 | .ic}                              | the status line.                  |
 +-----------------------------------+-----------------------------------+
-| [set -g status-interval n]{.cf    | Defines the refresh interval for  |
+| [set -g status-interval n]    | Defines the refresh interval for  |
 | .ic}                              | the status line, where [n]{.emph} |
 |                                   | is the number of seconds between  |
 |                                   | refreshes.                        |
 +-----------------------------------+-----------------------------------+
 | [set -g status-justify centre     | Centers the window list in the    |
-| ]{.cf .ic}                        | status line.                      |
+| ]                        | status line.                      |
 +-----------------------------------+-----------------------------------+
 | [setw -g monitor-activity on      | Looks for activity in other       |
-| ]{.cf .ic}                        | windows and highlights the name   |
+| ]                        | windows and highlights the name   |
 |                                   | of the window with background     |
 |                                   | activity.                         |
 +-----------------------------------+-----------------------------------+
-| [set -g visual-activity on ]{.cf  | Displays a message in the message |
+| [set -g visual-activity on ]  | Displays a message in the message |
 | .ic}                              | area when there is activity in    |
 |                                   | another window.                   |
 +-----------------------------------+-----------------------------------+
@@ -2127,16 +1404,16 @@ first, and then we'll look at more advanced automatic tools.
 
 ## Creating a Custom Setup with tmux Commands {#part0031.xhtml#sec.Creating.a.Custom.Setup}
 
-We've already explored how we use the [tmux]{.cf .ic} command to create
-new tmux sessions, but the [tmux]{.cf .ic} command takes many other
+We've already explored how we use the [tmux] command to create
+new tmux sessions, but the [tmux] command takes many other
 options. We can take an existing session and split its windows into
 panes, change layouts, or even start up applications within the session.
 
-The key to this is the [-t]{.cf .ic} switch, or the "target." When you
+The key to this is the [-t] switch, or the "target." When you
 have a named tmux session, you can attach to it like this:
 
   ------------------ --------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**\[session_name\]**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​\[session_name\]​
   ------------------ --------------------------------------------------------------------
 
 You can use this target switch to direct a tmux command to the
@@ -2144,23 +1421,23 @@ appropriate tmux session. Create a new tmux session called
 "development," like this:
 
   ------------------ --------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-s**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new-session​​ ​​-s​​ ​​development​
   ------------------ --------------------------------------------------------------------
 
-Then detach from the session with `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `d`{.cf .keystroke}. Even though you're
+Then detach from the session with `Prefix`
+ `d` . Even though you're
 no longer connected, you can split the window in the tmux session
 horizontally by issuing this command:
 
   ------------------ -----------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**split-window**​​ ​​**-h**​​ ​​**-t**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​split-window​​ ​​-h​​ ​​-t​​ ​​development​
   ------------------ -----------------------------------------------------------------------------
 
 When you attach to the session again, the window will split into two
 panes. Attach to your session again to see for yourself.
 
   ------------------ ---------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​development​
   ------------------ ---------------------------------------------------------------
 
 In fact, you don't even have to detach from a tmux session to send
@@ -2169,7 +1446,7 @@ this time with a vertical split. Try it out. Open a second terminal
 window or tab, and enter this command:
 
   ------------------ -----------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**split-window**​​ ​​**-v**​​ ​​**-t**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​split-window​​ ​​-v​​ ​​-t​​ ​​development​
   ------------------ -----------------------------------------------------------------------------
 
 Using this approach, you can customize your environment easily. Let's
@@ -2178,31 +1455,31 @@ explore this concept by creating our own development environment.
 ### Scripting a Project Configuration {#part0031.xhtml#sec.Scripting.a.Project.Configuration}
 
 In Chapter 1, [​*Learning the Basics*​](#part0013.xhtml#ch.basics), we
-discussed tmux commands such as [new-session]{.cf .ic} and
-[new-window]{.cf .ic}. Let's write a simple script using these and
+discussed tmux commands such as [new-session] and
+[new-window]. Let's write a simple script using these and
 similar commands that creates a new tmux session and creates a window
 with a couple panes and two additional windows with one pane each. To
 top it off, we'll launch applications in each of the panes.
 
-Let's start by creating a new script called [development]{.cf .filename}
+Let's start by creating a new script called [development] 
 in our home directory. We'll make this script executable too, so we can
 run it like any other executable program from our shell. Execute these
 commands in your terminal:
 
   ------------------ -------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**touch**​​ ​​**\~/development**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**chmod**​​ ​​**+x**​​ ​​**\~/development**​
+  ​[ ]   ​[\$ ]​​touch​​ ​​\~/development​
+  ​[ ]   ​[\$ ]​​chmod​​ ​​+x​​ ​​\~/development​
   ------------------ -------------------------------------------------------
 
 When we start up our session, we want to change to the directory for our
-project. We'll call that directory [devproject]{.cf .filename}. And
+project. We'll call that directory [devproject] . And
 before we can change to that directory, we'd better create it first.
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**mkdir**​​ ​​**\~/devproject**​
+  ​[ ]   ​[\$ ]​​mkdir​​ ​​\~/devproject​
   ------------------ ----------------------------------------------
 
-Now, open the [\~/development]{.cf .filename} script in your text editor
+Now, open the [\~/development]  script in your text editor
 and add this line to create a new tmux session called "development":
 
 ::: livecodelozenge
@@ -2210,59 +1487,59 @@ and add this line to create a new tmux session called "development":
 :::
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   tmux new-session -s development -n editor -d
+  ​[ ]   tmux new-session -s development -n editor -d
   ------------------ ----------------------------------------------
 
 We're passing a couple additional parameters when we create this new
 session. First, we're creating this session and naming it with the
-[-s]{.cf .ic} flag like we've done before. Then we give the initial
+[-s] flag like we've done before. Then we give the initial
 window a name of "editor," and then immediately detach from this new
-session with the [-d]{.cf .ic} flag.
+session with the [-d] flag.
 
-Next, add a line to our configuration that uses tmux's [send-keys]{.cf
+Next, add a line to our configuration that uses tmux's [send-keys]
 .ic} command to change the current directory to the one we're using for
 our project:
 
   ------------------ ----------------------------------------------------------
-  ​[ ]{.codeprefix}   tmux send-keys -t development ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux send-keys -t development ​*\'cd \~/devproject\'*​ C-m
   ------------------ ----------------------------------------------------------
 
-We place [C-m]{.cf .ic} at the end of the line to send the Carriage
+We place [C-m] at the end of the line to send the Carriage
 Return sequence, represented by
 Ctrl-M.^[\[8\]](#part0035.xhtml#FOOTNOTE-8){#part0031.xhtml#FNPTR-8
-.footnote}^ This is how we tell tmux to press the `Enter`{.cf .keystroke
-style="font-variant:small-caps"} key.
+.footnote}^ This is how we tell tmux to press the `Enter`
+ key.
 
 We'll use the same approach to open the Vim text editor in that window.
 Add this line to your script:
 
   ------------------ ---------------------------------------------
-  ​[ ]{.codeprefix}   tmux send-keys -t development ​*\'vim\'*​ C-m
+  ​[ ]   tmux send-keys -t development ​*\'vim\'*​ C-m
   ------------------ ---------------------------------------------
 
 With these three commands, we've created a new session, changed to a
 directory, and opened a text editor, but our environment isn't yet
 complete. Let's split the main editor window so we have a small terminal
-window on the bottom. We do this with the [split-window]{.cf .ic}
+window on the bottom. We do this with the [split-window]
 command. Add this line to your script:
 
   ------------------ -------------------------------------
-  ​[ ]{.codeprefix}   tmux split-window -v -t development
+  ​[ ]   tmux split-window -v -t development
   ------------------ -------------------------------------
 
 This splits the main window in half horizontally. You could have
 specified a percentage using something like
 
   ------------------ -------------------------------------------
-  ​[ ]{.codeprefix}   tmux split-window -v -p 10 -t development
+  ​[ ]   tmux split-window -v -p 10 -t development
   ------------------ -------------------------------------------
 
-but for now, just leave the [split-window]{.cf .ic} command as is and
-then select one of the default tmux layouts---the [main-horizontal]{.cf
+but for now, just leave the [split-window] command as is and
+then select one of the default tmux layouts---the [main-horizontal]
 .ic} one---by adding this to your script:
 
   ------------------ -------------------------------------------------------
-  ​[ ]{.codeprefix}   tmux ​**select**​-layout -t development main-horizontal
+  ​[ ]   tmux ​select​-layout -t development main-horizontal
   ------------------ -------------------------------------------------------
 
 We've created our first window and split it into two panes, but the
@@ -2272,33 +1549,33 @@ commands at specific panes and windows.
 
 #### Targeting Specific Panes and Windows {#part0031.xhtml#sec.Targeting.Specific.Panes.and.Windows}
 
-With commands such as [send-keys]{.cf .ic}, you can specify not only the
+With commands such as [send-keys], you can specify not only the
 target session, but also the target window and pane. In the
 configuration file you created back in Chapter 2, [​*Configuring
-tmux*​](#part0023.xhtml#ch.config), you specified a [base-index]{.cf .ic}
-of [1]{.cf .ic}, meaning that your window numbering starts at 1. This
+tmux*​](#part0023.xhtml#ch.config), you specified a [base-index]
+of [1], meaning that your window numbering starts at 1. This
 base index doesn't affect the panes, though, which is why you also set
-the [pane-base-index]{.cf .ic} to [1]{.cf .ic}. In our case, we have two
+the [pane-base-index] to [1]. In our case, we have two
 panes in our current setup, like the following example:
 
   ------------------ -----------------------------------------------------
-  ​[ ]{.codeprefix}   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
-  ​[ ]{.codeprefix}   \| \|
-  ​[ ]{.codeprefix}   \| Pane 1 \|
-  ​[ ]{.codeprefix}   \| \|
-  ​[ ]{.codeprefix}   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
-  ​[ ]{.codeprefix}   \| Pane 2 \|
-  ​[ ]{.codeprefix}   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+  ​[ ]   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+  ​[ ]   \| \|
+  ​[ ]   \| Pane 1 \|
+  ​[ ]   \| \|
+  ​[ ]   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+  ​[ ]   \| Pane 2 \|
+  ​[ ]   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
   ------------------ -----------------------------------------------------
 
 We have the Vim text editor open in Pane 1, and we want to send a
 command to Pane 2 that changes to our project directory. We target a
-pane using the format [\[session\]:\[window\].\[pane\]]{.cf .ic}, so to
-target Pane 2, we'd use [development:1.2]{.cf .ic}. So, add this line to
+pane using the format [\[session\]:\[window\].\[pane\]], so to
+target Pane 2, we'd use [development:1.2]. So, add this line to
 your script, and you'll get exactly what you want:
 
   ------------------ --------------------------------------------------------------
-  ​[ ]{.codeprefix}   tmux send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
   ------------------ --------------------------------------------------------------
 
 We're almost there. Let's finish up this configuration by adding a
@@ -2307,24 +1584,24 @@ couple more windows to the session.
 #### Creating and Selecting Windows {#part0031.xhtml#sec.Creating.and.Selecting.Windows}
 
 We want a second window in our session that will be a full-screen
-console. We can create that new window using the [new-window]{.cf .ic}
+console. We can create that new window using the [new-window]
 command. Add these lines to your script:
 
   ------------------ ------------------------------------------------------------
-  ​[ ]{.codeprefix}   tmux new-window -n console -t development
-  ​[ ]{.codeprefix}   tmux send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux new-window -n console -t development
+  ​[ ]   tmux send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
   ------------------ ------------------------------------------------------------
 
-After we create the window, we use [send-keys]{.cf .ic} to once again
+After we create the window, we use [send-keys] to once again
 change into our project directory. We only have one pane in our new
 window, so we only have to specify the window number in the target.
 
 When we start up our session, we want our first window to be displayed,
-and we do that with the [select-window]{.cf .ic} command:
+and we do that with the [select-window] command:
 
   ------------------ -----------------------------------------
-  ​[ ]{.codeprefix}   tmux ​**select**​-window -t development:1
-  ​[ ]{.codeprefix}   tmux attach -t development
+  ​[ ]   tmux ​select​-window -t development:1
+  ​[ ]   tmux attach -t development
   ------------------ -----------------------------------------
 
 We could continue to add to this script, creating additional windows and
@@ -2336,22 +1613,22 @@ it shows up on the screen, ready for us to begin working. Our entire
 script looks like this:
 
   ------------------ --------------------------------------------------------------
-  ​[ ]{.codeprefix}   tmux new-session -s development -n editor -d
-  ​[ ]{.codeprefix}   tmux send-keys -t development ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   tmux send-keys -t development ​*\'vim\'*​ C-m
-  ​[ ]{.codeprefix}   tmux split-window -v -t development
-  ​[ ]{.codeprefix}   tmux ​**select**​-layout -t development main-horizontal
-  ​[ ]{.codeprefix}   tmux send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   tmux new-window -n console -t development
-  ​[ ]{.codeprefix}   tmux send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   tmux ​**select**​-window -t development:1
-  ​[ ]{.codeprefix}   tmux attach -t development
+  ​[ ]   tmux new-session -s development -n editor -d
+  ​[ ]   tmux send-keys -t development ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux send-keys -t development ​*\'vim\'*​ C-m
+  ​[ ]   tmux split-window -v -t development
+  ​[ ]   tmux ​select​-layout -t development main-horizontal
+  ​[ ]   tmux send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux new-window -n console -t development
+  ​[ ]   tmux send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux ​select​-window -t development:1
+  ​[ ]   tmux attach -t development
   ------------------ --------------------------------------------------------------
 
 When you run it with
 
   ------------------ ------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**\~/development**​
+  ​[ ]   ​[\$ ]​​\~/development​
   ------------------ ------------------------------------
 
 your environment will look like this:
@@ -2362,9 +1639,9 @@ your environment will look like this:
 
 One drawback to this approach is that this script creates a brand-new
 session. It won't work properly if you run it a second time while the
-[development]{.cf .ic} session is currently running. You could modify
+[development] session is currently running. You could modify
 the script to check if a session with that name already exists by using
-the [tmux has-session]{.cf .ic} command and only create the session if
+the [tmux has-session] command and only create the session if
 it's not there, like this:
 
 ::: livecodelozenge
@@ -2372,20 +1649,20 @@ it's not there, like this:
 :::
 
   ------------------ --------------------------------------------------------------
-  ​[ ]{.codeprefix}   tmux has-session -t development
-  ​[ ]{.codeprefix}   ​**if**​ \[ \$? != 0 \]
-  ​[ ]{.codeprefix}   ​**then**​
-  ​[ ]{.codeprefix}   ​​tmux new-session -s development -n editor -d
-  ​[ ]{.codeprefix}   tmux send-keys -t development ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   tmux send-keys -t development ​*\'vim\'*​ C-m
-  ​[ ]{.codeprefix}   tmux split-window -v -t development
-  ​[ ]{.codeprefix}   tmux ​**select**​-layout -t development main-horizontal
-  ​[ ]{.codeprefix}   tmux send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   tmux new-window -n console -t development
-  ​[ ]{.codeprefix}   tmux send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   tmux ​**select**​-window -t development:1
-  ​[ ]{.codeprefix}   ​**fi**​
-  ​[ ]{.codeprefix}   tmux attach -t development
+  ​[ ]   tmux has-session -t development
+  ​[ ]   ​if​ \[ \$? != 0 \]
+  ​[ ]   ​then​
+  ​[ ]   ​​tmux new-session -s development -n editor -d
+  ​[ ]   tmux send-keys -t development ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux send-keys -t development ​*\'vim\'*​ C-m
+  ​[ ]   tmux split-window -v -t development
+  ​[ ]   tmux ​select​-layout -t development main-horizontal
+  ​[ ]   tmux send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux new-window -n console -t development
+  ​[ ]   tmux send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   tmux ​select​-window -t development:1
+  ​[ ]   ​fi​
+  ​[ ]   tmux attach -t development
   ------------------ --------------------------------------------------------------
 
 This approach works well for a single project setup. You could modify
@@ -2397,29 +1674,29 @@ things to manage multiple projects.
 
 ## Using tmux Configuration for Setup {#part0032.xhtml#sec.Using.tmux.Configuration.For.Setup}
 
-The [.tmux.conf]{.cf .filename} file itself can include commands that
+The [.tmux.conf]  file itself can include commands that
 set up a default environment. If you wanted every tmux session to start
 in the same default folder, or automatically open a split window, you
 could bake that right in to your default configuration, simply by using
 the appropriate commands.
 
 But you can also specify a configuration file when you start up an
-instance of tmux, by using the [-f]{.cf .ic} flag. This way you don't
+instance of tmux, by using the [-f] flag. This way you don't
 have to change your original default configuration file, and you can
 check your configuration file in with your project's source code. You
 can also set up your own per-project configuration options, such as new
 keyboard shortcuts to run commands or start your test suite.
 
-Let's try this out. Create a new file called [app.conf]{.cf .filename}.
+Let's try this out. Create a new file called [app.conf] .
 
   ------------------ -----------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**touch**​​ ​​**app.conf**​
+  ​[ ]   ​[\$ ]​​touch​​ ​​app.conf​
   ------------------ -----------------------------------------
 
 Inside this file, you can use the same commands you just learned about
 in the previous section, but since you're inside the configuration file
 rather than a shell script, you don't have to explicitly prefix each
-command with [tmux]{.cf .ic}. Add this code to your [app.conf]{.cf
+command with [tmux]. Add this code to your [app.conf]
 .filename} file:
 
 ::: livecodelozenge
@@ -2427,37 +1704,37 @@ command with [tmux]{.cf .ic}. Add this code to your [app.conf]{.cf
 :::
 
   ------------------ ---------------------------------------------------------
-  ​[ ]{.codeprefix}   source-file \~/.tmux.conf
-  ​[ ]{.codeprefix}   new-session -s development -n editor -d
-  ​[ ]{.codeprefix}   send-keys -t development ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   send-keys -t development ​*\'vim\'*​ C-m
-  ​[ ]{.codeprefix}   split-window -v -t development
-  ​[ ]{.codeprefix}   ​**select**​-layout -t development main-horizontal
-  ​[ ]{.codeprefix}   send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   new-window -n console -t development
-  ​[ ]{.codeprefix}   send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
-  ​[ ]{.codeprefix}   ​**select**​-window -t development:1
+  ​[ ]   source-file \~/.tmux.conf
+  ​[ ]   new-session -s development -n editor -d
+  ​[ ]   send-keys -t development ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   send-keys -t development ​*\'vim\'*​ C-m
+  ​[ ]   split-window -v -t development
+  ​[ ]   ​select​-layout -t development main-horizontal
+  ​[ ]   send-keys -t development:1.2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   new-window -n console -t development
+  ​[ ]   send-keys -t development:2 ​*\'cd \~/devproject\'*​ C-m
+  ​[ ]   ​select​-window -t development:1
   ------------------ ---------------------------------------------------------
 
-This code first loads your existing [.tmux.conf]{.cf .filename} file.
+This code first loads your existing [.tmux.conf]  file.
 This way you'll have all your environment settings you previously
 defined, including your keybindings and status bar settings. This isn't
 mandatory, but if you left this off, you'd have to use all the default
 keybindings and options, or you'd have to define your own options in
 this file.
 
-To use this configuration file, pass the [-f]{.cf .ic} flag followed by
+To use this configuration file, pass the [-f] flag followed by
 the path to the config file. You also have to start tmux with the
-[attach]{.cf .ic} command, like this:
+[attach] command, like this:
 
   ------------------ ------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**-f**​​ ​​**app.conf**​​ ​​**attach**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​-f​​ ​​app.conf​​ ​​attach​
   ------------------ ------------------------------------------------------------
 
-This is because, by default, tmux always calls the [new-session]{.cf
+This is because, by default, tmux always calls the [new-session]
 .ic} command when it starts. This file creates a new session already, so
 you'd have [two]{.emph} tmux sessions running if you left off
-[attach]{.cf .ic}.
+[attach].
 
 This approach gives you a lot of flexibility, but you can gain even more
 by using a command-line tool called tmuxinator.
@@ -2468,7 +1745,7 @@ by using a command-line tool called tmuxinator.
 
 tmuxinator is a simple tool you can use to define and manage different
 tmux configurations. You define window layouts and commands in a simple
-YAML format, and then launch them with the [tmuxinator]{.cf .ic}
+YAML format, and then launch them with the [tmuxinator]
 command. Unlike the other approaches, tmuxinator offers a central
 location for your configurations and a much easier dialect for creating
 complex layouts. It also lets you specify commands that should always
@@ -2486,30 +1763,30 @@ Install tmuxinator by using Rubygems, which is the package management
 system for Ruby.
 
   ------------------ ------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**gem**​​ ​​**install**​​ ​​**tmuxinator**​
+  ​[ ]   ​[\$ ]​​gem​​ ​​install​​ ​​tmuxinator​
   ------------------ ------------------------------------------------------
 
 If you are not using RVM, you will need to run this as root or with the
-[sudo]{.cf .ic} command.
+[sudo] command.
 
-tmuxinator needs the [\$EDITOR]{.cf .ic} shell environment to be
+tmuxinator needs the [\$EDITOR] shell environment to be
 defined, so if you haven't set yours yet, you'll want to do that in your
-[.bashrc]{.cf .filename} file on Linux, or [.bash_profile]{.cf
+[.bashrc]  file on Linux, or [.bash_profile]
 .filename} on OS X. For example, to define Vim as the default editor,
 you'd add this line to your Bash configuration:
 
   ------------------ -------------------
-  ​[ ]{.codeprefix}   export EDITOR=vim
+  ​[ ]   export EDITOR=vim
   ------------------ -------------------
 
 Now we can create a new tmuxinator project. Let's call it "development."
 Execute this command:
 
   ------------------ -----------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmuxinator**​​ ​​**open**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmuxinator​​ ​​open​​ ​​development​
   ------------------ -----------------------------------------------------------
 
-This pops open the editor you assigned to the [\$EDITOR]{.cf .ic}
+This pops open the editor you assigned to the [\$EDITOR]
 environment variable and displays the default project configuration,
 which looks like this:
 
@@ -2518,37 +1795,37 @@ which looks like this:
 :::
 
   ------------------ ------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# \~/.tmuxinator/development.yml*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*name*​: ​*development*​
-  ​[ ]{.codeprefix}   ​*root*​: ​*\~/*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# a bunch of comments\....*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*windows*​:
-  ​[ ]{.codeprefix}   \- ​*editor*​:
-  ​[ ]{.codeprefix}   ​*layout*​: ​*main-vertical*​
-  ​[ ]{.codeprefix}   ​*panes*​:
-  ​[ ]{.codeprefix}   \- ​*vim*​
-  ​[ ]{.codeprefix}   \- ​*guard*​
-  ​[ ]{.codeprefix}   \- ​*server*​: ​*bundle exec rails s*​
-  ​[ ]{.codeprefix}   \- ​*logs*​: ​*tail -f log/development.log*​
+  ​[ ]   ​*\# \~/.tmuxinator/development.yml*​
+  ​[ ]   
+  ​[ ]   ​*name*​: ​*development*​
+  ​[ ]   ​*root*​: ​*\~/*​
+  ​[ ]   
+  ​[ ]   ​*\# a bunch of comments\....*​
+  ​[ ]   
+  ​[ ]   ​*windows*​:
+  ​[ ]   \- ​*editor*​:
+  ​[ ]   ​*layout*​: ​*main-vertical*​
+  ​[ ]   ​*panes*​:
+  ​[ ]   \- ​*vim*​
+  ​[ ]   \- ​*guard*​
+  ​[ ]   \- ​*server*​: ​*bundle exec rails s*​
+  ​[ ]   \- ​*logs*​: ​*tail -f log/development.log*​
   ------------------ ------------------------------------------
 
 This is an environment that a Ruby on Rails developer who works with Git
 might really appreciate. This creates a tmux session with three windows.
 The first window is divided into two panes, using the
-[main-vertical]{.cf .ic} layout scheme. The left pane opens Vim, and the
+[main-vertical] layout scheme. The left pane opens Vim, and the
 right pane opens Guard, a Ruby program that watches files for changes
 and executes tasks, like test runners. The second window launches Rails'
-built-in web server, and the third window uses the [tail]{.cf .ic}
+built-in web server, and the third window uses the [tail]
 command to follow the application's development log file.
 
 As you can see, tmuxinator makes it trivial to define not only the
 windows and panes, but also what commands we want to execute in each
 one. Let's use Tmuxinator to construct our development environment, with
 Vim in the top pane and a terminal on the bottom, starting in the
-[\~/devproject]{.cf .filename} folder. Remove the contents of this file
+[\~/devproject]  folder. Remove the contents of this file
 and replace it with the following code:
 
 ::: livecodelozenge
@@ -2556,18 +1833,18 @@ and replace it with the following code:
 :::
 
   ------------------ ---------------------------------------
-  ​[ ]{.codeprefix}   ​*name*​: ​*development*​
-  ​[ ]{.codeprefix}   ​*root*​: ​*\~/devproject*​
-  ​[ ]{.codeprefix}   ​*windows*​:
-  ​[ ]{.codeprefix}   \- ​*editor*​:
-  ​[ ]{.codeprefix}   ​*layout*​: ​*main-horizontal*​
-  ​[ ]{.codeprefix}   ​*panes*​:
-  ​[ ]{.codeprefix}   \- ​*vim*​
-  ​[ ]{.codeprefix}   \- ​*#empty, will just run plain bash*​
-  ​[ ]{.codeprefix}   \- ​*console*​: ​*\# empty*​
+  ​[ ]   ​*name*​: ​*development*​
+  ​[ ]   ​*root*​: ​*\~/devproject*​
+  ​[ ]   ​*windows*​:
+  ​[ ]   \- ​*editor*​:
+  ​[ ]   ​*layout*​: ​*main-horizontal*​
+  ​[ ]   ​*panes*​:
+  ​[ ]   \- ​*vim*​
+  ​[ ]   \- ​*#empty, will just run plain bash*​
+  ​[ ]   \- ​*console*​: ​*\# empty*​
   ------------------ ---------------------------------------
 
-The [yml]{.cf .filename} file format uses two spaces for indenting, so
+The [yml]  file format uses two spaces for indenting, so
 it's really important to ensure you format the file correctly and that
 you don't accidentally use tabs when you write the file.
 
@@ -2575,22 +1852,22 @@ To fire up the new environment, save the config file and then execute
 the following command:
 
   ------------------ -------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmuxinator**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmuxinator​​ ​​development​
   ------------------ -------------------------------------------------
 
-tmuxinator automatically loads up your original [.tmux.conf]{.cf
+tmuxinator automatically loads up your original [.tmux.conf]
 .filename} file, applies the settings, and then arranges the windows and
 panes for you, just like you specified. If you want to make more changes
 to your environment, just use
 
   ------------------ -----------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmuxinator**​​ ​​**open**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmuxinator​​ ​​open​​ ​​development​
   ------------------ -----------------------------------------------------------
 
 again and edit the configuration.
 
 By default, the configuration files for tmuxinator are located in
-[\~/.tmuxinator/]{.cf .filename}, so you can find those and back them
+[\~/.tmuxinator/] , so you can find those and back them
 up, or share them with others.
 
 Under the hood, tmuxinator is just constructing a script that executes
@@ -2599,59 +1876,59 @@ script. However, it's a nicer syntax that's pretty easy to follow. It
 does require a Ruby interpreter on your machine, though, so it may not
 be something you'll set up on every environment where you'd like to use
 tmux. However, you can use Tmuxinator to generate a configuration you
-can use anywhere. The [tmuxinator debug]{.cf .ic} command can display
+can use anywhere. The [tmuxinator debug] command can display
 the script that Tmuxinator will use:
 
   ------------------ ------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmuxinator**​​ ​​**debug**​​ ​​**development**​
+  ​[ ]   ​[\$ ]​​tmuxinator​​ ​​debug​​ ​​development​
   ------------------ ------------------------------------------------------------
 
 Here's what the output looks like:
 
   ------------------ ------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*#!/bin/bash*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Clear rbenv variables before starting tmux*​
-  ​[ ]{.codeprefix}   unset RBENV_VERSION
-  ​[ ]{.codeprefix}   unset RBENV_DIR
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   tmux start-server;
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   cd /home/brianhogan/devproject
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Run pre command.*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Create the session and the first window. Manually switch to root*​
-  ​[ ]{.codeprefix}   ​*\# directory if required to support tmux \< 1.9*​
-  ​[ ]{.codeprefix}   TMUX= tmux new-session -d -s development -n editor
-  ​[ ]{.codeprefix}   tmux send-keys -t development:1 cd​*\\* ​/home/brianhogan/devproject C-m
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Create other windows.*​
-  ​[ ]{.codeprefix}   tmux new-window -t development:2 -n console
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Window \"editor\"*​
-  ​[ ]{.codeprefix}   tmux send-keys -t development:1.1 vim C-m
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   tmux splitw -c /home/brianhogan/devproject -t development:1
-  ​[ ]{.codeprefix}   tmux ​**select**​-layout -t development:1 tiled
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   tmux ​**select**​-layout -t development:1 tiled
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   tmux ​**select**​-layout -t development:1 main-horizontal
-  ​[ ]{.codeprefix}   tmux ​**select**​-pane -t development:1.1
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Window \"console\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   tmux ​**select**​-window -t 1
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​**if**​ \[ -z ​*\"*​\$TMUX​*\"*​ \]; ​**then**​
-  ​[ ]{.codeprefix}   ​​tmux -u attach-session -t development
-  ​[ ]{.codeprefix}   ​**else**​
-  ​[ ]{.codeprefix}   ​​tmux -u switch-client -t development
-  ​[ ]{.codeprefix}   ​**fi**​
+  ​[ ]   ​*#!/bin/bash*​
+  ​[ ]   
+  ​[ ]   ​*\# Clear rbenv variables before starting tmux*​
+  ​[ ]   unset RBENV_VERSION
+  ​[ ]   unset RBENV_DIR
+  ​[ ]   
+  ​[ ]   tmux start-server;
+  ​[ ]   
+  ​[ ]   cd /home/brianhogan/devproject
+  ​[ ]   
+  ​[ ]   ​*\# Run pre command.*​
+  ​[ ]   
+  ​[ ]   ​*\# Create the session and the first window. Manually switch to root*​
+  ​[ ]   ​*\# directory if required to support tmux \< 1.9*​
+  ​[ ]   TMUX= tmux new-session -d -s development -n editor
+  ​[ ]   tmux send-keys -t development:1 cd​*\\* ​/home/brianhogan/devproject C-m
+  ​[ ]   
+  ​[ ]   ​*\# Create other windows.*​
+  ​[ ]   tmux new-window -t development:2 -n console
+  ​[ ]   
+  ​[ ]   ​*\# Window \"editor\"*​
+  ​[ ]   tmux send-keys -t development:1.1 vim C-m
+  ​[ ]   
+  ​[ ]   tmux splitw -c /home/brianhogan/devproject -t development:1
+  ​[ ]   tmux ​select​-layout -t development:1 tiled
+  ​[ ]   
+  ​[ ]   tmux ​select​-layout -t development:1 tiled
+  ​[ ]   
+  ​[ ]   tmux ​select​-layout -t development:1 main-horizontal
+  ​[ ]   tmux ​select​-pane -t development:1.1
+  ​[ ]   
+  ​[ ]   ​*\# Window \"console\"*​
+  ​[ ]   
+  ​[ ]   tmux ​select​-window -t 1
+  ​[ ]   
+  ​[ ]   ​if​ \[ -z ​*\"*​\$TMUX​*\"*​ \]; ​then​
+  ​[ ]   ​​tmux -u attach-session -t development
+  ​[ ]   ​else​
+  ​[ ]   ​​tmux -u switch-client -t development
+  ​[ ]   ​fi​
   ------------------ ------------------------------------------------------------------------
 
-You could save the output of [tmuxinator debug]{.cf .ic} to a script you
+You could save the output of [tmuxinator debug] to a script you
 can run on any machine. You can also use this option to troubleshoot any
 issues you might be having as you develop your configuration file.
 
@@ -2685,28 +1962,28 @@ next.
 
   Command                                                                              Description
   ------------------------------------------------------------------------------------ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  [tmux new-session -s ]{.cf .ic}[development]{.cf .ic}[ -n editor]{.cf .ic}           Creates a session named "development" and names the first window "editor."
-  [tmux attach -t development]{.cf .ic}                                                Attaches to a session named "development."
-  [tmux send-keys -t development '\[keys\]' C-m]{.cf .ic}                              Sends the keystrokes to the "development" session's active window or pane. [C-m]{.cf .ic} is equivalent to pressing the `Enter`{.cf .keystroke style="font-variant:small-caps"} key.
-  [tmux send-keys -t ]{.cf .ic}[development:1.1]{.cf .ic}[ '\[keys\]' C-m]{.cf .ic}    Sends the keystrokes to the "development" session's first window and first pane, provided the window and pane indexes are set to 1. [C-m]{.cf .ic} is equivalent to pressing the `Enter`{.cf .keystroke style="font-variant:small-caps"} key.
-  [tmux select-window -t ]{.cf .ic}[development:1]{.cf .ic}                            Selects the first window of "development," making it the active window.
-  [tmux split-window -v -p 10 -t development]{.cf .ic}                                 Splits the current window in the "development" session vertically, dividing it in half [horizontally]{.emph}, and sets its height to 10% of the total window size.
-  [tmux select-layout -t ]{.cf .ic}[development]{.cf .ic}[ main-horizontal]{.cf .ic}   Sets the layout for the "development" session to [main-horizontal]{.cf .ic}.
-  [tmux source-file \[file\]]{.cf .ic}                                                 Loads the specified tmux configuration file.
-  [tmux -f app.conf attach]{.cf .ic}                                                   Loads the [app.conf]{.cf .filename} configuration file and attaches to a session created within the [app.conf]{.cf .filename} file.
+  [tmux new-session -s ][development][ -n editor]           Creates a session named "development" and names the first window "editor."
+  [tmux attach -t development]                                                Attaches to a session named "development."
+  [tmux send-keys -t development '\[keys\]' C-m]                              Sends the keystrokes to the "development" session's active window or pane. [C-m] is equivalent to pressing the `Enter`  key.
+  [tmux send-keys -t ][development:1.1][ '\[keys\]' C-m]    Sends the keystrokes to the "development" session's first window and first pane, provided the window and pane indexes are set to 1. [C-m] is equivalent to pressing the `Enter`  key.
+  [tmux select-window -t ][development:1]                            Selects the first window of "development," making it the active window.
+  [tmux split-window -v -p 10 -t development]                                 Splits the current window in the "development" session vertically, dividing it in half [horizontally]{.emph}, and sets its height to 10% of the total window size.
+  [tmux select-layout -t ][development][ main-horizontal]   Sets the layout for the "development" session to [main-horizontal].
+  [tmux source-file \[file\]]                                                 Loads the specified tmux configuration file.
+  [tmux -f app.conf attach]                                                   Loads the [app.conf]  configuration file and attaches to a session created within the [app.conf]  file.
 
 ### tmuxinator commands
 
   Command                                                 Description
   ------------------------------------------------------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  [tmuxinator open \[name\]]{.cf .ic}                     Opens the configuration file for the project [name]{.cf .ic} in the default text editor. Creates the configuration if it doesn't exist.
-  [tmuxinator \[name\]]{.cf .ic}                          Loads the tmux session for the given project. Creates the session from the contents of the project's configuration file if no session currently exists, or attaches to the session.
-  [tmuxinator list]{.cf .ic}                              Lists all current projects.
-  [tmuxinator copy \[source\] \[destination\]]{.cf .ic}   Copies a project configuration.
-  [tmuxinator delete \[name\]]{.cf .ic}                   Deletes the specified project.
-  [tmuxinator implode]{.cf .ic}                           Deletes all current projects.
-  [tmuxinator doctor]{.cf .ic}                            Looks for problems with the tmuxinator and system configuration.
-  [tmuxinator debug]{.cf .ic}                             Shows the script that tmuxinator will run, helping you figure out what's going wrong.
+  [tmuxinator open \[name\]]                     Opens the configuration file for the project [name] in the default text editor. Creates the configuration if it doesn't exist.
+  [tmuxinator \[name\]]                          Loads the tmux session for the given project. Creates the session from the contents of the project's configuration file if no session currently exists, or attaches to the session.
+  [tmuxinator list]                              Lists all current projects.
+  [tmuxinator copy \[source\] \[destination\]]   Copies a project configuration.
+  [tmuxinator delete \[name\]]                   Deletes the specified project.
+  [tmuxinator implode]                           Deletes all current projects.
+  [tmuxinator doctor]                            Looks for problems with the tmuxinator and system configuration.
+  [tmuxinator debug]                             Shows the script that tmuxinator will run, helping you figure out what's going wrong.
 
 ::: footnotes
 #### Footnotes
@@ -2747,40 +2024,40 @@ from these programs scrolls off the screen. But when you use tmux, you
 can use the keyboard to move backwards through the output buffer so you
 can see what you missed. This is especially useful for those times when
 you're running tests or watching log files and you can't just rely on
-the [less]{.cf .ic} command or your text editor.
+the [less] command or your text editor.
 
-Pressing `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`[`{.cf .keystroke style="font-variant:small-caps"} places you in Copy
+Pressing `Prefix` 
+`[`  places you in Copy
 mode. You can then use your movement keys to move the cursor around the
 screen. By default, the arrow keys work. But in Chapter 2, [​*Configuring
 tmux*​](#part0023.xhtml#ch.config), you configured tmux to use Vim keys
 for moving between windows and resizing panes so you wouldn't have to
-take your hands off the home row. tmux has a [vi]{.cf .ic} mode for
+take your hands off the home row. tmux has a [vi] mode for
 working with the buffer as well. To enable it, add this line to
-[.tmux.conf]{.cf .filename}:
+[.tmux.conf] :
 
 ::: livecodelozenge
 [config/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/config/tmux.conf)
 :::
 
   ------------------ ----------------------
-  ​[ ]{.codeprefix}   ​*\# enable vi keys.*​
-  ​[ ]{.codeprefix}   setw -g mode-keys vi
+  ​[ ]   ​*\# enable vi keys.*​
+  ​[ ]   setw -g mode-keys vi
   ------------------ ----------------------
 
-With this option set, you can use `h`{.cf .keystroke}, `j`{.cf
-.keystroke}, `k`{.cf .keystroke}, and `l`{.cf .keystroke} to move around
+With this option set, you can use `h` , `j`
+, `k` , and `l`  to move around
 your buffer.
 
-To get out of Copy mode, press the `Enter`{.cf .keystroke
-style="font-variant:small-caps"} key. Moving around one character at a
+To get out of Copy mode, press the `Enter`
+ key. Moving around one character at a
 time isn't very efficient. Since you enabled vi mode, you can also use
 some other visible shortcuts to move around the buffer.
 
-For example, you can use `w`{.cf .keystroke} to jump to the next word
-and `b`{.cf .keystroke} to jump back one word. And you can use `f`{.cf
-.keystroke}, followed by any character, to jump to that character on the
-same line, and `F`{.cf .keystroke style="font-variant:small-caps"} to
+For example, you can use `w`  to jump to the next word
+and `b`  to jump back one word. And you can use `f`
+, followed by any character, to jump to that character on the
+same line, and `F`  to
 jump backwards on the line.
 
 ### Moving Quickly Through the Buffer
@@ -2790,30 +2067,30 @@ to scroll isn't going to be that useful. Instead of moving word by word
 or character by character, you can scroll through the buffer page by
 page, or jump to the beginning or end of the buffer.
 
-You can move up one page with `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`b`{.cf .keystroke} and down one page
-with `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`f`{.cf
-.keystroke}. You can jump all the way to the top of the buffer's history
-with `g`{.cf .keystroke}, and then jump all the way to the bottom with
-`G`{.cf .keystroke style="font-variant:small-caps"}.
+You can move up one page with `Ctrl`
+-`b`  and down one page
+with `Ctrl` -`f`
+. You can jump all the way to the top of the buffer's history
+with `g` , and then jump all the way to the bottom with
+`G` .
 
 ### Searching Through the Buffer {#part0037.xhtml#sec.Searching.Through.the.Buffer}
 
 You don't have to browse through the hundreds of lines of content page
-by page if you know what you're looking for. By pressing `?`{.cf
-.keystroke style="font-variant:small-caps"} in Copy mode, you can search
-upwards for phrases or keywords. Simply press `?`{.cf .keystroke
-style="font-variant:small-caps"}, type in the search phrase, and press
-`Enter`{.cf .keystroke style="font-variant:small-caps"} to jump to the
-first occurrence of the phrase. Then press `n`{.cf .keystroke} to jump
-to the next occurrence, or `N`{.cf .keystroke
-style="font-variant:small-caps"} to move to the previous.
+by page if you know what you're looking for. By pressing `?`
+.keystroke  in Copy mode, you can search
+upwards for phrases or keywords. Simply press `?`
+, type in the search phrase, and press
+`Enter`  to jump to the
+first occurrence of the phrase. Then press `n`  to jump
+to the next occurrence, or `N`
+ to move to the previous.
 
-To search downward, press `/`{.cf .keystroke
-style="font-variant:small-caps"} instead of `?`{.cf .keystroke
-style="font-variant:small-caps"}. Pressing `n`{.cf .keystroke} then
-jumps to the next occurrence, and `N`{.cf .keystroke
-style="font-variant:small-caps"} jumps to the previous occurrence.
+To search downward, press `/`
+ instead of `?`
+. Pressing `n`  then
+jumps to the next occurrence, and `N`
+ jumps to the previous occurrence.
 
 Learning to move around the buffer this way will dramatically speed you
 up. It's faster to type the word you want to move to instead of using
@@ -2834,15 +2111,15 @@ select and copy text to a paste buffer so we can dump that text
 elsewhere.
 
 To copy text, enter Copy mode and move the cursor to where you want to
-start selecting text. Then press `Space`{.cf .keystroke
-style="font-variant:small-caps"} and move the cursor to the end of the
-text. When you press `Enter`{.cf .keystroke
-style="font-variant:small-caps"}, the selected text gets copied into a
+start selecting text. Then press `Space`
+ and move the cursor to the end of the
+text. When you press `Enter`
+, the selected text gets copied into a
 paste buffer.
 
-To paste the contents you just captured, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `]`{.cf .keystroke
-style="font-variant:small-caps"}.
+To paste the contents you just captured, press `Prefix`
+ `]`
+.
 
 Let's look at a few ways to copy and paste text from our main output
 buffer.
@@ -2850,33 +2127,33 @@ buffer.
 ### Capturing a Pane {#part0038.xhtml#sec.Capturing.a.Pane}
 
 tmux has a handy shortcut that copies the entire visible contents of a
-pane to a paste buffer. Enter tmux's Command mode with `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `:`{.cf .keystroke
-style="font-variant:small-caps"} and type
+pane to a paste buffer. Enter tmux's Command mode with `Prefix`
+.keystroke  `:`
+ and type
 
-[capture-pane]{.cf .ic}
+[capture-pane]
 
 The contents of the pane will be in a paste buffer. You can then paste
-that content into another pane or window by pressing `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `]`{.cf .keystroke
-style="font-variant:small-caps"}.
+that content into another pane or window by pressing `Prefix`
+.keystroke  `]`
+.
 
 ### Showing and Saving the Buffer
 
 You can display the contents of your paste buffer by using the
-[show-buffer]{.cf .ic} command in Command mode, or from a terminal
+[show-buffer] command in Command mode, or from a terminal
 session with
 
   ------------------ -------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**show-buffer**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​show-buffer​
   ------------------ -------------------------------------------
 
-However, by using the [save-buffer]{.cf .ic} command, you can save the
+However, by using the [save-buffer] command, you can save the
 buffer to a file, which can often be a real time saver. In fact, you can
 capture the contents of the current pane to a text file.
 
 In Command mode, execute the command [capture-pane; save-buffer
-buffer.txt]{.cf .ic}. You could easily map that command to a keystroke
+buffer.txt]. You could easily map that command to a keystroke
 if you wanted.
 
 ### Using Multiple Paste Buffers {#part0038.xhtml#sec.Using.Multiple.Paste.Buffers}
@@ -2891,38 +2168,38 @@ a new tmux session and load up a text editor such as Vim or Nano. In the
 editor, type the following sentences, one per line:
 
   ------------------ --------------------------
-  ​[ ]{.codeprefix}   First sentence is first.
-  ​[ ]{.codeprefix}   Next sentence is next.
-  ​[ ]{.codeprefix}   Last sentence is last.
+  ​[ ]   First sentence is first.
+  ​[ ]   Next sentence is next.
+  ​[ ]   Last sentence is last.
   ------------------ --------------------------
 
 Now copy some text to the paste buffer using tmux. Enter Copy mode with
-`Prefix`{.cf .keystroke style="font-variant:small-caps"} `[`{.cf
-.keystroke style="font-variant:small-caps"}. Move to the start of the
-first sentence, press `Space`{.cf .keystroke
-style="font-variant:small-caps"} to start selecting text, move to the
-end of the first sentence, and press `Enter`{.cf .keystroke
-style="font-variant:small-caps"} to copy the selection. Repeat this with
+`Prefix`  `[`
+.keystroke . Move to the start of the
+first sentence, press `Space`
+ to start selecting text, move to the
+end of the first sentence, and press `Enter`
+ to copy the selection. Repeat this with
 the second and third sentences.
 
 Each time you copied text, tmux created a new buffer. You can see these
-buffers with the [list-buffers]{.cf .ic} command.
+buffers with the [list-buffers] command.
 
   ------------------ -------------------------------------------
-  ​[ ]{.codeprefix}   0: 22 bytes: \"Last sentence is last.\"
-  ​[ ]{.codeprefix}   1: 22 bytes: \"Next sentence is next.\"
-  ​[ ]{.codeprefix}   2: 24 bytes: \"First sentence is first.\"
+  ​[ ]   0: 22 bytes: \"Last sentence is last.\"
+  ​[ ]   1: 22 bytes: \"Next sentence is next.\"
+  ​[ ]   2: 24 bytes: \"First sentence is first.\"
   ------------------ -------------------------------------------
 
-Pressing `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`]`{.cf .keystroke style="font-variant:small-caps"} always pastes buffer
-0, but you can issue the command [choose-buffer]{.cf .ic} to select a
+Pressing `Prefix` 
+`]`  always pastes buffer
+0, but you can issue the command [choose-buffer] to select a
 buffer and paste the contents into the focused pane.
 
 Split the current window in half and launch Nano in the second pane,
 then enter Command mode and type this:
 
-[choose-buffer]{.cf .ic}
+[choose-buffer]
 
 You'll be presented with a list that looks like this:
 
@@ -2930,8 +2207,8 @@ You'll be presented with a list that looks like this:
 ![images/buffers/choose-buffer.png](images/image00131.jpeg){#d24e5219}
 :::
 
-You can select any entry in the list, press `Enter`{.cf .keystroke
-style="font-variant:small-caps"}, and the text will be inserted into the
+You can select any entry in the list, press `Enter`
+, and the text will be inserted into the
 selected pane.
 
 This is an excellent way to manage multiple bits of text, especially in
@@ -2945,19 +2222,19 @@ so you can take content from one session and paste it into another.
 
 If you use Vim and you'd like to make the copy and paste command keys a
 little more familiar, you can remap the keys in your configuration. For
-example, you can use `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `Escape`{.cf .keystroke
-style="font-variant:small-caps"} to enter Copy mode, then use `v`{.cf
-.keystroke} to start Visual mode to select your text, use `y`{.cf
-.keystroke} to "yank" text into the buffer, and use `p`{.cf .keystroke}
+example, you can use `Prefix`
+ `Escape`
+ to enter Copy mode, then use `v`
+ to start Visual mode to select your text, use `y`
+ to "yank" text into the buffer, and use `p` 
 to paste the text:
 
   ------------------ -----------------------------------------
-  ​[ ]{.codeprefix}   bind Escape copy-mode
-  ​[ ]{.codeprefix}   bind -t vi-copy ​*\'v\'*​ begin-selection
-  ​[ ]{.codeprefix}   bind -t vi-copy ​*\'y\'*​ copy-selection
-  ​[ ]{.codeprefix}   unbind p
-  ​[ ]{.codeprefix}   bind p paste-buffer
+  ​[ ]   bind Escape copy-mode
+  ​[ ]   bind -t vi-copy ​*\'v\'*​ begin-selection
+  ​[ ]   bind -t vi-copy ​*\'y\'*​ copy-selection
+  ​[ ]   unbind p
+  ​[ ]   bind p paste-buffer
   ------------------ -----------------------------------------
 
 This can be a real productivity boost if you happen to do a lot of
@@ -2968,41 +2245,41 @@ comfortable with the keys that Vim uses.
 
 ## Working with the Clipboard on Linux {#part0039.xhtml#sec.linux.clipboard}
 
-Using the [xclip]{.cf .ic}
+Using the [xclip]
 utility,^[\[10\]](#part0042.xhtml#FOOTNOTE-10){#part0039.xhtml#FNPTR-10
 .footnote}^ you can integrate your buffers with the Linux system
 clipboard so you can more easily copy and paste between programs.
 
-First, you have to install [xclip]{.cf .ic}. On Ubuntu, use this
+First, you have to install [xclip]. On Ubuntu, use this
 command:
 
   ------------------ ---------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**sudo**​​ ​​**apt-get**​​ ​​**install**​​ ​​**xclip**​
+  ​[ ]   ​[\$ ]​​sudo​​ ​​apt-get​​ ​​install​​ ​​xclip​
   ------------------ ---------------------------------------------------------------
 
-Then we use tmux's [save-buffer]{.cf .ic} and [set-buffer]{.cf .ic}
-commands with [xclip]{.cf .ic}.
+Then we use tmux's [save-buffer] and [set-buffer]
+commands with [xclip].
 
 To copy the current buffer to the system clipboard, we add this command
-to our [.tmux.conf]{.cf .filename} file:
+to our [.tmux.conf]  file:
 
   ------------------ ------------------------------------------------------------------
-  ​[ ]{.codeprefix}   bind C-c run ​*\"tmux save-buffer - \| xclip -i -sel clipboard\"*​
+  ​[ ]   bind C-c run ​*\"tmux save-buffer - \| xclip -i -sel clipboard\"*​
   ------------------ ------------------------------------------------------------------
 
-This configures `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`c`{.cf
-.keystroke} so it pipes the current buffer to [xclip]{.cf .ic}.
+This configures `Prefix` 
+`Ctrl` -`c`
+ so it pipes the current buffer to [xclip].
 
-So, you enter Copy mode, select your text, press `y`{.cf .keystroke},
-and then press `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`c`{.cf
-.keystroke} to get your text on the clipboard. You can speed up the
-process by binding the `y`{.cf .keystroke} key to send the output to
-[xclip]{.cf .ic} directly:
+So, you enter Copy mode, select your text, press `y` ,
+and then press `Prefix` 
+`Ctrl` -`c`
+ to get your text on the clipboard. You can speed up the
+process by binding the `y`  key to send the output to
+[xclip] directly:
 
   ------------------ ------------------------------------------------------
-  ​[ ]{.codeprefix}   bind -t vi-copy y copy-pipe ​*\"xclip -sel clip -i\"*​
+  ​[ ]   bind -t vi-copy y copy-pipe ​*\"xclip -sel clip -i\"*​
   ------------------ ------------------------------------------------------
 
 Now text you select and copy in Copy mode will be on your system
@@ -3012,30 +2289,30 @@ To paste text from the system clipboard into a tmux session, add this
 line to your configuration:
 
   ------------------ ---------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   bind C-v run ​*\"tmux set-buffer* ​​*\\\"*​​**\$(**​xclip -o -sel clipboard​**)**​​*\\\"*​​*; tmux paste-buffer\"*​
+  ​[ ]   bind C-v run ​*\"tmux set-buffer* ​​*\\\"*​​\$(​xclip -o -sel clipboard​)​​*\\\"*​​*; tmux paste-buffer\"*​
   ------------------ ---------------------------------------------------------------------------------------------------------
 
-This configures tmux to pull the content from [xclip]{.cf .ic} into a
+This configures tmux to pull the content from [xclip] into a
 new tmux buffer and then pastes it into the selected tmux window or pane
-when you press `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`v`{.cf
-.keystroke}.
+when you press `Prefix` 
+`Ctrl` -`v`
+.
 
 []{#part0040.xhtml}
 
 ## Using OS X Clipboard Commands {#part0040.xhtml#sec.using.system.clipboards}
 
 If you're a Mac user, you may be familiar with OS X's command-line
-clipboard utilities [pbcopy]{.cf .ic} and [pbpaste]{.cf .ic}. These
+clipboard utilities [pbcopy] and [pbpaste]. These
 simple utilities make it a snap to work with the clipboard. The
-[pbcopy]{.cf .ic} command captures text to the system clipboard, and the
-[pbpaste]{.cf .ic} command pastes content out. For example, you can use
-[pbcopy]{.cf .ic} and [cat]{.cf .ic} together to easily put the contents
-of your [.tmux.conf]{.cf .filename} file into the clipboard so you can
+[pbcopy] command captures text to the system clipboard, and the
+[pbpaste] command pastes content out. For example, you can use
+[pbcopy] and [cat] together to easily put the contents
+of your [.tmux.conf]  file into the clipboard so you can
 paste it in an email or on the web, like this:
 
   ------------------ ----------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**cat**​​ ​​**\~/.tmux.conf**​​ ​​**\|**​​ ​​**pbcopy**​
+  ​[ ]   ​[\$ ]​​cat​​ ​​\~/.tmux.conf​​ ​​\|​​ ​​pbcopy​
   ------------------ ----------------------------------------------------------------
 
 This is a pretty handy way to work with text, but tmux doesn't have
@@ -3050,14 +2327,14 @@ While you could install this from source, using Homebrew simplifies the
 process:
 
   ------------------ -----------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**brew**​​ ​​**install**​​ ​​**reattach-to-user-namespace**​
+  ​[ ]   ​[\$ ]​​brew​​ ​​install​​ ​​reattach-to-user-namespace​
   ------------------ -----------------------------------------------------------------------
 
 Then configure tmux to use the wrapper by adding this line to your
-[.tmux.conf]{.cf .filename}:
+[.tmux.conf] :
 
   ------------------ --------------------------------------------------------------------
-  ​[ ]{.codeprefix}   set -g default-command \"reattach-to-user-namespace -l /bin/bash\"
+  ​[ ]   set -g default-command \"reattach-to-user-namespace -l /bin/bash\"
   ------------------ --------------------------------------------------------------------
 
 This configures the default command that tmux uses for new windows, so
@@ -3066,30 +2343,30 @@ other than Bash, like Fish or zsh, you'd specify its path or command
 instead.
 
 Once you reload the configuration file, you'll be able to use the
-[pbcopy]{.cf .ic} command again. And as an added bonus, you can send the
+[pbcopy] command again. And as an added bonus, you can send the
 contents of the current tmux buffer to the system clipboard:
 
   ------------------ ---------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**show-buffer**​​ ​​**\|**​​ ​​**pbcopy**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​show-buffer​​ ​​\|​​ ​​pbcopy​
   ------------------ ---------------------------------------------------------------
 
 Or you can paste the clipboard contents with this:
 
   ------------------ ----------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**set-buffer**​​ ​​**\$(pbpaste);**​​ ​​**tmux**​​ ​​**paste-buffer**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​set-buffer​​ ​​\$(pbpaste);​​ ​​tmux​​ ​​paste-buffer​
   ------------------ ----------------------------------------------------------------------------------------
 
 This means that you can also create keyboard shortcuts to do this, just
 like you did in [​*Working with the Clipboard on
 Linux*​](#part0039.xhtml#sec.linux.clipboard). Unfortunately, the wrapper
-program we're using doesn't work with tmux's [run]{.cf .ic} command. The
-workaround is to explicitly prefix [pbpaste]{.cf .ic} and [pbcopy]{.cf
+program we're using doesn't work with tmux's [run] command. The
+workaround is to explicitly prefix [pbpaste] and [pbcopy]
 .ic} with the wrapper script. So, to support copying the buffer to the
-system clipboard, add this line to your [.tmux.conf]{.cf .filename}
+system clipboard, add this line to your [.tmux.conf] 
 file:
 
   ------------------ ----------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   bind C-c run ​*\"tmux save-buffer - \| reattach-to-user-namespace pbcopy\"*​
+  ​[ ]   bind C-c run ​*\"tmux save-buffer - \| reattach-to-user-namespace pbcopy\"*​
   ------------------ ----------------------------------------------------------------------------
 
 Just like with Linux, you can also configure tmux's Copy mode to send
@@ -3097,19 +2374,19 @@ the text you copy directly to the system clipboard by adding this
 keybinding to your configuration:
 
   ------------------ ---------------------------------------------------------------------
-  ​[ ]{.codeprefix}   bind -t vi-copy y copy-pipe ​*\"reattach-to-user-namespace pbcopy\"*​
+  ​[ ]   bind -t vi-copy y copy-pipe ​*\"reattach-to-user-namespace pbcopy\"*​
   ------------------ ---------------------------------------------------------------------
 
-Now when you select text in Copy mode and press `y`{.cf .keystroke}, the
-text will be sent to [pbcopy]{.cf .ic} and will be on your system
+Now when you select text in Copy mode and press `y` , the
+text will be sent to [pbcopy] and will be on your system
 clipboard, ready for use in other programs.
 
 To support pasting from the system clipboard, we'd add this longer
 command, which must be [all on one line]{.emph}.
 
   ------------------ -------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   bind C-v run ​*\\*​
-  ​[ ]{.codeprefix}   ​*\"tmux set-buffer* ​​*\\\"*​​**\$(**​reattach-to-user-namespace pbpaste​**)**​​*\\\"*​​*; tmux paste-buffer\"*​
+  ​[ ]   bind C-v run ​*\\*​
+  ​[ ]   ​*\"tmux set-buffer* ​​*\\\"*​​\$(​reattach-to-user-namespace pbpaste​)​​*\\\"*​​*; tmux paste-buffer\"*​
   ------------------ -------------------------------------------------------------------------------------------------------
 
 This provides a simple solution to an otherwise fairly complex problem.
@@ -3138,35 +2415,35 @@ look at how to use tmux to work with another developer.
 
   Shortcut                                                                                                       Description
   -------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `[`{.cf .keystroke style="font-variant:small-caps"}   Enters Copy mode.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `]`{.cf .keystroke style="font-variant:small-caps"}   Pastes current buffer contents.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `=`{.cf .keystroke style="font-variant:small-caps"}   Lists all paste buffers and pastes selected buffer contents.
+  `Prefix`  `[`    Enters Copy mode.
+  `Prefix`  `]`    Pastes current buffer contents.
+  `Prefix`  `=`    Lists all paste buffers and pastes selected buffer contents.
 
 ### Copy mode movement keys (vi mode)
 
   Command                                                                                  Description
   ---------------------------------------------------------------------------------------- --------------------------------------------------------------
-  `h`{.cf .keystroke}, `j`{.cf .keystroke}, `k`{.cf .keystroke}, and `l`{.cf .keystroke}   Moves the cursor left, down, up, and right, respectively.
-  `w`{.cf .keystroke}                                                                      Moves the cursor forward one word at a time.
-  `b`{.cf .keystroke}                                                                      Moves the cursor backward one word at a time.
-  `f`{.cf .keystroke} followed by any character                                            Moves to the next occurrence of the specified character.
-  `F`{.cf .keystroke style="font-variant:small-caps"} followed by any character            Moves to the previous occurrence of the specified character.
-  `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`b`{.cf .keystroke}               Scrolls up one page.
-  `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`f`{.cf .keystroke}               Scrolls down one page.
-  `g`{.cf .keystroke}                                                                      Jumps to the top of the buffer.
-  `G`{.cf .keystroke style="font-variant:small-caps"}                                      Jumps to the bottom of the buffer.
-  `?`{.cf .keystroke style="font-variant:small-caps"}                                      Starts a search backward through the buffer.
-  `/`{.cf .keystroke style="font-variant:small-caps"}                                      Starts a search forward through the buffer.
+  `h` , `j` , `k` , and `l`    Moves the cursor left, down, up, and right, respectively.
+  `w`                                                                       Moves the cursor forward one word at a time.
+  `b`                                                                       Moves the cursor backward one word at a time.
+  `f`  followed by any character                                            Moves to the next occurrence of the specified character.
+  `F`  followed by any character            Moves to the previous occurrence of the specified character.
+  `Ctrl` -`b`                Scrolls up one page.
+  `Ctrl` -`f`                Scrolls down one page.
+  `g`                                                                       Jumps to the top of the buffer.
+  `G`                                       Jumps to the bottom of the buffer.
+  `?`                                       Starts a search backward through the buffer.
+  `/`                                       Starts a search forward through the buffer.
 
 ### Commands
 
   Command                               Description
   ------------------------------------- --------------------------------------------------------------------
-  [show-buffer]{.cf .ic}                Displays current buffer contents.
-  [capture-pane]{.cf .ic}               Captures the selected pane's visible contents to a new buffer.
-  [list-buffers]{.cf .ic}               Lists all paste buffers.
-  [choose-buffer]{.cf .ic}              Shows paste buffers and pastes the contents of the one you select.
-  [save-buffer \[filename\]]{.cf .ic}   Saves the buffer's contents to the specified file.
+  [show-buffer]                Displays current buffer contents.
+  [capture-pane]               Captures the selected pane's visible contents to a new buffer.
+  [list-buffers]               Lists all paste buffers.
+  [choose-buffer]              Shows paste buffers and pastes the contents of the one you select.
+  [save-buffer \[filename\]]   Saves the buffer's contents to the specified file.
 
 ::: footnotes
 #### Footnotes
@@ -3232,7 +2509,7 @@ host, install and configure tmux on that machine, and then create a tmux
 session there. The second user logs into that machine with the same user
 account and attaches to the session. By using SSH public keys, you can
 make the login process somewhat transparent. Let's walk through the
-setup. For this example, we'll use a server called [puzzles]{.cf .ic}
+setup. For this example, we'll use a server called [puzzles]
 running Ubuntu that has the SSH daemon installed.
 
 First, create a "tmux" user on the server. This is the user everyone
@@ -3240,61 +2517,61 @@ will use to connect to the pairing session. On the remote server,
 execute this command:
 
   ------------------ ---------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**adduser**​​ ​​**tmux**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​adduser​​ ​​tmux​
   ------------------ ---------------------------------------------------
 
 We want to configure the account so we can take SSH keys from other
 developers and use them to log into this account. We do this by creating
-the file [\~/.ssh/authorized_keys]{.cf .filename} under the [tmux]{.cf
-.ic} account. So, use the [su]{.cf .ic} command to switch to the user:
+the file [\~/.ssh/authorized_keys]  under the [tmux]
+.ic} account. So, use the [su] command to switch to the user:
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**su**​​ ​​**tmux**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​su​​ ​​tmux​
   ------------------ ----------------------------------------------
 
-Then create the [.ssh]{.cf .filename} folder and the
-[.ssh/authorized_keys]{.cf .filename} file, setting the appropriate
-permissions. Only the [tmux]{.cf .ic} user should be allowed to read,
+Then create the [.ssh]  folder and the
+[.ssh/authorized_keys]  file, setting the appropriate
+permissions. Only the [tmux] user should be allowed to read,
 write, or execute the folder and file.
 
   ------------------ -----------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**mkdir**​​ ​​**\~/.ssh**​
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**touch**​​ ​​**\~/.ssh/authorized_keys**​
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**chmod**​​ ​​**700**​​ ​​**\~/.ssh**​
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**chmod**​​ ​​**600**​​ ​​**\~/.ssh/authorized_keys**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​mkdir​​ ​​\~/.ssh​
+  ​[ ]   ​[tmux@puzzles\$ ]​​touch​​ ​​\~/.ssh/authorized_keys​
+  ​[ ]   ​[tmux@puzzles\$ ]​​chmod​​ ​​700​​ ​​\~/.ssh​
+  ​[ ]   ​[tmux@puzzles\$ ]​​chmod​​ ​​600​​ ​​\~/.ssh/authorized_keys​
   ------------------ -----------------------------------------------------------------------------
 
 Each user you'd like to connect needs a public key, which they would
 generate on their local machine. To generate a key, use the command
 
   ------------------ --------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**ssh-keygen**​
+  ​[ ]   ​[\$ ]​​ssh-keygen​
   ------------------ --------------------------------
 
 and follow the prompts on the screen.
 
 Then each user would transfer their public key over to the server and
-add it to the [authorized_keys]{.cf .filename} file. There are a number
+add it to the [authorized_keys]  file. There are a number
 of ways to do this, but the most universal approach would be to use
-[cat]{.cf .ic} and [ssh]{.cf .ic} to transfer the key and append it to
-[authorized_keys]{.cf .filename} at the same time, like this:
+[cat] and [ssh] to transfer the key and append it to
+[authorized_keys]  at the same time, like this:
 
   ------------------ -----------------------------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**cat**​​ ​​**\~/.ssh/id_rsa.pub**​​ ​​**\|**​​ ​​**ssh**​​ ​​**tmux@your_server**​​ ​​*\'cat \>\> .ssh/authorized_keys\'*​
+  ​[ ]   ​[\$ ]​​cat​​ ​​\~/.ssh/id_rsa.pub​​ ​​\|​​ ​​ssh​​ ​​tmux@your_server​​ ​​*\'cat \>\> .ssh/authorized_keys\'*​
   ------------------ -----------------------------------------------------------------------------------------------------------------------------
 
-You'll be prompted for the [tmux]{.cf .ic} user's password before you
+You'll be prompted for the [tmux] user's password before you
 can connect.
 
-The command [ssh-copy-id]{.cf .ic} makes this process slightly easier.
+The command [ssh-copy-id] makes this process slightly easier.
 If you install this command using your package manager on your client,
 then you can transfer the key like this:
 
   ------------------ -------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**ssh-copy-id**​​ ​​**tmux@your_server**​
+  ​[ ]   ​[\$ ]​​ssh-copy-id​​ ​​tmux@your_server​
   ------------------ -------------------------------------------------------
 
-This copies the [.id_rsa.pub]{.cf .filename} file automatically.
+This copies the [.id_rsa.pub]  file automatically.
 
 You would repeat this process for any other users you wanted to share
 this account with.
@@ -3305,14 +2582,14 @@ on any other development environment. Then you create a new tmux session
 on the server:
 
   ------------------ ----------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-s**​​ ​​**Pairing**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​tmux​​ ​​new-session​​ ​​-s​​ ​​Pairing​
   ------------------ ----------------------------------------------------------------------------
 
 Another member of your team can log in to the same machine and attach to
 the session with this:
 
   ------------------ -----------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**Pairing**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​Pairing​
   ------------------ -----------------------------------------------------------------------
 
 You can then work collaboratively on the project. What's more, you can
@@ -3331,20 +2608,20 @@ times when it's helpful if one person can work in a different window
 without completely taking over control.
 
 Using "grouped sessions," you can do just that. Let's demonstrate by
-creating a new session on our remote server called [groupedsession]{.cf
+creating a new session on our remote server called [groupedsession]
 .ic}.
 
   ------------------ -----------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-s**​​ ​​**groupedsession**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​tmux​​ ​​new-session​​ ​​-s​​ ​​groupedsession​
   ------------------ -----------------------------------------------------------------------------------
 
 Then, instead of attaching to the session, another user can join that
 session by [creating a new session]{.emph} by specifying the target of
-the original session [groupedsession]{.cf .ic} and then specifying their
+the original session [groupedsession] and then specifying their
 [own]{.emph} session name, like this:
 
   ------------------ ----------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-t**​​ ​​**groupedsession**​​ ​​**-s**​​ ​​**mysession**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​tmux​​ ​​new-session​​ ​​-t​​ ​​groupedsession​​ ​​-s​​ ​​mysession​
   ------------------ ----------------------------------------------------------------------------------------------------------
 
 When the second session launches, both users can interact with the
@@ -3360,7 +2637,7 @@ person prefers Vim:
 ![images/pairing/groupedsession.png](images/image00132.jpeg){#d24e6162}
 :::
 
-The second user can kill off their session with [kill-session]{.cf .ic},
+The second user can kill off their session with [kill-session],
 and the original will still exist. However, both sessions will be killed
 if all windows are closed, so be careful!
 
@@ -3388,21 +2665,21 @@ On Ubuntu, you can install it by adding the tmate PPA to your package
 manager:
 
   ------------------ ----------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**sudo**​​ ​​**apt-get**​​ ​​**install**​​ ​​**software-properties-common**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**sudo**​​ ​​**add-apt-repository**​​ ​​**ppa:tmate.io/archive**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**sudo**​​ ​​**apt-get**​​ ​​**update**​​ ​​**&&**​​ ​​**sudo**​​ ​​**apt-get**​​ ​​**install**​​ ​​**tmate**​
+  ​[ ]   ​[\$ ]​​sudo​​ ​​apt-get​​ ​​install​​ ​​software-properties-common​
+  ​[ ]   ​[\$ ]​​sudo​​ ​​add-apt-repository​​ ​​ppa:tmate.io/archive​
+  ​[ ]   ​[\$ ]​​sudo​​ ​​apt-get​​ ​​update​​ ​​&&​​ ​​sudo​​ ​​apt-get​​ ​​install​​ ​​tmate​
   ------------------ ----------------------------------------------------------------------------------------------------------
 
 On the Mac, you can install it with Homebrew:
 
   ------------------ --------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**brew**​​ ​​**install**​​ ​​**tmate**​
+  ​[ ]   ​[\$ ]​​brew​​ ​​install​​ ​​tmate​
   ------------------ --------------------------------------------------
 
 Once tmate is installed, fire it up with
 
   ------------------ ---------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmate**​
+  ​[ ]   ​[\$ ]​​tmate​
   ------------------ ---------------------------
 
 and tmate will launch, displaying the connection address in the bottom
@@ -3417,7 +2694,7 @@ you instantly. If the address disappears before you can copy it, or
 you'd like to see it again, execute the command
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmate**​​ ​​**show-messages**​
+  ​[ ]   ​[\$ ]​​tmate​​ ​​show-messages​
   ------------------ ----------------------------------------------
 
 to view the address again, along with some other interesting details,
@@ -3425,13 +2702,13 @@ including a read-only address you can send to someone if you just want
 to demonstrate something and don't want them to have any control:
 
   ------------------ --------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   Sun Sep 25 17:46:13 2016 \[tmate\] Connecting to ssh.tmate.io\...
-  ​[ ]{.codeprefix}   Sun Sep 25 17:46:13 2016 \[tmate\] Note: clear your terminal before sharing readonly
-  ​[ ]{.codeprefix}   access
-  ​[ ]{.codeprefix}   Sun Sep 25 17:46:13 2016 \[tmate\] web session read only: https://\...
-  ​[ ]{.codeprefix}   Sun Sep 25 17:46:13 2016 \[tmate\] ssh session read only: ssh \...
-  ​[ ]{.codeprefix}   Sun Sep 25 17:46:13 2016 \[tmate\] web session: https://\...
-  ​[ ]{.codeprefix}   Sun Sep 25 17:46:13 2016 \[tmate\] ssh session: ssh \...
+  ​[ ]   Sun Sep 25 17:46:13 2016 \[tmate\] Connecting to ssh.tmate.io\...
+  ​[ ]   Sun Sep 25 17:46:13 2016 \[tmate\] Note: clear your terminal before sharing readonly
+  ​[ ]   access
+  ​[ ]   Sun Sep 25 17:46:13 2016 \[tmate\] web session read only: https://\...
+  ​[ ]   Sun Sep 25 17:46:13 2016 \[tmate\] ssh session read only: ssh \...
+  ​[ ]   Sun Sep 25 17:46:13 2016 \[tmate\] web session: https://\...
+  ​[ ]   Sun Sep 25 17:46:13 2016 \[tmate\] ssh session: ssh \...
   ------------------ --------------------------------------------------------------------------------------
 
 tmate supports the same commands that tmux supports, so you can create
@@ -3439,13 +2716,13 @@ named sessions and even script up your configurations. You can even use
 it with Tmuxinator by adding the following to your Tmuxinator YAML file:
 
   ------------------ ----------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*tmux_options*​: ​*-S /tmp/your_project_name_tmate_socket*​
-  ​[ ]{.codeprefix}   ​*tmux_command*​: ​*tmate*​
+  ​[ ]   ​*tmux_options*​: ​*-S /tmp/your_project_name_tmate_socket*​
+  ​[ ]   ​*tmux_command*​: ​*tmate*​
   ------------------ ----------------------------------------------------------
 
 Since tmate creates a randomly named socket file, we just tell it not to
-do that by passing the [-S]{.cf .ic} switch. Then we tell Tmuxinator
-that it should use [tmate]{.cf .ic} instead of [tmux]{.cf .ic}.
+do that by passing the [-S] switch. Then we tell Tmuxinator
+that it should use [tmate] instead of [tmux].
 
 ::: sidebar
 ::: sidebar-title
@@ -3461,7 +2738,7 @@ website.^[\[15\]](#part0049.xhtml#FOOTNOTE-15){#part0046.xhtml#FNPTR-15
 install on your own Linux server. Then you run the server and configure
 client machines to use that server instead of the default service. This
 may add more security, but you'll want to think about redundancy and
-availability. For example, the [tmate.io]{.cf .ic} address resolves to
+availability. For example, the [tmate.io] address resolves to
 multiple backend servers, ensuring high availability. If you want to
 ensure continuity, you'll want to configure your environment in a
 similar way.
@@ -3483,82 +2760,82 @@ To test this out, create two new user accounts for the session: one
 called "ted" and another named "barney."
 
   ------------------ ------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**adduser**​​ ​​**ted**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​adduser​​ ​​ted​
   ------------------ ------------------------------------------------------------
 
   ------------------ ---------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**adduser**​​ ​​**barney**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​adduser​​ ​​barney​
   ------------------ ---------------------------------------------------------------
 
-Next, create the "tmux" group and the [/var/tmux]{.cf .filename} folder
+Next, create the "tmux" group and the [/var/tmux]  folder
 that will hold the shared sessions.
 
   ------------------ --------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**addgroup**​​ ​​**tmux**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​addgroup​​ ​​tmux​
   ------------------ --------------------------------------------------------------
 
   ------------------ ----------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**mkdir**​​ ​​**/var/tmux**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​mkdir​​ ​​/var/tmux​
   ------------------ ----------------------------------------------------------------
 
-Next, change the group ownership of the [/var/tmux]{.cf .filename}
-folder so that the [tmux]{.cf .ic} group has access:
+Next, change the group ownership of the [/var/tmux] 
+folder so that the [tmux] group has access:
 
   ------------------ --------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**chgrp**​​ ​​**tmux**​​ ​​**/var/tmux**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​chgrp​​ ​​tmux​​ ​​/var/tmux​
   ------------------ --------------------------------------------------------------------------
 
 Then alter the permissions on the folder so that new files will be
-accessible for all members of the [tmux]{.cf .ic} group:
+accessible for all members of the [tmux] group:
 
   ------------------ --------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**chmod**​​ ​​**g+ws**​​ ​​**/var/tmux**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​chmod​​ ​​g+ws​​ ​​/var/tmux​
   ------------------ --------------------------------------------------------------------------
 
-Finally, add [ted]{.cf .ic} and [barney]{.cf .ic} to the tmux group.
+Finally, add [ted] and [barney] to the tmux group.
 
   ------------------ -------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**usermod**​​ ​​**-aG**​​ ​​**tmux**​​ ​​**ted**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​usermod​​ ​​-aG​​ ​​tmux​​ ​​ted​
   ------------------ -------------------------------------------------------------------------------
 
   ------------------ ----------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[tmux@puzzles\$ ]{.coprompt}​​**sudo**​​ ​​**usermod**​​ ​​**-aG**​​ ​​**tmux**​​ ​​**barney**​
+  ​[ ]   ​[tmux@puzzles\$ ]​​sudo​​ ​​usermod​​ ​​-aG​​ ​​tmux​​ ​​barney​
   ------------------ ----------------------------------------------------------------------------------
 
 Now let's look at how these users can work together on a project.
 
 ### Creating and Sharing Sessions {#part0047.xhtml#sec.Creating.and.Sharing.Sessions}
 
-So far, you've used the [new-session]{.cf .ic} command to create these
+So far, you've used the [new-session] command to create these
 sessions, but that uses the default socket location, which won't be
 reachable by every user. Instead of creating named sessions, we create
-our sessions using the [-S]{.cf .ic} switch.
+our sessions using the [-S] switch.
 
-Log in to your server as [ted]{.cf .ic} and create a new tmux session
-using a socket file in the [/var/tmux/]{.cf .filename} folder:
+Log in to your server as [ted] and create a new tmux session
+using a socket file in the [/var/tmux/]  folder:
 
   ------------------ --------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[ted@puzzles\$ ]{.coprompt}​​**tmux**​​ ​​**-S**​​ ​​**/var/tmux/pairing**​
+  ​[ ]   ​[ted@puzzles\$ ]​​tmux​​ ​​-S​​ ​​/var/tmux/pairing​
   ------------------ --------------------------------------------------------------------
 
-In another terminal window, log in as [barney]{.cf .ic} and then attach
-to the session. But instead of specifying the target with the [-t]{.cf
+In another terminal window, log in as [barney] and then attach
+to the session. But instead of specifying the target with the [-t]
 .ic} switch, specify the location of the socket file, like this:
 
   ------------------ -----------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[barney@puzzles\$ ]{.coprompt}​​**tmux**​​ ​​**-S**​​ ​​**/var/tmux/pairing**​​ ​​**attach**​
+  ​[ ]   ​[barney@puzzles\$ ]​​tmux​​ ​​-S​​ ​​/var/tmux/pairing​​ ​​attach​
   ------------------ -----------------------------------------------------------------------------------
 
-The [barney]{.cf .ic} user now attaches to the tmux session and sees
-everything that the [ted]{.cf .ic} user sees.
+The [barney] user now attaches to the tmux session and sees
+everything that the [ted] user sees.
 
 It's important to note that when using this approach, the
-[.tmux.conf]{.cf .filename} file used is the one that started up the
+[.tmux.conf]  file used is the one that started up the
 session. Having two separate accounts doesn't mean that each account
 gets to use its own configuration files within the tmux session, but it
 does mean they can customize their accounts for other purposes, and can
 each initiate their own tmux session as needed. More importantly, it
-keeps [barney]{.cf .ic} out of [ted]{.cf .ic}'s home directory.
+keeps [barney] out of [ted]'s home directory.
 
 []{#part0048.xhtml}
 
@@ -3590,10 +2867,10 @@ our system in general.
 
   Command                                                                                        Description
   ---------------------------------------------------------------------------------------------- -------------------------------------------------------------------------
-  [tmux new-session -t ]{.cf .ic}[\[existing session\]]{.cf .ic}[ -s \[new session\]]{.cf .ic}   Creates a connection to a grouped session.
-  [tmux show-messages]{.cf .ic}                                                                  Displays a log of messages in the current window, useful for debugging.
-  [tmux -S \[socket\]]{.cf .ic}                                                                  Creates a new session using a socket instead of a name.
-  [tmux -S \[socket\] attach]{.cf .ic}                                                           Attaches to an existing session using a socket instead of a name.
+  [tmux new-session -t ][\[existing session\]][ -s \[new session\]]   Creates a connection to a grouped session.
+  [tmux show-messages]                                                                  Displays a log of messages in the current window, useful for debugging.
+  [tmux -S \[socket\]]                                                                  Creates a new session using a socket instead of a name.
+  [tmux -S \[socket\] attach]                                                           Attaches to an existing session using a socket instead of a name.
 
 ::: footnotes
 #### Footnotes
@@ -3647,33 +2924,33 @@ Panes are great for dividing up a workspace, but sometimes you might
 want to "pop out" a pane into its own window. tmux has a command to do
 just that.
 
-Inside any pane, press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `!`{.cf .keystroke
-style="font-variant:small-caps"} and tmux will create a new window from
+Inside any pane, press `Prefix`
+ `!`
+ and tmux will create a new window from
 your pane, removing the original pane.
 
 ### Turning a Window into a Pane {#part0051.xhtml#sec.Turning.a.Window.Into.A.Pane}
 
 Occasionally, it's nice to consolidate a workspace. You can easily take
-a window and turn it into a pane. To do this, issue the [join-pane]{.cf
+a window and turn it into a pane. To do this, issue the [join-pane]
 .ic} command.
 
 Try it out. Create a new tmux session with two windows.
 
   ------------------ -----------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-s**​​ ​​**panes**​​ ​​**-n**​​ ​​**first**​​ ​​**-d**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new-window**​​ ​​**-t**​​ ​​**panes**​​ ​​**-n**​​ ​​**second**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**panes**​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new-session​​ ​​-s​​ ​​panes​​ ​​-n​​ ​​first​​ ​​-d​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new-window​​ ​​-t​​ ​​panes​​ ​​-n​​ ​​second​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​panes​
   ------------------ -----------------------------------------------------------------------------------------
 
 Now, to move the first window into a pane in the second window, press
-`Prefix`{.cf .keystroke style="font-variant:small-caps"} `:`{.cf
-.keystroke style="font-variant:small-caps"} to enter Command mode, and
+`Prefix`  `:`
+.keystroke  to enter Command mode, and
 type this:
 
-[join-pane -s panes:1]{.cf .ic}
+[join-pane -s panes:1]
 
-This means "Take window 1 of the [panes]{.cf .ic} session and join it to
+This means "Take window 1 of the [panes] session and join it to
 the current window," since we did not specify a target. When you "join"
 a pane, you're essentially moving a pane from one session to another.
 You specify the source window and pane, followed by the target window
@@ -3682,75 +2959,74 @@ becomes the target.
 
 You can use this technique to move panes around as well. If your first
 window had two panes, you could specify the source pane like this,
-keeping in mind that you set the window and pane base indexes to [1]{.cf
-.ic} instead of [0]{.cf .ic} back in Chapter 2, [​*Configuring
+keeping in mind that you set the window and pane base indexes to [1]
+.ic} instead of [0] back in Chapter 2, [​*Configuring
 tmux*​](#part0023.xhtml#ch.config).
 
-[join-pane -s panes:1.1]{.cf .ic}
+[join-pane -s panes:1.1]
 
 This command grabs the first pane of the first window and joins it to
 the current window.
 
 To take it a step further, you can specify a different source session,
-using the notation [\[session_name\]:\[window\].\[pane\]]{.cf .ic}, and
-you can specify a target window using the [-t]{.cf .ic} flag using the
+using the notation [\[session_name\]:\[window\].\[pane\]], and
+you can specify a target window using the [-t] flag using the
 same notation. This lets you pull panes from one session into another.
 
-### Maximizing and Restoring Panes {#part0051.xhtml#sec.max.restore.panes}
+### Maximizing and Restoring Panes 
 
 Sometimes you just want a pane to go full-screen for a bit so you can
 see its contents or work in a more focused way. You could use the
-[break-pane]{.cf .ic} command. But then you'd have to use
-[join-pane]{.cf .ic} to put it back where it was. But there's a better
-way. The [resize-pane]{.cf .ic} command accepts the [-Z]{.cf .ic} option
-for zooming a pane. Best of all, it's already mapped to `Prefix`{.cf
-.keystroke style="font-variant:small-caps"} `z`{.cf .keystroke}, and
+[break-pane] command. But then you'd have to use
+[join-pane] to put it back where it was. But there's a better
+way. The [resize-pane] command accepts the [-Z] option
+for zooming a pane. Best of all, it's already mapped to `Prefix`
+.keystroke  `z` , and
 pressing it again restores the pane to its original size.
 
-### Launching Commands in Panes {#part0051.xhtml#sec.launching.commands.in.panes}
+### Launching Commands in Panes 
 
 In Chapter 3, [​*Scripting Customized tmux
 Environments*​](#part0030.xhtml#ch.scripting), we explored how to use
-shell commands and [send-keys]{.cf .ic} to launch programs in our panes,
+shell commands and [send-keys] to launch programs in our panes,
 but we can execute commands automatically when we launch a window or a
 pane.
 
-We have two servers, [burns]{.cf .ic} and [smithers]{.cf .ic}, which run
+We have two servers, [burns] and [smithers], which run
 our web server and database server, respectively. When we start up tmux,
 we want to connect to these servers using a single window with two
 panes.
 
-Let's create a new script called [servers.sh]{.cf .filename} and create
+Let's create a new script called [servers.sh]  and create
 one session connecting to two servers:
 
-  ------------------ ------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new-session**​​ ​​**-s**​​ ​​**servers**​​ ​​**-d**​​ ​​*\"ssh deploy@burns\"*​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**split-window**​​ ​​**-v**​​ ​​*\"ssh dba@smithers\"*​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**servers**​
-  ------------------ ------------------------------------------------------------------------------------------------
+
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new-session​​ ​​-s​​ ​​servers​​ ​​-d​​ ​​*\"ssh deploy@burns\"*​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​split-window​​ ​​-v​​ ​​*\"ssh dba@smithers\"*​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​servers​
+
 
 When we create a new session, we can pass the command we want to execute
 as the last argument. In our case, we fire off the new session and
-connect to [burns]{.cf .ic} in the first window, and we detach the
+connect to [burns] in the first window, and we detach the
 session. Then we divide the window using a vertical split and then
-connect to [smithers]{.cf .ic}.
+connect to [smithers].
 
 This configuration has a handy side effect: when we log off of our
 remote servers, the pane or window will close.
 
-### Opening a Pane in the Current Directory {#part0051.xhtml#sec.opening.pane.in.current.dir}
+### Opening a Pane in the Current Directory 
 
 When you open a new pane, tmux places you in the directory where you
 originally launched tmux. Sometimes that's exactly what you want, but if
 you navigated into another directory, you might want to create a new
 pane that starts in that directory instead.
 
-You can use the [pane_current_path]{.cf .ic} variable provided by tmux
+You can use the [pane_current_path] variable provided by tmux
 when creating a new pane. Open Command mode and execute
 
-  ------------------ -----------------------------------------------
-  ​[ ]{.codeprefix}   split-window -v -c ​*\"#{pane_current_path}\"*​
-  ------------------ -----------------------------------------------
+  ​[ ]   split-window -v -c ​*\"#{pane_current_path}\"*​
+
 
 This splits the window horizontally, but opens the new terminal session
 in the same working directory as the current pane or window.
@@ -3759,54 +3035,47 @@ You can add this to your configuration file to make this easy. Instead
 of changing the existing bindings for splits, add new ones so you can
 choose the behavior you'd like:
 
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
 
-  ------------------ -------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# split pane and retain the current directory of existing pane*​
-  ​[ ]{.codeprefix}   bind \_ split-window -v -c ​*\"#{pane_current_path}\"*​
-  ​[ ]{.codeprefix}   bind ​*\\* ​split-window -h -c ​*\"#{pane_current_path}\"*​
-  ------------------ -------------------------------------------------------------------
 
-This configures things so that `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `_`{.cf .keystroke
-style="font-variant:small-caps"} splits the window horizontally and
-`Prefix`{.cf .keystroke style="font-variant:small-caps"} `/`{.cf
-.keystroke style="font-variant:small-caps"} splits the window
+  ​[ ]   ​*\# split pane and retain the current directory of existing pane*​
+  ​[ ]   bind \_ split-window -v -c ​*\"#{pane_current_path}\"*​
+  ​[ ]   bind ​*\\* ​split-window -h -c ​*\"#{pane_current_path}\"*​
+
+
+This configures things so that `Prefix`
+ `_`
+ splits the window horizontally and
+`Prefix`  `/`
+.keystroke  splits the window
 vertically.
 
-### Issuing Commands in Many Panes Simultaneously {#part0051.xhtml#sec.sync.panes}
+### Issuing Commands in Many Panes Simultaneously 
 
 Every once in a while, you might need to execute the same command in
 multiple panes. You might need to run the same update script on two
 servers, for example. You can do this easily with tmux.
 
-Using the command [set-window-option synchronize-panes on]{.cf .ic},
+Using the command [set-window-option synchronize-panes on],
 anything you type in one pane will be immediately broadcast to the other
 panes in the current session. Once you've issued the command, you can
-turn it off with [set-window-option synchronize-panes off]{.cf .ic}.
+turn it off with [set-window-option synchronize-panes off].
 
-To make this easier to do, you can map this to `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`s`{.cf .keystroke}, like this:
+To make this easier to do, you can map this to `Prefix`
+ `Ctrl`
+-`s` , like this:
 
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
 
-  ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# shortcut for synchronize-panes toggle*​
-  ​[ ]{.codeprefix}   bind C-s set-window-option synchronize-panes
-  ------------------ ----------------------------------------------
+  ​[ ]   ​*\# shortcut for synchronize-panes toggle*​
+  ​[ ]   bind C-s set-window-option synchronize-panes
 
-By not specifying the [off]{.cf .ic} or [on]{.cf .ic} option, the
-[synchronize-panes]{.cf .ic} command acts as a toggle. While this isn't
+
+By not specifying the [off] or [on] option, the
+[synchronize-panes] command acts as a toggle. While this isn't
 something you'll use very often, it's amazingly handy when you need it.
 
-[]{#part0052.xhtml}
 
-## Managing Sessions {#part0052.xhtml#d24e7048}
+
+## Managing Sessions 
 
 As you get more comfortable with tmux, you may find yourself using more
 than one tmux session simultaneously. For example, you may fire up
@@ -3814,89 +3083,85 @@ unique tmux sessions for each application you're working on so you can
 keep the environments contained. There are some great tmux features to
 make managing these sessions painless.
 
-### Moving Between Sessions {#part0052.xhtml#sec.Moving.Between.Sessions}
+### Moving Between Sessions 
 
 All tmux sessions on a single machine route through a single server.
 That means you can move effortlessly between your sessions from a single
 client.
 
 Let's try this out. Start two detached tmux sessions, one named
-"editor," which launches Vim, and the other running the [top]{.cf .ic}
+"editor," which launches Vim, and the other running the [top]
 command, called "processes":
 
-  ------------------ ---------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**editor**​​ ​​**-d**​​ ​​**vim**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**processes**​​ ​​**-d**​​ ​​**top**​
-  ------------------ ---------------------------------------------------------------------------
+
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new​​ ​​-s​​ ​​editor​​ ​​-d​​ ​​vim​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new​​ ​​-s​​ ​​processes​​ ​​-d​​ ​​top​
+
 
 Connect to the "editor" session with
 
-  ------------------ ----------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**editor**​
-  ------------------ ----------------------------------------------------------
 
-and then press `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`(`{.cf .keystroke style="font-variant:small-caps"} to go to the
-previous session and `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `)`{.cf .keystroke
-style="font-variant:small-caps"} to move to the next session.
+  ​[ ]   ​[\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​editor​
 
-You can also use `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `s`{.cf .keystroke} to display a list
+
+and then press `Prefix` 
+`(`  to go to the
+previous session and `Prefix`
+ `)`
+ to move to the next session.
+
+You can also use `Prefix`
+ `s`  to display a list
 of sessions, so you can quickly navigate between sessions:
 
-::: ss
-![images/workflows/sessions.png](images/image00134.jpeg){#d24e7161}
-:::
 
-You can use the `j`{.cf .keystroke} and `k`{.cf .keystroke} keys to move
+![images/workflows/sessions.png](images/image00134.jpeg)
+You can use the `j`  and `k`  keys to move
 up and down if you've configured tmux to use Vim-like movement, and you
-can press `Space`{.cf .keystroke style="font-variant:small-caps"} to
+can press `Space`  to
 expand a session so you can jump to a specific window or pane.
 
-You can add custom keybindings for this to your [.tmux.conf]{.cf
-.filename} file by binding keys to the [switch-client]{.cf .ic} command.
+You can add custom keybindings for this to your [.tmux.conf]
+.filename} file by binding keys to the [switch-client] command.
 The default configuration looks like this:
 
-  ------------------ -------------------------
-  ​[ ]{.codeprefix}   bind ( switch-client -p
-  ​[ ]{.codeprefix}   bind ) switch-client -n
-  ------------------ -------------------------
+  ​[ ]   bind ( switch-client -p
+  ​[ ]   bind ) switch-client -n
+
 
 If you've set up multiple workspaces, this is an extremely efficient way
 to move around your environments, without detaching and reattaching.
 
-### Moving Windows Between Sessions {#part0052.xhtml#sec.Moving.Windows.Between.Sessios}
+### Moving Windows Between Sessions
 
 You can move a window from one session to another. This is handy in case
 you've started up a process in one environment and want to move it
 around or want to consolidate your workspaces.
 
-The [move-window]{.cf .ic} command is mapped to `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `.`{.cf .keystroke
-style="font-variant:small-caps"} (the period), so you can bring up the
+The [move-window] command is mapped to `Prefix`
+ `.`
+ (the period), so you can bring up the
 window you want to move, press the key combination, and then type the
 name of the target session.
 
 To try this out, create two sessions, with the names "editor" and
-"processes," running [vim]{.cf .ic} and [top]{.cf .ic} respectively:
+"processes," running [vim] and [top] respectively:
 
-  ------------------ ---------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**editor**​​ ​​**-d**​​ ​​**vim**​
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**new**​​ ​​**-s**​​ ​​**processes**​​ ​​**-d**​​ ​​**top**​
-  ------------------ ---------------------------------------------------------------------------
+
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new​​ ​​-s​​ ​​editor​​ ​​-d​​ ​​vim​
+  ​[ ]   ​[\$ ]​​tmux​​ ​​new​​ ​​-s​​ ​​processes​​ ​​-d​​ ​​top​
+
 
 Let's move the window in the "processes" session into the "editor"
 session.
 
 First, attach to the "processes" session with this:
 
-  ------------------ -------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**attach**​​ ​​**-t**​​ ​​**processes**​
-  ------------------ -------------------------------------------------------------
+  ​[ ]   ​[\$ ]​​tmux​​ ​​attach​​ ​​-t​​ ​​processes​
 
-Then, press `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`.`{.cf .keystroke style="font-variant:small-caps"} and type "editor" in
+
+Then, press `Prefix` 
+`.`  and type "editor" in
 the command line that appears.
 
 This removes the only window in the "processes" session, causing it to
@@ -3904,40 +3169,38 @@ close. If you attach to the "editor" session, you'll see both windows.
 
 You can use shell commands to do this, too, so you don't need to
 consolidate things by opening sessions. To do that, use
-[move-window]{.cf .ic}, like this:
+[move-window], like this:
 
-  ------------------ ----------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**tmux**​​ ​​**move-window**​​ ​​**-s**​​ ​​**processes:1**​​ ​​**-t**​​ ​​**editor**​
-  ------------------ ----------------------------------------------------------------------------------------
+
+  ​[ ]   ​[\$ ]​​tmux​​ ​​move-window​​ ​​-s​​ ​​processes:1​​ ​​-t​​ ​​editor​
+
 
 This moves the first window of the "processes" session to the "editor"
 session.
 
-### Creating or Attaching to Existing Sessions {#part0052.xhtml#sec.Creating.or.Attaching.To.Existing.Sessions}
+### Creating or Attaching to Existing Sessions 
 
 So far, we've always taken the approach of creating new tmux sessions
 whenever we want to work. However, we can actually detect if a tmux
 session exists and connect to it if it does.
 
-The [has-session]{.cf .ic} command returns a Boolean value that we can
+The [has-session] command returns a Boolean value that we can
 use in a shell script. That means we can do something like this in a
 Bash script:
 
-  ------------------ ----------------------------------------------------
-  ​[ ]{.codeprefix}   ​**if**​ ! tmux has-session -t development; ​**then**​
-  ​[ ]{.codeprefix}   ​​exec tmux new-session -s development -d
-  ​[ ]{.codeprefix}   ​*\# other setup commands before attaching\....*​
-  ​[ ]{.codeprefix}   ​**fi**​
-  ​[ ]{.codeprefix}   exec tmux attach -t development
-  ------------------ ----------------------------------------------------
+
+  ​[ ]   ​if​ ! tmux has-session -t development; ​then​
+  ​[ ]   ​​exec tmux new-session -s development -d
+  ​[ ]   ​*\# other setup commands before attaching\....*​
+  ​[ ]   ​fi​
+  ​[ ]   exec tmux attach -t development
+
 
 If you modify the script to take an argument, you can use this to create
 a single script that you can use to connect to or create any tmux
 session.
 
-[]{#part0053.xhtml}
-
-## tmux and Your Operating System {#part0053.xhtml#d24e7370}
+## tmux and Your Operating System 
 
 As tmux becomes part of your workflow, you may want to integrate it more
 tightly with your operating system. In this section, you'll discover
@@ -3946,55 +3209,55 @@ ways to make tmux and your system work well together.
 ### Using a Different Shell {#part0053.xhtml#sec.Using.A.Different.Shell}
 
 In this book, we've used the Bash shell, but if you're a fan of
-[zsh]{.cf .ic}, you can still get all the tmux goodness.
+[zsh], you can still get all the tmux goodness.
 
-Just explicitly set the default shell in [.tmux.conf]{.cf .filename}
+Just explicitly set the default shell in [.tmux.conf] 
 like this:
 
-  ------------------ -------------------------------
-  ​[ ]{.codeprefix}   set -g default-shell /bin/zsh
-  ------------------ -------------------------------
+
+  ​[ ]   set -g default-shell /bin/zsh
+
 
 Since tmux is just a terminal multiplexer and not a shell of its own,
 you just specify exactly what to run when it starts.
 
-### Launching tmux by Default {#part0053.xhtml#sec.Launching.ap}
+### Launching tmux by Default 
 
 You can configure your system to launch tmux automatically when you open
 a terminal. And using what you know about session names, you can create
 a new session if one doesn't exist, or attach to one that does.
 
-When tmux is running, it sets the [TERM]{.cf .ic} variable to "screen"
-or the value of the [default-terminal]{.cf .ic} setting in the
-configuration file. You can use this value in your [.bashrc]{.cf
-.filename} (or [.bash_profile]{.cf .filename} on macOS) file to
+When tmux is running, it sets the [TERM] variable to "screen"
+or the value of the [default-terminal] setting in the
+configuration file. You can use this value in your [.bashrc]
+.filename} (or [.bash_profile]  on macOS) file to
 determine whether or not you're currently in a tmux session. You set
 your tmux terminal to "screen-256color" back in Chapter 2, [​*Configuring
 tmux*​](#part0023.xhtml#ch.config), so you could use that to detect if
 tmux is actually running.
 
-For example, you could add these lines to the end of your [.bashrc]{.cf
+For example, you could add these lines to the end of your [.bashrc]
 .ic} file:
 
-  ------------------ ---------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​**if**​ \[\[ ​*\"*​\$TERM​*\"*​ != ​*\"screen-256color\"*​ \]\]
-  ​[ ]{.codeprefix}   ​**then**​
-  ​[ ]{.codeprefix}   ​​tmux attach-session -t ​*\"*​\$USER​*\"*​ \|\| tmux new-session -s ​*\"*​\$USER​*\"*​
-  ​[ ]{.codeprefix}   ​**fi**​
-  ------------------ ---------------------------------------------------------------------------------
+
+  ​[ ]   ​if​ \[\[ ​*\"*​\$TERM​*\"*​ != ​*\"screen-256color\"*​ \]\]
+  ​[ ]   ​then​
+  ​[ ]   ​​tmux attach-session -t ​*\"*​\$USER​*\"*​ \|\| tmux new-session -s ​*\"*​\$USER​*\"*​
+  ​[ ]   ​fi​
+
 
 This first checks that you're not already in a tmux session. If that's
 the case, it attempts to attach to a session with a session name of
-[\$USER]{.cf .ic}, which is your username. You can replace this with any
+[\$USER], which is your username. You can replace this with any
 value you want, but using the username helps avoid conflicts.
 
 If the session doesn't exist, tmux will throw an error that the shell
-script can interpret as a [false]{.cf .ic} value. It can then run the
+script can interpret as a [false] value. It can then run the
 right side of the expression, which creates a new session with your
 username as the session's name. It then exits out of the script.
 
-When the tmux session starts up, it will run through our [.bashrc]{.cf
-.filename} or [.bash_profile]{.cf .filename} file again, but this time
+When the tmux session starts up, it will run through our [.bashrc]
+.filename} or [.bash_profile]  file again, but this time
 it will see that we're in a tmux session, skip over this chunk of code,
 and execute the rest of the commands in our configuration file, ensuring
 that all our environment variables are set for us.
@@ -4004,180 +3267,163 @@ careful, though, since each time you open a new terminal session on your
 machine, it will be attached to the same session. Exiting tmux in one
 terminal will exit tmux in all of them.
 
-### Keeping Specific Configuration Separate {#part0053.xhtml#sec.specific.config}
+### Keeping Specific Configuration Separate 
 
 In Chapter 4, [​*Working With Text and
 Buffers*​](#part0036.xhtml#ch.buffers), you learned how to make tmux work
 with the OS X and Linux system clipboards, and this involved adding some
-specific configuration options to your [.tmux.conf]{.cf .filename} file.
+specific configuration options to your [.tmux.conf]  file.
 But if you wanted your configuration to work on both operating systems,
 you'd run into some conflicts.
 
 The solution is to move your OS-specific configuration into a separate
-file and then tell tmux to load it up by using tmux's [if-shell]{.cf
-.ic} command and the [source]{.cf .ic} command.
+file and then tell tmux to load it up by using tmux's [if-shell]
+.ic} command and the [source] command.
 
-Try it out. Create a new file called [.tmux.mac.conf]{.cf .filename} in
+Try it out. Create a new file called [.tmux.mac.conf]  in
 your home directory:
 
-  ------------------ --------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**touch**​​ ​​**\~/.tmux.mac.conf**​
-  ------------------ --------------------------------------------------
+
+  ​[ ]   ​[\$ ]​​touch​​ ​​\~/.tmux.mac.conf​
+
 
 In that file, put all the code to make the Mac's clipboard work with
 tmux:
 
-::: livecodelozenge
-[workflows/tmux.mac.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.mac.conf)
-:::
 
-  ------------------ -------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Setting the namespace*​
-  ​[ ]{.codeprefix}   set -g default-command ​*\"reattach-to-user-namespace -l /bin/bash\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Prefix C-c copy buffer to system clipboard*​
-  ​[ ]{.codeprefix}   bind C-c run ​*\"tmux save-buffer - \| reattach-to-user-namespace pbcopy\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Prefix C-v paste system clipboard into tmux*​
-  ​[ ]{.codeprefix}   bind C-v run \\
-  ​[ ]{.codeprefix}   ​*\"tmux set-buffer \\\"*​\$(reattach-to-user-namespace pbpaste)\\​*\"; tmux paste-buffer\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# use y in visual mode to copy text to system clipboard*​
-  ​[ ]{.codeprefix}   bind -t vi-copy y copy-pipe ​*\"reattach-to-user-namespace pbcopy\"*​
+  ​[ ]   ​*\# Setting the namespace*​
+  ​[ ]   set -g default-command ​*\"reattach-to-user-namespace -l /bin/bash\"*​
+  ​[ ]   
+  ​[ ]   ​*\# Prefix C-c copy buffer to system clipboard*​
+  ​[ ]   bind C-c run ​*\"tmux save-buffer - \| reattach-to-user-namespace pbcopy\"*​
+  ​[ ]   
+  ​[ ]   ​*\# Prefix C-v paste system clipboard into tmux*​
+  ​[ ]   bind C-v run \\
+  ​[ ]   ​*\"tmux set-buffer \\\"*​\$(reattach-to-user-namespace pbpaste)\\​*\"; tmux paste-buffer\"*​
+  ​[ ]   
+  ​[ ]   ​*\# use y in visual mode to copy text to system clipboard*​
+  ​[ ]   bind -t vi-copy y copy-pipe ​*\"reattach-to-user-namespace pbcopy\"*​
   ------------------ -------------------------------------------------------------------------------------------
 
-Then open [.tmux.conf]{.cf .filename} and remove any lines related to OS
+Then open [.tmux.conf]  and remove any lines related to OS
 X if you've put them in. Then add this to the end of the file:
 
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
 
-  ------------------ --------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Load mac-specific settings*​
-  ​[ ]{.codeprefix}   ​**if**​-shell ​*\"uname \| grep -q Darwin\"*​ ​*\"source-file \~/.tmux.mac.conf\"*​
-  ------------------ --------------------------------------------------------------------------------
 
-The [if-shell]{.cf .ic} command runs a shell command, and if it was
+  ​[ ]   ​*\# Load mac-specific settings*​
+  ​[ ]   ​if​-shell ​*\"uname \| grep -q Darwin\"*​ ​*\"source-file \~/.tmux.mac.conf\"*​
+
+
+The [if-shell] command runs a shell command, and if it was
 successful, it executes the step. In this case, we tell tmux to run the
-[uname]{.cf .ic} command and use [grep]{.cf .ic} to see if it contains
+[uname] command and use [grep] to see if it contains
 the word "Darwin." If it does, it's a safe bet we're on a Mac, so we
 load the configuration file.
 
 You could use a similar approach to load an additional bit of
 configuration only if it exists. For example, you may want to share your
-main [.tmux.conf]{.cf .filename} file with the world on GitHub, but you
+main [.tmux.conf]  file with the world on GitHub, but you
 may want to keep some of your own secret sauce private. So move all of
-those tricks into [.tmux.private]{.cf .filename}, and add this to your
-[.tmux.conf]{.cf .filename} file:
+those tricks into [.tmux.private] , and add this to your
+[.tmux.conf]  file:
 
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
 
-  ------------------ ---------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# load private settings if they exist*​
-  ​[ ]{.codeprefix}   ​**if**​-shell ​*\"\[ -f \~/.tmux.private\]\"*​ ​*\"source \~/.tmux.private\"*​
-  ------------------ ---------------------------------------------------------------------------
+  ​[ ]   ​*\# load private settings if they exist*​
+  ​[ ]   ​if​-shell ​*\"\[ -f \~/.tmux.private\]\"*​ ​*\"source \~/.tmux.private\"*​
+
 
 This will only load the file if it exists.
 
 ### Recording Program Output to a Log
 
 Sometimes it's useful to be able to capture the output of a terminal
-session to a log. You already learned how to use [capture-pane]{.cf .ic}
-and [save-buffer]{.cf .ic} to do this, but tmux can actually record the
-activity in a pane right to a text file with the [pipe-pane]{.cf .ic}
-command. This is similar to the [script]{.cf .ic} command available in
-many shells, except that with [pipe-pane]{.cf .ic}, you can toggle it on
+session to a log. You already learned how to use [capture-pane]
+and [save-buffer] to do this, but tmux can actually record the
+activity in a pane right to a text file with the [pipe-pane]
+command. This is similar to the [script] command available in
+many shells, except that with [pipe-pane], you can toggle it on
 and off at will, and you can start it after a program is already
 running.
 
 To activate this, enter Command mode and type [pipe-pane -o \"cat \>\>
-mylog.txt\"]{.cf .ic}.
+mylog.txt\"].
 
-You can use the [-o]{.cf .ic} flag to toggle the output, which means if
+You can use the [-o] flag to toggle the output, which means if
 you send the exact command again, you can turn the logging off. To make
 it easier to execute this command, add this to your configuration script
 as a shortcut key.
 
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
+  ​[ ]   ​*\# Log output to a text file on demand*​
+  ​[ ]   bind P pipe-pane -o ​*\"cat \>\>\~/#W.log\"*​ ​*\\;*​ display ​*\"Toggled logging to \~/#W.log\"*​
 
-  ------------------ ----------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Log output to a text file on demand*​
-  ​[ ]{.codeprefix}   bind P pipe-pane -o ​*\"cat \>\>\~/#W.log\"*​ ​*\\;*​ display ​*\"Toggled logging to \~/#W.log\"*​
-  ------------------ ----------------------------------------------------------------------------------------------
 
-Now you can press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `P`{.cf .keystroke
-style="font-variant:small-caps"} to toggle logging. Thanks to the
-[display]{.cf .ic} command (short for [display-message]{.cf .ic}),
+Now you can press `Prefix`
+ `P`
+ to toggle logging. Thanks to the
+[display] command (short for [display-message]),
 you'll see the name of the log file displayed in the status line. The
-[display]{.cf .ic} command has access to the same variables as the
+[display] command has access to the same variables as the
 status line, which you learned about in Table 1, [​*Status Line
 Variables*​](#part0027.xhtml#fig.status.line.variables).
 
-### Adding Battery Life to the Status Line {#part0053.xhtml#sec.Showing.Battery.Life}
+### Adding Battery Life to the Status Line 
 
 If you use tmux on a laptop, you may want to show the remaining battery
 life in your status line, especially if you run your terminal in
 full-screen mode. It turns out that this is a simple thing to add thanks
-to the [#(shell-command)]{.cf .ic} variable.
+to the [#(shell-command)] variable.
 
 Let's add the battery status to our configuration file. Grab a shell
 script that can fetch the remaining battery charge and display it to the
-screen. We'll place this in a file called [battery]{.cf .filename} in
+screen. We'll place this in a file called [battery]  in
 our home folder and tell tmux to run it for us.
 
 First, download the file:
 
   ------------------ ---------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**wget**​​ ​​**\--no-check-certificate**​​ ​​**\\**​
-  ​[ ]{.codeprefix}   ​**https://raw.github.com/richo/battery/master/bin/battery**​
+  ​[ ]   ​[\$ ]​​wget​​ ​​\--no-check-certificate​​ ​​\\​
+  ​[ ]   ​https://raw.github.com/richo/battery/master/bin/battery​
   ------------------ ---------------------------------------------------------------
 
-You can also find the [battery]{.cf .filename} script in the book's
+You can also find the [battery]  script in the book's
 source code downloads.
 
 Now make it executable so tmux can use it:
 
   ------------------ ---------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**chmod**​​ ​​**+x**​​ ​​**\~/battery**​
+  ​[ ]   ​[\$ ]​​chmod​​ ​​+x​​ ​​\~/battery​
   ------------------ ---------------------------------------------------
 
 Test it out by running
 
   ------------------ -------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**\~/battery**​​ ​​**Discharging**​
+  ​[ ]   ​[\$ ]​​\~/battery​​ ​​Discharging​
   ------------------ -------------------------------------------------
 
 If you're running this on a laptop without the power cord plugged in,
 you'll see the percentage left on the battery.
 
 We can get tmux to display the output of any command-line program in its
-status bar by using [#(\<command\>)]{.cf .ic}. So, to display the
-battery in front of the clock, change the [status-right]{.cf .ic} line
-in [.tmux.conf]{.cf .filename} to this:
+status bar by using [#(\<command\>)]. So, to display the
+battery in front of the clock, change the [status-right] line
+in [.tmux.conf]  to this:
 
   ------------------ -----------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Status line right side - 50% \| 31 Oct 13:37*​
-  ​[ ]{.codeprefix}   set -g status-right ​*\"#(\~/battery Discharging) \| #\[fg=cyan\]%d %b %R\"*​
+  ​[ ]   ​*\# Status line right side - 50% \| 31 Oct 13:37*​
+  ​[ ]   set -g status-right ​*\"#(\~/battery Discharging) \| #\[fg=cyan\]%d %b %R\"*​
   ------------------ -----------------------------------------------------------------------------
 
-Now, when you reload the [.tmux.conf]{.cf .filename} file, the battery
+Now, when you reload the [.tmux.conf]  file, the battery
 status indicator will appear.
 
-::: ss
-![images/workflows/battery.png](images/image00135.jpeg){#d24e7773}
-:::
+
+![images/workflows/battery.png](images/image00135.jpeg)
 
 To get battery status when it's charging, you'll need to execute the
 command
 
   ------------------ ----------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**\~/battery**​​ ​​**Charging**​
+  ​[ ]   ​[\$ ]​​\~/battery​​ ​​Charging​
   ------------------ ----------------------------------------------
 
 and work that into the status line. I'll leave that up to you.
@@ -4186,142 +3432,128 @@ You can use this approach to customize your status line further. You'd
 simply need to write your own script that returns the value you want to
 display, and then drop it into the status line.
 
-### Integrating Seamlessly with Vim {#part0053.xhtml#sec.vim.integration}
+### Integrating Seamlessly with Vim 
 
 The Vim text editor works pretty well with tmux, but developer Mislav
 Marohni[ć]{style=""} developed a solution that lets you move between
 tmux panes and Vim splits seamlessly. To make this work, you'll need to
 install Chris Toomey's vim-tmux-navigator plugin for
 Vim^[\[16\]](#part0056.xhtml#FOOTNOTE-16){#part0053.xhtml#FNPTR-16
-.footnote}^ and add some keybindings to your [.tmux.conf]{.cf .filename}
+.footnote}^ and add some keybindings to your [.tmux.conf] 
 file.
 
 This setup will create the following keybindings:
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`j`{.cf
-    .keystroke} moves up
+-   `Ctrl` -`j`
+     moves up
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`k`{.cf
-    .keystroke} moves down
+-   `Ctrl` -`k`
+     moves down
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`h`{.cf
-    .keystroke} moves left
+-   `Ctrl` -`h`
+     moves left
 
--   `Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`l`{.cf
-    .keystroke} moves right
+-   `Ctrl` -`l`
+     moves right
 
 If you're in tmux and you move into Vim, then the Vim plugin will take
 over. If you're in Vim and you move to tmux, then tmux will take over.
 Instead of having to learn two sets of commands to navigate, you just
 have one. To set this up, install the Vim plugin using Vundle by adding
-this to your [.vimrc]{.cf .ic} file:
+this to your [.vimrc] file:
 
   ------------------ -------------------------------------------
-  ​[ ]{.codeprefix}   Plugin \'christoomey/vim-tmux-navigator\'
+  ​[ ]   Plugin \'christoomey/vim-tmux-navigator\'
   ------------------ -------------------------------------------
 
-Then save your [.vimrc]{.cf .filename} file and run
+Then save your [.vimrc]  file and run
 
   ------------------ ----------------
-  ​[ ]{.codeprefix}   :PluginInstall
+  ​[ ]   :PluginInstall
   ------------------ ----------------
 
 in Vim to install the plugin.
 
-Then in [.tmux.conf]{.cf .filename}, add these lines:
-
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
+Then in [.tmux.conf] , add these lines:
 
   ------------------ --------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   is_vim=​*\"ps -o state= -o comm= -t \'#{pane_tty}\'* ​​*\\*​
-  ​[ ]{.codeprefix}   ​*\| grep -iqE \'\^\[\^TXZ \]+ +(*​​*\\\\*​​*S+*​​*\\\\*​​*/)?g?(view\|n?vim?x?)(diff)?*​\$\'​*\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-h ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-h\"*​ ​*\"select-pane -L\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-j ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-j\"*​ ​*\"select-pane -D\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-k ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-k\"*​ ​*\"select-pane -U\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-l ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-l\"*​ ​*\"select-pane -R\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-​*\\* ​​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-*​​*\\\\*​​*\"*​ ​*\"select-pane -l\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   bind C-l send-keys ​*\'C-l\'*​
+  ​[ ]   is_vim=​*\"ps -o state= -o comm= -t \'#{pane_tty}\'* ​​*\\*​
+  ​[ ]   ​*\| grep -iqE \'\^\[\^TXZ \]+ +(*​​*\\\\*​​*S+*​​*\\\\*​​*/)?g?(view\|n?vim?x?)(diff)?*​\$\'​*\"*​
+  ​[ ]   bind-key -n C-h ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-h\"*​ ​*\"select-pane -L\"*​
+  ​[ ]   bind-key -n C-j ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-j\"*​ ​*\"select-pane -D\"*​
+  ​[ ]   bind-key -n C-k ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-k\"*​ ​*\"select-pane -U\"*​
+  ​[ ]   bind-key -n C-l ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-l\"*​ ​*\"select-pane -R\"*​
+  ​[ ]   bind-key -n C-​*\\* ​​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-*​​*\\\\*​​*\"*​ ​*\"select-pane -l\"*​
+  ​[ ]   
+  ​[ ]   bind C-l send-keys ​*\'C-l\'*​
   ------------------ --------------------------------------------------------------------------------------------------
 
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`l`{.cf
-.keystroke} is the keybinding used by the [readline]{.cf .ic} library in
+`Ctrl` -`l`
+ is the keybinding used by the [readline] library in
 many shells for clearing the screen. The last line of this configuration
-sets up `Prefix`{.cf .keystroke style="font-variant:small-caps"}
-`Ctrl`{.cf .keystroke style="font-variant:small-caps"}-`l`{.cf
-.keystroke} to issue that command instead.
+sets up `Prefix` 
+`Ctrl` -`l`
+ to issue that command instead.
 
-[]{#part0054.xhtml}
 
-## Extending tmux with Plugins {#part0054.xhtml#sec.plugins}
+## Extending tmux with Plugins 
 
 So far, we've made modifications directly to the tmux configuration
 file. While that works, it can be a little awkward when doing something
 more complex. Bruno Sutic developed a solution to this called TPM, the
 tmux plugin manager. Since then, more and more people have come together
 to build plugins to extend tmux. Let's use TPM to install the incredibly
-useful [tmux-resurrect]{.cf
+useful [tmux-resurrect]
 .ic}^[\[17\]](#part0056.xhtml#FOOTNOTE-17){#part0054.xhtml#FNPTR-17
 .footnote}^ plugin, which can restore tmux sessions even after a reboot!
 
 To set it up, first clone the repository into a folder called
-[\~/.tmux/plugins/tpm]{.cf .filename}:
+[\~/.tmux/plugins/tpm] :
 
   ------------------ -------------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**git**​​ ​​**clone**​​ ​​**https://github.com/tmux-plugins/tpm**​​ ​​**\~/.tmux/plugins/tpm**​
+  ​[ ]   ​[\$ ]​​git​​ ​​clone​​ ​​https://github.com/tmux-plugins/tpm​​ ​​\~/.tmux/plugins/tpm​
   ------------------ -------------------------------------------------------------------------------------------------------
 
-Then add these lines to your [.tmux.conf]{.cf .filename} file:
-
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
-
+Then add these lines to your [.tmux.conf]  file:
   ------------------ ---------------------------------------------------
-  ​[ ]{.codeprefix}   set -g \@plugin ​*\'tmux-plugins/tpm\'*​
-  ​[ ]{.codeprefix}   set -g \@plugin ​*\'tmux-plugins/tmux-resurrect\'*​
-  ​[ ]{.codeprefix}   run ​*\'\~/.tmux/plugins/tpm/tpm\'*​
+  ​[ ]   set -g \@plugin ​*\'tmux-plugins/tpm\'*​
+  ​[ ]   set -g \@plugin ​*\'tmux-plugins/tmux-resurrect\'*​
+  ​[ ]   run ​*\'\~/.tmux/plugins/tpm/tpm\'*​
   ------------------ ---------------------------------------------------
 
-First we list TPM itself, followed by the [tmux-resurrect]{.cf .ic}
+First we list TPM itself, followed by the [tmux-resurrect]
 plugin. Then we load TPM so it can load other plugins. Save this file
-and reload your configuration. Then press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `I`{.cf .keystroke
-style="font-variant:small-caps"} to install the plugin. You'll see this
+and reload your configuration. Then press `Prefix`
+ `I`
+ to install the plugin. You'll see this
 output in tmux:
 
   ------------------ -------------------------------------
-  ​[ ]{.codeprefix}   Already installed \"tpm\"
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   Installing \"tmux-resurrect\"
-  ​[ ]{.codeprefix}   \"tmux-resurrect\" download success
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   TMUX environment reloaded.
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   Done, press ENTER to continue.
+  ​[ ]   Already installed \"tpm\"
+  ​[ ]   
+  ​[ ]   Installing \"tmux-resurrect\"
+  ​[ ]   \"tmux-resurrect\" download success
+  ​[ ]   
+  ​[ ]   TMUX environment reloaded.
+  ​[ ]   
+  ​[ ]   Done, press ENTER to continue.
   ------------------ -------------------------------------
 
-Now test out the [tmux-resurrect]{.cf .ic} program. Open a couple more
-panes, and then press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`s`{.cf .keystroke} to save the state
+Now test out the [tmux-resurrect] program. Open a couple more
+panes, and then press `Prefix`
+ `Ctrl`
+-`s`  to save the state
 of the tmux session. Then close all of the panes and exit tmux. Finally,
-reload tmux and press `Prefix`{.cf .keystroke
-style="font-variant:small-caps"} `Ctrl`{.cf .keystroke
-style="font-variant:small-caps"}-`r`{.cf .keystroke} to restore the
+reload tmux and press `Prefix`
+ `Ctrl`
+-`r`  to restore the
 session you saved. All of your panes will come back!
 
 Visit the list of tmux
-plugins^[\[18\]](#part0056.xhtml#FOOTNOTE-18){#part0054.xhtml#FNPTR-18
-.footnote}^ and find one you'd like to install. You'll find one for the
-batter meter we set up, another for OS-specific clipboards, and even one
-with sensible configuration options.
+plugins^ and find one you'd like to install. You'll find one for the
+batter meter we set up, another for OS-specific clipboards, and even one with sensible configuration options.
 
-[]{#part0055.xhtml}
-
-## What's Next? {#part0055.xhtml#d24e8116}
+## What's Next? 
 
 There's so much more you can do with tmux now that you know the basics
 and you've had some experience playing around with various
@@ -4329,7 +3561,7 @@ configurations. The tmux manual, which you can access from your terminal
 with
 
   ------------------ -----------------------------------
-  ​[ ]{.codeprefix}   ​[\$ ]{.coprompt}​​**man**​​ ​​**tmux**​
+  ​[ ]   ​[\$ ]​​man​​ ​​tmux​
   ------------------ -----------------------------------
 
 has the complete list of configuration options and available commands.
@@ -4351,247 +3583,157 @@ entire environment ready to go.
 Keep working with tmux and before you know it, it'll be an indispensable
 part of your workflow.
 
-[]{#part0056.xhtml}
 
-## For Future Reference {#part0056.xhtml#d24e8140}
+## For Future Reference 
 
   Command                                                                                                        Description
   -------------------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `!`{.cf .keystroke style="font-variant:small-caps"}   Converts the currently selected pane into a new window.
-  [join-pane -s \[session\]:\[window\].\[pane\]]{.cf .ic}                                                        Converts the specified session's window or pane into a pane in the current window.
-  [join-pane -s \[session\]:\[window\].\[pane\] -t \[other session\]]{.cf .ic}                                   Converts the specified session's window or pane into a pane in the target session.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `z`{.cf .keystroke}                                   Zooms the current pane, making it full screen. Pressing it again restores the pane to its original size.
-  [tmux new-session \"\[command\]\"]{.cf .ic}                                                                    Launches tmux and executes a command. When the command completes, the tmux session closes.
-  [split-pane \"\[command\]\"]{.cf .ic}                                                                          Splits the current window and executes the specified command in the new pane. When the command completes, the pane closes.
-  [split-window -c ]{.cf .ic}[\"#{pane_current_path}\"]{.cf .ic}                                                 Splits the pane and sets the working directory of the new pane to the current working directory of the focused pane.
-  [set-window-option synchronize-panes]{.cf .ic}                                                                 Toggles pane synchronization, where keystrokes are issued to all panes simultaneously instead of only the current pane.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `(`{.cf .keystroke style="font-variant:small-caps"}   Moves to the next tmux session.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `)`{.cf .keystroke style="font-variant:small-caps"}   Moves to the previous tmux session.
-  `Prefix`{.cf .keystroke style="font-variant:small-caps"} `s`{.cf .keystroke}                                   Shows the session selection list.
-  [move-window -s \[source session\]:]{.cf .ic}[\[window\] -t \[target session\] ]{.cf .ic}                      Moves a window from one session to another. Also available with `Prefix`{.cf .keystroke style="font-variant:small-caps"} `.`{.cf .keystroke style="font-variant:small-caps"}, followed by the target session name.
-  [set -g default-shell \[shell\]]{.cf .ic}                                                                      Sets the default shell that tmux uses when creating new windows.
-  [set -g default-command \[command\]]{.cf .ic}                                                                  Sets the default command that tmux uses when creating new windows. Blank by default.
-  [if-shell \"\[condition\]\" \"\[command\]\"]{.cf .ic}                                                          Performs a given [command]{.emph} if the [condition]{.emph} evaluates to [true]{.cf .ic}.
-  [ pipe-pane -o \"cat \>\>\~/#W.log\"]{.cf .ic}                                                                 Records the current pane to a text file.
+  `Prefix`  `!`    Converts the currently selected pane into a new window.
+  [join-pane -s \[session\]:\[window\].\[pane\]]                                                        Converts the specified session's window or pane into a pane in the current window.
+  [join-pane -s \[session\]:\[window\].\[pane\] -t \[other session\]]                                   Converts the specified session's window or pane into a pane in the target session.
+  `Prefix`  `z`                                    Zooms the current pane, making it full screen. Pressing it again restores the pane to its original size.
+  [tmux new-session \"\[command\]\"]                                                                    Launches tmux and executes a command. When the command completes, the tmux session closes.
+  [split-pane \"\[command\]\"]                                                                          Splits the current window and executes the specified command in the new pane. When the command completes, the pane closes.
+  [split-window -c ][\"#{pane_current_path}\"]                                                 Splits the pane and sets the working directory of the new pane to the current working directory of the focused pane.
+  [set-window-option synchronize-panes]                                                                 Toggles pane synchronization, where keystrokes are issued to all panes simultaneously instead of only the current pane.
+  `Prefix`  `(`    Moves to the next tmux session.
+  `Prefix`  `)`    Moves to the previous tmux session.
+  `Prefix`  `s`                                    Shows the session selection list.
+  [move-window -s \[source session\]:][\[window\] -t \[target session\] ]                      Moves a window from one session to another. Also available with `Prefix`  `.` , followed by the target session name.
+  [set -g default-shell \[shell\]]                                                                      Sets the default shell that tmux uses when creating new windows.
+  [set -g default-command \[command\]]                                                                  Sets the default command that tmux uses when creating new windows. Blank by default.
+  [if-shell \"\[condition\]\" \"\[command\]\"]                                                          Performs a given [command]{.emph} if the [condition]{.emph} evaluates to [true].
+  [ pipe-pane -o \"cat \>\>\~/#W.log\"]                                                                 Records the current pane to a text file.
 
-::: footnotes
-#### Footnotes
 
-[\[16\]](#part0053.xhtml#FNPTR-16){#part0056.xhtml#FOOTNOTE-16}
+<https://github.com/christoomey/vim-tmux-navigator>
+<https://github.com/tmux-plugins/tmux-resurrect>
+<https://github.com/tmux-plugins>
 
-:   <https://github.com/christoomey/vim-tmux-navigator>
+# Appendix 1 Our Configuration
 
-[\[17\]](#part0054.xhtml#FNPTR-17){#part0056.xhtml#FOOTNOTE-17}
-
-:   <https://github.com/tmux-plugins/tmux-resurrect>
-
-[\[18\]](#part0054.xhtml#FNPTR-18){#part0056.xhtml#FOOTNOTE-18}
-
-:   <https://github.com/tmux-plugins>
-:::
-
-::: {.copyright style=";color:black;"}
-Copyright © 2016, The Pragmatic Bookshelf.
-:::
-
-[]{#part0057.xhtml}
-
-# [ Appendix 1]{.chapter-number} [Our Configuration]{.chapter-name} {#part0057.xhtml#ap.config .chapter-title}
-
-Throughout the book, we've built up a somewhat complex [.tmux.conf]{.cf
+Throughout the book, we've built up a somewhat complex [.tmux.conf]
 .filename} file. Here's the entire file for your reference.
 
-::: livecodelozenge
-[workflows/tmux.conf](http://media.pragprog.com/titles/bhtmux2/code/workflows/tmux.conf)
-:::
-
-  ------------------ ----------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Setting the prefix from C-b to C-a*​
-  ​[ ]{.codeprefix}   set -g prefix C-a
-  ​[ ]{.codeprefix}   ​*\#*​
-  ​[ ]{.codeprefix}   ​*\# Free the original Ctrl-b prefix keybinding*​
-  ​[ ]{.codeprefix}   unbind C-b
-  ​[ ]{.codeprefix}   ​*\#*​
-  ​[ ]{.codeprefix}   ​*#setting the delay between prefix and command*​
-  ​[ ]{.codeprefix}   set -s escape-time 1
-  ​[ ]{.codeprefix}   ​*\#*​
-  ​[ ]{.codeprefix}   ​*\# Ensure that we can send Ctrl-A to other apps*​
-  ​[ ]{.codeprefix}   bind C-a send-prefix
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Set the base index for windows to 1 instead of 0*​
-  ​[ ]{.codeprefix}   set -g base-index 1
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Set the base index for panes to 1 instead of 0*​
-  ​[ ]{.codeprefix}   setw -g pane-base-index 1
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Reload the file with Prefix r*​
-  ​[ ]{.codeprefix}   bind r source-file \~/.tmux.conf ​*\\;*​ display ​*\"Reloaded!\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# splitting panes with \| and -*​
-  ​[ ]{.codeprefix}   bind \| split-window -h
-  ​[ ]{.codeprefix}   bind - split-window -v
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# moving between panes with Prefix h,j,k,l*​
-  ​[ ]{.codeprefix}   bind h ​**select**​-pane -L
-  ​[ ]{.codeprefix}   bind j ​**select**​-pane -D
-  ​[ ]{.codeprefix}   bind k ​**select**​-pane -U
-  ​[ ]{.codeprefix}   bind l ​**select**​-pane -R
+  ​[ ]   ​*\# Setting the prefix from C-b to C-a*​
+  ​[ ]   set -g prefix C-a
+  ​[ ]   ​*\#*​
+  ​[ ]   ​*\# Free the original Ctrl-b prefix keybinding*​
+  ​[ ]   unbind C-b
+  ​[ ]   ​*\#*​
+  ​[ ]   ​*#setting the delay between prefix and command*​
+  ​[ ]   set -s escape-time 1
+  ​[ ]   ​*\#*​
+  ​[ ]   ​*\# Ensure that we can send Ctrl-A to other apps*​
+  ​[ ]   bind C-a send-prefix
+  ​[ ]   
+  ​[ ]   ​*\# Set the base index for windows to 1 instead of 0*​
+  ​[ ]   set -g base-index 1
+  ​[ ]   
+  ​[ ]   ​*\# Set the base index for panes to 1 instead of 0*​
+  ​[ ]   setw -g pane-base-index 1
+  ​[ ]   
+  ​[ ]   ​*\# Reload the file with Prefix r*​
+  ​[ ]   bind r source-file \~/.tmux.conf ​*\\;*​ display ​*\"Reloaded!\"*​
+  ​[ ]   
+  ​[ ]   ​*\# splitting panes with \| and -*​
+  ​[ ]   bind \| split-window -h
+  ​[ ]   bind - split-window -v
+  ​[ ]   
+  ​[ ]   ​*\# moving between panes with Prefix h,j,k,l*​
+  ​[ ]   bind h ​select​-pane -L
+  ​[ ]   bind j ​select​-pane -D
+  ​[ ]   bind k ​select​-pane -U
+  ​[ ]   bind l ​select​-pane -R
   ------------------ ----------------------------------------------------------------
 
   ------------------ --------------------------------------------------------------------------------------------------
-  ​[ ]{.codeprefix}   ​*\# Quick window selection*​
-  ​[ ]{.codeprefix}   bind -r C-h ​**select**​-window -t :-
-  ​[ ]{.codeprefix}   bind -r C-l ​**select**​-window -t :+
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Pane resizing panes with Prefix H,J,K,L*​
-  ​[ ]{.codeprefix}   bind -r H resize-pane -L 5
-  ​[ ]{.codeprefix}   bind -r J resize-pane -D 5
-  ​[ ]{.codeprefix}   bind -r K resize-pane -U 5
-  ​[ ]{.codeprefix}   bind -r L resize-pane -R 5
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# mouse support - set to on if you want to use the mouse*​
-  ​[ ]{.codeprefix}   set -g mouse off
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Set the default terminal mode to 256color mode*​
-  ​[ ]{.codeprefix}   set -g default-terminal ​*\"screen-256color\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# set the status line\'s colors*​
-  ​[ ]{.codeprefix}   set -g status-style fg=white,bg=black
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# set the color of the window list*​
-  ​[ ]{.codeprefix}   setw -g window-status-style fg=cyan,bg=black
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# set colors for the active window*​
-  ​[ ]{.codeprefix}   setw -g window-status-current-style fg=white,bold,bg=red
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# colors for pane borders*​
-  ​[ ]{.codeprefix}   setw -g pane-border-style fg=green,bg=black
-  ​[ ]{.codeprefix}   setw -g pane-border-active-style fg=white,bg=yellow
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# active pane normal, other shaded out*​
-  ​[ ]{.codeprefix}   setw -g window-style fg=colour240,bg=colour235
-  ​[ ]{.codeprefix}   setw -g window-active-style fg=white,bg=black
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Command / message line*​
-  ​[ ]{.codeprefix}   setw -g message-style fg=white,bold,bg=black
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Status line left side to show Session:window:pane*​
-  ​[ ]{.codeprefix}   set -g status-left-length 40
-  ​[ ]{.codeprefix}   set -g status-left ​*\"#\[fg=green\]Session: #S #\[fg=yellow\]#I #\[fg=cyan\]#P\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Status line right side - 50% \| 31 Oct 13:37*​
-  ​[ ]{.codeprefix}   set -g status-right ​*\"#(\~/battery Discharging) \| #\[fg=cyan\]%d %b %R\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Update the status line every sixty seconds*​
-  ​[ ]{.codeprefix}   set -g status-interval 60
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Center the window list in the status line*​
-  ​[ ]{.codeprefix}   set -g status-justify centre
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# enable activity alerts*​
-  ​[ ]{.codeprefix}   setw -g monitor-activity on
-  ​[ ]{.codeprefix}   set -g visual-activity on
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# enable vi keys.*​
-  ​[ ]{.codeprefix}   setw -g mode-keys vi
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# shortcut for synchronize-panes toggle*​
-  ​[ ]{.codeprefix}   bind C-s set-window-option synchronize-panes
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# split pane and retain the current directory of existing pane*​
-  ​[ ]{.codeprefix}   bind \_ split-window -v -c ​*\"#{pane_current_path}\"*​
-  ​[ ]{.codeprefix}   bind ​*\\* ​split-window -h -c ​*\"#{pane_current_path}\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# Log output to a text file on demand*​
-  ​[ ]{.codeprefix}   bind P pipe-pane -o ​*\"cat \>\>\~/#W.log\"*​ ​*\\;*​ display ​*\"Toggled logging to \~/#W.log\"*​
-  ​[ ]{.codeprefix}   ​*\#*​
-  ​[ ]{.codeprefix}   ​*\# Load mac-specific settings*​
-  ​[ ]{.codeprefix}   ​**if**​-shell ​*\"uname \| grep -q Darwin\"*​ ​*\"source-file \~/.tmux.mac.conf\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   ​*\# load private settings if they exist*​
-  ​[ ]{.codeprefix}   ​**if**​-shell ​*\"\[ -f \~/.tmux.private\]\"*​ ​*\"source \~/.tmux.private\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   is_vim=​*\"ps -o state= -o comm= -t \'#{pane_tty}\'* ​​*\\*​
-  ​[ ]{.codeprefix}   ​*\| grep -iqE \'\^\[\^TXZ \]+ +(*​​*\\\\*​​*S+*​​*\\\\*​​*/)?g?(view\|n?vim?x?)(diff)?*​\$\'​*\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-h ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-h\"*​ ​*\"select-pane -L\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-j ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-j\"*​ ​*\"select-pane -D\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-k ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-k\"*​ ​*\"select-pane -U\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-l ​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-l\"*​ ​*\"select-pane -R\"*​
-  ​[ ]{.codeprefix}   bind-key -n C-​*\\* ​​**if**​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-*​​*\\\\*​​*\"*​ ​*\"select-pane -l\"*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   bind C-l send-keys ​*\'C-l\'*​
-  ​[ ]{.codeprefix}   
-  ​[ ]{.codeprefix}   set -g \@plugin ​*\'tmux-plugins/tpm\'*​
-  ​[ ]{.codeprefix}   set -g \@plugin ​*\'tmux-plugins/tmux-resurrect\'*​
-  ​[ ]{.codeprefix}   run ​*\'\~/.tmux/plugins/tpm/tpm\'*​
-  ------------------ --------------------------------------------------------------------------------------------------
+  ​[ ]   ​*\# Quick window selection*​
+  ​[ ]   bind -r C-h ​select​-window -t :-
+  ​[ ]   bind -r C-l ​select​-window -t :+
+  ​[ ]   
+  ​[ ]   ​*\# Pane resizing panes with Prefix H,J,K,L*​
+  ​[ ]   bind -r H resize-pane -L 5
+  ​[ ]   bind -r J resize-pane -D 5
+  ​[ ]   bind -r K resize-pane -U 5
+  ​[ ]   bind -r L resize-pane -R 5
+  ​[ ]   
+  ​[ ]   ​*\# mouse support - set to on if you want to use the mouse*​
+  ​[ ]   set -g mouse off
+  ​[ ]   
+  ​[ ]   ​*\# Set the default terminal mode to 256color mode*​
+  ​[ ]   set -g default-terminal ​*\"screen-256color\"*​
+  ​[ ]   
+  ​[ ]   ​*\# set the status line\'s colors*​
+  ​[ ]   set -g status-style fg=white,bg=black
+  ​[ ]   
+  ​[ ]   ​*\# set the color of the window list*​
+  ​[ ]   setw -g window-status-style fg=cyan,bg=black
+  ​[ ]   
+  ​[ ]   ​*\# set colors for the active window*​
+  ​[ ]   setw -g window-status-current-style fg=white,bold,bg=red
+  ​[ ]   
+  ​[ ]   ​*\# colors for pane borders*​
+  ​[ ]   setw -g pane-border-style fg=green,bg=black
+  ​[ ]   setw -g pane-border-active-style fg=white,bg=yellow
+  ​[ ]   
+  ​[ ]   ​*\# active pane normal, other shaded out*​
+  ​[ ]   setw -g window-style fg=colour240,bg=colour235
+  ​[ ]   setw -g window-active-style fg=white,bg=black
+  ​[ ]   
+  ​[ ]   ​*\# Command / message line*​
+  ​[ ]   setw -g message-style fg=white,bold,bg=black
+  ​[ ]   
+  ​[ ]   ​*\# Status line left side to show Session:window:pane*​
+  ​[ ]   set -g status-left-length 40
+  ​[ ]   set -g status-left ​*\"#\[fg=green\]Session: #S #\[fg=yellow\]#I #\[fg=cyan\]#P\"*​
+  ​[ ]   
+  ​[ ]   ​*\# Status line right side - 50% \| 31 Oct 13:37*​
+  ​[ ]   set -g status-right ​*\"#(\~/battery Discharging) \| #\[fg=cyan\]%d %b %R\"*​
+  ​[ ]   
+  ​[ ]   ​*\# Update the status line every sixty seconds*​
+  ​[ ]   set -g status-interval 60
+  ​[ ]   
+  ​[ ]   ​*\# Center the window list in the status line*​
+  ​[ ]   set -g status-justify centre
+  ​[ ]   
+  ​[ ]   ​*\# enable activity alerts*​
+  ​[ ]   setw -g monitor-activity on
+  ​[ ]   set -g visual-activity on
+  ​[ ]   
+  ​[ ]   ​*\# enable vi keys.*​
+  ​[ ]   setw -g mode-keys vi
+  ​[ ]   
+  ​[ ]   ​*\# shortcut for synchronize-panes toggle*​
+  ​[ ]   bind C-s set-window-option synchronize-panes
+  ​[ ]   
+  ​[ ]   ​*\# split pane and retain the current directory of existing pane*​
+  ​[ ]   bind \_ split-window -v -c ​*\"#{pane_current_path}\"*​
+  ​[ ]   bind ​*\\* ​split-window -h -c ​*\"#{pane_current_path}\"*​
+  ​[ ]   
+  ​[ ]   ​*\# Log output to a text file on demand*​
+  ​[ ]   bind P pipe-pane -o ​*\"cat \>\>\~/#W.log\"*​ ​*\\;*​ display ​*\"Toggled logging to \~/#W.log\"*​
+  ​[ ]   ​*\#*​
+  ​[ ]   ​*\# Load mac-specific settings*​
+  ​[ ]   ​if​-shell ​*\"uname \| grep -q Darwin\"*​ ​*\"source-file \~/.tmux.mac.conf\"*​
+  ​[ ]   
+  ​[ ]   ​*\# load private settings if they exist*​
+  ​[ ]   ​if​-shell ​*\"\[ -f \~/.tmux.private\]\"*​ ​*\"source \~/.tmux.private\"*​
+  ​[ ]   
+  ​[ ]   is_vim=​*\"ps -o state= -o comm= -t \'#{pane_tty}\'* ​​*\\*​
+  ​[ ]   ​*\| grep -iqE \'\^\[\^TXZ \]+ +(*​​*\\\\*​​*S+*​​*\\\\*​​*/)?g?(view\|n?vim?x?)(diff)?*​\$\'​*\"*​
+  ​[ ]   bind-key -n C-h ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-h\"*​ ​*\"select-pane -L\"*​
+  ​[ ]   bind-key -n C-j ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-j\"*​ ​*\"select-pane -D\"*​
+  ​[ ]   bind-key -n C-k ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-k\"*​ ​*\"select-pane -U\"*​
+  ​[ ]   bind-key -n C-l ​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-l\"*​ ​*\"select-pane -R\"*​
+  ​[ ]   bind-key -n C-​*\\* ​​if​-shell ​*\"*​\$is_vim​*\"*​ ​*\"send-keys C-*​​*\\\\*​​*\"*​ ​*\"select-pane -l\"*​
+  ​[ ]   
+  ​[ ]   bind C-l send-keys ​*\'C-l\'*​
+  ​[ ]   
+  ​[ ]   set -g \@plugin ​*\'tmux-plugins/tpm\'*​
+  ​[ ]   set -g \@plugin ​*\'tmux-plugins/tmux-resurrect\'*​
+  ​[ ]   run ​*\'\~/.tmux/plugins/tpm/tpm\'*​
 
-::: {.copyright style=";color:black;"}
-Copyright © 2016, The Pragmatic Bookshelf.
-:::
 
-[]{#part0058.xhtml}
 
-## You May Be Interested In...
 
-*Click a cover for more information*
-
-::: backmatter-covers
-::: backmatter-cover
-[![](images/image00136.jpeg)](http://pragmaticprogrammer.com/titles/bhh52e)
-:::
-
-::: backmatter-cover
-[![](images/image00137.jpeg)](http://pragmaticprogrammer.com/titles/bhwb)
-:::
-
-::: backmatter-cover
-[![](images/image00138.jpeg)](http://pragmaticprogrammer.com/titles/wbdev2)
-:::
-
-::: backmatter-cover
-[![](images/image00139.jpeg)](http://pragmaticprogrammer.com/titles/dnvim2)
-:::
-
-::: backmatter-cover
-[![](images/image00140.jpeg)](http://pragmaticprogrammer.com/titles/atcrime)
-:::
-
-::: backmatter-cover
-[![](images/image00141.jpeg)](http://pragmaticprogrammer.com/titles/rjnsd)
-:::
-
-::: backmatter-cover
-[![](images/image00142.jpeg)](http://pragmaticprogrammer.com/titles/kdnodesec)
-:::
-
-::: backmatter-cover
-[![](images/image00143.jpeg)](http://pragmaticprogrammer.com/titles/tbcoffee2)
-:::
-
-::: backmatter-cover
-[![](images/image00144.jpeg)](http://pragmaticprogrammer.com/titles/mwjsember)
-:::
-
-::: backmatter-cover
-[![](images/image00145.jpeg)](http://pragmaticprogrammer.com/titles/smreactjs)
-:::
-
-::: backmatter-cover
-[![](images/image00146.jpeg)](http://pragmaticprogrammer.com/titles/liftoff)
-:::
-
-::: backmatter-cover
-[![](images/image00147.jpeg)](http://pragmaticprogrammer.com/titles/dlret)
-:::
-
-::: backmatter-cover
-[![](images/image00148.jpeg)](http://pragmaticprogrammer.com/titles/fsfire)
-:::
-
-::: backmatter-cover
-[![](images/image00149.jpeg)](http://pragmaticprogrammer.com/titles/jkthp)
-:::
-:::
-
-------------------------------------------------------------------------

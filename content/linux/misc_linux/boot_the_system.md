@@ -3,35 +3,27 @@ title: Boot
 date: 2023-11-06T06:20:36-07:00
 draft: false
 ---
-Boot Process Overview
+#### Boot Process Overview
 
-4 stages the
+4 stages
 
 1 BIOS
-
-initialize hardware and use POST to check hardware
+- initialize hardware and use POST to check hardware
 
 2 Bootloader
-
-loads kernel into memory
-
-starts kernel w/ parameters
-
-GRUB is a common bootloader
+- loads kernel into memory
+- starts kernel w/ parameters
+- GRUB is a common bootloader
 
 3 Kernel
-
-initializes devices and memory
-
-load up the init process
+- initializes devices and memory
+- load up the init process
 
 4 init
-
-starts and stop essential service process on the system
+- starts and stop essential service process on the system
 
 3 major implementations of init
-
-Boot process: BIOS
+- Boot process: BIOS
 
 BIOS
 

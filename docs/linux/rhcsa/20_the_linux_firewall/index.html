@@ -10,57 +10,47 @@
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="20.The Linux Firewall 77.76%, 2023-09-27 03:09:10 UTC
-Color: #0010FF
-Describe Linux firewall for host-based security
-20.The Linux Firewall 77.76%, 2023-09-27 03:11:48 UTC
-Color: #0010FF
-control
-Overview of the firewalld service
-Understand the concepts of firewalld zones and services
-20.The Linux Firewall 77.77%, 2023-09-27 03:12:06 UTC
-Color: #0010FF
-services
-Analyze zone and service configuration files
-20.The Linux Firewall 77.77%, 2023-09-27 03:12:35 UTC
-Color: #0010FF
-Control access to network services and ports through firewalld">
+    <meta name="twitter:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Describe Linux firewall for host-based security control
+[ {.c37}]{.c36}Overview of the firewalld service
+[ {.c37}]{.c36}Understand the concepts of firewalld zones and services
+[ {.c37}]{.c36}Analyze zone and service configuration files
+[ {.c37}]{.c36}Control access to network services and ports through firewalld
+[ {.c37}]{.c36}Use firewall-cmd command to manage firewall rules
+[RHCSA Objectives:]{.c39}
+[50]{#part0032_split_000.html#id_815 .calibre10}. Restrict network access using firewall-cmd/firewall
+55. Configure firewall settings using firewall-cmd/firewalld">
     <meta property="og:title" content="">
-    <meta property="og:description" content="20.The Linux Firewall 77.76%, 2023-09-27 03:09:10 UTC
-Color: #0010FF
-Describe Linux firewall for host-based security
-20.The Linux Firewall 77.76%, 2023-09-27 03:11:48 UTC
-Color: #0010FF
-control
-Overview of the firewalld service
-Understand the concepts of firewalld zones and services
-20.The Linux Firewall 77.77%, 2023-09-27 03:12:06 UTC
-Color: #0010FF
-services
-Analyze zone and service configuration files
-20.The Linux Firewall 77.77%, 2023-09-27 03:12:35 UTC
-Color: #0010FF
-Control access to network services and ports through firewalld">
+    <meta property="og:description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Describe Linux firewall for host-based security control
+[ {.c37}]{.c36}Overview of the firewalld service
+[ {.c37}]{.c36}Understand the concepts of firewalld zones and services
+[ {.c37}]{.c36}Analyze zone and service configuration files
+[ {.c37}]{.c36}Control access to network services and ports through firewalld
+[ {.c37}]{.c36}Use firewall-cmd command to manage firewall rules
+[RHCSA Objectives:]{.c39}
+[50]{#part0032_split_000.html#id_815 .calibre10}. Restrict network access using firewall-cmd/firewall
+55. Configure firewall settings using firewall-cmd/firewalld">
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/20_the_linux_firewall/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1712107692" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1712315598" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1712107692" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712107692" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1712107692" rel="stylesheet">
-    <link href="/css/auto-complete.css?1712107692" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712107692" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1712107692" rel="stylesheet">
-    <link href="/css/fonts.css?1712107692" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712107692" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1712107692" rel="stylesheet">
-    <link href="/css/theme-git.css?1712107692" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1712107692" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1712107692" rel="stylesheet">
-    <link href="/css/print.css?1712107692" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1712107692" rel="stylesheet">
-    <script src="/js/url.js?1712107692"></script>
-    <script src="/js/variant.js?1712107692"></script>
+    <link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1712315598" rel="stylesheet">
+    <link href="/css/auto-complete.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1712315598" rel="stylesheet">
+    <link href="/css/fonts.css?1712315598" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712315598" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1712315598" rel="stylesheet">
+    <link href="/css/theme-git.css?1712315598" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1712315598" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1712315598" rel="stylesheet">
+    <link href="/css/print.css?1712315598" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1712315598" rel="stylesheet">
+    <script src="/js/url.js?1712315598"></script>
+    <script src="/js/variant.js?1712315598"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -95,151 +85,7 @@ Control access to network services and ports through firewalld">
 
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper"><nav class="TableOfContents">
-  <ul>
-    <li><a href="#20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5282"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C82">20.The Linux Firewall</a></a></li>
-    <li><a href="#20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52130"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C130">20.The Linux Firewall</a></a></li>
-    <li><a href="#20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52219"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C219">20.The Linux Firewall</a></a></li>
-    <li><a href="#20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52273"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C273">20.The Linux Firewall</a></a></li>
-    <li><a href="#20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52404"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C404">20.The Linux Firewall</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub53489"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C489">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub53697"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C697">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531446"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1446">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531599"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1599">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531648"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1648">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531804"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1804">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531877"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1877">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532036"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2036">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532155"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2155">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532185"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2185">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532291"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2291">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532308"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2308">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532412"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2412">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532627"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2627">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532752"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2752">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532771"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2771">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532834"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2834">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532915"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2915">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532994"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2994">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533067"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3067">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533191"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3191">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533197"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3197">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533250"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3250">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533341"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3341">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533416"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3416">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533454"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3454">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533475"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3475">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533567"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3567">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533699"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3699">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533776"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3776">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533833"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3833">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533919"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3919">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534181"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4181">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534226"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4226">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534320"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4320">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534509"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4509">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534647"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4647">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534712"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4712">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534725"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4725">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534928"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4928">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535286"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5286">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535621"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5621">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535883"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5883">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535953"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5953">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535972"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5972">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535978"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5978">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536176"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6176">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536234"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6234">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536310"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6310">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536462"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6462">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536546"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6546">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536582"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6582">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536673"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6673">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536747"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6747">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536820"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6820">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536937"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6937">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537018"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7018">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537106"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7106">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537173"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7173">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537292"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7292">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537451"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7451">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537464"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7464">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537563"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7563">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537601"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7601">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537687"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7687">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537798"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7798">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537908"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7908">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537997"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7997">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538064"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8064">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538106"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8106">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538154"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8154">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538190"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8190">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538370"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8370">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538439"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8439">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538458"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8458">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538616"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8616">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538708"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8708">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538829"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8829">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538913"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8913">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538991"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8991">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539069"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9069">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539113"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9113">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539184"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9184">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539256"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9256">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539333"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9333">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539465"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9465">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539587"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9587">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539639"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9639">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539815"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9815">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310022"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10022">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310259"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10259">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310495"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10495">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310685"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10685">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310867"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10867">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310873"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10873">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310883"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10883">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311132"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11132">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311226"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11226">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311316"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11316">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311342"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11342">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311616"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11616">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311762"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11762">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312074"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12074">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312169"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12169">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312395"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12395">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312985"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12985">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313036"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13036">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313113"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13113">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313272"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13272">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313298"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13298">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313341"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13341">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313389"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13389">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313436"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13436">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313484"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13484">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313503"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13503">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313581"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13581">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313679"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13679">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313775"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13775">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313801"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13801">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313856"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13856">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313904"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13904">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313988"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13988">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314285"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14285">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314343"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14343">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314628"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14628">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314672"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14672">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314708"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14708">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314780"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14780">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314983"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14983">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315016"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15016">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315287"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15287">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315340"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15340">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315545"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15545">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315588"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15588">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5318851"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C18851">Firewall Overview</a></a></li>
-    <li><a href="#firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5319107"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C19107">Firewall Overview</a></a></li>
-  </ul>
-</nav>
+                <div class="topbar-content-wrapper"> 
                 </div>
               </div>
             </div>
@@ -277,963 +123,448 @@ Control access to network services and ports through firewalld">
             </header>
 <h1 id=""></h1>
 
-<h2 id="20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5282"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C82" target="_blank">20.The Linux Firewall</a></h2>
-<p>77.76%, 2023-09-27 03:09:10 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>Describe Linux firewall for host-based security</p>
-</blockquote>
-<h2 id="20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52130"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C130" target="_blank">20.The Linux Firewall</a></h2>
-<p>77.76%, 2023-09-27 03:11:48 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>control</p>
-<p>Overview of the firewalld service</p>
-<p>Understand the concepts of firewalld zones and services</p>
-</blockquote>
-<h2 id="20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52219"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C219" target="_blank">20.The Linux Firewall</a></h2>
-<p>77.77%, 2023-09-27 03:12:06 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>services</p>
-<p>Analyze zone and service configuration files</p>
-</blockquote>
-<h2 id="20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52273"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C273" target="_blank">20.The Linux Firewall</a></h2>
-<p>77.77%, 2023-09-27 03:12:35 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>Control access to network services and ports through firewalld</p>
-<p>Use firewall-cmd command to manage firewall rules</p>
-</blockquote>
-<h2 id="20the-linux-firewallhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub52404"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#52%7C404" target="_blank">20.The Linux Firewall</a></h2>
-<p>77.79%, 2023-09-27 03:13:15 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>50. Restrict network access using firewall-cmd/firewall</p>
+<p>This chapter describes the following major topics:</p>
+<p>[<a href="#R-image-6e89018cc1ba04f76ce5a64a9f5ca463" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6e89018cc1ba04f76ce5a64a9f5ca463"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Describe Linux firewall for
+host-based security control</p>
+<p>[<a href="#R-image-0b79f4a250609daa0634ac5e72a86fec" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0b79f4a250609daa0634ac5e72a86fec"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of the firewalld service</p>
+<p>[<a href="#R-image-a3267a4c7a97bbb738265ac63128634c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a3267a4c7a97bbb738265ac63128634c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand the concepts of firewalld
+zones and services</p>
+<p>[<a href="#R-image-e136742b5a8ae6f3450007853e5878ab" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e136742b5a8ae6f3450007853e5878ab"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Analyze zone and service
+configuration files</p>
+<p>[<a href="#R-image-62bad1f0dee65fb90dfc84f76b1255ca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-62bad1f0dee65fb90dfc84f76b1255ca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Control access to network services
+and ports through firewalld</p>
+<p>[<a href="#R-image-4bcec8df84e1587339ef062e921cdc5a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4bcec8df84e1587339ef062e921cdc5a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Use firewall-cmd command to manage
+firewall rules</p>
+<p>[RHCSA Objectives:]{.c39}</p>
+<p>[50]{#part0032_split_000.html#id_815 .calibre10}. Restrict network
+access using firewall-cmd/firewall</p>
 <p>55. Configure firewall settings using firewall-cmd/firewalld</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub53489"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C489" target="_blank">Firewall Overview</a></h2>
-<p>77.85%, 2023-09-27 03:16:09 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>secure, monitor, and control inbound and outbound traffic flow</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub53697"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C697" target="_blank">Firewall Overview</a></h2>
-<p>77.87%, 2023-09-27 03:17:44 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>Server level firewalls are referred to as <em>host-based firewalls</em> and
-they run in a computer operating system to monitor and manage traffic
-in and out</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531446"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1446" target="_blank">Firewall Overview</a></h2>
-<p>77.94%, 2023-09-27 03:19:35 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>Ports are defined in the <em>/etc/services</em> file</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531599"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1599" target="_blank">Firewall Overview</a></h2>
-<p>77.96%, 2023-09-27 03:20:13 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>common services</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531648"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1648" target="_blank">Firewall Overview</a></h2>
-<p>77.96%, 2023-09-27 03:20:27 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>FTP (<em>File Transfer Protocol</em>) on port 21, SSH (<em>Secure Shell</em>) 22,
-Postfix (an email service) 25, HTTP (<em>HyperText Transfer Protocol</em>)
-80, and NTP (<em>Network Time</em></p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531804"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1804" target="_blank">Firewall Overview</a></h2>
-<p>77.98%, 2023-09-27 03:20:39 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p><em>Protocol</em>) on port 123.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub531877"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C1877" target="_blank">Firewall Overview</a></h2>
-<p>77.99%, 2023-09-27 03:21:50 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>uses a kernel module called <em>netfilter</em> together with a filtering and
-packet classification framework called <em>nftables</em> for policing the
-traffic movement</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532036"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2036" target="_blank">Firewall Overview</a></h2>
-<p>78.00%, 2023-09-27 03:22:00 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>supports other advanced features such as <em>Network Address Translation</em>
-(NAT) and <em>port forwarding</em>.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532155"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2155" target="_blank">Firewall Overview</a></h2>
-<p>78.01%, 2023-09-27 03:22:34 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>inspects, modifies, drops</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532185"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2185" target="_blank">Firewall Overview</a></h2>
-<p>78.02%, 2023-09-27 03:22:42 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>routes incoming, outgoing, and forwarded network packets based on
-defined rulesets.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532291"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2291" target="_blank">Firewall Overview</a></h2>
-<p>78.03%, 2023-09-27 03:23:06 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>firewalld</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532308"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2308" target="_blank">Firewall Overview</a></h2>
-<p>78.03%, 2023-09-27 03:23:27 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>default host-based firewall management service</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532412"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2412" target="_blank">Firewall Overview</a></h2>
-<p>78.04%, 2023-09-27 03:23:41 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>add, modify, or delete firewall rules immediately without disrupting
-current network connections or restarting the service process</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532627"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2627" target="_blank">Firewall Overview</a></h2>
-<p>78.06%, 2023-09-27 03:24:01 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>allows to save rules persistently so that they are activated
-automatically at system reboots.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532752"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2752" target="_blank">Firewall Overview</a></h2>
-<p>78.07%, 2023-09-27 03:24:07 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>perform management</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532771"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2771" target="_blank">Firewall Overview</a></h2>
-<p>78.08%, 2023-09-27 03:24:16 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>operations at the command line using the <em>firewall-cmd</em> command</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532834"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2834" target="_blank">Firewall Overview</a></h2>
-<p>78.08%, 2023-09-27 03:24:23 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>graphically using the web console, or manually by editing rules files</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532915"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2915" target="_blank">Firewall Overview</a></h2>
-<p>78.09%, 2023-09-27 03:24:37 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>stores the default rules in files located in the <em>/usr/lib/firewalld</em>
-directory</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub532994"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C2994" target="_blank">Firewall Overview</a></h2>
-<p>78.10%, 2023-09-27 03:24:49 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>and those that contain custom rules in the <em>/etc/firewalld</em> directory</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533067"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3067" target="_blank">Firewall Overview</a></h2>
-<p>78.11%, 2023-09-27 03:27:24 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>default rules files may be copied to the custom rules directory and
-modified</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533191"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3191" target="_blank">Firewall Overview</a></h2>
-<p>78.12%, 2023-09-27 03:27:32 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>zones</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533197"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3197" target="_blank">Firewall Overview</a></h2>
-<p>78.12%, 2023-09-27 03:27:36 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>for easier and transparent traffic management</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533250"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3250" target="_blank">Firewall Overview</a></h2>
-<p>78.12%, 2023-09-27 03:28:56 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>define policies based on the trust level of network connections and
-source IP addresses</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533341"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3341" target="_blank">Firewall Overview</a></h2>
-<p>78.13%, 2023-09-27 03:29:08 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>network connection can be part of only one zone at a time</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533416"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3416" target="_blank">Firewall Overview</a></h2>
-<p>78.14%, 2023-09-27 03:29:14 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>can have multiple network connections</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533454"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3454" target="_blank">Firewall Overview</a></h2>
-<p>78.14%, 2023-09-27 03:29:25 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>assigned to it</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533475"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3475" target="_blank">Firewall Overview</a></h2>
-<p>78.15%, 2023-09-27 03:29:39 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>configuration may include services, ports, and protocols that may be
-open or closed</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533567"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3567" target="_blank">Firewall Overview</a></h2>
-<p>78.15%, 2023-09-27 03:29:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>also include rules for advanced configuration items such as
-masquerading, port forwarding, NATting, ICMP filters, and rich
-language</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533699"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3699" target="_blank">Firewall Overview</a></h2>
-<p>78.17%, 2023-09-27 03:30:02 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Rules for each zone are defined and manipulated independent of other
-zones</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533776"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3776" target="_blank">Firewall Overview</a></h2>
-<p>78.18%, 2023-09-27 03:30:22 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>firewalld</em> inspects each incoming packet to determine the</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533833"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3833" target="_blank">Firewall Overview</a></h2>
-<p>78.18%, 2023-09-27 03:30:34 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>source IP address and applies the rules of the zone that has a match
-for the address</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub533919"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C3919" target="_blank">Firewall Overview</a></h2>
-<p>78.19%, 2023-09-27 03:32:30 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>In the event no zone configuration matches the address, it associates
-the packet with the zone that has the network connection defined, and
-applies the rules of that zone. If neither works, <em>firewalld</em>
-associates the packet with the default zone, and enforces th</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534181"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4181" target="_blank">Firewall Overview</a></h2>
-<p>78.22%, 2023-09-27 03:32:53 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>rules of the default zone on the packet</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534226"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4226" target="_blank">Firewall Overview</a></h2>
-<p>78.22%, 2023-09-27 03:33:56 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>firewalld</em> software installs several predefined zone files that may
-be selected or customized</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534320"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4320" target="_blank">Firewall Overview</a></h2>
-<p>78.23%, 2023-09-27 03:34:14 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>These files include templates for traffic that must be blocked or
-dropped, and for traffic that is public-facing, internal, external,
-home, public, trusted, and work-related.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534509"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4509" target="_blank">Firewall Overview</a></h2>
-<p>78.25%, 2023-09-27 04:17:18 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>public</em> zone is the default zone, and it is activated by default when
-the <em>firewalld</em> service is started</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534647"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4647" target="_blank">Firewall Overview</a></h2>
-<p>78.26%, 2023-09-27 04:17:28 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>predefined zones sorted based on the trust level from trusted</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534712"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4712" target="_blank">Firewall Overview</a></h2>
-<p>78.27%, 2023-09-27 04:17:47 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>untrusted</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534725"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4725" target="_blank">Firewall Overview</a></h2>
-<p>78.27%, 2023-09-27 04:17:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><strong>Zone</strong> <strong>Description</strong> trusted Allow all incoming internal Reject
-all incoming traffic except for what is allowed. Intended for use on
-internal networks. home Reject all incoming traffic except for what</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub534928"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C4928" target="_blank">Firewall Overview</a></h2>
-<p>78.29%, 2023-09-27 04:20:02 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>allowed. Intended for use in homes. work Reject all incoming traffic
-except for what is allowed. Intended for use at workplaces. dmz Reject
-all incoming traffic except for what is allowed. Intended for use in
-publicly-accessible demilitarized zones. external Reject all incoming
-traffic except for what is allowed. Outgoing IPv4 traffic forwarded</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535286"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5286" target="_blank">Firewall Overview</a></h2>
-<p>78.33%, 2023-09-27 04:21:02 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>this zone is masqueraded to look like it originated from the IPv4
-address of an outgoing network interface. Intended for use on external
-networks with masquerading enabled. public Reject all incoming traffic
-except for what is allowed. It is the default zone for any newly added
-network interfaces. Intended for us in public places.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535621"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5621" target="_blank">Firewall Overview</a></h2>
-<p>78.36%, 2023-09-27 04:22:36 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>block Reject all incoming traffic with icmp-host-prohibited message
-returned. Intended for use in secure places. drop Drop all incoming
-traffic without responding with ICMP errors. Intended for use in
-highly secure places.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535883"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5883" target="_blank">Firewall Overview</a></h2>
-<p>78.39%, 2023-09-27 04:24:50 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>For all the predefined zones, outgoing traffic is allowed by default</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535953"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5953" target="_blank">Firewall Overview</a></h2>
-<p>78.39%, 2023-09-27 04:25:01 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Zone Configuration</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535972"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5972" target="_blank">Firewall Overview</a></h2>
-<p>78.39%, 2023-09-27 04:25:05 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Files</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub535978"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C5978" target="_blank">Firewall Overview</a></h2>
-<p>78.39%, 2023-09-27 04:26:48 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
+<p>::: {#part0032_split_000.html#calibre_pb_1 .calibre12}
+:::</p>
+<p>[]{#part0032_split_001.html}</p>
+<p>[ R]{.c42}[unning]{.c43} a system in a networked or an Internet-facing
+environment requires that some security measures be taken to tighten
+access to the system in general and individual services in particular.
+This can be accomplished by implementing a firewall and restricting
+inbound traffic to allowed ports from valid source IP addresses only. We
+discuss a host-based firewall solution in this chapter.</p>
+<p><strong>[Firewall]{#part0032_split_001.html#id_524 .calibre10} Overview</strong></p>
+<p>A <em>firewall</em> is a protective layer implemented at the network or server
+level to secure, monitor, and control inbound and outbound traffic flow.
+Firewalls employed at the network level use either dedicated hardware or
+sophisticated software appliances to form a shield around the network.
+Server level firewalls are referred to as <em>host-based firewalls</em> and
+they run in a computer operating system to monitor and manage traffic in
+and out. Firewalls defend a network or an individual server from
+undesired traffic.</p>
+<p>RHEL is shipped with a host-based firewall solution that works by
+filtering data packets. A data packet is formed as a result of a process
+called <em>encapsulation</em> whereby the header information is attached to a
+message (called <em>payload</em>) during packet formation. The header includes
+information such as source and destination IP addresses, port, and type
+of data. Based on predefined <em>rules</em>, a firewall intercepts each inbound
+and outbound data packet, inspects its header, and decides whether to
+allow the packet to pass through.</p>
+<p>Ports are defined in the **etc<em>services</em> file for common network
+services that are standardized across all network operating systems,
+including RHEL. Some common services and the ports they listen on are
+FTP (<em>File Transfer Protocol</em>) on port 21, SSH (<em>Secure Shell</em>) 22,
+Postfix (an email service) 25, HTTP (<em>HyperText Transfer Protocol</em>) 80,
+and NTP (<em>Network Time Protocol</em>) on port 123.</p>
+<p>The host-based firewall solution employed in RHEL uses a kernel module
+called <em>netfilter</em> together with a filtering and packet classification
+framework called <em>nftables</em> for policing the traffic movement. It also
+supports other advanced features such as <em>Network Address Translation</em>
+(NAT) and <em>port forwarding</em>. This firewall solution inspects, modifies,
+drops, or routes incoming, outgoing, and forwarded network packets based
+on defined rulesets.</p>
+<p><strong>[Overview]{#part0032_split_001.html#id_525 .calibre10} of firewalld</strong></p>
+<p><em>firewalld</em> is the default host-based firewall management service in
+RHEL 8. One of the major advantages is its ability to add, modify, or
+delete firewall rules immediately without disrupting current network
+connections or restarting the service process. This is especially useful
+in testing and troubleshooting scenarios. <em>firewalld</em> also allows to
+save rules persistently so that they are activated automatically at
+system reboots.</p>
+<p>The <em>firewalld</em> service lets you perform management operations at the
+command line using the <em>firewall-cmd</em> command, graphically using the web
+console, or manually by editing rules files. <em>firewalld</em> stores the
+default rules in files located in the **usr<em>lib/firewalld</em> directory,
+and those that contain custom rules in the **etc<em>firewalld</em> directory.
+The default rules files may be copied to the custom rules directory and
+modified.</p>
+<p><strong>[firewalld]{#part0032_split_001.html#id_526 .calibre10} Zones</strong></p>
+<p><em>firewalld</em> uses the concept of <em>zones</em> for easier and transparent
+traffic management. Zones define policies based on the trust level of
+network connections and source IP addresses. A network connection can be
+part of only one zone at a time; however, a zone can have multiple
+network connections assigned to it. Zone configuration may include
+services, ports, and protocols that may be open or closed. It may also
+include rules for advanced configuration items such as masquerading,
+port forwarding, NATting, ICMP filters, and rich language. Rules for
+each zone are defined and manipulated independent of other zones.</p>
+<p><em>firewalld</em> inspects each incoming packet to determine the source IP
+address and applies the rules of the zone that has a match for the
+address. In the event no zone configuration matches the address, it
+associates the packet with the zone that has the network connection
+defined, and applies the rules of that zone. If neither works,
+<em>firewalld</em> associates the packet with the default zone, and enforces
+the</p>
+<p>rules of the default zone on the packet.</p>
+<p>The <em>firewalld</em> software installs several predefined zone files that may
+be selected or customized. These files include templates for traffic
+that must be blocked or dropped, and for traffic that is public-facing,
+internal, external, home, public, trusted, and work-related. Of these,
+the <em>public</em> zone is the default zone, and it is activated by default
+when the <em>firewalld</em> service is started. <a href="/linux/rhcsa/20_the_linux_firewall/#part0032_split_001.html#id_757">Table
+20-1</a>{.calibre5} lists and describes
+the predefined zones sorted based on the trust level from trusted to
+untrusted.</p>
+<p>::: c49</p>
+<hr>
+<p><strong>Zone</strong>   <strong>Description</strong>
+trusted    Allow all incoming
+internal   Reject all incoming traffic except for what is allowed. Intended for use on internal networks.
+home       Reject all incoming traffic except for what is allowed. Intended for use in homes.
+work       Reject all incoming traffic except for what is allowed. Intended for use at workplaces.
+dmz        Reject all incoming traffic except for what is allowed. Intended for use in publicly-accessible demilitarized zones.
+external   Reject all incoming traffic except for what is allowed. Outgoing IPv4 traffic forwarded through this zone is masqueraded to look like it originated from the IPv4 address of an outgoing network interface. Intended for use on external networks with masquerading enabled.
+public     Reject all incoming traffic except for what is allowed. It is the default zone for any newly added network interfaces. Intended for us in public places.
+block      Reject all incoming traffic with icmp-host-prohibited message returned. Intended for use in secure places.
+drop       Drop all incoming traffic without responding with ICMP errors. Intended for use in highly secure places.</p>
+<hr>
+<p><strong>[Table]{#part0032_split_001.html#id_757} 20-1 firewalld Default
+Zones</strong>
+:::</p>
+<p>For all the predefined zones, outgoing traffic is allowed by default.</p>
+<p><strong>[Zone]{#part0032_split_001.html#id_527 .calibre10} Configuration
+Files</strong></p>
 <p><em>firewalld</em> stores zone rules in XML format at two locations: the
-system-defined rules in the <em>/usr/lib/firewalld/zones</em> directory, and
-the user-defined rules in the <em>/etc/firewalld/zones</em> directo</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536176"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6176" target="_blank">Firewall Overview</a></h2>
-<p>78.41%, 2023-09-27 12:43:08 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>files at the former location can be used as templates</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536234"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6234" target="_blank">Firewall Overview</a></h2>
-<p>78.42%, 2023-09-27 12:43:13 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>adding new rules, or applied instantly to any available network
-connection</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536310"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6310" target="_blank">Firewall Overview</a></h2>
-<p>78.43%, 2023-09-27 12:43:30 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>A system zone configuration file is automatically copied to the
-<em>/etc/firewalld/zones</em> directory if it is modified with a management
-tool</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536462"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6462" target="_blank">Firewall Overview</a></h2>
-<p>78.44%, 2023-09-27 12:44:24 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>you can copy the required zone file to the <em>/etc/firewalld/zones</em>
-directory manually</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536546"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6546" target="_blank">Firewall Overview</a></h2>
-<p>78.45%, 2023-09-27 12:44:30 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>and make the necessary changes</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536582"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6582" target="_blank">Firewall Overview</a></h2>
-<p>78.46%, 2023-09-27 12:44:39 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>firewalld</em> service reads the files saved in this location, and
-applies the rules defined</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536673"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6673" target="_blank">Firewall Overview</a></h2>
-<p>78.46%, 2023-09-27 12:44:45 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>them. A listing of the system zone files</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536747"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6747" target="_blank">Firewall Overview</a></h2>
-<p>78.47%, 2023-09-27 12:45:00 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>public</em> zone file is displayed</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536820"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6820" target="_blank">Firewall Overview</a></h2>
-<p>78.48%, 2023-09-27 12:46:26 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>zone has a name and description, and it contains a list of all the
-allowed services—<em>ssh</em>, <em>dhcpv6-client</em>, and <em>cockpit</em></p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub536937"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C6937" target="_blank">Firewall Overview</a></h2>
-<p>78.49%, 2023-09-27 12:46:31 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>See the manual pages for <em>firewalld.zone</em> for details on zone
-configuration files.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537018"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7018" target="_blank">Firewall Overview</a></h2>
-<p>78.50%, 2023-09-27 12:46:35 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>firewalld Services</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537106"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7106" target="_blank">Firewall Overview</a></h2>
-<p>78.51%, 2023-09-27 12:47:16 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>services</em> for easier activation and deactivation of specific rules</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537173"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7173" target="_blank">Firewall Overview</a></h2>
-<p>78.51%, 2023-09-27 12:47:30 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>firewalld</em> services are preconfigured firewall rules delineated for
-various services and stored in different files</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537292"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7292" target="_blank">Firewall Overview</a></h2>
-<p>78.53%, 2023-09-27 12:48:39 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>rules consist of necessary settings, such as the port number,
-protocol, and possibly helper modules, to support the loading of the
-service</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537451"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7451" target="_blank">Firewall Overview</a></h2>
-<p>78.54%, 2023-09-27 12:48:47 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>can be added</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537464"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7464" target="_blank">Firewall Overview</a></h2>
-<p>78.54%, 2023-09-27 12:48:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>to a zone. By default, <em>firewalld</em> blocks all traffic unless a service
-or port is explicitly opened</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537563"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7563" target="_blank">Firewall Overview</a></h2>
-<p>78.55%, 2023-09-27 12:49:01 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Service Configuration Files</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537601"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7601" target="_blank">Firewall Overview</a></h2>
-<p>78.56%, 2023-09-27 12:49:11 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>stores service rules in XML format at two locations: the
-system-defined rules in the</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537687"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7687" target="_blank">Firewall Overview</a></h2>
-<p>78.57%, 2023-09-27 12:49:20 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>usr/lib/firewalld/services</em> directory, and the user-defined rules in
-the <em>/etc/firewalld/services</em> directory</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537798"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7798" target="_blank">Firewall Overview</a></h2>
-<p>78.58%, 2023-09-27 12:50:10 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>files at the former location can be used as templates for adding new
-service rules, or activated instantly</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537908"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7908" target="_blank">Firewall Overview</a></h2>
-<p>78.59%, 2023-09-27 12:50:18 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>system service configuration file is automatically copied to the
-<em>/etc/firewalld/services</em></p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub537997"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C7997" target="_blank">Firewall Overview</a></h2>
-<p>78.60%, 2023-09-27 12:50:26 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>directory if it is modified with a management tool</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538064"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8064" target="_blank">Firewall Overview</a></h2>
-<p>78.60%, 2023-09-27 12:50:32 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>you can copy the required service file to</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538106"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8106" target="_blank">Firewall Overview</a></h2>
-<p>78.61%, 2023-09-27 12:50:36 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>the <em>/etc/firewalld/services</em> directory manually</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538154"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8154" target="_blank">Firewall Overview</a></h2>
-<p>78.61%, 2023-09-27 12:50:42 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>and make the necessary changes</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538190"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8190" target="_blank">Firewall Overview</a></h2>
-<p>78.62%, 2023-09-27 12:50:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><em>firewalld</em> service reads the files saved in this location, and
-applies the rules defined in them. A listing of the system service
+system-defined rules in the **usr<em>lib/firewalld/zones</em> directory, and
+the user-defined rules in the **etc<em>firewalld/zones</em> directory. The
+files at the former location can be used as templates for adding new
+rules, or applied instantly to any available network connection. A
+system zone configuration file is automatically copied to the
+**etc<em>firewalld/zones</em> directory if it is modified with a management
+tool. Alternatively, you can copy the required zone file to the
+**etc<em>firewalld/zones</em> directory manually, and make the necessary
+changes. The <em>firewalld</em> service reads the files saved in this location,
+and applies the rules defined in them. A listing of the system zone
 files is presented below:</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538370"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8370" target="_blank">Firewall Overview</a></h2>
-<p>78.63%, 2023-09-27 12:52:17 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>content of the <em>ssh</em> service file</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538439"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8439" target="_blank">Firewall Overview</a></h2>
-<p>78.64%, 2023-09-27 12:52:38 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>service has a name</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538458"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8458" target="_blank">Firewall Overview</a></h2>
-<p>78.64%, 2023-09-27 12:52:45 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>and description, and it defines the port and protocol for the service.
-See the manual pages for <em>firewalld.service</em> for details on service
-configuration files.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538616"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8616" target="_blank">Firewall Overview</a></h2>
-<p>78.66%, 2023-09-27 12:52:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Firewall Management</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538708"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8708" target="_blank">Firewall Overview</a></h2>
-<p>78.67%, 2023-09-27 12:53:15 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>listing, querying, adding, changing, and removing zones, services,
-ports, IP sources, and network connections.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538829"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8829" target="_blank">Firewall Overview</a></h2>
-<p>78.68%, 2023-09-27 12:53:21 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>three methods</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538913"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8913" target="_blank">Firewall Overview</a></h2>
-<p>78.69%, 2023-09-27 12:53:25 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>firewall-cmd</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub538991"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C8991" target="_blank">Firewall Overview</a></h2>
-<p>78.69%, 2023-09-27 12:53:33 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>web interface for graphical administration</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539069"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9069" target="_blank">Firewall Overview</a></h2>
-<p>78.70%, 2023-09-27 12:53:41 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>make use of the zone and service templates</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539113"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9113" target="_blank">Firewall Overview</a></h2>
-<p>78.71%, 2023-09-27 12:53:45 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>and edit them as desired</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539184"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9184" target="_blank">Firewall Overview</a></h2>
-<p>78.71%, 2023-09-27 12:53:55 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>The firewall-cmd Command</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539256"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9256" target="_blank">Firewall Overview</a></h2>
-<p>78.72%, 2023-09-27 12:55:39 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p>manage the <em>firewalld</em> service at the command prompt</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539333"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9333" target="_blank">Firewall Overview</a></h2>
-<p>78.73%, 2023-09-27 12:55:49 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>add or remove rules from the runtime configuration, or save any
-modifications to service configuration for persistence</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539465"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9465" target="_blank">Firewall Overview</a></h2>
-<p>78.74%, 2023-09-27 12:56:03 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>numerous options for the management of zones, services, ports,
-connections, and so on</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539587"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9587" target="_blank">Firewall Overview</a></h2>
-<p>78.75%, 2023-09-27 12:56:12 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>common options</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539639"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9639" target="_blank">Firewall Overview</a></h2>
-<p>78.76%, 2023-09-27 12:56:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>&ndash;state Displays the running status of firewalld &ndash;reload Reloads
-firewall rules from zone files. All runtime changes are lost.
-&ndash;permanent Stores a change persistently</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub539815"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C9815" target="_blank">Firewall Overview</a></h2>
-<p>78.78%, 2023-09-27 12:57:10 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>change only becomes active after a service reload or restart.
-<strong>Zones</strong> &ndash;get-default-zone Shows the name of the default/active zone
-&ndash;set-default-zone Changes the default zone for both runtime and
-permanent</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310022"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10022" target="_blank">Firewall Overview</a></h2>
-<p>78.80%, 2023-09-27 13:00:31 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>configuration &ndash;get-zones Prints a list of available zones
-&ndash;get-active-zones Displays the active zone and the assigned
-interfaces &ndash;list-all Lists all settings for a zone &ndash;list-all-zones
-Lists the settings for all available zones</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310259"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10259" target="_blank">Firewall Overview</a></h2>
-<p>78.82%, 2023-09-27 13:02:48 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>&ndash;zone Specifies the name of the zone to work on. Without this option,
-the default zone is used. <strong>Services</strong> &ndash;get-services Prints
-predefined services &ndash;list-services Lists services for a zone
-&ndash;add-service Adds a service to a zone</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310495"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10495" target="_blank">Firewall Overview</a></h2>
-<p>78.84%, 2023-09-27 13:03:10 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>remove-service Removes a service from a zone &ndash;query-service Queries
-for the presence of a service <strong>Ports</strong> &ndash;list-ports Lists network
-ports &ndash;add-port Adds a port or a range of ports</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310685"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10685" target="_blank">Firewall Overview</a></h2>
-<p>78.86%, 2023-09-27 13:03:48 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>zone &ndash;remove-port Removes a port from a zone &ndash;query-port Queries for
-the presence of a port <strong>Network Connections</strong> &ndash;list-interfaces Lists
-network connections assigned to a zone</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310867"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10867" target="_blank">Firewall Overview</a></h2>
-<p>78.88%, 2023-09-27 13:03:54 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>&ndash;add</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310873"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10873" target="_blank">Firewall Overview</a></h2>
-<p>78.88%, 2023-09-27 13:04:30 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>interface Binds a network connection to a zone &ndash;change-interface
-Changes the binding of a network connection to a different zone
-&ndash;remove-interface Unbinds a network connection from a zone <strong>IP
-Sources</strong> &ndash;list-sources Lists IP sources assigned to a</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5310883"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C10883" target="_blank">Firewall Overview</a></h2>
-<p>78.88%, 2023-09-27 13:04:01 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Binds a network connection</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311132"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11132" target="_blank">Firewall Overview</a></h2>
-<p>78.91%, 2023-09-27 13:04:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>add-source Adds an IP source to a zone &ndash;change-source Changes an IP
-source &ndash;remove-source</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311226"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11226" target="_blank">Firewall Overview</a></h2>
-<p>78.92%, 2023-09-27 13:05:08 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Removes an IP source from a</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311316"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11316" target="_blank">Firewall Overview</a></h2>
-<p>78.93%, 2023-09-28 01:48:00 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>add and &ndash;remove</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311342"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11342" target="_blank">Firewall Overview</a></h2>
-<p>78.93%, 2023-09-28 01:48:27 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>the &ndash;permanent switch may be specified to ensure the rule is stored
-in the zone configuration file under the <em>/etc/firewalld/zones</em>
-directory for persistence</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311616"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11616" target="_blank">Firewall Overview</a></h2>
-<p>78.96%, 2023-09-28 01:48:50 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Consult the manual pages of the command for details on the usage of
-these and other optio</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5311762"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C11762" target="_blank">Firewall Overview</a></h2>
-<p>78.97%, 2023-09-28 01:49:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>check the running status of the <em>firewalld</em> service using either the
-<em>systemctl</em> or the <em>firewall-cmd</em> command.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312074"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12074" target="_blank">Firewall Overview</a></h2>
-<p>79.00%, 2023-09-28 01:50:27 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>other command outcome also reports that the service is marked for
-autostart at system reboots</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312169"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12169" target="_blank">Firewall Overview</a></h2>
-<p>79.01%, 2023-09-28 01:50:50 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>In case <em>firewalld</em> is not enabled or is inactive, issue <strong>sudo
-systemctl &ndash;now enable firewalld</strong> to start it immediately, and mark
-it for autostart on reboots.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312395"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12395" target="_blank">Firewall Overview</a></h2>
-<p>79.03%, 2023-09-28 01:50:59 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Add Services and Ports, and Manage Zones</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5312985"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C12985" target="_blank">Firewall Overview</a></h2>
-<p>79.09%, 2023-09-28 01:54:46 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Determine the name of the current default zone</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313036"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13036" target="_blank">Firewall Overview</a></h2>
-<p>79.10%, 2023-09-28 01:54:55 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Add a permanent rule to allow HTTP traffic on its default port</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313113"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13113" target="_blank">Firewall Overview</a></h2>
-<p>79.11%, 2023-09-28 01:55:53 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>made a copy of the <em>public.xml</em> file from <em>/usr/lib/firewalld/zones</em>
-directory into the <em>/etc/firewalld/zones</em> directory, and added the
-rule for the HTTP service.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313272"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13272" target="_blank">Firewall Overview</a></h2>
-<p>79.12%, 2023-09-28 01:56:00 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Activate the new rule</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313298"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13298" target="_blank">Firewall Overview</a></h2>
-<p>79.12%, 2023-09-28 01:56:08 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Confirm the activation of the new rule</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313341"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13341" target="_blank">Firewall Overview</a></h2>
-<p>79.13%, 2023-09-28 01:56:24 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Display the content of the default zone file</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313389"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13389" target="_blank">Firewall Overview</a></h2>
-<p>79.13%, 2023-09-28 01:56:28 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>confirm the addition of the permanent rule</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313436"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13436" target="_blank">Firewall Overview</a></h2>
-<p>79.14%, 2023-09-28 01:58:13 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Add a runtime rule to allow traffic on TCP port</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313484"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13484" target="_blank">Firewall Overview</a></h2>
-<p>79.14%, 2023-09-28 01:58:17 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>443 and verify</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313503"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13503" target="_blank">Firewall Overview</a></h2>
-<p>79.14%, 2023-09-28 01:58:34 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Add a permanent rule to the <em>internal</em> zone for TCP port range 5901 to
-5910</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313581"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13581" target="_blank">Firewall Overview</a></h2>
-<p>79.15%, 2023-09-28 01:58:43 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Display the content of the <em>internal</em> zone file to confirm the
-addition of the permanent rule</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313679"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13679" target="_blank">Firewall Overview</a></h2>
-<p>79.16%, 2023-09-28 02:02:51 UTC</p>
-<p>Color: #0010FF</p>
-<blockquote>
-<p><em>firewall-cmd</em> command makes a backup of the affected zone file with a
-<em>.old</em> extension whenever an</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313775"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13775" target="_blank">Firewall Overview</a></h2>
-<p>79.17%, 2023-09-28 02:02:59 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>update is made to a zone</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313801"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13801" target="_blank">Firewall Overview</a></h2>
-<p>79.17%, 2023-09-28 02:03:12 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>9.Switch the default zone to internal and confirm:</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313856"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13856" target="_blank">Firewall Overview</a></h2>
-<p>79.18%, 2023-09-28 02:10:13 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Activate the rules defined in the <em>internal</em></p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313904"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13904" target="_blank">Firewall Overview</a></h2>
-<p>79.18%, 2023-09-28 02:10:25 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>and list the port range added earlier</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5313988"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C13988" target="_blank">Firewall Overview</a></h2>
-<p>79.19%, 2023-09-28 02:10:41 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Remove Services and Ports, and Manage Zones</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314285"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14285" target="_blank">Firewall Overview</a></h2>
-<p>79.22%, 2023-09-28 02:10:58 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Remove the permanent rule for HTTP from the <em>public</em> zone</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314343"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14343" target="_blank">Firewall Overview</a></h2>
-<p>79.23%, 2023-09-28 02:11:37 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Notice the equal sign (=) used with the &ndash;remove-service option. The
+<p><a href="#R-image-cc827694af141d6aa3ca0fe4780fd808" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00946.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cc827694af141d6aa3ca0fe4780fd808"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00946.jpeg"></a>{.image2}</p>
+<p>The default <em>public</em> zone file is displayed below:</p>
+<p><a href="#R-image-f4e9aefe6ef0d67b3824991df4b50af3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00947.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f4e9aefe6ef0d67b3824991df4b50af3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00947.jpeg"></a>{.image2}</p>
+<p>As depicted in the screenshot, the zone has a name and description, and
+it contains a list of all the allowed services&mdash;<em>ssh</em>, <em>dhcpv6-client</em>,
+and <em>cockpit</em>. See the manual pages for <em>firewalld.zone</em> for details on
+zone configuration files.</p>
+<p><strong>[firewalld]{#part0032_split_001.html#id_528 .calibre10} Services</strong></p>
+<p>In addition to the concept of zones, <em>firewalld</em> also uses the idea of
+<em>services</em> for easier activation and deactivation of specific rules.
+<em>firewalld</em> services are preconfigured firewall rules delineated for
+various services and stored in different files. The rules consist of
+necessary settings, such as the port number, protocol, and possibly
+helper modules, to support the loading of the service. <em>firewalld</em>
+services can be added to a zone. By default, <em>firewalld</em> blocks all
+traffic unless a service or port is explicitly opened.</p>
+<p><strong>[Service]{#part0032_split_001.html#id_529 .calibre10} Configuration
+Files</strong></p>
+<p><em>firewalld</em> stores service rules in XML format at two locations: the
+system-defined rules in the **usr<em>lib/firewalld/services</em> directory, and
+the user-defined rules in the **etc<em>firewalld/services</em> directory. The
+files at the former location can be used as templates for adding new
+service rules, or activated instantly. A system service configuration
+file is automatically copied to the **etc<em>firewalld/services</em> directory
+if it is modified with a management tool. Alternatively, you can copy
+the required service file to the **etc<em>firewalld/services</em> directory
+manually, and make the necessary changes. The <em>firewalld</em> service reads
+the files saved in this location, and applies the rules defined in them.
+A listing of the system service files is presented below:</p>
+<p><a href="#R-image-77d2688274900ae7bc1934dd676f3bf6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00948.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-77d2688274900ae7bc1934dd676f3bf6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00948.jpeg"></a>{.image2}</p>
+<p>The following shows the content of the <em>ssh</em> service file:</p>
+<p><a href="#R-image-f0123b26cc2874523339fa25deaefc45" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00949.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f0123b26cc2874523339fa25deaefc45"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00949.jpeg"></a>{.image2}</p>
+<p>As depicted in the screenshot, the service has a name and description,
+and it defines the port and protocol for the service. See the manual
+pages for <em>firewalld.service</em> for details on service configuration
+files.</p>
+<p><strong>[Firewall]{#part0032_split_001.html#id_530 .calibre10} Management</strong></p>
+<p>Managing the <em>firewalld</em> service involves a number of operations, such
+as listing, querying, adding, changing, and removing zones, services,
+ports, IP sources, and network connections. There are three methods
+available in RHEL 8 to perform the management tasks. They include the
+<em>firewall-cmd</em> command for those who prefer to work at the command line
+and the web interface for graphical administration. The third management
+option is to make use of the zone and service templates, and edit them
+as desired. We use the command line method in this book.</p>
+<p><strong>The firewall-cmd Command</strong></p>
+<p>The <em>firewall-cmd</em> command is a powerful tool to manage the <em>firewalld</em>
+service at the command prompt. This tool can be used to add or remove
+rules from the runtime configuration, or save any modifications to
+service configuration for persistence. It supports numerous options for
+the management of zones, services, ports, connections, and so on; <a href="/linux/rhcsa/20_the_linux_firewall/#part0032_split_001.html#id_758">Table
+20-2</a>{.calibre5} lists and describes
+the common options only.</p>
+<p>::: c49</p>
+<hr>
+<p><strong>Option</strong>                <strong>Description</strong>
+<strong>General</strong>            <br>
+--state                  Displays the running status of firewalld
+--reload                 Reloads firewall rules from zone files. All runtime changes are lost.
+--permanent              Stores a change persistently. The change only becomes active after a service reload or restart.
+<strong>Zones</strong>              <br>
+--get-default-zone       Shows the name of the default/active zone
+--set-default-zone       Changes the default zone for both runtime and permanent configuration
+--get-zones              Prints a list of available zones
+--get-active-zones       Displays the active zone and the assigned interfaces
+--list-all               Lists all settings for a zone
+--list-all-zones         Lists the settings for all available zones
+--zone                   Specifies the name of the zone to work on. Without this option, the default zone is used.
+<strong>Services</strong>           <br>
+--get-services           Prints predefined services
+--list-services          Lists services for a zone
+--add-service            Adds a service to a zone
+--remove-service         Removes a service from a zone
+--query-service          Queries for the presence of a service
+<strong>Ports</strong>              <br>
+--list-ports             Lists network ports
+--add-port               Adds a port or a range of ports to a zone
+--remove-port            Removes a port from a zone
+--query-port             Queries for the presence of a port
+<strong>Network Connections</strong><br>
+--list-interfaces        Lists network connections assigned to a zone
+--add-interface          Binds a network connection to a zone
+--change-interface       Changes the binding of a network connection to a different zone
+--remove-interface       Unbinds a network connection from a zone
+<strong>IP Sources</strong>         <br>
+--list-sources           Lists IP sources assigned to a zone
+--add-source             Adds an IP source to a zone
+--change-source          Changes an IP source
+--remove-source          Removes an IP source from a zone</p>
+<hr>
+<p><strong>[Table]{#part0032_split_001.html#id_758} 20-2 Common firewall-cmd
+Options</strong>
+:::</p>
+<p>With all the --add and --remove options, the --permanent switch may
+be specified to ensure the rule is stored in the zone configuration file
+under the **etc<em>firewalld/zones</em> directory for persistence. Some of the
+options from <a href="/linux/rhcsa/20_the_linux_firewall/#part0032_split_001.html#id_758">Table 20-2</a>{.calibre5}
+are used in the upcoming exercises; the rest are beyond the scope of
+this book. Consult the manual pages of the command for details on the
+usage of these and other options.</p>
+<p><strong>[Querying]{#part0032_split_001.html#id_531 .calibre10} the Operational
+Status of firewalld</strong></p>
+<p>You can check the running status of the <em>firewalld</em> service using either
+the <em>systemctl</em> or the <em>firewall-cmd</em> command. Both commands will
+produce different outputs, but the intent here is to ensure the service
+is in the running state.</p>
+<p><a href="#R-image-c87cfd52b38fcc07f93f5f4e8803e6f9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00950.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c87cfd52b38fcc07f93f5f4e8803e6f9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00950.jpeg"></a>{.image2}</p>
+<p>The output indicates that the <em>firewalld</em> service is in the running
+state on <em>server10</em>. The other command outcome also reports that the
+service is marked for autostart at system reboots. In case <em>firewalld</em>
+is not enabled or is inactive, issue <strong>sudo systemctl --now enable
+firewalld</strong> to start it immediately, and mark it for autostart on
+reboots.</p>
+<p>You are ready to perform the exercises presented next.</p>
+<p><strong>[Exercise]{#part0032_split_001.html#id_532 .calibre10} 20-1: Add
+Services and Ports, and Manage Zones</strong></p>
+<p>This exercise should be done on <em>server10</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will determine the current active zone. You will
+add and activate a permanent rule to allow HTTP traffic on port 80, and
+then add a runtime rule for traffic intended for TCP port 443 (the HTTPS
+service). You will add a permanent rule to the <em>internal</em> zone for TCP
+port range 5901 to 5910. You will confirm the changes and display the
+contents of the affected zone files. Lastly, you will switch the default
+zone to the <em>internal</em> zone and activate it.</p>
+<p>1[.]{.c19}Determine the name of the current default zone:</p>
+<p><a href="#R-image-2c252ff4dacc92a5df45f430a657b4dc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00951.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2c252ff4dacc92a5df45f430a657b4dc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00951.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Add a permanent rule to allow HTTP traffic on its default
+port:</p>
+<p><a href="#R-image-b1d2adfcfefc277c01312f6f63923e1c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00952.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b1d2adfcfefc277c01312f6f63923e1c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00952.jpeg"></a>{.image2}</p>
+<p>The command made a copy of the <em>public.xml</em> file from
+**usr<em>lib/firewalld/zones</em> directory into the **etc<em>firewalld/zones</em>
+directory, and added the rule for the HTTP service.</p>
+<p>3[.]{.c19}Activate the new rule:</p>
+<p><a href="#R-image-b6e8ff7cccd772ec6970c4f2fd74db8f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00953.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b6e8ff7cccd772ec6970c4f2fd74db8f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00953.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Confirm the activation of the new rule:</p>
+<p><a href="#R-image-7ccacf2f9b17f55ac4c0e4942fbc2dba" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00954.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7ccacf2f9b17f55ac4c0e4942fbc2dba"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00954.jpeg"></a>{.image2}</p>
+<p>5[.]{.c19}Display the content of the default zone file to confirm the
+addition of the permanent rule:</p>
+<p><a href="#R-image-3f6ef3d811787816a3b728b99d0a50cd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00955.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3f6ef3d811787816a3b728b99d0a50cd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00955.jpeg"></a>{.image2}</p>
+<p>6[.]{.c19}Add a runtime rule to allow traffic on TCP port 443 and
+verify:</p>
+<p><a href="#R-image-13bfb571ed34f52b1b695e192313795d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00956.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-13bfb571ed34f52b1b695e192313795d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00956.jpeg"></a>{.image2}</p>
+<p>7[.]{.c19}Add a permanent rule to the <em>internal</em> zone for TCP port range
+5901 to 5910:</p>
+<p><a href="#R-image-d0021aee1b61fb96e5d858508d4c15dd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00957.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d0021aee1b61fb96e5d858508d4c15dd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00957.jpeg"></a>{.image2}</p>
+<p>8[.]{.c19}Display the content of the <em>internal</em> zone file to confirm the
+addition of the permanent rule:</p>
+<p><a href="#R-image-d506bae1cc92bf0d7507fcaa2935b2a0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00958.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d506bae1cc92bf0d7507fcaa2935b2a0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00958.jpeg"></a>{.image2}</p>
+<p>The <em>firewall-cmd</em> command makes a backup of the affected zone file with
+a <em>.old</em> extension whenever an update is made to a zone.</p>
+<p>9[.]{.c19}Switch the default zone to internal and confirm:</p>
+<p><a href="#R-image-eaeebd243f0019fb2a2bf83a2830ec39" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00959.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eaeebd243f0019fb2a2bf83a2830ec39"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00959.jpeg"></a>{.image2}</p>
+<p>10[.]{.c23}Activate the rules defined in the <em>internal</em> zone and list
+the port range added earlier:</p>
+<p><a href="#R-image-cc40c49f4203e8a8cdeebf2fa1b64004" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00960.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cc40c49f4203e8a8cdeebf2fa1b64004"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00960.jpeg"></a>{.image2}</p>
+<p>This completes the exercise.</p>
+<p><strong>[Exercise]{#part0032_split_001.html#id_533 .calibre10} 20-2: Remove
+Services and Ports, and Manage Zones</strong></p>
+<p>This exercise should be done on <em>server10</em> as <em>user1</em> with <em>sudo</em> where
+required.</p>
+<p>In this exercise, you will remove the two permanent rules that were
+added in <a href="/linux/rhcsa/20_the_linux_firewall/#part0032_split_001.html#id_532">Exercise 20-1</a>{.calibre5}.
+You will switch the <em>public</em> zone back as the default zone, and confirm
+the changes.</p>
+<p>1[.]{.c19}Remove the permanent rule for HTTP from the <em>public</em> zone:</p>
+<p><a href="#R-image-92113384f83721f3e53cd00a52f6a276" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00961.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-92113384f83721f3e53cd00a52f6a276"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00961.jpeg"></a>{.image2}</p>
+<p>Notice the equal sign (=) used with the --remove-service option. The
 <em>firewall-cmd</em> command supports the specification of add, remove,
-change, and zone options with and without an equal sign (=). The
-&ndash;zone option is used to specify the <em>public</em> zone as it is currently
-the non-defau</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314628"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14628" target="_blank">Firewall Overview</a></h2>
-<p>79.26%, 2023-09-28 02:11:50 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Remove the permanent rule for ports 5901</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314672"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14672" target="_blank">Firewall Overview</a></h2>
-<p>79.26%, 2023-09-28 02:11:56 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>5910 from the <em>internal</em> zone</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314708"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14708" target="_blank">Firewall Overview</a></h2>
-<p>79.26%, 2023-09-28 02:12:59 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>zone option is not used, as ‘internal’ is currently the default zone.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314780"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14780" target="_blank">Firewall Overview</a></h2>
-<p>79.27%, 2023-09-28 02:13:10 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Switch the default zone to <em>public</em> and validate</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5314983"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C14983" target="_blank">Firewall Overview</a></h2>
-<p>79.29%, 2023-09-28 02:14:25 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>xercise 20-3: Test the Effect of</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315016"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15016" target="_blank">Firewall Overview</a></h2>
-<p>79.29%, 2023-09-28 02:14:28 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Firewall Rule</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315287"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15287" target="_blank">Firewall Overview</a></h2>
-<p>79.32%, 2023-09-28 02:14:59 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Remove the rule for the <em>sshd</em> service on <em>server10</em></p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315340"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15340" target="_blank">Firewall Overview</a></h2>
-<p>79.33%, 2023-09-28 02:18:19 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Issue the <em>ssh</em> command on <em>server20</em> to access <em>server10</em></p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315545"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15545" target="_blank">Firewall Overview</a></h2>
-<p>79.35%, 2023-09-28 02:18:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Add the rule back for <em>sshd</em> on <em>server10</em>:</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5315588"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C15588" target="_blank">Firewall Overview</a></h2>
-<p>79.35%, 2023-09-28 02:20:52 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p>Issue the <em>ssh</em> command on <em>server20</em> to access <em>server10</em>. Enter
-“yes” if prompted and the password for <em>user1</em>.</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5318851"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C18851" target="_blank">Firewall Overview</a></h2>
-<p>79.68%, 2023-09-28 03:22:32 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><strong>Lab 20-1: Add Service to Firewall</strong></p>
-<p>As <em>user1</em> with <em>sudo</em> on <em>server10</em>, add and activate a permanent
-rule for HTTPs traffic to the default zone. Confirm the change by
-viewing the zone’s XML file and running the <em>firewall-cmd</em> command.
-(Hint: Firewall Management).</p>
-</blockquote>
-<h2 id="firewall-overviewhttpsreaderbookfusioncombooks3542526-rhcsa-red-hat-enterprise-linux-8-updatedtypeepub5319107"><a href="https://reader.bookfusion.com/books/3542526-rhcsa-red-hat-enterprise-linux-8-updated?type=epub#53%7C19107" target="_blank">Firewall Overview</a></h2>
-<p>79.70%, 2023-09-28 03:23:02 UTC</p>
-<p>Color: #3F1256</p>
-<blockquote>
-<p><strong>Lab 20-2: Add Port Range to Firewall</strong></p>
-<p>As <em>user1</em> with <em>sudo</em> on <em>server10</em>, add and activate a permanent
-rule for the UDP port range 8000 to 8005 to the <em>trusted</em> zone.
-Confirm the change by viewing the zone’s XML file and running the
-<em>firewall-cmd</em></p>
-</blockquote>
+change, and zone options with and without an equal sign (=). The --zone
+option is used to specify the <em>public</em> zone as it is currently the
+non-default.</p>
+<p>2[.]{.c19}Remove the permanent rule for ports 5901 to 5910 from the
+<em>internal</em> zone:</p>
+<p><a href="#R-image-885bc5d472dd6504f0b73bf4c629563d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00962.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-885bc5d472dd6504f0b73bf4c629563d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00962.jpeg"></a>{.image2}</p>
+<p>The --zone option is not used, as &lsquo;internal&rsquo; is currently the default
+zone.</p>
+<p>3[.]{.c19}Switch the default zone to <em>public</em> and validate:</p>
+<p><a href="#R-image-a14d5836a803f1eecc632684ac7a5577" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00963.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a14d5836a803f1eecc632684ac7a5577"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00963.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Activate the <em>public</em> zone rules, and list the current
+services:</p>
+<p><a href="#R-image-d165d4735bd192a8e810d1b7a4323cf5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00964.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d165d4735bd192a8e810d1b7a4323cf5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00964.jpeg"></a>{.image2}</p>
+<p>The <em>public</em> zone reflects the removal of the <em>http</em> service. This
+concludes the exercise.</p>
+<p><strong>[Exercise]{#part0032_split_001.html#id_534 .calibre10} 20-3: Test the
+Effect of Firewall Rule</strong></p>
+<p>This exercise should be done on <em>server10</em> and <em>server20</em> as <em>user1</em>
+with <em>sudo</em> where required.</p>
+<p>In this exercise, you will remove the <em>sshd</em> service rule from the
+runtime configuration on <em>server10</em>, and try to access the server from
+<em>server20</em> using the <em>ssh</em> command.</p>
+<p>1[.]{.c19}Remove the rule for the <em>sshd</em> service on <em>server10</em>:</p>
+<p><a href="#R-image-ad3668e1b25d520fb85a379d929b0d6a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00965.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ad3668e1b25d520fb85a379d929b0d6a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00965.jpeg"></a>{.image2}</p>
+<p>2[.]{.c19}Issue the <em>ssh</em> command on <em>server20</em> to access <em>server10</em>:</p>
+<p><a href="#R-image-1ee202d3f319b29209e796053f1aaaa0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00966.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1ee202d3f319b29209e796053f1aaaa0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00966.jpeg"></a>{.image2}</p>
+<p>The error displayed is because the firewall on <em>server10</em> blocked the
+access. Put the rule back on <em>server10</em> and try to access it from
+<em>server20</em> again:</p>
+<p>3[.]{.c19}Add the rule back for <em>sshd</em> on <em>server10</em>:</p>
+<p><a href="#R-image-6716cd18e7bf45dea4bb51f90b73e11d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00967.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6716cd18e7bf45dea4bb51f90b73e11d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00967.jpeg"></a>{.image2}</p>
+<p>4[.]{.c19}Issue the <em>ssh</em> command on <em>server20</em> to access <em>server10</em>.
+Enter &ldquo;yes&rdquo; if prompted and the password for <em>user1</em>.</p>
+<p><a href="#R-image-70e7b49c0d42059af0a352ab139a92a5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00968.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-70e7b49c0d42059af0a352ab139a92a5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00968.jpeg"></a>{.image2}</p>
+<p>This brings the exercise to an end.</p>
+<p><strong>[Chapter]{#part0032_split_001.html#id_535 .calibre10} Summary</strong></p>
+<p>We discussed a native host-based firewall solution for system protection
+in this chapter. We explored the concepts around firewall and described
+how it works. We looked at the firewalld service and examined the
+concepts of zones and services. We reviewed predefined zones and
+services, and analyzed their configuration files. We studied the lone
+firewall management command and reviewed options for listing and
+administering zones, services, ports, network connections, and source IP
+addresses.</p>
+<p>We learned how to change and check the operational state of the
+firewalld service. We performed exercises to add and remove services and
+ports persistently and non-persistently, and manage zones. Finally, we
+tested the effect of deleting a port from the firewall configuration and
+adding it back.</p>
+<p><strong>[Review]{#part0032_split_001.html#id_536 .calibre10} Questions</strong></p>
+<p>1[.]{.c19}A firewall can be configured between two networks but not
+between two hosts. True or False?</p>
+<p>2[.]{.c19}Which directory stores the configuration file for modified
+firewalld zones?</p>
+<p>3[.]{.c19}After changing the default firewalld zone to internal, what
+would you run to verify?</p>
+<p>4[.]{.c19}What is the process of data packet formation called?</p>
+<p>5[.]{.c19}What would the command <em>firewall-cmd --permanent
+--add-service=nfs --zone=external</em> do?</p>
+<p>6[.]{.c19}If you have a set of firewall rules defined for a service
+stored under both **etc<em>firewalld</em> and **usr<em>lib/firewalld</em> directories,
+which of the two sets will take precedence?</p>
+<p>7[.]{.c19}What is the kernel module in RHEL 8 that implements the
+host-level protection called?</p>
+<p>8[.]{.c19}firewalld is the firewall management solution in RHEL 8. True
+or False?</p>
+<p>9[.]{.c19}Name the default firewalld zone.</p>
+<p>10[.]{.c23}What is the purpose of firewalld service configuration files?</p>
+<p>11[.]{.c23}What would the command <em>firewall-cmd --remove-port=5000/tcp</em>
+do?</p>
+<p>12[.]{.c23}What is the primary command line tool for managing firewalld
+called?</p>
+<p><strong>[Answers]{#part0032_split_001.html#id_537 .calibre10} to Review
+Questions</strong></p>
+<p>1[.]{.c19}False. A firewall can also be configured between two host
+computers.</p>
+<p>2[.]{.c19}The modified <em>firewalld</em> zone files are stored under
+**etc<em>firewalld/zones</em> directory.</p>
+<p>3[.]{.c19}You run <em>firewall-cmd --get-default-zone</em> for validation.</p>
+<p>4[.]{.c19}The process of data packet formation is called encapsulation.</p>
+<p>5[.]{.c19}The command provided will add the <em>nfs</em> service to <em>external</em>
+firewalld zone persistently.</p>
+<p>6[.]{.c19}The ruleset located in the **etc<em>firewalld</em> directory will
+have precedence.</p>
+<p>7[.]{.c19}The kernel module that implements the host-level protection is
+called netfilter.</p>
+<p>8[.]{.c19}True.</p>
+<p>9[.]{.c19}The default firewalld zone is the <em>public</em> zone.</p>
+<p>10[.]{.c23}firewalld service configuration files store service-specific
+port, protocol, and other details, which makes it easy to activate and
+deactivate them.</p>
+<p>11[.]{.c23}The command provided will remove the runtime firewall rule
+for TCP port 5000.</p>
+<p>12[.]{.c23}The primary command line tool for managing <em>firewalld</em> is
+called <em>firewall-cmd</em>.</p>
+<p><strong>[Do-]{#part0032_split_001.html#id_538 .calibre10}It-Yourself Challenge
+Labs</strong></p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the lab has already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p><strong>[Lab]{#part0032_split_001.html#id_539 .calibre10} 20-1: Add Service to
+Firewall</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server10</em>, add and activate a permanent rule
+for HTTPs traffic to the default zone. Confirm the change by viewing the
+zone&rsquo;s XML file and running the <em>firewall-cmd</em> command. (Hint: Firewall
+Management).</p>
+<p><strong>[Lab]{#part0032_split_001.html#id_540 .calibre10} 20-2: Add Port Range
+to Firewall</strong></p>
+<p>As <em>user1</em> with <em>sudo</em> on <em>server10</em>, add and activate a permanent rule
+for the UDP port range 8000 to 8005 to the <em>trusted</em> zone. Confirm the
+change by viewing the zone&rsquo;s XML file and running the <em>firewall-cmd</em>
+command. (Hint: Firewall Management).</p>
+<p>[]{#part0033_split_000.html}</p>
 
             <footer class="footline">
             </footer>
@@ -1258,12 +589,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1712107692" defer></script>
-        <script src="/js/lunr/lunr.min.js?1712107692" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1712107692" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1712107692" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1712107692" defer></script>
-        <script src="/js/search.js?1712107692" defer></script>
+        <script src="/js/auto-complete.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1712315598" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1712315598" defer></script>
+        <script src="/js/search.js?1712315598" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1459,8 +790,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1712107692" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1712107692" defer></script>
+    <script src="/js/clipboard.min.js?1712315598" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1712315598" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1490,20 +821,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1712107692" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1712107692" defer></script>
-    <script src="/js/js-yaml.min.js?1712107692" defer></script>
+    <script src="/js/d3/d3-color.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1712315598" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1712315598" defer></script>
+    <script src="/js/js-yaml.min.js?1712315598" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1712107692" defer></script>
+    <script src="/js/theme.js?1712315598" defer></script>
   </body>
 </html>

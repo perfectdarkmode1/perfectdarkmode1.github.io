@@ -9,41 +9,23 @@
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Boot - Perfect Dark Mode">
-    <meta name="twitter:description" content="Boot Process Overview
-4 stages the
+    <meta name="twitter:description" content="Boot Process Overview 4 stages
 1 BIOS
-initialize hardware and use POST to check hardware
-2 Bootloader
-loads kernel into memory
-starts kernel w/ parameters
-GRUB is a common bootloader
-3 Kernel
-initializes devices and memory
-load up the init process
-4 init
-starts and stop essential service process on the system
-3 major implementations of init
-Boot process: BIOS
-BIOS
+initialize hardware and use POST to check hardware 2 Bootloader
+loads kernel into memory starts kernel w/ parameters GRUB is a common bootloader 3 Kernel
+initializes devices and memory load up the init process 4 init
+starts and stop essential service process on the system 3 major implementations of init
+Boot process: BIOS BIOS
 performs integrity checks
 main goal: find the system bootloader">
     <meta property="og:title" content="Boot - Perfect Dark Mode">
-    <meta property="og:description" content="Boot Process Overview
-4 stages the
+    <meta property="og:description" content="Boot Process Overview 4 stages
 1 BIOS
-initialize hardware and use POST to check hardware
-2 Bootloader
-loads kernel into memory
-starts kernel w/ parameters
-GRUB is a common bootloader
-3 Kernel
-initializes devices and memory
-load up the init process
-4 init
-starts and stop essential service process on the system
-3 major implementations of init
-Boot process: BIOS
-BIOS
+initialize hardware and use POST to check hardware 2 Bootloader
+loads kernel into memory starts kernel w/ parameters GRUB is a common bootloader 3 Kernel
+initializes devices and memory load up the init process 4 init
+starts and stop essential service process on the system 3 major implementations of init
+Boot process: BIOS BIOS
 performs integrity checks
 main goal: find the system bootloader">
     <meta property="og:type" content="article">
@@ -55,22 +37,22 @@ main goal: find the system bootloader">
     <title>Boot - Perfect Dark Mode</title>
     <link href="http://perfectdarkmode.com/linux/misc_linux/boot_the_system/" rel="canonical" type="text/html" title="Boot - Perfect Dark Mode">
     <link href="/linux/misc_linux/boot_the_system/index.xml" rel="alternate" type="application/rss+xml" title="Boot - Perfect Dark Mode">
-    <link href="/images/favicon.png?1712107692" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1712315598" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1712107694" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712107694" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1712107694" rel="stylesheet">
-    <link href="/css/auto-complete.css?1712107694" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712107694" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1712107694" rel="stylesheet">
-    <link href="/css/fonts.css?1712107694" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712107694" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1712107694" rel="stylesheet">
-    <link href="/css/theme-git.css?1712107694" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1712107694" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1712107694" rel="stylesheet">
-    <link href="/css/print.css?1712107694" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1712107694" rel="stylesheet">
-    <link href="/css/ie.css?1712107694" rel="stylesheet">
-    <script src="/js/url.js?1712107694"></script>
-    <script src="/js/variant.js?1712107694"></script>
+    <link href="/css/fontawesome-all.min.css?1712315599" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712315599" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1712315599" rel="stylesheet">
+    <link href="/css/auto-complete.css?1712315599" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712315599" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1712315599" rel="stylesheet">
+    <link href="/css/fonts.css?1712315599" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712315599" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1712315599" rel="stylesheet">
+    <link href="/css/theme-git.css?1712315599" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1712315599" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1712315599" rel="stylesheet">
+    <link href="/css/print.css?1712315599" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1712315599" rel="stylesheet">
+    <link href="/css/ie.css?1712315599" rel="stylesheet">
+    <script src="/js/url.js?1712315599"></script>
+    <script src="/js/variant.js?1712315599"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -137,21 +119,31 @@ main goal: find the system bootloader">
             </header>
 <h1 id="boot">Boot</h1>
 
-<p>Boot Process Overview</p>
-<p>4 stages the</p>
+<h4 id="boot-process-overview">Boot Process Overview</h4>
+<p>4 stages</p>
 <p>1 BIOS</p>
-<p>initialize hardware and use POST to check hardware</p>
+<ul>
+<li>initialize hardware and use POST to check hardware</li>
+</ul>
 <p>2 Bootloader</p>
-<p>loads kernel into memory</p>
-<p>starts kernel w/ parameters</p>
-<p>GRUB is a common bootloader</p>
+<ul>
+<li>loads kernel into memory</li>
+<li>starts kernel w/ parameters</li>
+<li>GRUB is a common bootloader</li>
+</ul>
 <p>3 Kernel</p>
-<p>initializes devices and memory</p>
-<p>load up the init process</p>
+<ul>
+<li>initializes devices and memory</li>
+<li>load up the init process</li>
+</ul>
 <p>4 init</p>
-<p>starts and stop essential service process on the system</p>
+<ul>
+<li>starts and stop essential service process on the system</li>
+</ul>
 <p>3 major implementations of init</p>
-<p>Boot process: BIOS</p>
+<ul>
+<li>Boot process: BIOS</li>
+</ul>
 <p>BIOS</p>
 <p>performs integrity checks</p>
 <p>main goal: find the system bootloader</p>
@@ -216,8 +208,8 @@ main goal: find the system bootloader">
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1712107694" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1712107694" defer></script>
+    <script src="/js/clipboard.min.js?1712315599" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1712315599" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -247,20 +239,20 @@ main goal: find the system bootloader">
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1712107694" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1712107694" defer></script>
-    <script src="/js/js-yaml.min.js?1712107694" defer></script>
+    <script src="/js/d3/d3-color.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1712315599" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1712315599" defer></script>
+    <script src="/js/js-yaml.min.js?1712315599" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1712107694" defer></script>
+    <script src="/js/theme.js?1712315599" defer></script>
   </body>
 </html>
