@@ -11,46 +11,32 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="This chapter describes the following major topics:
-[ {.c37}]{.c36}Master Boot Record vs. GUID Partition Table
-[ {.c37}]{.c36}Identify and understand disk partitions
-[ {.c37}]{.c36}The concept of thin provisioning, and its benefits
-[ {.c37}]{.c36}Create and delete partition on MBR disk
-[ {.c37}]{.c36}Create and delete partition on GPT disk
-[ {.c37}]{.c36}Overview of Virtual Data Optimizer and how it conserves storage
-[ {.c37}]{.c36}Create and delete a Virtual Data Optimizer volume
-[RHCSA Objectives:]{.c39}
-[27]{#part0025_split_000.html#id_793 .calibre10}. List, create, and delete partitions on MBR and GPT disks">
+Master Boot Record vs. GUID Partition Table Identify and understand disk partitions The concept of thin provisioning, and its benefits Create and delete partition on MBR disk Create and delete partition on GPT disk Overview of Virtual Data Optimizer and how it conserves storage Create and delete a Virtual Data Optimizer volume RHCSA Objectives:
+List, create, and delete partitions on MBR and GPT disks Configure disk compression Data is stored on disks that are logically divided into partitions.">
     <meta property="og:title" content="">
     <meta property="og:description" content="This chapter describes the following major topics:
-[ {.c37}]{.c36}Master Boot Record vs. GUID Partition Table
-[ {.c37}]{.c36}Identify and understand disk partitions
-[ {.c37}]{.c36}The concept of thin provisioning, and its benefits
-[ {.c37}]{.c36}Create and delete partition on MBR disk
-[ {.c37}]{.c36}Create and delete partition on GPT disk
-[ {.c37}]{.c36}Overview of Virtual Data Optimizer and how it conserves storage
-[ {.c37}]{.c36}Create and delete a Virtual Data Optimizer volume
-[RHCSA Objectives:]{.c39}
-[27]{#part0025_split_000.html#id_793 .calibre10}. List, create, and delete partitions on MBR and GPT disks">
+Master Boot Record vs. GUID Partition Table Identify and understand disk partitions The concept of thin provisioning, and its benefits Create and delete partition on MBR disk Create and delete partition on GPT disk Overview of Virtual Data Optimizer and how it conserves storage Create and delete a Virtual Data Optimizer volume RHCSA Objectives:
+List, create, and delete partitions on MBR and GPT disks Configure disk compression Data is stored on disks that are logically divided into partitions.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/13_basic_storage_partitioning/">
     <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <title></title>
-    <link href="/images/favicon.png?1712315995" rel="icon" type="image/png">
+    <link href="/images/favicon.png?1713093957" rel="icon" type="image/png">
     <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1712315996" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1712315996" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1712315996" rel="stylesheet">
-    <link href="/css/auto-complete.css?1712315996" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1712315996" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1712315996" rel="stylesheet">
-    <link href="/css/fonts.css?1712315996" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1712315996" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1712315996" rel="stylesheet">
-    <link href="/css/theme-git.css?1712315996" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1712315996" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1712315996" rel="stylesheet">
-    <link href="/css/print.css?1712315996" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1712315996" rel="stylesheet">
-    <script src="/js/url.js?1712315996"></script>
-    <script src="/js/variant.js?1712315996"></script>
+    <link href="/css/fontawesome-all.min.css?1713093957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713093957" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1713093957" rel="stylesheet">
+    <link href="/css/auto-complete.css?1713093957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713093957" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1713093957" rel="stylesheet">
+    <link href="/css/fonts.css?1713093957" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713093957" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1713093957" rel="stylesheet">
+    <link href="/css/theme-git.css?1713093957" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1713093957" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1713093957" rel="stylesheet">
+    <link href="/css/print.css?1713093957" rel="stylesheet" media="print">
+    <link href="/css/ie.css?1713093957" rel="stylesheet">
+    <script src="/js/url.js?1713093957"></script>
+    <script src="/js/variant.js?1713093957"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -85,7 +71,27 @@
 
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper"> 
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#storage-management-overview">Storage Management Overview</a></li>
+      </ul>
+    </li>
+    <li><a href="#master-boot-record-mbr">Master Boot Record (MBR)</a></li>
+    <li><a href="#guid-partition-table-gpt">GUID Partition Table (GPT)</a>
+      <ul>
+        <li><a href="#disk-partitions">Disk Partitions</a></li>
+        <li><a href="#lsblk-command">lsblk command</a></li>
+        <li><a href="#fdisk-and-parted-commands">fdisk and <em>parted</em> commands</a></li>
+        <li><a href="#storage-management-tools">Storage Management Tools</a></li>
+        <li><a href="#thin-provisioning">Thin Provisioning</a></li>
+        <li><a href="#adding-storage-for-practice">Adding Storage for Practice</a></li>
+        <li><a href="#lab-add-required-storage-to-server2">Lab: Add Required Storage to server2</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
                 </div>
               </div>
             </div>
@@ -124,280 +130,259 @@
 <h1 id=""></h1>
 
 <p>This chapter describes the following major topics:</p>
-<p>[<a href="#R-image-679ab791b5c14231142ca5b1c368507f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-679ab791b5c14231142ca5b1c368507f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Master Boot Record vs. GUID
-Partition Table</p>
-<p>[<a href="#R-image-2c9bc2e91e1c34ff1b81d2fc46b2a35c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2c9bc2e91e1c34ff1b81d2fc46b2a35c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Identify and understand disk
-partitions</p>
-<p>[<a href="#R-image-cf395189b3138a06c3ded48ea6531708" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-cf395189b3138a06c3ded48ea6531708"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}The concept of thin provisioning,
-and its benefits</p>
-<p>[<a href="#R-image-6bf8ee19f23329b8f28453e1cd3c041c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6bf8ee19f23329b8f28453e1cd3c041c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and delete partition on MBR
-disk</p>
-<p>[<a href="#R-image-6d55b573f2a6501ccd6cf1f66d87c377" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6d55b573f2a6501ccd6cf1f66d87c377"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and delete partition on GPT
-disk</p>
-<p>[<a href="#R-image-f9ac3e82f1c0d8f6f0fb60ed2bb95eba" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f9ac3e82f1c0d8f6f0fb60ed2bb95eba"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of Virtual Data Optimizer
-and how it conserves storage</p>
-<p>[<a href="#R-image-e39a1e4de31a07abd06d7b8824d5ff9c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e39a1e4de31a07abd06d7b8824d5ff9c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and delete a Virtual Data
-Optimizer volume</p>
-<p>[RHCSA Objectives:]{.c39}</p>
-<p>[27]{#part0025_split_000.html#id_793 .calibre10}. List, create, and
-delete partitions on MBR and GPT disks</p>
-<p>[37]{#part0025_split_000.html#id_803 .calibre10}. Configure disk
-compression</p>
-<p>::: {#part0025_split_000.html#calibre_pb_1 .calibre12}
-:::</p>
-<p>[]{#part0025_split_001.html}</p>
-<p>[ D]{.c42}[ata]{.c43} is stored on disks that are logically divided into
-partitions. A partition can exist on a portion of a disk, on an entire
-disk, or it may span multiple disks. Each partition is accessed and
-managed independent of other partitions and may contain a file system or
-swap space. Partitioning information is stored at special disk locations
-that the system references at boot time. RHEL offers a number of tools
-for partition management. Partitions created with a combination of most
-of these tools can coexist on a single disk.</p>
-<p>Thin provisioning is a powerful feature that guarantees an efficient use
-of storage space by allocating only what is needed and by storing data
-at adjacent locations. Many storage management solutions such as those
-we discuss later in this chapter and in the next incorporate thin
+<ul>
+<li>Master Boot Record vs. GUID Partition Table</li>
+<li>Identify and understand disk partitions</li>
+<li>The concept of thin provisioning, and its benefits</li>
+<li>Create and delete partition on MBR disk</li>
+<li>Create and delete partition on GPT disk</li>
+<li>Overview of Virtual Data Optimizer and how it conserves storage</li>
+<li>Create and delete a Virtual Data Optimizer volume</li>
+</ul>
+<p>RHCSA Objectives:</p>
+<ul>
+<li>List, create, and delete partitions on MBR and GPT disks</li>
+<li>Configure disk compression</li>
+</ul>
+<p>Data is stored on disks that are logically divided into
+partitions.</p>
+<p>A partition can exist on a portion of a disk, on an entire
+disk, or it may span multiple disks.</p>
+<p>Each partition is accessed and managed independent of other partitions and may contain a file system or swap space.</p>
+<p>Partitioning information is stored at special disk locations
+that the system references at boot time.</p>
+<p>RHEL offers a number of tools for partition management.</p>
+<p>Partitions created with a combination of most of these tools can coexist on a single disk.</p>
+<p>Thin provisioning is a powerful feature that guarantees an efficient use of storage space by allocating only what is needed and by storing data at adjacent locations.</p>
+<p>Many storage management solutions incorporate thin
 provisioning technology in their core configuration.</p>
-<p>Virtual Disk Optimizer is one of the newer storage management solutions
-incorporated in RHEL. It capitalizes on thin provisioning,
-de-duplication, and compression technologies to conserve storage space,
+<p>Virtual Disk Optimizer (VDO) is one of the newer storage management solutions incorporated in RHEL.</p>
+<p>It capitalizes on thin provisioning, de-duplication, and compression technologies to conserve storage space,
 improve data throughput, and save money.</p>
-<p>This is the first of the three chapters that shed light on storage
-solutions. The next two chapters (<a href="/linux/rhcsa/13_basic_storage_partitioning/#part0026_split_000.html#page_321">Chapters
-14</a>{.calibre5} and
-<a href="/linux/rhcsa/13_basic_storage_partitioning/#part0027_split_000.html#page_345">15</a>{.calibre5}) discuss advanced
-concepts and management tools.</p>
-<p><strong>[Storage]{#part0025_split_001.html#id_355 .calibre10} Management
-Overview</strong></p>
-<p>A disk in RHEL can be carved up into several partitions. This partition
-information is stored on the disk in a small region, which is read by
-the operating system at boot time. This region is referred to as the
-<em>Master Boot Record</em> (MBR) on the BIOS-based systems, and <em>GUID
-Partition Table</em> (GPT) on the UEFI-based systems. At system boot, the
-BIOS/UEFI scans all storage devices, detects the presence of MBR/GPT
-areas, identifies the boot disks, loads the bootloader program in memory
-from the default boot disk, executes the boot code to read the partition
-table and identify the <em>/boot</em> partition, loads the kernel in memory,
-and passes control over to it. Though MBR and GPT are designed for
-different PC firmware types, their job is essentially the same: to store
+<h3 id="storage-management-overview">Storage Management Overview</h3>
+<p>partition information is stored on the disk in a small region, which is read by the operating system at boot time.</p>
+<p>This region is referred to as the <em>Master Boot Record</em> (MBR) on the BIOS-based systems, and <em>GUID
+Partition Table</em> (GPT) on the UEFI-based systems.</p>
+<p>At system boot, the BIOS/UEFI</p>
+<ul>
+<li>scans all storage devices,</li>
+<li>detects the presence of MBR/GPT areas,</li>
+<li>identifies the boot disks,</li>
+<li>loads the bootloader program in memory from the default boot disk,</li>
+<li>executes the boot code to read the partition table and identify the <em>/boot</em> partition,</li>
+<li>loads the kernel in memory, and passes control over to it.</li>
+</ul>
+<p>Though MBR and GPT are designed for different PC firmware types, their job is essentially the same: to store
 disk partition information and the boot code.</p>
-<p><strong>[Master]{#part0025_split_001.html#id_356 .calibre10} Boot Record
-(MBR)</strong></p>
-<p>The MBR resides on the first sector of the boot disk. MBR was the
-preferred choice for saving partition table information on x86-based
-computers. However, with the arrival of bigger and larger hard drives, a
-newer firmware specification (UEFI) was introduced. MBR is still widely
-used, but its use is diminishing in favor of UEFI.</p>
-<p>MBR allows the creation of three types of partition&mdash;<em>primary</em>,
-<em>extended</em>, and <em>logical</em>&mdash;on a single disk. Of these, only primary and
-logical can be used for data storage; the extended is a mere enclosure
-for holding the logical partitions and it is not meant for data storage.
-MBR supports the creation of up to four primary partitions numbered 1
-through 4 at a time. In case additional partitions are required, one of
-the primary partitions must be deleted and replaced with an extended
-partition to be able to add logical partitions (up to 11) within that
-extended partition. Numbering for logical partitions begins at 5. MBR
-supports a maximum of 14 usable partitions (3 primary and 11 logical) on
-a single disk.</p>
-<p>MBR cannot address storage space beyond 2TB. This is due to its 32-bit
-nature and its 512-byte disk sector size. The MBR is non-redundant; the
-record it contains is not replicated, resulting in an unbootable system
-in the event of corruption. If your disk is smaller than 2TB and you
-don&rsquo;t intend to build more than 14 usable partitions, you can use MBR
-without issues. For more information on MBR, refer to <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0023_split_000.html#page_249">Chapter
-11</a>{.calibre5} &ldquo;Boot Process, GRUB2,
-and the Linux Kernel&rdquo;.</p>
-<p><strong>[GUID]{#part0025_split_001.html#id_357 .calibre10} Partition Table
-(GPT)</strong></p>
-<p>With the increasing use of disks larger than 2TB on x86 computers, a new
-64-bit partitioning standard called <em>Globally Unique Identifiers</em> (GUID)
-<em>Partition Table</em> (GPT) was developed and integrated into the UEFI
-firmware. This new standard introduced plenty of enhancements, including
-the ability to construct up to 128 partitions (no concept of extended or
-logical partitions), utilize disks larger than 2TB, use 4KB sector size,
-and store a copy of the partition information before the end of the disk
-for redundancy.</p>
-<p>Moreover, this standard allows a BIOS-based system to boot from a GPT
-disk using the bootloader program stored in a protective MBR at the
-first disk sector. In addition, the UEFI firmware also supports the
-secure boot feature, which only allows signed binaries to boot. For more
-information on UEFI and GPT, refer to <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0023_split_000.html#page_249">Chapter
-11</a>{.calibre5} &ldquo;Boot Process, GRUB2,
-and the Linux Kernel&rdquo;.</p>
-<p><strong>[Disk]{#part0025_split_001.html#id_358 .calibre10} Partitions</strong></p>
-<p>The space on a storage device can be sliced into partitions. Care must
-be taken when adding a new partition to elude data corruption with
-overlapping an extant partition or wasting storage by leaving unused
-space between adjacent partitions. On <em>server1</em>, the disk that was
-allocated at the time of installation is recognized as <em>sda</em> (<strong>s</strong> for
-<strong>S</strong>ATA, SAS, or SCSI device) <strong>d</strong>isk <strong>a</strong>, with the first partition
-identified as <em>sda1</em> and the second partition as <em>sda2</em>. Any subsequent
-disks added to the system will be known as <em>sdb</em>, <em>sdc</em>, <em>sdd</em>, and so
-on, and will use 1, 2, 3, <em>etc.</em> for partition numbering.</p>
-<p>RHEL offers a command called <em>lsblk</em> to list disk and partition
-information. The following graphic illustrates the current storage
-status on <em>server1</em>:</p>
-<p><a href="#R-image-7450400f092ea390ef82efd9a7bbb2e1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00652.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7450400f092ea390ef82efd9a7bbb2e1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00652.jpeg"></a>{.image2}</p>
-<p>It reveals the presence of one 10GB disk, <em>sda</em>, with two partitions:
-<em>sda1</em> and <em>sda2</em>. The first partition holds <em>/boot</em>, and the second one
-is an LVM object encapsulating <em>root</em> and <em>swap</em> logical volumes within
-it. Both <em>sda1</em> and <em>sda2</em> partitions occupy the entire disk capacity.
-The <em>sr0</em> represents the ISO image mounted as an optical medium.</p>
-<p><a href="#R-image-38ecaae307fa8a6ab41bc4f05c0e985c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-38ecaae307fa8a6ab41bc4f05c0e985c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} LVM is discussed at length in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0026_split_000.html#page_321">Chapter
-14</a>{.calibre5} &ldquo;Advanced Storage
-Partitioning&rdquo;.</p>
-<p>There are additional tools such as <em>fdisk</em> and <em>parted</em> available that
-can be used to expose disk and partitioning information. Let&rsquo;s run
-<em>fdisk</em> with -l and see what it reveals:</p>
-<p><a href="#R-image-bdf78d181073969f84c5aa8097dfbf17" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00653.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-bdf78d181073969f84c5aa8097dfbf17"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00653.jpeg"></a>{.image2}</p>
-<p>The output depicts the size of <em>sda</em> in GBs, bytes, and sectors, the
-type of disk label (dos) the disk has, and the disk&rsquo;s geometry in the
-top block. The second block shows the two disk partitions: <em>sda1</em> as the
-bootable partition marked with an asterisk (*) and <em>sda2</em> as an LVM
-partition. It also exposes the starting and ending sector numbers, size
-in 1KB blocks, and type of each partition. The identifiers 83 and 8e are
-hexadecimal values for the partition types. The last two blocks are
-specific to the LVM logical volumes that exist within the <em>sda2</em>
-partition. A detailed coverage on LVM is provided in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0026_split_000.html#page_321">Chapter
-14</a>{.calibre5} &ldquo;Advanced Storage
-Partitioning&rdquo;.</p>
-<p><strong>[Storage]{#part0025_split_001.html#id_359 .calibre10} Management
-Tools</strong></p>
-<p>RHEL offers numerous tools and toolsets for storage management, and they
-include <em>parted</em>, <em>gdisk</em>, VDO, LVM, and Stratis. There are other native
-tools available in the OS, but their discussion is beyond the scope of
-this book. Partitions created with a combination of most of these tools
-and toolsets can coexist on the same disk. We look at <em>parted</em>, <em>gdisk</em>,
-and VDO in this chapter and LVM and Stratis in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0026_split_000.html#page_321">Chapter
-14</a>{.calibre5} &ldquo;Advanced Storage
-Partitioning&rdquo;.</p>
-<p><em>parted</em> is a simple tool that understands both MBR and GPT formats.
-<em>gdisk</em> is designed to support the GPT format only, and it may be used
-as a replacement of <em>parted</em>. VDO is a disk optimizer software that
-takes advantage of certain technologies to minimize the overall data
-footprint on storage devices. LVM is a feature-rich logical volume
-management solution that gives flexibility in storage management.
-Stratis capitalizes on thin provisioning to create volumes much larger
-in size than the underlying storage devices they are built upon.</p>
-<p><strong>[Thin]{#part0025_split_001.html#id_360 .calibre10} Provisioning</strong></p>
-<p><em>Thin provisioning</em> technology allows for an economical allocation and
-utilization of storage space by moving arbitrary data blocks to
-contiguous locations, which results in empty block elimination. With
-thin provisioning support in VDO, LVM, and Stratis, you can create a
-<em>thin pool</em> of storage space and assign volumes much larger storage
-space than the physical capacity of the pool. Workloads begin consuming
-the actual allocated space for data writing. When a preset custom
-threshold (80%, for instance) on the actual consumption of the physical
-storage in the pool is reached, expand the pool dynamically by adding
-more physical storage to it. The volumes will automatically start
-exploiting the new space right away. The thin provisioning technique
-helps prevent spending more money upfront.</p>
-<p><strong>[Adding]{#part0025_split_001.html#id_361 .calibre10} Storage for
-Practice</strong></p>
-<p>This and the next two chapters have a considerable number of exercises
-that require block storage devices for practice. In <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0013_split_000.html#page_1">Chapter
-01</a>{.calibre5} &ldquo;Local Installation&rdquo;
-under &ldquo;Lab Infrastructure for Practice&rdquo;, we mentioned that <em>server2</em>
-will have 4x250MB, 1x4GB, and 2x1GB virtual disks for storage exercises.
-We presume that <em>server2</em> was built as part of Lab 1-1 and it is now
-available for use.</p>
-<p><strong>[Exercise]{#part0025_split_001.html#id_362 .calibre10} 13-1: Add
-Required Storage to server2</strong></p>
-<p>This exercise will add the required storage disks to <em>server2</em>
-(<em>RHEL8-VM2</em>) using VirtualBox.</p>
-<p>In this exercise, you will start VirtualBox and add 4x250MB, 1x4GB, and
-2x1GB disks to <em>server2</em> in preparation for exercises in this chapter
-and <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0026_split_000.html#page_321">Chapters 14</a>{.calibre5} and
-<a href="/linux/rhcsa/13_basic_storage_partitioning/#part0027_split_000.html#page_345">15</a>{.calibre5}.</p>
-<p>1[.]{.c19}Start VirtualBox on your Windows/Mac computer and highlight
-the <em>RHEL8-VM2</em> virtual machine that you created in Lab 1-1. See <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#id_675">Figure
-13-1</a>{.calibre5}.</p>
-<p>::: c49
-::: width_
-<a href="#R-image-e416ae763fa883c63577364d3418cfdc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00654.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e416ae763fa883c63577364d3418cfdc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00654.jpeg"></a>{.calibre13}
-:::</p>
-<p><strong>Figure 13-1 VirtualBox Interface</strong>
-:::</p>
-<p>2[.]{.c19}Click Settings at the top and then Storage on the window that
-pops up. Click on &ldquo;Controller: SATA&rdquo; to select it. <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#page_306">Figure
-13-2</a>{.calibre5}.</p>
-<p>::: c49
-::: width_
-<a href="#R-image-7bc29ee8ecc3d75f8c6aca0db7afa4bb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00655.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7bc29ee8ecc3d75f8c6aca0db7afa4bb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00655.jpeg"></a>{.calibre13}
-:::</p>
-<p><strong>Figure 13-2 VirtualBox &ndash; Add Storage</strong>
-:::</p>
-<p>3[.]{.c19}Click on the right-side icon next to &ldquo;Controller: SATA&rdquo; to add
-a hard disk.</p>
-<p>4[.]{.c19}Follow this sequence to add a 250MB disk: Click &ldquo;Create new
-disk&rdquo;, &ldquo;VDI (Virtualization Disk Image)&rdquo;, &ldquo;Dynamically allocated&rdquo;, and
-adjust the size to 250MB. Assign the disk a unique name. <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#id_676">Figure
-13-3</a>{.calibre5}.</p>
-<p>::: c49
-::: width_
-<a href="#R-image-868dfb63731d51210dd248b55b88e83c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00656.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-868dfb63731d51210dd248b55b88e83c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00656.jpeg"></a>{.calibre13}
-:::</p>
-<p><strong>Figure 13-3 VirtualBox &ndash; Adjust Disk Name and Size</strong>
-:::</p>
-<p>5[.]{.c19}Click Create to create and attach the disk to the VM.</p>
-<p>6[.]{.c19}Repeat steps 3 through 5 three more times to add disks of the
-same size to the VM.</p>
-<p>7[.]{.c19}Repeat steps 3 through 5 one time to add a disk of size 4GB to
-the VM.</p>
-<p>8[.]{.c19}Repeat steps 3 through 5 two times to add two disks of size
-1GB to the VM.</p>
-<p>9[.]{.c19}The final list of disks should look similar to what is shown
-in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#id_677">Figure 13-4</a>{.calibre5} after the
-addition of all seven drives. Disk names may vary.</p>
-<p>::: c49
-::: width_
-<a href="#R-image-0c8257cda742e12dcfb7c2fc6548f00b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00657.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0c8257cda742e12dcfb7c2fc6548f00b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00657.jpeg"></a>{.calibre13}
-:::</p>
-<p><strong>Figure 13-4 VirtualBox &ndash; 7 New Disks Added</strong>
-:::</p>
-<p>10[.]{.c23}Click OK to return to the main VirtualBox interface.</p>
-<p>11[.]{.c23}Power on <em>RHEL8-VM2</em> to boot RHEL 8 in it.</p>
-<p>12[.]{.c23}When the server is booted up, log on as <em>user1</em> and run the
-<em>lsblk</em> command to verify the new storage:</p>
-<p><a href="#R-image-0df0a83f46a4d5d25dbba15eb7c951d1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00658.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0df0a83f46a4d5d25dbba15eb7c951d1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00658.jpeg"></a>{.image2}</p>
-<p>13[.]{.c23}The seven new disks added to <em>server2</em> are 250MB (<em>sdb</em>,
-<em>sdc</em>, <em>sdd</em>, and <em>sde</em>), 4GB (<em>sdf</em>), and 1GB (<em>sdg</em> and <em>sdh</em>).</p>
-<p>This concludes the exercise for storage addition to <em>server2</em>.</p>
+<h2 id="master-boot-record-mbr">Master Boot Record (MBR)</h2>
+<ul>
+<li>resides on the first sector of the boot disk. MBR</li>
+<li>was the preferred choice for saving partition table information on x86-based computers.</li>
+<li>However, with the arrival of bigger and larger hard drives, a newer firmware specification (UEFI) was introduced.</li>
+<li>MBR is still widely used, but its use is diminishing in favor of UEFI.</li>
+</ul>
+<p>MBR allows the creation of three types of partition&mdash;<em>primary</em>, <em>extended</em>, and <em>logical</em>&mdash;on a single disk.</p>
+<ul>
+<li>primary and logical
+<ul>
+<li>can be used for data storage;</li>
+</ul>
+</li>
+<li>extended
+<ul>
+<li>a mere enclosure for holding the logical partitions and it is not meant for data storage.</li>
+</ul>
+</li>
+<li>supports the creation of up to four primary partitions numbered 1 through 4 at a time.</li>
+<li>In case additional partitions are required, one of the primary partitions must be deleted and replaced with an extended partition to be able to add logical partitions (up to 11) within that extended partition.</li>
+<li>Numbering for logical partitions begins at 5.</li>
+<li>supports a maximum of 14 usable partitions (3 primary and 11 logical) on a single disk.</li>
+<li>Cannot address storage space beyond 2TB. This is due to its 32-bit nature and its 512-byte disk sector size.</li>
+<li>non-redundant; the record it contains is not replicated, resulting in an unbootable system in the event of corruption.</li>
+<li>If your disk is smaller than 2TB and you don&rsquo;t intend to build more than 14 usable partitions, you can use MBR without issues.</li>
+</ul>
+<h2 id="guid-partition-table-gpt">GUID Partition Table (GPT)</h2>
+<ul>
+<li><em>Globally Unique Identifiers</em> (GUID) <em>Partition Table</em> (GPT)  This new standard</li>
+<li>ability to construct up to 128 partitions (no concept of extended or logical partitions),</li>
+<li>utilize disks larger than 2TB,</li>
+<li>use 4KB sector size,</li>
+<li>store a copy of the partition information before the end of the disk for redundancy.</li>
+<li>Allows a BIOS-based system to boot from a GPT disk using the bootloader program stored in a protective MBR at the first disk sector. In addition, the</li>
+<li>UEFI firmware also supports the secure boot feature
+<ul>
+<li>allows signed binaries to boot.</li>
+</ul>
+</li>
+</ul>
+<h3 id="disk-partitions">Disk Partitions</h3>
+<ul>
+<li>Care must be taken when adding a new partition to elude data corruption with overlapping an extant partition or wasting storage by leaving unused space between adjacent partitions.</li>
+<li>On <em>server1</em>, the disk that was allocated at the time of installation is recognized as <em>sda</em> (<strong>s</strong> for SATA, SAS, or SCSI device) <strong>d</strong>isk <strong>a</strong>, with the first partition identified as <em>sda1</em> and the second partition as <em>sda2</em>. Any subsequent disks added to the system will be known as <em>sdb</em>, <em>sdc</em>, <em>sdd</em>, and so on, and will use 1, 2, 3, <em>etc.</em> for partition numbering.</li>
+</ul>
+<h3 id="lsblk-command">lsblk command</h3>
+<ul>
+<li>list disk and partition information.</li>
+</ul>
+<p>View the current storage status on <em>server1</em>:
+<code>lsblk</code></p>
+<p>Output:</p>
+<ul>
+<li>reveals the presence of one 10GB disk, <em>sda</em>, with two partitions:
+<ul>
+<li><em>sda1</em> and <em>sda2</em>.</li>
+<li>The first partition holds <em>/boot</em>, and the second one is an LVM object encapsulating <em>root</em> and <em>swap</em> logical volumes within it.</li>
+<li>Both <em>sda1</em> and <em>sda2</em> partitions occupy the entire disk capacity.</li>
+</ul>
+</li>
+<li><em>sr0</em> represents the ISO image mounted as an optical medium.</li>
+</ul>
+<h3 id="fdisk-and-parted-commands">fdisk and <em>parted</em> commands</h3>
+<ul>
+<li>expose disk and partitioning information.</li>
+</ul>
+<p>Run <em>fdisk</em> with -l and see what it reveals:
+<code>fdisk -l</code></p>
+<p>output:
+Top Block</p>
+<ul>
+<li>size of <em>sda</em> in GBs, bytes, and sectors</li>
+<li>type of disk label (dos) the disk has</li>
+<li>disk&rsquo;s geometry<br>
+Second block</li>
+<li>two disk partitions:
+<ul>
+<li>sda1 as the bootable partition marked with *</li>
+<li>sda2 as an LVM  partition. It also exposes the starting and ending sector numbers, size in 1KB blocks, and type of each partition.</li>
+</ul>
+</li>
+<li>identifiers
+<ul>
+<li>83 and 8e are hexadecimal values for the partition types.
+last two blocks</li>
+</ul>
+</li>
+<li>Specific to the LVM logical volumes that exist within the <em>sda2</em> partition.</li>
+</ul>
+<h3 id="storage-management-tools">Storage Management Tools</h3>
+<ul>
+<li><em>parted</em>, gdisk, VDO, LVM, and Stratis.</li>
+<li>Partitions created with a combination of most of these tools</li>
+<li>toolsets can coexist on the same disk.</li>
+</ul>
+<p><em>parted</em></p>
+<ul>
+<li>simple tool that understands both MBR and GPT formats.</li>
+</ul>
+<p><em>gdisk</em></p>
+<ul>
+<li>designed to support the GPT format only</li>
+<li>may be used as a replacement of <em>parted</em>.</li>
+</ul>
+<p>VDO</p>
+<ul>
+<li>Disk optimizer software that takes advantage of certain technologies to minimize the overall data footprint on storage devices.</li>
+</ul>
+<p>LVM</p>
+<ul>
+<li>feature-rich logical volume management solution that gives flexibility in storage management.</li>
+</ul>
+<p>Stratis</p>
+<ul>
+<li>capitalizes on thin provisioning to create volumes much larger in size than the underlying storage devices they are built upon.</li>
+</ul>
+<h3 id="thin-provisioning">Thin Provisioning</h3>
+<ul>
+<li>Allows for an economical allocation and utilization of storage space by moving arbitrary data blocks to contiguous locations, which results in empty block elimination.</li>
+<li>With thin provisioning support in VDO, LVM, and Stratis, you can create a <em>thin pool</em> of storage space and assign volumes much larger storage space than the physical capacity of the pool.</li>
+<li>Workloads begin consuming the actual allocated space for data writing.</li>
+<li>When a preset custom threshold (80%, for instance) on the actual consumption of the physical storage in the pool is reached, expand the pool dynamically by adding more physical storage to it.</li>
+<li>The volumes will automatically start exploiting the new space right away.</li>
+<li>helps prevent spending more money upfront.</li>
+</ul>
+<h3 id="adding-storage-for-practice">Adding Storage for Practice</h3>
+<ul>
+<li>Need 4x250MB, 1x4GB, and 2x1GB virtual disks for storage exercises.</li>
+</ul>
+<h3 id="lab-add-required-storage-to-server2">Lab: Add Required Storage to server2</h3>
+<ul>
+<li>add the required storage disks to <em>server2</em> using VirtualBox.</li>
+<li>start VirtualBox and add 4x250MB, 1x4GB, and 2x1GB disks to <em>server2</em></li>
+</ul>
+<ol>
+<li>
+<p>Start VirtualBox on your Windows/Mac computer and highlight server2</p>
+</li>
+<li>
+<p>Click Settings at the top and then Storage on the window that
+pops up. Click on &ldquo;Controller: SATA&rdquo; to select it.</p>
+</li>
+</ol>
+<p><a href="#R-image-6f6613739594acfac7e6fc33f552ddc5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240413054446.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6f6613739594acfac7e6fc33f552ddc5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240413054446.png"></a></p>
+<ol start="3">
+<li>
+<p>Click on the right-side icon next to &ldquo;Controller: SATA&rdquo; to add a hard disk.</p>
+</li>
+<li>
+<p>Follow this sequence to add a 250MB disk: Click &ldquo;Create new disk&rdquo;, &ldquo;VDI (Virtualization Disk Image)&rdquo;, &ldquo;Dynamically allocated&rdquo;, and adjust the size to 250MB. Assign the disk a unique name.</p>
+</li>
+<li>
+<p>Click Create to create and attach the disk to the VM.</p>
+</li>
+<li>
+<p>Repeat steps to add the other required disks</p>
+</li>
+<li>
+<p>The final list of disks should look similar to what is shown</p>
+</li>
+<li>
+<p>Power on <em>RHEL8-VM2</em> to boot RHEL 8 in it.</p>
+</li>
+<li>
+<p>run <code>lsblk</code> command to verify the new storage:
+<code>lsblk</code></p>
+</li>
+</ol>
 <p><strong>MBR Storage Management with parted</strong></p>
-<p><em>parted</em> (<em>partition editor</em>) is a popular tool in RHEL that can be used
-to partition disks. This program may be run interactively or directly
-from the command prompt. It understands and supports both MBR and GPT
-schemes, and can be used to create up to 128 partitions on a single GPT
-disk. <em>parted</em> provides an abundance of subcommands to perform disk
-management operations such as viewing, labeling, adding, naming, and
-deleting partitions. <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#id_739">Table
-13-1</a>{.calibre5} describes these
-subcommands in that sequence.</p>
-<p>::: c49</p>
-<hr>
-<p><strong>Subcommand</strong>   <strong>Description</strong>
-print            Displays the partition table that includes disk geometry and partition number, start and end, size, type, file system type, and relevant flags.
-mklabel          Applies a label to the disk. Common labels are gpt and msdos.
-mkpart           Makes a new partition
-name             Assigns a name to a partition
-rm               Removes the specified partition</p>
-<hr>
+<p><em>parted</em> (<em>partition editor</em>) is a popular tool in RHEL that can be</p>
+<ul>
+<li>used to partition disks. This program</li>
+<li>may be run interactively or directly from the command prompt. It</li>
+<li>understands and supports both MBR and GPT schemes, and</li>
+<li>can be used to create up to 128 partitions on a single GPT disk. <em>parted</em></li>
+<li>subcommands for viewing, labeling, adding, naming, and deleting partitions.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Subcommand</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>print</td>
+<td>Displays the partition table that includes disk geometry and partition number, start and end, size, type, file system type, and relevant flags.</td>
+</tr>
+<tr>
+<td>mklabel</td>
+<td>Applies a label to the disk. Common labels are gpt and msdos.</td>
+</tr>
+<tr>
+<td>mkpart</td>
+<td>Makes a new partition</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Assigns a name to a partition</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>Removes the specified partition</td>
+</tr>
+</tbody>
+</table>
 <p><strong>[Table]{#part0025_split_001.html#id_739} 13-1 Common parted
 Subcommands</strong>
 :::</p>
@@ -416,37 +401,37 @@ for using it as an MBR disk. You will create and confirm a 100MB primary
 partition on the disk.</p>
 <p>1[.]{.c19}Execute <em>parted</em> on **dev<em>sdb</em> to view the current partition
 information:</p>
-<p><a href="#R-image-367ef77da9a72662ee6f7392f48567e5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00659.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-367ef77da9a72662ee6f7392f48567e5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00659.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0653d512126f23e06f2da8410be00e84" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00659.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0653d512126f23e06f2da8410be00e84"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00659.jpeg"></a>{.image2}</p>
 <p>There is an error on line 1 of the output, indicating an unrecognized
 label. This disk must be labeled before it can be partitioned.</p>
 <p>2[.]{.c19}Assign disk label &ldquo;msdos&rdquo; to the disk with <em>mklabel</em>. This
 operation is performed only once on a disk.</p>
-<p><a href="#R-image-4b2736f2665499fdfaa1619f295adccd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00660.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4b2736f2665499fdfaa1619f295adccd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00660.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-579dbcaebb665e248403d6403bbd7143" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00660.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-579dbcaebb665e248403d6403bbd7143"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00660.jpeg"></a>{.image2}</p>
 <p>The <em>print</em> subcommand confirms the successful application of the label.</p>
-<p><a href="#R-image-9c45a697ffaa77a890403a2b784de27a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9c45a697ffaa77a890403a2b784de27a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} To use the GPT partition table type, run
+<p><a href="#R-image-4d4667cc988bc3c6a35a7910abab481f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d4667cc988bc3c6a35a7910abab481f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} To use the GPT partition table type, run
 &ldquo;<strong>sudo parted <em>dev</em>sdb mklabel gpt</strong>&rdquo; instead.</p>
 <p>3[.]{.c19}Create a 100MB primary partition starting at 1MB (beginning of
 the disk) using <em>mkpart</em>:</p>
-<p><a href="#R-image-fc2bd3f7d75a3b2f6170a45ba4d4357f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00661.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fc2bd3f7d75a3b2f6170a45ba4d4357f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00661.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-ae793db4519b67410c4b3eb3be0c4512" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00661.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ae793db4519b67410c4b3eb3be0c4512"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00661.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Verify the new partition with <em>print</em>:</p>
-<p><a href="#R-image-97c69be02521ac67d5d725810ff342b3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00662.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-97c69be02521ac67d5d725810ff342b3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00662.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-aa4346992633b052104a2f9988016ba4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00662.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aa4346992633b052104a2f9988016ba4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00662.jpeg"></a>{.image2}</p>
 <p>Partition numbering begins at 1 by default.</p>
 <p>5[.]{.c19}Confirm the new partition with the <em>lsblk</em> command:</p>
-<p><a href="#R-image-e2c82a85bc14e25a7acec2cf7cdb9066" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00663.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e2c82a85bc14e25a7acec2cf7cdb9066"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00663.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4d3cb0d1f410a0b0ebe0c16d4790c2cb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00663.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d3cb0d1f410a0b0ebe0c16d4790c2cb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00663.jpeg"></a>{.image2}</p>
 <p>The device file for the first partition on the <em>sdb</em> disk is <em>sdb1</em> as
 identified on the bottom line. The partition size is 95MB.</p>
-<p><a href="#R-image-154a5260222f860d1d467d04a2b44371" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-154a5260222f860d1d467d04a2b44371"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Different tools will have variance in
+<p><a href="#R-image-fd5eef831ff6c5081520b310d276c62b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd5eef831ff6c5081520b310d276c62b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Different tools will have variance in
 reporting partition sizes. You should ignore minor differences.</p>
 <p>6[.]{.c19}Check the **proc<em>partitions</em> file also:</p>
-<p><a href="#R-image-9cf3c7242d35afa3a60c310eafd4b8be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00664.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9cf3c7242d35afa3a60c310eafd4b8be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00664.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4cdc6560996ed989debb38a9c5ae65df" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00664.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4cdc6560996ed989debb38a9c5ae65df"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00664.jpeg"></a>{.image2}</p>
 <p>The virtual file is also updated with the new partition information.
 This completes the steps for creating and verifying an MBR partition
 using the <em>parted</em> command.</p>
@@ -459,15 +444,15 @@ in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#
 confirm the deletion.</p>
 <p>1[.]{.c19}Execute <em>parted</em> on **dev<em>sdb</em> with the <em>rm</em> subcommand to
 remove partition number 1:</p>
-<p><a href="#R-image-2a000e3aecaa91e21fe0943393bf6245" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00665.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2a000e3aecaa91e21fe0943393bf6245"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00665.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-58726bdbc424eaf3bb2f2e3e18f29cf2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00665.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-58726bdbc424eaf3bb2f2e3e18f29cf2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00665.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Confirm the partition deletion with <em>print</em>:</p>
-<p><a href="#R-image-e91775c623ceb12251038c7c9174a96d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00666.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e91775c623ceb12251038c7c9174a96d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00666.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-685fdc4c86cb48b0af3684a0337c2cca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00666.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-685fdc4c86cb48b0af3684a0337c2cca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00666.jpeg"></a>{.image2}</p>
 <p>The partition no longer exists.</p>
 <p>3[.]{.c19}Check the **proc<em>partitions</em> file:</p>
-<p><a href="#R-image-9641125a4b630f3bb0559b473884b06e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00667.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9641125a4b630f3bb0559b473884b06e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00667.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-fafcb90e9fafe4676e656cd8bdea2f03" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00667.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fafcb90e9fafe4676e656cd8bdea2f03"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00667.jpeg"></a>{.image2}</p>
 <p>The virtual file has the partition entry deleted as well. You can also
 run the <em>lsblk</em> command for further verification. The partition has been
 removed successfully.</p>
@@ -486,8 +471,8 @@ partitions on a single disk on systems with UEFI firmware.</p>
 <p>The main interface of <em>gdisk</em> can be invoked by specifying a disk device
 name such as **dev<em>sdc</em> with the command. Type <em>help</em> or <em>?</em> (question
 mark) at the prompt to view available subcommands.</p>
-<p><a href="#R-image-6eac920a6a7de21a555bf18850a15045" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00668.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6eac920a6a7de21a555bf18850a15045"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00668.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bdc200d49f3873138d77044a45e0d567" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00668.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bdc200d49f3873138d77044a45e0d567"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00668.jpeg"></a>{.image2}</p>
 <p>The output illustrates that there is no partition table defined on the
 disk at the moment. There are several subcommands in the main menu
 followed by a short description. Refer to the screenshot above for a
@@ -501,40 +486,40 @@ using it as a GPT disk. You will create and confirm a 200MB partition on
 the disk.</p>
 <p>1[.]{.c19}Execute <em>gdisk</em> on **dev<em>sdc</em> to view the current partition
 information:</p>
-<p><a href="#R-image-83244a80bc8b4dd1e9883332d02d0853" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00669.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-83244a80bc8b4dd1e9883332d02d0853"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00669.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-702824d2babaa7fef08feab5aacbe999" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00669.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-702824d2babaa7fef08feab5aacbe999"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00669.jpeg"></a>{.image2}</p>
 <p>The disk currently does not have any partition table on it.</p>
 <p>2[.]{.c19}Assign &ldquo;gpt&rdquo; as the partition table type to the disk using the
 <em>o</em> subcommand. Enter &ldquo;y&rdquo; for confirmation to proceed. This operation is
 performed only once on a disk.</p>
-<p><a href="#R-image-e9c204f1fd87548aaf2404ab480c405b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00670.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e9c204f1fd87548aaf2404ab480c405b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00670.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c0074644dac5e364348cf04f957f90e5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00670.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c0074644dac5e364348cf04f957f90e5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00670.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Run the <em>p</em> subcommand to view disk information and confirm
 the GUID partition table creation:</p>
-<p><a href="#R-image-e8478405685a9b54241fd07f2ee3ea91" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00671.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e8478405685a9b54241fd07f2ee3ea91"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00671.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5bf1e68a717e73cc323296596aca72fb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00671.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5bf1e68a717e73cc323296596aca72fb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00671.jpeg"></a>{.image2}</p>
 <p>The output returns the assigned GUID and states that the partition table
 can hold up to 128 partition entries.</p>
 <p>4[.]{.c19}Create the first partition of size 200MB starting at the
 default sector with default type &ldquo;Linux filesystem&rdquo; using the <em>n</em>
 subcommand:</p>
-<p><a href="#R-image-72b0ddbfc3aeaf7c3ce7fd9249126597" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00672.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-72b0ddbfc3aeaf7c3ce7fd9249126597"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00672.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-66c26a4e0cbe9dc2c12d1ea3aed3a5b7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00672.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-66c26a4e0cbe9dc2c12d1ea3aed3a5b7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00672.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Verify the new partition with <em>p</em>:</p>
 <p>Command (? For help): <strong>p</strong></p>
-<p><a href="#R-image-b1d69d274253e8dbf7770eaeee0a5dbb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00673.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b1d69d274253e8dbf7770eaeee0a5dbb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00673.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b61484cecdf8a1bd450b87081aa42135" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00673.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b61484cecdf8a1bd450b87081aa42135"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00673.jpeg"></a>{.image2}</p>
 <p>6[.]{.c19}Run <em>w</em> to write the partition information to the partition
 table and exit out of the interface. Enter &ldquo;y&rdquo; to confirm when prompted.</p>
-<p><a href="#R-image-9aaee2dfe5b4cbb98ede3705d293771b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00674.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9aaee2dfe5b4cbb98ede3705d293771b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00674.jpeg"></a>{.image2}</p>
-<p><a href="#R-image-964169b8a0a687325666a95b92f25a36" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-964169b8a0a687325666a95b92f25a36"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} You may need to run the partprobe command
+<p><a href="#R-image-41b89a5e8b5d55a158b0259719425cc7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00674.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-41b89a5e8b5d55a158b0259719425cc7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00674.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5992c46b1029ade6f76c1966e6da754c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5992c46b1029ade6f76c1966e6da754c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} You may need to run the partprobe command
 after exiting the gdisk utility to update the kernel of the changes.</p>
 <p>7[.]{.c19}Verify the new partition by issuing either of the following at
 the command prompt:</p>
-<p><a href="#R-image-7a93638c515f334ab84e16a8b115c240" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00675.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7a93638c515f334ab84e16a8b115c240"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00675.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6accaeab8c9ac918dda86c69db3e902e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00675.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6accaeab8c9ac918dda86c69db3e902e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00675.jpeg"></a>{.image2}</p>
 <p>The device file for the first partition on the <em>sdc</em> disk is <em>sdc1</em> and
 it is 200MB in size as reported in the above outputs. This completes the
 steps for creating and verifying a GPT partition using the <em>gdisk</em>
@@ -548,20 +533,20 @@ in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#
 confirm the removal.</p>
 <p>1[.]{.c19}Execute <em>gdisk</em> on **dev<em>sdc</em> and run <em>d1</em> at the utility&rsquo;s
 prompt to delete partition number 1:</p>
-<p><a href="#R-image-fa6c20fa48f68bf2c0c4e19bb280d7c6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00676.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fa6c20fa48f68bf2c0c4e19bb280d7c6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00676.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-578d0835293e5d86b278be5b35b9f14e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00676.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-578d0835293e5d86b278be5b35b9f14e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00676.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Confirm the partition deletion with <em>p</em>:</p>
-<p><a href="#R-image-58a7c426b593af2976fd85450e2869d2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00677.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-58a7c426b593af2976fd85450e2869d2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00677.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-aa250da8fd82bb7f3c728155cc7de031" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00677.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aa250da8fd82bb7f3c728155cc7de031"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00677.jpeg"></a>{.image2}</p>
 <p>The partition no longer exists.</p>
 <p>3[.]{.c19}Write the updated partition information to the disk with <em>w</em>
 and quit <em>gdisk</em>:</p>
-<p><a href="#R-image-e1cd8af942bd106ce32a61aa8bff607a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00678.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e1cd8af942bd106ce32a61aa8bff607a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00678.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6ebab66aec054b527df9fc29cc1afef2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00678.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6ebab66aec054b527df9fc29cc1afef2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00678.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Verify the partition deletion by issuing either of the
 following at the command prompt:</p>
-<p><a href="#R-image-a1941bc35434832e43f6d8d296ae3511" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00679.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a1941bc35434832e43f6d8d296ae3511"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00679.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c44a036404378193f9ff0f8561ba3960" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00679.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c44a036404378193f9ff0f8561ba3960"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00679.jpeg"></a>{.image2}</p>
 <p>Both commands confirm the successful partition removal.</p>
 <p><strong>[Storage]{#part0025_split_001.html#id_368 .calibre10} Optimization
 with Virtual Data Optimizer (VDO)</strong></p>
@@ -624,15 +609,15 @@ required.</p>
 <p>In this exercise, you will install the VDO software packages, start the
 VDO service, and mark it for autostart on subsequent system reboots.</p>
 <p>1[.]{.c19}Install packages <em>vdo</em> and <em>kmod-kvdo</em>:</p>
-<p><a href="#R-image-c3428c8b5e99c070a22c25ad6fbd5668" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00680.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c3428c8b5e99c070a22c25ad6fbd5668"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00680.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-25526d9d33d4c5c53e8a2931dcb60b7f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00680.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-25526d9d33d4c5c53e8a2931dcb60b7f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00680.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Start the service and enable it to start automatically on
 future system reboots:</p>
-<p><a href="#R-image-70d20618f439a9ea45631b3e73fdd19b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00681.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-70d20618f439a9ea45631b3e73fdd19b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00681.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-737af60159b0dd679f696b3d37897384" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00681.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-737af60159b0dd679f696b3d37897384"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00681.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Check the operational status of the service:</p>
-<p><a href="#R-image-8802a8d3fab7144b5fd476c7bac0261c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00682.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8802a8d3fab7144b5fd476c7bac0261c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00682.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c0028e6c0eafdb57fb02de815a5a8385" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00682.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c0028e6c0eafdb57fb02de815a5a8385"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00682.jpeg"></a>{.image2}</p>
 <p>The relevant packages for VDO are installed, and the VDO service is
 started and activated. This concludes the exercise.</p>
 <p><strong>Exercise 13-7: Create a VDO Volume</strong></p>
@@ -646,51 +631,51 @@ features.</p>
 <p>1[.]{.c19}Create a volume called <em>vdo-vol1</em> (--name) on the **dev<em>sdf</em>
 device (--device) with a logical size of 16GB (--vdoLogicalSize) and
 slab size of 128MB (--vdoSlabSize):</p>
-<p><a href="#R-image-8dee4cfdb0643a3b346f3be6620d225f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00683.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8dee4cfdb0643a3b346f3be6620d225f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00683.jpeg"></a>{.image2}</p>
-<p><a href="#R-image-2765da7ce7e26437b05baa436aab314b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2765da7ce7e26437b05baa436aab314b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Increase the amount of memory allocated
+<p><a href="#R-image-b2bcb4a94ab72d411eae43b3c793ff73" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00683.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b2bcb4a94ab72d411eae43b3c793ff73"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00683.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a7b376cee0a05ffc36f10f031a15c2dc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a7b376cee0a05ffc36f10f031a15c2dc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Increase the amount of memory allocated
 to the virtual machine to 2GB if the output complains about insufficient
 memory.</p>
-<p><a href="#R-image-35e4ba0655c24dcdcf5b9a8328f8a096" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-35e4ba0655c24dcdcf5b9a8328f8a096"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} If the logical size is not specified, the
+<p><a href="#R-image-c8076529a9fceeb30cfd8a93f1628eed" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c8076529a9fceeb30cfd8a93f1628eed"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} If the logical size is not specified, the
 VDO volume will have the same size as the underlying disk (<em>dev</em>sdf in
 this case).</p>
-<p><a href="#R-image-8e221f7ebc57ea36031ff3baf4bc080a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e221f7ebc57ea36031ff3baf4bc080a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The slab size is the size of the
+<p><a href="#R-image-326fa41627db62e1f88541dd4c49a4bc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-326fa41627db62e1f88541dd4c49a4bc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The slab size is the size of the
 increment by which VDO volumes grow. This value must be a power of two
 between 128MB and 32GB; the default is 2GB. The default unit of size
 specification is MB.</p>
 <p>2[.]{.c19}List the new volume using the <em>vdo</em> and <em>lsblk</em> commands:</p>
-<p><a href="#R-image-40a4c34bdb9e2d752694fae0e62b3672" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00684.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-40a4c34bdb9e2d752694fae0e62b3672"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00684.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-95195a8ed6130df0034372596b96986c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00684.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-95195a8ed6130df0034372596b96986c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00684.jpeg"></a>{.image2}</p>
 <p>As indicated, the major number for the VDO volume is 253, which is
 associated with the device mapper kernel driver. The output also shows
 the logical volume size (16GB) and type (vdo). It also depicts the disk
 (<em>sdf</em>) that houses the volume, along with its actual size (4GB).</p>
 <p>3[.]{.c19}Display the usage status of the volume:</p>
-<p><a href="#R-image-c24ddc59f0469b628a4afc701ce4462a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00685.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c24ddc59f0469b628a4afc701ce4462a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00685.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-cdbcd1ba560a01b7af448b4d2260421e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00685.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cdbcd1ba560a01b7af448b4d2260421e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00685.jpeg"></a>{.image2}</p>
 <p>The size of the actual disk is 4GB. Due to thin provisioning, the system
 allowed you to create the VDO volume much larger in size (4 times) than
 the physical disk capacity.</p>
 <p>4[.]{.c19}Show detailed statistics for the volume including
 configuration information:</p>
-<p><a href="#R-image-c3a3d5b290c107abc594e1ffa1a505dc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00686.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c3a3d5b290c107abc594e1ffa1a505dc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00686.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-83eb7c1fab88973f5712f426f01d4420" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00686.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-83eb7c1fab88973f5712f426f01d4420"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00686.jpeg"></a>{.image2}</p>
 <p>The output will expose over one hundred different settings for the
 volume.</p>
 <p>5[.]{.c19}Display detailed statistics for the volume including
 configuration information:</p>
-<p><a href="#R-image-5ec12a4f2fd1d350f4a965981b5d0708" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00687.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5ec12a4f2fd1d350f4a965981b5d0708"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00687.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-adc96a4154fcdbb298789f01fda94456" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00687.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-adc96a4154fcdbb298789f01fda94456"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00687.jpeg"></a>{.image2}</p>
 <p>The status includes volume, kernel module, and configuration
 information. It also provides a detailed look at volume-specific
 elements.</p>
 <p>6[.]{.c19}Show the activation status of the compression and
 de-duplication features:</p>
-<p><a href="#R-image-8c5c6f4280029ebffc6602cb8f2ae277" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00688.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8c5c6f4280029ebffc6602cb8f2ae277"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00688.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0dffed8f66532b9ef16f7c51a85f10e5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00688.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0dffed8f66532b9ef16f7c51a85f10e5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00688.jpeg"></a>{.image2}</p>
 <p>Both compression and de-duplication features are activated by default on
 new VDO volumes. This concludes the exercise.</p>
 <p><strong>Exercise 13-8: Delete a VDO Volume</strong></p>
@@ -701,15 +686,15 @@ in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_000.html#
 confirm the removal.</p>
 <p>1[.]{.c19}Verify that the volume still exists with the <em>vdo</em> and <em>lsblk</em>
 commands:</p>
-<p><a href="#R-image-a2f19ddfc6b4e424bcc418de6a051368" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00689.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a2f19ddfc6b4e424bcc418de6a051368"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00689.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-3f840f5260b8a1c005049fd464966e55" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00689.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3f840f5260b8a1c005049fd464966e55"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00689.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Specify the name (--name) of the volume with the <em>vdo</em>
 command to delete:</p>
-<p><a href="#R-image-b09b899dd7a8ba754b94951b04d81ad0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00690.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b09b899dd7a8ba754b94951b04d81ad0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00690.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8bcaea4a0d2dea8f4a9b40f310b1ecbf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00690.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8bcaea4a0d2dea8f4a9b40f310b1ecbf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00690.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Confirm the removal with the <em>vdo</em> and <em>lsblk</em> commands:</p>
-<p><a href="#R-image-70b622c032f09c6bb5e806937258bb5a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00691.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-70b622c032f09c6bb5e806937258bb5a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00691.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-945bdb6ad26fe849cc87f75626344abf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00691.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-945bdb6ad26fe849cc87f75626344abf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00691.jpeg"></a>{.image2}</p>
 <p>The volume has been deleted successfully as reported in the above
 outputs.</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} Make sure that you run the lsblk command before
@@ -738,7 +723,9 @@ improve data throughput. We performed a couple of exercises in the end
 to demonstrate the creation and deletion of volumes using this solution.</p>
 <p><strong>[Review]{#part0025_split_001.html#id_372 .calibre10} Questions</strong></p>
 <p>1[.]{.c19}What is missing in the command <em>vdo create --name vdo1
---vdoLogicalSize 16GB --vdoSlabSize 128MB</em>?</p>
+--vdoLogicalSize 16GB --vdoSlabSize 128MB</em>?
+1[.]{.c19}The storage device (--device) name is missing from the
+command provided.</p>
 <p>2[.]{.c19}What is the maximum number of usable partitions that can be
 created on a GPT disk?</p>
 <p>3[.]{.c19}Which kernel module is responsible for data block compression
@@ -775,8 +762,6 @@ compression is enabled. Which command would you use?</p>
 or False?</p>
 <p><strong>[Answers]{#part0025_split_001.html#id_373 .calibre10} to Review
 Questions</strong></p>
-<p>1[.]{.c19}The storage device (--device) name is missing from the
-command provided.</p>
 <p>2[.]{.c19}128.</p>
 <p>3[.]{.c19}The <em>kvdo</em> module is responsible for compressing data blocks
 in VDO volumes.</p>
@@ -872,12 +857,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1712315996" defer></script>
-        <script src="/js/lunr/lunr.min.js?1712315996" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1712315996" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1712315996" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1712315996" defer></script>
-        <script src="/js/search.js?1712315996" defer></script>
+        <script src="/js/auto-complete.js?1713093957" defer></script>
+        <script src="/js/lunr/lunr.min.js?1713093957" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1713093957" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1713093957" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1713093957" defer></script>
+        <script src="/js/search.js?1713093957" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1073,8 +1058,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1712315996" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1712315996" defer></script>
+    <script src="/js/clipboard.min.js?1713093957" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1713093957" defer></script>
     <script>
       function useMathJax( config ){
         if( !Object.assign ){
@@ -1104,20 +1089,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1712315996" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1712315996" defer></script>
-    <script src="/js/js-yaml.min.js?1712315996" defer></script>
+    <script src="/js/d3/d3-color.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1713093957" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1713093957" defer></script>
+    <script src="/js/js-yaml.min.js?1713093957" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1712315996" defer></script>
+    <script src="/js/theme.js?1713093957" defer></script>
   </body>
 </html>

@@ -11,8 +11,8 @@
 
 | Week | mg (Goal) | Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday |
 | ---- | --------- | ------ | ------- | --------- | -------- | ------ | -------- | ------ |
-| 1    | 300       | 390    | 380     | 375       | 382      | 340    |          |        |
-| 2    | 275       |        |         |           |          |        |          |        |
+| 1    | 300       | 390    | 380     | 375       | 382      | 365    | 325      | 300    |
+| 2    | 275       | 300    | 350     | 350       | 365      | 395    | 370      |        |
 | 3    | 250       |        |         |           |          |        |          |        |
 | 4    | 225       |        |         |           |          |        |          |        |
 | 5    | 200       |        |         |           |          |        |          |        |
@@ -24,9 +24,9 @@
 | 11   | 50        |        |         |           |          |        |          |        |
 | 12   | 25        |        |         |           |          |        |          |        |
 #### Strategies to help me succeed:
-- Continue daily running habit. 
-- Eat healthy. 
-- Practice being a little uncomfortable. 
+- Meditate daily
+- Eat healthy
+- Practice being a little uncomfortable
 
 #### Read: 
 Dopamine Nation

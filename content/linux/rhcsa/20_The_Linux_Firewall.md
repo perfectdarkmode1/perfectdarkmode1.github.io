@@ -157,8 +157,7 @@ tool. Alternatively, you can copy the required zone file to the
 changes. The *firewalld* service reads the files saved in this location,
 and applies the rules defined in them. A listing of the system zone
 files is presented below:
-
-![](images/00946.jpeg){.image2}
+`ls -l /usr/lib/firewalld/zones/`
 
 The default *public* zone file is displayed below:
 

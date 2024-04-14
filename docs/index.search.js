@@ -903,7 +903,7 @@ var relearn_search_index = [
   },
   {
     "breadcrumb": "",
-    "content": "Coming soon…\n",
+    "content": " The Blog Startup - By Meera Kothand Date Read: 2024-04-14. How Strongly I Recommend It: 8/10\nIf you are wanting to blog as a business, you need a sound strategy and business model. Filled with practical tips on identifying your audience, email strategy, branding, marketing, things to watch out for, etc. Definitely read this if you are wanting to start a blog.\nRead my notes, or go to the Amazon page for details and reviews.\n",
     "description": "",
     "tags": null,
     "title": "Book Notes",

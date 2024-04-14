@@ -2,334 +2,212 @@
 
 This chapter describes the following major topics:
 
-[![](images/00001.jpeg){.c37}]{.c36}Master Boot Record vs. GUID
-Partition Table
+- Master Boot Record vs. GUID Partition Table
+- Identify and understand disk partitions
+- The concept of thin provisioning, and its benefits
+- Create and delete partition on MBR disk
+- Create and delete partition on GPT disk
+- Overview of Virtual Data Optimizer and how it conserves storage
+- Create and delete a Virtual Data Optimizer volume
 
-[![](images/00001.jpeg){.c37}]{.c36}Identify and understand disk
-partitions
+RHCSA Objectives:
 
-[![](images/00001.jpeg){.c37}]{.c36}The concept of thin provisioning,
-and its benefits
+- List, create, and delete partitions on MBR and GPT disks
+- Configure disk compression
 
-[![](images/00001.jpeg){.c37}]{.c36}Create and delete partition on MBR
-disk
+Data is stored on disks that are logically divided into
+partitions. 
 
-[![](images/00001.jpeg){.c37}]{.c36}Create and delete partition on GPT
-disk
+A partition can exist on a portion of a disk, on an entire
+disk, or it may span multiple disks. 
 
-[![](images/00001.jpeg){.c37}]{.c36}Overview of Virtual Data Optimizer
-and how it conserves storage
+Each partition is accessed and managed independent of other partitions and may contain a file system or swap space. 
 
-[![](images/00001.jpeg){.c37}]{.c36}Create and delete a Virtual Data
-Optimizer volume
+Partitioning information is stored at special disk locations
+that the system references at boot time. 
 
-[RHCSA Objectives:]{.c39}
+RHEL offers a number of tools for partition management. 
 
-[27]{#part0025_split_000.html#id_793 .calibre10}. List, create, and
-delete partitions on MBR and GPT disks
+Partitions created with a combination of most of these tools can coexist on a single disk.
 
-[37]{#part0025_split_000.html#id_803 .calibre10}. Configure disk
-compression
+Thin provisioning is a powerful feature that guarantees an efficient use of storage space by allocating only what is needed and by storing data at adjacent locations. 
 
-::: {#part0025_split_000.html#calibre_pb_1 .calibre12}
-:::
-
-[]{#part0025_split_001.html}
-
-[ D]{.c42}[ata]{.c43} is stored on disks that are logically divided into
-partitions. A partition can exist on a portion of a disk, on an entire
-disk, or it may span multiple disks. Each partition is accessed and
-managed independent of other partitions and may contain a file system or
-swap space. Partitioning information is stored at special disk locations
-that the system references at boot time. RHEL offers a number of tools
-for partition management. Partitions created with a combination of most
-of these tools can coexist on a single disk.
-
-Thin provisioning is a powerful feature that guarantees an efficient use
-of storage space by allocating only what is needed and by storing data
-at adjacent locations. Many storage management solutions such as those
-we discuss later in this chapter and in the next incorporate thin
+Many storage management solutions incorporate thin
 provisioning technology in their core configuration.
 
-Virtual Disk Optimizer is one of the newer storage management solutions
-incorporated in RHEL. It capitalizes on thin provisioning,
-de-duplication, and compression technologies to conserve storage space,
+Virtual Disk Optimizer (VDO) is one of the newer storage management solutions incorporated in RHEL. 
+
+It capitalizes on thin provisioning, de-duplication, and compression technologies to conserve storage space,
 improve data throughput, and save money.
 
-This is the first of the three chapters that shed light on storage
-solutions. The next two chapters ([Chapters
-14](#part0026_split_000.html#page_321){.calibre5} and
-[15](#part0027_split_000.html#page_345){.calibre5}) discuss advanced
-concepts and management tools.
+### Storage Management Overview
 
-**[Storage]{#part0025_split_001.html#id_355 .calibre10} Management
-Overview**
+partition information is stored on the disk in a small region, which is read by the operating system at boot time. 
 
-A disk in RHEL can be carved up into several partitions. This partition
-information is stored on the disk in a small region, which is read by
-the operating system at boot time. This region is referred to as the
-*Master Boot Record* (MBR) on the BIOS-based systems, and *GUID
-Partition Table* (GPT) on the UEFI-based systems. At system boot, the
-BIOS/UEFI scans all storage devices, detects the presence of MBR/GPT
-areas, identifies the boot disks, loads the bootloader program in memory
-from the default boot disk, executes the boot code to read the partition
-table and identify the */boot* partition, loads the kernel in memory,
-and passes control over to it. Though MBR and GPT are designed for
-different PC firmware types, their job is essentially the same: to store
+This region is referred to as the *Master Boot Record* (MBR) on the BIOS-based systems, and *GUID
+Partition Table* (GPT) on the UEFI-based systems. 
+
+At system boot, the BIOS/UEFI
+- scans all storage devices,
+- detects the presence of MBR/GPT areas, 
+- identifies the boot disks, 
+- loads the bootloader program in memory from the default boot disk, 
+- executes the boot code to read the partition table and identify the */boot* partition, 
+- loads the kernel in memory, and passes control over to it. 
+
+Though MBR and GPT are designed for different PC firmware types, their job is essentially the same: to store
 disk partition information and the boot code.
 
-**[Master]{#part0025_split_001.html#id_356 .calibre10} Boot Record
-(MBR)**
+## Master Boot Record (MBR)
 
-The MBR resides on the first sector of the boot disk. MBR was the
-preferred choice for saving partition table information on x86-based
-computers. However, with the arrival of bigger and larger hard drives, a
-newer firmware specification (UEFI) was introduced. MBR is still widely
-used, but its use is diminishing in favor of UEFI.
+-  resides on the first sector of the boot disk. MBR 
+- was the preferred choice for saving partition table information on x86-based computers. 
+- However, with the arrival of bigger and larger hard drives, a newer firmware specification (UEFI) was introduced. 
+- MBR is still widely used, but its use is diminishing in favor of UEFI.
 
-MBR allows the creation of three types of partition---*primary*,
-*extended*, and *logical*---on a single disk. Of these, only primary and
-logical can be used for data storage; the extended is a mere enclosure
-for holding the logical partitions and it is not meant for data storage.
-MBR supports the creation of up to four primary partitions numbered 1
-through 4 at a time. In case additional partitions are required, one of
-the primary partitions must be deleted and replaced with an extended
-partition to be able to add logical partitions (up to 11) within that
-extended partition. Numbering for logical partitions begins at 5. MBR
-supports a maximum of 14 usable partitions (3 primary and 11 logical) on
-a single disk.
+MBR allows the creation of three types of partition---*primary*, *extended*, and *logical*---on a single disk. 
+- primary and logical 
+	- can be used for data storage;
+- extended 
+	- a mere enclosure for holding the logical partitions and it is not meant for data storage.
+- supports the creation of up to four primary partitions numbered 1 through 4 at a time. 
+- In case additional partitions are required, one of the primary partitions must be deleted and replaced with an extended partition to be able to add logical partitions (up to 11) within that extended partition. 
+- Numbering for logical partitions begins at 5. 
+- supports a maximum of 14 usable partitions (3 primary and 11 logical) on a single disk.
+- Cannot address storage space beyond 2TB. This is due to its 32-bit nature and its 512-byte disk sector size. 
+- non-redundant; the record it contains is not replicated, resulting in an unbootable system in the event of corruption. 
+- If your disk is smaller than 2TB and you don't intend to build more than 14 usable partitions, you can use MBR without issues. 
 
-MBR cannot address storage space beyond 2TB. This is due to its 32-bit
-nature and its 512-byte disk sector size. The MBR is non-redundant; the
-record it contains is not replicated, resulting in an unbootable system
-in the event of corruption. If your disk is smaller than 2TB and you
-don't intend to build more than 14 usable partitions, you can use MBR
-without issues. For more information on MBR, refer to [Chapter
-11](#part0023_split_000.html#page_249){.calibre5} "Boot Process, GRUB2,
-and the Linux Kernel".
+## GUID Partition Table (GPT)
 
-**[GUID]{#part0025_split_001.html#id_357 .calibre10} Partition Table
-(GPT)**
+- *Globally Unique Identifiers* (GUID) *Partition Table* (GPT)  This new standard 
+- ability to construct up to 128 partitions (no concept of extended or logical partitions), 
+- utilize disks larger than 2TB, 
+- use 4KB sector size,
+- store a copy of the partition information before the end of the disk for redundancy.
+- Allows a BIOS-based system to boot from a GPT disk using the bootloader program stored in a protective MBR at the first disk sector. In addition, the 
+- UEFI firmware also supports the secure boot feature 
+	- allows signed binaries to boot. 
 
-With the increasing use of disks larger than 2TB on x86 computers, a new
-64-bit partitioning standard called *Globally Unique Identifiers* (GUID)
-*Partition Table* (GPT) was developed and integrated into the UEFI
-firmware. This new standard introduced plenty of enhancements, including
-the ability to construct up to 128 partitions (no concept of extended or
-logical partitions), utilize disks larger than 2TB, use 4KB sector size,
-and store a copy of the partition information before the end of the disk
-for redundancy.
+### Disk Partitions
 
-Moreover, this standard allows a BIOS-based system to boot from a GPT
-disk using the bootloader program stored in a protective MBR at the
-first disk sector. In addition, the UEFI firmware also supports the
-secure boot feature, which only allows signed binaries to boot. For more
-information on UEFI and GPT, refer to [Chapter
-11](#part0023_split_000.html#page_249){.calibre5} "Boot Process, GRUB2,
-and the Linux Kernel".
+- Care must be taken when adding a new partition to elude data corruption with overlapping an extant partition or wasting storage by leaving unused space between adjacent partitions. 
+- On *server1*, the disk that was allocated at the time of installation is recognized as *sda* (**s** for SATA, SAS, or SCSI device) **d**isk **a**, with the first partition identified as *sda1* and the second partition as *sda2*. Any subsequent disks added to the system will be known as *sdb*, *sdc*, *sdd*, and so on, and will use 1, 2, 3, *etc.* for partition numbering.
 
-**[Disk]{#part0025_split_001.html#id_358 .calibre10} Partitions**
+### lsblk command
 
-The space on a storage device can be sliced into partitions. Care must
-be taken when adding a new partition to elude data corruption with
-overlapping an extant partition or wasting storage by leaving unused
-space between adjacent partitions. On *server1*, the disk that was
-allocated at the time of installation is recognized as *sda* (**s** for
-**S**ATA, SAS, or SCSI device) **d**isk **a**, with the first partition
-identified as *sda1* and the second partition as *sda2*. Any subsequent
-disks added to the system will be known as *sdb*, *sdc*, *sdd*, and so
-on, and will use 1, 2, 3, *etc.* for partition numbering.
+- list disk and partition information. 
 
-RHEL offers a command called *lsblk* to list disk and partition
-information. The following graphic illustrates the current storage
-status on *server1*:
+View the current storage status on *server1*:
+`lsblk`
 
-![](images/00652.jpeg){.image2}
+Output:
+- reveals the presence of one 10GB disk, *sda*, with two partitions:
+	- *sda1* and *sda2*. 
+	- The first partition holds */boot*, and the second one is an LVM object encapsulating *root* and *swap* logical volumes within it. 
+	- Both *sda1* and *sda2* partitions occupy the entire disk capacity.
+- *sr0* represents the ISO image mounted as an optical medium.
 
-It reveals the presence of one 10GB disk, *sda*, with two partitions:
-*sda1* and *sda2*. The first partition holds */boot*, and the second one
-is an LVM object encapsulating *root* and *swap* logical volumes within
-it. Both *sda1* and *sda2* partitions occupy the entire disk capacity.
-The *sr0* represents the ISO image mounted as an optical medium.
+### fdisk and *parted* commands
+- expose disk and partitioning information. 
 
-![](images/00002.jpeg){.image} LVM is discussed at length in [Chapter
-14](#part0026_split_000.html#page_321){.calibre5} "Advanced Storage
-Partitioning".
+Run *fdisk* with -l and see what it reveals:
+`fdisk -l`
 
-There are additional tools such as *fdisk* and *parted* available that
-can be used to expose disk and partitioning information. Let's run
-*fdisk* with -l and see what it reveals:
+output:
+Top Block
+- size of *sda* in GBs, bytes, and sectors
+- type of disk label (dos) the disk has
+- disk's geometry  
+Second block 
+- two disk partitions: 
+	- sda1 as the bootable partition marked with *
+	- sda2 as an LVM  partition. It also exposes the starting and ending sector numbers, size in 1KB blocks, and type of each partition.
+- identifiers 
+	- 83 and 8e are hexadecimal values for the partition types. 
+last two blocks 
+- Specific to the LVM logical volumes that exist within the *sda2* partition. 
 
-![](images/00653.jpeg){.image2}
+### Storage Management Tools
 
-The output depicts the size of *sda* in GBs, bytes, and sectors, the
-type of disk label (dos) the disk has, and the disk's geometry in the
-top block. The second block shows the two disk partitions: *sda1* as the
-bootable partition marked with an asterisk (\*) and *sda2* as an LVM
-partition. It also exposes the starting and ending sector numbers, size
-in 1KB blocks, and type of each partition. The identifiers 83 and 8e are
-hexadecimal values for the partition types. The last two blocks are
-specific to the LVM logical volumes that exist within the *sda2*
-partition. A detailed coverage on LVM is provided in [Chapter
-14](#part0026_split_000.html#page_321){.calibre5} "Advanced Storage
-Partitioning".
+- *parted*, gdisk, VDO, LVM, and Stratis. 
+- Partitions created with a combination of most of these tools
+- toolsets can coexist on the same disk. 
 
-**[Storage]{#part0025_split_001.html#id_359 .calibre10} Management
-Tools**
+*parted* 
+- simple tool that understands both MBR and GPT formats.
 
-RHEL offers numerous tools and toolsets for storage management, and they
-include *parted*, *gdisk*, VDO, LVM, and Stratis. There are other native
-tools available in the OS, but their discussion is beyond the scope of
-this book. Partitions created with a combination of most of these tools
-and toolsets can coexist on the same disk. We look at *parted*, *gdisk*,
-and VDO in this chapter and LVM and Stratis in [Chapter
-14](#part0026_split_000.html#page_321){.calibre5} "Advanced Storage
-Partitioning".
+*gdisk*
+- designed to support the GPT format only
+- may be used as a replacement of *parted*. 
 
-*parted* is a simple tool that understands both MBR and GPT formats.
-*gdisk* is designed to support the GPT format only, and it may be used
-as a replacement of *parted*. VDO is a disk optimizer software that
-takes advantage of certain technologies to minimize the overall data
-footprint on storage devices. LVM is a feature-rich logical volume
-management solution that gives flexibility in storage management.
-Stratis capitalizes on thin provisioning to create volumes much larger
-in size than the underlying storage devices they are built upon.
+VDO
+- Disk optimizer software that takes advantage of certain technologies to minimize the overall data footprint on storage devices. 
 
-**[Thin]{#part0025_split_001.html#id_360 .calibre10} Provisioning**
+LVM
+- feature-rich logical volume management solution that gives flexibility in storage management.
 
-*Thin provisioning* technology allows for an economical allocation and
-utilization of storage space by moving arbitrary data blocks to
-contiguous locations, which results in empty block elimination. With
-thin provisioning support in VDO, LVM, and Stratis, you can create a
-*thin pool* of storage space and assign volumes much larger storage
-space than the physical capacity of the pool. Workloads begin consuming
-the actual allocated space for data writing. When a preset custom
-threshold (80%, for instance) on the actual consumption of the physical
-storage in the pool is reached, expand the pool dynamically by adding
-more physical storage to it. The volumes will automatically start
-exploiting the new space right away. The thin provisioning technique
-helps prevent spending more money upfront.
+Stratis 
+- capitalizes on thin provisioning to create volumes much larger in size than the underlying storage devices they are built upon.
 
-**[Adding]{#part0025_split_001.html#id_361 .calibre10} Storage for
-Practice**
+### Thin Provisioning
 
-This and the next two chapters have a considerable number of exercises
-that require block storage devices for practice. In [Chapter
-01](#part0013_split_000.html#page_1){.calibre5} "Local Installation"
-under "Lab Infrastructure for Practice", we mentioned that *server2*
-will have 4x250MB, 1x4GB, and 2x1GB virtual disks for storage exercises.
-We presume that *server2* was built as part of Lab 1-1 and it is now
-available for use.
+- Allows for an economical allocation and utilization of storage space by moving arbitrary data blocks to contiguous locations, which results in empty block elimination. 
+- With thin provisioning support in VDO, LVM, and Stratis, you can create a *thin pool* of storage space and assign volumes much larger storage space than the physical capacity of the pool. 
+- Workloads begin consuming the actual allocated space for data writing. 
+- When a preset custom threshold (80%, for instance) on the actual consumption of the physical storage in the pool is reached, expand the pool dynamically by adding more physical storage to it. 
+- The volumes will automatically start exploiting the new space right away.
+- helps prevent spending more money upfront.
 
-**[Exercise]{#part0025_split_001.html#id_362 .calibre10} 13-1: Add
-Required Storage to server2**
+### Adding Storage for Practice
 
-This exercise will add the required storage disks to *server2*
-(*RHEL8-VM2*) using VirtualBox.
+- Need 4x250MB, 1x4GB, and 2x1GB virtual disks for storage exercises.
 
-In this exercise, you will start VirtualBox and add 4x250MB, 1x4GB, and
-2x1GB disks to *server2* in preparation for exercises in this chapter
-and [Chapters 14](#part0026_split_000.html#page_321){.calibre5} and
-[15](#part0027_split_000.html#page_345){.calibre5}.
+### Lab: Add Required Storage to server2
 
-1[.]{.c19}Start VirtualBox on your Windows/Mac computer and highlight
-the *RHEL8-VM2* virtual machine that you created in Lab 1-1. See [Figure
-13-1](#part0025_split_001.html#id_675){.calibre5}.
+- add the required storage disks to *server2* using VirtualBox.
+- start VirtualBox and add 4x250MB, 1x4GB, and 2x1GB disks to *server2* 
 
-::: c49
-::: width_
-![](images/00654.jpeg){.calibre13}
-:::
+1. Start VirtualBox on your Windows/Mac computer and highlight server2
 
-**Figure 13-1 VirtualBox Interface**
-:::
+2. Click Settings at the top and then Storage on the window that
+pops up. Click on "Controller: SATA" to select it. 
 
-2[.]{.c19}Click Settings at the top and then Storage on the window that
-pops up. Click on "Controller: SATA" to select it. [Figure
-13-2](#part0025_split_001.html#page_306){.calibre5}.
+![](Pasted%20image%2020240413054446.png)
 
-::: c49
-::: width_
-![](images/00655.jpeg){.calibre13}
-:::
+3. Click on the right-side icon next to "Controller: SATA" to add a hard disk.
 
-**Figure 13-2 VirtualBox -- Add Storage**
-:::
+4. Follow this sequence to add a 250MB disk: Click "Create new disk", "VDI (Virtualization Disk Image)", "Dynamically allocated", and adjust the size to 250MB. Assign the disk a unique name. 
 
-3[.]{.c19}Click on the right-side icon next to "Controller: SATA" to add
-a hard disk.
+5. Click Create to create and attach the disk to the VM.
 
-4[.]{.c19}Follow this sequence to add a 250MB disk: Click "Create new
-disk", "VDI (Virtualization Disk Image)", "Dynamically allocated", and
-adjust the size to 250MB. Assign the disk a unique name. [Figure
-13-3](#part0025_split_001.html#id_676){.calibre5}.
+6. Repeat steps to add the other required disks
 
-::: c49
-::: width_
-![](images/00656.jpeg){.calibre13}
-:::
+9.  The final list of disks should look similar to what is shown
 
-**Figure 13-3 VirtualBox -- Adjust Disk Name and Size**
-:::
+10. Power on *RHEL8-VM2* to boot RHEL 8 in it.
 
-5[.]{.c19}Click Create to create and attach the disk to the VM.
+12. run `lsblk` command to verify the new storage:
+`lsblk`
 
-6[.]{.c19}Repeat steps 3 through 5 three more times to add disks of the
-same size to the VM.
-
-7[.]{.c19}Repeat steps 3 through 5 one time to add a disk of size 4GB to
-the VM.
-
-8[.]{.c19}Repeat steps 3 through 5 two times to add two disks of size
-1GB to the VM.
-
-9[.]{.c19}The final list of disks should look similar to what is shown
-in [Figure 13-4](#part0025_split_001.html#id_677){.calibre5} after the
-addition of all seven drives. Disk names may vary.
-
-::: c49
-::: width_
-![](images/00657.jpeg){.calibre13}
-:::
-
-**Figure 13-4 VirtualBox -- 7 New Disks Added**
-:::
-
-10[.]{.c23}Click OK to return to the main VirtualBox interface.
-
-11[.]{.c23}Power on *RHEL8-VM2* to boot RHEL 8 in it.
-
-12[.]{.c23}When the server is booted up, log on as *user1* and run the
-*lsblk* command to verify the new storage:
-
-![](images/00658.jpeg){.image2}
-
-13[.]{.c23}The seven new disks added to *server2* are 250MB (*sdb*,
-*sdc*, *sdd*, and *sde*), 4GB (*sdf*), and 1GB (*sdg* and *sdh*).
-
-This concludes the exercise for storage addition to *server2*.
 
 **MBR Storage Management with parted**
 
-*parted* (*partition editor*) is a popular tool in RHEL that can be used
-to partition disks. This program may be run interactively or directly
-from the command prompt. It understands and supports both MBR and GPT
-schemes, and can be used to create up to 128 partitions on a single GPT
-disk. *parted* provides an abundance of subcommands to perform disk
-management operations such as viewing, labeling, adding, naming, and
-deleting partitions. [Table
-13-1](#part0025_split_001.html#id_739){.calibre5} describes these
-subcommands in that sequence.
+*parted* (*partition editor*) is a popular tool in RHEL that can be 
+- used to partition disks. This program 
+- may be run interactively or directly from the command prompt. It
+- understands and supports both MBR and GPT schemes, and 
+- can be used to create up to 128 partitions on a single GPT disk. *parted*
+- subcommands for viewing, labeling, adding, naming, and deleting partitions. 
 
-::: c49
-  ---------------- -------------------------------------------------------------------------------------------------------------------------------------------------
-  **Subcommand**   **Description**
-  print            Displays the partition table that includes disk geometry and partition number, start and end, size, type, file system type, and relevant flags.
-  mklabel          Applies a label to the disk. Common labels are gpt and msdos.
-  mkpart           Makes a new partition
-  name             Assigns a name to a partition
-  rm               Removes the specified partition
-  ---------------- -------------------------------------------------------------------------------------------------------------------------------------------------
+|  **Subcommand** |  **Description** |
+| --- | --- |
+|  print     |       Displays the partition table that includes disk geometry and partition number, start and end, size, type, file system type, and relevant flags. |
+|  mklabel    |      Applies a label to the disk. Common labels are gpt and msdos. |
+|  mkpart      |     Makes a new partition |
+|  name    |         Assigns a name to a partition |
+|  rm      |         Removes the specified partition |
+   
 
 **[Table]{#part0025_split_001.html#id_739} 13-1 Common parted
 Subcommands**
@@ -775,6 +653,8 @@ to demonstrate the creation and deletion of volumes using this solution.
 
 1[.]{.c19}What is missing in the command *vdo create \--name vdo1
 \--vdoLogicalSize 16GB \--vdoSlabSize 128MB*?
+1[.]{.c19}The storage device (\--device) name is missing from the
+command provided.
 
 2[.]{.c19}What is the maximum number of usable partitions that can be
 created on a GPT disk?
@@ -831,8 +711,7 @@ or False?
 **[Answers]{#part0025_split_001.html#id_373 .calibre10} to Review
 Questions**
 
-1[.]{.c19}The storage device (\--device) name is missing from the
-command provided.
+
 
 2[.]{.c19}128.
 

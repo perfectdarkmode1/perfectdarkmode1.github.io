@@ -12,7 +12,7 @@
 | [[9_basic_package_management]]                                                                        | X               | X          |           |           |
 | [[10_adv_package_management]]                                                                         | X               | X          |           |           |
 | [[11_boot_grub2_kernel]]                                                                              | X               | X          |           |           |
-| [[12_sysinit_logging_tuning]]                                                                         | X               |            |           |           |
+| [[12_sysinit_logging_tuning]]                                                                         | X               | X          |           |           |
 | [13_Basic_Storage_Partitioning](13_Basic_Storage_Partitioning.md)                                     | X               |            |           |           |
 | [14_Advanced_Storage_Partitioning](14_Advanced_Storage_Partitioning.md)                               | X               |            |           |           |
 | [[15_local_file_systems_and_swap]]                                                                    | X               |            |           |           |
@@ -43,4 +43,4 @@ Buffer days
 - [x]  ✅ 2024-04-05
 - [x]  ✅ 2024-04-05
 - [x]  ✅ 2024-04-05
-- [ ] 
+- [x]  ✅ 2024-04-06
