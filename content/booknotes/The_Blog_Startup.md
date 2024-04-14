@@ -12,29 +12,20 @@ If you are wanting to blog as a business, you need a sound strategy and business
 
 ---
 
-They have a business model. They have their core or brand that is
-responsible for attracting people to them.
+Have a business model. 
 
-are two ways to approach blogging when
+Have core core or brand that is responsible for attracting people to you.
 
-you’re starting out
+Two approaches to a new blog: **content first or offer first**.
 
-**content first or offer first**
+With **content first**, you start with no product or service and create content to attract, grow, and nurture your audience. Your blog serves as a content hub to get people in the door.
 
-In **Method 1**, you start with no product or service and create
-content to attract, grow, and nurture your audience
-
-Your blog serves as a content hub
-
-to get people in the door
-
-ou get permission to be in touch with them via email.
+You get permission to be in touch with them via email.
 
 You find out what type of content makes your audience tick
 
-Once you start attracting an audience, you promote your own digital or
-affiliate products or offer the services that are most aligned with
-their needs and your skill set or expertise
+Once you start attracting an audience, you promote your own digital or affiliate products or offer the services that are most aligned with
+their needs and your skill set or expertise.
 
 In **Method 2**, you have existing products and
 
@@ -45,8 +36,7 @@ transition to Method 2
 
 You need to figure out
 
-**•** Thestrongtypes of problems you want to solve/strongfor
-your audience
+**•** The ypes of problems you want to solve for your audience.
 
 Your **Business Model** (Your pathway to making money. Because if you
 don’t monetize, you don’t

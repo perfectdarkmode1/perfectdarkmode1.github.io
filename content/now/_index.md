@@ -8,11 +8,10 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 ## What I am Reading
 
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91HfbGNPsKL._SL1500_.jpg?classes=inline&height=175px)
-![Playful Parenting](https://m.media-amazon.com/images/I/71Z8lnOQgmL._SL1200_.jpg?classes=inline&height=175px) ![The Blog Startup](https://m.media-amazon.com/images/I/61Lm6P0rPsL._SL1360_.jpg?classes=inline&height=175px) 
 
 ## Things to Learn
 
-I keep a page of projects that I want to do and tech that I want to learn [here.](perfectdarkmode1.github.io/content/now/Projects.md) Then, instead of trying to learn every new shiny thing as it pops up. I continue to focus on my current goal. 
+I keep a page of projects that I want to do and tech that I want to learn [here.](/now/Projects.md) Then, instead of trying to learn every new shiny thing as it pops up. I continue to focus on my current goal. 
 
 ## Plans for my website
 - [x] Build out basic theme and layout. 

@@ -1,3 +1,8 @@
+---
+draft: false
+title: Projects
+---
+
 Fedora SilverBlue
 Vimwiki
 Switch to Firefox?
