@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="generator" content="Relearn 6.0.0+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Describe Security Enhanced Linux and its terminology
+[ {.c37}]{.c36}Understand SELinux contexts for users, processes, files, and ports
+[ {.c37}]{.c36}Copy, move, and archive files with and without SELinux context
+[ {.c37}]{.c36}How domain transitioning works
+[ {.c37}]{.c36}Overview of SELinux Booleans
+[ {.c37}]{.c36}Query and manage SELinux via management tools
+[ {.c37}]{.c36}Modify SELinux contexts for files and ports
+[ {.c37}]{.c36}Add SELinux rules to policy database
+[ {.">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
     <meta name="twitter:description" content="This chapter describes the following major topics:
 [ {.c37}]{.c36}Describe Security Enhanced Linux and its terminology
 [ {.c37}]{.c36}Understand SELinux contexts for users, processes, files, and ports
@@ -20,7 +28,8 @@
 [ {.c37}]{.c36}Modify SELinux contexts for files and ports
 [ {.c37}]{.c36}Add SELinux rules to policy database
 [ {.">
-    <meta property="og:title" content="">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/21_security_enhanced_linux/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:description" content="This chapter describes the following major topics:
 [ {.c37}]{.c36}Describe Security Enhanced Linux and its terminology
 [ {.c37}]{.c36}Understand SELinux contexts for users, processes, files, and ports
@@ -31,26 +40,33 @@
 [ {.c37}]{.c36}Modify SELinux contexts for files and ports
 [ {.c37}]{.c36}Add SELinux rules to policy database
 [ {.">
+    <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/21_security_enhanced_linux/">
-    <meta property="article:section" content="Linux - Perfect Dark Mode">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Describe Security Enhanced Linux and its terminology
+[ {.c37}]{.c36}Understand SELinux contexts for users, processes, files, and ports
+[ {.c37}]{.c36}Copy, move, and archive files with and without SELinux context
+[ {.c37}]{.c36}How domain transitioning works
+[ {.c37}]{.c36}Overview of SELinux Booleans
+[ {.c37}]{.c36}Query and manage SELinux via management tools
+[ {.c37}]{.c36}Modify SELinux contexts for files and ports
+[ {.c37}]{.c36}Add SELinux rules to policy database
+[ {.">
+    <meta itemprop="wordCount" content="5608">
     <title></title>
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095796" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095796" rel="stylesheet">
-    <link href="/css/fonts.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095796" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095796" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095796" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095796" rel="stylesheet">
-    <link href="/css/print.css?1713095796" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1713095796" rel="stylesheet">
-    <script src="/js/url.js?1713095796"></script>
-    <script src="/js/variant.js?1713095796"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390185" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390185" rel="stylesheet">
+    <link href="/css/fonts.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390185" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390185" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390185" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390185" rel="stylesheet">
+    <link href="/css/print.css?1714390185" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1714390185"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -58,7 +74,6 @@
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -121,32 +136,33 @@
           <article class="default">
             <header class="headline">
             </header>
+
 <h1 id=""></h1>
 
 <p>This chapter describes the following major topics:</p>
-<p>[<a href="#R-image-d84cff457014b097fbf19ba0885b33d6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d84cff457014b097fbf19ba0885b33d6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Describe Security Enhanced Linux and
+<p>[<a href="#R-image-1141117975088f55eab502cd362b9030" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1141117975088f55eab502cd362b9030"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Describe Security Enhanced Linux and
 its terminology</p>
-<p>[<a href="#R-image-d1653b0d77e25cdd9190698d5e291824" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d1653b0d77e25cdd9190698d5e291824"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand SELinux contexts for
+<p>[<a href="#R-image-276ca95927f447dd0d22a8954a64656c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-276ca95927f447dd0d22a8954a64656c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand SELinux contexts for
 users, processes, files, and ports</p>
-<p>[<a href="#R-image-a6a448bc9330d07bf450d03b36e3bcce" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a6a448bc9330d07bf450d03b36e3bcce"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Copy, move, and archive files with
+<p>[<a href="#R-image-29f382b86a027546c1539cfcbf4cab28" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-29f382b86a027546c1539cfcbf4cab28"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Copy, move, and archive files with
 and without SELinux context</p>
-<p>[<a href="#R-image-12b95bc1f92d3a19a0dc9f0983e2850f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-12b95bc1f92d3a19a0dc9f0983e2850f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}How domain transitioning works</p>
-<p>[<a href="#R-image-a47026961bb2381dd902c61e19b6ee2b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a47026961bb2381dd902c61e19b6ee2b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of SELinux Booleans</p>
-<p>[<a href="#R-image-12a3e23903dc3dce37c2b9e02b3320d1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-12a3e23903dc3dce37c2b9e02b3320d1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Query and manage SELinux via
+<p>[<a href="#R-image-8bffd6c3cc1c017e939800e30f7d1fa4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8bffd6c3cc1c017e939800e30f7d1fa4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}How domain transitioning works</p>
+<p>[<a href="#R-image-65c71aadc63921117a1f757ba591532f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-65c71aadc63921117a1f757ba591532f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of SELinux Booleans</p>
+<p>[<a href="#R-image-21802517d200330c33a80b55b3b0568e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-21802517d200330c33a80b55b3b0568e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Query and manage SELinux via
 management tools</p>
-<p>[<a href="#R-image-04c591b0320298a6687072012a48fa38" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-04c591b0320298a6687072012a48fa38"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Modify SELinux contexts for files
+<p>[<a href="#R-image-cd257e17982436766a41ff497b5370ad" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cd257e17982436766a41ff497b5370ad"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Modify SELinux contexts for files
 and ports</p>
-<p>[<a href="#R-image-022e99f27b3ca10afa93170dd5681812" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-022e99f27b3ca10afa93170dd5681812"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Add SELinux rules to policy database</p>
-<p>[<a href="#R-image-a268ada531899b540c29d7709d1bb7be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a268ada531899b540c29d7709d1bb7be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}View and analyze SELinux alerts</p>
+<p>[<a href="#R-image-408b717313198e0a106ebc06f00973dc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-408b717313198e0a106ebc06f00973dc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Add SELinux rules to policy database</p>
+<p>[<a href="#R-image-9a5ccfe3318a611cf56b11f70a7e25e6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9a5ccfe3318a611cf56b11f70a7e25e6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}View and analyze SELinux alerts</p>
 <p>[RHCSA Objectives:]{.c39}</p>
 <p>[58]{#part0033_split_000.html#id_822 .calibre10}. Set enforcing and
 permissive modes for SELinux</p>
@@ -307,8 +323,8 @@ objects. Each context contains a type and a security level with subject
 and object information. Use the <em>id</em> command with the -Z option to view
 the context set on Linux users. The following example shows the context
 for <em>user1</em>:</p>
-<p><a href="#R-image-2bcb0bb3c68f82efa70f879103f5a1cb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00969.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2bcb0bb3c68f82efa70f879103f5a1cb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00969.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c3672cd47303bb2c830248a48e990691" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00969.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c3672cd47303bb2c830248a48e990691"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00969.jpeg"></a>{.image2}</p>
 <p>The output indicates that <em>user1</em> is mapped to the SELinux unconfined_u
 user, and that there are no SELinux restrictions placed on this user.
 You&rsquo;ll get the same result if you run this command for other users. This
@@ -322,12 +338,12 @@ that Linux users might inflict on the system.</p>
 <p>You can use the <em>seinfo</em> query command to list the SELinux users;
 however, the <em>setools-console</em> software package must be installed before
 doing so.</p>
-<p><a href="#R-image-3f80891c55ee3ed0f8de2bf071c860fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00970.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3f80891c55ee3ed0f8de2bf071c860fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00970.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b593f85c519fa4acb89c95157435ea0e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00970.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b593f85c519fa4acb89c95157435ea0e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00970.jpeg"></a>{.image2}</p>
 <p>The output shows the eight predefined SELinux users. You can use the
 <em>semanage</em> command to view the mapping between Linux and SELinux users:</p>
-<p><a href="#R-image-bc1ef50d021bd046646fee6cb0563fb2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00971.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-bc1ef50d021bd046646fee6cb0563fb2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00971.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5671b4dc6d87c5bbbfbf4c40920cff54" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00971.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5671b4dc6d87c5bbbfbf4c40920cff54"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00971.jpeg"></a>{.image2}</p>
 <p>The output displays Linux users in column 1 (Login Name) and SELinux
 users they are mapped to in column 2 (SELinux User). Columns 3 and 4
 show the associated security level (MLS/MCS Range), and the context for
@@ -339,8 +355,8 @@ Processes</strong></p>
 <p>You can determine the context for processes using the <em>ps</em> command with
 the -Z flag. The following example shows only the first two lines from
 the command output:</p>
-<p><a href="#R-image-5f9ae19ebfa8dbc891d8514e2140ad6b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00972.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5f9ae19ebfa8dbc891d8514e2140ad6b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00972.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-218f21e136a05b42ca6a78495367019c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00972.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-218f21e136a05b42ca6a78495367019c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00972.jpeg"></a>{.image2}</p>
 <p>In the output, the subject (system_u) is a SELinux username (mapped to
 Linux user <em>root</em>), object is system_r, domain (init_t) reveals the type
 of protection applied to the process, and level of security (s0). Any
@@ -349,8 +365,8 @@ process that is unprotected will run in the unconfined_t domain.</p>
 <p>You can spot the context for files and directories. To this end, use the
 <em>ls</em> command with the -Z switch. The following shows the four attributes
 set on the **etc<em>passwd</em> file:</p>
-<p><a href="#R-image-ef3d76d66d7ba6bfdc4868ce7ebe6c8e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00973.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ef3d76d66d7ba6bfdc4868ce7ebe6c8e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00973.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-e315b88441cf0fefeac96458c25fec29" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00973.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e315b88441cf0fefeac96458c25fec29"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00973.jpeg"></a>{.image2}</p>
 <p>The outcome indicates the subject (system_u), object (object_r), type
 (passwd_file_t), and security level (s0) for the <em>passwd</em> file. Contexts
 for system-installed and user-created files are stored in the
@@ -386,8 +402,8 @@ Ports</strong></p>
 <p>SELinux contexts define security attributes for network ports, which can
 be viewed with the <em>semanage</em> command . The following illustrates a few
 entries from the output of this command:</p>
-<p><a href="#R-image-d2660ab8d6b85cb879bc25efc82814fc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00974.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d2660ab8d6b85cb879bc25efc82814fc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00974.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-931fe50c6c5aa13e52ef2e6abd3f40e1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00974.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-931fe50c6c5aa13e52ef2e6abd3f40e1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00974.jpeg"></a>{.image2}</p>
 <p>The output is displayed in three columns. Column 1 shows the SELinux
 type, column 2 depicts the protocol, and column 3 indicates the port
 number(s). By default, SELinux allows services to listen on a restricted
@@ -403,13 +419,13 @@ happens when a Linux user attempts to change their password using the
 **usr<em>bin/passwd</em> command.</p>
 <p>The <em>passwd</em> command is labeled with the passwd_exec_t type, which can
 be confirmed as follows:</p>
-<p><a href="#R-image-9f8da30fe2cf08d248a4a4df5c5cd120" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00975.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9f8da30fe2cf08d248a4a4df5c5cd120"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00975.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-1983ceddf5fb7099aeec9d113d0b969b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00975.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1983ceddf5fb7099aeec9d113d0b969b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00975.jpeg"></a>{.image2}</p>
 <p>The <em>passwd</em> command requires access to the **etc<em>shadow</em> file in order
 to modify a user password. The <em>shadow</em> file has a different type set on
 it (shadow_t):</p>
-<p><a href="#R-image-000a982b2cf8f06e5f1bd7a300f5de6e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00976.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-000a982b2cf8f06e5f1bd7a300f5de6e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00976.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f5e5534741097236bf4a09711bcfdf38" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00976.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f5e5534741097236bf4a09711bcfdf38"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00976.jpeg"></a>{.image2}</p>
 <p>The SELinux policy has rules that specifically allow processes running
 in domain passwd_t to read and modify the files with type shadow_t, and
 allow them entrypoint permission into domain passwd_exec_t. This rule
@@ -417,11 +433,11 @@ enables the user&rsquo;s shell process executing the <em>passwd</em> command to
 switch into the passwd_t domain and update the <em>shadow</em> file~.~</p>
 <p>Open two terminal windows. In window 1, issue the <em>passwd</em> command as
 <em>user1</em> and wait at the prompt:</p>
-<p><a href="#R-image-c35ae9ff535900cd6d9dcb638a3a0933" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00977.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c35ae9ff535900cd6d9dcb638a3a0933"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00977.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-806fcb56cd1488def723477567fb52b5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00977.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-806fcb56cd1488def723477567fb52b5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00977.jpeg"></a>{.image2}</p>
 <p>In window 2, run the <em>ps</em> command:</p>
-<p><a href="#R-image-bc35bef9be8f4a5b823c0bb8b7749f92" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00978.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-bc35bef9be8f4a5b823c0bb8b7749f92"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00978.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0d681b401d83e7546ab515f4b4d8979f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00978.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0d681b401d83e7546ab515f4b4d8979f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00978.jpeg"></a>{.image2}</p>
 <p>As you can see, the <em>passwd</em> command (process) transitioned into the
 passwd_t domain to change the user password. A process running in this
 domain is allowed to modify the content of the **etc<em>shadow</em> file.</p>
@@ -434,8 +450,8 @@ to enable anonymous users to upload files. This privilege can be revoked
 by turning this Boolean off. Boolean values are stored in virtual files
 located in the **sys<em>fs/selinux/booleans</em> directory. The filenames match
 the Boolean names. A sample listing of this directory is provided below:</p>
-<p><a href="#R-image-cba81f738e1f91d22163c6acbec31132" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00979.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-cba81f738e1f91d22163c6acbec31132"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00979.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9635e652e78b96e50f091b0d2bd6453d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00979.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9635e652e78b96e50f091b0d2bd6453d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00979.jpeg"></a>{.image2}</p>
 <p>On a typical server, you&rsquo;ll see hundreds of Boolean files in the output.</p>
 <p>The manual pages of the Booleans are available through the
 <em>selinux-policy-doc</em> package. Once installed, use the -K option with the
@@ -503,8 +519,8 @@ SELinux Operational State</strong></p>
 state, and sets its default type is the <em>config</em> file located in the
 **etc<em>selinux</em> directory. The default content of the file are displayed
 below:</p>
-<p><a href="#R-image-2b7fc9ba37ddf8f680bce80a9aeab08b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00980.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2b7fc9ba37ddf8f680bce80a9aeab08b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00980.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f2442ecf3e7a4fe9fb4a678982ad87fb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00980.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f2442ecf3e7a4fe9fb4a678982ad87fb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00980.jpeg"></a>{.image2}</p>
 <p>The SELINUX directive in the file sets the activation mode for SELinux.
 <em>Enforcing</em> activates it and allows or denies actions based on the
 policy rules. <em>Permissive</em> activates SELinux, but permits all actions.
@@ -514,15 +530,15 @@ is to completely turn SELinux off. When running in enforcing mode, the
 SELINUXTYPE directive dictates the type of policy to be enforced. The
 default SELinux type is targeted.</p>
 <p>Issue the <em>getenforce</em> command to determine the current operating mode:</p>
-<p><a href="#R-image-d5ad495a2be3c46c0beeff95a36d8edc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00981.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d5ad495a2be3c46c0beeff95a36d8edc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00981.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-67e3632a3923d4170cc23d8a965eb953" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00981.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-67e3632a3923d4170cc23d8a965eb953"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00981.jpeg"></a>{.image2}</p>
 <p>The output returns enforcing as the current active policy. You may flip
 the state to permissive using the <em>setenforce</em> command, and verify the
 change with <em>getenforce</em>:</p>
-<p><a href="#R-image-24cc0a6ee030a7cd809d967e06819a4f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00982.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-24cc0a6ee030a7cd809d967e06819a4f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00982.jpeg"></a>{.image2}</p>
-<p><a href="#R-image-0628c897340434955249e6cd3a35d3b9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0628c897340434955249e6cd3a35d3b9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} You may alternatively use a &ldquo;0&rdquo; for
+<p><a href="#R-image-b7bd9f4f2f46cdf97f0101e08201a0f0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00982.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b7bd9f4f2f46cdf97f0101e08201a0f0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00982.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-1738a875ab7c96be9d6d77c517848b65" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1738a875ab7c96be9d6d77c517848b65"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} You may alternatively use a &ldquo;0&rdquo; for
 permissive and a &ldquo;1&rdquo; for enforcing.</p>
 <p>The change takes effect at once; however, it will be lost at the next
 system reboot. To make it persistent, edit the **etc<em>selinux/config</em>
@@ -540,8 +556,8 @@ through the process of relabeling all the files.</p>
 <p>The current runtime status of SELinux can be viewed with the <em>sestatus</em>
 command. This command also displays the location of principal
 directories, the policy in effect, and the activation mode.</p>
-<p><a href="#R-image-db9a75fbd62328fa74a03b1bcdd529de" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00983.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-db9a75fbd62328fa74a03b1bcdd529de"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00983.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-dbb1f0c32874c2ae160aa7efdb87f747" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00983.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dbb1f0c32874c2ae160aa7efdb87f747"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00983.jpeg"></a>{.image2}</p>
 <p>The output reveals that SELinux is enabled (SELinux status), and it is
 running in permissive mode (Current mode) with the targeted policy in
 effect (Loaded policy name). It also indicates the current mode setting
@@ -551,11 +567,11 @@ information.</p>
 security contexts set on files and processes, as listed in the
 **etc<em>sestatus.conf</em> file. The default content of this file is shown
 below:</p>
-<p><a href="#R-image-b2a37634aaba18a0d51b9b95bd877fd6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00984.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b2a37634aaba18a0d51b9b95bd877fd6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00984.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-7ff0812b45800923f56548fc8b8b03be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00984.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7ff0812b45800923f56548fc8b8b03be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00984.jpeg"></a>{.image2}</p>
 <p>Run the <em>sestatus</em> command with -v:</p>
-<p><a href="#R-image-9ed66651a2d593a1d425f796146a299d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00985.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ed66651a2d593a1d425f796146a299d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00985.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-025afceabe275a517b3cd60683aaf867" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00985.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-025afceabe275a517b3cd60683aaf867"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00985.jpeg"></a>{.image2}</p>
 <p>With -v included, the command reports the contexts for the current
 process (Current context) and the <em>init</em> (<em>systemd</em>) process (Init
 context) under Process Contexts. It also reveals the file contexts for
@@ -569,20 +585,20 @@ a file <em>sefile1</em> under <em>sedir1</em>. You will check the context on the
 directory and file. You will change the SELinux user and type to user_u
 and public_content_t on both and verify.</p>
 <p>1[.]{.c19}Create the hierarchy <em>sedir1/sefile1</em> under <em>/tmp</em>:</p>
-<p><a href="#R-image-0bafadade2960b19a8417b865b09826e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00986.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0bafadade2960b19a8417b865b09826e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00986.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8caf82e25f3fd88553d5b5309544e97c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00986.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8caf82e25f3fd88553d5b5309544e97c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00986.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Determine the context on the new directory and file:</p>
-<p><a href="#R-image-0d8db061b47df7d2891cfe51112b6787" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00987.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0d8db061b47df7d2891cfe51112b6787"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00987.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-53161ca1283da258a00ee9dfea56c1e0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00987.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-53161ca1283da258a00ee9dfea56c1e0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00987.jpeg"></a>{.image2}</p>
 <p>The directory and the file get unconfined_u and user_tmp_t as the
 SELinux user and type.</p>
 <p>3[.]{.c19}Modify the SELinux user (-u) on the directory to user_u and
 type (-t) to public_content_t recursively (-R) with the <em>chcon</em> command:</p>
-<p><a href="#R-image-f91a9c0a61a92a5cb8dd2e0084c18e3d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00988.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f91a9c0a61a92a5cb8dd2e0084c18e3d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00988.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8601a49640b638640d633466b25810ad" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00988.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8601a49640b638640d633466b25810ad"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00988.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Validate the new context:</p>
-<p><a href="#R-image-00b306805fbe2d14aab45146b8b31272" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00989.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-00b306805fbe2d14aab45146b8b31272"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00989.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c792ce0a5b1ce800d32312608cd49ead" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00989.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c792ce0a5b1ce800d32312608cd49ead"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00989.jpeg"></a>{.image2}</p>
 <p>This concludes the exercise.</p>
 <p><strong>[Exercise]{#part0033_split_001.html#id_553 .calibre10} 21-2: Add and
 Apply File Context</strong></p>
@@ -596,14 +612,14 @@ change the context on the directory to some random values. You will
 restore the default context from the policy database back to the
 directory recursively.</p>
 <p>1[.]{.c19}Determine the current context:</p>
-<p><a href="#R-image-93ae92a9c06f301b3fd34b3856f222f0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00990.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-93ae92a9c06f301b3fd34b3856f222f0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00990.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-76a51b7d287987ab02bc6ed46eaa1f58" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00990.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-76a51b7d287987ab02bc6ed46eaa1f58"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00990.jpeg"></a>{.image2}</p>
 <p>The output indicates the current SELinux user (user_u) and type
 (public_content_t) set on the directory and the file.</p>
 <p>2[.]{.c19}Add (-a) the directory recursively to the policy database
 using the <em>semanage</em> command with the <em>fcontext</em> subcommand:</p>
-<p><a href="#R-image-88a559b199d3e6599ff08ed3b8156f7a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00991.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-88a559b199d3e6599ff08ed3b8156f7a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00991.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5fba7f602aa386b234677d78300c6f95" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00991.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5fba7f602aa386b234677d78300c6f95"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00991.jpeg"></a>{.image2}</p>
 <p>The regular expression (/.*)? instructs the command to include all
 files and subdirectories under **tmp<em>sedir1</em>. This expression is needed
 only if recursion is required.</p>
@@ -612,20 +628,20 @@ only if recursion is required.</p>
 use the <em>cat</em> command to view the content.</p>
 <p>3[.]{.c19}Validate the addition by listing (-l) the recent changes (-C)
 in the policy database:</p>
-<p><a href="#R-image-7bacbb22389c52b18e0543ed8f836259" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00992.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7bacbb22389c52b18e0543ed8f836259"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00992.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a5cccff879fdec18f9a5ee845f99b1de" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00992.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a5cccff879fdec18f9a5ee845f99b1de"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00992.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Change the current context on <em>sedir1</em> to something random
 (staff_u/etc_t) with the <em>chcon</em> command:</p>
-<p><a href="#R-image-db206577e531dfc725abf38bf1a2e19b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00993.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-db206577e531dfc725abf38bf1a2e19b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00993.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-7521c30a72f1da4c006737810220b312" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00993.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7521c30a72f1da4c006737810220b312"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00993.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}The security context is changed successfully. Confirm with the
 <em>ls</em> command:</p>
-<p><a href="#R-image-c9b9cfc4d62e062460ee608385dd6aa1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00994.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c9b9cfc4d62e062460ee608385dd6aa1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00994.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-1b8de87137191c56403a9973b56a7162" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00994.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1b8de87137191c56403a9973b56a7162"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00994.jpeg"></a>{.image2}</p>
 <p>6[.]{.c19}Reinstate the context on the <em>sedir1</em> directory recursively
 (-R) as stored in the policy database using the <em>restorecon</em> command:</p>
-<p><a href="#R-image-a2bf6d36d8cd1609d78d3741222e2d00" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00995.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a2bf6d36d8cd1609d78d3741222e2d00"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00995.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f295771df2f11fddf45d145af942d99a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00995.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f295771df2f11fddf45d145af942d99a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00995.jpeg"></a>{.image2}</p>
 <p>The output confirms the restoration of the default context on the
 directory and the file.</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} Use the combination of semanage and restorecon
@@ -641,21 +657,21 @@ addition. You will then remove the port from the policy and verify the
 deletion.</p>
 <p>1[.]{.c19}List (-l) the ports for the <em>httpd</em> service as defined in the
 SELinux policy database:</p>
-<p><a href="#R-image-7c02eca3f6d840d346057f9ed2bce61b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00996.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7c02eca3f6d840d346057f9ed2bce61b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00996.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-706e356f81a174a2aff3c3d684cbed7a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00996.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-706e356f81a174a2aff3c3d684cbed7a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00996.jpeg"></a>{.image2}</p>
 <p>The output reveals eight network ports the <em>httpd</em> process is currently
 allowed to listen on.</p>
 <p>2[.]{.c19}Add (-a) port 8010 with type (-t) http_port_t and protocol
 (-p) tcp to the policy:</p>
-<p><a href="#R-image-a29ac4938313cc189ffdb1e42170b034" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00997.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a29ac4938313cc189ffdb1e42170b034"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00997.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-13050b2a298f30c9d1e3215d0cbe3938" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00997.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-13050b2a298f30c9d1e3215d0cbe3938"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00997.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Confirm the addition:</p>
-<p><a href="#R-image-7d2574393ea917cef664fb106a20ecf5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00998.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7d2574393ea917cef664fb106a20ecf5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00998.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-33b6b63825c415fabf7a8164356ca531" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00998.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-33b6b63825c415fabf7a8164356ca531"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00998.jpeg"></a>{.image2}</p>
 <p>The new network port is visible in the outcome.</p>
 <p>4[.]{.c19}Delete (-d) port 8010 from the policy and confirm:</p>
-<p><a href="#R-image-12acc3c9bdbbeb9556765340e651d1ca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00999.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-12acc3c9bdbbeb9556765340e651d1ca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00999.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-dfe3ba5cb8f88b6fd6f3729680bfa52d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00999.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dfe3ba5cb8f88b6fd6f3729680bfa52d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00999.jpeg"></a>{.image2}</p>
 <p>The port is removed from the policy database.</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} Any non-standard port you want to use for any
 service, make certain to add it to the SELinux policy database with the
@@ -671,22 +687,22 @@ se<em>file2</em> from **etc<em>default</em>, and copy it again to the same
 destination, ensuring that the target file receives the source file&rsquo;s
 context.</p>
 <p>1[.]{.c19}Create file <em>sefile2</em> under <em>/tmp</em> and show context:</p>
-<p><a href="#R-image-ddee0b40545ad94f179be9f9cf653bfe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01000.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ddee0b40545ad94f179be9f9cf653bfe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01000.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f834d486fc6b981ffe152892777e94c1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01000.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f834d486fc6b981ffe152892777e94c1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01000.jpeg"></a>{.image2}</p>
 <p>The context on the file is unconfined_u, object_r, and user_tmp_t.</p>
 <p>2[.]{.c19}Copy this file to the **etc<em>default</em> directory, and check the
 context again:</p>
-<p><a href="#R-image-e03e804fe3542bb1891db51a3c27a7b9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e03e804fe3542bb1891db51a3c27a7b9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01001.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-195255b543b00595ac70500e7bafdb64" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-195255b543b00595ac70500e7bafdb64"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01001.jpeg"></a>{.image2}</p>
 <p>The target file (**etc<em>default/sefile2</em>) received the default context of
 the destination directory (**etc<em>default</em>).</p>
 <p>3[.]{.c19}Erase the **etc<em>default/sefile2</em> file, and copy it again with
 the --preserve=context option:</p>
-<p><a href="#R-image-a4e34304e4c2f272a722711bce695ccc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4e34304e4c2f272a722711bce695ccc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01002.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-d679f6cc4a88f2d7789e99009dbb129b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d679f6cc4a88f2d7789e99009dbb129b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01002.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}List the file to view the context:</p>
-<p><a href="#R-image-57f0d3df0d50a1110ddea5810da7dba6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01003.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-57f0d3df0d50a1110ddea5810da7dba6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01003.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-003083455a92cdd91113d2e5c5177ab3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01003.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-003083455a92cdd91113d2e5c5177ab3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01003.jpeg"></a>{.image2}</p>
 <p>The original context (user_tmp_t) is preserved on the target file after
 the copy operation has finished.</p>
 <p><strong>[Exercise]{#part0033_split_001.html#id_555 .calibre10} 21-5: View and
@@ -700,25 +716,25 @@ back up.</p>
 <p>1[.]{.c19}Display the current setting of the Boolean nfs_export_all_rw
 using three different commands&mdash;<em>getsebool</em>, <em>sestatus</em>, and
 <em>semanage</em>:</p>
-<p><a href="#R-image-2cfefe1d7f0dfdda9b8c69ad949febe8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01004.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2cfefe1d7f0dfdda9b8c69ad949febe8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01004.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-95d05689aeb2eb08ab85a774dc90d302" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01004.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-95d05689aeb2eb08ab85a774dc90d302"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01004.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Turn off the value of nfs_export_all_rw using the <em>setsebool</em>
 command by simply furnishing &ldquo;off&rdquo; or &ldquo;0&rdquo; with it and confirm:</p>
-<p><a href="#R-image-6eb8f1d509266d86a3518165a75cf8ac" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01005.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6eb8f1d509266d86a3518165a75cf8ac"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01005.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-ff69fa237dd4223f19eecd78d283bf2c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01005.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ff69fa237dd4223f19eecd78d283bf2c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01005.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Reboot the system and rerun the <em>getsebool</em> command to check
 the Boolean state:</p>
-<p><a href="#R-image-a84098b3251453e08987261ca516521c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01006.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a84098b3251453e08987261ca516521c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01006.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f2258b7fb25ac7ea104efb17730a2b1d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01006.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f2258b7fb25ac7ea104efb17730a2b1d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01006.jpeg"></a>{.image2}</p>
 <p>The value reverted to its previous state.</p>
 <p>4[.]{.c19}Set the value of the Boolean persistently (-P or -m as needed)
 using either of the following:</p>
-<p><a href="#R-image-1f3d5101f688bfc42de53e37baa3aa11" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01007.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f3d5101f688bfc42de53e37baa3aa11"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01007.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5a98e0f5eecf8f30ad7b02df25d1791b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01007.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5a98e0f5eecf8f30ad7b02df25d1791b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01007.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Validate the new value using the <em>getsebool</em>, <em>sestatus</em>, or
 <em>semanage</em> command:</p>
-<p><a href="#R-image-1140d07d5069286f8cfec38abdf5a4eb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01008.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1140d07d5069286f8cfec38abdf5a4eb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01008.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6aa075cf9058fd4ad872417d4242be21" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01008.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6aa075cf9058fd4ad872417d4242be21"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01008.jpeg"></a>{.image2}</p>
 <p>The command outputs confirm the permanent change.</p>
 <p><strong>[Monitoring]{#part0033_split_001.html#id_556 .calibre10} and Analyzing
 SELinux Violations</strong></p>
@@ -730,8 +746,8 @@ the **var<em>log/messages</em> file via the <em>rsyslog</em> daemon in the absen
 of an action, and identifies them with a type tag AVC (<em>Access Vector
 Cache</em>) in the <em>audit.log</em> file. It also writes the rejection in the
 <em>messages</em> file with a message ID, and how to view the message details.</p>
-<p><a href="#R-image-be25143723967e29658dce248b765885" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-be25143723967e29658dce248b765885"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} If it works with SELinux in permissive
+<p><a href="#R-image-f6facf7eafce1a0a076827c0de345445" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f6facf7eafce1a0a076827c0de345445"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} If it works with SELinux in permissive
 mode and not in enforcing, something needs to be adjusted in SELinux.</p>
 <p>SELinux denial messages are analyzed and the audit data is examined to
 identify the potential cause of the rejection. The results of the
@@ -747,14 +763,14 @@ interfaces. The server and client components are part of the
 system prior to using this service.</p>
 <p>The following shows a sample allowed record in raw format from the
 **var<em>log/audit/audit.log</em> file:</p>
-<p><a href="#R-image-2e8e24e9cc98d704328fe934da17bb78" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01009.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2e8e24e9cc98d704328fe934da17bb78"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01009.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8f453a0d9cccbec5d3b3c452565af7eb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01009.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8f453a0d9cccbec5d3b3c452565af7eb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01009.jpeg"></a>{.image2}</p>
 <p>The record shows a successful <em>user1</em> attempt to <em>su</em> into the <em>root</em>
 user account on <em>server10</em>.</p>
 <p>The following is a sample denial record from the same file in raw
 format:</p>
-<p><a href="#R-image-6bd9f3a6dcb9a5b52df4e4e4627909da" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01010.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6bd9f3a6dcb9a5b52df4e4e4627909da"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01010.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-494b50c96dfeff86bd7a072539b8a647" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01010.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-494b50c96dfeff86bd7a072539b8a647"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01010.jpeg"></a>{.image2}</p>
 <p>The message has the AVC type, and it is related to the <em>passwd</em> command
 (comm) with source context (scontext)
 &ldquo;unconfined_u:unconfined_r:passwd_t:s0-s0:c0.c1023&rdquo;, and the <em>nshadow</em>
@@ -767,8 +783,8 @@ updating the user&rsquo;s password.</p>
 <p>You can also use the <em>sealert</em> command to analyze (-a) all AVC records
 in the <em>audit.log</em> file. This command produces a formatted report with
 all relevant details:</p>
-<p><a href="#R-image-fb07477f713ecf1a321e5560be84dd81" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01011.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fb07477f713ecf1a321e5560be84dd81"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01011.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6430c344c37d198cc8f59a6f9458da50" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01011.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6430c344c37d198cc8f59a6f9458da50"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01011.jpeg"></a>{.image2}</p>
 <p>The above SELinux denial was due to the fact that I produced the
 scenario by changing the SELinux type on the <em>shadow</em> file to something
 random (etc_t). I then issued the <em>passwd</em> command as <em>user1</em> to modify
@@ -916,21 +932,24 @@ new value with the <em>getsebool</em>, <em>semanage</em>, or <em>sestatus</em> c
 Perfect Dark Mode
 
         </div>
-        <div class="searchbox default-animation">
-          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
-          <label class="a11y-only" for="R-search-by">Search</label>
-          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
-          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
-        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1713095796" defer></script>
-        <script src="/js/search.js?1713095796" defer></script>
+        <script src="/js/auto-complete.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1714390185" defer></script>
+        <script src="/js/search.js?1714390185" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1126,28 +1145,14 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1713095796" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095796" defer></script>
+    <script src="/js/clipboard.min.js?1714390185" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390185" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -1157,20 +1162,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095796" defer></script>
-    <script src="/js/js-yaml.min.js?1713095796" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390185" defer></script>
+    <script src="/js/js-yaml.min.js?1714390185" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095796" defer></script>
+    <script src="/js/theme.js?1714390185" defer></script>
   </body>
 </html>

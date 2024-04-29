@@ -126,6 +126,7 @@ Outliers: The Story of Success
 The 80/20 Principle: The Secret to Achieving More with Less
 The Prophet
 DMT: The Spirit Molecule: A Doctor's Revolutionary Research into the Biology of Near-Death and Mystical Experiences
+The 12 week Year
 ### Dog Training
 
 The Power of Positive Dog Training
@@ -167,6 +168,7 @@ Lying
 The Moral Landscape: How Science Can Determine Human Values
 Islam and the Future of Tolerance: A Dialogue]
 Free Will
+A guide to the Good Life: The Ancient Art of Stoic Joy
 
 ## Books I want to Read
 

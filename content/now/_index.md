@@ -1,6 +1,6 @@
-
 This is a page to help me stay focused and keep track of what I am doing. It is also to show others what I am currently working on and thinking about. Credit goes to Derrick Sivers for starting a "Now" page movement. Read about "Now" pages [here](https://nownownow.com/about).
 
+Updated: 04-29-2024
 ## Career
 
 I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goal is to take the test at the end of June 2024. Follow my progress here: [RHCSA_Tracker](/linux/rhcsa/RHCSA_Tracker.md)

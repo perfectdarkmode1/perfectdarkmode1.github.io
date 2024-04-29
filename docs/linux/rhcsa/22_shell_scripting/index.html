@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="generator" content="Relearn 6.0.0+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Overview of shell scripts
+[ {.c37}]{.c36}Write scripts to display basic system information, employ shell and environment variables, use command substitution, and manipulate special and positional parameters
+[ {.c37}]{.c36}Execute and debug scripts
+[ {.c37}]{.c36}Know exit codes and test conditions
+[ {.c37}]{.c36}Understand logical constructs: if-then-fi, if-then-else-fi, and if-then-elif-fi
+[ {.c37}]{.c36}Write scripts using logical statements
+[ {.c37}]{.c36}Know arithmetic test conditions
+[ {.c37}]{.c36}Comprehend looping construct: for-do-done">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
     <meta name="twitter:description" content="This chapter describes the following major topics:
 [ {.c37}]{.c36}Overview of shell scripts
 [ {.c37}]{.c36}Write scripts to display basic system information, employ shell and environment variables, use command substitution, and manipulate special and positional parameters
@@ -19,7 +26,8 @@
 [ {.c37}]{.c36}Write scripts using logical statements
 [ {.c37}]{.c36}Know arithmetic test conditions
 [ {.c37}]{.c36}Comprehend looping construct: for-do-done">
-    <meta property="og:title" content="">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/22_shell_scripting/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:description" content="This chapter describes the following major topics:
 [ {.c37}]{.c36}Overview of shell scripts
 [ {.c37}]{.c36}Write scripts to display basic system information, employ shell and environment variables, use command substitution, and manipulate special and positional parameters
@@ -29,26 +37,32 @@
 [ {.c37}]{.c36}Write scripts using logical statements
 [ {.c37}]{.c36}Know arithmetic test conditions
 [ {.c37}]{.c36}Comprehend looping construct: for-do-done">
+    <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/22_shell_scripting/">
-    <meta property="article:section" content="Linux - Perfect Dark Mode">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="This chapter describes the following major topics:
+[ {.c37}]{.c36}Overview of shell scripts
+[ {.c37}]{.c36}Write scripts to display basic system information, employ shell and environment variables, use command substitution, and manipulate special and positional parameters
+[ {.c37}]{.c36}Execute and debug scripts
+[ {.c37}]{.c36}Know exit codes and test conditions
+[ {.c37}]{.c36}Understand logical constructs: if-then-fi, if-then-else-fi, and if-then-elif-fi
+[ {.c37}]{.c36}Write scripts using logical statements
+[ {.c37}]{.c36}Know arithmetic test conditions
+[ {.c37}]{.c36}Comprehend looping construct: for-do-done">
+    <meta itemprop="wordCount" content="4426">
     <title></title>
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095796" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095796" rel="stylesheet">
-    <link href="/css/fonts.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095796" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095796" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095796" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095796" rel="stylesheet">
-    <link href="/css/print.css?1713095796" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1713095796" rel="stylesheet">
-    <script src="/js/url.js?1713095796"></script>
-    <script src="/js/variant.js?1713095796"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390185" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390185" rel="stylesheet">
+    <link href="/css/fonts.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390185" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390185" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390185" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390185" rel="stylesheet">
+    <link href="/css/print.css?1714390185" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1714390185"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -56,7 +70,6 @@
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -119,32 +132,33 @@
           <article class="default">
             <header class="headline">
             </header>
+
 <h1 id=""></h1>
 
 <p>This chapter describes the following major topics:</p>
-<p>[<a href="#R-image-f670e0e27bc35784f2a6375459467838" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f670e0e27bc35784f2a6375459467838"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of shell scripts</p>
-<p>[<a href="#R-image-60784ffe4a461411754254e7b4675e99" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-60784ffe4a461411754254e7b4675e99"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts to display basic
+<p>[<a href="#R-image-ae48bfa3e3edf0a0602f8dd567da3426" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ae48bfa3e3edf0a0602f8dd567da3426"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Overview of shell scripts</p>
+<p>[<a href="#R-image-c1857435e0a6d3ead18059bad547e4b7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c1857435e0a6d3ead18059bad547e4b7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts to display basic
 system information, employ shell and environment variables, use command
 substitution, and manipulate special and positional parameters</p>
-<p>[<a href="#R-image-4ab2dd1c265641c02759309f774774f8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4ab2dd1c265641c02759309f774774f8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Execute and debug scripts</p>
-<p>[<a href="#R-image-2bdecebd8a958ec1cd6b9aa7239e6b28" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2bdecebd8a958ec1cd6b9aa7239e6b28"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know exit codes and test conditions</p>
-<p>[<a href="#R-image-1f35c23e5e33821025f37846b974242f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f35c23e5e33821025f37846b974242f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand logical constructs:
+<p>[<a href="#R-image-f9d5568f1338511dfd10835c574e9390" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f9d5568f1338511dfd10835c574e9390"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Execute and debug scripts</p>
+<p>[<a href="#R-image-e234ca0ebdb0453d6c6d35caea91bdcb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e234ca0ebdb0453d6c6d35caea91bdcb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know exit codes and test conditions</p>
+<p>[<a href="#R-image-d1c2b598a820632b2705cc137da477c5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d1c2b598a820632b2705cc137da477c5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand logical constructs:
 if-then-fi, if-then-else-fi, and if-then-elif-fi</p>
-<p>[<a href="#R-image-15736ef78d7eeae8b1033603830cfa18" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-15736ef78d7eeae8b1033603830cfa18"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts using logical
+<p>[<a href="#R-image-9ca37a56ea847f8a7f8cee30b851af24" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ca37a56ea847f8a7f8cee30b851af24"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts using logical
 statements</p>
-<p>[<a href="#R-image-8e5588b6a6322b7eedffbd3cea6ee6c0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e5588b6a6322b7eedffbd3cea6ee6c0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know arithmetic test conditions</p>
-<p>[<a href="#R-image-040832628a519ab091f40819204e96cd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-040832628a519ab091f40819204e96cd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Comprehend looping construct:
+<p>[<a href="#R-image-9e6f17c0c9126acf4c094549d4104329" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9e6f17c0c9126acf4c094549d4104329"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know arithmetic test conditions</p>
+<p>[<a href="#R-image-06d91c364de35e67957a285db2bb185f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06d91c364de35e67957a285db2bb185f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Comprehend looping construct:
 for-do-done</p>
-<p>[<a href="#R-image-8628e0056be294d07a597937b18a8dcb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8628e0056be294d07a597937b18a8dcb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts using looping
+<p>[<a href="#R-image-2eba156e87240fffb66c0bc0de0b4544" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2eba156e87240fffb66c0bc0de0b4544"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Write scripts using looping
 statements</p>
 <p>[RHCSA Objectives:]{.c39}</p>
 <p>[12]{#part0034_split_000.html#id_778 .calibre10}. Conditionally execute
@@ -202,10 +216,10 @@ System Information</strong></p>
 **usr<em>local/bin</em> directory and examine it line by line. Use the <em>vim</em>
 editor with <em>sudo</em> to write the script. Type what you see below. Do not
 enter the line numbers, as they are used for explanation and reference.</p>
-<p><a href="#R-image-e38e41cdc1acbe5a0bf8e1d48d3948db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01012.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e38e41cdc1acbe5a0bf8e1d48d3948db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01012.jpeg"></a>{.image2}</p>
-<p><a href="#R-image-0bdb74b07fd55fab98d101c5f8237772" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0bdb74b07fd55fab98d101c5f8237772"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Within vim, press the ESC key and then
+<p><a href="#R-image-ac7cfd5324bdcc71bb0c8357b64e4f24" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01012.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ac7cfd5324bdcc71bb0c8357b64e4f24"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01012.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-21094514094237827f8006ca03ef9f13" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-21094514094237827f8006ca03ef9f13"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Within vim, press the ESC key and then
 type :set nu to view line numbers associated with each line entry.</p>
 <p>In this script, comments and commands are used as follows:</p>
 <p>The first line indicates the shell that will run the commands in the
@@ -237,21 +251,21 @@ in:&rdquo; on the screen.</p>
 users.</p>
 <p>Here is the listing of the <em>sys_info.sh</em> file created in the
 **usr<em>local/bin</em> directory:</p>
-<p><a href="#R-image-853dfae770e7b491ee8bcab90e6bb1c2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01013.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-853dfae770e7b491ee8bcab90e6bb1c2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01013.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bddc724054390ff839c35926ade315a2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01013.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bddc724054390ff839c35926ade315a2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01013.jpeg"></a>{.image2}</p>
 <p><strong>[Executing]{#part0034_split_001.html#id_567 .calibre10} a Script</strong></p>
 <p>The script created above does not have the execute permission bit since
 the default umask for the <em>root</em> user is set to 0022, which allows
 read/write access to the owner, and read-only access to the rest. You
 will need to run the <em>chmod</em> command on the file and add an execute bit
 for everyone:</p>
-<p><a href="#R-image-2ad32135fdfb9649c2411852a3668265" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01014.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2ad32135fdfb9649c2411852a3668265"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01014.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5f1d76a947d5dc96eda2ba0b1529cb3b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01014.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5f1d76a947d5dc96eda2ba0b1529cb3b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01014.jpeg"></a>{.image2}</p>
 <p>Any user on the system can now run this script using either its name or
 the full path.</p>
 <p>Let&rsquo;s run the script and see what the output will look like:</p>
-<p><a href="#R-image-09f82563e5f0ae3fdb47ffdeb66d598d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01015.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-09f82563e5f0ae3fdb47ffdeb66d598d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01015.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-e66b2c8a6ef4b1f8646ffcccb07dd35b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01015.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e66b2c8a6ef4b1f8646ffcccb07dd35b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01015.jpeg"></a>{.image2}</p>
 <p>The output reflects the execution of the commands as scripted.</p>
 <p>The <em>hostnamectl</em> command displays the hostname of the system, type of
 platform (physical, virtual) it is running on, hypervisor vendor name,
@@ -264,8 +278,8 @@ will help identify where the script might have failed or did not
 function as expected. You can either append the -x option to the
 &ldquo;#!/bin/bash&rdquo; at the beginning of the script to look like &ldquo;#!/bin/bash
 -x&rdquo;, or execute the script as follows:</p>
-<p><a href="#R-image-e5d48ac793d006d54a00c5251f455668" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01016.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e5d48ac793d006d54a00c5251f455668"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01016.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bf41cffd5175e447064dbc3312504be6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01016.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bf41cffd5175e447064dbc3312504be6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01016.jpeg"></a>{.image2}</p>
 <p>The above output now also includes the actual lines from the script
 prefixed by the + sign and followed by the command execution result. It
 also shows the line number of the problem line in the output if there is
@@ -283,26 +297,26 @@ scripts and at the command line.</p>
 and display its value on the screen. You will re-check the value of this
 variable after the script execution has completed. The comments have
 been excluded for brevity.</p>
-<p><a href="#R-image-0b3dbaccfe67644a209d1edf93f44e22" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01017.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0b3dbaccfe67644a209d1edf93f44e22"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01017.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-e514255c205d54f9ec2f4fad89caf172" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01017.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e514255c205d54f9ec2f4fad89caf172"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01017.jpeg"></a>{.image2}</p>
 <p>Add the execute bit to the script. The following output will be
 generated when you run it:</p>
-<p><a href="#R-image-9d7a8ca2a9d832b00bd0518f04f3bcdc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01018.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9d7a8ca2a9d832b00bd0518f04f3bcdc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01018.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6838fb278acd2f671c0eb82f7a085905" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01018.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6838fb278acd2f671c0eb82f7a085905"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01018.jpeg"></a>{.image2}</p>
 <p>If you run the <em>echo</em> command to see what is stored in the SYSNAME
 variable, you will get nothing:</p>
-<p><a href="#R-image-3f819670c905d594ffc0bfb65b0243ba" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01019.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3f819670c905d594ffc0bfb65b0243ba"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01019.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-84651f9de019f09e82389a34f45ad8a6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01019.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-84651f9de019f09e82389a34f45ad8a6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01019.jpeg"></a>{.image2}</p>
 <p>The output is self-explanatory.</p>
 <p><strong>[Script]{#part0034_split_001.html#id_570 .calibre10}03: Using
 Pre-Defined Environment Variables</strong></p>
 <p>The following script called <em>pre_env.sh</em> will display the values of
 SHELL and LOGNAME environment variables:</p>
-<p><a href="#R-image-926fb21711a7dd6ad0b818b4b0f2ad2b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01020.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-926fb21711a7dd6ad0b818b4b0f2ad2b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01020.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-04facdb24d0b6d37fccbb6153b043b47" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01020.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-04facdb24d0b6d37fccbb6153b043b47"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01020.jpeg"></a>{.image2}</p>
 <p>Add the execute bit to the script, and run to view the result:</p>
-<p><a href="#R-image-bd4266bf09584a04cb056f988ecc1a6e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01021.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd4266bf09584a04cb056f988ecc1a6e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01021.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4d965dd063c97ffcd2f2c9e3d01a53f1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01021.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d965dd063c97ffcd2f2c9e3d01a53f1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01021.jpeg"></a>{.image2}</p>
 <p>The output is self-explanatory.</p>
 <p><strong>[Script]{#part0034_split_001.html#id_571 .calibre10}04: Using Command
 Substitution</strong></p>
@@ -313,11 +327,11 @@ will run the <em>hostname</em> and <em>uname</em> commands and save their output
 variables. This script shows two different ways to use command
 substitution. Make sure to use the backticks (normally located with the
 ~ character on the keyboard) to enclose the <em>uname</em> command.</p>
-<p><a href="#R-image-5d573df1e7cbb8dde0db16c97e567258" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01022.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5d573df1e7cbb8dde0db16c97e567258"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01022.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-2637d7207f579de0b4a572f02340705d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01022.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2637d7207f579de0b4a572f02340705d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01022.jpeg"></a>{.image2}</p>
 <p>Add the execute bit and run the script:</p>
-<p><a href="#R-image-da5e5c2ab78c77ac45cc9e262c7f58ca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01023.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-da5e5c2ab78c77ac45cc9e262c7f58ca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01023.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-78e71f0da34a7ad890a3070e17dd6ee9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01023.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-78e71f0da34a7ad890a3070e17dd6ee9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01023.jpeg"></a>{.image2}</p>
 <p>The output is self-explanatory.</p>
 <p><strong>[Understanding]{#part0034_split_001.html#id_572 .calibre10} Shell
 Parameters</strong></p>
@@ -336,8 +350,8 @@ respect to the calling script. <a href="/linux/rhcsa/22_shell_scripting/#part003
 view of the special and positional parameters.</p>
 <p>::: c49
 ::: width_
-<a href="#R-image-3b9b537b288cfafb8c8422a5e7f5b0d2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01024.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3b9b537b288cfafb8c8422a5e7f5b0d2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01024.jpeg"></a>{.calibre13}
+<a href="#R-image-eef8ebaaf8718a9839ebc677bdaba9cb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01024.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eef8ebaaf8718a9839ebc677bdaba9cb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01024.jpeg"></a>{.calibre13}
 :::</p>
 <p><strong>Figure 22-1 Shell Parameters</strong>
 :::</p>
@@ -350,12 +364,12 @@ expansions as well.</p>
 and Positional Parameters</strong></p>
 <p>The script <em>com_line_arg.sh</em> below will show the supplied arguments,
 total count, value of the first argument, and PID of the script:</p>
-<p><a href="#R-image-18247d027100a41933b4c6b63efd54c2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01025.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-18247d027100a41933b4c6b63efd54c2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01025.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8ca420c3640ea21aef143e6d10aca435" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01025.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8ca420c3640ea21aef143e6d10aca435"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01025.jpeg"></a>{.image2}</p>
 <p>The result will be as follows when the script is executed with four
 arguments. Do not forget to add the execute bit prior to running it.</p>
-<p><a href="#R-image-4d47a067d21d30e00b5aa6b74f76b74b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01026.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d47a067d21d30e00b5aa6b74f76b74b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01026.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-ae44f11cb50043c47421d5626220bdb3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01026.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ae44f11cb50043c47421d5626220bdb3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01026.jpeg"></a>{.image2}</p>
 <p>The output is self-explanatory.</p>
 <p><strong>[Script]{#part0034_split_001.html#id_574 .calibre10}06: Shifting
 Command Line Arguments</strong></p>
@@ -364,12 +378,12 @@ During this move, the value of the first argument is lost. The
 <em>com_line_arg_shift.sh</em> script below is an extension to the
 <em>com_line_arg.sh</em> script. It uses the <em>shift</em> command to show what
 happens when arguments are moved.</p>
-<p><a href="#R-image-7d06a6ea4c80b7459fea821d22b91ba8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01027.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7d06a6ea4c80b7459fea821d22b91ba8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01027.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a4456b3eeee6b90ef7d0b3cf5abb1651" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01027.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4456b3eeee6b90ef7d0b3cf5abb1651"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01027.jpeg"></a>{.image2}</p>
 <p>Let&rsquo;s execute the script with the same four arguments. Notice that a new
 value is assigned to $1 after each shift.</p>
-<p><a href="#R-image-14b2b39983040b75973ac12f06d125d5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01028.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-14b2b39983040b75973ac12f06d125d5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01028.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-adb3de735ad2ccbd0491c6db2a38789c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01028.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-adb3de735ad2ccbd0491c6db2a38789c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01028.jpeg"></a>{.image2}</p>
 <p>Multiple shifts in a single attempt may be performed by furnishing a
 count of desired shifts to the <em>shift</em> command as an argument. For
 example, &ldquo;<em>shift</em> 2&rdquo; will carry out two shifts, &ldquo;<em>shift</em> 3&rdquo; will make
@@ -395,8 +409,8 @@ code, otherwise you get a non-zero value. This code is also referred to
 as a <em>return code,</em> and it is stored in a special shell parameter called
 <em>?</em> (question mark). Let&rsquo;s look at the following two examples to
 understand their usage:</p>
-<p><a href="#R-image-934134269fed2301a4355bc4395bd6cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01029.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-934134269fed2301a4355bc4395bd6cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01029.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-97a6fa1142aac0b5198f8c0005ee0648" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01029.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-97a6fa1142aac0b5198f8c0005ee0648"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01029.jpeg"></a>{.image2}</p>
 <p>In the first example, the <em>pwd</em> command ran successfully and it produced
 the desired result, hence a zero exit code was returned and stored in
 the ?. In the second example, the <em>man</em> command did not run successfully
@@ -447,8 +461,8 @@ ends with a &ldquo;fi&rdquo;, as depicted in the flow diagram in <a href="/linux
 22-2</a>{.calibre5}:</p>
 <p>::: c49
 ::: width_
-<a href="#R-image-5682fbe61539dde5f3c0395ce75e437a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01030.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5682fbe61539dde5f3c0395ce75e437a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01030.jpeg"></a>{.calibre14}
+<a href="#R-image-56bc4c06456454817fac22e2c2f3b450" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01030.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-56bc4c06456454817fac22e2c2f3b450"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01030.jpeg"></a>{.calibre14}
 :::</p>
 <p><strong>Figure 22-2 The if-then-fi Construct</strong>
 :::</p>
@@ -466,20 +480,20 @@ Construct</strong></p>
 command line. The following script called <em>if_then_fi.sh</em> determines the
 number of arguments and prints an error message if there are none
 provided:</p>
-<p><a href="#R-image-85d99d1b316443105273758bcfde42e5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01031.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-85d99d1b316443105273758bcfde42e5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01031.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-7274f1bc24dac9d599a3d7163abd9c27" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01031.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7274f1bc24dac9d599a3d7163abd9c27"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01031.jpeg"></a>{.image2}</p>
 <p>This script will display the following messages on the screen if it is
 executed without exactly two arguments specified at the command line:</p>
-<p><a href="#R-image-c48cf7246f3484a47b25b9222e008244" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01032.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c48cf7246f3484a47b25b9222e008244"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01032.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-75edbf85fefa76a357ab0c79e8b0a97e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01032.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-75edbf85fefa76a357ab0c79e8b0a97e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01032.jpeg"></a>{.image2}</p>
 <p>A value of 2 will appear upon examining the return code as follows. This
 value reflects the exit code that you defined in the script on line 6.</p>
-<p><a href="#R-image-6ccf6315a8ad1251b2e666f8f38ae81b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01033.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6ccf6315a8ad1251b2e666f8f38ae81b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01033.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-162a1d17a626b51eb1aa6704dfac4502" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01033.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-162a1d17a626b51eb1aa6704dfac4502"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01033.jpeg"></a>{.image2}</p>
 <p>Conversely, the return code will be 0 and the message will be as follows
 if you supply a pair of arguments:</p>
-<p><a href="#R-image-b2f8b5663add36dd30dbc70b729ca348" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01034.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b2f8b5663add36dd30dbc70b729ca348"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01034.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4bf3726b98c3e2f1286bfe56bd8660ea" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01034.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4bf3726b98c3e2f1286bfe56bd8660ea"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01034.jpeg"></a>{.image2}</p>
 <p><strong>[The]{#part0034_split_001.html#id_580 .calibre10} if-then-else-fi
 Construct</strong></p>
 <p>The if-then-fi statement has a limitation and it can execute an action
@@ -491,8 +505,8 @@ this structure is shown in <a href="/linux/rhcsa/22_shell_scripting/#part0034_sp
 22-3</a>{.calibre5}:</p>
 <p>::: c49
 ::: width_
-<a href="#R-image-233de223f12364e6ec8d38c0834493f9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01035.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-233de223f12364e6ec8d38c0834493f9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01035.jpeg"></a>{.calibre14}
+<a href="#R-image-a71f4ff2089c7ba2a5ebe50558924788" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01035.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a71f4ff2089c7ba2a5ebe50558924788"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01035.jpeg"></a>{.calibre14}
 :::</p>
 <p><strong>Figure 22-3 The if-then-else-fi Construct</strong>
 :::</p>
@@ -511,12 +525,12 @@ the condition.</p>
 if-then-else-fi Construct</strong></p>
 <p>The following script called <em>if_then_else_fi.sh</em> will accept an integer
 value as an argument and tell if the value is positive or negative:</p>
-<p><a href="#R-image-668aba0b68e7080e133e2fabed14be8a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01036.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-668aba0b68e7080e133e2fabed14be8a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01036.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b8f23cbba4ec991dad3c1ed93c3b39e8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01036.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8f23cbba4ec991dad3c1ed93c3b39e8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01036.jpeg"></a>{.image2}</p>
 <p>Run this script one time with a positive integer value and the next time
 with a negative value:</p>
-<p><a href="#R-image-e30705189336e11fa8b9c0547f889f6e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01037.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e30705189336e11fa8b9c0547f889f6e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01037.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0428851488c573555c1d24e0d8e0b6de" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01037.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0428851488c573555c1d24e0d8e0b6de"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01037.jpeg"></a>{.image2}</p>
 <p>Try the script again but with a non-integer value and see what it does.</p>
 <p><strong>[The]{#part0034_split_001.html#id_582 .calibre10} if-then-elif-fi
 Construct</strong></p>
@@ -528,8 +542,8 @@ this structure is shown in <a href="/linux/rhcsa/22_shell_scripting/#part0034_sp
 22-4</a>{.calibre5}:</p>
 <p>::: c49
 ::: width_
-<a href="#R-image-234a8064914a05f8415c519d8dee4771" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01038.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-234a8064914a05f8415c519d8dee4771"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01038.jpeg"></a>{.calibre13}
+<a href="#R-image-e7812ce00d2afcb7e791f187a25811c3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01038.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e7812ce00d2afcb7e791f187a25811c3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01038.jpeg"></a>{.calibre13}
 :::</p>
 <p><strong>Figure 22-4 The if-then-elif-fi Construct</strong>
 :::</p>
@@ -559,14 +573,14 @@ and tells if it is positive, negative, or zero. If a non-integer value
 or no argument is supplied, the script will complaint. Notice that the
 script employs the <em>exit</em> command after each action to help you identify
 where it exited.</p>
-<p><a href="#R-image-6109437f6ffa0c36d31d908b23809cc0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01039.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6109437f6ffa0c36d31d908b23809cc0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01039.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bdb972e293b86d9b72acc6db1c324195" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01039.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bdb972e293b86d9b72acc6db1c324195"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01039.jpeg"></a>{.image2}</p>
 <p>Run this script four times: the first time with a positive integer, the
 second time with 0, the third time with a negative integer, and the
 fourth time with a non-integer value. Check the exit code after each
 execution to know where the script exited.</p>
-<p><a href="#R-image-a8f303f4f1bf236991465ca08cd537ba" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01040.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a8f303f4f1bf236991465ca08cd537ba"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01040.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-e21e05240459501baa21d4b8b5b36103" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01040.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e21e05240459501baa21d4b8b5b36103"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01040.jpeg"></a>{.image2}</p>
 <p>The outputs and exit values reflect the program code.</p>
 <p><strong>[Script]{#part0034_split_001.html#id_584 .calibre10}10: The
 if-then-elif-fi Construct (Example 2)</strong></p>
@@ -575,13 +589,13 @@ RHCSA or RHCE in the output based on the input argument (ex200 or
 ex294). If a random or no argument is provided, it will print &ldquo;Usage:
 Acceptable values are ex200 and ex294&rdquo;. Make sure to add white spaces in
 the conditions as shown.</p>
-<p><a href="#R-image-1f52fcc66732d356f5f08223eb9708e7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01041.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f52fcc66732d356f5f08223eb9708e7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01041.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9c92fe056723dbf4398bbfab8207718d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01041.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9c92fe056723dbf4398bbfab8207718d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01041.jpeg"></a>{.image2}</p>
 <p>Run this script three times: the first time with argument ex200, the
 second time with argument ex294, and the third time with something
 random as an argument:</p>
-<p><a href="#R-image-f93d31fd47846b9d915c98fe15379ad8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01042.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f93d31fd47846b9d915c98fe15379ad8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01042.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4209b5c7b5d9f3b331acd23df483fba1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01042.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4209b5c7b5d9f3b331acd23df483fba1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01042.jpeg"></a>{.image2}</p>
 <p>The results are as expected.</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} A good understanding of the usage of logical
 statements is important.</p>
@@ -595,8 +609,8 @@ for you. Likewise, based on a condition, you may want a program to
 continue to run until that condition becomes true or false.</p>
 <p>There are three constructs&mdash;<em>for-do-done</em>, <em>while-do-done</em>, and
 <em>until-do-done</em>&mdash;that you can use to implement looping.</p>
-<p><a href="#R-image-42a3c4db29a8d62175d00d8ae7bed3d2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-42a3c4db29a8d62175d00d8ae7bed3d2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The for loop is also referred to as the
+<p><a href="#R-image-05a7ca18ba613416e85ebe95286c77d9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-05a7ca18ba613416e85ebe95286c77d9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The for loop is also referred to as the
 foreach loop.</p>
 <p>The for loop iterates on a list of given values until the list is
 exhausted. The while loop runs repeatedly until the specified condition
@@ -634,8 +648,8 @@ after the other for processing. The flow diagram for this construct is
 displayed in <a href="/linux/rhcsa/22_shell_scripting/#part0034_split_001.html#id_683">Figure 22-5</a>{.calibre5}:</p>
 <p>::: c49
 ::: width_
-<a href="#R-image-5cdf0691ce15ff46cd30e849c290f484" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01043.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5cdf0691ce15ff46cd30e849c290f484"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01043.jpeg"></a>{.calibre14}
+<a href="#R-image-aa08a5682232e2e6b8ebb26435665e9a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01043.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aa08a5682232e2e6b8ebb26435665e9a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01043.jpeg"></a>{.calibre14}
 :::</p>
 <p><strong>Figure 22-5 The for Loop</strong> The general syntax of this construct is as
 follows:
@@ -654,11 +668,11 @@ curly brackets (no spaces before the letter A and after the letter Z),
 assign it to another variable LETTER, and display the value on the
 screen. The <em>expr</em> command is an arithmetic processor and it is used
 here to increment the COUNT by 1 at each loop iteration.</p>
-<p><a href="#R-image-9a2b930621acbf8fd341342dacb45005" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01044.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9a2b930621acbf8fd341342dacb45005"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01044.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-2e1ab47de70b764211828b4e3c6ecc77" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01044.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2e1ab47de70b764211828b4e3c6ecc77"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01044.jpeg"></a>{.image2}</p>
 <p>The output of the script will be:</p>
-<p><a href="#R-image-5e265270c2228d2668bc739f88b7a49e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01045.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5e265270c2228d2668bc739f88b7a49e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01045.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-02b9945f4be15272077fd1f796335912" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01045.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-02b9945f4be15272077fd1f796335912"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01045.jpeg"></a>{.image2}</p>
 <p><strong>[Script]{#part0034_split_001.html#id_589 .calibre10}12: Create Users
 Using for Loop</strong></p>
 <p>The <em>create_user.sh</em> script can create several Linux user accounts. As
@@ -667,16 +681,16 @@ value is 0, a message saying the account is created successfully will be
 displayed, otherwise the script will terminate. In case of a successful
 account creation, the <em>passwd</em> command will be invoked to assign the
 user the same password as their username.</p>
-<p><a href="#R-image-4f98c2b57075a756cb4af3c439feea87" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01046.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4f98c2b57075a756cb4af3c439feea87"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01046.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-06d0be1cd7b1a88e05c2a18aad0436ad" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01046.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06d0be1cd7b1a88e05c2a18aad0436ad"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01046.jpeg"></a>{.image2}</p>
 <p>The result of the script execution below confirms the addition of three
 new user accounts:</p>
-<p><a href="#R-image-68f7dd404f86cdb7185b4b3fcf9bae83" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01047.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-68f7dd404f86cdb7185b4b3fcf9bae83"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01047.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-63b0c76de26bfc224bd53c9d7fabaf77" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01047.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-63b0c76de26bfc224bd53c9d7fabaf77"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01047.jpeg"></a>{.image2}</p>
 <p>If this script is re-executed without modifying the list of elements
 (user names), the following will appear:</p>
-<p><a href="#R-image-491c87c465c93f93794101bea0d48213" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01048.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-491c87c465c93f93794101bea0d48213"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01048.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-05865b7d139091d84f6702a0792ff5e5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/01048.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-05865b7d139091d84f6702a0792ff5e5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/01048.jpeg"></a>{.image2}</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} A good understanding of the looping construct will
 help on the exam.</p>
 <p><strong>[Chapter]{#part0034_split_001.html#id_590 .calibre10} Summary</strong></p>
@@ -784,21 +798,24 @@ existing file content.</p>
 Perfect Dark Mode
 
         </div>
-        <div class="searchbox default-animation">
-          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
-          <label class="a11y-only" for="R-search-by">Search</label>
-          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
-          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
-        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1713095796" defer></script>
-        <script src="/js/search.js?1713095796" defer></script>
+        <script src="/js/auto-complete.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1714390185" defer></script>
+        <script src="/js/search.js?1714390185" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -994,28 +1011,14 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1713095796" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095796" defer></script>
+    <script src="/js/clipboard.min.js?1714390185" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390185" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -1025,20 +1028,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095796" defer></script>
-    <script src="/js/js-yaml.min.js?1713095796" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390185" defer></script>
+    <script src="/js/js-yaml.min.js?1714390185" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095796" defer></script>
+    <script src="/js/theme.js?1714390185" defer></script>
   </body>
 </html>

@@ -1,44 +1,49 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="description" content="Using Rsync to sync a folder between two hosts I was using github to sync my notebook with my website. But that introduces some extra steps that rsync can easily eliminate.
+Install rsync apt install rsyncTo upload files from your local computer to your server rsync -rtvzP /path/to/file root@example.org:/path/on/the/serverTurn the above script into an alias We will be adding an alias so you do not have to type the entire command above every time.">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Rsync Guide - Perfect Dark Mode">
     <meta name="twitter:description" content="Using Rsync to sync a folder between two hosts I was using github to sync my notebook with my website. But that introduces some extra steps that rsync can easily eliminate.
 Install rsync apt install rsyncTo upload files from your local computer to your server rsync -rtvzP /path/to/file root@example.org:/path/on/the/serverTurn the above script into an alias We will be adding an alias so you do not have to type the entire command above every time.">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/rsync/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:title" content="Rsync Guide - Perfect Dark Mode">
     <meta property="og:description" content="Using Rsync to sync a folder between two hosts I was using github to sync my notebook with my website. But that introduces some extra steps that rsync can easily eliminate.
 Install rsync apt install rsyncTo upload files from your local computer to your server rsync -rtvzP /path/to/file root@example.org:/path/on/the/serverTurn the above script into an alias We will be adding an alias so you do not have to type the entire command above every time.">
+    <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/tools/rsync/">
-    <meta property="article:section" content="Tools - Perfect Dark Mode">
+    <meta property="article:section" content="Tools">
     <meta property="article:published_time" content="2023-04-22T06:19:10-07:00">
     <meta property="article:modified_time" content="2023-04-22T06:19:10-07:00">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta itemprop="name" content="Rsync Guide - Perfect Dark Mode">
+    <meta itemprop="description" content="Using Rsync to sync a folder between two hosts I was using github to sync my notebook with my website. But that introduces some extra steps that rsync can easily eliminate.
+Install rsync apt install rsyncTo upload files from your local computer to your server rsync -rtvzP /path/to/file root@example.org:/path/on/the/serverTurn the above script into an alias We will be adding an alias so you do not have to type the entire command above every time.">
+    <meta itemprop="datePublished" content="2023-04-22T06:19:10-07:00">
+    <meta itemprop="dateModified" content="2023-04-22T06:19:10-07:00">
+    <meta itemprop="wordCount" content="152">
     <title>Rsync Guide - Perfect Dark Mode</title>
     <link href="http://perfectdarkmode.com/tools/rsync/" rel="canonical" type="text/html" title="Rsync Guide - Perfect Dark Mode">
     <link href="/tools/rsync/index.xml" rel="alternate" type="application/rss+xml" title="Rsync Guide - Perfect Dark Mode">
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095797" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095797" rel="stylesheet">
-    <link href="/css/fonts.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095797" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095797" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095797" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095797" rel="stylesheet">
-    <link href="/css/print.css?1713095797" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1713095797" rel="stylesheet">
-    <link href="/css/ie.css?1713095797" rel="stylesheet">
-    <script src="/js/url.js?1713095797"></script>
-    <script src="/js/variant.js?1713095797"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390187" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390187" rel="stylesheet">
+    <link href="/css/fonts.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390187" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390187" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390187" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390187" rel="stylesheet">
+    <link href="/css/print.css?1714390187" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1714390187" rel="stylesheet">
+    <script src="/js/variant.js?1714390187"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -46,7 +51,6 @@ Install rsync apt install rsyncTo upload files from your local computer to your 
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -103,6 +107,7 @@ Install rsync apt install rsyncTo upload files from your local computer to your 
           <article class="default">
             <header class="headline">
             </header>
+
 <h1 id="rsync-guide">Rsync Guide</h1>
 
 <h1 id="using-rsync-to-sync-a-folder-between-two-hosts">Using Rsync to sync a folder between two hosts</h1>
@@ -130,28 +135,14 @@ Install rsync apt install rsyncTo upload files from your local computer to your 
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1713095797" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095797" defer></script>
+    <script src="/js/clipboard.min.js?1714390187" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390187" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -161,20 +152,20 @@ Install rsync apt install rsyncTo upload files from your local computer to your 
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095797" defer></script>
-    <script src="/js/js-yaml.min.js?1713095797" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390187" defer></script>
+    <script src="/js/js-yaml.min.js?1714390187" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095797" defer></script>
+    <script src="/js/theme.js?1714390187" defer></script>
   </body>
 </html>

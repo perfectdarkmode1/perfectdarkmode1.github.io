@@ -1,42 +1,44 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="generator" content="Relearn 6.0.0+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="description" content="Describe package groups Understand application streams and modules Software repositories and how to access them Review module streams and module profiles Perform software management operations using dnf List, install, update, and delete individual packages, package groups, and modules Show package information, determine provider, and search metadata Exhibit package group and module information Install module from alternative stream
+RHCSA Objectives:
+44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system 45.">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
     <meta name="twitter:description" content="Describe package groups Understand application streams and modules Software repositories and how to access them Review module streams and module profiles Perform software management operations using dnf List, install, update, and delete individual packages, package groups, and modules Show package information, determine provider, and search metadata Exhibit package group and module information Install module from alternative stream
 RHCSA Objectives:
 44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system 45.">
-    <meta property="og:title" content="">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/10_adv_package_management/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:description" content="Describe package groups Understand application streams and modules Software repositories and how to access them Review module streams and module profiles Perform software management operations using dnf List, install, update, and delete individual packages, package groups, and modules Show package information, determine provider, and search metadata Exhibit package group and module information Install module from alternative stream
 RHCSA Objectives:
 44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system 45.">
+    <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/10_adv_package_management/">
-    <meta property="article:section" content="Linux - Perfect Dark Mode">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Describe package groups Understand application streams and modules Software repositories and how to access them Review module streams and module profiles Perform software management operations using dnf List, install, update, and delete individual packages, package groups, and modules Show package information, determine provider, and search metadata Exhibit package group and module information Install module from alternative stream
+RHCSA Objectives:
+44.Install and update software packages from Red Hat Network, a remote repository, or from the local file system 45.">
+    <meta itemprop="wordCount" content="4793">
     <title></title>
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095796" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095796" rel="stylesheet">
-    <link href="/css/fonts.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095796" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095796" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095796" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095796" rel="stylesheet">
-    <link href="/css/print.css?1713095796" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1713095796" rel="stylesheet">
-    <script src="/js/url.js?1713095796"></script>
-    <script src="/js/variant.js?1713095796"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390185" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390185" rel="stylesheet">
+    <link href="/css/fonts.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390185" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390185" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390185" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390185" rel="stylesheet">
+    <link href="/css/print.css?1714390185" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1714390185"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -44,7 +46,6 @@ RHCSA Objectives:
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -170,6 +171,7 @@ RHCSA Objectives:
           <article class="default">
             <header class="headline">
             </header>
+
 <h1 id=""></h1>
 
 <p>Describe package groups
@@ -898,7 +900,7 @@ installation.</li>
 </ol>
 <h2 id="module-management">Module Management</h2>
 <p><strong>Modules</strong> are special package groups usually representing an application, a language runtime, or a set of tools. They are available in one or <strong>multiple streams</strong> which usually represent a major version of a piece of software, giving you an option to choose what versions of packages you want to consume.
-<a href="https://docs.fedoraproject.org/en-US/modularity/using-modules/" target="_blank">https://docs.fedoraproject.org/en-US/modularity/using-modules/</a></p>
+<a href="https://docs.fedoraproject.org/en-US/modularity/using-modules/" rel="external" target="_blank">https://docs.fedoraproject.org/en-US/modularity/using-modules/</a></p>
 <p>Modules are a way to deliver different versions of software (such as programming languages, databases, or web servers) independently of the base operating system&rsquo;s release cycle.</p>
 <p>Each module can contain multiple streams, representing different versions or configurations of the software. For example, a module for Python might have streams for Python 2 and Python 3.</p>
 <p><em>module</em> dnf subcommand</p>
@@ -1248,21 +1250,24 @@ gpgcheck=0</code></pre></div><ol start="4">
 Perfect Dark Mode
 
         </div>
-        <div class="searchbox default-animation">
-          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
-          <label class="a11y-only" for="R-search-by">Search</label>
-          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
-          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
-        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1713095796" defer></script>
-        <script src="/js/search.js?1713095796" defer></script>
+        <script src="/js/auto-complete.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1714390185" defer></script>
+        <script src="/js/search.js?1714390185" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1458,28 +1463,14 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1713095796" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095796" defer></script>
+    <script src="/js/clipboard.min.js?1714390185" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390185" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -1489,20 +1480,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095796" defer></script>
-    <script src="/js/js-yaml.min.js?1713095796" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390185" defer></script>
+    <script src="/js/js-yaml.min.js?1714390185" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095796" defer></script>
+    <script src="/js/theme.js?1714390185" defer></script>
   </body>
 </html>

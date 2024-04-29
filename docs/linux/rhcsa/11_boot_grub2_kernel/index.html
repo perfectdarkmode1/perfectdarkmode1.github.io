@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="generator" content="Relearn 6.0.0+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
     <meta name="twitter:description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
-    <meta property="og:title" content="">
-    <meta property="og:description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
-    <meta property="og:type" content="article">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/11_boot_grub2_kernel/">
-    <meta property="article:section" content="Linux - Perfect Dark Mode">
     <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Boot Process, GRUB2, and the Linux Kernel Linux boot process: firmware, bootloader, kernel, and initialization Understand and interact with GRUB2 to boot into different targets Modify GRUB2 configuration Boot system into specific targets Reset lost or forgotten root user password Linux kernel, packages, version anatomy, and key directories Download and install a newer kernel version RHCSA Objectives Interrupt the boot process in order to gain access to a system Modify the system bootloader Multiple phases during the boot process.">
+    <meta itemprop="wordCount" content="4089">
     <title></title>
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095796" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095796" rel="stylesheet">
-    <link href="/css/fonts.css?1713095796" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095796" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095796" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095796" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095796" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095796" rel="stylesheet">
-    <link href="/css/print.css?1713095796" rel="stylesheet" media="print">
-    <link href="/css/ie.css?1713095796" rel="stylesheet">
-    <script src="/js/url.js?1713095796"></script>
-    <script src="/js/variant.js?1713095796"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390185" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390185" rel="stylesheet">
+    <link href="/css/fonts.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390185" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390185" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390185" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390185" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390185" rel="stylesheet">
+    <link href="/css/print.css?1714390185" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1714390185"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -40,7 +38,6 @@
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -146,6 +143,7 @@
           <article class="default">
             <header class="headline">
             </header>
+
 <h1 id=""></h1>
 
 <h2 id="boot-process-grub2-and-the-linux-kernel"><strong>Boot Process, GRUB2, and the Linux Kernel</strong></h2>
@@ -558,8 +556,8 @@ timeout value when GRUB2 menu appears.</p>
 </li>
 </ul>
 <p>Append &ldquo;emergency&rdquo; to the kernel line entry:</p>
-<p><a href="#R-image-5f7cd560a0bf3677217fb85df836177d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321045343.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5f7cd560a0bf3677217fb85df836177d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321045343.png"></a></p>
+<p><a href="#R-image-1f8c5af8e56bd7260420ccc1607d838e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321045343.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f8c5af8e56bd7260420ccc1607d838e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321045343.png"></a></p>
 <p>Other options:</p>
 <ul>
 <li>&ldquo;rescue&rdquo;</li>
@@ -579,13 +577,13 @@ timeout value when GRUB2 menu appears.</p>
 <p>Modify this kernel string and append &ldquo;rd.break&rdquo; to the end of the line.</p>
 </li>
 </ol>
-<p><a href="#R-image-d8c42e7aa430a782d64cd08473549fb5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321045933.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d8c42e7aa430a782d64cd08473549fb5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321045933.png"></a></p>
+<p><a href="#R-image-fe58aec723be0b0b7b8d0e47e5eaba37" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321045933.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fe58aec723be0b0b7b8d0e47e5eaba37"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321045933.png"></a></p>
 <ol start="3">
 <li>
 <p>Press Ctrl+x when done to boot to the special shell. The system mounts the root file system read-only on the <em>/sysroot</em> directory. Make <em>/sysroot</em> appear as mounted on <em>/</em> using the <em>chroot</em> command:
-<a href="#R-image-b7ebc31ef3b0717203e36ab2b4a048b6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321050831.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b7ebc31ef3b0717203e36ab2b4a048b6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321050831.png"></a></p>
+<a href="#R-image-d46b4a767d655bdb4343aa238ea06553" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240321050831.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d46b4a767d655bdb4343aa238ea06553"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240321050831.png"></a></p>
 </li>
 <li>
 <p>Remount the root file system in read/write mode for the <em>passwd</em> command to be able to modify the <em>shadow</em> file with a new
@@ -987,7 +985,7 @@ components.</p>
 <code>rpm -qa | grep kernel</code></p>
 </li>
 <li>
-<p>Sign in to the <a href="http://access.redhat.com" target="_blank">Red Hat Customer Portal</a>and click downloads.</p>
+<p>Sign in to the <a href="http://access.redhat.com" rel="external" target="_blank">Red Hat Customer Portal</a>and click downloads.</p>
 </li>
 <li>
 <p>Click &ldquo;Red Hat Enterprise Linux 8&rdquo; under &ldquo;By Category&rdquo;:</p>
@@ -1088,7 +1086,7 @@ A. It is called <em>systemd</em>.</p>
 <h3 id="lab-install-new-kernel">Lab: Install New Kernel</h3>
 <ul>
 <li>check the current version of the kernel using the <em>uname</em> or <em>rpm</em> command.</li>
-<li>Download a higher version from the Red Hat Customer Portal or <a href="http://rpmfind.net" target="_blank">rpmfind.net</a> and install it.</li>
+<li>Download a higher version from the Red Hat Customer Portal or <a href="http://rpmfind.net" rel="external" target="_blank">rpmfind.net</a> and install it.</li>
 <li>Reboot the system and ensure the new kernel is listed on the bootloader menu.</li>
 </ul>
 
@@ -1106,21 +1104,24 @@ A. It is called <em>systemd</em>.</p>
 Perfect Dark Mode
 
         </div>
-        <div class="searchbox default-animation">
-          <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
-          <label class="a11y-only" for="R-search-by">Search</label>
-          <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
-          <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
-        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1713095796" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1713095796" defer></script>
-        <script src="/js/search.js?1713095796" defer></script>
+        <script src="/js/auto-complete.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1714390185" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1714390185" defer></script>
+        <script src="/js/search.js?1714390185" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1316,28 +1317,14 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1713095796" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095796" defer></script>
+    <script src="/js/clipboard.min.js?1714390185" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390185" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -1347,20 +1334,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095796" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095796" defer></script>
-    <script src="/js/js-yaml.min.js?1713095796" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390185" defer></script>
+    <script src="/js/js-yaml.min.js?1714390185" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095796" defer></script>
+    <script src="/js/theme.js?1714390185" defer></script>
   </body>
 </html>

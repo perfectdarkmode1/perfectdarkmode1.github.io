@@ -193,285 +193,178 @@ pops up. Click on "Controller: SATA" to select it.
 
 **MBR Storage Management with parted**
 
-*parted* (*partition editor*) is a popular tool in RHEL that can be 
+### parted Command (*partition editor*) 
 - used to partition disks. This program 
 - may be run interactively or directly from the command prompt. It
 - understands and supports both MBR and GPT schemes, and 
-- can be used to create up to 128 partitions on a single GPT disk. *parted*
+- can be used to create up to 128 partitions on a single GPT disk. 
 - subcommands for viewing, labeling, adding, naming, and deleting partitions. 
 
-|  **Subcommand** |  **Description** |
-| --- | --- |
-|  print     |       Displays the partition table that includes disk geometry and partition number, start and end, size, type, file system type, and relevant flags. |
-|  mklabel    |      Applies a label to the disk. Common labels are gpt and msdos. |
-|  mkpart      |     Makes a new partition |
-|  name    |         Assigns a name to a partition |
-|  rm      |         Removes the specified partition |
-   
+| **Subcommand** | **Description**                                                                                                                                 |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| print          | Displays the partition table that includes disk geometry and partition number, start and end, size, type, file system type, and relevant flags. |
+| mklabel        | Applies a label to the disk. Common labels are gpt and msdos.                                                                                   |
+| mkpart         | Makes a new partition                                                                                                                           |
+| name           | Assigns a name to a partition                                                                                                                   |
+| rm             | Removes the specified partition                                                                                                                 |
 
-**[Table]{#part0025_split_001.html#id_739} 13-1 Common parted
-Subcommands**
-:::
+- use the /dev/sdb disk for these exercises.
+- After making a partition, use the *print* subcommand to ensure you created what you wanted.
+- /proc/partitions is also updated to reflect the results of partition management operations.
 
-For the basic partition creation and deletion operations, Exercises 13-2
-and 13-3 will show the use of this tool by directly invoking it from the
-command prompt. You will use the **dev*sdb* disk for these exercises.
-After making a partition, use the *print* subcommand to ensure you
-created what you wanted. The **proc*partitions* file is also updated to
-reflect the results of partition management operations.
+### Lab:  Create an MBR Partition
 
-**[Exercise]{#part0025_split_001.html#id_363 .calibre10} 13-2: Create an
-MBR Partition**
+- assign partition type "msdos" to /dev/sdb for using it as an MBR disk. 
+- create and confirm a 100MB primary partition on the disk.
 
-This exercise should be done on *server2* as *user1* with *sudo* where
-required.
+1. Execute *parted* on /dev/sdb to view the current partition information:
+`parted /dev/sdb print`
 
-In this exercise, you will assign partition type "msdos" to **dev*sdb*
-for using it as an MBR disk. You will create and confirm a 100MB primary
-partition on the disk.
+- Notice the error on line 1 of the output, indicating an unrecognized label. 
+- Disk must be labeled before it can be partitioned.
 
-1[.]{.c19}Execute *parted* on **dev*sdb* to view the current partition
-information:
-
-![](images/00659.jpeg){.image2}
-
-There is an error on line 1 of the output, indicating an unrecognized
-label. This disk must be labeled before it can be partitioned.
-
-2[.]{.c19}Assign disk label "msdos" to the disk with *mklabel*. This
-operation is performed only once on a disk.
-
-![](images/00660.jpeg){.image2}
+2. Assign disk label "msdos" to the disk with mklabel. (performed only once on a disk.)
+`parted /dev/sdb mklabel msdos`
 
 The *print* subcommand confirms the successful application of the label.
+`parted /dev/sdb print`
 
-![](images/00002.jpeg){.image} To use the GPT partition table type, run
-"**sudo parted *dev*sdb mklabel gpt**" instead.
+To use the GPT partition table type, run `parted /dev/sdb mklabel gpt` instead.
 
-3[.]{.c19}Create a 100MB primary partition starting at 1MB (beginning of
-the disk) using *mkpart*:
+3. Create a 100MB primary partition starting at 1MB (beginning of the disk) using mkpart:
+`parted /dev/sdb mkpart primary 1 101m`
 
-![](images/00661.jpeg){.image2}
+4. Verify the new partition with *print*:
+`parted /dev/sdb print`
 
-4[.]{.c19}Verify the new partition with *print*:
+- Partition numbering begins at 1 by default.
 
-![](images/00662.jpeg){.image2}
+5. Confirm the new partition with the `lsblk` command:
+`lsblk /dev/sdb`
 
-Partition numbering begins at 1 by default.
+- Different tools will have variance in reporting partition sizes. Ignore minor differences.
 
-5[.]{.c19}Confirm the new partition with the *lsblk* command:
+6. Check /proc/partitions also:
+`cat /proc/partitions | grep sdb`
 
-![](images/00663.jpeg){.image2}
+- The virtual file is also updated with the new partition information.
 
-The device file for the first partition on the *sdb* disk is *sdb1* as
-identified on the bottom line. The partition size is 95MB.
 
-![](images/00002.jpeg){.image} Different tools will have variance in
-reporting partition sizes. You should ignore minor differences.
+### Lab: Delete an MBR Partition
 
-6[.]{.c19}Check the **proc*partitions* file also:
+- Delete the *sdb1* partition and confirm the deletion.
 
-![](images/00664.jpeg){.image2}
+1. Execute *parted* on /dev/sdb with the `rm` subcommand to remove partition number 1:
+`parted /dev/sdb rm 1`
 
-The virtual file is also updated with the new partition information.
-This completes the steps for creating and verifying an MBR partition
-using the *parted* command.
+2. Confirm the partition deletion with *print*:
+`parted /dev/sdb print`
 
-**[Exercise]{#part0025_split_001.html#id_364 .calibre10} 13-3: Delete an
-MBR Partition**
+3. Check /proc/partitions:
+`cat /proc/partitions | grep sdb`
 
-This exercise should be done on *server2* as *user1* with *sudo* where
-required.
+- The virtual file has the partition entry deleted as well. 
+- can also run the `lsblk` command for further verification.
+- Knowing either parted or gdisk for the exam is enough.
 
-In this exercise, you will delete the *sdb1* partition that was created
-in [Exercise 13-2](#part0025_split_001.html#id_363){.calibre5} and
-confirm the deletion.
+### GPT Storage Management with gdisk
 
-1[.]{.c19}Execute *parted* on **dev*sdb* with the *rm* subcommand to
-remove partition number 1:
+#### gdisk (GPT disk) command 
+- partitions disks using the GPT format.  
+- text-based, menu-driven program 
+- show, add, verify, modify, and delete partitions among other operations. 
+- can create up to 128 partitions on a single disk on systems with UEFI firmware.
 
-![](images/00665.jpeg){.image2}
+- Specify a disk device name such as /dev/sdc/ with the command. 
+- Type *help* or *?* at the prompt to view available subcommands.
 
-2[.]{.c19}Confirm the partition deletion with *print*:
+`gdisk /dev/sdc`
 
-![](images/00666.jpeg){.image2}
+### Lab: Create a GPT Partition
 
-The partition no longer exists.
+- assign partition type "gpt" to /dev/sdc for using it as a GPT disk. 
+- create and confirm a 200MB partition on the disk.
 
-3[.]{.c19}Check the **proc*partitions* file:
+1. Execute *gdisk* on /dev/sdc/ to view the current partition information:
+`gdisk /dev/sdc`
 
-![](images/00667.jpeg){.image2}
-
-The virtual file has the partition entry deleted as well. You can also
-run the *lsblk* command for further verification. The partition has been
-removed successfully.
-
-[**EXAM TIP:**]{.c56} Knowing either parted or gdisk for the exam is
-enough.
-
-We will recreate partitions for use in LVM in [Chapter
-14](#part0026_split_000.html#page_321){.calibre5} and then again in
-[Chapter 15](#part0027_split_000.html#page_345){.calibre5} to construct
-file system and swap structures.
-
-**[GPT]{#part0025_split_001.html#id_365 .calibre10} Storage Management
-with gdisk**
-
-The *gdisk* (*GPT disk*) utility partitions disks using the GPT format.
-This text-based, menu-driven program can show, add, verify, modify, and
-delete partitions among other operations. *gdisk* can create up to 128
-partitions on a single disk on systems with UEFI firmware.
-
-The main interface of *gdisk* can be invoked by specifying a disk device
-name such as **dev*sdc* with the command. Type *help* or *?* (question
-mark) at the prompt to view available subcommands.
-
-![](images/00668.jpeg){.image2}
-
-The output illustrates that there is no partition table defined on the
-disk at the moment. There are several subcommands in the main menu
-followed by a short description. Refer to the screenshot above for a
-list of subcommands.
-
-**[Exercise]{#part0025_split_001.html#id_366 .calibre10} 13-4: Create a
-GPT Partition**
-
-This exercise should be done on *server2* as *user1* with *sudo* where
-required.
-
-In this exercise, you will assign partition type "gpt" to **dev*sdc* for
-using it as a GPT disk. You will create and confirm a 200MB partition on
-the disk.
-
-1[.]{.c19}Execute *gdisk* on **dev*sdc* to view the current partition
-information:
-
-![](images/00669.jpeg){.image2}
-
-The disk currently does not have any partition table on it.
-
-2[.]{.c19}Assign "gpt" as the partition table type to the disk using the
-*o* subcommand. Enter "y" for confirmation to proceed. This operation is
+2. Assign "gpt" as the partition table type to the disk using the o subcommand. Enter "y" for confirmation to proceed. This operation is
 performed only once on a disk.
 
-![](images/00670.jpeg){.image2}
+3. Run the *p* subcommand to view disk information and confirm the GUID partition table creation:
 
-3[.]{.c19}Run the *p* subcommand to view disk information and confirm
-the GUID partition table creation:
+4. Create the first partition of size 200MB starting at the default sector with default type "Linux filesystem" using the *n* subcommand:
+```
+Command (? for help): n
+Partition number (1-128, default 1): 
+First sector (34-511966, default = 2048) or {+-}size{KMGTP}: 
+Last sector (2048-511966, default = 511966) or {+-}size{KMGTP}: +200M
+Current type is 8300 (Linux filesystem)
+Hex code or GUID (L to show codes, Enter = 8300): 
+Changed type of partition to 'Linux filesystem'
+```
 
-![](images/00671.jpeg){.image2}
+5. Verify the new partition with *p*:
 
-The output returns the assigned GUID and states that the partition table
-can hold up to 128 partition entries.
+6. Run *w* to write the partition information to the partition table and exit out of the interface. Enter "y" to confirm when prompted.
 
-4[.]{.c19}Create the first partition of size 200MB starting at the
-default sector with default type "Linux filesystem" using the *n*
-subcommand:
+- You may need to run the partprobe command after exiting the gdisk utility to update the kernel of the changes.
+`partprobe`
 
-![](images/00672.jpeg){.image2}
+7. Verify the new partition by issuing either of the following at the command prompt:
+`grep sdc /proc/partitions`
+`lsblk /dev/sdc`
 
-5[.]{.c19}Verify the new partition with *p*:
+### Lab: Delete a GPT Partition
 
-Command (? For help): **p**
+In this exercise, you will delete the *sdc1* partition that was created in [Exercise 13-4](#part0025_split_001.html#id_366){.calibre5} and confirm the removal.
 
-![](images/00673.jpeg){.image2}
+1. Execute *gdisk* on /dev/sdc/ and run `d1` at the utility's prompt to delete partition number 1:
+`gdisk /dev/sdc`
+`d1`
 
-6[.]{.c19}Run *w* to write the partition information to the partition
-table and exit out of the interface. Enter "y" to confirm when prompted.
+2. Confirm the partition deletion with *p*:
 
-![](images/00674.jpeg){.image2}
+3. Write the updated partition information to the disk with `w` and quit *gdisk*:
 
-![](images/00002.jpeg){.image} You may need to run the partprobe command
-after exiting the gdisk utility to update the kernel of the changes.
+4. Verify the partition deletion by issuing either of the following at the command prompt:
+`grep sdc /proc/partitions`
+`lsblk /dev/sdc`
 
-7[.]{.c19}Verify the new partition by issuing either of the following at
-the command prompt:
 
-![](images/00675.jpeg){.image2}
+## Storage Optimization with Virtual Data Optimizer (VDO)
 
-The device file for the first partition on the *sdc* disk is *sdc1* and
-it is 200MB in size as reported in the above outputs. This completes the
-steps for creating and verifying a GPT partition using the *gdisk*
-command.
+VDO
+- device driver layer that sits between the operating system kernel and the physical storage devices. 
+- conserve disk space
+- improve data throughput
+- save on storage cost. 
+- employs thin provisioning, de-duplication, and compression technologies 
+- runs in the background and processes inbound data through the three stages on VDO-enabled volumes. 
+- not a CPU-or memory-intensive process; it consumes a low amount of system resources.
 
-**[Exercise]{#part0025_split_001.html#id_367 .calibre10} 13-5: Delete a
-GPT Partition**
+### How VDO Conserves Storage Space
 
-This exercise should be done on *server2* as *user1* with *sudo* where
-required.
+thin provisioning (Stage 1)
+- identify and eliminate empty (zero-byte) data blocks. (zero-block elimination). 
+- removes randomization of data blocks by moving in-use data blocks to contiguous locations on the storage device.
 
-In this exercise, you will delete the *sdc1* partition that was created
-in [Exercise 13-4](#part0025_split_001.html#id_366){.calibre5} and
-confirm the removal.
+de-duplication (Stage 2)
+- If VDO detects that new data is an identical copy of some existing data, it makes an internal note of it but does not actually write the redundant data to the disk. 
+-  implemented in RHEL with the inclusion of a kernel module called *UDS* (*Universal Deduplication Service*). T
 
-1[.]{.c19}Execute *gdisk* on **dev*sdc* and run *d1* at the utility's
-prompt to delete partition number 1:
-
-![](images/00676.jpeg){.image2}
-
-2[.]{.c19}Confirm the partition deletion with *p*:
-
-![](images/00677.jpeg){.image2}
-
-The partition no longer exists.
-
-3[.]{.c19}Write the updated partition information to the disk with *w*
-and quit *gdisk*:
-
-![](images/00678.jpeg){.image2}
-
-4[.]{.c19}Verify the partition deletion by issuing either of the
-following at the command prompt:
-
-![](images/00679.jpeg){.image2}
-
-Both commands confirm the successful partition removal.
-
-**[Storage]{#part0025_split_001.html#id_368 .calibre10} Optimization
-with Virtual Data Optimizer (VDO)**
-
-One of the new features recently introduced in RHEL is a device driver
-layer that sits between the operating system kernel and the physical
-storage devices. The goals are to conserve disk space, improve data
-throughput, and save on storage cost. This feature is referred to as
-*Virtual Data Optimizer* (VDO). VDO employs thin provisioning,
-de-duplication, and compression technologies to help realize the goals.
-
-**[How]{#part0025_split_001.html#id_369 .calibre10} VDO Conserves
-Storage Space**
-
-VDO makes use of the thin provisioning technology to identify and
-eliminate empty (zero-byte) data blocks. This is referred to as
-*zero-block elimination*. VDO removes randomization of data blocks by
-moving in-use data blocks to contiguous locations on the storage device.
-This is the initial stage in the process.
-
-Next, VDO keeps an eye on data being written to the disk. If it detects
-that the new data is an identical copy of some existing data, it makes
-an internal note of it but does not actually write the redundant data to
-the disk. VDO uses the technique called *de-duplication* to this end.
-This technique is implemented in RHEL with the inclusion of a kernel
-module called *UDS* (*Universal Deduplication Service*). This is the
-second stage in the process.
-
-In the third and final stage, VDO calls upon another kernel module
-called *kvdo*, which compresses the residual data blocks and
-consolidates them on a lower number of blocks. This results in a further
-drop in storage space utilization.
-
-VDO runs in the background and processes inbound data through the three
-stages on VDO-enabled volumes. VDO is not a CPU-or memory-intensive
-process; it consumes a low amount of system resources.
+kvdo (Stage 3)
+- kernel module
+- compresses the residual data blocks and consolidates them on a lower number of blocks.
+- results in a further drop in storage space utilization.
 
 **Creating and Managing VDO Volumes**
 
-The concept of VDO volumes is similar to that of disk partitions, which
-you created in Exercises 13-1 and 13-3 using *parted* and *gdisk*. VDO
-volumes can be initialized for use just like disk partitions, or they
-can be used as LVM physical volumes.
+- VDO volumes can be initialized for use just like disk partitions, or they can be used as LVM physical volumes.
 
+*vdo* and *vdostats* commands
 VDO offers a set of commands to create, manage, and monitor volumes. Of
-these *vdo* and *vdostats* commands are discussed and used in this
+these  are discussed and used in this
 section. The *vdo* command is used to create and perform essential
 operations on VDO volumes, and the *vdostats* command is employed to
 monitor usage statistics of the underlying physical storage device.

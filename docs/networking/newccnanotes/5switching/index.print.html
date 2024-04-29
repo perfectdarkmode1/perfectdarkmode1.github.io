@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
+    <meta name="generator" content="Relearn 6.0.0+tip">
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="description" content="5 Switching Thursday, June 17, 2021 12:53 PM
+1.0 Network Fundamentals1.1 Explain the role and function of network components
+1.1.b L2 and L3 Switches1.13 Describe switching concepts
+1.13.a MAC learning and aging1.13.b Frame switching
+1.13.c Frame flooding1.13.d MAC address table
+2.0 Network Access2.5 Describe the need for and basic operations of Rapid PVST&#43; Spanning Tree Protocol and identify basic operations
+Overview of Switching Logic
+-Forward or filter frame based on destination MAC AddressExamine source MAC address of each frame received">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
     <meta name="twitter:description" content="5 Switching Thursday, June 17, 2021 12:53 PM
 1.0 Network Fundamentals1.1 Explain the role and function of network components
 1.1.b L2 and L3 Switches1.13 Describe switching concepts
@@ -18,7 +24,8 @@
 2.0 Network Access2.5 Describe the need for and basic operations of Rapid PVST&#43; Spanning Tree Protocol and identify basic operations
 Overview of Switching Logic
 -Forward or filter frame based on destination MAC AddressExamine source MAC address of each frame received">
-    <meta property="og:title" content="">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/newccnanotes/5switching/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:description" content="5 Switching Thursday, June 17, 2021 12:53 PM
 1.0 Network Fundamentals1.1 Explain the role and function of network components
 1.1.b L2 and L3 Switches1.13 Describe switching concepts
@@ -27,27 +34,32 @@ Overview of Switching Logic
 2.0 Network Access2.5 Describe the need for and basic operations of Rapid PVST&#43; Spanning Tree Protocol and identify basic operations
 Overview of Switching Logic
 -Forward or filter frame based on destination MAC AddressExamine source MAC address of each frame received">
+    <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/networking/newccnanotes/5switching/">
-    <meta property="article:section" content="Networking - Perfect Dark Mode">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="5 Switching Thursday, June 17, 2021 12:53 PM
+1.0 Network Fundamentals1.1 Explain the role and function of network components
+1.1.b L2 and L3 Switches1.13 Describe switching concepts
+1.13.a MAC learning and aging1.13.b Frame switching
+1.13.c Frame flooding1.13.d MAC address table
+2.0 Network Access2.5 Describe the need for and basic operations of Rapid PVST&#43; Spanning Tree Protocol and identify basic operations
+Overview of Switching Logic
+-Forward or filter frame based on destination MAC AddressExamine source MAC address of each frame received">
+    <meta itemprop="wordCount" content="656">
     <title></title>
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095797" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095797" rel="stylesheet">
-    <link href="/css/fonts.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095797" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095797" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095797" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095797" rel="stylesheet">
-    <link href="/css/print.css?1713095797" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1713095797" rel="stylesheet">
-    <link href="/css/ie.css?1713095797" rel="stylesheet">
-    <script src="/js/url.js?1713095797"></script>
-    <script src="/js/variant.js?1713095797"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390187" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390187" rel="stylesheet">
+    <link href="/css/fonts.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390187" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390187" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390187" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390187" rel="stylesheet">
+    <link href="/css/print.css?1714390187" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1714390187" rel="stylesheet">
+    <script src="/js/variant.js?1714390187"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -55,7 +67,6 @@ Overview of Switching Logic
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -112,28 +123,14 @@ Overview of Switching Logic
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1713095797" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095797" defer></script>
+    <script src="/js/clipboard.min.js?1714390187" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390187" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -143,20 +140,20 @@ Overview of Switching Logic
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095797" defer></script>
-    <script src="/js/js-yaml.min.js?1713095797" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390187" defer></script>
+    <script src="/js/js-yaml.min.js?1714390187" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095797" defer></script>
+    <script src="/js/theme.js?1714390187" defer></script>
   </body>
 </html>

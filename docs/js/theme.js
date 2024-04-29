@@ -1,15 +1,6 @@
 window.relearn = window.relearn || {};
 
 var theme = true;
-var isIE = /*@cc_on!@*/false || !!document.documentMode;
-if( isIE ){
-    // we don't support sidebar flyout in IE
-    document.querySelector( 'body' ).classList.remove( 'mobile-support' );
-}
-else{
-    document.querySelector( 'body' ).classList.add( 'mobile-support' );
-}
-
 var isPrint = document.querySelector( 'body' ).classList.contains( 'print' );
 
 var isRtl = document.querySelector( 'html' ).getAttribute( 'dir' ) == 'rtl';
@@ -19,7 +10,7 @@ var dir_padding_end = 'padding-right';
 var dir_key_start = 37;
 var dir_key_end = 39;
 var dir_scroll = 1;
-if( isRtl && !isIE ){
+if( isRtl ){
     dir_padding_start = 'padding-right';
     dir_padding_end = 'padding-left';
     dir_key_start = 39;
@@ -357,10 +348,6 @@ function initMermaid( update, attrs ) {
 }
 
 function initOpenapi( update, attrs ){
-    if( isIE ){
-        return;
-    }
-
     var state = this;
     if( update && !state.is_initialized ){
         return;
@@ -391,10 +378,9 @@ function initOpenapi( update, attrs ){
     }
     function renderOpenAPI(oc) {
         var relBasePath = window.relearn.relBasePath;
-        var mod = window.relearn.themeVariantModifier;
         var buster = window.themeUseOpenapi.assetsBuster ? '?' + window.themeUseOpenapi.assetsBuster : '';
         var print = isPrint || attrs.isPrintPreview ? "PRINT-" : "";
-        var theme = print ? `${relBasePath}/css/theme-relearn-light${mod}.css${buster}` : document.querySelector( '#R-variant-style' ).attributes.href.value
+        var theme = print ? `${relBasePath}/css/theme-relearn-light.css${buster}` : document.querySelector( '#R-variant-style' ).attributes.href.value
         var swagger_theme = variants.getColorValue( print + 'OPENAPI-theme' );
         var swagger_code_theme = variants.getColorValue( print + 'OPENAPI-CODE-theme' );
 
@@ -703,7 +689,57 @@ function initChroma( update ){
     link.setAttribute( 'href', new_path );
 }
 
-function initArrowNav(){
+function initArrowVerticalNav(){
+    var topMain = 0;
+    if( !isPrint ){
+        topMain = document.querySelector("main").getClientRects()[0].top;
+    }
+
+    document.addEventListener('keydown', function(event){
+        var elems = Array.from( document.querySelectorAll( `main :not(.include.hide-first-heading) > :where(
+                .article-subheading,
+                :not(.article-subheading) + h1:not(.a11y-only),
+                h1:not(.a11y-only):first-child,
+                h2, h3, h4, h5, h6
+            ),
+            main .include.hide-first-heading > :where( h1, h2, h3, h4, h5, h6 ) ~ :where( h1, h2, h3, h4, h5, h6 )
+        ` ));
+        if( !event.shiftKey && !event.ctrlKey && event.altKey && !event.metaKey ){
+            if( event.which == 38 ){ // up
+                var target = isPrint ? document.querySelector( '#R-body' ) : document.querySelector( '.flex-block-wrapper' );
+                elems.some( function( elem, i ){
+                    var top = elem.getBoundingClientRect().top;
+                    var topBoundary = top - topMain;
+                    if( topBoundary > -1 ){
+                        target.scrollIntoView();
+                        return true;
+                    }
+                    target = elem
+                })
+            }
+            else if( event.which == 40 ){ // down
+                elems.some( function( elem, i ){
+                    var top = elem.getBoundingClientRect().top;
+                    var topBoundary = top - topMain;
+                    if( topBoundary > -1 && topBoundary < 1 ){
+                        if( i+1 < elems.length ){
+                            var target = elems[ i+1 ];
+                            target.scrollIntoView();
+                        }
+                        return true;
+                    }
+                    if( topBoundary >= 1 ){
+                        var target = elem;
+                        target.scrollIntoView();
+                        return true;
+                    }
+                })
+            }
+        }
+    });
+}
+
+function initArrowHorizontalNav(){
     if( isPrint ){
         return;
     }
@@ -821,13 +857,13 @@ function initMenuScrollbar(){
     // that need to be executed inbetween our own handlers
     // PSC removed for #242 #243 #244
     // psc = elc && new PerfectScrollbar('#R-body-inner');
-    psm = elm && new PerfectScrollbar('#R-content-wrapper');
+    psm = elm && new PerfectScrollbar('#R-content-wrapper', { scrollingThreshold: 2000, swipeEasing: false, wheelPropagation: false });
     document.querySelectorAll('.topbar-button .topbar-content-wrapper').forEach( function( e ){
         var button = getTopbarButtonParent( e );
         if( !button ){
             return;
         }
-        pst.set( button, new PerfectScrollbar( e ) );
+        pst.set( button, new PerfectScrollbar( e, { scrollingThreshold: 2000, swipeEasing: false, wheelPropagation: false }) );
         e.addEventListener( 'click', toggleTopbarFlyoutEvent );
     });
 
@@ -1273,9 +1309,9 @@ function mark() {
 
     var value = sessionStorage.getItem( window.relearn.absBaseUri + '/search-value' );
     var highlightableElements = document.querySelectorAll( '.highlightable' );
-    highlight( highlightableElements, value, { element: 'mark' } );
+    highlight( highlightableElements, value, { element: 'mark', className: 'search' } );
 
-    var markedElements = document.querySelectorAll( 'mark' );
+    var markedElements = document.querySelectorAll( 'mark.search' );
     for( var i = 0; i < markedElements.length; i++ ){
         var parent = markedElements[i].parentNode;
         while( parent && parent.classList ){
@@ -1360,7 +1396,7 @@ function highlightNode( node, re, nodeName, className ){
 
 function unmark() {
     sessionStorage.removeItem( window.relearn.absBaseUri + '/search-value' );
-    var markedElements = document.querySelectorAll( 'mark' );
+    var markedElements = document.querySelectorAll( 'mark.search' );
     for( var i = 0; i < markedElements.length; i++ ){
         var parent = markedElements[i].parentNode;
         while( parent && parent.classList ){
@@ -1385,7 +1421,7 @@ function unmark() {
     }
 
     var highlighted = document.querySelectorAll( '.highlightable' );
-    unhighlight( highlighted, { element: 'mark' } );
+    unhighlight( highlighted, { element: 'mark', className: 'search' } );
     psm && setTimeout( function(){ psm.update(); }, 10 );
 }
 
@@ -1519,10 +1555,6 @@ function updateTheme( detail ){
 })();
 
 function useMermaid( config ){
-    if( !Object.assign ){
-        // We don't support Mermaid for IE11 anyways, so bail out early
-        return;
-    }
     window.relearn.mermaidConfig = config;
     if (typeof mermaid != 'undefined' && typeof mermaid.mermaidAPI != 'undefined') {
         mermaid.initialize( Object.assign( { "securityLevel": "antiscript", "startOnLoad": false }, config ) );
@@ -1546,7 +1578,8 @@ if( window.themeUseOpenapi ){
 }
 
 ready( function(){
-    initArrowNav();
+    initArrowVerticalNav();
+    initArrowHorizontalNav();
     initMermaid();
     initOpenapi();
     initMenuScrollbar();

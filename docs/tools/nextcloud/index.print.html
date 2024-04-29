@@ -1,46 +1,53 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
-    <meta name="generator" content="Relearn 5.26.2+tip">
-    <meta name="description" content="Linux, Tech, Open Source Software, Privacy">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="description" content="This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare
+What is Nextcloud? Nextcloud is so many things. It offers so many features and options, it deserves a bulleted list:
+Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google’s services Create web forms or surveys It is also free and open source.">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Nextcloud Guide - Perfect Dark Mode">
     <meta name="twitter:description" content="This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare
 What is Nextcloud? Nextcloud is so many things. It offers so many features and options, it deserves a bulleted list:
-Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google&rsquo;s services Create web forms or surveys It is also free and open source.">
+Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google’s services Create web forms or surveys It is also free and open source.">
+    <meta property="og:url" content="http://perfectdarkmode.com/tools/nextcloud/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:title" content="Nextcloud Guide - Perfect Dark Mode">
     <meta property="og:description" content="This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare
 What is Nextcloud? Nextcloud is so many things. It offers so many features and options, it deserves a bulleted list:
-Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google&rsquo;s services Create web forms or surveys It is also free and open source.">
+Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google’s services Create web forms or surveys It is also free and open source.">
+    <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://perfectdarkmode.com/tools/nextcloud/">
-    <meta property="article:section" content="Tools - Perfect Dark Mode">
+    <meta property="article:section" content="Tools">
     <meta property="article:published_time" content="2023-04-23T13:44:23-07:00">
     <meta property="article:modified_time" content="2023-04-23T13:44:23-07:00">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta itemprop="name" content="Nextcloud Guide - Perfect Dark Mode">
+    <meta itemprop="description" content="This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare
+What is Nextcloud? Nextcloud is so many things. It offers so many features and options, it deserves a bulleted list:
+Free and open source Cloud storage and syncing Email client Custom browser dashboard with widgets Office suite RSS newsfeed Project organization (deck) Notebook Calender Task manager Connect to decentralized social media (like Mastodon) Replacement for all of google’s services Create web forms or surveys It is also free and open source.">
+    <meta itemprop="datePublished" content="2023-04-23T13:44:23-07:00">
+    <meta itemprop="dateModified" content="2023-04-23T13:44:23-07:00">
+    <meta itemprop="wordCount" content="1322">
     <title>Nextcloud Guide - Perfect Dark Mode</title>
     <link href="http://perfectdarkmode.com/tools/nextcloud/" rel="canonical" type="text/html" title="Nextcloud Guide - Perfect Dark Mode">
     <link href="/tools/nextcloud/index.xml" rel="alternate" type="application/rss+xml" title="Nextcloud Guide - Perfect Dark Mode">
-    <link href="/images/favicon.png?1713095795" rel="icon" type="image/png">
-    <!-- https://github.com/filamentgroup/loadCSS/blob/master/README.md#how-to-use -->
-    <link href="/css/fontawesome-all.min.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1713095797" rel="stylesheet">
-    <link href="/css/auto-complete.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1713095797" rel="stylesheet">
-    <link href="/css/fonts.css?1713095797" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1713095797" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1713095797" rel="stylesheet">
-    <link href="/css/theme-git.css?1713095797" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1713095797" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1713095797" rel="stylesheet">
-    <link href="/css/print.css?1713095797" rel="stylesheet" media="print">
-    <link href="/css/format-print.css?1713095797" rel="stylesheet">
-    <link href="/css/ie.css?1713095797" rel="stylesheet">
-    <script src="/js/url.js?1713095797"></script>
-    <script src="/js/variant.js?1713095797"></script>
+    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714390187" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714390187" rel="stylesheet">
+    <link href="/css/fonts.css?1714390187" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390187" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714390187" rel="stylesheet">
+    <link href="/css/theme-git.css?1714390187" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714390187" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714390187" rel="stylesheet">
+    <link href="/css/print.css?1714390187" rel="stylesheet" media="print">
+    <link href="/css/format-print.css?1714390187" rel="stylesheet">
+    <script src="/js/variant.js?1714390187"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -48,7 +55,6 @@ Free and open source Cloud storage and syncing Email client Custom browser dashb
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.relearn.themeVariantModifier='';
       window.variants && variants.init( [ 'git' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
@@ -105,6 +111,7 @@ Free and open source Cloud storage and syncing Email client Custom browser dashb
           <article class="default">
             <header class="headline">
             </header>
+
 <h1 id="nextcloud-guide">Nextcloud Guide</h1>
 
 <p>This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare</p>
@@ -132,7 +139,7 @@ Free and open source Cloud storage and syncing Email client Custom browser dashb
 <div class="highlight wrap-code"><pre tabindex="0"><code>sudo apt install software-properties-common ca-certificates lsb-release apt-transport-https </code></pre></div><h4 id="enable-sury-repository">Enable Sury Repository</h4>
 <div class="highlight wrap-code"><pre tabindex="0"><code>sudo sh -c &#39;echo &#34;deb https://packages.sury.org/php/ $(lsb_release -sc) main&#34; &gt; /etc/apt/sources.list.d/php.list&#39; </code></pre></div><h4 id="import-the-gpg-key-for-the-repository">Import the GPG key for the repository</h4>
 <div class="highlight wrap-code"><pre tabindex="0"><code>wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add - </code></pre></div><h4 id="install-php-82">Install PHP 8.2</h4>
-<p><a href="https://computingforgeeks.com/how-to-install-php-8-2-on-debian/?expand_article=1" target="_blank">https://computingforgeeks.com/how-to-install-php-8-2-on-debian/?expand_article=1</a>
+<p><a href="https://computingforgeeks.com/how-to-install-php-8-2-on-debian/?expand_article=1" rel="external" target="_blank">https://computingforgeeks.com/how-to-install-php-8-2-on-debian/?expand_article=1</a>
 (This is also part of the other dependencies install command below)</p>
 <div class="highlight wrap-code"><pre tabindex="0"><code>sudo apt install php8.2 </code></pre></div><h4 id="install-other-dependencies">Install other dependencies:</h4>
 <div class="highlight wrap-code"><pre tabindex="0"><code>apt install -y nginx python3-certbot-nginx mariadb-server php8.2 php8.2-{fpm,bcmath,bz2,intl,gd,mbstring,mysql,zip,xml,curl}</code></pre></div><h3 id="improving-nextcloud-server-performance">Improving Nextcloud server performance</h3>
@@ -160,7 +167,7 @@ Reload privilege tables now? [Y/n]: Y</code></pre></div><p>Sign in to your SQL d
 GRANT ALL ON nextcloud.* TO &#39;username&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;;
 FLUSH PRIVILEGES;
 EXIT;</code></pre></div><h3 id="install-ssl-with-certbot">Install SSL with Certbot</h3>
-<p>Obtain an SSL certificate. See my <a href="https://perfectdarkmode.com/posts/2023/03/building-a-minimalist-website-with-hugo/" target="_blank">website setup</a> post for information about Certbot and nginx setup.</p>
+<p>Obtain an SSL certificate. See my <a href="https://perfectdarkmode.com/posts/2023/03/building-a-minimalist-website-with-hugo/" rel="external" target="_blank">website setup</a> post for information about Certbot and nginx setup.</p>
 <div class="highlight wrap-code"><pre tabindex="0"><code>certbot certonly --nginx -d nextcloud.example.com</code></pre></div><h3 id="create-a-cname-record-for-dns">Create a CNAME record for DNS.</h3>
 <p>You will need to have a domain name set up for your server. I use Cloudflare to manage my DNS records. You will want to make a CNAME record for your nextcloud subdomain.</p>
 <p>Just add &ldquo;nextcloud&rdquo; as the name and &ldquo;yourwebsite.com&rdquo; as the content. This will make it so &ldquo;nextcloud.yourwebsite.com&rdquo;. Make sure to select &ldquo;DNS Only&rdquo; under proxy status.</p>
@@ -281,7 +288,7 @@ chmod -R 755 /var/www/nextcloud</code></pre></div><h3 id="start-and-enable-php-f
 # Do need this-&gt;
 sudo systemctl enable php8.2-fpm.service --now</code></pre></div><h3 id="reload-nginx">Reload nginx</h3>
 <div class="highlight wrap-code"><pre tabindex="0"><code>systemctl reload nginx</code></pre></div><h3 id="nextcloud-occ-tool">Nextcloud occ tool</h3>
-<p>Here is a built in Nextcloud tool just in case things break. Here is a <a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html" target="_blank">guide</a> on troubleshooting with occ. The basic command is as follows:</p>
+<p>Here is a built in Nextcloud tool just in case things break. Here is a <a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html" rel="external" target="_blank">guide</a> on troubleshooting with occ. The basic command is as follows:</p>
 <div class="highlight wrap-code"><pre tabindex="0"><code>sudo -u www-data php /var/www/nextcloud/occ</code></pre></div><p>Add this as an alias in ~/.bashrc for ease of use.</p>
 <h3 id="you-are-ready-to-log-in-to-nextcloud">You are ready to log in to Nextcloud!</h3>
 <p>Go to your nextcloud domain in a browser. In my case, I head to nextcloud.perfectdarkmode.com. Fill out the form to create your first Nextcloud user:</p>
@@ -303,14 +310,14 @@ sudo systemctl enable php8.2-fpm.service --now</code></pre></div><h3 id="reload-
 </ul>
 <h3 id="nextcloud-desktop-synchronization">NextCloud desktop synchronization</h3>
 <p>Install the desktop client (Fedora)</p>
-<div class="highlight wrap-code"><pre tabindex="0"><code>Sudo dnf install nextcloudclient</code></pre></div><p>Install on other distros: <a href="https://help.nextcloud.com/t/install-nextcloud-client-for-opensuse-arch-linux-fedora-ubuntu-based-android-ios/13657" target="_blank">https://help.nextcloud.com/t/install-nextcloud-client-for-opensuse-arch-linux-fedora-ubuntu-based-android-ios/13657</a></p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>Sudo dnf install nextcloudclient</code></pre></div><p>Install on other distros: <a href="https://help.nextcloud.com/t/install-nextcloud-client-for-opensuse-arch-linux-fedora-ubuntu-based-android-ios/13657" rel="external" target="_blank">https://help.nextcloud.com/t/install-nextcloud-client-for-opensuse-arch-linux-fedora-ubuntu-based-android-ios/13657</a></p>
 <ol>
 <li>Run the nextcloud desktop app and sign in.</li>
 <li>Choose folders to sync.</li>
 <li>Folder will be ~/Nextcloud.</li>
 <li>Move everything into your nextcloud folder.</li>
 </ol>
-<p>This may break things with filepaths so beware. Now you are ready to use and explore nextcloud. Here is a <a href="https://www.youtube.com/watch?v=j0APTeBFfSU" target="_blank">video</a> from TechHut to get you started down the NextCloud rabbit hole.</p>
+<p>This may break things with filepaths so beware. Now you are ready to use and explore nextcloud. Here is a <a href="https://www.youtube.com/watch?v=j0APTeBFfSU" rel="external" target="_blank">video</a> from TechHut to get you started down the NextCloud rabbit hole.</p>
 <h4 id="change-max-upload-size-default-is-500mg">Change max upload size (default is 500mg)</h4>
 <p>/var/www/nextcloud/.user.ini
 php_value upload_max_filesize = 16G
@@ -322,7 +329,7 @@ php_value post_max_size = 16G</p>
 <code>DELETE FROM oc_file_locks WHERE 1</code></p>
 <ul>
 <li>disable maintenance mode (undo first step).</li>
-<li>Make sure your cron-jobs run properly (you admin page tells you when cron ran the last time): <a href="https://docs.nextcloud.org/server/13/admin_manual/configuration_server/background_jobs_configuration.html" target="_blank">https://docs.nextcloud.org/server/13/admin_manual/configuration_server/background_jobs_configuration.html 2.7k</a></li>
+<li>Make sure your cron-jobs run properly (you admin page tells you when cron ran the last time): <a href="https://docs.nextcloud.org/server/13/admin_manual/configuration_server/background_jobs_configuration.html" rel="external" target="_blank">https://docs.nextcloud.org/server/13/admin_manual/configuration_server/background_jobs_configuration.html 2.7k</a></li>
 </ul>
 <div class="highlight wrap-code"><pre tabindex="0"><code>mysql -u root -p
 MariaDB [(none)]&gt; use nextcloud;
@@ -336,28 +343,14 @@ MariaDB [nextcloud]&gt; DELETE FROM oc_file_locks WHERE 1;
         </div>
       </main>
     </div>
-    <script src="/js/clipboard.min.js?1713095797" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1713095797" defer></script>
+    <script src="/js/clipboard.min.js?1714390187" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714390187" defer></script>
     <script>
       function useMathJax( config ){
-        if( !Object.assign ){
-          
-          return;
-        }
         window.MathJax = Object.assign( window.MathJax || {}, {
-          loader: {
-            load: ['[tex]/mhchem']
-          },
-          startup: {
-            elements: [
-              '.math'
-            ]
-          },
           tex: {
-            inlineMath: [
-              ['$', '$'], 
-              ['\\(', '\\)']
-            ]
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
           },
           options: {
             enableMenu: false 
@@ -367,20 +360,20 @@ MariaDB [nextcloud]&gt; DELETE FROM oc_file_locks WHERE 1;
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1713095797" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1713095797" defer></script>
-    <script src="/js/js-yaml.min.js?1713095797" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714390187" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714390187" defer></script>
+    <script src="/js/js-yaml.min.js?1714390187" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1713095797" defer></script>
+    <script src="/js/theme.js?1714390187" defer></script>
   </body>
 </html>
