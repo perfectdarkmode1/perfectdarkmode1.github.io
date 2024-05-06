@@ -362,47 +362,33 @@ kvdo (Stage 3)
 
 - VDO volumes can be initialized for use just like disk partitions, or they can be used as LVM physical volumes.
 
-*vdo* and *vdostats* commands
-VDO offers a set of commands to create, manage, and monitor volumes. Of
-these  are discussed and used in this
-section. The *vdo* command is used to create and perform essential
-operations on VDO volumes, and the *vdostats* command is employed to
-monitor usage statistics of the underlying physical storage device.
+### vdo and vdostats commands
 
-[Table 13-2](#part0025_split_001.html#id_740){.calibre5} summarizes the
-subcommands available with *vdo*.
+- Create, manage, and monitor volumes.
+- vdo command is used to create and perform essential operations on VDO volumes
+- vdostats command is employed to monitor usage statistics of the underlying physical storage device.
 
-::: c49
-  ---------------- -----------------------------------------------------
-  **Subcommand**   **Description**
-  create           Adds a new VDO volume on the specified block device
-  status           Returns the status and attributes of VDO volumes
-  list             Lists the names of all started VDO volumes
-  start            Starts a VDO volume
-  stop             Stops a VDO volume
-  ---------------- -----------------------------------------------------
+VDO subcommands
 
-**[Table]{#part0025_split_001.html#id_740} 13-2 vdo Subcommands**
-:::
+|  **Subcommand** |  **Description** |
+| --- | --- |
+|  create   |        Adds a new VDO volume on the specified block device |
+|  status    |       Returns the status and attributes of VDO volumes |
+|  list       |      Lists the names of all started VDO volumes |
+|  start      |      Starts a VDO volume |
+|  stop       |      Stops a VDO volume |
 
-The *vdostats* command has a couple of interesting options that you will
-use shortly.
 
-**[Exercise]{#part0025_split_001.html#id_370 .calibre10} 13-6: Install
-Software and Activate VDO**
+### Lab: Install Software and Activate VDO
 
-This exercise should be done on *server2* as *user1* with *sudo* where
-required.
+- install the VDO software packages
+- start the VDO service, and mark it for autostart on subsequent system reboots.
 
-In this exercise, you will install the VDO software packages, start the
-VDO service, and mark it for autostart on subsequent system reboots.
+1. Install packages *vdo* and *kmod-kvdo*:
+`dnf install vdo kmod-kvdo -y`
 
-1[.]{.c19}Install packages *vdo* and *kmod-kvdo*:
 
-![](images/00680.jpeg){.image2}
-
-2[.]{.c19}Start the service and enable it to start automatically on
-future system reboots:
+2. Start the service and enable it to start automatically on future system reboots:
 
 ![](images/00681.jpeg){.image2}
 

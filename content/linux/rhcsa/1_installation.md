@@ -1,5 +1,6 @@
 # Chapter 1 RHCSA Notes - Installation
 
+
 ## About RHEL9
 
 - Kernel 5.14
@@ -102,7 +103,7 @@ Storage: 1x20GB
 
 Download the disc iso on Redhat's website: [https://access.redhat.com/downloads/content/rhel](https://access.redhat.com/downloads/content/rhel)
 
-Name RHEL9-VM1 Accept defaults
+Name RHEL9-VM1 Accept defaults.
 
 Set drive to 20 gigs
 

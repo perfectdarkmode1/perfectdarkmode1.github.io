@@ -25,20 +25,20 @@ List, create, and delete partitions on MBR and GPT disks Configure disk compress
     <meta itemprop="description" content="This chapter describes the following major topics:
 Master Boot Record vs. GUID Partition Table Identify and understand disk partitions The concept of thin provisioning, and its benefits Create and delete partition on MBR disk Create and delete partition on GPT disk Overview of Virtual Data Optimizer and how it conserves storage Create and delete a Virtual Data Optimizer volume RHCSA Objectives:
 List, create, and delete partitions on MBR and GPT disks Configure disk compression Data is stored on disks that are logically divided into partitions.">
-    <meta itemprop="wordCount" content="4036">
+    <meta itemprop="wordCount" content="3974">
     <title></title>
-    <link href="/images/favicon.png?1714390184" rel="icon" type="image/png">
-    <link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714390185" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1714390185" rel="stylesheet">
-    <link href="/css/auto-complete.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714390185" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1714390185" rel="stylesheet">
-    <link href="/css/fonts.css?1714390185" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714390185" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1714390185" rel="stylesheet">
-    <link href="/css/theme-git.css?1714390185" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1714390185" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1714390185" rel="stylesheet">
-    <link href="/css/print.css?1714390185" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1714390185"></script>
+    <link href="/images/favicon.png?1714996895" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1714996896" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1714996896" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1714996896" rel="stylesheet">
+    <link href="/css/auto-complete.css?1714996896" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1714996896" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1714996896" rel="stylesheet">
+    <link href="/css/fonts.css?1714996896" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1714996896" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1714996896" rel="stylesheet">
+    <link href="/css/theme-git.css?1714996896" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1714996896" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1714996896" rel="stylesheet">
+    <link href="/css/print.css?1714996896" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1714996896"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -100,6 +100,8 @@ List, create, and delete partitions on MBR and GPT disks Configure disk compress
     <li><a href="#storage-optimization-with-virtual-data-optimizer-vdo">Storage Optimization with Virtual Data Optimizer (VDO)</a>
       <ul>
         <li><a href="#how-vdo-conserves-storage-space">How VDO Conserves Storage Space</a></li>
+        <li><a href="#vdo-and-vdostats-commands">vdo and vdostats commands</a></li>
+        <li><a href="#lab-install-software-and-activate-vdo">Lab: Install Software and Activate VDO</a></li>
       </ul>
     </li>
   </ul>
@@ -331,8 +333,8 @@ last two blocks</li>
 pops up. Click on &ldquo;Controller: SATA&rdquo; to select it.</p>
 </li>
 </ol>
-<p><a href="#R-image-d227c9b8d19658736f3fd26f71144eea" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240413054446.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d227c9b8d19658736f3fd26f71144eea"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240413054446.png"></a></p>
+<p><a href="#R-image-72ba0d109b1048a33746590b0e5f0d8d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240413054446.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-72ba0d109b1048a33746590b0e5f0d8d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240413054446.png"></a></p>
 <ol start="3">
 <li>
 <p>Click on the right-side icon next to &ldquo;Controller: SATA&rdquo; to add a hard disk.</p>
@@ -590,43 +592,62 @@ Changed type of partition to &#39;Linux filesystem&#39;</code></pre></div><ol st
 <ul>
 <li>VDO volumes can be initialized for use just like disk partitions, or they can be used as LVM physical volumes.</li>
 </ul>
-<p><em>vdo</em> and <em>vdostats</em> commands
-VDO offers a set of commands to create, manage, and monitor volumes. Of
-these  are discussed and used in this
-section. The <em>vdo</em> command is used to create and perform essential
-operations on VDO volumes, and the <em>vdostats</em> command is employed to
-monitor usage statistics of the underlying physical storage device.</p>
-<p><a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_001.html#id_740">Table 13-2</a>{.calibre5} summarizes the
-subcommands available with <em>vdo</em>.</p>
-<p>::: c49</p>
-<hr>
-<p><strong>Subcommand</strong>   <strong>Description</strong>
-create           Adds a new VDO volume on the specified block device
-status           Returns the status and attributes of VDO volumes
-list             Lists the names of all started VDO volumes
-start            Starts a VDO volume
-stop             Stops a VDO volume</p>
-<hr>
-<p><strong>[Table]{#part0025_split_001.html#id_740} 13-2 vdo Subcommands</strong>
-:::</p>
-<p>The <em>vdostats</em> command has a couple of interesting options that you will
-use shortly.</p>
-<p><strong>[Exercise]{#part0025_split_001.html#id_370 .calibre10} 13-6: Install
-Software and Activate VDO</strong></p>
-<p>This exercise should be done on <em>server2</em> as <em>user1</em> with <em>sudo</em> where
-required.</p>
-<p>In this exercise, you will install the VDO software packages, start the
-VDO service, and mark it for autostart on subsequent system reboots.</p>
-<p>1[.]{.c19}Install packages <em>vdo</em> and <em>kmod-kvdo</em>:</p>
-<p><a href="#R-image-c2621a2ff1fbc528f7fd92418d2ce76b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00680.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c2621a2ff1fbc528f7fd92418d2ce76b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00680.jpeg"></a>{.image2}</p>
-<p>2[.]{.c19}Start the service and enable it to start automatically on
-future system reboots:</p>
-<p><a href="#R-image-8bbbb6042e430e8a9f0894ca498354a3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00681.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8bbbb6042e430e8a9f0894ca498354a3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00681.jpeg"></a>{.image2}</p>
+<h3 id="vdo-and-vdostats-commands">vdo and vdostats commands</h3>
+<ul>
+<li>Create, manage, and monitor volumes.</li>
+<li>vdo command is used to create and perform essential operations on VDO volumes</li>
+<li>vdostats command is employed to monitor usage statistics of the underlying physical storage device.</li>
+</ul>
+<p>VDO subcommands</p>
+<table>
+<thead>
+<tr>
+<th><strong>Subcommand</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>create</td>
+<td>Adds a new VDO volume on the specified block device</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Returns the status and attributes of VDO volumes</td>
+</tr>
+<tr>
+<td>list</td>
+<td>Lists the names of all started VDO volumes</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Starts a VDO volume</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>Stops a VDO volume</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lab-install-software-and-activate-vdo">Lab: Install Software and Activate VDO</h3>
+<ul>
+<li>install the VDO software packages</li>
+<li>start the VDO service, and mark it for autostart on subsequent system reboots.</li>
+</ul>
+<ol>
+<li>
+<p>Install packages <em>vdo</em> and <em>kmod-kvdo</em>:
+<code>dnf install vdo kmod-kvdo -y</code></p>
+</li>
+<li>
+<p>Start the service and enable it to start automatically on future system reboots:</p>
+</li>
+</ol>
+<p><a href="#R-image-0038ca5bbf163500b31a395efd131cfb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00681.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0038ca5bbf163500b31a395efd131cfb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00681.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Check the operational status of the service:</p>
-<p><a href="#R-image-583cdc413d9569bf809ebe3f0fb00c97" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00682.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-583cdc413d9569bf809ebe3f0fb00c97"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00682.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5d3f2586f694b4d7b83bba58c841a04d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00682.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5d3f2586f694b4d7b83bba58c841a04d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00682.jpeg"></a>{.image2}</p>
 <p>The relevant packages for VDO are installed, and the VDO service is
 started and activated. This concludes the exercise.</p>
 <p><strong>Exercise 13-7: Create a VDO Volume</strong></p>
@@ -640,51 +661,51 @@ features.</p>
 <p>1[.]{.c19}Create a volume called <em>vdo-vol1</em> (--name) on the **dev<em>sdf</em>
 device (--device) with a logical size of 16GB (--vdoLogicalSize) and
 slab size of 128MB (--vdoSlabSize):</p>
-<p><a href="#R-image-b49c467d1949b9b881731f79f9ded47e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00683.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b49c467d1949b9b881731f79f9ded47e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00683.jpeg"></a>{.image2}</p>
-<p><a href="#R-image-4d63695b2cd28b22f30298107e59bc4c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d63695b2cd28b22f30298107e59bc4c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Increase the amount of memory allocated
+<p><a href="#R-image-88730375181d4d53ec675425572862a5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00683.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-88730375181d4d53ec675425572862a5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00683.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-534e7e534ef752fabbf459757882d49a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-534e7e534ef752fabbf459757882d49a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} Increase the amount of memory allocated
 to the virtual machine to 2GB if the output complains about insufficient
 memory.</p>
-<p><a href="#R-image-816c4a5d3adde6baac64fc83b6bd8ea8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-816c4a5d3adde6baac64fc83b6bd8ea8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} If the logical size is not specified, the
+<p><a href="#R-image-97d1a0fd2751c13e9ea3fbd24c5991e9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-97d1a0fd2751c13e9ea3fbd24c5991e9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} If the logical size is not specified, the
 VDO volume will have the same size as the underlying disk (<em>dev</em>sdf in
 this case).</p>
-<p><a href="#R-image-a8b611527c3aaf6f1ecf240bb7256476" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a8b611527c3aaf6f1ecf240bb7256476"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The slab size is the size of the
+<p><a href="#R-image-c1aaa6bdd9f200c97dd79f60141e9802" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c1aaa6bdd9f200c97dd79f60141e9802"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} The slab size is the size of the
 increment by which VDO volumes grow. This value must be a power of two
 between 128MB and 32GB; the default is 2GB. The default unit of size
 specification is MB.</p>
 <p>2[.]{.c19}List the new volume using the <em>vdo</em> and <em>lsblk</em> commands:</p>
-<p><a href="#R-image-d07b4ed30830a2004ef2bb41a5ccf719" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00684.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d07b4ed30830a2004ef2bb41a5ccf719"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00684.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-2f84e87e7523c2ffaba460699e083b88" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00684.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2f84e87e7523c2ffaba460699e083b88"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00684.jpeg"></a>{.image2}</p>
 <p>As indicated, the major number for the VDO volume is 253, which is
 associated with the device mapper kernel driver. The output also shows
 the logical volume size (16GB) and type (vdo). It also depicts the disk
 (<em>sdf</em>) that houses the volume, along with its actual size (4GB).</p>
 <p>3[.]{.c19}Display the usage status of the volume:</p>
-<p><a href="#R-image-d026fe645205c8c2d5391dd6a8847504" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00685.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d026fe645205c8c2d5391dd6a8847504"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00685.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a1b0b03aa4a4de8887600374f0dd903b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00685.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a1b0b03aa4a4de8887600374f0dd903b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00685.jpeg"></a>{.image2}</p>
 <p>The size of the actual disk is 4GB. Due to thin provisioning, the system
 allowed you to create the VDO volume much larger in size (4 times) than
 the physical disk capacity.</p>
 <p>4[.]{.c19}Show detailed statistics for the volume including
 configuration information:</p>
-<p><a href="#R-image-8159640537ec9b85dc05806079d4d389" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00686.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8159640537ec9b85dc05806079d4d389"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00686.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-3b926cde26f0efbf46eb293a88396b04" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00686.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3b926cde26f0efbf46eb293a88396b04"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00686.jpeg"></a>{.image2}</p>
 <p>The output will expose over one hundred different settings for the
 volume.</p>
 <p>5[.]{.c19}Display detailed statistics for the volume including
 configuration information:</p>
-<p><a href="#R-image-08a6e07d61b91923fc8bad4b7b025008" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00687.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-08a6e07d61b91923fc8bad4b7b025008"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00687.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-160d04c344045a94ece4dddf937e1a6c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00687.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-160d04c344045a94ece4dddf937e1a6c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00687.jpeg"></a>{.image2}</p>
 <p>The status includes volume, kernel module, and configuration
 information. It also provides a detailed look at volume-specific
 elements.</p>
 <p>6[.]{.c19}Show the activation status of the compression and
 de-duplication features:</p>
-<p><a href="#R-image-04efda8664f0cb399a89201a252312ff" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00688.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-04efda8664f0cb399a89201a252312ff"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00688.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-7af15e4f6057c69004a96c50c33127da" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00688.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7af15e4f6057c69004a96c50c33127da"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00688.jpeg"></a>{.image2}</p>
 <p>Both compression and de-duplication features are activated by default on
 new VDO volumes. This concludes the exercise.</p>
 <p><strong>Exercise 13-8: Delete a VDO Volume</strong></p>
@@ -695,15 +716,15 @@ in <a href="/linux/rhcsa/13_basic_storage_partitioning/#part0025_split_000.html#
 confirm the removal.</p>
 <p>1[.]{.c19}Verify that the volume still exists with the <em>vdo</em> and <em>lsblk</em>
 commands:</p>
-<p><a href="#R-image-9164e7f55e1cb7557d47fc20e56f1244" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00689.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9164e7f55e1cb7557d47fc20e56f1244"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00689.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c38ebb7e78d96a91f9d01d3f413f2b6d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00689.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c38ebb7e78d96a91f9d01d3f413f2b6d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00689.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Specify the name (--name) of the volume with the <em>vdo</em>
 command to delete:</p>
-<p><a href="#R-image-7a2c6230106b669e7ea5d083f56f4df8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00690.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7a2c6230106b669e7ea5d083f56f4df8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00690.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-d6e7b801e5cb9099321c3a5e5c72a32a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00690.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d6e7b801e5cb9099321c3a5e5c72a32a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00690.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Confirm the removal with the <em>vdo</em> and <em>lsblk</em> commands:</p>
-<p><a href="#R-image-3f74f12b902134f046f226d143a8b222" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00691.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3f74f12b902134f046f226d143a8b222"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00691.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-cbb0409bdca1d2122c67feaea86199ca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00691.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cbb0409bdca1d2122c67feaea86199ca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00691.jpeg"></a>{.image2}</p>
 <p>The volume has been deleted successfully as reported in the above
 outputs.</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} Make sure that you run the lsblk command before
@@ -869,12 +890,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1714390185" defer></script>
-        <script src="/js/lunr/lunr.min.js?1714390185" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1714390185" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1714390185" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1714390185" defer></script>
-        <script src="/js/search.js?1714390185" defer></script>
+        <script src="/js/auto-complete.js?1714996896" defer></script>
+        <script src="/js/lunr/lunr.min.js?1714996896" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1714996896" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1714996896" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1714996896" defer></script>
+        <script src="/js/search.js?1714996896" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1070,8 +1091,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1714390185" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1714390185" defer></script>
+    <script src="/js/clipboard.min.js?1714996896" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1714996896" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -1087,20 +1108,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1714390185" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1714390185" defer></script>
-    <script src="/js/js-yaml.min.js?1714390185" defer></script>
+    <script src="/js/d3/d3-color.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1714996896" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1714996896" defer></script>
+    <script src="/js/js-yaml.min.js?1714996896" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1714390185" defer></script>
+    <script src="/js/theme.js?1714996896" defer></script>
   </body>
 </html>
