@@ -5,7 +5,7 @@ Date Read: 2024-04-22. How Strongly I Recommend It: 10/10
 
 Go to the [Amazon page](https://www.amazon.com/Dopamine-Nation-Finding-Balance-Indulgence/dp/1524746746/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.CbGRT43DDyCX0BQVGMrdXbxl4RHGuckIx-_lae2ha3aCLsP5rrupkhMNHIMWvSJSLvVvmxicIad61tvFjK0S23bIb6vuvBfBCMA9EnQWDK7411Lox_5c4qrrAJk5YWqmTvQc_rwbb44qwolvF51WiR93E2tXE5fvjhd8epOF-4jXZJc0nZ66NxOun1UQUoeLl1eszAUbMk0oObXKl2XLY-YHpVaoGPdAw3QE5Lm5hkY.UBLZKp4ivcCTLvVZIZleBbdfZ0jAKt2py70jyL_jW-Q&qid=1714996664&sr=8-1) for details and reviews.
 
-This is my review and summary of Dopamine Nation. Overall, this was a very insightful book. Knowing the balance between pain and pleasure is essential to living in modern day society. Where scarcity is no longer an issue. Our brains are not adapted for a world of abundance. So the forces that kept us alive for thousands of years, are now making us miserable. Consider this a primer into understanding addiction and over consumption. And steps you can take to mitigate this. 
+This was a very insightful book. Knowing the balance between pain and pleasure is essential to living in modern day society. Where scarcity is no longer an issue. Our brains are not adapted for a world of abundance. So the forces that kept us alive for thousands of years, are now making us miserable. Consider this a primer into understanding addiction and over consumption. And steps you can take to mitigate this. 
 
 ---
 
