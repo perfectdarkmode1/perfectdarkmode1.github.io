@@ -1,6 +1,10 @@
+---
+draft: false
+title: Dopamine Nation Summary
+---
+
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91lcJzqYNtL._SL1500_.jpg?classes=inline&height=175px)
 
-[Dopamine Nation  - By Anna Lembke](Dopamine_Nation)
 Date Read: 2024-04-22. How Strongly I Recommend It: 10/10
 
 Go to the [Amazon page](https://www.amazon.com/Dopamine-Nation-Finding-Balance-Indulgence/dp/1524746746/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.CbGRT43DDyCX0BQVGMrdXbxl4RHGuckIx-_lae2ha3aCLsP5rrupkhMNHIMWvSJSLvVvmxicIad61tvFjK0S23bIb6vuvBfBCMA9EnQWDK7411Lox_5c4qrrAJk5YWqmTvQc_rwbb44qwolvF51WiR93E2tXE5fvjhd8epOF-4jXZJc0nZ66NxOun1UQUoeLl1eszAUbMk0oObXKl2XLY-YHpVaoGPdAw3QE5Lm5hkY.UBLZKp4ivcCTLvVZIZleBbdfZ0jAKt2py70jyL_jW-Q&qid=1714996664&sr=8-1) for details and reviews.
@@ -258,9 +262,15 @@ We feel deeply connected to others when we feel accepted despite our flaws.
 
 Social media makes us compare ourselves to the entire world. Leading us to believe we should have done more. 
 
-Immerse oourselves in the world instead of turning away from it. 
+Immerse ourselves in the world instead of turning away from it. 
 
 Finding balance does not happen instantly. It requires patience, courage, and maintenance. You must have faith that the small actions you take every day will pay off in the future. 
+
+# If you made it this far…
+
+Please consider giving me some feedback. I want to become a better writer and help others grow along with me. Feedback is invaluable for this goal.
+
+Thanks for reading!
 
 
 
