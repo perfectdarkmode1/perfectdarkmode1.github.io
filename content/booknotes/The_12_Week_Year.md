@@ -317,7 +317,7 @@ Author book recommendations:
 - The Power of Habit by Charles Duhigg
 - Feel the Fear and do it anyway by Susan Jeffers
 
-# If you made it this far…
+### If you made it this far…
 
 Please consider giving me some feedback. I want to become a better writer and help others grow along with me. Feedback is invaluable for this goal.
 

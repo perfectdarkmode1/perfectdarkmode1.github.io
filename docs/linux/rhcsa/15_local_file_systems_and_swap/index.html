@@ -27,7 +27,7 @@
 [ {.c37}]{.c36}Monitor file system and directory usage
 [ {.c37}]{.c36}Create and mount different types of local file systems in partitions">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/15_local_file_systems_and_swap/">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:site_name" content="David Vargas">
     <meta property="og:description" content="This chapter describes the following major topics:
 [ {.c37}]{.c36}Understand file systems and their benefits, categories, and types
 [ {.c37}]{.c36}Review file system types: Ext3/Ext4, XFS, VFAT, and ISO9660
@@ -51,18 +51,18 @@
 [ {.c37}]{.c36}Create and mount different types of local file systems in partitions">
     <meta itemprop="wordCount" content="9286">
     <title></title>
-    <link href="/images/favicon.png?1715337780" rel="icon" type="image/png">
-    <link href="/css/fontawesome-all.min.css?1715337780" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1715337780" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1715337780" rel="stylesheet">
-    <link href="/css/auto-complete.css?1715337780" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1715337780" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1715337780" rel="stylesheet">
-    <link href="/css/fonts.css?1715337780" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1715337780" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1715337780" rel="stylesheet">
-    <link href="/css/theme-git.css?1715337780" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1715337780" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1715337780" rel="stylesheet">
-    <link href="/css/print.css?1715337780" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1715337780"></script>
+    <link href="/images/favicon.png?1715774310" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1715774310" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1715774310" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1715774310" rel="stylesheet">
+    <link href="/css/auto-complete.css?1715774310" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1715774310" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1715774310" rel="stylesheet">
+    <link href="/css/fonts.css?1715774310" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1715774310" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1715774310" rel="stylesheet">
+    <link href="/css/theme-blue.css?1715774310" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-learn.css?1715774310" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1715774310" rel="stylesheet">
+    <link href="/css/print.css?1715774310" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1715774310"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -70,7 +70,7 @@
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.variants && variants.init( [ 'git' ] );
+      window.variants && variants.init( [ 'blue' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -136,39 +136,39 @@
 <h1 id=""></h1>
 
 <p>This chapter describes the following major topics:</p>
-<p>[<a href="#R-image-e243255676701a85027413ce5dc9e468" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e243255676701a85027413ce5dc9e468"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand file systems and their
+<p>[<a href="#R-image-a1d771d05271f6befcb63407f505b387" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a1d771d05271f6befcb63407f505b387"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand file systems and their
 benefits, categories, and types</p>
-<p>[<a href="#R-image-ec30c2fac471a63d49ecb467c8bac0fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ec30c2fac471a63d49ecb467c8bac0fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Review file system types: Ext3/Ext4,
+<p>[<a href="#R-image-c0185bdcf44c80f4f988e8de0500e470" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c0185bdcf44c80f4f988e8de0500e470"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Review file system types: Ext3/Ext4,
 XFS, VFAT, and ISO9660</p>
-<p>[<a href="#R-image-536fb06f139172542f0724957158d83c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-536fb06f139172542f0724957158d83c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know file system administration
+<p>[<a href="#R-image-b9c809a6066a9acb3cb4ca0e8bf547f4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b9c809a6066a9acb3cb4ca0e8bf547f4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Know file system administration
 commandset</p>
-<p>[<a href="#R-image-0fb7ae8f5e4c38cc4554fd4c15cb23a4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0fb7ae8f5e4c38cc4554fd4c15cb23a4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Mount and unmount file systems
+<p>[<a href="#R-image-94e20feca7e9cea718e1d6668a8014f7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-94e20feca7e9cea718e1d6668a8014f7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Mount and unmount file systems
 manually and persistently</p>
-<p>[<a href="#R-image-ea8197f3c48e9fd391f87ea8acdb2884" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ea8197f3c48e9fd391f87ea8acdb2884"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Determine and use UUID</p>
-<p>[<a href="#R-image-4a5111f826bbbc49efd2f48b469ac920" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4a5111f826bbbc49efd2f48b469ac920"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Apply and use file system label</p>
-<p>[<a href="#R-image-10e8d5f0099d80a8f188177e6d8e2903" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-10e8d5f0099d80a8f188177e6d8e2903"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Monitor file system and directory
+<p>[<a href="#R-image-7a08cc4814f8971db9530e7b8cb6bfb5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7a08cc4814f8971db9530e7b8cb6bfb5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Determine and use UUID</p>
+<p>[<a href="#R-image-11a891f83630e3f48fa44f161f0e46e7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11a891f83630e3f48fa44f161f0e46e7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Apply and use file system label</p>
+<p>[<a href="#R-image-bd4079f96af1cb574f68f3282703f4e1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd4079f96af1cb574f68f3282703f4e1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Monitor file system and directory
 usage</p>
-<p>[<a href="#R-image-db7af6a6213d019da189f0f4a6be26db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-db7af6a6213d019da189f0f4a6be26db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and mount different types of
+<p>[<a href="#R-image-27c1c6b0de43316da940eb7f803c17db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-27c1c6b0de43316da940eb7f803c17db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and mount different types of
 local file systems in partitions</p>
-<p>[<a href="#R-image-26b12af32bd60131291ffd0c48fdd58d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-26b12af32bd60131291ffd0c48fdd58d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and mount XFS file system in
+<p>[<a href="#R-image-3a2579f7a2dcb61b24960fc9c1c90060" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3a2579f7a2dcb61b24960fc9c1c90060"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create and mount XFS file system in
 VDO volume</p>
-<p>[<a href="#R-image-1ae43ce02a054f31901f5f5846bf5344" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1ae43ce02a054f31901f5f5846bf5344"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create, mount, and resize Ext4 and
+<p>[<a href="#R-image-ea75e28646683ebe7376bc8bdf2e8935" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ea75e28646683ebe7376bc8bdf2e8935"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create, mount, and resize Ext4 and
 XFS file systems in LVM</p>
-<p>[<a href="#R-image-23948ebc58676b5bb7e7e110baff3abe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-23948ebc58676b5bb7e7e110baff3abe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create, mount, and expand Stratis
+<p>[<a href="#R-image-38602746aa2d462f572c787b7c64e81f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-38602746aa2d462f572c787b7c64e81f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Create, mount, and expand Stratis
 file system</p>
-<p>[<a href="#R-image-c492a27b5554d6d96c45440094d685fe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c492a27b5554d6d96c45440094d685fe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand, create, and activate
+<p>[<a href="#R-image-76375e70d644a163655614823a04f0e6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00001.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-76375e70d644a163655614823a04f0e6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00001.jpeg"></a>{.c37}]{.c36}Understand, create, and activate
 swap in partitions and LVM</p>
 <p>[RHCSA Objectives:]{.c39}</p>
 <p>[31]{#part0027_split_000.html#id_797 .calibre10}[.]{.c29}Configure
@@ -222,22 +222,22 @@ systems created during an installation are <em>/home</em>, <em>/opt</em>, <em>/t
 <em>/boot</em>&mdash;are required for installation and booting.</p>
 <p>Storing disparate data in distinct file systems versus storing all data
 in a single file system offers the following advantages:</p>
-<p>[<a href="#R-image-6f178e050d0764c29e0663f455f09b0f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6f178e050d0764c29e0663f455f09b0f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Make any file system
+<p>[<a href="#R-image-ca530696aa0abd7fa6765f9c2e1f9e69" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ca530696aa0abd7fa6765f9c2e1f9e69"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Make any file system
 accessible (mount) or inaccessible (unmount) to users independent of
 other file systems. This hides or reveals information contained in that
 file system.</p>
-<p>[<a href="#R-image-58a7f172de5d5d22ccdd54460676557b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-58a7f172de5d5d22ccdd54460676557b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Perform file system repair
+<p>[<a href="#R-image-3ba80a4fdef395fffafaa6b529985252" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3ba80a4fdef395fffafaa6b529985252"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Perform file system repair
 activities on individual file systems</p>
-<p>[<a href="#R-image-4dba9de5e438f34c24cd7f272f7fd55e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4dba9de5e438f34c24cd7f272f7fd55e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Keep dissimilar data in
+<p>[<a href="#R-image-08265f53b521c96c191357889408c426" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-08265f53b521c96c191357889408c426"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Keep dissimilar data in
 separate file systems</p>
-<p>[<a href="#R-image-c6d46ab26b02c8fc0577f4a1105bd8b1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c6d46ab26b02c8fc0577f4a1105bd8b1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Optimize or tune each file
+<p>[<a href="#R-image-fe86d00adbf2f310a031192b8183169b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fe86d00adbf2f310a031192b8183169b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Optimize or tune each file
 system independently</p>
-<p>[<a href="#R-image-94dc0f6d83e683255bd628e55c10df94" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-94dc0f6d83e683255bd628e55c10df94"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Grow or shrink a file system
+<p>[<a href="#R-image-11d24db51fa6bba1fb93b0418d219999" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00562.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11d24db51fa6bba1fb93b0418d219999"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00562.jpeg"></a>{.image2}]{.c1568a}Grow or shrink a file system
 independent of other file systems</p>
 <p>RHEL supports several types of file systems that may be categorized in
 three basic groups: <em>disk-based</em>, <em>network-based</em>, and <em>memory-based</em>.
@@ -378,8 +378,8 @@ deleted the LVM volume group and the Stratis pool. All the disks were
 returned to their unused state after the completion of the exercises.</p>
 <p>Here is a listing of the block devices to confirm the current state of
 the disks:</p>
-<p><a href="#R-image-572aacfb51ab3a12fb4f0cab562dde87" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00752.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-572aacfb51ab3a12fb4f0cab562dde87"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00752.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bbdc2247c80c192a30bd5e0ff238d2f1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00752.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bbdc2247c80c192a30bd5e0ff238d2f1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00752.jpeg"></a>{.image2}</p>
 <p>The output verifies the unused state and availability status for all the
 disks&mdash;<em>sdb</em> through <em>sdh</em>. You should be able to reuse them in the
 exercises in this chapter.</p>
@@ -431,8 +431,8 @@ root file system mounted on <em>/</em> and the boot file system mounted on
 the two file systems to the directory hierarchy. You can use the <em>mount</em>
 command to view information about mounted file systems. The following
 shows the XFS file systems only:</p>
-<p><a href="#R-image-d854c446dbb59f207039502d4455d96d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00753.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d854c446dbb59f207039502d4455d96d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00753.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8e88487341204706e972aa481844401a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00753.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e88487341204706e972aa481844401a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00753.jpeg"></a>{.image2}</p>
 <p>The &ldquo;-t xfs&rdquo; option makes the command to only show the file systems
 initialized with the XFS type.</p>
 <p>The <em>mount</em> command is also used for mounting a file system to a mount
@@ -444,8 +444,8 @@ command to mount all or a specific type of file system. The <em>mount</em>
 command is also used to mount other types of file systems such as those
 located in removable media. Upon successful mount, the kernel places an
 entry for the file system in the **proc<em>self/mounts</em> file.</p>
-<p><a href="#R-image-f2635486542026e2f795b4a954ee22b3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f2635486542026e2f795b4a954ee22b3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} A mount point should be empty when an
+<p><a href="#R-image-823422e49d1fc010e946d4ad49664b51" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-823422e49d1fc010e946d4ad49664b51"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} A mount point should be empty when an
 attempt is made to mount a file system on it, otherwise the content of
 the mount point will hide. As well, the mount point must not be in use
 or the mount attempt will fail.</p>
@@ -486,8 +486,8 @@ exist on the system. The primary benefit of using a UUID is the fact
 that it always stays persistent across system reboots. A UUID is used by
 default in RHEL 8 in the **etc<em>fstab</em> file for any file system that is
 created by the system in a standard partition.</p>
-<p><a href="#R-image-015072b637dd98a5934ac204744490b0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-015072b637dd98a5934ac204744490b0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} RHEL attempts to mount all file systems
+<p><a href="#R-image-c6c7a3bceb4e78634874e08fb1894a2d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c6c7a3bceb4e78634874e08fb1894a2d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} RHEL attempts to mount all file systems
 listed in the **etc<em>fstab</em> file at reboots. Each file system has an
 associated device file and UUID, but may or may not have a corresponding
 label. The system checks for the presence of each file system&rsquo;s device
@@ -496,15 +496,15 @@ file, UUID, or label, and then attempts to mount it.</p>
 device file associated with it is on <em>server2</em> is **dev<em>sda1</em>. You can
 use the <em>xfs_admin</em> command, the <em>blkid</em> command, or the <em>lsblk</em> command
 as follows to determine its UUID:</p>
-<p><a href="#R-image-443eb597625ca71dde6d2e04bbccd7f5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00754.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-443eb597625ca71dde6d2e04bbccd7f5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00754.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9148007dba770a53de4154986aeceaa4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00754.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9148007dba770a53de4154986aeceaa4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00754.jpeg"></a>{.image2}</p>
 <p>The UUID reported by the above commands for the <em>/boot</em> file system is
 &quot;c1ff315e-4320-442c-a3c5-36db403b53f2&quot;. If you <em>grep</em> for the string
 &ldquo;boot&rdquo; on the **etc<em>fstab</em> file, you will see that the system uses this
 UUID to mount <em>/boot</em>. A discussion on the **etc<em>fstab</em> file is provided
 later in this chapter.</p>
-<p><a href="#R-image-f62a81dc99e7da631bcc79792475d132" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f62a81dc99e7da631bcc79792475d132"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} For extended file systems, you can use
+<p><a href="#R-image-d803bce14ebcfc13daf3b22508093fdb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d803bce14ebcfc13daf3b22508093fdb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} For extended file systems, you can use
 the <em>tune2fs</em> command in addition to the <em>blkid</em> and <em>lsblk</em> commands to
 determine the UUID.</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} Knowing how to find the UUID of a file system
@@ -522,8 +522,8 @@ no labels are assigned to a file system at the time of its creation.</p>
 <p>The <em>/boot</em> file system is located in the **dev<em>sda1</em> partition and its
 type is XFS. You can use the <em>xfs_admin</em> command, the <em>blkid</em> command,
 or the <em>lsblk</em> command as follows to determine its label:</p>
-<p><a href="#R-image-a3889a9bd1132b64b5f61fbfa190bb64" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00755.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a3889a9bd1132b64b5f61fbfa190bb64"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00755.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8d94b2aeff0de25a83edd8807ed63e67" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00755.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8d94b2aeff0de25a83edd8807ed63e67"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00755.jpeg"></a>{.image2}</p>
 <p>The output discloses that there is currently no label assigned to the
 <em>/boot</em> file system.</p>
 <p>A label is not needed on a file system if you intend to use its UUID or
@@ -532,12 +532,12 @@ apply one using the <em>xfs_admin</em> command with the -L option. Labeling an
 XFS file system requires that the target file system be unmounted.</p>
 <p>The following example demonstrates the steps to unmount <em>/boot</em>, set the
 label &ldquo;bootfs&rdquo; on its device file, and remount it:</p>
-<p><a href="#R-image-3c18d20a0b725e84ae68b0d00b123f1b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00756.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3c18d20a0b725e84ae68b0d00b123f1b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00756.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-890d04790d8083f2bc5b60a6ad0cc489" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00756.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-890d04790d8083f2bc5b60a6ad0cc489"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00756.jpeg"></a>{.image2}</p>
 <p>You can confirm the new label by executing <strong>sudo xfs_admin -l
 <em>dev</em>sda1</strong>, <strong>sudo blkid <em>dev</em>sda1</strong>, or <strong>sudo lsblk -f <em>dev</em>sda1</strong>.</p>
-<p><a href="#R-image-7ca856ba822dc7d911da0095bb262023" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7ca856ba822dc7d911da0095bb262023"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} For extended file systems, you can use
+<p><a href="#R-image-83247a88820c5885e857e295fe2a7f94" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-83247a88820c5885e857e295fe2a7f94"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} For extended file systems, you can use
 the <em>e2label</em> command to apply a label and the <em>tune2fs</em>, <em>blkid</em>, and
 <em>lsblk</em> commands to view and verify.</p>
 <p>Now you can replace the UUID=&quot;c1ff315e-4320-442c-a3c5-36db403b53f2&quot;
@@ -562,8 +562,8 @@ with the <em>umount</em> command to detach it from the directory hierarchy.</p>
 <p>The default <em>fstab</em> file contains entries for file systems that are
 created at the time of installation. On <em>server2</em>, for instance, this
 file currently has the following three entries:</p>
-<p><a href="#R-image-5abb011a129299b6dfbc7b9656c58cf3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00757.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5abb011a129299b6dfbc7b9656c58cf3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00757.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4a979d8d6d1da6b564f00cfed5e12550" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00757.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4a979d8d6d1da6b564f00cfed5e12550"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00757.jpeg"></a>{.image2}</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} Any missing or invalid entry in this file may
 render the system unbootable. You will have to boot the system in
 emergency mode to fix this file. Ensure that you understand each field
@@ -597,8 +597,8 @@ memory-based, remote, and removable file systems, 1 for <em>/</em>, and 2 for
 <em>/boot</em>, and other physical file systems you don&rsquo;t want to be checked or
 repaired. This field is applicable only on Extended file systems; XFS
 does not use it.</p>
-<p><a href="#R-image-347bd16aaf1fc04896fd33c6de8ea7a4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-347bd16aaf1fc04896fd33c6de8ea7a4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} A 0 in columns 5 and 6 for XFS, virtual,
+<p><a href="#R-image-dd378b5ba88f20935d60511f30f43b07" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dd378b5ba88f20935d60511f30f43b07"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} A 0 in columns 5 and 6 for XFS, virtual,
 remote, and removable file system types has no meaning. You do not need
 to add them for these file system types.</p>
 <p>This file is edited manually, so care must be observed to circumvent
@@ -612,13 +612,13 @@ spaces for a file system. The <em>df</em> (<em>disk free</em>) command has been 
 for this purpose. It reports usage details for mounted file systems. By
 default, this command reports the numbers in KBs unless the -m or -h
 option is specified to view the sizes in MBs or human-readable format.</p>
-<p><a href="#R-image-0c97d1ed33417d1307f9b12cc16c04b7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0c97d1ed33417d1307f9b12cc16c04b7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} This command may not produce correct
+<p><a href="#R-image-33a0007a4e366219f84fffea60a5e620" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00002.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-33a0007a4e366219f84fffea60a5e620"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00002.jpeg"></a>{.image} This command may not produce correct
 information for VDO and Stratis file systems. Use their own tools for
 viewing usage.</p>
 <p>Let&rsquo;s run this command with the -h option on <em>server2</em>:</p>
-<p><a href="#R-image-342d496f141619cb3f4bd1b70517c29d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00758.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-342d496f141619cb3f4bd1b70517c29d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00758.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-e3d6281d4e0d4bf2330b1d07e3b348bc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00758.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e3d6281d4e0d4bf2330b1d07e3b348bc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00758.jpeg"></a>{.image2}</p>
 <p>The output shows the file system device file or type in column 1,
 followed by the total, used, and available spaces in columns 2, 3, and
 4, and then the usage percentage and mount point in columns 5 and 6.</p>
@@ -641,11 +641,11 @@ human-readable format. In addition, you can view a usage summary with
 the -s switch and a grand total with -c.</p>
 <p>Let&rsquo;s run this command on the **usr<em>bin</em> directory to view the usage
 summary:</p>
-<p><a href="#R-image-4c9e55ac05871010bcd9541f0c51c2d9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00759.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4c9e55ac05871010bcd9541f0c51c2d9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00759.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-22037755883c8a2ce459b412731ed69a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00759.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-22037755883c8a2ce459b412731ed69a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00759.jpeg"></a>{.image2}</p>
 <p>To add a &ldquo;total&rdquo; row to the output and with numbers displayed in KBs:</p>
-<p><a href="#R-image-6bd1483c50a5262863c37171c25a9439" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00760.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6bd1483c50a5262863c37171c25a9439"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00760.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bc107e569a181debc9d2479ec570bf6e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00760.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bc107e569a181debc9d2479ec570bf6e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00760.jpeg"></a>{.image2}</p>
 <p>Try this command with different options on the **usr<em>sbin/lvm</em> file and
 observe the results.</p>
 <p><strong>Exercise 15-1: Create and Mount Ext4, VFAT, and XFS File Systems in
@@ -661,46 +661,46 @@ use the disk **dev<em>sdc</em> and repeat the above procedure to establish an
 XFS file system in it and mount it on <em>/xfsfs1</em>.</p>
 <p>1[.]{.c19}Apply the label &ldquo;msdos&rdquo; to the <em>sdb</em> disk using the <em>parted</em>
 command:</p>
-<p><a href="#R-image-3363981c6b3dd35c7ab3320541b83cc5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00761.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3363981c6b3dd35c7ab3320541b83cc5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00761.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-55e8cfcd39c73c5f6856aa04537d1ff7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00761.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-55e8cfcd39c73c5f6856aa04537d1ff7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00761.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Create 2 x 100MB primary partitions on <em>sdb</em> with the <em>parted</em>
 command:</p>
-<p><a href="#R-image-ab2a643ac4c9eefd61f15cae7ca7be47" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00762.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ab2a643ac4c9eefd61f15cae7ca7be47"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00762.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9a198b5b939284fc6c1aaba967b14f88" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00762.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9a198b5b939284fc6c1aaba967b14f88"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00762.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Initialize the first partition (<em>sdb1</em>) with Ext4 file system
 type using the <em>mkfs</em> command:</p>
-<p><a href="#R-image-38e02c1cb3a7d95d8ad76c950be5e3fb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00763.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-38e02c1cb3a7d95d8ad76c950be5e3fb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00763.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-06afd1b24c4357bab7af9035317e2af9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00763.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06afd1b24c4357bab7af9035317e2af9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00763.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Initialize the second partition (<em>sdb2</em>) with VFAT file system
 type using the <em>mkfs</em> command:</p>
-<p><a href="#R-image-cebf08717d020257d23a66ad9831e15a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00764.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-cebf08717d020257d23a66ad9831e15a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00764.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0af1b2bbe39cccc8d4fac16c0e2addf8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00764.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0af1b2bbe39cccc8d4fac16c0e2addf8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00764.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Initialize the whole disk (<em>sdc</em>) with the XFS file system
 type using the <em>mkfs.xfs</em> command. Add the -f flag to force the removal
 of any old partitioning or labeling information from the disk.</p>
-<p><a href="#R-image-dace409ca43ad6743bf5230b1d8eafe0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00765.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-dace409ca43ad6743bf5230b1d8eafe0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00765.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-ccb2bec60b6a05e18a20191c55905f75" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00765.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ccb2bec60b6a05e18a20191c55905f75"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00765.jpeg"></a>{.image2}</p>
 <p>6[.]{.c19}Determine the UUIDs for all three file systems using the
 <em>lsblk</em> command:</p>
-<p><a href="#R-image-b37a6a4b78734250514d5a10f1f1a180" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00766.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b37a6a4b78734250514d5a10f1f1a180"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00766.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-32bfc8718e7c365db8a1d421c11856f4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00766.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-32bfc8718e7c365db8a1d421c11856f4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00766.jpeg"></a>{.image2}</p>
 <p>7[.]{.c19}Open the **etc<em>fstab</em> file, go to the end of the file, and
 append entries for the file systems for persistence using their UUIDs:</p>
-<p><a href="#R-image-e76cbfd23b4029223c150f98f26c8d58" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00767.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e76cbfd23b4029223c150f98f26c8d58"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00767.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-ba320af9738d0e655550e6e45baf0d65" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00767.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ba320af9738d0e655550e6e45baf0d65"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00767.jpeg"></a>{.image2}</p>
 <p>8[.]{.c19}Create mount points <em>/ext4fs1</em>, <em>/vfatfs1</em>, and <em>/xfsfs1</em> for
 the three file systems using the <em>mkdir</em> command:</p>
-<p><a href="#R-image-32e13077c72c0f92e3ec656ae0baa8ac" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00768.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-32e13077c72c0f92e3ec656ae0baa8ac"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00768.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-448e0bc157c0c29fb3d8992bbd9ec351" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00768.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-448e0bc157c0c29fb3d8992bbd9ec351"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00768.jpeg"></a>{.image2}</p>
 <p>9[.]{.c19}Mount the new file systems using the <em>mount</em> command. This
 command will fail if there are any invalid or missing information in the
 file.</p>
-<p><a href="#R-image-c417b225fc2cf5ff65e97844732c8569" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00769.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c417b225fc2cf5ff65e97844732c8569"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00769.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a8cd98185da68f9a1b4a264cacd53a0b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00769.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a8cd98185da68f9a1b4a264cacd53a0b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00769.jpeg"></a>{.image2}</p>
 <p>10[.]{.c23}View the mount and availability status as well as the types
 of all three file systems using the <em>df</em> command:</p>
-<p><a href="#R-image-63146ff90efd55319352b614cbe00253" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00770.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-63146ff90efd55319352b614cbe00253"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00770.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-97825913cc3ed3ab4ab206d4db4eee20" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00770.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-97825913cc3ed3ab4ab206d4db4eee20"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00770.jpeg"></a>{.image2}</p>
 <p>The output verifies the creation and availability status of the three
 file systems. They are added to the <em>fstab</em> file for persistence. A
 system reboot at this point will remount them automatically. These file
@@ -720,45 +720,45 @@ availability and usage.</p>
 installation and service startup have been accomplished.</p>
 <p>1[.]{.c19}Create a VDO volume <em>vdo1</em> on the <em>sdf</em> disk with a logical
 size of 16GB and a slab size of 128MB:</p>
-<p><a href="#R-image-ab8089cc0a7f64009202b2ac5e2431b8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00771.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ab8089cc0a7f64009202b2ac5e2431b8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00771.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4d5fa81c3dded20be40530f025d41f14" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00771.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d5fa81c3dded20be40530f025d41f14"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00771.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}List the new VDO volume using the <em>vdo</em> and <em>lsblk</em> commands:</p>
-<p><a href="#R-image-4b1013747763ff95ba1f515b6f2810ac" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00772.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4b1013747763ff95ba1f515b6f2810ac"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00772.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6b5d64ea22ecaaa3e60dbda248d264c7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00772.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6b5d64ea22ecaaa3e60dbda248d264c7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00772.jpeg"></a>{.image2}</p>
 <p>The output shows the logical volume size (16GB), type (vdo), and the
 actual size (4GB) of the underlying disk.</p>
 <p>3[.]{.c19}Initialize the VDO volume with the XFS file system type with
 the <em>mkfs.xfs</em> command. The VDO volume device file is **dev<em>mapper/vdo1</em>
 as indicated in the output in step 1. Add the -f flag to force the
 removal of any old partitioning or labeling information from the disk.</p>
-<p><a href="#R-image-71c82c010947c2022987c0273e516f44" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00773.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-71c82c010947c2022987c0273e516f44"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00773.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b5079f58cf1f7863b8ef4c927a40269a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00773.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b5079f58cf1f7863b8ef4c927a40269a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00773.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Open the **etc<em>fstab</em> file, go to the end of the file, and
 append the following entry for the file system for persistence using its
 device file:</p>
-<p><a href="#R-image-4602e26b82ed46e8793140ad15ee9c1c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00774.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4602e26b82ed46e8793140ad15ee9c1c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00774.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-1bf321f64f6753a92b95cdeca553a3a6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00774.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1bf321f64f6753a92b95cdeca553a3a6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00774.jpeg"></a>{.image2}</p>
 <p>Make sure to include the option <strong>x-systemd.requires=vdo.service</strong> (or
 try _netdev instead) with the file system entry in the <em>fstab</em> file or
 your system will land into the emergency target on the next reboot. This
 option holds the <em>mount</em> command from mounting this file system until
 the <em>vdo.service</em> service has been operational.</p>
 <p>5[.]{.c19}Create the mount point <em>/xfsvdo1</em> using the <em>mkdir</em> command:</p>
-<p><a href="#R-image-3068051d649fe8cb5418fc04be070660" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00775.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3068051d649fe8cb5418fc04be070660"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00775.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-7bab9f2f860a5546733250e2bd0bf3be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00775.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7bab9f2f860a5546733250e2bd0bf3be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00775.jpeg"></a>{.image2}</p>
 <p>6[.]{.c19}Mount the new file system using the <em>mount</em> command. This
 command will fail if there are any invalid or missing information in the
 file.</p>
-<p><a href="#R-image-05f3417a9174c50c2fb021a8378f469e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00776.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-05f3417a9174c50c2fb021a8378f469e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00776.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-3d76890a2107976d59e244714265af04" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00776.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3d76890a2107976d59e244714265af04"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00776.jpeg"></a>{.image2}</p>
 <p>The <em>mount</em> command with the -a flag is a validation test for the
 <em>fstab</em> file. It should always be executed after updating this file and
 before rebooting the server to avoid landing the system in an unbootable
 state.</p>
 <p>7[.]{.c19}View the mount and availability status as well as the types of
 the VDO file system using the <em>lsblk</em> and <em>df</em> commands:</p>
-<p><a href="#R-image-4ef2676274d7c5afd5af5f7108b3481f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00777.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4ef2676274d7c5afd5af5f7108b3481f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00777.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-07fa60bc607a8c9f797a272ddcb26496" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00777.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-07fa60bc607a8c9f797a272ddcb26496"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00777.jpeg"></a>{.image2}</p>
 <p>The <em>lsblk</em> command output illustrates the VDO volume name (<em>vdo1</em>) ,
 the disk it is located on (<em>sdf</em>), the actual (4GB) and logical (16GB)
 sizes, and the mount point (<em>/xfsvdo1</em>) where the file system is
@@ -785,51 +785,51 @@ logical volume device filenames. You will create mount points called
 availability and usage.</p>
 <p>1[.]{.c19}Create a 150MB partition on the <em>sdd</em> disk using the <em>parted</em>
 command:</p>
-<p><a href="#R-image-59921acf46aadbc57810f3112b4f6863" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00778.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-59921acf46aadbc57810f3112b4f6863"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00778.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-3589ae988a3fde23b9f4e28db5477b0d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00778.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3589ae988a3fde23b9f4e28db5477b0d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00778.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Initialize the <em>sdd1</em> partition for use in LVM using the
 <em>pvcreate</em> command:</p>
-<p><a href="#R-image-256c84dd9ce538c393e2f18c1f51dd57" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00779.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-256c84dd9ce538c393e2f18c1f51dd57"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00779.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a86cb4e0c43a463500924d435a40f9bd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00779.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a86cb4e0c43a463500924d435a40f9bd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00779.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Create the volume group <em>vgfs</em> with a PE size of 16MB using
 the physical volume <em>sdd1</em>:</p>
-<p><a href="#R-image-d8c89cc1ee9f1b483399f70d4ed4f79d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00780.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d8c89cc1ee9f1b483399f70d4ed4f79d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00780.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-3ebe0a1c7490b835375c9815f8c17ff4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00780.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3ebe0a1c7490b835375c9815f8c17ff4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00780.jpeg"></a>{.image2}</p>
 <p>The PE size is not easy to alter after a volume group creation, so
 ensure it is defined as required at creation.</p>
 <p>4[.]{.c19}Create two logical volumes <em>ext4vol</em> and <em>xfsvol</em> of size 80MB
 each in <em>vgfs</em> using the <em>lvcreate</em> command:</p>
-<p><a href="#R-image-6d56fe80ab254357f33a2d1037f87825" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00781.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6d56fe80ab254357f33a2d1037f87825"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00781.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-d632fe51915a8847bb4fa4e6174487ec" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00781.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d632fe51915a8847bb4fa4e6174487ec"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00781.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Format the <em>ext4vol</em> logical volume with the Ext4 file system
 type using the <em>mkfs.ext4</em> command:</p>
-<p><a href="#R-image-ed774b8f49ba3b5f8876c9d1d40c58c4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00782.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ed774b8f49ba3b5f8876c9d1d40c58c4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00782.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-270eb86e04cdb6c35a6a3779fb8e576f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00782.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-270eb86e04cdb6c35a6a3779fb8e576f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00782.jpeg"></a>{.image2}</p>
 <p>You may alternatively use <strong>sudo mkfs -t ext4 <em>dev</em>vgfs/ext4vol</strong>.</p>
 <p>6[.]{.c19}Format the <em>xfsvol</em> logical volume with the XFS file system
 type using the <em>mkfs.xfs</em> command:</p>
-<p><a href="#R-image-0e0208f30ec65253e173f69e4f4131b5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00783.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0e0208f30ec65253e173f69e4f4131b5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00783.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-43a5d0519c8ddbe5cf462fd74f86d3c8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00783.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-43a5d0519c8ddbe5cf462fd74f86d3c8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00783.jpeg"></a>{.image2}</p>
 <p>You may use <strong>sudo mkfs -t xfs <em>dev</em>vgfs/xfsvol</strong> instead.</p>
 <p>7[.]{.c19}Open the **etc<em>fstab</em> file, go to the end of the file, and
 append entries for the file systems for persistence using their device
 files:</p>
-<p><a href="#R-image-5bf8d818ff99c22d4e9391318fa9c700" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00784.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-5bf8d818ff99c22d4e9391318fa9c700"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00784.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-79fcc496c960e0d777ceca67e695a1ca" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00784.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-79fcc496c960e0d777ceca67e695a1ca"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00784.jpeg"></a>{.image2}</p>
 <p>8[.]{.c19}Create mount points <em>/ext4fs2</em> and <em>/xfsfs2</em> using the <em>mkdir</em>
 command:</p>
-<p><a href="#R-image-eb544194ac98f6e74cb6c0f8288c07a2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00785.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-eb544194ac98f6e74cb6c0f8288c07a2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00785.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-1d693a9e603dcac72c59097f46717c42" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00785.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1d693a9e603dcac72c59097f46717c42"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00785.jpeg"></a>{.image2}</p>
 <p>9[.]{.c19}Mount the new file systems using the <em>mount</em> command. This
 command will fail if there is any invalid or missing information in the
 file.</p>
-<p><a href="#R-image-7deca0349cdc610d80879d3870d3ac9d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00786.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7deca0349cdc610d80879d3870d3ac9d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00786.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4ac2244998add3c18b0dec699e6e6a9a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00786.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4ac2244998add3c18b0dec699e6e6a9a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00786.jpeg"></a>{.image2}</p>
 <p>Fix any issues in the file if reported.</p>
 <p>10[.]{.c23}View the mount and availability status as well as the types
 of the new LVM file systems using the <em>lsblk</em> and <em>df</em> commands:</p>
-<p><a href="#R-image-4284a2eae0459c58917dd692017ae627" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00787.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4284a2eae0459c58917dd692017ae627"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00787.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4f4961905c94f391916465f70552008e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00787.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4f4961905c94f391916465f70552008e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00787.jpeg"></a>{.image2}</p>
 <p>The <em>lsblk</em> command output illustrates the LVM logical volumes
 (<em>ext4vol</em> and <em>xfsvol</em>), the disk they are located on (<em>sdd</em>), the
 sizes (80MB), and the mount points (<em>/ext4fs2</em> and <em>/xfsfs2</em>) where the
@@ -852,35 +852,35 @@ it contains by 40MB using a single command. You will verify the new
 extensions.</p>
 <p>1[.]{.c19}Initialize the <em>sde</em> disk and add it to the <em>vgfs</em> volume
 group:</p>
-<p><a href="#R-image-2224f0d129669c6b7c42f7b710b1fe75" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00788.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2224f0d129669c6b7c42f7b710b1fe75"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00788.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-f2f8c5dbce4e837f2ca51c9240584b1b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00788.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f2f8c5dbce4e837f2ca51c9240584b1b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00788.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Confirm the new size of <em>vgfs</em> using the <em>vgs</em> and <em>vgdisplay</em>
 commands:</p>
-<p><a href="#R-image-26017248d2cde15b8edb991c2cd966a4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00789.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-26017248d2cde15b8edb991c2cd966a4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00789.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-26fb406fb2bdc96674233357e9a481c7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00789.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-26fb406fb2bdc96674233357e9a481c7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00789.jpeg"></a>{.image2}</p>
 <p>There are now two physical volumes in the volume group and the total
 size increased to 400MiB.</p>
 <p>3[.]{.c19}Grow the logical volume <em>ext4vol</em> and the file system it holds
 by 40MB using the <em>lvextend</em> and <em>fsadm</em> command pair. Make sure to use
 an uppercase L to specify the size. The default unit is MiB. The plus
 sign (+) signifies an addition to the current size.</p>
-<p><a href="#R-image-59b0193bdff370459a0b10a72dc0b6dd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00790.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-59b0193bdff370459a0b10a72dc0b6dd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00790.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4296ab33c29c009eef749aad274248ea" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00790.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4296ab33c29c009eef749aad274248ea"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00790.jpeg"></a>{.image2}</p>
 <p>The <em>resize</em> subcommand instructs the <em>fsadm</em> command to grow the file
 system to the full length of the specified logical volume.</p>
 <p>4[.]{.c19}Grow the logical volume <em>xfsvol</em> and the file system (-r) it
 holds by (+) 40MB using the <em>lvresize</em> command:</p>
-<p><a href="#R-image-dca27939401a2039e07046fa9200a0f1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00791.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-dca27939401a2039e07046fa9200a0f1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00791.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0eb7a009a1d92b807b7963a7f9ac4d86" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00791.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0eb7a009a1d92b807b7963a7f9ac4d86"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00791.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Verify the new extensions to both logical volumes using the
 <em>lvs</em> command. You may also issue the <em>lvdisplay</em> or <em>vgdisplay</em> command
 instead.</p>
-<p><a href="#R-image-fb8bf30c8c083e8ddb18e3adc5fdbc0c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00792.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fb8bf30c8c083e8ddb18e3adc5fdbc0c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00792.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6f7f4f45b4f6fcdc86f14e99251ef1af" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00792.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6f7f4f45b4f6fcdc86f14e99251ef1af"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00792.jpeg"></a>{.image2}</p>
 <p>6[.]{.c19}Check the new sizes and the current mount status for both file
 systems using the <em>df</em> and <em>lsblk</em> commands:</p>
-<p><a href="#R-image-e73f9fc4b934cd7ff4aca05949c2413a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00793.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e73f9fc4b934cd7ff4aca05949c2413a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00793.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-42f0645cc696ae0884cd553ed5a24655" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00793.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-42f0645cc696ae0884cd553ed5a24655"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00793.jpeg"></a>{.image2}</p>
 <p>The outputs reflect the new sizes (128MB) for both file systems. They
 also indicate their mount status.</p>
 <p>This concludes the exercise.</p>
@@ -902,48 +902,48 @@ for Stratis software installation and service startup have been
 accomplished.</p>
 <p>1[.]{.c19}Create a pool called <em>strpool</em> using the <em>sdg</em> disk and verify
 the creation:</p>
-<p><a href="#R-image-3a75c0c6d372a1b2e1abc56e440344c3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00794.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-3a75c0c6d372a1b2e1abc56e440344c3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00794.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-579c40ccdaa60783a76ef69573997e07" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00794.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-579c40ccdaa60783a76ef69573997e07"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00794.jpeg"></a>{.image2}</p>
 <p>The pool is created with a single disk included, and confirmed.</p>
 <p>2[.]{.c19}Show the block device used in the pool:</p>
-<p><a href="#R-image-0ff0fdc5868bca14008584602a4fb9ec" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00795.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0ff0fdc5868bca14008584602a4fb9ec"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00795.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-80318c33db19a7eab3db38b56b6ff890" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00795.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-80318c33db19a7eab3db38b56b6ff890"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00795.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Create a file system called <em>strfs2</em> in the pool and verify
 the creation:</p>
-<p><a href="#R-image-51c0f2497ce87a6b7c4e1673646e666a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00796.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-51c0f2497ce87a6b7c4e1673646e666a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00796.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-69d9a70cbd0721d51a2df4f444a9f468" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00796.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-69d9a70cbd0721d51a2df4f444a9f468"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00796.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Determine the UUID of the new file system to be added to the
 <em>fstab</em> file:</p>
-<p><a href="#R-image-791f37763febc487b628e423576272db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00797.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-791f37763febc487b628e423576272db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00797.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-fb5c30f2d57c93a79d9594649679f73d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00797.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fb5c30f2d57c93a79d9594649679f73d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00797.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Open the **etc<em>fstab</em> file, go to the end of the file, and
 append the following entry for the file system for persistence using the
 UUID:</p>
-<p><a href="#R-image-d602835b633eadf824cee57da1a8a45f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00798.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d602835b633eadf824cee57da1a8a45f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00798.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-fd0024162d794169b690285c8beb5773" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00798.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd0024162d794169b690285c8beb5773"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00798.jpeg"></a>{.image2}</p>
 <p>Make sure to include the option <strong>x-systemd.requires=stratisd.service</strong>
 (or try _netdev instead) with the file system entry in the <em>fstab</em> file
 or your system will land into the emergency target on the next reboot.
 This option holds the <em>mount</em> command from mounting this file system
 until the <em>stratisd.service</em> service has been started successfully.</p>
 <p>6[.]{.c19}Create the mount point <em>/strfs2</em>:</p>
-<p><a href="#R-image-b987828793433f9694af69d492cef808" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00799.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b987828793433f9694af69d492cef808"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00799.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4415cafc96930592354dd3b7ce30ec1e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00799.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4415cafc96930592354dd3b7ce30ec1e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00799.jpeg"></a>{.image2}</p>
 <p>7[.]{.c19}Mount the new file system using the <em>mount</em> command as
 follows. This command will fail if there are any invalid or missing
 information in the file.</p>
-<p><a href="#R-image-02c8d977aed2d85459f52428b01aa8c8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00800.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-02c8d977aed2d85459f52428b01aa8c8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00800.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8cb436dc9715e915f5299fde5725fab3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00800.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8cb436dc9715e915f5299fde5725fab3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00800.jpeg"></a>{.image2}</p>
 <p>8[.]{.c19}Check the pool usage:</p>
-<p><a href="#R-image-42a553f5b549a4bfbba70488298eff7e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00801.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-42a553f5b549a4bfbba70488298eff7e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00801.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-22781797f20bb61c2700aeadb5e6f2f0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00801.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-22781797f20bb61c2700aeadb5e6f2f0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00801.jpeg"></a>{.image2}</p>
 <p>9[.]{.c19}Check the file system usage:</p>
-<p><a href="#R-image-9b7f9d4b4a4be097f574f3250e4b98cf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00802.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9b7f9d4b4a4be097f574f3250e4b98cf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00802.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-06ae0ccc823dc69995919bf62939791f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00802.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-06ae0ccc823dc69995919bf62939791f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00802.jpeg"></a>{.image2}</p>
 <p>10[.]{.c23}Grow the pool by adding the <em>sdh</em> disk to it and confirm the
 growth:</p>
-<p><a href="#R-image-e2f75f5072b96c7cd130e0f0554fbdfa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00803.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e2f75f5072b96c7cd130e0f0554fbdfa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00803.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9b75ec13f23d879846668c11a09dbc22" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00803.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9b75ec13f23d879846668c11a09dbc22"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00803.jpeg"></a>{.image2}</p>
 <p>The file system <em>strfs2</em> will automatically expand to take advantage of
 the additional pool capacity when required.</p>
 <p>This concludes the exercise.</p>
@@ -1001,8 +1001,8 @@ human-readable format, otherwise -k for KB, -m for MB, -g for GB, and so
 on are also supported. Add -t with the command to display a line with
 the &ldquo;total&rdquo; at the bottom of the output. Here is a sample output from
 <em>server2</em>:</p>
-<p><a href="#R-image-c6f8cbe5a3aaa643681c94292894ea9a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00804.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-c6f8cbe5a3aaa643681c94292894ea9a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00804.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-2ad94a5b0785a99195a6a7584114fcb2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00804.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2ad94a5b0785a99195a6a7584114fcb2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00804.jpeg"></a>{.image2}</p>
 <p>The output indicates that the system has 1.8GiB of total memory of which
 895MiB is in use and 447MiB is free. It also shows on the same line the
 current memory usages by temporary (tmpfs) file systems (20MiB) and
@@ -1018,8 +1018,8 @@ three seconds (-s) and to display the output twice (-c).</p>
 **proc<em>meminfo</em> file to produce the report. The values are shown in KBs
 by default, and they are slightly off from what is shown in the above
 screenshot with <em>free</em>. Here are the relevant fields from this file:</p>
-<p><a href="#R-image-6a263d7b5d24b7bd9025b10e253435e8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00805.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6a263d7b5d24b7bd9025b10e253435e8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00805.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-5ca8bf7fec054c1cccf8001864646e08" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00805.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5ca8bf7fec054c1cccf8001864646e08"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00805.jpeg"></a>{.image2}</p>
 <p>This data depicts the system&rsquo;s runtime memory and swap usage, as it is
 located in a virtual file.</p>
 <p><strong>[Prioritizing]{#part0027_split_001.html#id_423 .calibre10} Swap
@@ -1058,53 +1058,53 @@ space.</p>
 <p>1[.]{.c19}Use the <em>parted</em>&rsquo;s <em>print</em> subcommand on the <em>sdb</em> disk and
 the <em>vgs</em> command on the <em>vgfs</em> volume group to determine available
 space for a new 40MB partition and a 144MB logical volume:</p>
-<p><a href="#R-image-a53bf916387f408a8324f3641262745b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00806.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a53bf916387f408a8324f3641262745b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00806.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-709715711e317687eabb2454d3caf475" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00806.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-709715711e317687eabb2454d3caf475"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00806.jpeg"></a>{.image2}</p>
 <p>The outputs show 49MB (250MB minus 201MB) free space on the <em>sdb</em> disk
 and 144MB free space in the volume group.</p>
 <p>2[.]{.c19}Create partition called <em>sdb3</em> of size 40MB using the <em>parted</em>
 command:</p>
-<p><a href="#R-image-82c0c94177045c03f625579b7d1358b4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00807.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-82c0c94177045c03f625579b7d1358b4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00807.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-8c4a9d46e22d45f03ce7466e7228d0a1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00807.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8c4a9d46e22d45f03ce7466e7228d0a1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00807.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Create logical volume <em>swapvol</em> of size 144MB in <em>vgs</em> using
 the <em>lvcreate</em> command:</p>
-<p><a href="#R-image-e4c45043c614f0e4485e3a5bcd8cc459" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00808.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e4c45043c614f0e4485e3a5bcd8cc459"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00808.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0b90f6127a4532ecda9f61c89e1258f8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00808.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0b90f6127a4532ecda9f61c89e1258f8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00808.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Construct swap structures in <em>sdb3</em> and <em>swapvol</em> using the
 <em>mkswap</em> command:</p>
-<p><a href="#R-image-d1b9a366ca66f3115efb77d9add8de44" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00809.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d1b9a366ca66f3115efb77d9add8de44"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00809.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c876961499018e5f3ab11ab26ac56149" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00809.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c876961499018e5f3ab11ab26ac56149"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00809.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Edit the <em>fstab</em> file and add entries for both swap areas for
 auto-activation on reboots. Obtain the UUID for partition swap with
 <strong>lsblk -f <em>dev</em>sdb3</strong> and use the device file for logical volume.
 Specify their priorities.</p>
-<p><a href="#R-image-7032cf8ffddc6e03b8cf4a76bf1f3f3d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00810.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7032cf8ffddc6e03b8cf4a76bf1f3f3d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00810.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b4c270b4f78575163b6147c2a0383aff" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00810.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b4c270b4f78575163b6147c2a0383aff"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00810.jpeg"></a>{.image2}</p>
 <p>[<strong>EXAM TIP:</strong>]{.c56} You will not be given any credit for this work if
 you forget to add entries to the fstab file.</p>
 <p>6[.]{.c19}Determine the current amount of swap space on the system using
 the <em>swapon</em> command:</p>
-<p><a href="#R-image-51827da6f38c90a7b6dbea0d2965ff42" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00811.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-51827da6f38c90a7b6dbea0d2965ff42"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00811.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-928ecd5373839665aeafe770e06d8806" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00811.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-928ecd5373839665aeafe770e06d8806"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00811.jpeg"></a>{.image2}</p>
 <p>There is one 1GB swap area on the system configured at the default
 priority of -2.</p>
 <p>7[.]{.c19}Activate the new swap regions using the <em>swapon</em> command:</p>
-<p><a href="#R-image-ac22ce978d8a2e996d4699f049008763" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00812.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ac22ce978d8a2e996d4699f049008763"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00812.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-0f47f64786651326606a13b4a5c0735e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00812.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0f47f64786651326606a13b4a5c0735e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00812.jpeg"></a>{.image2}</p>
 <p>The command would display errors if there were any issues with swap
 entries in the <em>fstab</em> file.</p>
 <p>8[.]{.c19}Confirm the activation using the <em>swapon</em> command or by
 viewing the **proc<em>swaps</em> file:</p>
-<p><a href="#R-image-b6e95abe857a2aa66852febcfb1128d8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00813.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b6e95abe857a2aa66852febcfb1128d8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00813.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-31da61e13107031665f453ae853af064" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00813.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-31da61e13107031665f453ae853af064"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00813.jpeg"></a>{.image2}</p>
 <p>The two new swap regions are activated and listed in the above outputs.
 Their sizes and priorities are also visible. The device mapper device
 files for the logical volumes and the device file for the partition swap
 are also exhibited.</p>
 <p>9[.]{.c19}Issue the <em>free</em> command to view the reflection of swap
 numbers on the Swap and Total lines:</p>
-<p><a href="#R-image-af036cf6fc23aba4e94a52f97b0ff4df" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00814.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-af036cf6fc23aba4e94a52f97b0ff4df"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00814.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b86fcd0e5985f83420c0202d8fbcd470" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00814.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b86fcd0e5985f83420c0202d8fbcd470"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00814.jpeg"></a>{.image2}</p>
 <p>The total swap is now 1.2GiB. This concludes the exercise.</p>
 <p><strong>[Chapter]{#part0027_split_001.html#id_426 .calibre10} Summary</strong></p>
 <p>This chapter covered two major storage topics: file systems and swap.
@@ -1323,7 +1323,7 @@ activation. (Hint: Swap and its Management).</p>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
 
-Perfect Dark Mode
+David Vargas
 
         </div>
 
@@ -1338,12 +1338,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.min.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1715337780" defer></script>
-        <script src="/js/search.js?1715337780" defer></script>
+        <script src="/js/auto-complete.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.min.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1715774310" defer></script>
+        <script src="/js/search.js?1715774310" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1477,13 +1477,15 @@ Perfect Dark Mode
           <li data-nav-id="/tools/obsidian/yaml-in-obsidian/" class=""><a class="padding" href="/tools/obsidian/yaml-in-obsidian/">YAML in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/writing/" class="alwaysopen"><input type="checkbox" id="R-section-e557a922d533a171e9a204b7e50265e2" aria-controls="R-subsections-e557a922d533a171e9a204b7e50265e2" checked><label for="R-section-e557a922d533a171e9a204b7e50265e2"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e557a922d533a171e9a204b7e50265e2" class="morespace collapsible-menu">
           <li data-nav-id="/writing/19-biggest-lessons-from-reading-100-books./" class=""><a class="padding" href="/writing/19-biggest-lessons-from-reading-100-books./">19 Biggest Lessons From Reading 100 Books<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/writing/my-journey-with-addiction/" class=""><a class="padding" href="/writing/my-journey-with-addiction/">My Journey With Addiction (NSFW)<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/writing/writing-off-the-cuff/" class=""><a class="padding" href="/writing/writing-off-the-cuff/">Writing Off the Cuff<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/booknotes/" class="alwaysopen"><input type="checkbox" id="R-section-1cda010113b426a07bb6aec1adc15086" aria-controls="R-subsections-1cda010113b426a07bb6aec1adc15086" checked><label for="R-section-1cda010113b426a07bb6aec1adc15086"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Book Notes</span></label><a class="padding" href="/booknotes/">Book Notes<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-1cda010113b426a07bb6aec1adc15086" class="morespace collapsible-menu">
           <li data-nav-id="/booknotes/123magic/" class=""><a class="padding" href="/booknotes/123magic/">123 Magic Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/booknotes/dopamine_nation/" class=""><a class="padding" href="/booknotes/dopamine_nation/">Dopamine Nation Summary<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/booknotes/master_reading_list/" class=""><a class="padding" href="/booknotes/master_reading_list/">Master Reading List<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/booknotes/the_12_week_year/" class=""><a class="padding" href="/booknotes/the_12_week_year/">The 12 Week Year<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/the-psychology-of-money/" class=""><a class="padding" href="/booknotes/the-psychology-of-money/">The Psychology of Money<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -1517,7 +1519,7 @@ Perfect Dark Mode
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -1542,8 +1544,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1715337781" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1715337781" defer></script>
+    <script src="/js/clipboard.min.js?1715774310" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1715774310" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -1559,20 +1561,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1715337781" defer></script>
-    <script src="/js/js-yaml.min.js?1715337781" defer></script>
+    <script src="/js/d3/d3-color.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1715774310" defer></script>
+    <script src="/js/js-yaml.min.js?1715774310" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1715337781" defer></script>
+    <script src="/js/theme.js?1715774310" defer></script>
   </body>
 </html>

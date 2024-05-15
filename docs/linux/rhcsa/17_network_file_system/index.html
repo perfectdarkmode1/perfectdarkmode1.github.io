@@ -11,7 +11,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:description" content="Chapter 16 RHCSA Notes - Network File System Same tools for mounting and unmounting a filesystem. Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible.">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/17_network_file_system/">
-    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:site_name" content="David Vargas">
     <meta property="og:description" content="Chapter 16 RHCSA Notes - Network File System Same tools for mounting and unmounting a filesystem. Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible.">
     <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
@@ -19,18 +19,18 @@
     <meta itemprop="description" content="Chapter 16 RHCSA Notes - Network File System Same tools for mounting and unmounting a filesystem. Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible.">
     <meta itemprop="wordCount" content="2918">
     <title></title>
-    <link href="/images/favicon.png?1715337780" rel="icon" type="image/png">
-    <link href="/css/fontawesome-all.min.css?1715337780" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1715337780" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1715337780" rel="stylesheet">
-    <link href="/css/auto-complete.css?1715337780" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1715337780" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1715337780" rel="stylesheet">
-    <link href="/css/fonts.css?1715337780" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1715337780" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1715337780" rel="stylesheet">
-    <link href="/css/theme-git.css?1715337780" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1715337780" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1715337780" rel="stylesheet">
-    <link href="/css/print.css?1715337780" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1715337780"></script>
+    <link href="/images/favicon.png?1715774310" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1715774310" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1715774310" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1715774310" rel="stylesheet">
+    <link href="/css/auto-complete.css?1715774310" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1715774310" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1715774310" rel="stylesheet">
+    <link href="/css/fonts.css?1715774310" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1715774310" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1715774310" rel="stylesheet">
+    <link href="/css/theme-blue.css?1715774310" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-learn.css?1715774310" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1715774310" rel="stylesheet">
+    <link href="/css/print.css?1715774310" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1715774310"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
@@ -38,7 +38,7 @@
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.variants && variants.init( [ 'git' ] );
+      window.variants && variants.init( [ 'blue' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -399,30 +399,30 @@ the <em>fstab</em> file and it is also configured via a direct map for
 automounting on <em>/autodir</em>. There should occur no conflict in
 configuration or functionality among the three.</p>
 <p>1[.]{.c19}Install the AutoFS software package called <em>autofs</em>:</p>
-<p><a href="#R-image-04a1c66ce8b391eb8a36d0d598b95a1e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00877.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-04a1c66ce8b391eb8a36d0d598b95a1e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00877.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4adf4765f9209805609deedaab34391e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00877.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4adf4765f9209805609deedaab34391e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00877.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Confirm the entry for the indirect map <em>/misc</em> in the
 **etc<em>auto.master</em> file exists:</p>
-<p><a href="#R-image-7e96171ee80a643738fc64326411064a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00878.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7e96171ee80a643738fc64326411064a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00878.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-407d39bd4b7c373b43379b50520afafd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00878.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-407d39bd4b7c373b43379b50520afafd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00878.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Edit the **etc<em>auto.misc</em> file and add the mount point, NFS
 server, and share information to it:</p>
-<p><a href="#R-image-363610288b63e9972be69dd968e68714" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00879.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-363610288b63e9972be69dd968e68714"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00879.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-46f4f9ffcb7ee31a03d9fa57aa5848f3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00879.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-46f4f9ffcb7ee31a03d9fa57aa5848f3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00879.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Start the AutoFS service now and set it to autostart at system
 reboots:</p>
-<p><a href="#R-image-2f4ab1624e5ea4799e0e992a8dae15de" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00880.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2f4ab1624e5ea4799e0e992a8dae15de"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00880.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-98461bc3d0e655efa05b8fe4fb149790" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00880.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-98461bc3d0e655efa05b8fe4fb149790"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00880.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Verify the operational status of the AutoFS service. Use the
 -l and --no-pager options to show full details without piping the
 output to a pager program (the <em>pg</em> command in this case):</p>
-<p><a href="#R-image-aa2727c958e7bc40e60d35a32aad4d63" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00881.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-aa2727c958e7bc40e60d35a32aad4d63"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00881.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-cb51b02cf60b7212e8f809f728b94ef3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00881.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cb51b02cf60b7212e8f809f728b94ef3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00881.jpeg"></a>{.image2}</p>
 <p>6[.]{.c19}Run the <em>ls</em> command on the mount point **misc<em>autoindir</em> and
 then <em>grep</em> for both <em>auto.misc</em> and <em>autoindir</em> on the <em>mount</em> command
 output to verify that the share is automounted and accessible:</p>
-<p><a href="#R-image-b891fdc5b20c9d2dd00a058df3af0a06" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00882.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b891fdc5b20c9d2dd00a058df3af0a06"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00882.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-c9392987508c03c0c17b9adf12875698" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00882.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c9392987508c03c0c17b9adf12875698"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00882.jpeg"></a>{.image2}</p>
 <p>Observe the above outcomes. The <em>mount</em> command output illustrates the
 path of the AutoFS map (**etc<em>auto.misc</em>), the auto-generated mount
 point (**misc<em>autoindir</em>), file system type (autofs), and the options
@@ -449,8 +449,8 @@ specific user&rsquo;s home directory rather than the entire <em>/home</em>. The
 indirect map entry for this type of substitution is defined in an
 indirect map, such as **etc<em>auto.master.d/auto.home</em>, and will look
 like:</p>
-<p><a href="#R-image-14e6888820ba9975e7d8c9ed58c08a2e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00883.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-14e6888820ba9975e7d8c9ed58c08a2e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00883.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-fc8269cecd9b594ee5454e4c2ec9f464" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00883.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fc8269cecd9b594ee5454e4c2ec9f464"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00883.jpeg"></a>{.image2}</p>
 <p>With this entry in place, there is no need to update any AutoFS
 configuration files if NFS servers with <em>/home</em> shared are added or
 removed. Similarly, if user home directories are added or deleted, there
@@ -476,57 +476,57 @@ in as <em>user30</em>.</p>
 <p><strong>On NFS server <em>server20</em>:</strong></p>
 <p>1[.]{.c19}Create a user account called <em>user30</em> with UID 3000 (-u) and
 assign password &ldquo;password1&rdquo;:</p>
-<p><a href="#R-image-6c469ca2d1cec51aed140faf14b26184" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00884.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6c469ca2d1cec51aed140faf14b26184"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00884.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-d12add15710472446716b77ded29d854" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00884.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d12add15710472446716b77ded29d854"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00884.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Edit the **etc<em>exports</em> file and add an entry for <em>/home</em> (do
 not remove the previous entry):</p>
-<p><a href="#R-image-61f004017a552ce992e3d1e94fb24d79" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00885.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-61f004017a552ce992e3d1e94fb24d79"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00885.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-a892c4da9e997d8d9e0a709911c56c1f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00885.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a892c4da9e997d8d9e0a709911c56c1f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00885.jpeg"></a>{.image2}</p>
 <p>3[.]{.c19}Export all the shares listed in the **etc<em>exports</em> file:</p>
-<p><a href="#R-image-433fbe231b39f54f57116fbab290b315" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00886.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-433fbe231b39f54f57116fbab290b315"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00886.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-62e43f2e1693891a25684562e86a53fd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00886.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-62e43f2e1693891a25684562e86a53fd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00886.jpeg"></a>{.image2}</p>
 <p><strong>On NFS client <em>server10</em>:</strong></p>
 <p>1[.]{.c19}Install the AutoFS software package called <em>autofs</em>:</p>
-<p><a href="#R-image-d4ddeca6cf45a1f509a059e2be17e1b1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00887.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d4ddeca6cf45a1f509a059e2be17e1b1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00887.jpeg"></a>{.image2}</p>
-<p><a href="#R-image-e1cb23b2fac5aeeb44b124261b51d64d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00888.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e1cb23b2fac5aeeb44b124261b51d64d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00888.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-6f9069514c1fa830f2e8329c491e44f7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00887.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6f9069514c1fa830f2e8329c491e44f7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00887.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9a0d7fdcb0cb5708960aaf91f769f66c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00888.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9a0d7fdcb0cb5708960aaf91f769f66c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00888.jpeg"></a>{.image2}</p>
 <p>2[.]{.c19}Create a user account called <em>user30</em> with UID 3000 (-u), base
 home directory location <em>/nfshome</em> (-b), no home directory (-M), and
 password &ldquo;password1&rdquo;:</p>
-<p><a href="#R-image-86ebc2ea5c5936a07d97d591ef855a3e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00889.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-86ebc2ea5c5936a07d97d591ef855a3e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00889.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-fbef36aa8bc5ee4cb2122fd1a61ae7b3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00889.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fbef36aa8bc5ee4cb2122fd1a61ae7b3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00889.jpeg"></a>{.image2}</p>
 <p>This is to ensure that the UID for the user is consistent on the server
 and the client to avoid access issues.</p>
 <p>3[.]{.c19}Create the umbrella mount point <em>/nfshome</em> to automount the
 user&rsquo;s home directory:</p>
-<p><a href="#R-image-0136ff9b01c1aa99698e20b5d60ac9e2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00890.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0136ff9b01c1aa99698e20b5d60ac9e2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00890.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-9aeeed902ee931625a62a5baec75f513" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00890.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9aeeed902ee931625a62a5baec75f513"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00890.jpeg"></a>{.image2}</p>
 <p>4[.]{.c19}Edit the **etc<em>auto.master</em> file and add the mount point and
 indirect map location to it:</p>
-<p><a href="#R-image-277745a586d1e155338b7011329b7a70" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00891.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-277745a586d1e155338b7011329b7a70"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00891.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-4c7712ca83ef5920451e799cb0a48ac1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00891.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4c7712ca83ef5920451e799cb0a48ac1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00891.jpeg"></a>{.image2}</p>
 <p>5[.]{.c19}Create the **etc<em>auto.master.d/auto.home</em> file and add the
 following information to it:</p>
-<p><a href="#R-image-9f2b574ad15f55dad2b0c709fa81a14f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00892.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9f2b574ad15f55dad2b0c709fa81a14f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00892.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-64cd5d6d5c1cf7de23f0ff763d132df0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00892.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-64cd5d6d5c1cf7de23f0ff763d132df0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00892.jpeg"></a>{.image2}</p>
 <p>For multiple user setup, you can replace &ldquo;user30&rdquo; with the &amp; character,
 but ensure that those users exist on both the server and the client with
 consistent UIDs.</p>
 <p>6[.]{.c19}Start the AutoFS service now and set it to autostart at system
 reboots. This step is not required if AutoFS is already running and
 enabled.</p>
-<p><a href="#R-image-bda1c12585c3a37f5d878aa5a143d925" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00893.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-bda1c12585c3a37f5d878aa5a143d925"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00893.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-49694d466d16cd07d44057ed52730238" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00893.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49694d466d16cd07d44057ed52730238"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00893.jpeg"></a>{.image2}</p>
 <p>7[.]{.c19}Verify the operational status of the AutoFS service. Use the
 -l and --no-pager options to show full details without piping the
 output to a pager program (the <em>pg</em> command):</p>
-<p><a href="#R-image-746e907cd8a74a9d5d5f2fcbf48835a4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00894.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-746e907cd8a74a9d5d5f2fcbf48835a4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00894.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-b080e4299fb1630cbec872fcf8cbaaa1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00894.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b080e4299fb1630cbec872fcf8cbaaa1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00894.jpeg"></a>{.image2}</p>
 <p>8[.]{.c19}Log in as <em>user30</em> and run the <em>pwd</em>, <em>ls</em>, and <em>df</em> commands
 for verification:</p>
-<p><a href="#R-image-f9e4f8291a19114788deb0ce545501f1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00895.jpeg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f9e4f8291a19114788deb0ce545501f1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00895.jpeg"></a>{.image2}</p>
+<p><a href="#R-image-bd683e1f461269a4a1cf97c2d7720c79" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="images/00895.jpeg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd683e1f461269a4a1cf97c2d7720c79"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="images/00895.jpeg"></a>{.image2}</p>
 <p>The user is successfully logged in with their home directory automounted
 from the NFS server. The <em>pwd</em> command confirms the path. The <em>df</em>
 command verifies the NFS server name and the source home directory path
@@ -633,7 +633,7 @@ confirm. (Hint: Auto File System).</p>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
 
-Perfect Dark Mode
+David Vargas
 
         </div>
 
@@ -648,12 +648,12 @@ Perfect Dark Mode
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.min.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1715337780" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1715337780" defer></script>
-        <script src="/js/search.js?1715337780" defer></script>
+        <script src="/js/auto-complete.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.min.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1715774310" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1715774310" defer></script>
+        <script src="/js/search.js?1715774310" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -787,13 +787,15 @@ Perfect Dark Mode
           <li data-nav-id="/tools/obsidian/yaml-in-obsidian/" class=""><a class="padding" href="/tools/obsidian/yaml-in-obsidian/">YAML in Obsidian<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/writing/" class="alwaysopen"><input type="checkbox" id="R-section-e557a922d533a171e9a204b7e50265e2" aria-controls="R-subsections-e557a922d533a171e9a204b7e50265e2" checked><label for="R-section-e557a922d533a171e9a204b7e50265e2"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Writing</span></label><a class="padding" href="/writing/">Writing<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-e557a922d533a171e9a204b7e50265e2" class="morespace collapsible-menu">
           <li data-nav-id="/writing/19-biggest-lessons-from-reading-100-books./" class=""><a class="padding" href="/writing/19-biggest-lessons-from-reading-100-books./">19 Biggest Lessons From Reading 100 Books<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/writing/my-journey-with-addiction/" class=""><a class="padding" href="/writing/my-journey-with-addiction/">My Journey With Addiction (NSFW)<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/writing/writing-off-the-cuff/" class=""><a class="padding" href="/writing/writing-off-the-cuff/">Writing Off the Cuff<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           <li data-nav-id="/booknotes/" class="alwaysopen"><input type="checkbox" id="R-section-1cda010113b426a07bb6aec1adc15086" aria-controls="R-subsections-1cda010113b426a07bb6aec1adc15086" checked><label for="R-section-1cda010113b426a07bb6aec1adc15086"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Book Notes</span></label><a class="padding" href="/booknotes/">Book Notes<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-1cda010113b426a07bb6aec1adc15086" class="morespace collapsible-menu">
           <li data-nav-id="/booknotes/123magic/" class=""><a class="padding" href="/booknotes/123magic/">123 Magic Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/booknotes/dopamine_nation/" class=""><a class="padding" href="/booknotes/dopamine_nation/">Dopamine Nation Summary<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/booknotes/master_reading_list/" class=""><a class="padding" href="/booknotes/master_reading_list/">Master Reading List<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/booknotes/the_12_week_year/" class=""><a class="padding" href="/booknotes/the_12_week_year/">The 12 Week Year<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/booknotes/thepowerofpositivedogtraining/" class=""><a class="padding" href="/booknotes/thepowerofpositivedogtraining/">The Power of Positive Dog Training Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/booknotes/the-psychology-of-money/" class=""><a class="padding" href="/booknotes/the-psychology-of-money/">The Psychology of Money<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -827,7 +829,7 @@ Perfect Dark Mode
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-select-variant-git" value="git" selected>Git</option>
+                      <option id="R-select-variant-blue" value="blue" selected>Blue</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -852,8 +854,8 @@ Perfect Dark Mode
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1715337781" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1715337781" defer></script>
+    <script src="/js/clipboard.min.js?1715774310" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1715774310" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -869,20 +871,20 @@ Perfect Dark Mode
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1715337781" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1715337781" defer></script>
-    <script src="/js/js-yaml.min.js?1715337781" defer></script>
+    <script src="/js/d3/d3-color.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1715774310" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1715774310" defer></script>
+    <script src="/js/js-yaml.min.js?1715774310" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1715337781" defer></script>
+    <script src="/js/theme.js?1715774310" defer></script>
   </body>
 </html>
