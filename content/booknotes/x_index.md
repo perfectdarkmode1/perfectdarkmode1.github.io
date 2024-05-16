@@ -1,9 +1,4 @@
-+++
-title = "Book Notes"
-[_build]
-  render = "always"
-  publishResources = true
-+++
+
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91lcJzqYNtL._SL1500_.jpg?classes=inline&height=175px)
 
 [Dopamine Nation](Dopamine_Nation)

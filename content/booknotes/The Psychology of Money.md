@@ -1,6 +1,6 @@
 ---
-draft: false
-title: The Psychology of Money 
+draft: true
+title: The Psychology of Money
 ---
 You don't have to be a genius to do well with money. You just need to have the proper set of emotional and behavioral skills. These skills have nothing to do with having a finance degree. 
 

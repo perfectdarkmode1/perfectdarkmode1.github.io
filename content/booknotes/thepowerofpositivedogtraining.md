@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 title: The Power of Positive Dog Training Notes
 ---
 
