@@ -1,9 +1,12 @@
----
-title: "Writing"
-date: 2023-04-24T09:03:52-07:00
-draft: false
-weight: 5
----
++++ 
+archetype = "default" 
+title = "Writing" 
+weight = 5
+alwaysopen = false
+[_build]
+  render = "always"
+  list = "never"
++++
 
 Writing is the single most important skill you can have in business and in life. We do it every day. Everyone is a writer. You write when you are sending emails. You Write when you are commenting code. You write when you make a grocery list. 
 

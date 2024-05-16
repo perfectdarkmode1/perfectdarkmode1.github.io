@@ -17,27 +17,11 @@ var relearn_search_index = [
   },
   {
     "breadcrumb": "",
-    "content": "Check the sidebar! Coming soon..",
-    "description": "Check the sidebar! Coming soon..",
-    "tags": [],
-    "title": "Python",
-    "uri": "/python/"
-  },
-  {
-    "breadcrumb": "",
     "content": "Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.space/\nRSS Create and RSS feed of my site and subscribe to other feeds.\nFollow these sites:\nhttps://denshi.org/ https://drewdevault.com/ https://opensourcemusings.com/support https://www.mrmoneymustache.com/\nDWM Tile Manager http://thedarnedestthing.com/vim/wiki%20cheatsheet\n[[../Security/firefox_hardening]]\nBrowser Sync https://www.xbrowsersync.org/\nPrivacy tools https://www.privacytools.io/",
     "description": "Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.space/\nRSS Create and RSS feed of my site and subscribe to other feeds.\nFollow these sites:\nhttps://denshi.org/ https://drewdevault.com/ https://opensourcemusings.com/support https://www.mrmoneymustache.com/\nDWM Tile Manager http://thedarnedestthing.com/vim/wiki%20cheatsheet\n[[../Security/firefox_hardening]]\nBrowser Sync https://www.xbrowsersync.org/\nPrivacy tools https://www.privacytools.io/",
     "tags": [],
     "title": "Tools",
     "uri": "/tools/"
-  },
-  {
-    "breadcrumb": "",
-    "content": "Writing is the single most important skill you can have in business and in life. We do it every day. Everyone is a writer. You write when you are sending emails. You Write when you are commenting code. You write when you make a grocery list.\nAI is taking over and writing tons of low quality crap on the interwebs. Now is the best time to up your writing game and stand out over the robots. Hone your craft and AI will never be able to compete.\nReach out to me if you need any help. I LOVE writing blog posts about tech, personal development, and more.",
-    "description": "Writing is the single most important skill you can have in business and in life. We do it every day. Everyone is a writer. You write when you are sending emails. You Write when you are commenting code. You write when you make a grocery list.\nAI is taking over and writing tons of low quality crap on the interwebs. Now is the best time to up your writing game and stand out over the robots.",
-    "tags": [],
-    "title": "Writing",
-    "uri": "/writing/"
   },
   {
     "breadcrumb": "Linux",
@@ -900,14 +884,6 @@ var relearn_search_index = [
     "tags": [],
     "title": "19 Biggest Lessons From Reading 100 Books",
     "uri": "/writing/19-biggest-lessons-from-reading-100-books./"
-  },
-  {
-    "breadcrumb": "",
-    "content": "",
-    "description": "",
-    "tags": [],
-    "title": "Booknotes",
-    "uri": "/booknotes/"
   },
   {
     "breadcrumb": "Tools",
