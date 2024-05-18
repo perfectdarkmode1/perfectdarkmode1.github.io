@@ -1,7 +1,7 @@
 ---
 title: "Rsync Guide"
 date: 2023-04-22T06:19:10-07:00
-draft: false
+draft: true
 ---
 
 

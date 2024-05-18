@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 title: Console into a Juniper MX80 from Linux
 ---
 

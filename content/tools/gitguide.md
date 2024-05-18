@@ -1,7 +1,7 @@
 ---
 title: "Beginners Guide to Git"
 date: 2023-04-22T06:01:12-07:00
-draft: false
+draft: true
 ---
 
 

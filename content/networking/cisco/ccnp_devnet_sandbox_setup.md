@@ -1,7 +1,7 @@
 ---
 title: Cisco Devnet Sandbox Setup
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 
 Max reservation time: 4 hours

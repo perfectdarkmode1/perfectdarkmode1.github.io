@@ -1,7 +1,7 @@
 ---
 title: SCSS & SASS in Hugo
 date: 2023-04-22T06:39:22-07:00
-draft: false
+draft: true
 ---
 
 Create assets/scss/

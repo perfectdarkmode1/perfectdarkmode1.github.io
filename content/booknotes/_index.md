@@ -9,9 +9,21 @@ list = "never"
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91lcJzqYNtL._SL1500_.jpg?classes=inline&height=175px)
 
 [Dopamine Nation](Dopamine_Nation)
-Date Read: 2024-04-22. How Strongly I Recommend It: 10/10
+Date Read: 2024-04-22 How Strongly I Recommend It: 10/10
 
 This was a very insightful book. Knowing the balance between pain and pleasure is essential to living in modern day society. Where scarcity is no longer an issue. Our brains are not adapted for a world of abundance. So the forces that kept us alive for thousands of years, are now making us miserable. Consider this a primer into understanding addiction and over consumption. And steps you can take to mitigate this. [Read my notes](Dopamine_Nation.md) 
+
+---
+
+![The Power of Positive Dog Training](https://m.media-amazon.com/images/I/61fUL8I9owL._SL1500_.jpg?classes=inline&height=175px)
+
+[The Power of Positive Dog Training](thepowerofpositivedogtraining.md)
+Date Read: 2022-07-01 Rating: 10/10
+
+This book is a no BS guide to dog training without being a jerk. Any dog can be training with progressive reinforcement techniques. The author even explains why aversive training not only doesn't work, but it makes problems sprout up in other areas of your dogs life. Loaded with how-to's on all of the basic things you should treat your dogs and dealing with common problems. 
+
+
+
 
 ---
 

@@ -2,7 +2,7 @@
 tags: 
 aliases: 
 type: 
-draft: false
+draft: true
 title: YAML in Obsidian
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Juniper CLI Basics
-draft: false
+draft: true
 ---
 
 Connection Methods

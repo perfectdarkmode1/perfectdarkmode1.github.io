@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 title: How to Copy and Paste a Junos Config
 ---
 

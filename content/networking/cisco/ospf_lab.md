@@ -1,7 +1,7 @@
 ---
 title: OSPF Lab
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 Welcome to the CCNA OSPF lab. You'll need to configure OSPF so that there are full routing capabilities in the network. As well as use show commands to verify your network. Then you will troubleshoot and fix a broken OSPF network.
 

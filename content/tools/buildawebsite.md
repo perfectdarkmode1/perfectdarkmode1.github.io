@@ -21,7 +21,7 @@ series = ["tools"]
 
 Word Press is great, but it is probably a lot more bloated then you need for a personal website. Enter Hugo, it has less server capacity and storage needs than Word Press. Hugo is a static site generator than takes markdown files and converts them to html. 
 
-Hosting your own website is also a lot cheaper than having a provider like Bluehost do it for you. Instead of $15 per month, I am currently paying $10 per year. 
+Hosting your own website is also a lot cheaper than having a provider like Bluehost do it for you. Instead of \$15 per month, I am currently paying \$10 per year. 
 
 This guide will walk through building a website step-by-step. 
 
@@ -208,12 +208,6 @@ You will need to fill out this header information for each new post you make. Th
 
 Save your doc and exit. Next, there should be an about.md page now in your ~/Documents/hugo/Contents folder. Edit this to edit your about page for your site. You can use this Markdown Guide if you need help learning markdown language. https://www.markdownguide.org/
 
-Note: To insert an image into your post. Add the image to your ~/Documents/hugo/static directory. Then reference the image in your post like this:
-
-```
-
-```
-
 ### Serve your website locally
 
 Let's test the website by serving it locally and accessing it at localhost:1313 in your web browser. Enter the command:
@@ -224,7 +218,6 @@ hugo serve
 
 Hugo will now be generating your website. You can view it by entering localhost:1313 in your webbrowser.
 
-![hugo1](/hugo1.png)
 
 You can use this to test new changes before uploading them to your server. When you svae a post or page file such as your about page, hugo will automatically update the changes to this local page if the local server is running. 
 
@@ -239,7 +232,11 @@ From your hugo site folder run:
 ```
 [davidthomas@fedora hugo]$ hugo
 Start building sites … 
-hugo v0.98.0+extended linux/amd64 BuildDate=unknown
+hugo v0.98.0+extended linux/amd64 BuildDate=unknownNote: To insert an image into your post. Add the image to your ~/Documents/hugo/static directory. Then reference the image in your post like this:
+
+```
+
+```
 
 
                    | EN  

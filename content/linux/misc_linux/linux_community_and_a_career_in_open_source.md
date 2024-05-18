@@ -1,7 +1,7 @@
 ---
 title: Open source and Linux Community
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 Distributions
 

@@ -1,6 +1,6 @@
 ---
 title: Run Command as Another User
-draft: false
+draft: true
 ---
 
 To invoke a login shell using `sudo` just use `-i`. When command is not specified you'll get a login shell prompt, otherwise you'll get the output of your command.

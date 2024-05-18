@@ -1,7 +1,7 @@
 ---
 title: General Linux and History
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 Richard Stallman started working on the GNU (GNU is Not UNIX) project, the GNU kernel called Hurd, which unfortunately never came to completion. The GNU General Public License (GPL), a free software license, was also created as a result of this.
 

@@ -1,7 +1,7 @@
 ---
 title: Windows Subsystem for Linux
 date: 2023-11-06T06:20:36-07:00
-draft: false
+draft: true
 ---
 # Add a permanent home alias in WSL2
 

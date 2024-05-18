@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
@@ -22,7 +22,7 @@ cd ~/Documents rsync -avuP your-library-dir root@example.org:/opt/calibre/Add a 
 calibre-server --manage-users/var/www/nextcloud/data/david/files/Documents/Calibre
 Creating a service Create a new file /etc/systemd/system/calibre-server.service and add the following:
 [Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.">
-    <meta property="og:url" content="http://perfectdarkmode.com/tools/calibre_server/">
+    <meta property="og:url" content="http://localhost:1313/tools/calibre_server/">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:title" content="Calibre Server - Perfect Dark Mode">
     <meta property="og:description" content="Install Calibre and Rsync
@@ -51,23 +51,23 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
     <title>Calibre Server - Perfect Dark Mode</title>
     <link href="/tools/calibre_server/index.xml" rel="alternate" type="application/rss+xml" title="Calibre Server - Perfect Dark Mode">
     <link href="/tools/calibre_server/index.print.html" rel="alternate" type="text/html" title="Calibre Server - Perfect Dark Mode">
-    <link href="/images/favicon.png?1715876280" rel="icon" type="image/png">
-    <link href="/css/fontawesome-all.min.css?1715876282" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1715876282" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1715876282" rel="stylesheet">
-    <link href="/css/auto-complete.css?1715876282" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1715876282" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1715876282" rel="stylesheet">
-    <link href="/css/fonts.css?1715876282" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1715876282" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1715876282" rel="stylesheet">
-    <link href="/css/theme-zen-dark.css?1715876282" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1715876282" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1715876282" rel="stylesheet">
-    <link href="/css/print.css?1715876282" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1715876282"></script>
+    <link href="/images/favicon.png?1716027085" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716027086" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716027086" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716027086" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716027086" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716027086" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716027086" rel="stylesheet">
+    <link href="/css/fonts.css?1716027086" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716027086" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716027086" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716027086" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716027086" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716027086" rel="stylesheet">
+    <link href="/css/print.css?1716027086" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716027086"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
       window.relearn.relBaseUri='..\/..';
-      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
       window.index_js_url="/index.search.js";
       // variant stuff
       window.variants && variants.init( [ 'zen-dark' ] );
@@ -178,11 +178,11 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
 </span></span><span style="display:flex;"><span>systemctl reload nginx</span></span></code></pre></div><p>Issue a Let&rsquo;s Encrypt certificate. <a href="https://landchad.net/certbot" rel="external" target="_blank">Detailed instructions and additional information</a>.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>certbot --nginx</span></span></code></pre></div><p>Add CNAME record</p>
 <p>Now just go to <strong>calibre.example.org</strong>. The server will request an username and a password.</p>
-<p><a href="#R-image-9ebe039befdda6483b533a6293e42082" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ebe039befdda6483b533a6293e42082"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png"></a></p>
+<p><a href="#R-image-1e1c07b2ec1ac2b6c2a53398509c5df1" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1e1c07b2ec1ac2b6c2a53398509c5df1"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png"></a></p>
 <p>After login you will see something like this.</p>
-<p><a href="#R-image-1f148de0c7b6545e9310c34aeb2b16aa" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f148de0c7b6545e9310c34aeb2b16aa"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png"></a></p>
+<p><a href="#R-image-b8a6e476085ea62ba645a7a371e3e81a" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8a6e476085ea62ba645a7a371e3e81a"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png"></a></p>
 <p>De DRM Books</p>
 <p>Download kindle verion 1.26 <a href="https://www.filehorse.com/download-kindle-for-pc/40502/download/" rel="external" target="_blank">https://www.filehorse.com/download-kindle-for-pc/40502/download/</a></p>
 <p>filename: KindleForPC-installer-1.26.55076.exe<br>
@@ -220,12 +220,12 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1715876282" defer></script>
-        <script src="/js/lunr/lunr.min.js?1715876282" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1715876282" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1715876282" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1715876282" defer></script>
-        <script src="/js/search.js?1715876282" defer></script>
+        <script src="/js/auto-complete.js?1716027086" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716027086" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716027086" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716027086" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716027086" defer></script>
+        <script src="/js/search.js?1716027086" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -236,101 +236,15 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/linux/" class=""><input type="checkbox" id="R-section-9e5aaccdf48687824ccd3b3097af8e41" aria-controls="R-subsections-9e5aaccdf48687824ccd3b3097af8e41"><label for="R-section-9e5aaccdf48687824ccd3b3097af8e41"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Linux</span></label><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
-          <li data-nav-id="/linux/misc_linux/boot_the_system/" class=""><a class="padding" href="/linux/misc_linux/boot_the_system/">Boot<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/command_line/" class=""><a class="padding" href="/linux/misc_linux/command_line/">Command Line<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/consoling_in_on_linux/" class=""><a class="padding" href="/linux/misc_linux/consoling_in_on_linux/">Consoling in on Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/devices/" class=""><a class="padding" href="/linux/misc_linux/devices/">Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/dns/" class=""><a class="padding" href="/linux/misc_linux/dns/">DNS<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
           <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/file_permissions/" class=""><a class="padding" href="/linux/misc_linux/file_permissions/">File Permissions<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/getting_started/" class=""><a class="padding" href="/linux/misc_linux/getting_started/">General Linux and History<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/ubuntu_stuff/" class=""><a class="padding" href="/linux/misc_linux/ubuntu_stuff/">How to Get Putty to Work in Ubuntu<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/init/" class=""><a class="padding" href="/linux/misc_linux/init/">Init<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/i_o_monitoring/" class=""><a class="padding" href="/linux/misc_linux/i_o_monitoring/">IO Monitoring<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/keyboard_shortcuts/" class=""><a class="padding" href="/linux/misc_linux/keyboard_shortcuts/">Keyboard Shortcuts<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/kernel/" class=""><a class="padding" href="/linux/misc_linux/kernel/">Linux Kernel<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/logging/" class=""><a class="padding" href="/linux/misc_linux/logging/">Logging<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/ls/" class=""><a class="padding" href="/linux/misc_linux/ls/">ls<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/network_troubleshooting/" class=""><a class="padding" href="/linux/misc_linux/network_troubleshooting/">Network Troubleshooting<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/network_basics/" class=""><a class="padding" href="/linux/misc_linux/network_basics/">Networking in Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/linux_community_and_a_career_in_open_source/" class=""><a class="padding" href="/linux/misc_linux/linux_community_and_a_career_in_open_source/">Open source and Linux Community<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/packages/" class=""><a class="padding" href="/linux/misc_linux/packages/">Packages and Their Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/process_utilization/" class=""><a class="padding" href="/linux/misc_linux/process_utilization/">Process Utilization<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/ps_processes/" class=""><a class="padding" href="/linux/misc_linux/ps_processes/">Processes<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/linux_resources/" class=""><a class="padding" href="/linux/misc_linux/linux_resources/">Resources for learning Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/scp_command/" class=""><a class="padding" href="/linux/misc_linux/scp_command/">scp<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/network_sharing/" class=""><a class="padding" href="/linux/misc_linux/network_sharing/">Sharing Resources<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/finding_your_way_on_a_linux_system/" class=""><a class="padding" href="/linux/misc_linux/finding_your_way_on_a_linux_system/">Shell<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/skills_that_go_with_bash_scripting/" class=""><a class="padding" href="/linux/misc_linux/skills_that_go_with_bash_scripting/">Skills that go with Bash Scripting<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/switching_to_linux/" class=""><a class="padding" href="/linux/misc_linux/switching_to_linux/">Switching to Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/the_power_of_the_linux_command_line/" class=""><a class="padding" href="/linux/misc_linux/the_power_of_the_linux_command_line/">Symbols in Bash<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/tar/" class=""><a class="padding" href="/linux/misc_linux/tar/">Tar Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/text_fu/" class=""><a class="padding" href="/linux/misc_linux/text_fu/">Text Editors<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/the_filesystem/" class=""><a class="padding" href="/linux/misc_linux/the_filesystem/">The Linux Filesystem<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/user_management/" class=""><a class="padding" href="/linux/misc_linux/user_management/">User Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/wsl2/" class=""><a class="padding" href="/linux/misc_linux/wsl2/">Windows Subsystem for Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/chroot/" class=""><a class="padding" href="/linux/misc_linux/chroot/">chroot<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/containers/" class=""><a class="padding" href="/linux/containers/">Container Stuff<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/linux/misc_linux/run_command_as_another_user/" class=""><a class="padding" href="/linux/misc_linux/run_command_as_another_user/">Run Command as Another User<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/networking/" class=""><input type="checkbox" id="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f" aria-controls="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f"><label for="R-section-ec0ce2ce30f7ea4f73b681ec6981b84f"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Networking</span></label><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
-          <li data-nav-id="/networking/cisco/cli/" class=""><a class="padding" href="/networking/cisco/cli/">Cisco CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/cml_setup_in_vmware/" class=""><a class="padding" href="/networking/cisco/cml_setup_in_vmware/">Cisco CML VMWARE Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ccnp_devnet_sandbox_setup/" class=""><a class="padding" href="/networking/cisco/ccnp_devnet_sandbox_setup/">Cisco Devnet Sandbox Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/cisco_to_junos_cheat_sheet/" class=""><a class="padding" href="/networking/juniper/cisco_to_junos_cheat_sheet/">Cisco to Juniper Cheat Sheet<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/cisco_vlan_lab/" class=""><a class="padding" href="/networking/cisco/cisco_vlan_lab/">Cisco VLAN Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/classful_ipv4/" class=""><a class="padding" href="/networking/cisco/classful_ipv4/">Classfull IPv4<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/management/" class=""><a class="padding" href="/networking/cisco/management/">Device Management<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/device_management_protocols/" class=""><a class="padding" href="/networking/cisco/device_management_protocols/">Device Management Protocols<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/dhcp_config/" class=""><a class="padding" href="/networking/cisco/dhcp_config/">DHCP Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/dhcp_snooping_and_arp_inspection/" class=""><a class="padding" href="/networking/cisco/dhcp_snooping_and_arp_inspection/">DHCP Snooping and ARP Inspection<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ethernet_lans/" class=""><a class="padding" href="/networking/cisco/ethernet_lans/">Ethernet LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/extended_acls/" class=""><a class="padding" href="/networking/cisco/extended_acls/">Extended ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
           <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ip_services/" class=""><a class="padding" href="/networking/cisco/ip_services/">IP Services<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6_addressing_and_subnetting/" class=""><a class="padding" href="/networking/cisco/ipv6_addressing_and_subnetting/">IPv6 Addressing and Subnetting<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6/" class=""><a class="padding" href="/networking/cisco/ipv6/">IPv6 Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6_config/" class=""><a class="padding" href="/networking/cisco/ipv6_config/">IPv6 Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ipv6_routing/" class=""><a class="padding" href="/networking/cisco/ipv6_routing/">IPv6 Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/junos_fundementals/" class=""><a class="padding" href="/networking/juniper/junos_fundementals/">Junos Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/lan_architecture/" class=""><a class="padding" href="/networking/cisco/lan_architecture/">LAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/l2-etherchannel/" class=""><a class="padding" href="/networking/cisco/l2-etherchannel/">Layer 2 Etherchannel<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/spanning_tree/" class=""><a class="padding" href="/networking/cisco/spanning_tree/">More Spanning Tree<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/nat/" class=""><a class="padding" href="/networking/cisco/nat/">Network Address Translation (NAT)<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_concepts/" class=""><a class="padding" href="/networking/cisco/ospf_concepts/">OSPF Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_config/" class=""><a class="padding" href="/networking/cisco/ospf_config/">OSPF Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_lab/" class=""><a class="padding" href="/networking/cisco/ospf_lab/">OSPF Lab<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/ospf_network_types_and_neighbors/" class=""><a class="padding" href="/networking/cisco/ospf_network_types_and_neighbors/">OSPF Network Types and Neighbors<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/qos/" class=""><a class="padding" href="/networking/cisco/qos/">QoS<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/rstp/" class=""><a class="padding" href="/networking/cisco/rstp/">Rapid Spanning Tree (RSTP)<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/router_operation/" class=""><a class="padding" href="/networking/cisco/router_operation/">Router Operation<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/routing_in_the_lan/" class=""><a class="padding" href="/networking/cisco/routing_in_the_lan/">Routing in the LAN<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/securing_network_devices/" class=""><a class="padding" href="/networking/cisco/securing_network_devices/">Securing Network Devices<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/security_architectures/" class=""><a class="padding" href="/networking/cisco/security_architectures/">Security Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/spanning_tree_protocol_concepts/" class=""><a class="padding" href="/networking/cisco/spanning_tree_protocol_concepts/">Spanning Tree Protocol Basics<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/standard_acls/" class=""><a class="padding" href="/networking/cisco/standard_acls/">Standard ACLs<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/static_routes/" class=""><a class="padding" href="/networking/cisco/static_routes/">Static Routes<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/switch_interfaces/" class=""><a class="padding" href="/networking/cisco/switch_interfaces/">Switch Interfaces<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/switchport_security_config/" class=""><a class="padding" href="/networking/cisco/switchport_security_config/">Switchport Security Configuration<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/tcp_ip_transport_and_applications/" class=""><a class="padding" href="/networking/cisco/tcp_ip_transport_and_applications/">TCP/UDP<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/t-shoot_routing/" class=""><a class="padding" href="/networking/cisco/t-shoot_routing/">Troubleshooting Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/vlans/" class=""><a class="padding" href="/networking/cisco/vlans/">VLANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wan_architecture/" class=""><a class="padding" href="/networking/cisco/wan_architecture/">WAN Architecture<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wans_and_ip_routing/" class=""><a class="padding" href="/networking/cisco/wans_and_ip_routing/">WANs and IP Routing<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/what_is_a_vlan_/" class=""><a class="padding" href="/networking/cisco/what_is_a_vlan_/">What is a VLAN?<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless_architectures/" class=""><a class="padding" href="/networking/cisco/wireless_architectures/">Wireless Architectures<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless_lan/" class=""><a class="padding" href="/networking/cisco/wireless_lan/">Wireless LANs<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless/" class=""><a class="padding" href="/networking/cisco/wireless/">Wireless Principles<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/cisco/wireless_security/" class=""><a class="padding" href="/networking/cisco/wireless_security/">Wireless Security<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/consoling_in_to_mx80_from_linux/" class=""><a class="padding" href="/networking/juniper/consoling_in_to_mx80_from_linux/">Console into a Juniper MX80 from Linux<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/junos_paste_config/" class=""><a class="padding" href="/networking/juniper/junos_paste_config/">How to Copy and Paste a Junos Config<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/toggle_poe/" class=""><a class="padding" href="/networking/juniper/toggle_poe/">How to Toggle POE on a Juniper Switch<i class="fa-fw fas fa-check read-icon"></i></a></li>
-          <li data-nav-id="/networking/juniper/juniper_cli_basics/" class=""><a class="padding" href="/networking/juniper/juniper_cli_basics/">Juniper CLI Basics<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
-          <li data-nav-id="/tools/" class="parent "><input type="checkbox" id="R-section-cff67d57e00d6d598d882def3568f700" aria-controls="R-subsections-cff67d57e00d6d598d882def3568f700" checked><label for="R-section-cff67d57e00d6d598d882def3568f700"><i class="fa-fw fas fa-chevron-down"></i><i class="fa-fw fas fa-chevron-right"></i><span class="a11y-only">Submenu Tools</span></label><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class="parent "><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
           <li data-nav-id="/tools/calibre_server/" class="active"><a class="padding" href="/tools/calibre_server/">Calibre Server<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/distrobox/" class=""><a class="padding" href="/tools/distrobox/">Distrobox Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
           <li data-nav-id="/tools/silverblue/" class=""><a class="padding" href="/tools/silverblue/">Fedora Silverblue<i class="fa-fw fas fa-check read-icon"></i></a></li>
@@ -412,8 +326,8 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1715876283" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1715876283" defer></script>
+    <script src="/js/clipboard.min.js?1716027086" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716027086" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -429,20 +343,20 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1715876283" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1715876283" defer></script>
-    <script src="/js/js-yaml.min.js?1715876283" defer></script>
+    <script src="/js/d3/d3-color.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716027086" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716027086" defer></script>
+    <script src="/js/js-yaml.min.js?1716027086" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1715876283" defer></script>
+    <script src="/js/theme.js?1716027086" defer></script>
   </body>
 </html>
