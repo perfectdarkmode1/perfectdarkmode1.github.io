@@ -7,7 +7,7 @@ I am currently a Linux Sys Admin. I am studying for Red Hat's RHCSA exam. My goa
 
 ## What I am Reading
 
-![Infinite Jest](/images/Pasted%20image%2020240519084603.png)
+![Infinite Jest](/images/Pasted%20image%2020240519084603.png?classes=inline&height=175px)
 
 ## Things to Learn
 
