@@ -1,4 +1,4 @@
-
+# The Blog Startup
 
 ![The Blog Startup](https://m.media-amazon.com/images/I/61Lm6P0rPsL._SL1360_.jpg?classes=inline&height=175px)
 
@@ -9,6 +9,8 @@ If you are wanting to blog as a business, you need a sound strategy and business
 
 
 ---
+
+## Summary and Highlights
 
 Have a business model. 
 

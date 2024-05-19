@@ -1,10 +1,5 @@
----
-draft: true
-title: The 12 Week Year
----
+# The 12 Week Year (8/10)
 ![The 12 Week Year](https://m.media-amazon.com/images/I/71ZMsYuwELL._SL1500_.jpg?classes=inline&height=175px) 
-
-Date Read: 2024-04-22. How Strongly I Recommend It: 8/10 
 
 This second half of the book was almost an identical copy of the second half of the book. But still filled with solid advice on establishing a vision, settings goals, measuring the effectiveness of your actions, and other tidbits about being effective and taking action. 
 
@@ -14,6 +9,8 @@ I highly advise you make your own outline so you do not have to read everything 
 
 
 ---
+
+## Summary and Highlights
 
 The barrier between the life you are living and the life you want is effective execution. Getting in shape is not a knowledge problem, it's an execution problem. In order to maintain effective execution, you must:
 

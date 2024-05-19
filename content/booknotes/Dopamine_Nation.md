@@ -1,17 +1,13 @@
----
-draft: true
-title: Dopamine Nation Summary
----
+# Dopamine Nation (10/10)
 
 ![Dopamine Nation](https://m.media-amazon.com/images/I/91lcJzqYNtL._SL1500_.jpg?classes=inline&height=175px)
 
-Date Read: 2024-04-22. How Strongly I Recommend It: 10/10
-
-Go to the [Amazon page](https://www.amazon.com/Dopamine-Nation-Finding-Balance-Indulgence/dp/1524746746/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.CbGRT43DDyCX0BQVGMrdXbxl4RHGuckIx-_lae2ha3aCLsP5rrupkhMNHIMWvSJSLvVvmxicIad61tvFjK0S23bIb6vuvBfBCMA9EnQWDK7411Lox_5c4qrrAJk5YWqmTvQc_rwbb44qwolvF51WiR93E2tXE5fvjhd8epOF-4jXZJc0nZ66NxOun1UQUoeLl1eszAUbMk0oObXKl2XLY-YHpVaoGPdAw3QE5Lm5hkY.UBLZKp4ivcCTLvVZIZleBbdfZ0jAKt2py70jyL_jW-Q&qid=1714996664&sr=8-1) for details and reviews.
 
 This was a very insightful book. Knowing the balance between pain and pleasure is essential to living in modern day society. Where scarcity is no longer an issue. Our brains are not adapted for a world of abundance. So the forces that kept us alive for thousands of years, are now making us miserable. Consider this a primer into understanding addiction and over consumption. And steps you can take to mitigate this. 
 
 ---
+
+## Summary and Highlights
 
 Being sick and tired is a result of a skewed pain/pleasure balance. In order to find balance, you must understand the relationship between pleasure and pain in the body. Pleasure and pain operate in the same area of the brain and are intertwined. 
 
@@ -61,7 +57,7 @@ The brain wants to maintain homeostasis.
 [Opponent process theory](https://en.wikipedia.org/wiki/Opponent-process_theory) states that any prolonged or repeated departures from hedonic or effective neutrality have a cost.
 
 With prolonged exposure to pleasure, our capacity to tolerate pain decreases, and our threshold for experiencing pleasure increases. 
-#### The negative feedback caused by tolerance
+### The negative feedback caused by tolerance
 
 Repeated exposure to a pleasure stimulus makes the pleasure from that stimulus less and less. And the rebound to the pain side gets stronger and longer. You need more of a behavior or substance over time to feel the same amount of pleasure. 
 
@@ -81,7 +77,7 @@ The pain from withdrawl is what drives people to relapse, withdrawl is the pleas
 
 If you wait long enough, you can reset your dopamine baseline. (in most cases) And you can regain pleasure in simple things like going for walks, listening to birds, reading, writing, watching the sun rise, etc.  
 
-#### Dopamine cues
+### Dopamine cues
 
 Cue dependant learning or pavlovian conditioning is when dopamine is released in the brain in response to a conditioned cue. This leads to pleasure in anticipation of a reward. When the cue happens, dopamine drops below baseline, which leads us to seek out the reward. 
 
@@ -93,7 +89,7 @@ These conditioned reward pathways can cause permanent brain changes. But new pat
 
 Even learning releases dopamine. 
 
-#### Balance is person independent. 
+### Balance is person independent. 
 
 Pleasure and pain can happen at the same time like with spicy food. Something that one person finds pleasurable or painful may not be the same for someone else. And not everyone starts with a level balance.
 
@@ -101,7 +97,7 @@ People injured in war are sometimes in less pain because they are pulled into a 
 
 "We are Cacti in a rainforest" -Dr. Tom Finucane. Our brains have evolved for a world of scarcity, but we live in a new world of abundance.
 
-## Dopamine Fasting
+### Dopamine Fasting
 
 We must abstain from the unwanted behavior in order to truly have clarity on how it effects us. High dopamine subtances or behaviors cloud or ability to see cause and effect. And young people are more immune to immediate negative impacts than adults. 
 
@@ -130,7 +126,7 @@ Use mindfulness to observe without judging yourself. Have compassion for yoursel
 
 Don't forget that moderation can backfire. 
 
-#### Limit access through self-binding. 
+### Limit access through self-binding. 
 
 Self-binding is placing barriers between you and the reward to help get over the limitations of willpower. Willpower gets tired the more we use it. This is a tool, not a fail safe. 
 
@@ -266,7 +262,8 @@ Immerse ourselves in the world instead of turning away from it.
 
 Finding balance does not happen instantly. It requires patience, courage, and maintenance. You must have faith that the small actions you take every day will pay off in the future. 
 
-# If you made it this far…
+---
+## If you made it this far…
 
 Please consider giving me some feedback. I want to become a better writer and help others grow along with me. Feedback is invaluable for this goal.
 

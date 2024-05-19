@@ -1,11 +1,12 @@
----
-draft: true
-title: The Power of Positive Dog Training Notes
+![The Power of Positive Dog Training](https://m.media-amazon.com/images/I/61fUL8I9owL._SL1500_.jpg?classes=inline&height=175px)
+
+This book is a no BS guide to dog training without being a jerk. Any dog can be training with progressive reinforcement techniques. The author even explains why aversive training not only doesn’t work, but it makes problems sprout up in other areas of your dogs life. Loaded with how-to’s on all of the basic things you should treat your dogs and dealing with common problems.
+
 ---
 
-# Principles
+## Summary and Highlights
 
-## All living things repeat behaviors that are rewarding and avoid behaviors that are not
+### All living things repeat behaviors that are rewarding and avoid behaviors that are not
 
 You don't need to punish dog to make behavior not rewarding
 
@@ -1579,3 +1580,9 @@ Take It: Take food or an object into your mouth (the beginning of teaching a dog
 
 Touch: Touch your nose to a designated target. Wait: Pause. Stop moving, either until I leave or until I release you. (This is less formal than stay.)
 
+---
+### If you made it this far…
+
+Please consider giving me some feedback. I want to become a better writer and help others grow along with me. Feedback is invaluable for this goal.
+
+Thanks for reading!
