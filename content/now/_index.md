@@ -11,7 +11,9 @@ Goal is to study for 30 minutes per day.
 
 ## What I am Reading
 
-![IThe Gardener and the Carpenter](https://m.media-amazon.com/images/I/81HEa+Dj+4L._SL1500_.jpg)?classes=inline&height=175px)
+
+![Infinite Jest](/images/Pasted%20image%2020240520022354.png?classes=inline&height=175px)
+
 
 ## Health
 
