@@ -50,7 +50,7 @@ You can transform your content into other stuff like videos, infographics, image
 
 Reddit and Facebook don't lend themselves to building an audience around your writing. 
 
-Now I guess it's time to stop consuming to much and start producing. 
+Now I guess it's time to stop consuming so much and start producing. 
 
 ---
 

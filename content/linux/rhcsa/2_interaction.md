@@ -1,74 +1,40 @@
-# Chapter 2 RHCSA Notes - Interaction
+# RedHat (RHEL9) Graphical Environment and Filesystem
 
-## Linux Graphical Environment
+## Wayland - Linux Graphical Environment in RHEL
 
-## Wayland
-- Client/server display protocol. 
-- Foundation for running GUI apps.
-- Better graphics capabilities, features, and performance than X.
+Redhat runs a graphical environment called Wayland. This is the foundation for running GUI apps. Wayland is a client/server display protocol. Which just means that the user (the client) requests a resource and the display manager (the server) serves those resources. 
 
-### Core Components
+Wayland is slowly replaced and older display protocol called "X". And has better graphics capabilities, features, and performance than X. And consists of a Display or Login manager and a Desktop environment. 
 
-- Display manager (login manager)
-- Desktop environment
+The Display/ Login manager presents the login screen for users to log in. Once you log in, you get to the pre-configured desktop manager or Desktop Environment (DE). The GNOME Display Manager. (GDM)
 
-### Display/ Login Manager 
-- Presentation of graphical login screen
-- Allows users to enter credentials to log on to the system
-- Preconfigured graphical desktop manager appears after the credentials are verified
 
-- Default display manager for RHEL8 :: GNOME Display Manager (GDM).
+## Filesystem and Directory Hierarchy 
 
-#### Desktop Environment 
+The standard for the Linux filesystem is the Filesystem Hierarchy Standard (FHS). Which describes locations, names, and permissions for a variety of file types and directories.
 
-- After login, the display/login manager establishes a Desktop Environment (DE).
+The directory structure starts at the root. Which is notated by a "/". The top levels of the directory can be viewed by running the `ls` command on the root of the directory tree.
 
-# Linux Directory Structure and Filesystems
+`ls /`
 
-Filesystem Hierarchy Standard (FHS) :: Describes names, locations, and permissions for many file types and directories.
+```
+$ ls /
+afs  bin  boot  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var
+```
 
-## Top-Level Directories
+Some of these directories hold static data such as commands, configuration files, kernel and device files, etc. And some hold dynamic data such as log and status files. 
 
-- Key top-level directories under /
-- Some of these directories hold static data
-- Others contain dynamic (or variable) information.
+There are three major categories of file systems. They are:
 
-### Static directories
+1. disk-based
+2. network-based
+3. memory-based
 
-- commands
-- configuration files
-- library routines
-- kernel files
-- device files
+Disk-based files ystems are physical media such as a hard drive or a USB flash drive and store information persistently. The root and boot file systems and both disk-based and created automatically when you select the default partitioning. 
 
-### Dynamic directories 
+Network Based filesystems are disk-based file systems that are shared over the network for remote access. (Also stored persistently)
 
-- log files
-- status files
-- temporary files\
-
-## File System Categories
-
-Three groups: 
-- disk-based
-- network-based
-- memory-based
-
-### Disk-based 
-
-- created on physical media such as a hard drive or a USB flash drive
-- store information persistently
-
-two disk-based file systems that  are created when you select the default partitioning :: root and boot file systems.
-### Network Based
-
-- disk-based file systems that are shared over the network for remote access.
-- store information persistently
-
-### Memory Based
-
-- virtual; created automatically at system startup and destroyed when the system goes down.
-- lost at system reboots.
+Memory Based filesystems are virtual. And are created automatically at system startup and destroyed when the system goes down.
 
 ## Root File System (/), Disk-Based
 

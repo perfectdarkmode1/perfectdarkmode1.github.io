@@ -1,8 +1,14 @@
+---
+title: Everything I've Learned About Caffeine. Look at this bird.
+draft: false
+---
+
 No really. Look at this bird: 
 
-  
 
-[MEDIA=youtube]HUngLgGRJpo:66[/MEDIA]
+https://www.youtube.com/watch?v=HUngLgGRJpo&t
+
+{{< youtube "HUngLgGRJpo&t" >}}
 
   
 
@@ -75,6 +81,30 @@ Take a look at this advertisement from 1924 mentioned in Eugene M. Schwartz's fa
 
 There you have it. Not from me but from a professional word smith. People knew this was a problem 100 years ago. Yet, we are all still addicted. 
 
+## Caffeine is the #1 ignored factor when it comes to health. 
+
+Here are some common tips we see over and over again in regards to taking control of your physical health. 
+
+- Cut carbs.
+- Cut out blue light.
+- Don't eat past 6.
+- Quit alcohol.
+- Eat only meat.
+- Stop eating unsoaked almonds.
+
+You get the point. We are so obsessed with minor details that we miss the obvious. Seriously, anyone who is recommending putting butter in your coffee for optimal health has no clue what optimal health is. 
+
+People are clueless about caffeine. Why?
+
+Because it's "Normal".
+
+It's a problem that is hard to see before it's too late. 
+
+"But caffeine is not a problem for me."
+
+Any amount of stimulants in your body is a problem. It's effecting you TODAY. If you want to feel emotions again, have unlimited energy throughout the day, have healthy joints, be able to recover fully from exercise, have the most creative thoughts you can possibly have...
+
+You need to quit caffeine. Plain and simple. You are not living the life you are fully capable of. 
   
 
 Here's the #1 post on Reddit regarding caffeine:
@@ -89,7 +119,6 @@ Here's the #1 post on Reddit regarding caffeine:
 > 
 > I can breathe. My sleep is perfect. My digestion is perfect. My livelihood, however, is in jeopardy. I just wanted to put this out there, in case anyone has quit caffeine but is struggling with productivity or lack of motivation: It's not withdrawal. You're a spiritual creature in a cold, mechanical system, and now there's no hiding.
 
-  
 
 There is something deeper going on here. Is caffeine used as a form of control? I mean, the Nazi's gave prisoners soup, bread, and coffee for a reason right? 
 
