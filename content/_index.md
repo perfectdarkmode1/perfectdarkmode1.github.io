@@ -7,9 +7,6 @@ What I am doing [Now](perfectdarkmode1.github.io/content/now/_index.md).
 I am also interested in digital minimalism, privacy, and personal development topics. Expect to see writings on those as well. 
 ### Recent Posts:
 
-[Caffeine-bird](/writing/Caffeine-bird.md)
-
-
 [![RHCSA Vagrant Lab](/images/vagrantmultivmdeployment.jpg?classes=inline&height=225px&lightbox=false)](linux/rhcsavagrantlabsetup/)
 [![Fedora Desktop Setup](/images/fedoradesktop.png?classes=inline&height=225px&lightbox=false)](linux/fedora_setup/)
 

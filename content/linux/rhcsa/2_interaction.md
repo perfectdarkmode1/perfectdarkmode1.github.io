@@ -9,7 +9,7 @@ Wayland is slowly replaced and older display protocol called "X". And has better
 The Display/ Login manager presents the login screen for users to log in. Once you log in, you get to the pre-configured desktop manager or Desktop Environment (DE). The GNOME Display Manager. (GDM)
 
 
-## Filesystem and Directory Hierarchy 
+## File System and Directory Hierarchy 
 
 The standard for the Linux filesystem is the Filesystem Hierarchy Standard (FHS). Which describes locations, names, and permissions for a variety of file types and directories.
 
