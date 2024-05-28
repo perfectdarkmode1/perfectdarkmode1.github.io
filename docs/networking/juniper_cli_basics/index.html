@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Connection Methods
+Factory default:
+User: root
+No password
+Fxpo = ethernet management interface
+SSH, FTP. Telnet, http(s)
+Cannot route traffic
+Management purposes only
+Initial Login
+Logging for the First Time
+• Nonroot users are placed into the CLI automatically
+• Root user SSH login requires explicit config
+router (ttyu0)
+Serial console
+login :
+user
+Password:
+JUNOS 15.1X49-DIOO.6 built 2017-06-28 07:33:31 UTC
+• The root user must start the CLI from the shell">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Connection Methods
+Factory default:
+User: root
+No password
+Fxpo = ethernet management interface
+SSH, FTP. Telnet, http(s)
+Cannot route traffic
+Management purposes only
+Initial Login
+Logging for the First Time
+• Nonroot users are placed into the CLI automatically
+• Root user SSH login requires explicit config
+router (ttyu0)
+Serial console
+login :
+user
+Password:
+JUNOS 15.1X49-DIOO.6 built 2017-06-28 07:33:31 UTC
+• The root user must start the CLI from the shell">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/juniper_cli_basics/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Connection Methods
+Factory default:
+User: root
+No password
+Fxpo = ethernet management interface
+SSH, FTP. Telnet, http(s)
+Cannot route traffic
+Management purposes only
+Initial Login
+Logging for the First Time
+• Nonroot users are placed into the CLI automatically
+• Root user SSH login requires explicit config
+router (ttyu0)
+Serial console
+login :
+user
+Password:
+JUNOS 15.1X49-DIOO.6 built 2017-06-28 07:33:31 UTC
+• The root user must start the CLI from the shell">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="Connection Methods
+Factory default:
+User: root
+No password
+Fxpo = ethernet management interface
+SSH, FTP. Telnet, http(s)
+Cannot route traffic
+Management purposes only
+Initial Login
+Logging for the First Time
+• Nonroot users are placed into the CLI automatically
+• Root user SSH login requires explicit config
+router (ttyu0)
+Serial console
+login :
+user
+Password:
+JUNOS 15.1X49-DIOO.6 built 2017-06-28 07:33:31 UTC
+• The root user must start the CLI from the shell">
+    <meta itemprop="wordCount" content="741">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/juniper_cli_basics/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>Connection Methods</p>
+<p>Factory default:</p>
+<p>User: root</p>
+<p>No password</p>
+<p>Fxpo = ethernet management interface</p>
+<p>SSH, FTP. Telnet, http(s)</p>
+<p>Cannot route traffic</p>
+<p>Management purposes only</p>
+<p>Initial Login</p>
+<p>Logging for the First Time<br>
+• Nonroot users are placed into the CLI automatically<br>
+• Root user SSH login requires explicit config<br>
+router (ttyu0)<br>
+Serial console<br>
+login :<br>
+user<br>
+Password:</p>
+<ul>
+<li>JUNOS 15.1X49-DIOO.6 built 2017-06-28 07:33:31 UTC<br>
+• The root user must start the CLI from the shell<br>
+• Remember to exit the root shell after logging out of the CLI!<br>
+router (ttyuO)</li>
+<li>JUNOS 15.1X49-DIOO<br>
+2017-06-28<br>
+UTC<br>
+login:<br>
+Password:<br>
+root@router&gt;<br>
+.6 built<br>
+cli<br>
+Shell Prompt<br>
+CLI Prompt &ldquo;&gt;</li>
+</ul>
+<p>CLI Modes</p>
+<p>configure</p>
+<p>Configure mode . New candidate config file</p>
+<h1 id="configure-private-best-practice">configure private (best practice)</h1>
+<p>Configure mode with a private candidate file</p>
+<p>Other users logged in will not make changes to this file</p>
+<p>Private Files comitted are merged into active config</p>
+<p>Whoever commits last wins if there are matching commands</p>
+<p>Can&rsquo;t commit until you are at the top of the configuration (in private mode)</p>
+<h1 id="configure-exclusive">configure exclusive</h1>
+<p>Locks config database</p>
+<p>Can be killed by admin</p>
+<p>No other user can edit config while you are in this mode</p>
+<h1 id="edit-top">(edit) top</h1>
+<p>Goes back to the top of the configuration tree</p>
+<p>Candidate Config Files</p>
+<h1 id="commit">commit</h1>
+<p>Turns candidate config file into active</p>
+<p>Warning will show if candidate config is already being edited</p>
+<p>Commiting Configurations</p>
+<p>Rollback files are last three Active configurations and stored in /config/(the current active are stored here as well)</p>
+<p>4-49 are stores in /var/config/</p>
+<p>Shows timestamp for the last time the file was active</p>
+<h1 id="rollback-1">rollback 1</h1>
+<p>Places rollback file one into the candidate config, must commit to make it active</p>
+<p>CLI Help, Auto complete</p>
+<p>Can type ? To show available commands</p>
+<p>#&gt; Show version brief</p>
+<p>Show version info, hostname, and model</p>
+<p>#&gt;Configure</p>
+<p>goes into configure mode</p>
+<h1 id="set-system-host-name-hostname">set system host-name hostname</h1>
+<p>set&rsquo;s hostname</p>
+<h1 id="delete-system-host-name">delete system host-name</h1>
+<p>deletes set hostname</p>
+<h1 id="edit-routing-options-static">edit routing-options static</h1>
+<p>edit routing options mode</p>
+<h1 id="exit">exit</h1>
+<p>exit</p>
+<p>Junos will let you know that config hasn&rsquo;t been committed and ask if you want to commit</p>
+<h1 id="rollback-0">rollback 0</h1>
+<p>throwaway all changes to active candidate</p>
+<p>#&gt; help topic routing-options static</p>
+<p>shows info page for topic specified</p>
+<p>#&gt; help references routing-options static</p>
+<p>syntax and hierarchy of commands</p>
+<p>Keyboard Shortcuts</p>
+<p>Command completion</p>
+<p>Space</p>
+<p>auto complete commands built into system, Does not autocomplete things you named</p>
+<p>tab</p>
+<p>autocomplete user defined commands in the system</p>
+<p>?</p>
+<p>will show user defined options for autocomplete as well</p>
+<p>Navigating Configuration Mode</p>
+<p>When you go into config mode the running config is copied into a candidate file that you will be working on</p>
+<h1 id="show">show</h1>
+<p>if in configure mode, displays the entire candidate configuration</p>
+<h1 id="edit">edit</h1>
+<p>similar to cd</p>
+<h1 id="edit-protocols-ospf">edit protocols ospf</h1>
+<p>goes to the protocols/ospf heirarchy config mode</p>
+<p>if you run show commend it will show the contents of hierarchy from wherever you are.</p>
+<h1 id="top">top</h1>
+<p>goes to the top of the hierarchy. Like cd to / in Linux</p>
+<p>must be at the top to commit changes</p>
+<h1 id="show-protocols-ospf">show protocols ospf</h1>
+<p>selects which part of the hierarchy to show</p>
+<p>will only see this if you are above the option you want to show in the hierarchy</p>
+<p>can bypass this with:</p>
+<h1 id="top-show-routing-options-static">top show routing-options static</h1>
+<p>same thing happens with the edit command</p>
+<h1 id="top-edit-routing-options">top edit routing-options</h1>
+<p>same fix</p>
+<p>Editing, Renaming, and Comparing Configuration</p>
+<h1 id="up">up</h1>
+<p>moves up one level in the hierarchy</p>
+<p>there is a protion in this video wioth vlan and interface configuration, come back if this isn&rsquo;t covered elsewhere</p>
+<h1 id="up-2">up 2</h1>
+<p>jump up 2 levels</p>
+<h1 id="rollback-">rollback ?</h1>
+<p>shows all the rollback files on the system</p>
+<h1 id="run-show-system-uptime">run show system uptime</h1>
+<p>run is like &ldquo;do&rdquo; in cisco, can run command from anywhere</p>
+<h1 id="rollback-1-1">rollback 1</h1>
+<p>rolls config back to rollback 1 file</p>
+<h1 id="show--compare">show | compare</h1>
+<p>show things to be removed added with - or +</p>
+<h1 id="exit-1">exit</h1>
+<p>Also brings you to the top of config file</p>
+<p>Replace, Copy, or annotate Configuration</p>
+<h1 id="copy-ge-001-to-ge-002">copy ge-0/0/1 to ge-0/0/2</h1>
+<p>makes a copy of the config</p>
+<h1 id="show-ge-000">show ge-0/0/0</h1>
+<h1 id="edit-ge-000">edit ge-0/0/0</h1>
+<p>Edit interfaces mode</p>
+<p>#(int) replace pattern 0.101 with 200.102</p>
+<p>Replaces the pattern of the ip address</p>
+<p>#(int) replace pattern /24 with /25</p>
+<p>Replace mask</p>
+<p>If using replace commands don&rsquo;t commit the config without running the #top show | compare command to verify. You may have run the compare command from one place.</p>
+<h1 id="top-edit-protocols-ospf">top edit protocols ospf</h1>
+<p>Go into ospf edit</p>
+<h1 id="deactivate-interface-ge-0000">deactivate interface ge-0/0/0.0</h1>
+<p>Remove interface from ospf</p>
+<h1 id="annotate-interface-ge-000-took-down-due-to-flapping">annotate interface ge-0/0/0 &ldquo;took down due to flapping&rdquo;</h1>
+<p>C style programming comment</p>
+<p>Load merge Configuration</p>
+<h1 id="run-file-list">run file list</h1>
+<p>ls -l basically</p>
+<h1 id="run-file-show-top-int-config">run file show top-int-config</h1>
+<p>Display contents of top-int-config</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/juniper_cli_basics/" class="active"><a class="padding" href="/networking/juniper_cli_basics/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/juniper_cli_basics/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

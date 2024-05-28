@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.8 Configure and verify IPv6 addressing and prefix
+1.9 Compare and contrast IPv6 address types
+1.9.a Global unicast
+1.9.b Unique local
+IPv6 does not use any concept like the classful network concept used by IPv4. However, IANA does still reserve some IPv6 address ranges for specific purposes.
+Public and Private IPv6 Addresses
+global unicast addresses as the public IPv6 address space.">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.8 Configure and verify IPv6 addressing and prefix
+1.9 Compare and contrast IPv6 address types
+1.9.a Global unicast
+1.9.b Unique local
+IPv6 does not use any concept like the classful network concept used by IPv4. However, IANA does still reserve some IPv6 address ranges for specific purposes.
+Public and Private IPv6 Addresses
+global unicast addresses as the public IPv6 address space.">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/ipv6_addressing_and_subnetting/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.8 Configure and verify IPv6 addressing and prefix
+1.9 Compare and contrast IPv6 address types
+1.9.a Global unicast
+1.9.b Unique local
+IPv6 does not use any concept like the classful network concept used by IPv4. However, IANA does still reserve some IPv6 address ranges for specific purposes.
+Public and Private IPv6 Addresses
+global unicast addresses as the public IPv6 address space.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.8 Configure and verify IPv6 addressing and prefix
+1.9 Compare and contrast IPv6 address types
+1.9.a Global unicast
+1.9.b Unique local
+IPv6 does not use any concept like the classful network concept used by IPv4. However, IANA does still reserve some IPv6 address ranges for specific purposes.
+Public and Private IPv6 Addresses
+global unicast addresses as the public IPv6 address space.">
+    <meta itemprop="wordCount" content="739">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/ipv6_addressing_and_subnetting/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>1.0 Network Fundamentals</p>
+<p>1.8 Configure and verify IPv6 addressing and prefix</p>
+<p>1.9 Compare and contrast IPv6 address types</p>
+<p>1.9.a Global unicast</p>
+<p>1.9.b Unique local</p>
+<p>IPv6 does not use any concept like the classful network concept used by IPv4. However, IANA does still reserve some IPv6 address ranges for specific purposes.</p>
+<p>Public and Private IPv6 Addresses</p>
+<p>global unicast addresses as the public IPv6 address space.</p>
+<p>Global unicast: Addresses that work like public IPv4 addresses. The organization that needs IPv6 addresses asks for a registered IPv6 address block, which is assigned as a global routing prefix. After that, only that organization uses the addresses inside that block of addresses—that is, the addresses that begin with the assigned prefix.</p>
+<p>Unique local: Works somewhat like private IPv4 addresses, with the possibility that multiple organizations use the exact same addresses, and with no requirement for registering with any numbering authority.</p>
+<p>That reserved block of IPv6 addresses—a set of addresses that only one company can use—is called a global routing prefix.</p>
+<p>Address Ranges for Global Unicast Addresses</p>
+<p>unique local unicast addresses, discussed later in this chapter, all start with hex FD.</p>
+<p>any address ranges that are not specifically reserved, for now, are considered to be global unicast addresses.</p>
+<p>ddress Type
+Global unicast
+Unique local
+Multicast
+Link local
+First Hex Digits
+2 or 3 (originally); all not otherwise reserved (today)
+FE80 &ldquo;&gt;</p>
+<p>IPv6 Subnetting Using Global Unicast Addresses</p>
+<p>Most everyone uses the easiest possible IPv6 prefix length: /64.</p>
+<p>the right side of the IPv6, formally called the interface ID (short for interface identifier), acts like the IPv4 host field.</p>
+<p>the prefix length of the global routing prefix is often between /32 and /48, or possibly as long as /56.</p>
+<p>with the commonly used 64-bit interface ID field, the subnet field is typically 64–P bits, with P being the length of the global routing prefix.</p>
+<p>All subnet IDs begin with the global routing prefix.</p>
+<p>Use a different value in the subnet field to identify each different subnet.</p>
+<p>All subnet IDs have all 0s in the interface ID.</p>
+<p>The IPv6 subnet ID, more formally called the subnet router anycast address, is reserved and should not be used as an IPv6 address for any host.</p>
+<p>Assigning Addresses to Hosts in a Subnet</p>
+<p>hosts can learn these same settings dynamically, using either Dynamic Host Configuration Protocol (DHCP) or a built-in IPv6 mechanism called Stateless Address Autoconfiguration (SLAAC).</p>
+<p>Unique Local Unicast Addresses</p>
+<p>Unique local unicast addresses act as private IPv6 addresses.</p>
+<p>The biggest difference lies in the literal number (unique local addresses begin with hex FD) and with the administrative process: the unique local prefixes are not registered with any numbering authority and can be used by multiple organizations.</p>
+<p>Use FD as the first two hex digits.</p>
+<p>Choose a unique 40-bit global ID.</p>
+<p>Append the global ID to FD to create a 48-bit prefix, used as the prefix for all your addresses.</p>
+<p>Use the next 16 bits as a subnet field.</p>
+<p>Note that the structure leaves a convenient 64-bit interface ID field.</p>
+<p><!-- raw HTML omitted --></p>
+<p>IANA actually reserves prefix FC00::/7, and not FD00::/8, for these addresses. FC00::/7 includes all addresses that begin with hex FC and FD. However, an RFC (4193) requires the eighth bit of these addresses to be set to 1, which means that in practice today, the unique local addresses all begin with their first two digits as FD.</p>
+<p>Subnetting with Unique Local IPv6 Addresses</p>
+<p>With unique local, you create that prefix locally, and the prefix begins with /48, with the first 8 bits set and the next 40 bits randomly chosen.</p>
+<p>imagine you chose a 10-hex-digit value of hex 00 0001 0001, prepend a hex FD, making the entire prefix be FD00:0001:0001::/48, or FD00:1:1::/48 when abbreviated.</p>
+<p>The Need for Globally Unique Local Addresses</p>
+<p>RFC stresses the importance of choosing your global ID in a way to make it statistically unlikely to be used by other companies.</p>
+<p>in a real network, plan on using the random number generator logic listed in RFC 4193 to create your prefix.</p>
+<p>One of the big reasons to attempt to use a unique prefix, rather than everyone using the same easy-to-remember prefixes, is to be ready for the day that your company merges with or buys another company.</p>
+<p>With IPv6 unique local addresses, if both companies did the right thing and randomly chose a prefix, they will most likely be using completely different prefixes, making the merger much simpler</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/ipv6_addressing_and_subnetting/" class="active"><a class="padding" href="/networking/ipv6_addressing_and_subnetting/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/ipv6_addressing_and_subnetting/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

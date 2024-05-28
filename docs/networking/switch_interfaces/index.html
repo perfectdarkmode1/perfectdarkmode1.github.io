@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.b L2 and L3 switches
+1.4 Describe switching concepts
+Configuring Speed, Duplex, and Description
+autonegotiate
+What speed to use
+enabled by default
+duplex {auto | full | half} and speed {auto | 10 | 100 | 1000}
+configure the speed and duplex settings (config-int) # description text
+add a text description to the interface show interfaces status
+lists port #, Name, status, vlan, duplex, speed, and type a-full and a-100">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.b L2 and L3 switches
+1.4 Describe switching concepts
+Configuring Speed, Duplex, and Description
+autonegotiate
+What speed to use
+enabled by default
+duplex {auto | full | half} and speed {auto | 10 | 100 | 1000}
+configure the speed and duplex settings (config-int) # description text
+add a text description to the interface show interfaces status
+lists port #, Name, status, vlan, duplex, speed, and type a-full and a-100">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/switch_interfaces/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.b L2 and L3 switches
+1.4 Describe switching concepts
+Configuring Speed, Duplex, and Description
+autonegotiate
+What speed to use
+enabled by default
+duplex {auto | full | half} and speed {auto | 10 | 100 | 1000}
+configure the speed and duplex settings (config-int) # description text
+add a text description to the interface show interfaces status
+lists port #, Name, status, vlan, duplex, speed, and type a-full and a-100">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="1.0 Network Fundamentals
+1.1 Explain the role and function of network components
+1.1.b L2 and L3 switches
+1.4 Describe switching concepts
+Configuring Speed, Duplex, and Description
+autonegotiate
+What speed to use
+enabled by default
+duplex {auto | full | half} and speed {auto | 10 | 100 | 1000}
+configure the speed and duplex settings (config-int) # description text
+add a text description to the interface show interfaces status
+lists port #, Name, status, vlan, duplex, speed, and type a-full and a-100">
+    <meta itemprop="wordCount" content="756">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/switch_interfaces/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>1.0 Network Fundamentals</p>
+<p>1.1 Explain the role and function of network components</p>
+<p>1.1.b L2 and L3 switches</p>
+<p>1.4 Describe switching concepts</p>
+<p>Configuring Speed, Duplex, and Description</p>
+<ul>
+<li>
+<p>autonegotiate</p>
+</li>
+<li>
+<p>What speed to use</p>
+</li>
+<li>
+<p>enabled by default</p>
+</li>
+</ul>
+<p>duplex {auto | full | half} and speed {auto | 10 | 100 | 1000}</p>
+<ul>
+<li>configure the speed and duplex settings</li>
+</ul>
+<p>(config-int) # description text</p>
+<ul>
+<li>add a text description to the interface</li>
+</ul>
+<p>show interfaces status</p>
+<ul>
+<li>lists port #, Name, status, vlan, duplex, speed, and type</li>
+</ul>
+<p>a-full and a-100</p>
+<p>a- means that the listed speed and duplex values were autonegotiated.</p>
+<p>Autonegotiation</p>
+<p>IEEE autonegotiation (IEEE standard 802.3u)</p>
+<ul>
+<li>
+<p>each node states what it can do, and</p>
+</li>
+<li>
+<p>then each node picks the best options that both nodes support:</p>
+</li>
+<li>
+<p>the fastest speed and the best duplex setting, with full duplex being better than half duplex.</p>
+</li>
+<li>
+<p>disable autonegotiation</p>
+</li>
+<li>
+<p>Configure both the speed and duplex on a  switch interface</p>
+</li>
+<li>
+<p>when a node tries to use autonegotiation but hears nothing from the device.</p>
+</li>
+</ul>
+<p>Speed: Use your slowest supported speed (often 10 Mbps).</p>
+<p>Duplex: If your speed = 10 or 100, use half duplex; otherwise, use full duplex.</p>
+<p>Cisco switches can actually sense the speed used by other nodes, even without IEEE autonegotiation.</p>
+<ul>
+<li>
+<p>Cisco switches use this slightly different logic to choose the speed when autonegotiation fails:</p>
+</li>
+<li>
+<p>Speed: Sense the speed (without using autonegotiation), but if that fails, use the IEEE default (slowest supported speed, often 10 Mbps).</p>
+</li>
+<li>
+<p>Duplex: Use the IEEE defaults: If speed = 10 or 100, use half duplex; otherwise, use full duplex.</p>
+</li>
+<li>
+<p>Ethernet interfaces using speeds faster than 1 Gbps always use full duplex.</p>
+</li>
+<li>
+<p>hubs do not react to autonegotiation messages</p>
+</li>
+</ul>
+<p> show interfaces and show interfaces description</p>
+<p>Shutdown command is configured</p>
+<ul>
+<li>Line status = administratively down</li>
+<li>Protocol status = down</li>
+<li>Interface status = disabled</li>
+</ul>
+<p>Cable, speed mismatch, neighbor device is off, shutdown, or err-disabled</p>
+<ul>
+<li>Line status = down</li>
+<li>Protocol status = down</li>
+<li>Interface status = notconnect</li>
+</ul>
+<p>Not expected on LAN switch physical interfaces</p>
+<ul>
+<li>Line status = up</li>
+<li>Protocol status = down</li>
+<li>Interface status = notconnect</li>
+</ul>
+<p>Port security has disabled the interface</p>
+<ul>
+<li>Line status = down</li>
+<li>Protocol status = down (err-disabled)</li>
+<li>Interface status = err-disabled</li>
+</ul>
+<p>the interface is working</p>
+<ul>
+<li>Line status = up</li>
+<li>Protocol status = up</li>
+<li>Interface status = connected</li>
+</ul>
+<p>show interfaces fa0/13 (without the status option)</p>
+<ul>
+<li>lists the speed and duplex for interface Fast Ethernet 0/13</li>
+<li>with nothing implying that the values were learned through autonegotiation.</li>
+</ul>
+<p>speed manually set 10 Mbps on one switch and 100 Mbps on the other</p>
+<ul>
+<li>both switches would list the port in a down/down or notconnect state</li>
+</ul>
+<p>if the duplex settings do not match</p>
+<ul>
+<li>the switch interface will still be in a connected (up/up) or connected state.</li>
+</ul>
+<p>How to identify duplex mismatch problems,</p>
+<ul>
+<li>check the duplex setting on each end of the link to see if the values mismatch.</li>
+<li>watch for incrementing collision and late collision counters</li>
+</ul>
+<p>Common Layer 1 problems</p>
+<ul>
+<li>receiving device might receive a frame whose bits have changed values.</li>
+<li>These frames do not pass the error detection logic as implemented in the FCS field in the Ethernet trailer,</li>
+<li>The receiving device discards the frame and counts it as some kind of input error.</li>
+<li>Cisco switches list this error as a CRC error</li>
+</ul>
+<p>Runts:</p>
+<ul>
+<li>
+<p>Frames that did not meet the minimum frame size requirement</p>
+</li>
+<li>
+<p>(64 bytes, including the 18-byte destination MAC, source MAC, type, and FCS).</p>
+</li>
+<li>
+<p>Can be caused by collisions.</p>
+</li>
+</ul>
+<p>Giants:</p>
+<ul>
+<li>
+<p>Frames that exceed the maximum frame size requirement</p>
+</li>
+<li>
+<p>(1518 bytes, including the 18-byte destination MAC, source MAC, type, and FCS)</p>
+</li>
+</ul>
+<p>Input Errors:</p>
+<ul>
+<li>A total of many counters, including runts, giants, no buffer, CRC, frame, overrun, and ignored counts.</li>
+</ul>
+<p>CRC:</p>
+<ul>
+<li>Received frames that did not pass the FCS math</li>
+<li>can be caused by collisions</li>
+</ul>
+<p>Frame:</p>
+<ul>
+<li>
+<p>Received frames that have an illegal format</p>
+</li>
+<li>
+<p>(like ending with a partial byte)</p>
+</li>
+<li>
+<p>can be caused by collisions.</p>
+</li>
+</ul>
+<p>Packets Output:</p>
+<ul>
+<li>Total number of packets (frames) forwarded out the interface.</li>
+</ul>
+<p>Output Errors:</p>
+<ul>
+<li>Total number of packets (frames) that the switch port tried to transmit, but for which some problem occurred.</li>
+</ul>
+<p>Collisions:</p>
+<ul>
+<li>Counter of all collisions that occur when the interface is transmitting a frame</li>
+</ul>
+<p>Late Collisions:</p>
+<ul>
+<li>
+<p>The subset of all collisions that happen after the 64th byte</p>
+</li>
+<li>
+<p>(In a properly working Ethernet LAN, collisions should occur within the first 64 bytes</p>
+</li>
+<li>
+<p>Often point to a duplex mismatch</p>
+</li>
+</ul>
+<p>Collisions occur as a normal part of the half-duplex logic imposed by CSMA/CD</p>
+<p>a switch interface with an increasing collisions counter might not even have a problem.</p>
+<ul>
+<li>if the CRC errors grow, but the collisions counters do not, the problem might simply be interference on the cable.</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/switch_interfaces/" class="active"><a class="padding" href="/networking/switch_interfaces/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/switch_interfaces/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920804" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920804" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920804" defer></script>
+    <script src="/js/js-yaml.min.js?1716920804" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920804" defer></script>
+  </body>
+</html>

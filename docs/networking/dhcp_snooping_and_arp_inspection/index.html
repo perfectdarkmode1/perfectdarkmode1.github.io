@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+DHCP Snooping
+notices DHCP messages that fall outside the normal use of DHCP watches the DHCP messages that flow through a LAN switch builds a table that lists the details of legitimate DHCP flows other switch features can know what legitimate DHCP leases exist for devices connected to the switch. Dynamic ARP Inspection (DAI)">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+DHCP Snooping
+notices DHCP messages that fall outside the normal use of DHCP watches the DHCP messages that flow through a LAN switch builds a table that lists the details of legitimate DHCP flows other switch features can know what legitimate DHCP leases exist for devices connected to the switch. Dynamic ARP Inspection (DAI)">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/dhcp_snooping_and_arp_inspection/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+DHCP Snooping
+notices DHCP messages that fall outside the normal use of DHCP watches the DHCP messages that flow through a LAN switch builds a table that lists the details of legitimate DHCP flows other switch features can know what legitimate DHCP leases exist for devices connected to the switch. Dynamic ARP Inspection (DAI)">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+DHCP Snooping
+notices DHCP messages that fall outside the normal use of DHCP watches the DHCP messages that flow through a LAN switch builds a table that lists the details of legitimate DHCP flows other switch features can know what legitimate DHCP leases exist for devices connected to the switch. Dynamic ARP Inspection (DAI)">
+    <meta itemprop="wordCount" content="1825">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/dhcp_snooping_and_arp_inspection/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>5.0 Security Fundamentals</p>
+<p>5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)</p>
+<p>DHCP Snooping</p>
+<ul>
+<li>notices DHCP messages that fall outside the normal use of DHCP</li>
+<li>watches the DHCP messages that flow through a LAN switch</li>
+<li>builds a table that lists the details of legitimate DHCP flows</li>
+<li>other switch features can know what legitimate DHCP leases exist for devices connected to the switch.</li>
+</ul>
+<p>Dynamic ARP Inspection (DAI)</p>
+<ul>
+<li>
+<p>helps prevent packets being redirected to an attacking host.</p>
+</li>
+<li>
+<p>Some ARP attacks try to convince hosts to send packets to the attacker’s device instead of the true destination.</p>
+</li>
+<li>
+<p>The switch watches ARP messages as they flow through the switch.</p>
+</li>
+<li>
+<p>checks incoming ARP messages,</p>
+</li>
+<li>
+<p>checks those against normal ARP operation as well as</p>
+</li>
+<li>
+<p>checks the details against other data sources, including the DHCP Snooping binding table.</p>
+</li>
+<li>
+<p>When the ARP message does not match the known information about the legitimate addresses in the network, the switch filters the ARP message.</p>
+</li>
+</ul>
+<p>DHCP Snooping Concepts</p>
+<ul>
+<li>
+<p>analyzes incoming messages on the specified subset of ports in a VLAN</p>
+</li>
+<li>
+<p>never filters non-DHCP messages</p>
+</li>
+<li>
+<p>allow the incoming DHCP message or discard the message.</p>
+</li>
+<li>
+<p>operates on LAN switches and is commonly used on Layer 2 LAN switches and enabled on Layer 2 ports.</p>
+</li>
+<li>
+<p>Client facing devices are untrusted</p>
+</li>
+<li>
+<p>DHCP facing devices (server, router, switch) are trusted</p>
+</li>
+<li>
+<p>works first on all ports in a VLAN, but with each port being trusted or untrusted by DHCP Snooping</p>
+</li>
+<li>
+<p>the rules differentiate between messages normally sent by servers (like DHCPOFFER and DHCPACK) versus those normally sent by DHCP clients:</p>
+</li>
+<li>
+<p>DHCP messages received on an untrusted port, for messages normally sent by a server, will always be discarded.</p>
+</li>
+<li>
+<p>DHCP messages received on an untrusted port, as normally sent by a DHCP client, may be filtered if they appear to be part of an attack.</p>
+</li>
+<li>
+<p>DHCP messages received on a trusted port will be forwarded; trusted ports do not filter (discard) any DHCP messages.</p>
+</li>
+</ul>
+<p>A Sample Attack: A Spurious DHCP Server</p>
+<ul>
+<li>Spurious DHCP server (attacker) responds to dhcp message by a client pc</li>
+<li>attacker replies with false dhcp information by naming itself as the default gateway</li>
+<li>Pc1 send all messages to another network to attacker, becoming a man-in-the-middle attack (pc2 could forward the messages to the actual default gateway</li>
+<li>the legitimate DHCP also returns a DHCPOFFER message to host PC1, but most hosts use the first received DHCPOFFER, and the attacker will likely be first in this scenario.</li>
+</ul>
+<p>DHCP Snooping Logic</p>
+<ul>
+<li>
+<p>stops attacks by making ports untrusted</p>
+</li>
+<li>
+<p>DHCP clients also use the DHCP RELEASE and DHCP DECLINE messages.</p>
+</li>
+<li>
+<p>DHCP RELEASE</p>
+</li>
+<li>
+<p>client can tell the DHCP server it no longer needs the address, releasing it back to the DHCP server</p>
+</li>
+<li>
+<p>DHCP DECLINE</p>
+</li>
+<li>
+<p>turn down the use of an IP address during the normal DORA flow on messages.</p>
+</li>
+</ul>
+<p>DHCP Snooping rules:</p>
+<ul>
+<li>
+<p>Examine all incoming DHCP messages.</p>
+</li>
+<li>
+<p>If normally sent by servers, discard the message.</p>
+</li>
+<li>
+<p>If normally sent by clients, filter as follows:</p>
+</li>
+<li>
+<p>DISCOVER and REQUEST</p>
+</li>
+<li>
+<p>check for MAC address consistency between the Ethernet frame and the DHCP message.</p>
+</li>
+</ul>
+<p>RELEASE or DECLINE</p>
+<ul>
+<li>
+<p>check the incoming interface plus IP address versus the DHCP Snooping binding table.</p>
+</li>
+<li>
+<p>For messages not filtered that result in a DHCP lease, build a new entry to the DHCP Snooping binding table.</p>
+</li>
+</ul>
+<p>DHCP snooping checking MAC Address</p>
+<ul>
+<li>
+<p>chaddr (client hardware address)</p>
+</li>
+<li>
+<p>Source MAC address included in DISCOVER message</p>
+</li>
+<li>
+<p>frame encapsulating the dhcp message also includes the source mac address</p>
+</li>
+<li>
+<p>DHCP Snooping checks to make sure those values match.</p>
+</li>
+<li>
+<p>if not the packet is dropped</p>
+</li>
+<li>
+<p>Used on untrusted ports</p>
+</li>
+<li>
+<p>stops attacker from leasing all available addresses so no other client can get a lease</p>
+</li>
+</ul>
+<p>Filtering Messages that Release IP Addresses</p>
+<ul>
+<li>
+<p>DHCP Snooping binding table</p>
+</li>
+<li>
+<p>creates entry for all legitimate DHCP entries</p>
+</li>
+<li>
+<p>DHCP Snooping, and other features like Dynamic ARP Inspection, can use the table to make decisions.</p>
+</li>
+<li>
+<p>DHCP Snooping Binding Table:</p>
+</li>
+<li>
+<p>MAC</p>
+</li>
+<li>
+<p>IP</p>
+</li>
+<li>
+<p>VLAN</p>
+</li>
+<li>
+<p>INTERFACE</p>
+</li>
+<li>
+<p>checks client-sent messages like RELEASE and DECLINE that would cause the DHCP server to be allowed to release an address</p>
+</li>
+<li>
+<p>attacker could RELEASE an address that is not his and attempt steal it for himself</p>
+</li>
+<li>
+<p>attacker pretends his source IP is the legitimate IP trying to RELEASE</p>
+</li>
+<li>
+<p>the source interface in the DHCP Snooping Binding Table does not match so dhcp snooping bloacks the request</p>
+</li>
+</ul>
+<p>DHCP Snooping Configuration</p>
+<p>Required:</p>
+<ul>
+<li>
+<p>enable DHCP Snooping</p>
+</li>
+<li>
+<p>ip dhcp snooping</p>
+</li>
+<li>
+<p>list the VLANs on which to use DHCP Snooping</p>
+</li>
+<li>
+<p>ip dhcp snooping vlan vlan-id</p>
+</li>
+</ul>
+<p>Often used:</p>
+<ul>
+<li>
+<p>configure trusted ports</p>
+</li>
+<li>
+<p>default is untrusted.</p>
+</li>
+<li>
+<p>(config-if) # ip dhcp snooping trust</p>
+</li>
+</ul>
+<p>DHCP Snooping verification</p>
+<p>show ip dhcp snooping</p>
+<ul>
+<li>
+<p>enabled or disabled</p>
+</li>
+<li>
+<p>operational in which vlans</p>
+</li>
+<li>
+<p>trusted interfaces</p>
+</li>
+<li>
+<p>Insertion of option 82 is disabled</p>
+</li>
+<li>
+<p>(enabled by default)</p>
+</li>
+<li>
+<p>no ip dhcp information option command is configured</p>
+</li>
+<li>
+<p>(because this switch is not a dhcp relay agent)</p>
+</li>
+<li>
+<p>DHCP relay agents add option 82 DHCP header fields (RFC 3046)</p>
+</li>
+<li>
+<p>If enabled on a non relay agent then dhcp stops working for end users</p>
+</li>
+<li>
+<p>The switch sets fields in the DHCP messages as if it were a DHCP relay agent</p>
+</li>
+<li>
+<p>changes to those messages cause most DHCP servers (and most DHCP relay agents) to ignore the received DHCP messages.</p>
+</li>
+<li>
+<p>Rate limit on each interface</p>
+</li>
+</ul>
+<p>Show ip dhcp snooping binding</p>
+<p>Shows actual dhcp snooping binding table</p>
+<p>DHCP Rate Limiting</p>
+<ul>
+<li>
+<p>attacker generates large volumes of DHCP messages to overload the DHCP Snooping feature and the switch CPU itself</p>
+</li>
+<li>
+<p>optional feature that tracks the number of incoming DHCP messages.</p>
+</li>
+<li>
+<p>If the number of incoming DHCP messages exceeds that limit over a one-second period:</p>
+</li>
+<li>
+<p>port changes to an err-disabled state.</p>
+</li>
+</ul>
+<p>-can be on both on trusted and untrusted interfaces.</p>
+<ul>
+<li>Default of no rate limit</li>
+</ul>
+<p>how to enable DHCP Snooping rate limits and err-disabled recovery.</p>
+<p>(config-int) # ip dhcp snooping rate limit number</p>
+<p>errdisable recovery cause dhcp-rate-limit</p>
+<ul>
+<li>recover from errdisable if caused by dhcp snooping</li>
+</ul>
+<p>errdisable recovery interval number</p>
+<ul>
+<li>seconds to wait before recovering</li>
+</ul>
+<p>(config-int) # no ip dhcp snooping rate limit</p>
+<p>Dynamic ARP Inspection (DAI)</p>
+<ul>
+<li>
+<p>examines incoming ARP messages on untrusted ports to filter those it believes to be part of an attack.</p>
+</li>
+<li>
+<p>compares incoming ARP messages with two sources of data:</p>
+</li>
+<li>
+<p>DHCP Snooping binding table</p>
+</li>
+<li>
+<p>configured ARP ACLs.</p>
+</li>
+<li>
+<p>If the incoming ARP message does not match the tables in the switch, the switch discards the ARP message.</p>
+</li>
+</ul>
+<p>DAI Concepts</p>
+<p>gratuitous ARP (arp reply)—</p>
+<p>triggers hosts to add incorrect ARP entries to their ARP tables.</p>
+<p>Review of Normal IP ARP</p>
+<p>Both hosts learn the other host’s MAC address with this two-message flow. Not only does PC1 learn R2’s MAC address based on the ARP reply (message 2), but router R2 learns PC1’s IP and MAC address because of the ARP request (message 1).</p>
+<p>ARP Request</p>
+<ul>
+<li>
+<p>Ethernet Frame</p>
+</li>
+<li>
+<p>source mac</p>
+</li>
+<li>
+<p>destination mac (broadcast)</p>
+</li>
+<li>
+<p>ARP</p>
+</li>
+<li>
+<p>Origin IP</p>
+</li>
+<li>
+<p>Target IP</p>
+</li>
+<li>
+<p>Origin MAC</p>
+</li>
+<li>
+<p>Target MAC ??</p>
+</li>
+</ul>
+<p>ARP Reply</p>
+<ul>
+<li>
+<p>Ethernet Frame</p>
+</li>
+<li>
+<p>Source MAC</p>
+</li>
+<li>
+<p>Dest. MAC</p>
+</li>
+<li>
+<p>ARP</p>
+</li>
+<li>
+<p>Origin IP</p>
+</li>
+<li>
+<p>Target IP</p>
+</li>
+<li>
+<p>Origin MAC</p>
+</li>
+<li>
+<p>Target MAC</p>
+</li>
+</ul>
+<p>Gratuitous ARP as an Attack Vector</p>
+<ul>
+<li>
+<p>when a host changes its MAC address it can send a gratuitous ARP message with these features:</p>
+</li>
+<li>
+<p>ARP reply.</p>
+</li>
+<li>
+<p>sent without having first received an ARP request.</p>
+</li>
+<li>
+<p>sent to an Ethernet destination broadcast address so that all hosts in the subnet receive the message.</p>
+</li>
+<li>
+<p>could be part of a man-in-the-middle attack</p>
+</li>
+<li>
+<p>attacker uses gratuitous arp to make replies go back to it instead of original host</p>
+</li>
+</ul>
+<p>Dynamic ARP Inspection Logic</p>
+<ul>
+<li>Host does not need arp if it doesn&rsquo;t have an IP yet</li>
+<li>Once DHCP assigns and IP then ARP is used</li>
+<li>for untrusted interfaces DAI confirms an ARP’s correctness based on the DHCP Snooping Binding table</li>
+<li>compares origin MAC and IP</li>
+<li>if not found on the table, discard the arp</li>
+<li>same trusted and untrusted rules as dhcp snooping</li>
+</ul>
+<p>ARP ACL</p>
+<ul>
+<li>
+<p>statically configured</p>
+</li>
+<li>
+<p>list correct pairs of IP and mac addresses</p>
+</li>
+<li>
+<p>Useful for ip addresses configured statically because they will not be in the dhcp snooping binding table</p>
+</li>
+<li>
+<p>DAI can check Ethernet header and arp source and destination messages mac addresses to make sure they match</p>
+</li>
+<li>
+<p>DAI can also check Messages with unexpected IP addresses in the two ARP IP address fields</p>
+</li>
+<li>
+<p>does its work in the switch CPU rather than in the switch ASIC</p>
+</li>
+<li>
+<p>DAI itself can be more susceptible to DoS attacks.</p>
+</li>
+<li>
+<p>attacker could generate large numbers of ARP messages, driving up CPU usage in the switch.</p>
+</li>
+<li>
+<p>DAI can avoid these problems through rate limiting the number of ARP messages on a port over time.</p>
+</li>
+</ul>
+<p>Configuring ARP Inspection on a Layer 2 Switch</p>
+<p>decisions include the following:</p>
+<ul>
+<li>Choose whether to rely on DHCP Snooping, ARP ACLs, or both.</li>
+<li>If using DHCP Snooping, configure it and make the correct ports trusted for DHCP Snooping.</li>
+<li>Choose the VLAN(s) on which to enable DAI.</li>
+<li>Make DAI trusted (rather than the default setting of untrusted) on select ports in those VLANs, typically for the same ports you trusted for DHCP Snooping.</li>
+</ul>
+<p>ip arp inspection vlan vlan-id</p>
+<ul>
+<li>enable arp DAI on that vlan</li>
+</ul>
+<p>(config-if)# ip arp inspection trust</p>
+<ul>
+<li>dhcp snooping should be enabled or DAI will filter all packets</li>
+</ul>
+<p>ip dhcp snooping</p>
+<p>ip dhcp snooping vlan vlan-id</p>
+<p>ip dhcp snooping trust</p>
+<p>(configure arp ACLs)</p>
+<p>show ip arp inspection</p>
+<ul>
+<li>
+<p>gives both configuration settings along with status variables and counters</p>
+</li>
+<li>
+<p>forwarded, dropped, dhcp drops, acl drop counts</p>
+</li>
+<li>
+<p>Is logging enabled?</p>
+</li>
+</ul>
+<p>show ip arp inspection statistics</p>
+<ul>
+<li>
+<p>counts per vlan</p>
+</li>
+<li>
+<p>forwarded, dropped, dhcp drops, acl drops</p>
+</li>
+<li>
+<p>permits</p>
+</li>
+</ul>
+<p>ARP Rate Limiting</p>
+<ul>
+<li>
+<p>Default for all interfaces</p>
+</li>
+<li>
+<p>(trusted and untrusted)</p>
+</li>
+</ul>
+<p>burst interval (a number of seconds)</p>
+<ul>
+<li>x ARP messages over y seconds”</li>
+<li>(DHCP Snooping does not define a burst setting)</li>
+<li>optional configuration</li>
+</ul>
+<p>ip arp inspection limit rate 8 burst interval 4</p>
+<ul>
+<li>
+<p>8 messages in a burst of 4 seconds</p>
+</li>
+<li>
+<p>default of 15 messages over a one second burst</p>
+</li>
+<li>
+<p>show ip arp inspection interfaces</p>
+</li>
+<li>
+<p>rate, burst interval, trust state, per interface</p>
+</li>
+</ul>
+<p>ip arp inspection limit rate number</p>
+<p>ip arp inspection limit rate none</p>
+<ul>
+<li>disable rate limiting</li>
+</ul>
+<p>errdisable recovery cause arp-inspection</p>
+<p>errdisable recovery interval 30</p>
+<p>Configuring Optional DAI Message Checks</p>
+<p>ip arp inspection validate {dst-mac, ip, src-mac}</p>
+<ul>
+<li>one, two, or all three of the options</li>
+<li>command with overrides previous versions of the same command</li>
+<li>show ip arp inspection to validate</li>
+</ul>
+<p>drop ARP packets when the IP addresses in the packets are invalid or when the MAC addresses in the body of the ARP packets do not match the addresses specified in the Ethernet header.</p>
+<ul>
+<li>For src-mac, check the source MAC address in the Ethernet header against the sender MAC address in the ARP body. This check is performed on both ARP requests and responses. When enabled, packets with different MAC addresses are classified as invalid and are dropped.</li>
+<li>For dst-mac, check the destination MAC address in the Ethernet header against the target MAC address in ARP body. This check is performed for ARP responses. When enabled, packets with different MAC addresses are classified as invalid and are dropped.</li>
+<li>For ip, check the ARP body for invalid and unexpected IP addresses. Addresses include 0.0.0.0, 255.255.255.255, and all IP multicast addresses. Sender IP addresses are checked in all ARP requests and responses, and target IP addresses are checked only in ARP responses</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/dhcp_snooping_and_arp_inspection/" class="active"><a class="padding" href="/networking/dhcp_snooping_and_arp_inspection/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/dhcp_snooping_and_arp_inspection/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

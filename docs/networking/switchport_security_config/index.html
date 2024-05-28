@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+Port Security Concepts and Configuration
+identifies devices based on the source MAC address of Ethernet frames that the devices send. no restrictions on whether the frame came from a local device or was forwarded through other switches examines frames received on the interface to determine if a violation has occurred. defines a maximum number of unique source MAC addresses allowed for all frames coming in the interface.">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+Port Security Concepts and Configuration
+identifies devices based on the source MAC address of Ethernet frames that the devices send. no restrictions on whether the frame came from a local device or was forwarded through other switches examines frames received on the interface to determine if a violation has occurred. defines a maximum number of unique source MAC addresses allowed for all frames coming in the interface.">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/switchport_security_config/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+Port Security Concepts and Configuration
+identifies devices based on the source MAC address of Ethernet frames that the devices send. no restrictions on whether the frame came from a local device or was forwarded through other switches examines frames received on the interface to determine if a violation has occurred. defines a maximum number of unique source MAC addresses allowed for all frames coming in the interface.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="5.0 Security Fundamentals
+5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)
+Port Security Concepts and Configuration
+identifies devices based on the source MAC address of Ethernet frames that the devices send. no restrictions on whether the frame came from a local device or was forwarded through other switches examines frames received on the interface to determine if a violation has occurred. defines a maximum number of unique source MAC addresses allowed for all frames coming in the interface.">
+    <meta itemprop="wordCount" content="924">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/switchport_security_config/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>5.0 Security Fundamentals</p>
+<p>5.7 Configure Layer 2 security features (DHCP snooping, dynamic ARP inspection, and port security)</p>
+<p>Port Security Concepts and Configuration</p>
+<ul>
+<li>identifies devices based on the source MAC address of Ethernet frames that the devices send.</li>
+<li>no restrictions on whether the frame came from a local device or was forwarded through other switches</li>
+<li>examines frames received on the interface to determine if a violation has occurred.</li>
+<li>defines a maximum number of unique source MAC addresses allowed for all frames coming in the interface.</li>
+<li>keeps a list and counter of all unique source MAC addresses on the interface.</li>
+<li>monitors newly learned MAC addresses, considering those MAC addresses to cause a violation if the newly learned MAC address would push the total number of MAC table entries for the interface past the configured maximum allowed MAC addresses for that port.</li>
+<li>takes action to discard frames from the violating MAC addresses, plus other actions depending on the configured violation mode.</li>
+</ul>
+<p>Other port security options</p>
+<ul>
+<li>Define a maximum of three MAC addresses, defining all three specific MAC addresses.</li>
+<li>Define a maximum of three MAC addresses but allow those addresses to be dynamically learned, allowing the first three MAC addresses learned.</li>
+<li>Define a maximum of three MAC addresses, predefining one specific MAC address, and allowing two more to be dynamically learned.</li>
+</ul>
+<p>sticky secure MAC addresses.</p>
+<ul>
+<li>port security learns the MAC addresses off each port so that you do not have to preconfigure the values. It also adds the learned MAC addresses to the port security configuration (in the running-config file).</li>
+</ul>
+<p>Configuring Port Security</p>
+<ul>
+<li>works on both access ports and trunk ports</li>
+</ul>
+<p>requires you to statically configure the port as a trunk or an access port.</p>
+<ul>
+<li>
+<p>Use the switchport mode access or the switchport mode trunk interface subcommands</p>
+</li>
+<li>
+<p>Use the switchport port-security interface subcommand to enable port security on the interface.</p>
+</li>
+<li>
+<p>(Optional)</p>
+</li>
+<li>
+<p>switchport port-security maximum number</p>
+</li>
+<li>
+<p>override the default maximum number of allowed MAC addresses associated with the interface (1).</p>
+</li>
+</ul>
+<p>(Optional)</p>
+<ul>
+<li>
+<p>switchport port-security violation {protect | restrict | shutdown}</p>
+</li>
+<li>
+<p>override the default action to take upon a security violation (shutdown).</p>
+</li>
+</ul>
+<p>(Optional)</p>
+<ul>
+<li>
+<p>switchport port-security mac-address mac-address</p>
+</li>
+<li>
+<p>predefine any allowed source MAC addresses for this interface.</p>
+</li>
+</ul>
+<p>(Optional)</p>
+<ul>
+<li>
+<p>switchport port-security mac-address sticky</p>
+</li>
+<li>
+<p>tell the switch to “sticky learn” dynamically learned MAC addresses.</p>
+</li>
+</ul>
+<p>switchport port-security</p>
+<ul>
+<li>enables port security, with all defaults</li>
+</ul>
+<p>switchport port-security mac-address 0200.1111.1111</p>
+<ul>
+<li>defines a specific source MAC address. With the default maximum source address setting of 1</li>
+</ul>
+<p>default violation action</p>
+<p>disable the interface.</p>
+<ul>
+<li>
+<p>Port security does not save the configuration of the sticky addresses</p>
+</li>
+<li>
+<p>use the copy running-config startup-config command if desired.</p>
+</li>
+</ul>
+<p>voice ports and EtherChannels</p>
+<ul>
+<li>
+<p>voice ports</p>
+</li>
+<li>
+<p>make sure to configure the maximum MAC address to at least two (one for the phone, or for a PC connected to the phone)</p>
+</li>
+<li>
+<p>EtherChannels</p>
+</li>
+<li>
+<p>the port security configuration should be placed on the port-channel interface, rather than the individual physical interfaces in the channel.</p>
+</li>
+</ul>
+<p>Verifying Port Security</p>
+<p>Show port-security interface</p>
+<ul>
+<li>
+<p>provides the most insight to how port security operates</p>
+</li>
+<li>
+<p>lists the configuration settings for port security on an interface</p>
+</li>
+<li>
+<p>includes information about any security violations</p>
+</li>
+<li>
+<p>Port Security: Enabled</p>
+</li>
+<li>
+<p>Port Status: Secure-shutdown</p>
+</li>
+<li>
+<p>Violation mode: shutdown</p>
+</li>
+<li>
+<p>Maximum MAC Addresses : 1</p>
+</li>
+<li>
+<p>Last source Address:VLAN: 0013:197b:5004 1</p>
+</li>
+</ul>
+<p>Show port-security interface fastEthernet 0/2</p>
+<ul>
+<li>Port Security: Enabled</li>
+<li>Port Status: Secure-shutdown</li>
+<li>Violation Mode: Shutdown</li>
+<li>Maximum MAC Addresses: 1</li>
+<li>Sticky MAC Addresses: 1</li>
+<li>Last Source Address: Vlan 0013:197b:5004 1</li>
+</ul>
+<p>secure-shutdown state</p>
+<ul>
+<li>the interface has been disabled because of port security</li>
+</ul>
+<p>Port Security MAC Addresses</p>
+<ul>
+<li>
+<p>Port security ports</p>
+</li>
+<li>
+<p>No longer listed as dynamic entries</p>
+</li>
+<li>
+<p>Do not show up in the results from show mac address-table dynamic EXEC command.</p>
+</li>
+<li>
+<p>you need to use one of these options to see the MAC table entries associated with ports using port security:</p>
+</li>
+</ul>
+<p>show mac address-table secure:</p>
+<ul>
+<li>Lists MAC addresses associated with ports that use port security</li>
+</ul>
+<p>show mac address-table static:</p>
+<ul>
+<li>Lists MAC addresses associated with ports that use port security, as well as any other statically defined MAC addresses</li>
+</ul>
+<p>show mac address-table secure interface F0/2</p>
+<p>Port Security Violation Modes</p>
+<p>(All three options cause the switch to discard the offending frame)</p>
+<p>Protect</p>
+<ul>
+<li>Discard frame</li>
+</ul>
+<p>Restrict</p>
+<ul>
+<li>Discard frame</li>
+<li>Send log and snmp messages</li>
+<li>increment violation counter</li>
+</ul>
+<p>Shutdown</p>
+<ul>
+<li>Discard frame</li>
+<li>Send log and snmp messages</li>
+<li>increment violation counter</li>
+<li>Puts interface into err-disabled state, discarding all traffic</li>
+</ul>
+<p>Shutdown Mode</p>
+<ul>
+<li>
+<p>recover from an err-disabled state</p>
+</li>
+<li>
+<p>interface must be shut down with the shutdown command and then enabled with the no shutdown command.</p>
+</li>
+<li>
+<p>automatically recover from the err-disabled state:</p>
+</li>
+</ul>
+<p>errdisable recovery cause psecure-violation</p>
+<ul>
+<li>automatic recovery for interfaces in an err-disabled state caused by port security</li>
+</ul>
+<p>errdisable recovery interval seconds</p>
+<ul>
+<li>set the time to wait before recovering the interface</li>
+</ul>
+<p>show port-security interface</p>
+<ul>
+<li>lists the current port-security status (secure-shutdown) as well as the configured mode (shutdown)</li>
+<li>last line of output lists the number of violations that caused the interface to fail to an err-disabled state</li>
+<li>second-to-last line identifies the MAC address and VLAN of the device that caused the violation.</li>
+</ul>
+<p>violations counter</p>
+<ul>
+<li>notes the number of times the interface has been moved to the err-disabled (secure-shutdown) state.</li>
+<li>while err-disabled, many frames can arrive, but the counter remains at 1.</li>
+<li>after shutdown/no shutdown, another violation that causes the interface to fail to an err-disabled state will cause the counter to increment to 2.</li>
+</ul>
+<p>Protect and Restrict Modes</p>
+<ul>
+<li>still discard offending traffic, but the interface remains in a connected (up/up) state and in a port security state of secure-up.</li>
+<li>port continues to forward good traffic but discards offending traffic.</li>
+</ul>
+<p>protect</p>
+<ul>
+<li>discard the frame.</li>
+<li>does not change the port to an err-disabled state</li>
+<li>does not generate messages</li>
+<li>does not even increment the violations counter</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/switchport_security_config/" class="active"><a class="padding" href="/networking/switchport_security_config/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/switchport_security_config/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920804" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920804" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920804" defer></script>
+    <script src="/js/js-yaml.min.js?1716920804" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920804" defer></script>
+  </body>
+</html>

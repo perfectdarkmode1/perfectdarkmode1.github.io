@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="1.0 Network Fundamentals
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS within the network
+4.6 Configure and verify DHCP client and relay
+DHCP Concepts
+Four messages between the client and server (DORA):
+Discover:
+Sent by the DHCP client to find a willing DHCP server
+Offer:
+Sent by a DHCP server to offer to lease
+Request:
+Sent by the DHCP client to ask the server to lease the IPv4 address listed in the Offer message Acknowledgment:">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="1.0 Network Fundamentals
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS within the network
+4.6 Configure and verify DHCP client and relay
+DHCP Concepts
+Four messages between the client and server (DORA):
+Discover:
+Sent by the DHCP client to find a willing DHCP server
+Offer:
+Sent by a DHCP server to offer to lease
+Request:
+Sent by the DHCP client to ask the server to lease the IPv4 address listed in the Offer message Acknowledgment:">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/dhcp_config/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="1.0 Network Fundamentals
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS within the network
+4.6 Configure and verify DHCP client and relay
+DHCP Concepts
+Four messages between the client and server (DORA):
+Discover:
+Sent by the DHCP client to find a willing DHCP server
+Offer:
+Sent by a DHCP server to offer to lease
+Request:
+Sent by the DHCP client to ask the server to lease the IPv4 address listed in the Offer message Acknowledgment:">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="1.0 Network Fundamentals
+1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS within the network
+4.6 Configure and verify DHCP client and relay
+DHCP Concepts
+Four messages between the client and server (DORA):
+Discover:
+Sent by the DHCP client to find a willing DHCP server
+Offer:
+Sent by a DHCP server to offer to lease
+Request:
+Sent by the DHCP client to ask the server to lease the IPv4 address listed in the Offer message Acknowledgment:">
+    <meta itemprop="wordCount" content="1045">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/dhcp_config/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>1.0 Network Fundamentals</p>
+<p>1.10 Identify IP parameters for Client OS (Windows, Mac OS, Linux)</p>
+<p>4.0 IP Services</p>
+<p>4.3 Explain the role of DHCP and DNS within the network</p>
+<p>4.6 Configure and verify DHCP client and relay</p>
+<p>DHCP Concepts</p>
+<p>Four messages between the client and server (DORA):</p>
+<ul>
+<li>
+<p>Discover:</p>
+</li>
+<li>
+<p>Sent by the DHCP client to find a willing DHCP server</p>
+</li>
+<li>
+<p>Offer:</p>
+</li>
+<li>
+<p>Sent by a DHCP server to offer to lease</p>
+</li>
+</ul>
+<p>Request:</p>
+<ul>
+<li>Sent by the DHCP client to ask the server to lease the IPv4 address listed in the Offer message</li>
+</ul>
+<p>Acknowledgment:</p>
+<ul>
+<li>Sent by the DHCP server to assign the address and to list the mask, default router, and DNS server IP addresses</li>
+</ul>
+<p>IPv4 addresses that allow a host that has no IP address to still be able to send and receive messages on the local subnet:</p>
+<p>0.0.0.0:</p>
+<ul>
+<li>An address reserved for use as a source IPv4 address for hosts that do not yet have an IP address.</li>
+</ul>
+<p>255.255.255.255:</p>
+<ul>
+<li>
+<p>The local broadcast IP address. Packets sent to this destination address are broadcast on the local data link, but routers do not forward them.</p>
+</li>
+<li>
+<p>a client, sends a Discover message, with source IP address of 0.0.0.0</p>
+</li>
+<li>
+<p>Host A sends the packet to destination 255.255.255.255 router R1 will not forward this packet.</p>
+</li>
+<li>
+<p>assuming the DHCP client chooses to use a DHCP option called the broadcast flag;</p>
+</li>
+<li>
+<p>all examples in this book assume the broadcast flag is used.</p>
+</li>
+<li>
+<p>all hosts in the subnet receive the Offer message</p>
+</li>
+<li>
+<p>the original Discover message lists a number called the client ID, which</p>
+</li>
+<li>
+<p>includes the host’s MAC address, that identifies the original host (host A in this case).</p>
+</li>
+<li>
+<p>As a result, host A knows that the Offer message is meant for host A.</p>
+</li>
+</ul>
+<p>Supporting DHCP for Remote Subnets with DHCP Relay</p>
+<p>ip helper-address server-ip</p>
+<ul>
+<li>
+<p>Watch for incoming DHCP messages, with destination IP address 255.255.255.255.</p>
+</li>
+<li>
+<p>Change that packet’s source IP address to the router’s incoming interface IP address.</p>
+</li>
+<li>
+<p>Change that packet’s destination IP address to the address of the DHCP server (as configured in the ip helper-address command).</p>
+</li>
+<li>
+<p>Route the packet to the DHCP server.</p>
+</li>
+<li>
+<p>for the return packet from the DHCP server</p>
+</li>
+<li>
+<p>the server simply reverses the source and destination IP address of the packet received from the router (relay agent)</p>
+</li>
+<li>
+<p>the Discover message lists source IP address 172.16.1.1, so the server sends the Offer message back to destination IP address 172.16.1.1.</p>
+</li>
+<li>
+<p>the DHCP relay agent (router R1) needs to change the destination IP address, so that the real DHCP client (host A), which does not have an IP address yet, can receive and process the packet.</p>
+</li>
+<li>
+<p>Sends as broadcast back to the LAN</p>
+</li>
+</ul>
+<p>Information Stored at the DHCP Server</p>
+<p>types of settings the DHCP server needs to know to support DHCP clients:</p>
+<ul>
+<li>
+<p>Subnet ID and mask:</p>
+</li>
+<li>
+<p>Reserved (excluded) addresses:</p>
+</li>
+<li>
+<p>which addresses in the subnet to not lease.</p>
+</li>
+<li>
+<p>Default router(s)</p>
+</li>
+<li>
+<p>DNS IP address(es)</p>
+</li>
+</ul>
+<p>other parameters</p>
+<p>Maximum lease time</p>
+<ul>
+<li>time limit for leasing an IP address</li>
+</ul>
+<p>DHCP uses three allocation modes</p>
+<p>Dynamic allocation</p>
+<ul>
+<li>the DHCP mechanisms and configuration described throughout this chapter.</li>
+</ul>
+<p>automatic allocation</p>
+<ul>
+<li>sets the DHCP lease time to infinite.</li>
+</ul>
+<p>static allocation</p>
+<ul>
+<li>preconfigures the specific IP address for a client based on the client’s MAC address.</li>
+</ul>
+<p>Trivial File Transfer Protocol (TFTP) server address</p>
+<p>Configuring DHCP Relay</p>
+<p>What for?</p>
+<ul>
+<li>DHCP clients exist in the subnet</li>
+<li>DHCP servers do not exist in the subnet</li>
+</ul>
+<p>(config-if)# ip helper-address address</p>
+<p>Show ip interface g0/0</p>
+<ul>
+<li>Helper Address is address or Helper address is not set</li>
+</ul>
+<p>Configuring a Switch as DHCP Client</p>
+<p>(config-if) ip address dhcp</p>
+<ul>
+<li>the switch does not attempt DHCP until the interface reaches an up/up state</li>
+</ul>
+<p>show interfaces interface</p>
+<ul>
+<li>verify ip address</li>
+</ul>
+<p>show dhcp lease</p>
+<ul>
+<li>see the (temporarily) leased IP address and other parameters</li>
+<li>the switch does not store the DHCP-learned IP configuration in the running-config</li>
+</ul>
+<p>show ip default-gateway</p>
+<ul>
+<li>view address of the default gateway</li>
+</ul>
+<p>Configuring a Router as DHCP Client</p>
+<p>(config-if) # ip address dhcp</p>
+<ul>
+<li>IOS displays this route as a static route (destination 0.0.0.0/0)</li>
+</ul>
+<p>To recognize this route as a DHCP-learned default route, look to the administrative distance value of 254.</p>
+<ul>
+<li>administrative distance of 1 for static routes configured with the ip route configuration command</li>
+<li>default of 254 for default routes added because of DHCP.</li>
+</ul>
+<p>Host Settings for IPv4</p>
+<p>To work correctly, an IPv4 host needs to know these values:</p>
+<ul>
+<li>DNS server IP addresses</li>
+<li>Default gateway (router) IP address</li>
+<li>Device’s own IP address</li>
+<li>Device’s own subnet mask</li>
+</ul>
+<p>Host IP Settings on Windows</p>
+<p>netstat -rn</p>
+<ul>
+<li>lists the host’s IP routing table</li>
+<li>the top of the table lists a route based on the default gateway (0.0.0.0 and 0.0.0.0)</li>
+<li>top of the output also lists several other routes related to having a working interface, like a route to the subnet connected to the interface.</li>
+</ul>
+<p>gateway of “on-link”</p>
+<p>the PC thinks the destination is on the local subnet (link)</p>
+<p>Host IP Settings on macOS</p>
+<p>ifconfig</p>
+<ul>
+<li>does not have an /all option</li>
+<li>does not list the default gateway or DNS servers</li>
+<li>Shows mac address and ip address</li>
+</ul>
+<p>networksetup -getinfo Ethernet</p>
+<ul>
+<li>Shows dhcp config, ip, subnet mask, and default gateway</li>
+</ul>
+<p>networksetup -getdnsservers Ethernet</p>
+<ul>
+<li>
+<p>Shows dns server</p>
+</li>
+<li>
+<p>adds a default route to its host routing table based on the default gateway</p>
+</li>
+<li>
+<p>adds route to the local subnet calculated based on the IP address and mask learned with DHCP</p>
+</li>
+<li>
+<p>uses the netstat -rn command to list those routes</p>
+</li>
+<li>
+<p>output represents the default route using the word default rather than 0.0.0.0 and 0.0.0.0</p>
+</li>
+</ul>
+<p>Host IP Settings on Linux</p>
+<p>some Linux distributions do not include net-tools.</p>
+<p>You can add net-tools to most Linux distributions.</p>
+<p>includes ifconfig and netstat -rn.</p>
+<p>iproute library</p>
+<ul>
+<li>preinstalled on Linux</li>
+<li>includes a set of replacement commands and functions, many performed with the ip command and some parameters.</li>
+<li>similar to the macOS version but also shows some interface counters.</li>
+</ul>
+<p>ipaddress</p>
+<ul>
+<li>shows basic addressing info</li>
+<li>Shows subnet in prefix notation rather than in dotted decimal</li>
+</ul>
+<p>ifconfig wlan0</p>
+<ul>
+<li>shows l2 and l3 addresses</li>
+<li>from net-tools</li>
+</ul>
+<p>netstat -rn</p>
+<ul>
+<li>
+<p>from net-tools</p>
+</li>
+<li>
+<p>lists a default route, but with a style that shows the destination as 0.0.0.0.</p>
+</li>
+<li>
+<p>points to the default gateway as learned with DHCP:</p>
+</li>
+<li>
+<p>lists a route to the local subnet</p>
+</li>
+</ul>
+<p>The bottom of the example shows the command meant to replace netstat -rn: ip route. Note that it also shows a default route that references the default router, along with a route for the local subnet.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/dhcp_config/" class="active"><a class="padding" href="/networking/dhcp_config/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/dhcp_config/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

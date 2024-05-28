@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="This lab covers some basic LAN setup. Real world networks are a lot bigger than this but once you can configure these things. Troubleshooting and setting up bigger networks will be less challenging.
+Here are the settings to configure:
+VLAN setup using VTP Trunking using DTP Router on a stick Spanning Tree Etherchannel Your goal with this lab is to configure all of the settings above and verify using show commands.">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="This lab covers some basic LAN setup. Real world networks are a lot bigger than this but once you can configure these things. Troubleshooting and setting up bigger networks will be less challenging.
+Here are the settings to configure:
+VLAN setup using VTP Trunking using DTP Router on a stick Spanning Tree Etherchannel Your goal with this lab is to configure all of the settings above and verify using show commands.">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/cisco_vlan_lab/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="This lab covers some basic LAN setup. Real world networks are a lot bigger than this but once you can configure these things. Troubleshooting and setting up bigger networks will be less challenging.
+Here are the settings to configure:
+VLAN setup using VTP Trunking using DTP Router on a stick Spanning Tree Etherchannel Your goal with this lab is to configure all of the settings above and verify using show commands.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="This lab covers some basic LAN setup. Real world networks are a lot bigger than this but once you can configure these things. Troubleshooting and setting up bigger networks will be less challenging.
+Here are the settings to configure:
+VLAN setup using VTP Trunking using DTP Router on a stick Spanning Tree Etherchannel Your goal with this lab is to configure all of the settings above and verify using show commands.">
+    <meta itemprop="wordCount" content="1332">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/cisco_vlan_lab/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>This lab covers some basic LAN setup. Real world networks are a lot bigger than this but once you can configure these things. Troubleshooting and setting up bigger networks will be less challenging.</p>
+<p>Here are the settings to configure:</p>
+<ul>
+<li>VLAN setup using VTP</li>
+<li>Trunking using DTP</li>
+<li>Router on a stick</li>
+<li>Spanning Tree</li>
+<li>Etherchannel</li>
+</ul>
+<p>Your goal with this lab is to configure all of the settings above and verify using show commands. And test your working network with pings between all of the PCs. Finally, you will download a broken version of the lab and use your troubleshooting skills to fix it.</p>
+<p>The PCs have all been configured with IP addresses and default gateways for their respective VLANs.</p>
+<p>Packet Tracer files for this lab</p>
+<p>Set up trunk ports on all switches using DTP</p>
+<p>You&rsquo;ll need to set up trunk ports using dtp between all of the switches. Switch1s port connecting to router1 should also be a trunk link. Then verify the trunk connections.</p>
+<p>Each interface you see here should be a trunk port.</p>
+<p>Set all used ports on switch1 to &ldquo;dynamic desirable&rdquo;. Later we will disable DTP and manually set up the trunk links.</p>
+<p>switch1 (config) # int ra fa0/1-6<br>
+switch1 (config-if-range) # switchport mode dynamic desirable</p>
+<p>Verify trunk links on switches 3-5 leading to switch1</p>
+<p>You should see trunks connecting to switch1 since dtp is set to &ldquo;dynamic auto&rdquo; by default on the other switches.</p>
+<p>switch3 # show interfaces trunk</p>
+<p>Remove the dynamic desirable command</p>
+<p>All of that work you did to get the trunks up using DTP? Let&rsquo;s start all over and configure them manually instead.</p>
+<p>You know.. just for fun.</p>
+<p>switch1 (config-if) # no switchport dynamic desirable</p>
+<p>Manually Configure Trunks</p>
+<p>DTP is usually disabled for security purposes. So we will configure the trunks manually.</p>
+<p>Designate trunk ports with 802.1q encapsulation</p>
+<p>Depending on the switch, you may or may not have to do this.</p>
+<p>switch3 (config-int) # switchport trunk encapsulation dot1q</p>
+<p>Set switch port mode to trunk</p>
+<p>switch1 # interface range fa0/1-6<br>
+switch1 (config-if) # switchport mode trunk</p>
+<p>Disable dtp</p>
+<p>switch1 (config-if) # switchport nonegotiate</p>
+<p>Show switchport info on a single interface</p>
+<p>switch1 # show interfaces fa0/4 switchport</p>
+<p>Use VTP to Populate VLANs</p>
+<p>VTP is not on the current CCNA exam objectives. However, I&rsquo;ve seen this in the real world so it&rsquo;s good to know how it works and how to configure it.</p>
+<p>I&rsquo;ve heard that you may see questions on the exam about VTP anyway.</p>
+<p>Set up VLANs on switch1</p>
+<p>This lab uses VLAN 10, 20, and 30 in networks that match their respective VLAN number. With VLAN 100 being an unused VLAN for security.</p>
+<ul>
+<li>VLAN 10: 10.0.0.0 /24</li>
+<li>VLAN 20: 20.0.0.0 /24</li>
+<li>VLAN 30: 30.0.0.0 /24</li>
+<li>VLAN 100: NA</li>
+</ul>
+<p>switch 1 (config) # vlan 10<br>
+switch 1 (config) # vlan 20<br>
+switch 1 (config) # vlan 30<br>
+switch 1 (config) # vlan 100</p>
+<p>Set switch1 to VTP mode &ldquo;server&rdquo;</p>
+<p>switch1 (config) # vtp mode server</p>
+<p>Set the VTP domain name</p>
+<p>switch1 (config) # vtp domain cisco</p>
+<p>Set the other switches to VTP &ldquo;client&rdquo; mode</p>
+<p>switch2 (config) # vtp mode client</p>
+<p>Confirm VTP settings</p>
+<p>switch2 # show vtp status</p>
+<p>Confirm VLANs are set up on all switches</p>
+<p>switch2 # show vlan brief</p>
+<p>Disable VTP on all switches</p>
+<p>switch1 (config) # vtp mode transparent</p>
+<p>Final VLAN Pieces</p>
+<p>Now that your trunks and VLANs are configured. You can assign some ports to the VLANs. Then block the unused VLAN 100 on all of your trunk links.</p>
+<p>Set up access ports connected to PCs</p>
+<p>Set the switchport type to &ldquo;access&rdquo;. Then assign that access port to it&rsquo;s respective VLAN.</p>
+<p>switch3 (config-int) # switchport mode access<br>
+switch3 (config-int) # switchport access vlan 10</p>
+<p>Remove VLAN 100 from all trunks</p>
+<p>switch1 (config-int) # switchport trunk allowed vlan remove 100</p>
+<p>Create a Router on a Stick</p>
+<p>Make sure interface gi0/0 does not have an ip address</p>
+<p>router1 # show ip interface brief</p>
+<p>Create subinterfaces on router and assign ip addresses to them</p>
+<ul>
+<li>gi0/1.10</li>
+<li>gi0/1.20</li>
+<li>gi0/1.30</li>
+</ul>
+<p>router1 # interface gi0/1.10<br>
+router1 (config-if) # ip address 10.0.0.1 255.255.255.0<br>
+router1 (config-if) # encapsulation dot1q 10</p>
+<p>Set port on opposing switch to trunk mode</p>
+<p>You&rsquo;ll need to make sure the switch1 port connecting to router1 is a trunk link. This is so that all VLANs can travel to router1 for routing.</p>
+<p>The PCs are already configured to use router1 as their default gateway. Assuming you configure the subinterfaces with the .1 ip address for their respective VLANS</p>
+<p>Spanning Tree Protocol</p>
+<p>This is a very simplified Spanning Tree lab. Leave a comment if you&rsquo;d like a more detailed one in the future.</p>
+<p>Optimize spanning tree for best path</p>
+<p>You&rsquo;ll want to make switch1 the root bridge for Spanning Tree. To do this, make switch1 have the lowest priority. Or manually set it as the root bridge with the &ldquo;primary&rdquo; command.</p>
+<p>This setting should be configured for each VLAN.</p>
+<p>Set the priority to change the root bridge</p>
+<p>switch1 (config) # spanning-tree vlan 10 priority 24,576</p>
+<p>Change the root bridge with the primary command</p>
+<p>This will set the switches priority from 32,868 to 24,586. (24,576 + 10 for VLAN 10) The lowest priority will win the root election.</p>
+<p>switch1 (config) # spanning-tree vlan 10 root primary</p>
+<p>View spanning tree information</p>
+<p>switch1 # show spanning-tree</p>
+<p>View STP information on a specific VLAN</p>
+<p>switch1 # show spanning-tee vlan 10</p>
+<p>Show summary of Spanning Tree</p>
+<p>switch1 # show spanning-tree summary</p>
+<p>Enable PortFast on access ports for switches 3-5</p>
+<p>You can set each interface manually. Or you can enable portfast on all non trunking ports with the &ldquo;default&rdquo; option.</p>
+<p>switch3 (config-if) # spanning-tree portfast</p>
+<p>Enable BPDU Guard on all interfaces with PortFast</p>
+<p>switch3 (config-if) # spanning-tree bpduguard enable</p>
+<p>Etherchannel (Layer 2)</p>
+<p>ou&rsquo;ll need to make sure that all of the Etherchannel ports are either in access mode or trunk mode. It cannot be a mix of both. Also, I had an error (twice) in Packet Tracer where the P01 interface was stuck on STP listening mode. It would not resolve until I reset Packet Tracer.</p>
+<p>Keep in mind when troubleshooting errors that Packet Tracer can be buggy. Your issue may be with PT software and not the IOS configuration.</p>
+<p>Set up an Etherchannel using PAGP</p>
+<p>switch1 (config-if) # channel-group 1 mode desirable</p>
+<p>switch2 (config-if) # channel-group 1 mode desirable/ auto</p>
+<p>Set up an Etherchannel using LACP</p>
+<p>switch1 (conf-if) # channel-group 1 mode active</p>
+<p>switch2 (config-if) # channel-group 1 mode active/ passive</p>
+<p>View Etherchannel info</p>
+<p>switch1 # show etherchannel 1 port-channel</p>
+<p>View Etherchannel summary</p>
+<p>switch1 # show etherchannel summary</p>
+<p>Modify Etherchannel load distribution</p>
+<p>switch1 # port-channel load-balance dst-ip</p>
+<p>Show Etherchannel load balance information</p>
+<p>switch1 # show etherchannel load-balance</p>
+<p>Port Security</p>
+<p>Implement port security and add an unauthorized device.</p>
+<p>View port security details</p>
+<p>switch3 # show port-security interface fa 0/3</p>
+<p>Enable port security</p>
+<p>Switch ports must be not be set as dynamic. Set them manually as access ports instead.</p>
+<p>switch3 (config-if-range) # switchport mode access<br>
+switch3 (config-if-range) # switchport port-security</p>
+<p>Using the sticky command</p>
+<p>switch3 (config-if-range) # switchport port-security mac-address sticky</p>
+<p>Set the maximum allowed mac addresses on a port to 2</p>
+<p>switch3 (config-if-range) # switchport port-security maximum 2</p>
+<p>Set port violation to &ldquo;protect&rdquo;</p>
+<p>switch3 (config-if-range) # switchport port-security violation protect</p>
+<p>Set port violation to &ldquo;restrict&rdquo;</p>
+<p>switch3 (config-if-range) # switchport port-security violation restrict</p>
+<p>Set port violation to &ldquo;shutdown&rdquo;</p>
+<p>switch3 (config-if-range) # switchport port-security violation shutdown</p>
+<p>Set port security to a single mac-address</p>
+<p>switch3 (config-if-range) # switchport port-security mac-address aa.bb.cc.dd.ee.ff</p>
+<p>Shutdown unused ports</p>
+<p>switch3 (config-if-range) # Shutdown</p>
+<p>Place unused ports into an unused vlan</p>
+<p>switch3 (config-if-range) # switchport access vlan 100</p>
+<p>Bring an interface back up from an &ldquo;err-disabled&rdquo; state</p>
+<p>This is optional. To get a port to an err-disabled state, you&rsquo;ll have to plug in an unauthorized PC if using a static mac-address. Or if you are using the maximum allowed option, plug too many PCs into a single port. Either via hub or by unplugging the PCs and plugging new ones in a few times.</p>
+<p>switch3 (config-if) # shutdown<br>
+switch3 (config-if) # no shutdown</p>
+<p>Show port security Info</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/cisco_vlan_lab/" class="active"><a class="padding" href="/networking/cisco_vlan_lab/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/cisco_vlan_lab/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

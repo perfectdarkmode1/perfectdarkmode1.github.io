@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="3.0 IP Connectivity
+3.5 Describe the purpose of First Hop Redundancy Protocol
+4.0 Infrastructure Services
+4.4 Explain the function of SNMP in network operations
+4.9 Describe the capabilities and function of TFTP/FTP in the network
+First Hop Redundancy Protocol Subnet 10.1.1.0/24 SW3 Default GW=.9 SW4 SWI SW2 .9 Single Points of Failure RI Figure 12-1 RI and the One WAN Link as Single Points of Failure “&gt;
+Subnet 10. I .">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="3.0 IP Connectivity
+3.5 Describe the purpose of First Hop Redundancy Protocol
+4.0 Infrastructure Services
+4.4 Explain the function of SNMP in network operations
+4.9 Describe the capabilities and function of TFTP/FTP in the network
+First Hop Redundancy Protocol Subnet 10.1.1.0/24 SW3 Default GW=.9 SW4 SWI SW2 .9 Single Points of Failure RI Figure 12-1 RI and the One WAN Link as Single Points of Failure “&gt;
+Subnet 10. I .">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/ip_services/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="3.0 IP Connectivity
+3.5 Describe the purpose of First Hop Redundancy Protocol
+4.0 Infrastructure Services
+4.4 Explain the function of SNMP in network operations
+4.9 Describe the capabilities and function of TFTP/FTP in the network
+First Hop Redundancy Protocol Subnet 10.1.1.0/24 SW3 Default GW=.9 SW4 SWI SW2 .9 Single Points of Failure RI Figure 12-1 RI and the One WAN Link as Single Points of Failure “&gt;
+Subnet 10. I .">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="3.0 IP Connectivity
+3.5 Describe the purpose of First Hop Redundancy Protocol
+4.0 Infrastructure Services
+4.4 Explain the function of SNMP in network operations
+4.9 Describe the capabilities and function of TFTP/FTP in the network
+First Hop Redundancy Protocol Subnet 10.1.1.0/24 SW3 Default GW=.9 SW4 SWI SW2 .9 Single Points of Failure RI Figure 12-1 RI and the One WAN Link as Single Points of Failure “&gt;
+Subnet 10. I .">
+    <meta itemprop="wordCount" content="3380">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/ip_services/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#first-hop-redundancy-protocol">First Hop Redundancy Protocol</a></li>
+    <li><a href="#simple-network-management-protocol">Simple Network Management Protocol</a></li>
+    <li><a href="#ftp-and-tftp">FTP and TFTP</a>
+      <ul>
+        <li><a href="#upgrading-ios-images">Upgrading IOS Images</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>3.0 IP Connectivity</p>
+<p>3.5 Describe the purpose of First Hop Redundancy Protocol</p>
+<p>4.0 Infrastructure Services</p>
+<p>4.4 Explain the function of SNMP in network operations</p>
+<p>4.9 Describe the capabilities and function of TFTP/FTP in the network</p>
+<h2 id="first-hop-redundancy-protocol">First Hop Redundancy Protocol</h2>
+<p>Subnet 10.1.1.0/24
+SW3
+Default
+GW=.9
+SW4
+SWI
+SW2
+.9
+Single Points of Failure
+RI
+Figure 12-1 RI and the One WAN Link as Single Points of Failure &ldquo;&gt;</p>
+<p>Subnet 10. I .1.0/24
+SW3
+Default
+GW=.9
+SW4
+Remote
+Single Points of Failure
+SWI
+SW2
+.9
+R4
+Main Site
+Figure 12-2 Higher Availability but with RI Still as a Single Point of Failure &ldquo;&gt;</p>
+<p>Subnet 10.1.1.0/24
+sw3 1
+Default
+GW=.9
+SW4 1
+SWI
+SW2 1
+GO/O
+.9
+.129
+Figure 12-3 Removing All Single Points ofFailure from the Network Design &ldquo;&gt;</p>
+<p>GW=.9
+GW=.9
+GW=.129
+GW=.129
+GO/O
+.9
+GO/I
+.129
+Figure 124 Balancing Traffic by Assigning Different Default Routers to Different Clients &ldquo;&gt;</p>
+<p>All hosts act like they always have, with one default router setting that never has to change.</p>
+<p>The default routers share a virtual IP address in the subnet, defined by the FHRP.</p>
+<p>Hosts use the FHRP virtual IP address as their default router address.</p>
+<p>The routers exchange FHRP protocol messages so that both agree as to which router does what work at any point in time.</p>
+<p>When a router fails or has some other problem, the routers use the FHRP to choose which router takes over responsibilities from the failed router.</p>
+<p>The Three Solutions for First-Hop Redundancy</p>
+<p>First Hop Redundancy Protocol does not name any one protocol. Instead, it names a family of protocols that fill the same role</p>
+<p>acronym
+HSRP
+VRRP
+GLBP
+Full Name
+Hot Standby
+Router Protocol
+Virtual Router
+Redundancy
+Protocol
+Gateway Load
+Balancing
+Protocol
+Origin
+Cisco
+RFC
+5798
+Cisco
+Redundancy
+Approach
+active/standby
+active/standby
+active/active
+Load
+Balancing
+Per&hellip;
+subnet
+subnet
+host &ldquo;&gt;</p>
+<p>HSRP Concepts</p>
+<p>operates with an active/standby model (also more generally called active/passive</p>
+<p>allows two (or more) routers to cooperate</p>
+<p>GW=.I
+GW=.I
+Host ARP Table
+MAC
+10.1.1.1 VMACI
+HSRP Active
+.1
+VMACI
+RI
+HSRP
+HSRP Standby
+Figure 12-5 All Traffic Goes to .1 (RI, Which Is Active); R2 Is Standby &ldquo;&gt;</p>
+<p>HSRP Failover</p>
+<p>GW=.I
+GW=.I
+GW=.I
+GW=.I
+c
+.9
+vrMC1
+VMACI
+.129
+HSRP Active
+Host ARP Table
+MAC
+No Change
+10.1.1.1 VMACI
+Figure 12-6 Packets Sent Through R2 (New Active) Once It Takes Overfor Failed RI &ldquo;&gt;</p>
+<p>To make the switches change their MAC address table entries for VMAC1, R2 sends an Ethernet frame with VMAC1 as the source MAC address.</p>
+<p>he frame is also a LAN broadcast, so all the switches learn a MAC table entry for VMAC1 that leads toward R2.</p>
+<p>HSRP Load Balancing</p>
+<p>you can configure multiple instances of HSRP in the same subnet (called multiple HSRP groups), preferring one router to be active in one group and the other router to be preferred as active in another.</p>
+<p>Subnet 10.1.1.0/24
+SW3
+10.1.2.1
+VLAN 2
+Subnet 10.1.2.0/24
+Active Subnet I
+Standby Subnet 2
+10.1.1.1
+SWI
+HSRP
+RI
+SW2
+10.1.2.1
+Active Subnet 2
+Standby Subnet 1
+F igure 12-7 Load Balancing with HSRP by Using Different Active Routers per Subnet &ldquo;&gt;</p>
+<p>FHRPs are needed on any device that acts as a default router,</p>
+<p>includes both traditional routers and Layer 3 switches.</p>
+<h2 id="simple-network-management-protocol">Simple Network Management Protocol</h2>
+<p>SNMPv2c and SNMPv3</p>
+<p>application layer protocol</p>
+<p>provides a message format for communication between what are termed managers and agents</p>
+<p>manager</p>
+<p>a network management application running on a PC or server</p>
+<p>typically being called a Network Management Station (NMS)</p>
+<p>uses SNMP protocols to communicate with each SNMP agent.</p>
+<p>Cisco Prime series of management products (<a href="http://www.cisco.com/go/prime" rel="external" target="_blank">www.cisco.com/go/prime</a>) use SNMP (and other protocols) to manage networks.</p>
+<p>agents</p>
+<p>exist in the network, one per device that is managed.</p>
+<p>software running inside each device (router, switch, and so on), with knowledge of all the variables on that device that describe the device’s configuration, status, and counters.</p>
+<p>keeps a database of variables that make up the parameters, status, and counters for the operations of the device. This database, called the Management Information Base (MIB)</p>
+<p>IOS on routers and switches include an SNMP agent, with built-in MIB, that can be enabled with the configuration shown later</p>
+<p>i.e. Cisco Prime)
+The MB
+The Cisco Router and
+SNMP Agent Software
+Figure 12-8 Elements of Simple Network Management Protocol &ldquo;&gt;</p>
+<p>SNMP Variable Reading and Writing: SNMP Get and Set</p>
+<p>NMS typically polls the SNMP agent on each device</p>
+<p>NMS can notify the human user in front of the PC or send emails, texts, and so on to notify the network operations staff of any issues identified by the data found by polling the devices. You can even reconfigure the device through these SNMP variables in the MIB if you permit this level of control.</p>
+<p>NMS uses the SNMP Get, GetNext, and GetBulk messages (together referenced simply as Get messages) to ask for information from an agent.</p>
+<p>NMS sends an SNMP Set message to write variables on the SNMP agent as a means to change the configuration of the device.</p>
+<p>messages come in pairs, with, for instance, a Get Request asking the agent for the contents of a variable, and the Get Response supplying that information</p>
+<p>o find out if GiO/O is UP/UP
+SNMP Get Request
+The MIB
+Gi0/0
+Router I
+Figure 12-9 SNMP Get Request and Get Response Message Flow &ldquo;&gt;</p>
+<p>NMS can analyze various statistical facts such as averages, minimums, and maximums</p>
+<p>NMS can set thresholds for certain key variables, telling the NMS to send a notification (email, text, and so on) when a threshold is passed.</p>
+<p>SNMP Notifications: Traps and Informs</p>
+<p>SNMP agents can initiate communications to the NMS.</p>
+<p>generally called notifications, use two specific SNMP messages: Trap and Inform</p>
+<p>SNMP agents send a Trap or Inform SNMP message to the NMS to list the state of certain MIB variables when those variables reach a certain state.</p>
+<p>y GiO/O Interface Failed!
+Take a Look!
+SNMP Trap @
+The MIB
+Router 1
+Figure 12-10 SNMP Trap Notification Process &ldquo;&gt;</p>
+<p>SNMP Traps and Inform messages have the exact same purpose but differ in the protocol mechanisms</p>
+<p>trap</p>
+<p>The SNMP agent sends the Trap to the IP address of the NMS, with UDP as the transport protocol as with all SNMP messages,</p>
+<p>less overhead than inform</p>
+<p>Inform</p>
+<p>Like Trap messages but with reliability added</p>
+<p>Added to the protocol with SNMP Version 2 (SNMPv2),</p>
+<p>use UDP but add application layer reliability</p>
+<p>NMS must acknowledge receipt of the Inform with an SNMP Response message, or the SNMP agent will time out and resend the Inform.</p>
+<p>The Management Information Base</p>
+<p>Every SNMP agent has its own Management Information Base</p>
+<p>defines variables whose values are set and updated by the agent</p>
+<p>enable the management software to monitor/control the network device.</p>
+<p>defines each variable as an object ID (OID)</p>
+<p>organizes the OIDs based in part on RFC standards, and in part with vendor-proprietary variables</p>
+<p>organizes all the variables into a hierarchy of OIDs, usually shown as a tree</p>
+<p>Each node in the tree can be described based on the tree structure sequence, either by name or by number.</p>
+<p>nternet I
+rivate 4
+enterprises (I)
+Cisco 9
+1.3.6.1.4.1.9.2.2
+1.3.6.1.4.1.9.9.10
+Figure 12-11 Management Information Base (MIB) &ldquo;&gt;</p>
+<p>you could use an SNMP manager and type MIB variable 1.3.6.1.4.1.9.2.1.58.0 and click a button to get that variable, to see the current CPU usage percentage from a Cisco router</p>
+<p>Securing SNMP</p>
+<p>use ACLs to limit SNMP messages to those from known servers only.</p>
+<p>can configure an IPv4 ACL to filter incoming SNMP messages that arrive in IPv4 packets and an IPv6 ACL to filter SNMP messages that arrive in IPv6 packets.</p>
+<p>all versions of SNMP support a basic clear-text password mechanism,</p>
+<p>SNMPv1 defined clear-text passwords called SNMP communities.</p>
+<p>SNMP agent and the SNMP manager need prior knowledge of the same SNMP community value (called a community string)</p>
+<p>Get messages and the Set message include the appropriate community string value, in clear text.</p>
+<p>NMS sends a Get or Set with the correct community string, as configured on the SNMP agent, the agent processes the message.</p>
+<p>SNMPv1 defines both a read-only community and a read-write community.</p>
+<p>read-only (RO) community allows Get messages, and the read-write (RW) community allows both reads and writes (Gets and Sets).</p>
+<p>RI RO Passi
+RI RW Pass2
+O Get (?assl or Pass2 Worki)
+@Set (Pass2 Only Works)
+Figure 12-12 RO and RW Communities with the Get and Set Commands
+RO Passi
+RI RW Pass2 &ldquo;&gt;</p>
+<p>SNMPv2, and the related Community-based SNMP Version 2 (SNMPv2c)</p>
+<p>The original specifications for SNMPv2 did not include SNMPv1 communities</p>
+<p>SNMPv3</p>
+<p>security had arrived with the powerful network management protocol. SNMPv3 does away with communities and replaces them with the following features:</p>
+<p>Message integrity: This mechanism, applied to all SNMPv3 messages, confirms whether or not each message has been changed during transit.</p>
+<p>Authentication: This optional feature adds authentication with both a username and password, with the password never sent as clear text. Instead, it uses a hashing method like many other modern authentication processes.</p>
+<p>Encryption (privacy): This optional feature encrypts the contents of SNMPv3 messages so that attackers who intercept the messages cannot read their contents.</p>
+<h2 id="ftp-and-tftp">FTP and TFTP</h2>
+<dl>
+<dt>lick here to view code image</dt>
+<dt>R2# show file systems</dt>
+<dt>File Systems:</dt>
+<dt>*</dt>
+<dt>Size(b)</dt>
+<dt>256487424</dt>
+<dt>262136</dt>
+<dt>7794737152</dt>
+<dt>Free(b)</dt>
+<dt>49238016</dt>
+<dt>253220</dt>
+<dt>7483719680</dt>
+<dt>copied in 187.</dt>
+<dt>Type</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>network</dt>
+<dt>disk</dt>
+<dt>disk</dt>
+<dt>nvram</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>opaque</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>network</dt>
+<dt>opaque</dt>
+<dt>network</dt>
+<dt>opaque</dt>
+<dt>usbflash</dt>
+<dt>Flags</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>rw</dt>
+<dt>prefixes</dt>
+<dt>archive:</dt>
+<dt>system :</dt>
+<dt>tmpsys :</dt>
+<dt>null :</dt>
+<dt>tftp:</dt>
+<dt>flasho</dt>
+<dd>flash:#
+flashl:
+nvram:
+sys log:
+xmodem :
+ymodem :
+rcp:
+pram:
+http :
+scp:
+tar:
+https:
+cns:
+usbflashø:
+74503236 bytes
+876 secs (396555 bytes/sec) &ldquo;&gt;</dd>
+</dl>
+<p>Opaque: To represent logical internal file systems for the convenience of internal functions and commands</p>
+<p>Network: To represent external file systems found on different types of servers for the convenience of reference in different IOS commands</p>
+<p>Disk: For flash</p>
+<p>Usbflash: For USB flash</p>
+<p>NVRAM: A special type for NVRAM memory, the default location of the startup-config file</p>
+<p>the command more flash0:/wotemp/fred would display the contents of file fred in directory /wotemp in the first flash memory slot in the router.</p>
+<p>many commands use a keyword that indirectly refers to a formal filename, to reduce typing. For example:</p>
+<p>show running-config command: Refers to file system:running-config</p>
+<p>show startup-config command: Refers to file nvram:startup-config</p>
+<p>show flash command: Refers to default flash IFS (usually flash0:)</p>
+<h3 id="upgrading-ios-images">Upgrading IOS Images</h3>
+<p>process to upgrade an IOS image into flash memory, using the following steps:</p>
+<p>Step 1. Obtain the IOS image from Cisco, usually by downloading the IOS image from Cisco.com using HTTP or FTP.</p>
+<p>Step 2. Place the IOS image someplace that the router can reach. Locations include TFTP or FTP servers in the network or a USB flash drive that is then inserted into the router.</p>
+<p>Step 3. Issue the copy command from the router, copying the file into the flash memory that usually remains with the router on a permanent basis. (Routers usually cannot boot from the IOS image in a USB flash drive.)</p>
+<p>nternet
+Figure 12-13
+TFTp server
+Router
+o
+copy tftp flash
+Copying an IOS Image as Part of the Cisco IOS Software Upgrade Process &ldquo;&gt;</p>
+<p>Copying a New IOS Image to a Local IOS File System Using TFTP</p>
+<p>ddress or name of remote host [ ] ? 2.2.2.1
+Source filename [ ] ? c29øe-universa1k9-mz . SPA. 152-4. Ml.bin
+Destination filename [c29ee-universa1k9-mz.SPA.152-4.M1.bin ] ?
+Ml. bin
+—mz. SPA.
+Accessing tftp://2.2.2.1/c29ee-universa1k9-mz.
+Loading
+c29ee
+-universalk9
+152-4.</p>
+<ul>
+<li>9779404e
+97794e4e
+bytes
+bytes ]
+copied
+in
+187 . 876
+secs
+(396555
+SPA. 152-4. Ml. bin
+(via Gigi
+from 2.2.2.1
+bytes/ sec) &ldquo;&gt;</li>
+</ul>
+<p>copy command</p>
+<p>works through these kinds of questions:</p>
+<p>What is the IP address or host name of the TFTP server?</p>
+<p>What is the name of the file?</p>
+<p>Ask the server to learn the size of the file, and then check the local router’s flash to ask whether enough space is available for this file in flash memory.</p>
+<p>Does the server actually have a file by that name?</p>
+<p>Do you want the router to erase any old files in flash?</p>
+<p>Afterward</p>
+<p>verifies that the checksum for the file shows that no errors occurred</p>
+<p>view the contents of the flash file system</p>
+<p>show flash</p>
+<p>shows the files in the default flash file system (flash0:)</p>
+<dl>
+<dt>3:38.</dt>
+<dt>3</dt>
+<dt>4</dt>
+<dt>ee:es.</dt>
+<dt>5</dt>
+<dt>ee:es.</dt>
+<dt>6</dt>
+<dt>ee:es.</dt>
+<dt>7</dt>
+<dt>ee:es.</dt>
+<dt>8</dt>
+<dt>18:20.</dt>
+<dt>9</dt>
+<dt>21 :es.</dt>
+<dt>-#- - -length&ndash; &mdash;&ndash;date/time&ndash;</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Jul</dt>
+<dt>Aug</dt>
+<dt>Oct</dt>
+<dt>show flash</dt>
+<dt>le4193476</dt>
+<dt>seee32e</dt>
+<dt>1038</dt>
+<dt>12288e</dt>
+<dt>1697952</dt>
+<dt>415956</dt>
+<dt>1153</dt>
+<dt>9779404e</dt>
+<dt>21</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>10</dt>
+<dt>16</dt>
+<dt>10</dt>
+<dt>2e15</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e12</dt>
+<dt>2e14</dt>
+<dt>ee.</dt>
+<dd>44
+52
+02
+16
+28
+56
+• 38
+path
++00.
+c29ee-universa1k9-mz . SPA
+cpexpress . tar
+home . shtml
+home . tar
+securedesktop-ios-3.1.1.
+ss1c1ient-win-1.1.4.176.
+wo-lic-l
+c29ee-universa1k9-mz.SPA
+49238e16 bytes
+available (207249408
+bytes used) &ldquo;&gt;</dd>
+</dl>
+<p>dir flash0: command lists the contents of that same file system, with similar information. (You can use the dir command to display the contents of any local IFS.)</p>
+<p>irectory of flashe:/
+1
+3
+4
+5
+6
+7
+8
+9
+-rw-
+-rw-
+-rw-
+le4193476
+seee32e
+le38
+12288e
+1697952
+415956
+1153
+97794e4e
+Jul 21 2e15 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Jul 10 2e12 +ee:ee
+Aug 16 2e12 +ee:ee
+Oct 10 2e14 +ee:ee
+c29ee-universa1
+cpexpress . tar
+home . shtml
+home . tar
+securedesktop-i
+sslclient-win-l
+wo-lic-l
+c29ee-universa1
+256487424 bytes total (49238e16 bytes free) &ldquo;&gt;</p>
+<p>show flash lists the bytes used, whereas the dir command lists the total bytes (bytes used plus bytes free). know which command lists which particular total.</p>
+<p>Verifying IOS Code Integrity with MD5</p>
+<p>when Cisco builds a new IOS image, it calculates and publishes an MD5 hash value for that specific IOS file.</p>
+<p>IOS verify command.</p>
+<p>will list the MD5 hash as recalculated on your router. If both MD5 hashes are equal, the file has not changed.</p>
+<p>ww.cisco.com
+Compare
+Download:
+MD5: xxxxxxx&hellip;
+Figure 12-14 MDS Verification of IOS Images—Concepts &ldquo;&gt;</p>
+<p>verify 5 command generates the MD5 hash on your router,</p>
+<p>you can include the hash value computed by Cisco as the last parameter (as shown in the example), or leave it off. If you include it, IOS will tell you if the locally computed value matches what you copied into the command. If you leave it out, the verify command lists the locally computed MD5 hash, and you have to do the picky character-by-character check of the values yourself.</p>
+<p>lick here to view code image
+R2# verify 5 flashø:c29ee-universa1k9-mz.SPA.154-3.M3.bin a79e325
+.MD5 of flashe:c29ee-universa1k9-mz.SPA.154-3.M3.bin Done!
+Verified (flashe:c29ee-universa1k9-mz . SPA. 154-3.M3. bin)
+= a79e325e6c &ldquo;&gt;</p>
+<p>Copying Images with FTP</p>
+<p>ethod
+TFTP
+FTP
+SCP
+Method (Full Name)
+Trivial File Transfer Protocol
+File Transfer Protocol
+Secure Copy Protocol
+Encrypted?
+No
+No
+Yes &ldquo;&gt;</p>
+<p>copy ftp flash</p>
+<dl>
+<dt>lick here to view code image</dt>
+<dt>RI* copy</dt>
+<dt>Tl.bxn</dt>
+<dt>—mz. SPA.</dt>
+<dt>155-2.</dt>
+<dt>Tl.bxn</dt>
+<dt>—mz. SPA.</dt>
+<dt>155-2.</dt>
+<dt>Destination filename [c29ee-universa1k9-mz .SPA.155</dt>
+<dt>-2. Tl.bin]?</dt>
+<dt>Accessing ftp</dt>
+<dt>Loading</dt>
+<dt>c29ee</dt>
+<dd>//192.168.1.17e/c29ee-universa1k9
+-universalk9
+[OK - I e7410736/4096
+bytes ]
+le741e736
+bytes
+copied
+in
+119 . 604
+secs
+(898e53
+bytes/ sec) &ldquo;&gt;</dd>
+</dl>
+<p>can configure the FTP username and password on the router so that you do not have to include them in the copy command. For instance, the global configuration commands ip ftp username wendell and ip ftp password odom would have configured those values.</p>
+<p>The FTP and TFTP Protocols</p>
+<p>copy command, when using the tftp or ftp keyword, makes the command act as a client</p>
+<p>FTP Protocol Basics</p>
+<p>uses TCP</p>
+<p>TCP port 21 and in some cases also well-known port 20.</p>
+<p>FTP uses a client/server model for file transfer</p>
+<p><!-- raw HTML omitted --></p>
+<p>FTP control connection—define the kinds of functions supported by FTP</p>
+<p>allow the client to navigate around the directory structures of the server, list files, and then transfer files from the server (FTP GET) or to the server (FTP PUT).</p>
+<p>summary of some of the FTP actions:</p>
+<p>Navigate directories: List the current directory, change the current directory to a new directory, go back to the home directory, all on both the server and client side of the connection.</p>
+<p>Add/remove directories: Create new directories and remove existing directories on both the client and server.</p>
+<p>List files: List files on both the client and server.</p>
+<p>File transfer: Get (client gets a copy of the file from the server), Put (client takes a file that exists on the client and puts a copy of the FTP server).</p>
+<p>FTP Active and Passive Modes</p>
+<p>may impact whether the TCP client can or cannot connect to the server and perform normal functions</p>
+<p>user at the FTP client can choose which mode to use</p>
+<p>FTP passive mode may be the more likely option to work.</p>
+<p>FTP uses two types of TCP connections:</p>
+<p>Control Connection: Used to exchange FTP commands</p>
+<p>Data Connection: Used for sending and receiving data, both for file transfers and for output to display to a user</p>
+<p>when a client connects to an FTP server, the client first creates the FTP control connection</p>
+<p>server listens for new control connections on its well-known port 21</p>
+<p>client allocates any new dynamic port (49222 in this case) and creates a TCP connection to the server</p>
+<p>9222
+192.168.1.102
+TCP SYN
+TCP SYN ACK
+TCP ACK
+Figure 12-17 FTP Client Creates an FTP Control Connection
+FTP Server
+192.168.1.11 &ldquo;&gt;</p>
+<p>The FTP client allocates a currently unused dynamic port and starts listening on that port.</p>
+<p>The client identifies that port (and its IP address) to the FTP server by sending an FTP PORT command to the server.</p>
+<p>The server, because it also operates in active mode, expects the PORT command; the server reacts and initiates the FTP data connection to the client’s address (192.168.1.102) and port (49333).</p>
+<p>9222
+TCP control
+FTP PORT 192.168.1.102 49333
+TCP SYN for FTP Data
+FTP Server
+21
+49160
+Figure 12-18 FTP Active Mode Process to Create the Data Connection &ldquo;&gt;</p>
+<p>Passive mode helps solve the firewall restrictions by having the FTP client initiate the FTP data connection to the server.</p>
+<p>passive mode does not simply cause the FTP client to connect to a well-known port on the server;</p>
+<p>The FTP client changes to use FTP passive mode, notifying the server using the FTP PASV command.</p>
+<p>The server chooses a port to listen on for the upcoming new TCP connection, in this case TCP port 49444.</p>
+<p>The FTP notifies the FTP client of its IP address and chosen port with the FTP PORT command.</p>
+<p>The FTP client opens the TCP data connection to the IP address and port learned at the previous step.</p>
+<p>92.168.1.102
+49222
+49160
+192.168.1.11
+FTP Server
+FTP PASV
+49444
+FTP PORT 192.168.1.11 49444 0
+TCP SYN for FTP Data Connection
+Figure 12-19 FTP Passive Mode Process to Create the Data Connection &ldquo;&gt;</p>
+<p>FTP over TLS (FTP Secure)</p>
+<p>FTPS encrypts both the control and data connections with TLS, including the exchange of the usernames and passwords</p>
+<p>FTPS explicit mode process:</p>
+<p>The client creates the FTP control TCP connection to server well-known port 21.</p>
+<p>The client initiates the use of TLS in the control connection with the FTP AUTH command.</p>
+<p>When the user takes an action that requires an FTP data connection, the client creates an FTP data TCP connection to server well-known port 21.</p>
+<p>The client initiates the use of TLS in the data connection with the FTP AUTH command.</p>
+<p>92.168.1.102
+192.168.1.11
+FTP Server
+o
+49222
+FTP AUTH (Starts TLS)
+49299
+o
+FTP AUTH (Starts TLS)
+Figure 12-20 FTPS Explicit Mode Control and Data Connection Establishment &ldquo;&gt;</p>
+<p>implicit mode process</p>
+<p>begins with a required TLS connection, with no need for an FTP AUTH command, using well-known ports 990 (for the control connection) and 989 (for the data connection).</p>
+<p>SFTP</p>
+<p>uses SSH to encrypt file transfers over an SSH connection. However, the acronym SFTP does not refer to a secure version of FTP.</p>
+<p>TFTP Protocol Basics</p>
+<p>Trivial File Transfer Protocol uses UDP well-known port 69. Because it uses UDP, TFTP adds a feature to check each file for transmission errors by using a checksum process on each file after the transfer completes.</p>
+<p>the code requires less space to install, which can be useful for devices with limited memory.</p>
+<p>can Get and Put files, but it includes no commands to change directories, create/remove directories, or even to list files on the server.</p>
+<p>does not support even simple clear-text authentication. In effect, if a TFTP server is running, it should accept requests from any TFTP client.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/ip_services/" class="active"><a class="padding" href="/networking/ip_services/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/ip_services/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

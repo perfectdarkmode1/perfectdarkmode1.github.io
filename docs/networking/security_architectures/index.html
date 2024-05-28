@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.1 Define key security concepts (threats, vulnerabilities, exploits, and mitigation techniques)
+5.2 Describe security program elements (user awareness, training, and physical access control)
+5.4 Describe security password policies elements, such as management, complexity, and password alternatives (multifactor authentication, certificates, and biometrics)
+5.8 Differentiate authentication, authorization, and accounting concepts
+Attacks That Spoof Addresses
+attacker sends packets with a spoofed source IP address">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.1 Define key security concepts (threats, vulnerabilities, exploits, and mitigation techniques)
+5.2 Describe security program elements (user awareness, training, and physical access control)
+5.4 Describe security password policies elements, such as management, complexity, and password alternatives (multifactor authentication, certificates, and biometrics)
+5.8 Differentiate authentication, authorization, and accounting concepts
+Attacks That Spoof Addresses
+attacker sends packets with a spoofed source IP address">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/security_architectures/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.1 Define key security concepts (threats, vulnerabilities, exploits, and mitigation techniques)
+5.2 Describe security program elements (user awareness, training, and physical access control)
+5.4 Describe security password policies elements, such as management, complexity, and password alternatives (multifactor authentication, certificates, and biometrics)
+5.8 Differentiate authentication, authorization, and accounting concepts
+Attacks That Spoof Addresses
+attacker sends packets with a spoofed source IP address">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.1 Define key security concepts (threats, vulnerabilities, exploits, and mitigation techniques)
+5.2 Describe security program elements (user awareness, training, and physical access control)
+5.4 Describe security password policies elements, such as management, complexity, and password alternatives (multifactor authentication, certificates, and biometrics)
+5.8 Differentiate authentication, authorization, and accounting concepts
+Attacks That Spoof Addresses
+attacker sends packets with a spoofed source IP address">
+    <meta itemprop="wordCount" content="964">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/security_architectures/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>5.0 Security Fundamentals</p>
+<p>5.1 Define key security concepts (threats, vulnerabilities, exploits, and mitigation techniques)</p>
+<p>5.2 Describe security program elements (user awareness, training, and physical access control)</p>
+<p>5.4 Describe security password policies elements, such as management, complexity, and password alternatives (multifactor authentication, certificates, and biometrics)</p>
+<p>5.8 Differentiate authentication, authorization, and accounting concepts</p>
+<p>Attacks That Spoof Addresses</p>
+<ul>
+<li>
+<p>attacker sends packets with a spoofed source IP address</p>
+</li>
+<li>
+<p>attacker sends spoofed MAC addresses</p>
+</li>
+<li>
+<p>DHCP requests with spoofed MAC addresses can be sent to a  DHCP server</p>
+</li>
+<li>
+<p>filling its address lease table and leaving no free IP addresses for normal use.</p>
+</li>
+</ul>
+<p>Denial-of-Service Attacks</p>
+<ul>
+<li>
+<p>server adds the TCP connection and replies to the fake address with a SYN-ACK.</p>
+</li>
+<li>
+<p>no ack replies cause the server to leave open the connection and fill up the table</p>
+</li>
+<li>
+<p>Server is no longer able to do legitimate TCP connections</p>
+</li>
+<li>
+<p>ICMP echo (ping) packets</p>
+</li>
+<li>
+<p>flood of UDP packets, and TCP connections, such as the TCP SYN flood</p>
+</li>
+<li>
+<p>distributed denial-of-service (DDoS)</p>
+</li>
+<li>
+<p>attack is distributed across a large number of bots, all flooding or attacking the same target.</p>
+</li>
+</ul>
+<p>Reflection and Amplification Attacks</p>
+<p>Reflection attack</p>
+<ul>
+<li>
+<p>Attacker sends packets to the reflector host</p>
+</li>
+<li>
+<p>host (reflector) reflects the exchange toward the spoofed address that is the target.</p>
+</li>
+<li>
+<p>The attacker might also send the spoofed packets to multiple reflectors, causing the target to receive multiple copies of the unexpected traffic.</p>
+</li>
+<li>
+<p>Attackers source packet is the IP of the victim</p>
+</li>
+<li>
+<p>when reflector (Corporate server) responds, it sends packets to victim</p>
+</li>
+</ul>
+<p>Amplification attack</p>
+<ul>
+<li>attacker sends a small amount of traffic to a reflector to generate large volume of traffic to a target</li>
+<li>leverages a protocol or service to generate the traffic</li>
+<li>mechanisms of DNS and NTP have been exploited for this</li>
+</ul>
+<p>Man-in-the-Middle Attacks</p>
+<ul>
+<li>can exploit the ARP table to communicate with other hosts on the local network</li>
+<li>attacker sends the last ARP reply so that any listening host will update its ARP table with the most recent information.</li>
+<li>attacker can repeat this process by poisoning the ARP entries on multiple hosts and then relaying traffic between them without easy detection.</li>
+</ul>
+<p>Address Spoofing Attack Summary</p>
+<p>DoS/DDoS</p>
+<ul>
+<li>Exhaust a system service or resource</li>
+<li>Crash target system</li>
+</ul>
+<p>Reflection/ Amplification</p>
+<ul>
+<li>Trick unwilling accomplice host to send traffic to target</li>
+</ul>
+<p>man-in-the-middle</p>
+<ul>
+<li>Eavesdrop on traffic</li>
+<li>Modify traffic passing through</li>
+</ul>
+<p>Reconnaissance Attacks</p>
+<ul>
+<li>discover details about the target and its systems prior to an actual attack.</li>
+<li>use common tools to uncover public details like who owns a domain and what IP address ranges are used there.</li>
+<li>nslookup can reveal the owner of the domain and the IP address space registered to it.</li>
+<li>The whois and dig commands are complementary tools that can query DNS information to reveal detailed information about domain owners, contact information, mail servers, authoritative name servers, and so on.</li>
+<li>using ping sweeps to send pings to each IP address in the target range. Hosts that answer the ping sweep then become live targets.</li>
+<li>Port scanning tools can then sweep through a range of UDP and TCP ports to see if a target host answers on any port numbers. Any replies indicate that a corresponding service is running on the target host.</li>
+<li>not a true attack because nothing is exploited as a result.</li>
+</ul>
+<p>Buffer Overflow Attacks</p>
+<ul>
+<li>
+<p>incoming data might be stored in unexpected memory locations if a buffer is allowed to fill beyond its limit.</p>
+</li>
+<li>
+<p>sending data that is larger than expected.</p>
+</li>
+<li>
+<p>If a vulnerability exists, the target system might store that data, overflowing its buffer into another area of memory, eventually crashing a service or the entire system.</p>
+</li>
+<li>
+<p>attackers specially craft the large message by inserting malicious code in it.</p>
+</li>
+<li>
+<p>If the target system stores that data as a result of a buffer overflow, then it can potentially run the malicious code without realizing.</p>
+</li>
+</ul>
+<p>Malware</p>
+<ul>
+<li>
+<p>Trojan horse</p>
+</li>
+<li>
+<p>can spread from one computer to another only through user interaction</p>
+</li>
+<li>
+<p>such as opening email attachments, downloading software from the Internet, and inserting a USB drive into a computer.</p>
+</li>
+<li>
+<p>Packaged inside other software</p>
+</li>
+<li>
+<p>viruses</p>
+</li>
+<li>
+<p>can propagate between systems more readily. To spread, virus software must inject itself into another application, then rely on users to transport the infected application software to other victims.</p>
+</li>
+<li>
+<p>Self-injected into other software</p>
+</li>
+<li>
+<p>Worms</p>
+</li>
+<li>
+<p>-propagates automatically</p>
+</li>
+</ul>
+<p>Human Vulnerabilities</p>
+<p>Spear phishing</p>
+<ul>
+<li>
+<p>targets a group of similar users who might work for the same company, shop at the same stores, and so on.</p>
+</li>
+<li>
+<p>all receive the same convincing email with a link to a malicious site.</p>
+</li>
+<li>
+<p>Whaling</p>
+</li>
+<li>
+<p>similar to phishing</p>
+</li>
+<li>
+<p>targets high-profile individuals in corporations, governments, and organizations.</p>
+</li>
+<li>
+<p>voice calls (vishing)</p>
+</li>
+<li>
+<p>SMS text messages (smishing).</p>
+</li>
+</ul>
+<p>Pharming:</p>
+<ul>
+<li>altered DNS service or local hosts file entry for a legitimate site.</li>
+<li>altered name resolution returns the address of a malicious site instead.</li>
+</ul>
+<p>Watering Hole:</p>
+<ul>
+<li>frequently visited site is compromised and malware is deposited there.</li>
+<li>infects only the target users who visit the site</li>
+</ul>
+<p>Attack Type
+Social
+engineering
+Phishing
+Spear phishing
+Whaling
+Vishing
+Smishing
+Pharming
+Watering hole
+Goal
+Exploits human trust and social behavior
+Disguises a malicious invitation as something legitimate
+Targets group of similar users
+Targets high-profile individuals
+Uses voice calls
+Uses SMS text messages
+Uses legitimate services to send users to a compromised
+site
+Targets specific victims who visit a compromised site &ldquo;&gt;</p>
+<p>Securing Network Access with Cisco AAA</p>
+<p>Authentication, Authorization, and Accounting</p>
+<p>Authentication</p>
+<p>- Name and password</p>
+<p>- Challenge and response</p>
+<p>- Token cards</p>
+<p>Authorization</p>
+<p>- Takes place after authentication is validated</p>
+<p>- Provides needed resources specifically allowed to a certain user and permits the operation that specific user is allowed to perform</p>
+<p>Accounting</p>
+<p>- Records what the user did on the network as well as the resources they accessed.</p>
+<p>- Keeps track of how much time they spent using network resources.</p>
+<p>Authentication Methods</p>
+<p>Least secure to most secure methods:</p>
+<ul>
+<li>No username or password</li>
+<li>Username/password (static)</li>
+<li>Aging username/password</li>
+<li>One-time passwords (OTP</li>
+<li>Token cards/soft tokens</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/security_architectures/" class="active"><a class="padding" href="/networking/security_architectures/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/security_architectures/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

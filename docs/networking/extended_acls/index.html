@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.6 Configure and verify access control lists
+all the parameters must be matched correctly to match that one ACE. . Matching the Protocol, Source IP, and Destination IP 9Extended)
+Uses the access-list global command. The
+syntax is identical up until permit or deny keyword
+Requires three matching parameters:
+IP protocol type
+source IP address
+destination IP address.
+IP header’s Protocol Type field">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.6 Configure and verify access control lists
+all the parameters must be matched correctly to match that one ACE. . Matching the Protocol, Source IP, and Destination IP 9Extended)
+Uses the access-list global command. The
+syntax is identical up until permit or deny keyword
+Requires three matching parameters:
+IP protocol type
+source IP address
+destination IP address.
+IP header’s Protocol Type field">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/extended_acls/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.6 Configure and verify access control lists
+all the parameters must be matched correctly to match that one ACE. . Matching the Protocol, Source IP, and Destination IP 9Extended)
+Uses the access-list global command. The
+syntax is identical up until permit or deny keyword
+Requires three matching parameters:
+IP protocol type
+source IP address
+destination IP address.
+IP header’s Protocol Type field">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="This chapter covers the following exam topics:
+5.0 Security Fundamentals
+5.6 Configure and verify access control lists
+all the parameters must be matched correctly to match that one ACE. . Matching the Protocol, Source IP, and Destination IP 9Extended)
+Uses the access-list global command. The
+syntax is identical up until permit or deny keyword
+Requires three matching parameters:
+IP protocol type
+source IP address
+destination IP address.
+IP header’s Protocol Type field">
+    <meta itemprop="wordCount" content="1142">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/extended_acls/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>This chapter covers the following exam topics:</p>
+<p>5.0 Security Fundamentals</p>
+<p>5.6 Configure and verify access control lists</p>
+<ul>
+<li>all the parameters must be matched correctly to match that one ACE. .</li>
+</ul>
+<p>Matching the Protocol, Source IP, and Destination IP 9Extended)</p>
+<ul>
+<li>
+<p>Uses the access-list global command. The</p>
+</li>
+<li>
+<p>syntax is identical up until permit or deny keyword</p>
+</li>
+<li>
+<p>Requires three matching parameters:</p>
+</li>
+<li>
+<p>IP protocol type</p>
+</li>
+<li>
+<p>source IP address</p>
+</li>
+<li>
+<p>destination IP address.</p>
+</li>
+</ul>
+<p>IP header’s Protocol Type field</p>
+<ul>
+<li>identifies the header that follows the IP header (layer 4)</li>
+<li>TCP, UDP, EIGRP, IGMP, etc</li>
+<li>Use protocol as keyword</li>
+<li>Keyword IP means all IPv4 packets</li>
+</ul>
+<p>Syntax</p>
+<p># Access-list 101 (list #) permit/ Deny tcp (protocol) 10.0.0.1 0.0.0.0 (Source) 10.1.0.1 0.0.0.255 (Destination</p>
+<ul>
+<li>
+<p>Requires the use of the host keyword for specific address</p>
+</li>
+<li>
+<p>Examples</p>
+</li>
+<li>
+<p>access-list 101 deny tcp any any</p>
+</li>
+<li>
+<p>Any IP packet that has a TCP header</p>
+</li>
+<li>
+<p>access-list 101 deny udp any any</p>
+</li>
+<li>
+<p>Any IP packet that that has a UDP header</p>
+</li>
+<li>
+<p>access-list 101 deny icmp any any</p>
+</li>
+<li>
+<p>Any IP packet that has a ICMP header</p>
+</li>
+<li>
+<p>access-list 101 deny ip host 1.1.1.1 host 2.2.2.2</p>
+</li>
+<li>
+<p>All IP packets from host 1.1.1.1 going to host 2.2.2.2</p>
+</li>
+<li>
+<p>access-list 101 deny udp 1.1.1.0 0.0.0.255 any</p>
+</li>
+<li>
+<p>All IP packets that have a UDP header following the IP header, from subnet 1.1.1.0/24 going to any destination</p>
+</li>
+</ul>
+<p>IP and TCP Header</p>
+<p>IP Header</p>
+<p>Misc Header Fields</p>
+<ul>
+<li>9 bytes</li>
+</ul>
+<p>Protocol</p>
+<ul>
+<li>1 byte</li>
+<li>ie 6 = tcp</li>
+<li>identify TCP header</li>
+</ul>
+<p>Header Checksum</p>
+<ul>
+<li>2 bytes</li>
+</ul>
+<p>Source IP</p>
+<ul>
+<li>4 bytes</li>
+</ul>
+<p>Dest. IP</p>
+<ul>
+<li>4 bytes</li>
+</ul>
+<p>Options</p>
+<ul>
+<li>variable</li>
+</ul>
+<p>TCP Header</p>
+<p>Source Port</p>
+<ul>
+<li>2 bytes</li>
+</ul>
+<p>Dest. port</p>
+<ul>
+<li>2 bytes</li>
+</ul>
+<p>Rest of TCP</p>
+<ul>
+<li>16 bytes</li>
+</ul>
+<p>tcp or udp keyword</p>
+<ul>
+<li>can optionally reference the source and/or destination port</li>
+<li>equal, not equal, less than, greater than, and for a range of port numbers</li>
+<li>can use port numbers or  keywords for some well-known application ports</li>
+</ul>
+<p>positions of the source and destination port fields in the access-list command and these port number keywords.</p>
+<p># access-list 101 permit (protocol) Source_IP (source port) dest_IP (dest port)</p>
+<p>Protocol</p>
+<ul>
+<li>tcp</li>
+<li>udp</li>
+</ul>
+<p>Source Port</p>
+<ul>
+<li>eq _</li>
+<li>ne_</li>
+<li>lt_</li>
+<li>gt_</li>
+<li>range_</li>
+</ul>
+<p>Dest. Port</p>
+<ul>
+<li>eq _</li>
+<li>ne_</li>
+<li>lt_</li>
+<li>gt_</li>
+<li>range_</li>
+</ul>
+<p>eq: =</p>
+<p>lt: &lt;</p>
+<p>ne: not equal</p>
+<p>gt: &gt;</p>
+<p>range: x to y</p>
+<p>ie:</p>
+<p># access-list 101 permit tcp 172.16.1.0 0.0.0.255 172.16.3.0 0.0.0.255 eq 21</p>
+<ul>
+<li>eq 21 is in the destination port position</li>
+</ul>
+<p>Apps and Port number shortcuts for ACL Commands</p>
+<p>20 ftp-data</p>
+<p>21 ftp</p>
+<p>22 -</p>
+<p>23 telnet</p>
+<p>25 smtp</p>
+<p>53 domain</p>
+<p>67 bootps (dhcp server)</p>
+<p>68 bootpc (dhcp client)</p>
+<p>69 tftp</p>
+<p>80 www</p>
+<p>110 pop3</p>
+<p>161 snmp</p>
+<p>443 -</p>
+<p>514 -</p>
+<p>16,384 - 32,767 (RTP/ Voice/ Video) -</p>
+<p>Extended IP ACL Configuration</p>
+<p>ommand
+access-list access-list-number {deny I
+permit} protocol source source-wildcard
+destination destination-wildcard [log I
+log-input]
+access-list access-list-number {deny I
+permit} {tcp I udp} source source-wild-
+card [operator [port]] destination destina-
+tion-wildcard [operator [port]] [estab-
+fished] [log]
+Configuration Mode and
+Description
+Global command for extended
+numbered access lists. Use a
+number between 100 and 199 or
+2000 and 2699, inclusive.
+A version of the access-list com-
+mand with parameters specific
+to TCP and/or UDP. &ldquo;&gt;</p>
+<ul>
+<li>enable the ACL using the same ip access-group command used with standard ACLs.</li>
+<li>Place extended ACLs as close as possible to the source of the packets that will be filtered.</li>
+</ul>
+<p>- saves some bandwidth.</p>
+<ul>
+<li>
+<p>ACL numbers</p>
+</li>
+<li>
+<p>100–199 and 2000–2699</p>
+</li>
+</ul>
+<p>Extended IP Access Lists: Example 1</p>
+<p>(If you were to type eq 80, the config would show eq www.)</p>
+<p>#(int) ip access-group 101 in</p>
+<p>Named ACLs and ACL Editing</p>
+<p>Named IP Access Lists</p>
+<ul>
+<li>Easier to remember</li>
+<li>Uses ACL subcommands instead of global config commands</li>
+<li>editing features allow deleting individual lines and inserting new ones</li>
+</ul>
+<p>Config</p>
+<p># ip access-list (standard/ extended) (name)</p>
+<p>#(ACLmode) permit 1.1.1.1</p>
+<p>#(ACLmode) permit 2.2.2.2</p>
+<p>#(ACLmode) permit 3.3.3.3</p>
+<p>#(ACLmode) deny ip 10.1.2.0 0.0.0.255 10.2.3.0 0.0.0.255</p>
+<p>#(int) ip access-group barney out</p>
+<ul>
+<li>
+<p>delete and add new lines to the ACL from within ACL configuration mode</p>
+</li>
+<li>
+<p>deleting a single entry from the ACL.</p>
+</li>
+</ul>
+<p>#(ACLmode) no deny ip 10.1.2.0 0.0.0.255</p>
+<p>Editing ACLs Using Sequence Numbers (named and numbered (not the global numbered way)</p>
+<ul>
+<li>
+<p>ACL sequence number is added to each ACL permit or deny statement,</p>
+</li>
+<li>
+<p>numbers represent the sequence of statements in the ACL</p>
+</li>
+<li>
+<p>Numbered ACLs can use a configuration style like named ACLs, as well as the traditional style, for the same ACL; the new style is required to perform advanced ACL editing.</p>
+</li>
+<li>
+<p>Deleting single lines:</p>
+</li>
+<li>
+<p>delete an ACE with a no sequence-number subcommand.</p>
+</li>
+<li>
+<p>Inserting new lines:</p>
+</li>
+<li>
+<p>New ACEs can be configured with a sequence number before the deny or permit command, dictating the location of the statement within the ACL.</p>
+</li>
+<li>
+<p>Automatic sequence numbering:</p>
+</li>
+<li>
+<p>sequence numbers are added to ACEs automatically</p>
+</li>
+</ul>
+<p># Show ip access-lists 24</p>
+<ul>
+<li>Shows access list 24 and sequence numbers with each entry</li>
+</ul>
+<p>#(ACLmode) no 20</p>
+<ul>
+<li>delete entry 20</li>
+</ul>
+<p>#(ACLmode) 5 deny 10.1.1.1</p>
+<ul>
+<li>enters this new ace as sequence #5</li>
+<li>Places the sequence number in the list in order</li>
+</ul>
+<p>although Example 3-6 uses a numbered ACL, named ACLs use the same process to edit (add and remove) entries.</p>
+<p>Numbered ACL Configuration Versus Named ACL Configuration</p>
+<ul>
+<li>numbered ACLs are stored with the original style of configuration, as global access-list commands, no matter which method is used to configure the ACL.</li>
+<li>the parts of ACL 24 configured with both new-style commands and old-style commands are all listed in the same old-style ACL (show running-config).</li>
+</ul>
+<p>ACL Implementation Considerations</p>
+<ul>
+<li>
+<p>Place more specific statements early in the ACL.</p>
+</li>
+<li>
+<p>Disable an ACL from its interface (using the no ip access-group interface subcommand) before making changes to the ACL.</p>
+</li>
+<li>
+<p>By doing so, you avoid issues with the ACL during an interim state</p>
+</li>
+</ul>
+<p>Mitigating Security Issues with ACLs</p>
+<p>Security threats that can be mitigated with ACLs</p>
+<p>- IP address spoofing, inbound</p>
+<p>- IP address spoofing, outbound</p>
+<p>- DoS TCP SYN attacks, blocking external attacks</p>
+<p>- Dos TCP SYN attacks, using TCP Intercept</p>
+<p>- DoS smurf attacks</p>
+<p>- Denying/filtering ICMP messages, inbound</p>
+<p>- Denying/filtering ICCMP messages, outbound</p>
+<p>- Denying/filtering Traceroute</p>
+<p>* Don&rsquo;t allow external packets that have an internal destination address.</p>
+<p>Configuring ACLs from the internet</p>
+<ul>
+<li>Deny any source addresses from your internal networks</li>
+</ul>
+<p>- Deny any local host addresses (127.0.0.0/8)</p>
+<p>- Deny any reserved private addresses (RFC 1918)</p>
+<p>- Deny any addresses in the IP multicast address range (224.0.0.0/4)</p>
+<p>Controlling VTY (Telnet/ SSH) Access</p>
+<p>1. Create a standard IP access list that permits only the host or hosts you want to be able to telnet into the routers.</p>
+<p>2. Apply the access list to the VTY line with the access-class in command.</p>
+<p>(g) # access-list 50 permit host 172.16.10.3</p>
+<p>(g) # line vty  0 4</p>
+<p>(int) # access-class 50 in</p>
+<p>Monitoring Access Lists</p>
+<p># show access-list</p>
+<p>shows access lists, parameters, statistics, etc.</p>
+<p># show access-list 110</p>
+<p>Shows info for access list 110</p>
+<p># show ip access-list</p>
+<p>shows IP access lists on the router</p>
+<p># show ip interface</p>
+<p>Shows which interfaces have access lists set on them.</p>
+<p># show running-config</p>
+<p>Shows ACLs and what interfaces that have them.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/extended_acls/" class="active"><a class="padding" href="/networking/extended_acls/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/extended_acls/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

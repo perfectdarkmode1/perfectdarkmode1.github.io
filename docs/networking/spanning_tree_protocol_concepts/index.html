@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="RSTP is the most common spanning tree protocol. And Cisco devices default to using RSTP.
+MAC table instability
+The switches MAC address tables keep changing because frames with the same source MAC arrive on different ports. Broadcast storms
+forwarding of a frame repeatedly on the same links Multiple frame transmission
+side effect of looping frames Multiple copies are delivered to a host, confusing the host. What Spanning Tree Does
+blocking state">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="RSTP is the most common spanning tree protocol. And Cisco devices default to using RSTP.
+MAC table instability
+The switches MAC address tables keep changing because frames with the same source MAC arrive on different ports. Broadcast storms
+forwarding of a frame repeatedly on the same links Multiple frame transmission
+side effect of looping frames Multiple copies are delivered to a host, confusing the host. What Spanning Tree Does
+blocking state">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/spanning_tree_protocol_concepts/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="RSTP is the most common spanning tree protocol. And Cisco devices default to using RSTP.
+MAC table instability
+The switches MAC address tables keep changing because frames with the same source MAC arrive on different ports. Broadcast storms
+forwarding of a frame repeatedly on the same links Multiple frame transmission
+side effect of looping frames Multiple copies are delivered to a host, confusing the host. What Spanning Tree Does
+blocking state">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="RSTP is the most common spanning tree protocol. And Cisco devices default to using RSTP.
+MAC table instability
+The switches MAC address tables keep changing because frames with the same source MAC arrive on different ports. Broadcast storms
+forwarding of a frame repeatedly on the same links Multiple frame transmission
+side effect of looping frames Multiple copies are delivered to a host, confusing the host. What Spanning Tree Does
+blocking state">
+    <meta itemprop="wordCount" content="2876">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/spanning_tree_protocol_concepts/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#etherchannel">Etherchannel</a></li>
+    <li><a href="#bpdu-guard">BPDU Guard</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>RSTP is the most common spanning tree protocol. And Cisco devices default to using RSTP.</p>
+<p>MAC table instability</p>
+<ul>
+<li>The switches MAC address tables keep changing because frames with the same source MAC arrive on different ports.</li>
+</ul>
+<p>Broadcast storms</p>
+<ul>
+<li>forwarding of a frame repeatedly on the same links</li>
+</ul>
+<p>Multiple frame transmission</p>
+<ul>
+<li>side effect of looping frames</li>
+<li>Multiple copies are delivered to a host, confusing the host.</li>
+</ul>
+<p>What Spanning Tree Does</p>
+<ul>
+<li>
+<p>blocking state</p>
+</li>
+<li>
+<p>interfaces does not process any frames</p>
+</li>
+<li>
+<p>except STP/RSTP messages and some other overhead messages</p>
+</li>
+</ul>
+<p>STP Convergence</p>
+<ul>
+<li>switches collectively realize that something has changed in the LAN topology</li>
+<li>determine whether they need to change which ports block and which port forward</li>
+</ul>
+<p>How Spanning Tree works</p>
+<p>three criteria to choose whether to put and interface in forwarding state:</p>
+<p>elect a root switch.</p>
+<ul>
+<li>STP puts all working interfaces on the root switch in forwarding state</li>
+</ul>
+<p>nonroot switches</p>
+<ul>
+<li>
+<p>select the port with the least administrative cost (root port)</p>
+</li>
+<li>
+<p>cost between itself and the root switch (root cost) (root cost path)</p>
+</li>
+<li>
+<p>root port (RP) gets put in a forwarding state</p>
+</li>
+<li>
+<p>The switch with the lowest root cost, as compared with the other switches attached to the same link, is placed in forwarding state.</p>
+</li>
+<li>
+<p>That switch is the designated switch, and that switch&rsquo;s interface, attached to that segment, is called the designated port (DP)</p>
+</li>
+</ul>
+<p>STP States</p>
+<p>All the root switches ports</p>
+<ul>
+<li>forwarding</li>
+<li>root switch is always the designated switch</li>
+</ul>
+<p>All nonroot switch&rsquo;s root ports</p>
+<ul>
+<li>forwarding</li>
+<li>port with the least cost to the root switch (lowest root cost)</li>
+</ul>
+<p>Each LAN&rsquo;s designated port</p>
+<ul>
+<li>forwarding</li>
+<li>switch forwarding the Hello on to the segment with the lowest root cost is the designated switch for the segment</li>
+</ul>
+<p>All other working ports</p>
+<ul>
+<li>blocking</li>
+<li>Not used for forwarding frames</li>
+<li>frames received on these interfaces to not forward</li>
+</ul>
+<p>The STP Bridge ID and Hello BPDU</p>
+<ul>
+<li>
+<p>bridge ID (BID)</p>
+</li>
+<li>
+<p>8-byte value unique to each switch.</p>
+</li>
+<li>
+<p>2-byte priority field</p>
+</li>
+<li>
+<p>6-byte system ID</p>
+</li>
+<li>
+<p>based on a universal (burned-in) MAC address</p>
+</li>
+<li>
+<p>bridge protocol data units (BPDU)</p>
+</li>
+<li>
+<p>configuration BPDUs, which switches</p>
+</li>
+<li>
+<p>used to exchange information with each other (switches) The most common BPDU, called a</p>
+</li>
+<li>
+<p>hello BPDU,</p>
+</li>
+<li>
+<p>sending switch&rsquo;s BID</p>
+</li>
+<li>
+<p>switches can tell which switch sent which Hello BPDU</p>
+</li>
+<li>
+<p>Root Bridge ID</p>
+</li>
+<li>
+<p>BID the sender currently believes to be the root switch</p>
+</li>
+<li>
+<p>Sender&rsquo;s root cost</p>
+</li>
+<li>
+<p>STP cost between this switch and current root</p>
+</li>
+<li>
+<p>Timer values on the root switch</p>
+</li>
+<li>
+<p>Hello timer, MaxAge timer, and forward delay timer</p>
+</li>
+</ul>
+<p>Electing the Root Switch</p>
+<ul>
+<li>
+<p>based on the BIDs in the BPDUs.</p>
+</li>
+<li>
+<p>root switch is the switch with the lowest numeric value for the BID.</p>
+</li>
+<li>
+<p>Because the two-part BID starts with the priority value,</p>
+</li>
+<li>
+<p>essentially the switch with the lowest priority becomes the root.</p>
+</li>
+<li>
+<p>If a tie occurs based on the priority portion of the BID,</p>
+</li>
+<li>
+<p>the switch with the lowest MAC address portion of the BID is the root.</p>
+</li>
+<li>
+<p>Mac addresses are the second part of the BID</p>
+</li>
+<li>
+<p>all switches claim to be the root by sending Hello BPDUs listing their own BID as the root BID.</p>
+</li>
+<li>
+<p>If a switch hears a Hello that lists a better (lower) BID</p>
+</li>
+<li>
+<p>that switch stops advertising itself as root and starts forwarding the superior Hello.</p>
+</li>
+<li>
+<p>The Hello sent by the better switch lists the better switch’s BID as the root.</p>
+</li>
+<li>
+<p>superior hello (better hello)</p>
+</li>
+<li>
+<p>the listed root’s BID is better (numerically lower),</p>
+</li>
+<li>
+<p>Inferior hello (worse Hello), meaning that</p>
+</li>
+<li>
+<p>the listed root’s BID is not as good (numerically higher)</p>
+</li>
+<li>
+<p>each nonroot switch chooses its one and only root port. A switch’s RP is its interface through which it has the least STP/RSTP cost to reach the root switch (least root cost).</p>
+</li>
+</ul>
+<p>Choosing Each Switch&rsquo;s Root Port</p>
+<ul>
+<li>
+<p>each nonroot switch chooses its one and only root port.</p>
+</li>
+<li>
+<p>its interface through which it has the least STP/RSTP cost to reach the root switch (least root cost).</p>
+</li>
+<li>
+<p>The STP/RSTP port cost is simply an integer value assigned to each interface, per VLAN</p>
+</li>
+<li>
+<p>The switches also look at their neighbor’s root cost, as announced in Hello BPDUs received from each neighbor.</p>
+</li>
+</ul>
+<p>![Root Cost = O
+SWI
+GO/I
+GiO'2
+Root Cost = O
+RootCostoutGO/1 is 5
+Root Cost out GO,&lsquo;2 is 8
+0+5=5
+cost 5
+Cost = 4
+GiO,Q
+SW3
+4
+Cost 4
+GiO,Q
+My Root Cost
+Out GOO is 4
+sv-V2
+GiO'1
+Root Cost = 4</p>
+<ul>
+<li>
+<p>SW3 calculates its cost to reach the root over the two possible paths by adding the advertised cost (in Hello messages) to the interface costs listed in the figure.</p>
+</li>
+<li>
+<p>The root switch sends Hellos, with a listed root cost of 0. The idea is that the root’s cost to reach itself is 0.</p>
+</li>
+<li>
+<p>Each switch places its root port into a forwarding state.</p>
+</li>
+<li>
+<p>tiebreaker to use in case the best root cost ties for two or more paths.</p>
+</li>
+<li>
+<p>Choose based on the lowest neighbor bridge ID.</p>
+</li>
+<li>
+<p>Choose based on the lowest neighbor port priority.</p>
+</li>
+<li>
+<p>Choose based on the lowest neighbor internal port number.</p>
+</li>
+</ul>
+<p>Choosing the Designated Port on each LAN Segment</p>
+<ul>
+<li>
+<p>final step to choose the STP/RSTP topology is to choose the designated port on each LAN segment.</p>
+</li>
+<li>
+<p>The designated port (DP) on each LAN segment is the switch port that advertises the lowest-cost Hello onto a LAN segment.</p>
+</li>
+<li>
+<p>When a nonroot switch forwards a Hello, the nonroot switch sets the root cost field in the Hello to that switch’s cost to reach the root. In effect, the switch with the lower cost to reach the root, among all switches connected to a segment, becomes the DP on that segment.</p>
+</li>
+<li>
+<p>All DPs are placed into a forwarding state</p>
+</li>
+</ul>
+<p>Two additional tiebreakers are needed in some cases</p>
+<ul>
+<li>
+<p>these would be unlikely today.</p>
+</li>
+<li>
+<p>A single switch can connect two or more interfaces to the same collision domain by connecting to a hub.</p>
+</li>
+<li>
+<p>In that case, the one switch hears its own BPDUs.</p>
+</li>
+<li>
+<p>So, if a switch ties with itself, two additional tiebreakers are used:</p>
+</li>
+<li>
+<p>the lowest interface STP/RSTP priority and,</p>
+</li>
+<li>
+<p>if that ties, the lowest internal interface number.</p>
+</li>
+<li>
+<p>switch ports connected to endpoint devices should become DPs and settle into a forwarding state.</p>
+</li>
+</ul>
+<p>Configuring to influence the STP Topology</p>
+<ul>
+<li>
+<p>configure the bridge ID and  change STP/RSTP port costs.</p>
+</li>
+<li>
+<p>change the BID, the engineer can</p>
+</li>
+<li>
+<p>set the priority used by the switch, while</p>
+</li>
+<li>
+<p>continues to use the universal MAC address as the final 48 bits of the BID.</p>
+</li>
+<li>
+<p>giving a switch the lowest priority value among all switches will cause that switch to win the root election.</p>
+</li>
+<li>
+<p>to favor one link, give the ports on that link a lower cost, or to avoid a link, give the ports a higher cost.</p>
+</li>
+</ul>
+<p>Link Costs</p>
+<p>10 Mbps</p>
+<ul>
+<li>2,000,000</li>
+<li>100 (old)</li>
+</ul>
+<p>100Mbps</p>
+<ul>
+<li>200,000</li>
+<li>19 (old)</li>
+</ul>
+<p>1gbps</p>
+<ul>
+<li>20,000</li>
+<li>4 (old)</li>
+</ul>
+<p>10Gbps</p>
+<ul>
+<li>2000</li>
+<li>2 (old)</li>
+</ul>
+<p>100Gbps</p>
+<ul>
+<li>200</li>
+<li>N/A (old)</li>
+</ul>
+<p>1Tbps</p>
+<ul>
+<li>
+<p>20</p>
+</li>
+<li>
+<p>N/A (old)</p>
+</li>
+<li>
+<p>the cost defaults based on the operating speed of the link, not the maximum speed</p>
+</li>
+<li>
+<p>(config) # spanning-tree pathcost method long</p>
+</li>
+<li>
+<p>Cisco Catalyst switches can be configured to use the long values as defaults</p>
+</li>
+</ul>
+<p>Details specific to STP</p>
+<p>STP Activity When the Network Remains Stable</p>
+<ul>
+<li>
+<p>An STP root switch sends a new Hello BPDU every 2 seconds by default.</p>
+</li>
+<li>
+<p>Each nonroot switch forwards the Hello on all DPs, but only after changing items listed in the Hello.</p>
+</li>
+<li>
+<p>(As a result, the Hello flows once over every working link in the LAN.)</p>
+</li>
+<li>
+<p>When forwarding the Hello BPDU, each switch sets the root cost to that local switch’s calculated root cost. The switch also sets the “sender’s bridge ID” field to its own bridge ID. (The root’s bridge ID field is not changed.)</p>
+</li>
+</ul>
+<p>Step 1. The root creates and sends a Hello BPDU, with a root cost of 0, out all its working interfaces (those in a forwarding state).</p>
+<p>Step 2. The nonroot switches receive the Hello on their root ports. After changing the Hello to list their own BID as the sender’s BID and listing that switch’s root cost, the switch forwards the Hello out all designated ports.</p>
+<p>Step 3. Steps 1 and 2 repeat until something changes.</p>
+<ul>
+<li>When a switch ceases to receive the Hellos, or receives a Hello that lists different details, something has failed, so the switch reacts and starts the process of changing the spanning-tree topology.</li>
+</ul>
+<p>STP Timers That Manage STP Convergence</p>
+<ul>
+<li>
+<p>STP convergence process requires the use of three timers</p>
+</li>
+<li>
+<p>All switches use the timers as dictated by the root switch, which the root lists in its periodic Hello BPDU messages.</p>
+</li>
+</ul>
+<p>hello</p>
+<ul>
+<li>2 seconds by default</li>
+<li>Period between hellos created by the root</li>
+</ul>
+<p>MaxAge</p>
+<ul>
+<li>10 times the hello (20 seconds by default hello)</li>
+<li>How long the switch will go without receiving any hellos before it attempts to change the stp topology</li>
+</ul>
+<p>Forward Delay</p>
+<ul>
+<li>
+<p>15 seconds</p>
+</li>
+<li>
+<p>how long the port stays in listening and learning state</p>
+</li>
+<li>
+<p>After MaxAge expires, the switch essentially makes all its STP choices again, based on any Hellos it receives from other switches.</p>
+</li>
+</ul>
+<p>Changing Interface States with STP</p>
+<p>Roles, like root port and designated port, relate to how STP analyzes the LAN topology. States, like forwarding and blocking, tell a switch whether to send or receive frames.</p>
+<p>When STP converges, a switch chooses new port roles, and the port roles determine the state (forwarding or blocking).</p>
+<p>Switches using STP can simply move immediately from forwarding to blocking state, but they must take extra time to transition from blocking state to forwarding state.</p>
+<p>when a port that formerly blocked needs to transition to forwarding, the switch first puts the port through two intermediate interface states.</p>
+<p>Listening:</p>
+<ul>
+<li>interface does not forward frames.</li>
+<li>switch removes old stale (unused) MAC table entries for which no frames are received from each MAC address during this period.</li>
+<li>These stale MAC table entries could be the cause of the temporary loops.</li>
+<li>Transitory</li>
+</ul>
+<p>Learning:</p>
+<ul>
+<li>do not forward frames</li>
+<li>switch begins to learn the MAC addresses of frames received on the interface.</li>
+<li>Transitory</li>
+</ul>
+<p>Blocking</p>
+<ul>
+<li>does not forward frames</li>
+<li>does not learn mac addresses</li>
+<li>stable</li>
+</ul>
+<p>Forwarding</p>
+<ul>
+<li>learns mac addresses</li>
+<li>forwards frames</li>
+<li>stable</li>
+</ul>
+<p>Disabled</p>
+<ul>
+<li>does not forward or learn mac addresses</li>
+<li>stable</li>
+</ul>
+<p>blocking &gt; listening, &gt; learning &gt; forwarding.</p>
+<p>STP leaves the interface in each interim state for a time equal to the forward delay timer, which defaults to 15 seconds.</p>
+<p>a convergence event that causes an interface to change from blocking to forwarding requires 30 seconds to transition from blocking to forwarding.</p>
+<p>a switch might have to wait MaxAge seconds (default 20 seconds) before even choosing to move an interface from blocking to forwarding state.</p>
+<p>Rapid STP Concepts</p>
+<ul>
+<li>802.1w</li>
+<li>Sits in 802.1q standards document</li>
+</ul>
+<p>Comparing STP and RSTP</p>
+<ul>
+<li>
+<p>similarities</p>
+</li>
+<li>
+<p>elect the root switch using the same rules and tiebreakers.</p>
+</li>
+<li>
+<p>switches select their root ports with the same rules.</p>
+</li>
+<li>
+<p>elect designated ports on each LAN segment with the same rules and tiebreakers.</p>
+</li>
+<li>
+<p>place each port in either forwarding or blocking state</p>
+</li>
+<li>
+<p>(RSTP calls the blocking state the discarding state.)</p>
+</li>
+<li>
+<p>they can both be used in the same network.</p>
+</li>
+<li>
+<p>RSTP improves network convergence when topology changes occur, usually converging within a few seconds (or in slow conditions, in about 10 seconds).</p>
+</li>
+</ul>
+<p>RSTP defines more cases in which the switch can avoid waiting for a timer to expire, such as the following:</p>
+<ul>
+<li>
+<p>a switch can replace its root port, without any waiting to reach a forwarding state (in some conditions).</p>
+</li>
+<li>
+<p>replace a designated port, without any waiting to reach a forwarding state (in some conditions).</p>
+</li>
+<li>
+<p>lowers waiting times for cases in which RSTP must wait for a timer.</p>
+</li>
+<li>
+<p>MaxAge is only 3 times the hello</p>
+</li>
+<li>
+<p>uses the term alternate port to refer to a switch’s other ports that could be used as the root port if the root port ever fails.</p>
+</li>
+<li>
+<p>The backup port concept provides a backup port on the local switch for a designated port.</p>
+</li>
+<li>
+<p>backup ports apply only to designs that use hubs, so they are unlikely to be useful today.)</p>
+</li>
+</ul>
+<p>RSTP Port roles</p>
+<p>Root Port</p>
+<ul>
+<li>Nonroot switch&rsquo;s port that has the best path to the root</li>
+</ul>
+<p>Alternate port</p>
+<ul>
+<li>Replaces the root port when the root port fails</li>
+</ul>
+<p>Designated port</p>
+<ul>
+<li>port designated to forward onto a collision domain</li>
+</ul>
+<p>Backup Port</p>
+<ul>
+<li>Replaces designated port when designated port fails</li>
+</ul>
+<p>Disabled ports</p>
+<ul>
+<li>
+<p>administratively disabled</p>
+</li>
+<li>
+<p>each switch independently generates its own Hellos.</p>
+</li>
+<li>
+<p>allows for queries between neighbors</p>
+</li>
+<li>
+<p>(rather than waiting on timers to expire to learn new information)</p>
+</li>
+</ul>
+<p>RSTP and the Alternate (Root) Port Role</p>
+<p>alternate port</p>
+<ul>
+<li>both the RP and the alternate port must receive Hellos that identify the same root switch.</li>
+</ul>
+<p>the switch changes the former root port’s role and state:</p>
+<ul>
+<li>
+<p>the role from root port to a disabled port, and</p>
+</li>
+<li>
+<p>the state from forwarding to discarding</p>
+</li>
+<li>
+<p>without waiting on any timers, the switch changes roles and state for the alternate port:</p>
+</li>
+<li>
+<p>its role changes to be the root port, with a forwarding state.</p>
+</li>
+<li>
+<p>the new root port also does not need to spend time in other states, such as learning state, instead moving immediately to forwarding state.</p>
+</li>
+</ul>
+<p>Step 1. The link between SW1 and SW3 fails, so SW3’s current root port (Gi0/1) fails.</p>
+<p>Step 2. SW3 and SW2 exchange RSTP messages to confirm that SW3 will now transition its former alternate port (Gi0/2) to be the root port. This action causes SW2 to flush the required MAC table entries.</p>
+<p>Step 3. SW3 transitions Gi0/1 to the disabled role and Gi0/2 to the root port role.</p>
+<p>Step 4. SW3 transitions Gi0/2 to a forwarding state immediately, without using learning state, because this is one case in which RSTP knows the transition will not create a loop.</p>
+<p>RSTP States and Processes</p>
+<ul>
+<li>
+<p>RSTP keeps both the learning and forwarding states as compared with STP, for the same purposes</p>
+</li>
+<li>
+<p>RSTP does not even define a listening state,</p>
+</li>
+<li>
+<p>RSTP renames the blocking state to the discarding state and redefines its use slightly.</p>
+</li>
+<li>
+<p>RSTP uses the discarding state for what STP defines as two states: disabled state and blocking state.</p>
+</li>
+</ul>
+<p>![Table 9-10 Port States Compared: STP and RSTP
+Function
+Port is administratively disabled
+Stable state that ignores incoming data frames and is not used to
+forward data frames
+Interim state without MAC learning and without forwarding
+Interim state with MAC learning and without forwarding
+Stable state that allows MAC learning and forwarding of data
+STP State
+Disabled
+Blocking
+Listening
+Learning
+Forward-
+RSTp
+State
+Discard-
+Discard-
+Not used
+Learning
+Forward</p>
+<ul>
+<li>
+<p>RSTP switches tell each other (using messages) that the topology has changed.</p>
+</li>
+<li>
+<p>Those messages also direct neighboring switches to flush the contents of their MAC tables in a way that removes all the potentially loop-causing entries, without a wait.</p>
+</li>
+<li>
+<p>RSTP backup port role creates a way for RSTP to quickly replace a switch’s designated port on some LAN.</p>
+</li>
+</ul>
+<p>RSTP Port Types</p>
+<ul>
+<li>several links between two switches. RSTP considers these links to be point-to-point links and the ports connected to them to be point-to-point ports</li>
+</ul>
+<p>Point-to-point
+port
+SWI
+SW3
+Point-to-point
+Edge Port
+Point-to-point
+Port
+SW2
+swa
+Shared
+Port
+Hub</p>
+<ul>
+<li>
+<p>Ports that instead connect to a single endpoint device at the edge of the network, like a PC or server, are called point-to-point edge ports, or simply edge ports.</p>
+</li>
+<li>
+<p>&ldquo;shared&rdquo; to describe ports connected to a hub.</p>
+</li>
+<li>
+<p>hubs also force the attached switch port to use half-duplex logic. RSTP assumes that all half-duplex ports may be connected to hubs, treating ports that use half duplex as shared ports.</p>
+</li>
+<li>
+<p>RSTP converges more slowly on shared ports as compared to all point-to-point ports.</p>
+</li>
+</ul>
+<p>Optional STP Features</p>
+<h2 id="etherchannel">Etherchannel</h2>
+<ul>
+<li>The switches treat the EtherChannel as a single interface with regard to STP.</li>
+</ul>
+<p>Layer 2 EtherChannels combine links that switches use as switch ports, with the switches using Layer 2 switching logic to forward and receive Ethernet frames over the EtherChannels. Layer 3 EtherChannels also combine links, but the switches use Layer 3 routing logic to forward packets over the EtherChannels.</p>
+<p>PortFast</p>
+<p>PortFast</p>
+<ul>
+<li>
+<p>allows a switch to immediately transition from blocking to forwarding, bypassing listening and learning states.</p>
+</li>
+<li>
+<p>only ports on which you can safely enable PortFast are ports on which you know that no bridges, switches, or other STP-speaking devices are connected.</p>
+</li>
+<li>
+<p>Cisco switches enable RSTP point-to-point edge ports by enabling PortFast on the port.</p>
+</li>
+</ul>
+<h2 id="bpdu-guard">BPDU Guard</h2>
+<p>An attacker could connect a switch to a port with a low STP/RSTP priority value. And make itself the root switch. The new STP/RSTP topology could have worse performance than the desired topology.</p>
+<ul>
+<li>
+<p>The attacker could plug into multiple ports, into multiple switches, become root, and actually forward much of the traffic in the LAN. Without the networking staff realizing it, the attacker could use a LAN analyzer to copy large numbers of data frames sent through the LAN.</p>
+</li>
+<li>
+<p>Users could innocently harm the LAN when they buy and connect an inexpensive consumer LAN switch (one that does not use STP/RSTP). Such a switch, without any STP/RSTP function, would not choose to block any ports and could cause a loop.</p>
+</li>
+<li>
+<p>Cisco BPDU Guard feature helps defeat these kinds of problems by disabling a port if any BPDUs are received on the port. So, this feature is particularly useful on ports that should be used only as an access port and never connected to another switch.</p>
+</li>
+<li>
+<p>In addition, the BPDU Guard feature helps prevent problems with PortFast. PortFast should be enabled only on access ports that connect to user devices, not to other LAN switches. Using BPDU Guard on these same ports makes sense because if another switch connects to such a port, the local switch can disable the port before a loop is created.</p>
+</li>
+</ul>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/spanning_tree_protocol_concepts/" class="active"><a class="padding" href="/networking/spanning_tree_protocol_concepts/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/spanning_tree_protocol_concepts/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920803" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920803" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920803" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920803" defer></script>
+    <script src="/js/js-yaml.min.js?1716920803" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920803" defer></script>
+  </body>
+</html>

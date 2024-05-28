@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 1. Introduction to TCP/IP Transport and Applications
+This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.5 Compare TCP to UDP
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS in the network
+TCP/IP Layer 4 Protocols: TCP and UDP
+TCP provides retransmission (error recovery) and TCP helps to avoid congestion (flow control), UDP needs fewer bytes in its header (less overhead) UDP software does not slow down data transfer TCP can purposefully slow down data transfer Voice over IP (VoIP) and video over IP, do not need error recovery, so they use UDP UDP Supports:">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 1. Introduction to TCP/IP Transport and Applications
+This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.5 Compare TCP to UDP
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS in the network
+TCP/IP Layer 4 Protocols: TCP and UDP
+TCP provides retransmission (error recovery) and TCP helps to avoid congestion (flow control), UDP needs fewer bytes in its header (less overhead) UDP software does not slow down data transfer TCP can purposefully slow down data transfer Voice over IP (VoIP) and video over IP, do not need error recovery, so they use UDP UDP Supports:">
+    <meta property="og:url" content="http://perfectdarkmode.com/networking/tcp_ip_transport_and_applications/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 1. Introduction to TCP/IP Transport and Applications
+This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.5 Compare TCP to UDP
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS in the network
+TCP/IP Layer 4 Protocols: TCP and UDP
+TCP provides retransmission (error recovery) and TCP helps to avoid congestion (flow control), UDP needs fewer bytes in its header (less overhead) UDP software does not slow down data transfer TCP can purposefully slow down data transfer Voice over IP (VoIP) and video over IP, do not need error recovery, so they use UDP UDP Supports:">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Networking">
+    <meta itemprop="description" content="Chapter 1. Introduction to TCP/IP Transport and Applications
+This chapter covers the following exam topics:
+1.0 Network Fundamentals
+1.5 Compare TCP to UDP
+4.0 IP Services
+4.3 Explain the role of DHCP and DNS in the network
+TCP/IP Layer 4 Protocols: TCP and UDP
+TCP provides retransmission (error recovery) and TCP helps to avoid congestion (flow control), UDP needs fewer bytes in its header (less overhead) UDP software does not slow down data transfer TCP can purposefully slow down data transfer Voice over IP (VoIP) and video over IP, do not need error recovery, so they use UDP UDP Supports:">
+    <meta itemprop="wordCount" content="1027">
+    <title></title>
+    <link href="/images/favicon.png?1716920802" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1716920803" rel="stylesheet">
+    <link href="/css/auto-complete.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1716920803" rel="stylesheet">
+    <link href="/css/fonts.css?1716920803" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1716920803" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1716920803" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1716920803" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1716920803" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1716920803" rel="stylesheet">
+    <link href="/css/print.css?1716920803" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1716920803"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/networking/tcp_ip_transport_and_applications/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>Chapter 1. Introduction to TCP/IP Transport and Applications</p>
+<p>This chapter covers the following exam topics:</p>
+<p>1.0 Network Fundamentals</p>
+<p>1.5 Compare TCP to UDP</p>
+<p>4.0 IP Services</p>
+<p>4.3 Explain the role of DHCP and DNS in the network</p>
+<p>TCP/IP Layer 4 Protocols: TCP and UDP</p>
+<ul>
+<li>TCP provides retransmission (error recovery) and</li>
+<li>TCP helps to avoid congestion (flow control),</li>
+<li>UDP needs fewer bytes in its header (less overhead)</li>
+<li>UDP software does not slow down data transfer</li>
+<li>TCP can purposefully slow down data transfer</li>
+<li>Voice over IP (VoIP) and video over IP, do not need error recovery, so they use UDP</li>
+</ul>
+<p>UDP Supports:</p>
+<ul>
+<li>Multiplexing using ports</li>
+</ul>
+<p>TCP Supports:</p>
+<ul>
+<li>
+<p>Multiplexing using ports</p>
+</li>
+<li>
+<p>Error recovery (reliability)</p>
+</li>
+<li>
+<p>numbering and acknowledging data with sequence and acknowledgment header fields</p>
+</li>
+<li>
+<p>Flow control using windowing</p>
+</li>
+<li>
+<p>use window sizes to protect buffer space</p>
+</li>
+<li>
+<p>Connection establishment and termination</p>
+</li>
+<li>
+<p>initialize port numbers and sequence and acknowledgment fields</p>
+</li>
+<li>
+<p>Ordered data transfer and segmentation</p>
+</li>
+</ul>
+<p>Transmission Control Protocol</p>
+<ul>
+<li>
+<p>TCP header is 20 bytes (without options)</p>
+</li>
+<li>
+<p>source port/ destination port</p>
+</li>
+<li>
+<p>Sequence Number</p>
+</li>
+<li>
+<p>Acknowledgement Number</p>
+</li>
+<li>
+<p>Offset, Reserved, Flag bits, Window</p>
+</li>
+<li>
+<p>Checksum, Urgent</p>
+</li>
+</ul>
+<p>*TCP segment, Layer 4 PDU, or L4PDU</p>
+<p>Multiplexing</p>
+<p>example</p>
+<p>All open on one computer:</p>
+<p>Port 80 Web Server</p>
+<p>Port 800 Ad Server</p>
+<p>Port 9876 Wire Application</p>
+<p>Socket</p>
+<ul>
+<li>
+<p>Includes IP address, transport protocol, and port number</p>
+</li>
+<li>
+<p>(10.1.1.2, TCP, port 80)</p>
+</li>
+</ul>
+<p>Well Known (System) Ports:</p>
+<ul>
+<li>0 to 1023</li>
+</ul>
+<p>User (Registered) Ports:</p>
+<ul>
+<li>1024 to 49151</li>
+</ul>
+<p>Ephemeral (Dynamic, Private) Ports:</p>
+<ul>
+<li>
+<p>49152 to 65535,</p>
+</li>
+<li>
+<p>not assigned</p>
+</li>
+<li>
+<p>Servers use well-known ports (or user ports), whereas clients use dynamic ports</p>
+</li>
+<li>
+<p>uses the same port number for all connections. For example,</p>
+</li>
+<li>
+<p>web server with 100 clients would have only one socket (one port number)</p>
+</li>
+<li>
+<p>server looks at source port of received TCP segments.</p>
+</li>
+</ul>
+<p>Popular TCP/IP Applications</p>
+<p>Simple Network Management Protocol (SNMP)</p>
+<ul>
+<li>query, compile, store, and display information about a network’s operation</li>
+<li>Cisco Prime software</li>
+</ul>
+<p>FTP/ TFTP</p>
+<ul>
+<li>FTP allows many more features</li>
+<li>TFTPis very simple, good tools for embedded parts of networking devices.</li>
+</ul>
+<p>SMTP/ POP3</p>
+<ul>
+<li>Simple Mail Transfer Protocol (SMTP) and Post Office Protocol version 3 (POP3)</li>
+<li>both used for transferring mail (TCP).</li>
+</ul>
+<p>Port numbers and protocols</p>
+<ul>
+<li>FTP Data TCP 20</li>
+<li>FTP Control TCP 21</li>
+<li>SSH TCP 22</li>
+<li>Telnet TCP 23</li>
+<li>SMTP TCP 25</li>
+<li>DNS UDP/TCP 53</li>
+<li>DHCP Server UDP 67</li>
+<li>DHCP Client UDP 68</li>
+<li>TFTP UDP 69</li>
+<li>HTTP TCP 80</li>
+<li>POP2 TCP 110</li>
+<li>SNMP UDP 161</li>
+<li>SSL TCP 443</li>
+<li>Syslog UDP 514</li>
+</ul>
+<p>Connection Establishment and Termination</p>
+<p>TCP connection establishment (3 way handshake) occurs 1st</p>
+<ul>
+<li>
+<p>SYN, DPORT=80, SPORT=49145</p>
+</li>
+<li>
+<p>SYN ACK , DPORT= 49145, SPORT=80</p>
+</li>
+<li>
+<p>ACK DPORT=80, SPORT=49145</p>
+</li>
+<li>
+<p>initializing Sequence and Acknowledgment fields</p>
+</li>
+<li>
+<p>agreeing on the port numbers</p>
+</li>
+<li>
+<p>2 bits inside the flag fields of the TCP header. Called the SYN and ACK flags</p>
+</li>
+</ul>
+<p>TCP connection termination. (four-way)</p>
+<p>- uses an additional flag, called the FIN bit</p>
+<ul>
+<li>ACK, FIN &gt;</li>
+<li>&lt; ACK</li>
+<li>ACK, FIN &lt;</li>
+<li>&lt; ACK</li>
+</ul>
+<p>Error Recovery and Reliability</p>
+<ul>
+<li>
+<p>reliability in both directions</p>
+</li>
+<li>
+<p>Sequence Number field of one direction and Acknowledgment field in the other direction</p>
+</li>
+<li>
+<p>1000 bytes, Seq = 1000 &gt;</p>
+</li>
+<li>
+<p>1000 bytes, Seq = 2000 &gt;</p>
+</li>
+<li>
+<p>1000 bytes, Seq = 3000 &gt;</p>
+</li>
+<li>
+<p>&lt; no data, ACK = 4000</p>
+</li>
+<li>
+<p>received all data with sequence numbers up through one less than 4000</p>
+</li>
+<li>
+<p>ready to receive your byte 4000 next.</p>
+</li>
+<li>
+<p>ack by listing the next expected byte (forward acknowledgment)</p>
+</li>
+<li>
+<p>sequence number field identifies the data (sender)</p>
+</li>
+<li>
+<p>forward acknowledgments acknowledge the data (receiver)</p>
+</li>
+<li>
+<p>Sequence and Acknowledgment fields let the receiving host can notice lost data</p>
+</li>
+<li>
+<p>ask the sending host to resend</p>
+</li>
+<li>
+<p>acknowledge that the re-sent data arrived</p>
+</li>
+<li>
+<p>1000 bytes, SEQ 1000 &gt;</p>
+</li>
+<li>
+<p>1000 bytes, SEQ 2000 X &gt;</p>
+</li>
+<li>
+<p>1000 bytes, SEQ 3000 &gt;</p>
+</li>
+<li>
+<p>&lt; no data, ACK = 2000</p>
+</li>
+<li>
+<p>(received 1000 - 1999 and 3000 - 3999, asking for 2000)</p>
+</li>
+<li>
+<p>1000 bytes, SEQ 2000 &gt;</p>
+</li>
+<li>
+<p>&lt; no data, ACK 4000</p>
+</li>
+<li>
+<p>Retransmission timer</p>
+</li>
+<li>
+<p>Sender may wait a few moments to make sure no other acknowledgments arrive</p>
+</li>
+</ul>
+<p>Flow Control Using Windowing</p>
+<p>Sliding window (dynamic window</p>
+<ul>
+<li>
+<p>Receiver slides the window size up and down</p>
+</li>
+<li>
+<p>&lt; ACK=1000, Window=3000</p>
+</li>
+<li>
+<p>SEQ=1000, SEQ=2000, SEQ=3000 &gt;</p>
+</li>
+<li>
+<p>&lt; ACK=4000, Window=4000</p>
+</li>
+</ul>
+<p>User Datagram Protocol</p>
+<ul>
+<li>
+<p>connectionless</p>
+</li>
+<li>
+<p>no reliability,</p>
+</li>
+<li>
+<p>no windowing,</p>
+</li>
+<li>
+<p>no reordering of the received data, and</p>
+</li>
+<li>
+<p>no segmentation of large chunks of data into the right size for transmission</p>
+</li>
+<li>
+<p>provides data transfer and multiplexing using port numbers</p>
+</li>
+<li>
+<p>Less overhead and processing than TCP.</p>
+</li>
+<li>
+<p>no reordering or recovery</p>
+</li>
+<li>
+<p>DNS requests use UDP, user will retry an operation if the DNS resolution fails</p>
+</li>
+<li>
+<p>Network File System (NFS), a remote file system application, performs recovery with application layer code, so UDP features are acceptable to NFS.</p>
+</li>
+<li>
+<p>8 byte header</p>
+</li>
+<li>
+<p>Source port, Destination Port</p>
+</li>
+<li>
+<p>Length, Checksum</p>
+</li>
+</ul>
+<p>TCP/IP Applications</p>
+<p>Uniform Resource Identifiers (URI)</p>
+<ul>
+<li>
+<p>clicking a link and typing a URI—refer to a URI</p>
+</li>
+<li>
+<p>referred to as web address or  Universal (uniform) Resource Locator [URL]</p>
+</li>
+<li>
+<p>three key components</p>
+</li>
+<li>
+<p>before the :// identifies the protocol</p>
+</li>
+<li>
+<p>between the // and / identifies the server by name</p>
+</li>
+<li>
+<p>after the / identifies the web page.</p>
+</li>
+<li>
+<p>http:// (Scheme)</p>
+</li>
+<li>
+<p><a href="http://www.certskills.com" rel="external" target="_blank">www.certskills.com</a> (Authority)</p>
+</li>
+<li>
+<p>/blog (path)</p>
+</li>
+</ul>
+<p>DNS</p>
+<ul>
+<li>
+<p>&lt; Name Resolution Request (IP Header, UDP Header, DNS Request)</p>
+</li>
+<li>
+<p>Name resolution Reply (Ip Header, UDP Header, DNS Request (IP address) &gt;</p>
+</li>
+<li>
+<p>&lt; TCP connection to requested web server</p>
+</li>
+<li>
+<p>DNS requests can be cached by hosts and servers</p>
+</li>
+<li>
+<p>Local DNS may need to ask for help</p>
+</li>
+<li>
+<p>The enterprise DNS acts as a recursive DNS server</p>
+</li>
+<li>
+<p>Sends repeated DNS messages to find the authoritative DNS server.</p>
+</li>
+<li>
+<p>Recursive DNS lookup</p>
+</li>
+<li>
+<p>host &gt; Enterprise DNS &gt;</p>
+</li>
+<li>
+<p>Root DNS</p>
+</li>
+<li>
+<p>.com TLD DNS</p>
+</li>
+<li>
+<p>Authoritative cisco.com DNS</p>
+</li>
+</ul>
+<p>Transferring Files with HTTP</p>
+<ul>
+<li>
+<p>HTTP GET request lists file it needs</p>
+</li>
+<li>
+<p>HTTP GET response from server with a return code of 200 (meaning OK) and file’s contents.</p>
+</li>
+<li>
+<p>Server may issue a return code of 404, (file not found)</p>
+</li>
+<li>
+<p>Web pages consist of multiple files, called objects</p>
+</li>
+<li>
+<p>Objects are stored as different files on the web server</p>
+</li>
+<li>
+<p>Web browser gets the first file which can include references to other URIs that the browser also requests</p>
+</li>
+<li>
+<p>&lt; HTTP GET /go/ccna</p>
+</li>
+<li>
+<p>HTTP OK data &gt;</p>
+</li>
+<li>
+<p>&lt; HTTP GET /graphics/logo1.gif</p>
+</li>
+<li>
+<p>HTTP OK data &gt;</p>
+</li>
+<li>
+<p>&lt; HTTP GET /graphics/ad1.gif</p>
+</li>
+<li>
+<p>HTTP OK data &gt;</p>
+</li>
+<li>
+<p>Flow over one or more TCP connection between the client and the server.</p>
+</li>
+</ul>
+<p>Identifying the Correct Receiving Application</p>
+<ul>
+<li>tracks which port opened which request</li>
+</ul>
+<p>Fields that identify next header</p>
+<p>&lt; Ethernet (Type) (0x0800)</p>
+<p>&lt; IPv4 (Protocol) (6)</p>
+<p>&lt; TCP (Destination port) (49124)</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1716920803" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1716920803" defer></script>
+        <script src="/js/search.js?1716920803" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class=""><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class="parent "><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/tcp_ip_transport_and_applications/" class="active"><a class="padding" href="/networking/tcp_ip_transport_and_applications/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/networking/tcp_ip_transport_and_applications/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1716920804" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1716920804" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1716920804" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1716920804" defer></script>
+    <script src="/js/js-yaml.min.js?1716920804" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1716920804" defer></script>
+  </body>
+</html>
