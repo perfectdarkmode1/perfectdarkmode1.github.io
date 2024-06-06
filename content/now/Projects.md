@@ -112,3 +112,5 @@ Hugo
 [Hugo: Add Table of Contents Anywhere in Markdown File (ruddra.com)](https://ruddra.com/hugo-add-toc-anywhere/)
 
 BTL1 and CCD certifications (security)
+
+How to change google snippet in hugo
