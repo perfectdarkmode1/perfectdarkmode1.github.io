@@ -1,6 +1,7 @@
-# RedHat (RHEL9) Graphical Environment and Filesystem
+Looking to get started using Fedora or Red Hat operating systems?
 
-## Wayland - Linux Graphical Environment in RHEL
+This guide with get you started with the RHEL Graphical environment, file system, and essential commands to get started using Fedora, Red Hat, or other RHEL based systems. 
+## RedHat (RHEL9) Graphical Environment (Wayland)
 
 Redhat runs a graphical environment called Wayland. This is the foundation for running GUI apps. Wayland is a client/server display protocol. Which just means that the user (the client) requests a resource and the display manager (the server) serves those resources. 
 
@@ -15,7 +16,7 @@ The standard for the Linux filesystem is the Filesystem Hierarchy Standard (FHS)
 
 The directory structure starts at the root. Which is notated by a "/". The top levels of the directory can be viewed by running the `ls` command on the root of the directory tree.
 
-`ls /`
+Size of the root file system is automatically determined by the installer program based on the available disk space when you select the default partitioning (it may be altered). Here is a listing of the contents of /:
 
 ```
 $ ls /
@@ -30,102 +31,120 @@ There are three major categories of file systems. They are:
 2. network-based
 3. memory-based
 
-Disk-based files ystems are physical media such as a hard drive or a USB flash drive and store information persistently. The root and boot file systems and both disk-based and created automatically when you select the default partitioning. 
+**Disk-based** files systems are physical media such as a hard drive or a USB flash drive and store information persistently. The root and boot file systems and both disk-based and created automatically when you select the default partitioning. 
 
-Network Based filesystems are disk-based file systems that are shared over the network for remote access. (Also stored persistently)
+**Network-Based** file systems are disk-based file systems that are shared over the network for remote access. (Also stored persistently)
 
-Memory Based filesystems are virtual. And are created automatically at system startup and destroyed when the system goes down.
+**Memory-Based** filesystems are virtual. And are created automatically at system startup and destroyed when the system goes down.
 
-## Root File System (/), Disk-Based
 
-Size of the root file system is automatically determined by the installer program based on the available disk space when you select the default partitioning (it may be altered)
+### Key Directories in /
 
-### Key Directories:
+#### /etc (extended text configuration)
+This directory contains system configuration files for systemd, LVM, and user shell startup template files.
 
-#### /etc 
-- etcetera (extended text configuration)
-- system configuration files
-- common subdirectories
-	systemd
-	sysconfig
-	lvm
-	skel
--   comprise configuration files for systemd
--   most system services
--   Logical Volume Manager
--   per-user shell startup template files
+```
+david@fedora:~/Documents/perfectdarkmode/perfectdarkmode1.github.io$ ls /etc
+abrt                    dhcp                        gshadow-       locale.conf               openldap            request-key.d          sysctl.conf
+adjtime                 DIR_COLORS                  gss            localtime                 opensc.conf         resolv.conf            sysctl.d
+aliases                 DIR_COLORS.lightbgcolor     gssproxy       login.defs                opensc-x86_64.conf  rpc                    systemd
+alsa                    dleyna-server-service.conf  host.conf      logrotate.conf            openvpn             rpm                    system-release
+alternatives            dnf                         hostname       logrotate.d               opt                 rpmdevtools            system-release-cpe
+anaconda                dnsmasq.conf                hosts          lvm                       os-release          rpmlint                tcsd.conf
+anthy-unicode.conf      dnsmasq.d                   hp             machine-id                ostree              rsyncd.conf            terminfo
+apk                     dracut.conf                 httpd          magic                     PackageKit          rwtab.d                thermald
+appstream.conf          dracut.conf.d               idmapd.conf    mailcap                   pam.d               rygel.conf             timidity++.cfg
+asound.conf             egl                         ImageMagick-7  makedumpfile.conf.sample  paperspecs          samba                  tmpfiles.d
+audit                   environment                 init.d         man_db.conf               passwd              sane.d                 tpm2-tss
+authselect              ethertypes                  inittab        mcelog                    passwd-             sasl2                  Trolltech.conf
+avahi                   exports                     inputrc        mdevctl.d                 passwdqc.conf       security               trusted-key.key
+bash_completion.d       exports.d                   ipp-usb        mercurial                 pinforc             selinux                ts.conf
+bashrc                  favicon.png                 iproute2       mime.types                pkcs11              services               udev
+bindresvport.blacklist  fedora-release              iscsi          mke2fs.conf               pkgconfig           sestatus.conf          udisks2
+binfmt.d                filesystems                 issue          modprobe.d                pki                 sgml                   unbound
+bluetooth               firefox                     issue.d        modules-load.d            plymouth            shadow                 updatedb.conf
+brlapi.key              firewalld                   issue.net      mono                      pm                  shadow-                UPower
+brltty                  flatpak                     java           motd                      polkit-1            shells                 uresourced.conf
+brltty.conf             fonts                       jvm            motd.d                    popt.d              skel                   usb_modeswitch.conf
+ceph                    fprintd.conf                jvm-common     mtab                      ppp                 sos                    vconsole.conf
+chkconfig.d             fstab                       kdump          mtools.conf               printcap            speech-dispatcher      vdpau_wrapper.cfg
+chromium                fuse.conf                   kdump.conf     my.cnf                    profile             ssh                    vimrc
+chrony.conf             fwupd                       kernel         my.cnf.d                  profile.d           ssl                    virc
+cifs-utils              gcrypt                      keys           nanorc                    protocols           sssd                   vmware-tools
+containers              gdbinit                     keyutils       ndctl                     pulse               statetab.d             vpl
+credstore               gdbinit.d                   krb5.conf      ndctl.conf.d              qemu                subgid                 vpnc
+credstore.encrypted     gdm                         krb5.conf.d    netconfig                 qemu-ga             subgid-                vulkan
+crypto-policies         geoclue                     ld.so.cache    NetworkManager            rc0.d               subuid                 wgetrc
+crypttab                glvnd                       ld.so.conf     networks                  rc1.d               subuid-                whois.conf
+csh.cshrc               gnupg                       ld.so.conf.d   nfs.conf                  rc2.d               subversion             wireplumber
+csh.login               GREP_COLORS                 libaudit.conf  nfsmount.conf             rc3.d               sudo.conf              wpa_supplicant
+cups                    groff                       libblockdev    nftables                  rc4.d               sudoers                X11
+cupshelpers             group                       libibverbs.d   nilfs_cleanerd.conf       rc5.d               sudoers.d              xattr.conf
+dbus-1                  group-                      libnl          npmrc                     rc6.d               swid                   xdg
+dconf                   grub2.cfg                   libreport      nsswitch.conf             rc.d                swtpm-localca.conf     xml
+debuginfod              grub2-efi.cfg               libssh         nvme                      reader.conf.d       swtpm-localca.options  yum.repos.d
+default                 grub.d                      libuser.conf   odbc.ini                  redhat-release      swtpm_setup.conf       zfs-fuse
+depmod.d                gshadow                     libvirt        odbcinst.ini              request-key.conf    sysconfig
+```
 
-/root :: default home directory for the root user
+As you can see, there is a lot of stuff here. 
 
-/mnt :: used to temporarily mount a file system
+#### /root
+This is the default home directory for the root user.
 
-#### Boot File System (/boot), Disk-Based 
+#### /mnt 
+/mnt is used to temporarily mount a file system.
 
-- Linux kernel
-- boot support files
-- boot configuration files
-- size determined by the installer program based on the available disk space when you select the default partitioning
-- may be set to a different size during or after the installation
+#### /boot (Disk-Based)
+This directory contains the Linux Kernel, as well as boot support and configuration files.
 
-#### The Home Directory (/home) 
+The size of /boot is determined by the installer program based on the available disk space when you select the default partitioning. It may be set to a different size during or after the installation.
 
-- store user home directories and other user contents.
+#### /home
+This is used to store user home directories and other user contents.
 
-#### The Optional Directory (/opt) 
+#### /opt (Optional)
+This directory holds additional software that may need to be installed on the system. A sub directory is created for each installed software.
 
-- hold additional software that may need to be installed on the system
-- subdirectory is created for each installed software.
-
-#### UNIX System Resources Directory (/usr)
-
-- most of the system files.
+#### /usr (UNIX System Resources)
+Holds most of the system files such as: 
 
 ##### /usr/bin
-- binary directory
-- crucial user executable commands.
+Binary directory for user executable commands
 
 ##### /usr/sbin
-- Most commands are required at system boot,
-- system binary
-- crucial system administration commands not intended for execution by normal users (although they can still run a few of them).
-- not included in the default search path for normal users
+System binaries required at boot and system administration commands not intended for execution by normal users. This directory is not included in the default search path for normal users.
 
 ##### /usr/lib and /usr/lib64
-- shared library routines
-- required by many commands/programs located in /usr/bin and /usr/sbin
-- used by kernel and other applications and programs for their successful installation and operation
-- /usr/lib directory also stores system initialization and service management programs
-- /usr/lib64 contains 64-bit shared library routines.
+Contain shared library routines required by many commands/programs located in /usr/bin and /usr/sbin. These are used by kernel and other applications and programs for their successful installation and operation.
+
+/usr/lib directory also stores system initialization and service management programs. /usr/lib64 contains 64-bit shared library routines.
 
 ##### /usr/include
-- header files for C language.
+Contains header files for the C programming language.
 
 ##### /usr/local:
-- system administrator repository for storing commands and tools
-- commands not generally included with the original Linux distribution.
-	/usr/local/bin
-		executables
-	/usr/local/etc
-		configuration files
-	/usr/local/lib and /usr/local/lib64
-		holds library routines.
-	/usr/share:
-		directory location for manual pages, documentation, sample templates, configuration files, etc.
-		may be shared with other Linux platforms.
+This is a system administrator repository for storing commands and tools. These commands not generally included with the original Linux distribution.
+
+
+| Directory                           | Contains                                                           |
+| ----------------------------------- | ------------------------------------------------------------------ |
+| /usr/local/bin                      | ecutables                                                          |
+| /usr/local/etc                      | configuration files                                                |
+| /usr/local/lib and /usr/local/lib64 | library routines                                                   |
+| /usr/share                          | manual pages, documentation, sample templates, configuration files |
 
 ##### /usr/src:
-- used to store source code.
+This directory is used to store source code.
 
 #### Variable Directory (/var)
 
-- data that frequently changes while the system is operational.
-- log, status, spool, lock, and other dynamic data.
+For data that frequently changes while the system is operational. Such as log, status, spool, lock, etc. 
 
-common subdirectories
+common sub directories in /var: 
 
 ##### /var/log
-- Most system log files
-- system logs, boot logs, user logs, failed user logs, installation logs, cron logs, mail logs, etc.
+Contains most system log files. Such as boot logs, user logs, failed user logs, installation logs, cron logs, mail logs, etc.
 
 ##### /var/opt
 
