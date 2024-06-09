@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 13 \
+Storage Management \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Master Boot Record vs. GUID Partition Table
+\
+Identify and understand disk partitions
+\
+The concept of thin provisioning, and its benefits
+\
+Create and delete partition on MBR disk
+\
+Create and delete partition on GPT disk
+\
+Describe Logical Volume Manager and its components">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 13 \
+Storage Management \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Master Boot Record vs. GUID Partition Table
+\
+Identify and understand disk partitions
+\
+The concept of thin provisioning, and its benefits
+\
+Create and delete partition on MBR disk
+\
+Create and delete partition on GPT disk
+\
+Describe Logical Volume Manager and its components">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/13_storage_management/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 13 \
+Storage Management \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Master Boot Record vs. GUID Partition Table
+\
+Identify and understand disk partitions
+\
+The concept of thin provisioning, and its benefits
+\
+Create and delete partition on MBR disk
+\
+Create and delete partition on GPT disk
+\
+Describe Logical Volume Manager and its components">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Chapter 13 \
+Storage Management \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Master Boot Record vs. GUID Partition Table
+\
+Identify and understand disk partitions
+\
+The concept of thin provisioning, and its benefits
+\
+Create and delete partition on MBR disk
+\
+Create and delete partition on GPT disk
+\
+Describe Logical Volume Manager and its components">
+    <meta itemprop="wordCount" content="8871">
+    <title></title>
+    <link href="/images/favicon.png?1717964147" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1717964147" rel="stylesheet">
+    <link href="/css/auto-complete.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1717964147" rel="stylesheet">
+    <link href="/css/fonts.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1717964147" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1717964147" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1717964147" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1717964147" rel="stylesheet">
+    <link href="/css/print.css?1717964147" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1717964147"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/13_storage_management/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#chapter-13">Chapter 13</a>
+      <ul>
+        <li><a href="#storage-management">Storage Management</a></li>
+      </ul>
+    </li>
+    <li><a href="#storage-management-overview">Storage Management Overview</a></li>
+    <li><a href="#master-boot-record-mbr">Master Boot Record (MBR)</a></li>
+    <li><a href="#guid-partition-table-gpt">GUID Partition Table (GPT)</a></li>
+    <li><a href="#disk-partitions">Disk Partitions</a></li>
+    <li><a href="#storage-management-tools">Storage Management Tools</a></li>
+    <li><a href="#thin-provisioning">Thin Provisioning</a></li>
+    <li><a href="#adding-storage-for-practice">Adding Storage for Practice</a></li>
+    <li><a href="#exercise-13-1-add-required-storage-to-server2">Exercise 13-1: Add Required Storage to server2</a></li>
+    <li><a href="#mbr-storage-management-with-parted">MBR Storage Management with parted</a></li>
+    <li><a href="#exercise-13-2-create-an-mbr-partition">Exercise 13-2: Create an MBR Partition</a></li>
+    <li><a href="#exercise-13-3-delete-an-mbr-partition">Exercise 13-3: Delete an MBR Partition</a></li>
+    <li><a href="#gpt-storage-management-with-gdisk">GPT Storage Management with gdisk</a></li>
+    <li><a href="#exercise-13-4-create-a-gpt-partition">Exercise 13-4: Create a GPT Partition</a></li>
+    <li><a href="#exercise-13-5-delete-a-gpt-partition">Exercise 13-5: Delete a GPT Partition</a></li>
+    <li><a href="#logical-volume-manager-lvm">Logical Volume Manager (LVM)</a></li>
+    <li><a href="#physical-volume">Physical Volume</a></li>
+    <li><a href="#volume-group">Volume Group</a></li>
+    <li><a href="#physical-extent">Physical Extent</a></li>
+    <li><a href="#logical-volume">Logical Volume</a></li>
+    <li><a href="#logical-extent">Logical Extent</a></li>
+    <li><a href="#lvm-operations-and-commands">LVM Operations and Commands</a></li>
+    <li><a href="#exercise-13-6-create-physical-volume-and-volume-group">Exercise 13-6: Create Physical Volume and Volume Group</a></li>
+    <li><a href="#exercise-13-7-create-logical-volumes">Exercise 13-7: Create Logical Volumes</a></li>
+    <li><a href="#exercise-13-8-extend-a-volume-group-and-a-logical-volume">Exercise 13-8: Extend a Volume Group and a Logical Volume</a></li>
+    <li><a href="#exercise-13-9-rename-reduce-extend-and-remove-logical-volumes">Exercise 13-9: Rename, Reduce, Extend, and Remove Logical Volumes</a></li>
+    <li><a href="#exercise-13-10-reduce-and-remove-a-volume-group">Exercise 13-10: Reduce and Remove a Volume Group</a></li>
+    <li><a href="#exercise-13-11-uninitialize-physical-volumes">Exercise 13-11: Uninitialize Physical Volumes</a></li>
+    <li><a href="#storage-optimization-with-virtual-data-optimizer-vdo">Storage Optimization with Virtual Data Optimizer (VDO)</a></li>
+    <li><a href="#how-vdo-conserves-storage">How VDO Conserves Storage</a></li>
+    <li><a href="#vdo-integration-with-lvm">VDO Integration with LVM</a></li>
+    <li><a href="#vdo-components">VDO Components</a></li>
+    <li><a href="#exercise-13-12-create-an-lvm-vdo-volume">Exercise 13-12: Create an LVM VDO Volume</a></li>
+    <li><a href="#exercise-13-13-remove-a-volume-group-and-uninitialize-physical-volume">Exercise 13-13: Remove a Volume Group and Uninitialize Physical Volume</a></li>
+    <li><a href="#chapter-summary">Chapter Summary</a></li>
+    <li><a href="#review-questions">Review Questions</a></li>
+    <li><a href="#answers-to-review-questions">Answers to Review Questions</a></li>
+    <li><a href="#do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</a></li>
+    <li><a href="#lab-13-1-create-and-remove-partitions-with-parted">Lab 13-1: Create and Remove Partitions with parted</a></li>
+    <li><a href="#lab-13-2-create-and-remove-partitions-with-gdisk">Lab 13-2: Create and Remove Partitions with gdisk</a></li>
+    <li><a href="#lab-13-3-create-volume-group-and-logical-volumes">Lab 13-3: Create Volume Group and Logical Volumes</a></li>
+    <li><a href="#lab-13-4-expand-volume-group-and-logical-volume">Lab 13-4: Expand Volume Group and Logical Volume</a></li>
+    <li><a href="#lab-13-5-add-a-vdo-logical-volume">Lab 13-5: Add a VDO Logical Volume</a></li>
+    <li><a href="#lab-13-6-reduce-and-remove-logical-volumes">Lab 13-6: Reduce and Remove Logical Volumes</a></li>
+    <li><a href="#lab-13-7-remove-volume-group-and-physical-volumes">Lab 13-7: Remove Volume Group and Physical Volumes</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h2 style="text-align: right" id="chapter-13">Chapter 13</h2>
+<p>\</p>
+<h3 class="style3" id="storage-management">Storage Management</h3>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;&rdquo;}
+:::</p>
+<p>\</p>
+<h4 id="this-chapter-describes-the-following-major-topics">This chapter describes the following major topics:</h4>
+<p>\</p>
+<p>Master Boot Record vs. GUID Partition Table</p>
+<p>\</p>
+<p>Identify and understand disk partitions</p>
+<p>\</p>
+<p>The concept of thin provisioning, and its benefits</p>
+<p>\</p>
+<p>Create and delete partition on MBR disk</p>
+<p>\</p>
+<p>Create and delete partition on GPT disk</p>
+<p>\</p>
+<p>Describe Logical Volume Manager and its components</p>
+<p>\</p>
+<p>Understand various Logical Volume Manager management operations</p>
+<p>\</p>
+<p>Know Logical Volume Manager administration commands</p>
+<p>\</p>
+<p>Overview of Virtual Data Optimizer and how it conserves storage</p>
+<p>\</p>
+<p>Create and confirm physical volumes, volume groups, LVM logical volumes,
+and VDO logical volumes</p>
+<p>\</p>
+<p>Rename, reduce, extend, and remove logical volumes</p>
+<p>\</p>
+<p>Extend, reduce, and remove volume groups</p>
+<p>\</p>
+<p>Remove physical volumes</p>
+<p>\</p>
+<h4 id="rhcsa-objectives">RHCSA Objectives:</h4>
+<p>\</p>
+<p>26. List, create, and delete partitions on MBR and GPT disks</p>
+<p>27. Create and remove physical volumes</p>
+<p>28. Assign physical volumes to volume groups</p>
+<p>29. Create and delete logical volumes</p>
+<p>31. Add new partitions and logical volumes, and swap to a system
+nondestructively (the swap portion of this objective is covered in
+Chapter 14 )</p>
+<p>35. Extend existing logical volumes (additional coverage on this
+objective is available in Chapter 14 )</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Data is stored on disks that are logically divided into partitions. A
+partition can exist on a portion of a disk, on an entire disk, or it may
+span multiple disks. Each partition is accessed and managed independent
+of other partitions and may contain a file system or swap space.
+Partitioning information is stored at special disk locations that the
+system references at boot time. RHEL offers a number of tools for
+partition management. Partitions created with a combination of most of
+these tools can coexist on a single disk.</p>
+<p>\</p>
+<p>Thin provisioning is a powerful feature that guarantees an efficient use
+of storage space by allocating only what is needed and by storing data
+at adjacent locations. Many storage management solutions such as those
+we discuss later in this chapter and in the next incorporate thin
+provisioning technology in their core configuration.</p>
+<p>\</p>
+<p>Virtual Data Optimizer capitalizes on thin provisioning, de-duplication,
+and compression technologies to conserve storage space, improve data
+throughput, and save money.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-7b949dd0ba5b4ccd65250c42bffe6a18" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZC2N5YSX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7b949dd0ba5b4ccd65250c42bffe6a18"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZC2N5YSX.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>The Logical Volume Manager solution sets up an abstraction layer between
+the operating system and the storage hardware. It utilizes virtual
+objects for storage pooling and allocation, and offers a slew of
+commands to carry out management operations.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0387.html}</p>
+<h2 class="style3" id="storage-management-overview">Storage Management Overview</h2>
+<p>\</p>
+<p>A disk in RHEL can be carved up into several partitions. This partition
+information is stored on the disk in a small region, which is read by
+the operating system at boot time. This region is referred to as the
+Master Boot Record (MBR) on the BIOS-based systems, and GUID Partition
+Table (GPT) on the UEFI-based systems. At system boot, the BIOS/UEFI
+scans all storage devices, detects the presence of MBR/GPT areas,
+identifies the boot disks, loads the bootloader program in memory from
+the default boot disk, executes the boot code to read the partition
+table and identify the /boot partition, loads the kernel in memory, and
+passes control over to it. Though MBR and GPT are designed for different
+PC firmware types, their job is essentially the same: to store disk
+partition information and the boot code.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0388.html}</p>
+<h2 class="style3" id="master-boot-record-mbr">Master Boot Record (MBR)</h2>
+<p>\</p>
+<p>The MBR resides on the first sector of the boot disk. MBR was the
+preferred choice for saving partition table information on x86-based
+computers. However, with the arrival of bigger and larger hard drives, a
+new firmware specification (UEFI) was introduced. MBR is still widely
+used, but its use is diminishing in favor of UEFI.</p>
+<p>\</p>
+<p>MBR allows the creation of three types of partition&mdash;primary, extended,
+and logical&mdash;on a single disk. Of these, only primary and logical can
+be used for data storage; the extended is a mere enclosure for holding
+the logical partitions and it is not meant for data storage. MBR
+supports the creation of up to four primary partitions numbered 1
+through 4 at a time. In case additional partitions are required, one of
+the primary partitions must be deleted and replaced with an extended
+partition to be able to add logical partitions (up to 11) within that
+extended partition. Numbering for logical partitions begins at 5. MBR
+supports a maximum of 14 usable partitions (3 primary and 11 logical) on
+a single disk.</p>
+<p>\</p>
+<p>MBR cannot address storage space beyond 2TB. This is due to its 32-bit
+nature and its 512-byte disk sector size. The MBR is non-redundant; the
+record it contains is not replicated, resulting in an unbootable system
+in the event of corruption. If your disk is smaller than 2TB and you
+don&rsquo;t intend to build more than 14 usable partitions, you can use MBR
+without issues. For more information on MBR, refer to Chapter 11 &ldquo;Boot
+Process, GRUB2, and the Linux Kernel&rdquo;.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0389.html}</p>
+<h2 class="style3" id="guid-partition-table-gpt">GUID Partition Table (GPT)</h2>
+<p>\</p>
+<p>With the increasing use of disks larger than 2TB on x86 computers, a new
+64-bit partitioning standard called Globally Unique Identifiers (GUID)
+Partition Table (GPT) was developed and integrated into the UEFI
+firmware. This new standard introduced plenty of enhancements, including
+the ability to construct up to 128 partitions (no concept of extended or
+logical partitions), utilize disks larger than 2TB, use 4KB sector size,
+and store a copy of the partition information before the end of the disk
+for redundancy.</p>
+<p>\</p>
+<p>Moreover, this standard allows a BIOS-based system to boot from a GPT
+disk using the bootloader program stored in a protective MBR at the
+first disk sector. In addition, the UEFI firmware also supports the
+secure boot feature, which only allows signed binaries to boot. For more
+information on UEFI and GPT, refer to Chapter 11 &ldquo;Boot Process, GRUB2,
+and the Linux Kernel&rdquo;.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0390.html}</p>
+<h2 class="style3" id="disk-partitions">Disk Partitions</h2>
+<p>\</p>
+<p>The space on a storage device can be sliced into partitions. Care must
+be taken when adding a new partition to elude data corruption with
+overlapping an extant partition or wasting storage by leaving unused
+space between adjacent partitions. On server1, the disk that was
+allocated at the time of installation is recognized as sda (s for SATA,
+SAS, or SCSI device) disk a, with the first partition identified as sda1
+and the second partition as sda2. Any subsequent disks added to the
+system will be known as sdb, sdc, sdd, and so on, and will use 1, 2, 3,
+etc. for partition numbering.</p>
+<p>\</p>
+<p>RHEL offers a command called lsblk to list disk and partition
+information. The following graphic illustrates the current storage
+status on server1:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-0c0aedc154c074f1c9cd69a99a3d8e2b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-U3XAWUUX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0c0aedc154c074f1c9cd69a99a3d8e2b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-U3XAWUUX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>It reveals the presence of one 20GB disk, sda, with two partitions: sda1
+and sda2. The first partition holds /boot, and the second one is an LVM
+object encapsulating root (17GB) and swap (2GB) logical volumes within
+it. Both sda1 and sda2 partitions occupy the entire disk capacity. The
+sr0 represents the ISO image mounted as an optical medium.</p>
+<p>\</p>
+<p>LVM is discussed at length later in this chapter.</p>
+<p>\</p>
+<p>There are additional tools such as fdisk and parted available that can
+be used to expose disk and partitioning information. Let&rsquo;s run fdisk
+with -l and see what it reveals:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a4c90c2156ef8374dc0f05bd56830193" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-MLI4LMNG.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4c90c2156ef8374dc0f05bd56830193"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-MLI4LMNG.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output depicts the size of sda in GBs, bytes, and sectors, the type
+of disk label (dos) the disk has, and the disk&rsquo;s geometry in the top
+block. The second block shows the two disk partitions: sda1 as the
+bootable partition marked with an asterisk (*) and sda2 as an LVM
+partition. It also exposes the starting and ending sector numbers, size
+in 1KB blocks, and type of each partition. The identifiers 83 and 8e are
+hexadecimal values for the partition types. The last two blocks are
+specific to the LVM logical volumes that exist within the sda2
+partition.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0391.html}</p>
+<h2 class="style3" id="storage-management-tools">Storage Management Tools</h2>
+<p>\</p>
+<p>RHEL offers numerous tools and toolsets for storage management, and they
+include parted, gdisk, and LVM. There are other native tools available
+in the OS, but their discussion is beyond the scope of this book.
+Partitions created with a combination of most of these tools and
+toolsets can coexist on the same disk.</p>
+<p>\</p>
+<p>parted is a simple tool that understands both MBR and GPT formats. gdisk
+is designed to support the GPT format only, and it may be used as a
+replacement of parted. LVM is a feature-rich logical volume management
+solution that gives flexibility in storage management.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0392.html}</p>
+<h2 class="style3" id="thin-provisioning">Thin Provisioning</h2>
+<p>\</p>
+<p>Thin provisioning technology allows for an economical allocation and
+utilization of storage space by moving arbitrary data blocks to
+contiguous locations, which results in empty block elimination. With
+thin provisioning support in LVM, you can create a thin pool of storage
+space and assign volumes much larger storage space than the physical
+capacity of the pool. Workloads begin consuming the actual allocated
+space for data writing. When a preset custom threshold (80%, for
+instance) on the actual consumption of the physical storage in the pool
+is reached, expand the pool dynamically by adding more physical storage
+to it. The volumes will automatically start exploiting the new space
+right away. The thin provisioning technique helps prevent spending more
+money upfront.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0393.html}</p>
+<h2 class="style3" id="adding-storage-for-practice">Adding Storage for Practice</h2>
+<p>\</p>
+<p>This and the next chapter have a considerable number of exercises that
+require block storage devices for practice. In Chapter 01 &ldquo;Local
+Installation&rdquo; under &ldquo;Lab Environment for Practice&rdquo;, we mentioned that
+server2 will have 4x250MB and 1x5GB virtual disks for storage exercises.
+We presume that server2 was built as part of Lab 1-1 and it is now
+available for use.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0394.html}</p>
+<h2 class="style3" id="exercise-13-1-add-required-storage-to-server2">Exercise 13-1: Add Required Storage to server2</h2>
+<p>\</p>
+<p>This exercise will add the required storage disks to server2 (RHEL9-VM2)
+using VirtualBox.</p>
+<p>\</p>
+<p>In this exercise, you will start VirtualBox and add 4x250MB and 1x5GB
+disks to server2 in preparation for exercises in this and the next
+chapter.</p>
+<p>\</p>
+<p>1. Start VirtualBox on your Windows/Mac computer and highlight the
+RHEL9-VM2 virtual machine that you created in Lab 1-1. See Figure 13-1.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-04284be230e80e30544ff2a1a8f96a35" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KEGS1BT1.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-04284be230e80e30544ff2a1a8f96a35"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KEGS1BT1.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-1 VirtualBox Manager | RHEL9-VM2 Selected</p>
+<p>\</p>
+<p>2. Click Settings at the top and then Storage on the window that pops
+up. Click on &ldquo;Controller: SATA&rdquo; to select it. Figure 13-2.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-eab45e5f157d075318124f76ae2ecad3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KWA12KXW.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eab45e5f157d075318124f76ae2ecad3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KWA12KXW.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-2 VirtualBox Manager | Add Storage</p>
+<p>\</p>
+<p>3. Click on the right-side icon next to &ldquo;Controller: SATA&rdquo; to add a
+hard disk and then click Create (on the Medium Selector screen). Figure
+13-3.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-c1fc811a7c0a7d582df7c712552453cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-Q6NZNE81.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c1fc811a7c0a7d582df7c712552453cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-Q6NZNE81.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-3 VirtualBox Manager | Medium Selector Screen</p>
+<p>\</p>
+<p>4. Follow this sequence to add a 250MB disk: Click Next on the next two
+screens to select the two defaults for the &ldquo;VDI (Virtualization Disk
+Image)&rdquo; and &ldquo;Dynamically allocated&rdquo; options. Adjust the size on the
+third screen to 250MB. Assign the disk a unique name and click Finish to
+complete the process. Figure 13-4.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-eaea007e41842ff234f3309ce5609814" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-DPO9QA8O.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eaea007e41842ff234f3309ce5609814"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-DPO9QA8O.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-4 VirtualBox Manager | Create a Disk</p>
+<p>\</p>
+<p>5. Repeat step 4 three more times to create additional disks of the
+same size.</p>
+<p>6. Repeat step 4 one time to create a disk of size 5GB.</p>
+<p>7. On the Medium Selector screen, the five new disks will appear under
+the Not Attached list of disks. Double-click on each one of them to add
+to RHEL9-VM2.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-05b90a119230ba88ee7f0445b52661fb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-I02OKCQR.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-05b90a119230ba88ee7f0445b52661fb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-I02OKCQR.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-5 VirtualBox Manager | 5 New Disks Created</p>
+<p>\</p>
+<p>8. The final list of disks should look similar to what is shown in
+Figure 13-6 after the addition of all five disks (RHEL9-VM2_1 to
+RHEL9-VM2_5). Disk names may vary.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-78129cb231d86aa7b0bb27612e720f65" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-38AAB6BK.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-78129cb231d86aa7b0bb27612e720f65"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-38AAB6BK.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-6 VirtualBox Manager | 5 New Disks Added</p>
+<p>\</p>
+<p>9. Click OK to return to the main VirtualBox interface.</p>
+<p>10. Power on RHEL9-VM2.</p>
+<p>11. When the server is booted up, log on as user1 and run the lsblk
+command to verify the new storage:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c755c09abe1f80d7e73e77600a3f68b2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-CYDQFW2E.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c755c09abe1f80d7e73e77600a3f68b2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-CYDQFW2E.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>12. The five new disks added to server2 are 250MB (sdb, sdc, sdd, and
+sde) and 5GB (sdf).</p>
+<p>\</p>
+<p>This concludes the exercise for storage addition to server2.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0395.html}</p>
+<h2 class="style3" id="mbr-storage-management-with-parted">MBR Storage Management with parted</h2>
+<p>\</p>
+<p>parted (partition editor) is a popular tool in RHEL that can be used to
+partition disks. This program may be run interactively or directly from
+the command prompt. It understands and supports both MBR and GPT
+schemes, and can be used to create up to 128 partitions on a single GPT
+disk. parted provides an abundance of subcommands to perform disk
+management operations such as viewing, labeling, adding, naming, and
+deleting partitions. Table 13-1 describes these subcommands in that
+sequence.</p>
+<p>\</p>
+<hr>
+<p>Subcommand                          Description</p>
+<p>print                               Displays the partition table that
+includes disk geometry and
+partition number, start and end,
+size, type, file system type, and
+relevant flags.</p>
+<p>mklabel                             Applies a label to the disk. Common
+labels are gpt and msdos.</p>
+<p>mkpart                              Makes a new partition</p>
+<p>name                                Assigns a name to a partition</p>
+<p>rm                                  Removes the specified partition</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 13-1 Common parted Subcommands</p>
+<p>\</p>
+<p>For the basic partition creation and deletion operations, Exercises 13-2
+and 13-3 will show the use of this tool by directly invoking it from the
+command prompt. You will use the /dev/sdb disk for these exercises.
+After making a partition, use the print subcommand to ensure you created
+what you wanted. The /proc/partitions file is also updated to reflect
+the results of partition management operations.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0396.html}</p>
+<h2 class="style3" id="exercise-13-2-create-an-mbr-partition">Exercise 13-2: Create an MBR Partition</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will assign partition type &ldquo;msdos&rdquo; to /dev/sdb for
+using it as an MBR disk. You will create and confirm a 100MB primary
+partition on the disk.</p>
+<p>\</p>
+<p>1. Execute parted on /dev/sdb to view the current partition
+information:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-830eddb976670ce02fa2b9bfc33e5a1c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-AJS3MV0N.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-830eddb976670ce02fa2b9bfc33e5a1c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-AJS3MV0N.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>There is an error on line 1 of the output, indicating an unrecognized
+label. This disk must be labeled before it can be partitioned.</p>
+<p>\</p>
+<p>2. Assign disk label &ldquo;msdos&rdquo; to the disk with mklabel. This operation
+is performed only once on a disk.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-bd5cc3eaec4a4e86e09a55063610ff60" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-HZI83BCJ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd5cc3eaec4a4e86e09a55063610ff60"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-HZI83BCJ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The print subcommand confirms the successful application of the label.</p>
+<p>\</p>
+<p>To use the GPT partition table type, run &ldquo;sudo parted /dev/sdb mklabel
+gpt&rdquo; instead.</p>
+<p>\</p>
+<p>3. Create a 100MB primary partition starting at 1MB (beginning of the
+disk) using mkpart:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-0531a2044cb6d606c4bba8356f37caf9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-B5KT2H2C.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0531a2044cb6d606c4bba8356f37caf9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-B5KT2H2C.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Verify the new partition with print:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a1d5019b380f62a672f809069918d7a1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-JHXL8DUV.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a1d5019b380f62a672f809069918d7a1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-JHXL8DUV.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Partition numbering begins at 1 by default.</p>
+<p>\</p>
+<p>5. Confirm the new partition with the lsblk command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-53331bc62dfed624d52bc41ff560b947" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-588XNE8G.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-53331bc62dfed624d52bc41ff560b947"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-588XNE8G.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The device file for the first partition on the sdb disk is sdb1 as
+identified on the bottom line. The partition size is 95MB.</p>
+<p>\</p>
+<p>Different tools will have variance in reporting partition sizes. You
+should ignore minor differences.</p>
+<p>\</p>
+<p>6. Check the /proc/partitions file also:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c02b9b6daeed9d45f1b3d5163d2fe152" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-63FMXEBC.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c02b9b6daeed9d45f1b3d5163d2fe152"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-63FMXEBC.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The virtual file is also updated with the new partition information.
+This completes the steps for creating and verifying an MBR partition
+using the parted command.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0397.html}</p>
+<h2 class="style3" id="exercise-13-3-delete-an-mbr-partition">Exercise 13-3: Delete an MBR Partition</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will delete the sdb1 partition that was created in
+Exercise 13-2 and confirm the deletion.</p>
+<p>\</p>
+<p>1. Execute parted on /dev/sdb with the rm subcommand to remove
+partition number 1:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-184ac00b86f84dc2a61a8d9910bc5a55" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-AXOLB7MY.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-184ac00b86f84dc2a61a8d9910bc5a55"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-AXOLB7MY.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Confirm the partition deletion with print:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7bd6b792f21ed575a5a06e996c6de4ff" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-7961UAET.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7bd6b792f21ed575a5a06e996c6de4ff"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-7961UAET.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The partition no longer exists.</p>
+<p>\</p>
+<p>3. Check the /proc/partitions file:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-11ad4c83072d60061bacf8c9d99c0cee" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-B25TKSXL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11ad4c83072d60061bacf8c9d99c0cee"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-B25TKSXL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The virtual file has the partition entry deleted as well. You can also
+run the lsblk command for further verification. The partition has been
+removed successfully.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: Knowing either parted or gdisk for the exam is enough.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>We will recreate partitions for use in LVM later in this chapter and
+then again in the next chapter to construct file system and swap
+structures.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0398.html}</p>
+<h2 class="style3" id="gpt-storage-management-with-gdisk">GPT Storage Management with gdisk</h2>
+<p>\</p>
+<p>The gdisk (GPT disk) utility partitions disks using the GPT format. This
+text-based, menu-driven program can show, add, verify, modify, and
+delete partitions among other operations. gdisk can create up to 128
+partitions on a single disk on systems with UEFI firmware.</p>
+<p>\</p>
+<p>The main interface of gdisk can be invoked by specifying a disk device
+name such as /dev/sdc with the command. Type help or ? (question mark)
+at the prompt to view available subcommands.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-374e3467548c1fedce77ec9a6cdd9bb0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-QCNBZ0VW.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-374e3467548c1fedce77ec9a6cdd9bb0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-QCNBZ0VW.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output illustrates that there is no partition table defined on the
+disk at the moment. There are several subcommands in the main menu
+followed by a short description. Refer to the screenshot above for a
+list of subcommands. Enter q to quit and return to the command prompt.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0399.html}</p>
+<h2 class="style3" id="exercise-13-4-create-a-gpt-partition">Exercise 13-4: Create a GPT Partition</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will assign partition type &ldquo;gpt&rdquo; to /dev/sdc for
+using it as a GPT disk. You will create and confirm a 200MB partition on
+the disk.</p>
+<p>\</p>
+<p>1. Execute gdisk on /dev/sdc to view the current partition information:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-acee764bd7ff80a68c507352b6ce87fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-9E3PG988.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-acee764bd7ff80a68c507352b6ce87fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-9E3PG988.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The disk currently does not have any partition table on it.</p>
+<p>\</p>
+<p>2. Assign &ldquo;gpt&rdquo; as the partition table type to the disk using the o
+subcommand. Enter &ldquo;y&rdquo; for confirmation to proceed. This operation is
+performed only once on a disk.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-49f57023bc627a821dc6b5add1c2cf01" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-HHL2BAA8.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49f57023bc627a821dc6b5add1c2cf01"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-HHL2BAA8.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Run the p subcommand to view disk information and confirm the GUID
+partition table creation:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-21c90cb9ca1169d7eb84566e51448615" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-NZARY1XW.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-21c90cb9ca1169d7eb84566e51448615"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-NZARY1XW.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output returns the assigned GUID and states that the partition table
+can hold up to 128 partition entries.</p>
+<p>\</p>
+<p>4. Create the first partition of size 200MB starting at the default
+sector with default type &ldquo;Linux filesystem&rdquo; using the n subcommand:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-26f92b37c5946a04972e6949d6af6e7c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-86XFQWVL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-26f92b37c5946a04972e6949d6af6e7c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-86XFQWVL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Verify the new partition with p:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-96a1c2f1d2bbfcecedbc880f1a66b2b3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KIK83Z1M.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-96a1c2f1d2bbfcecedbc880f1a66b2b3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KIK83Z1M.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>6. Run w to write the partition information to the partition table and
+exit out of the interface. Enter &ldquo;y&rdquo; to confirm when prompted.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-daf6ce8224f2f79b83536da8e1b7c3d7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LQV4DH6R.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-daf6ce8224f2f79b83536da8e1b7c3d7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LQV4DH6R.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>You may need to run the partprobe command after exiting the gdisk
+utility to inform the kernel of partition table changes.</p>
+<p>\</p>
+<p>7. Verify the new partition by issuing either of the following at the
+command prompt:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ebed971aa659eea4be011a1e05fecc72" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-U8O9IN1Y.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ebed971aa659eea4be011a1e05fecc72"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-U8O9IN1Y.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The device file for the first partition on the sdc disk is sdc1 and it
+is 200MB in size as reported in the above outputs. This completes the
+steps for creating and verifying a GPT partition using the gdisk
+command.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0400.html}</p>
+<h2 class="style3" id="exercise-13-5-delete-a-gpt-partition">Exercise 13-5: Delete a GPT Partition</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will delete the sdc1 partition that was created in
+Exercise 13-4 and confirm the removal.</p>
+<p>\</p>
+<p>1. Execute gdisk on /dev/sdc and run d1 at the utility&rsquo;s prompt to
+delete partition number 1:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-b856312f8a55baf5e224de9bf9f8b6b8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-IP250O65.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b856312f8a55baf5e224de9bf9f8b6b8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-IP250O65.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Confirm the partition deletion with p:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-87f5727baaad9eae96d97e0823575366" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-F124Y0JN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-87f5727baaad9eae96d97e0823575366"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-F124Y0JN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The partition no longer exists.</p>
+<p>\</p>
+<p>3. Write the updated partition information to the disk with w and quit
+gdisk:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-32beed53b4cb9aa9aee47057076ff2fe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-R97S52OF.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-32beed53b4cb9aa9aee47057076ff2fe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-R97S52OF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Verify the partition deletion by issuing either of the following at
+the command prompt:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a3e0cb19aed372cfd17a7e4ae3dc3455" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-58Z53OYA.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a3e0cb19aed372cfd17a7e4ae3dc3455"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-58Z53OYA.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Both commands confirm the successful partition removal.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0401.html}</p>
+<h2 class="style3" id="logical-volume-manager-lvm">Logical Volume Manager (LVM)</h2>
+<p>\</p>
+<p>The Logical Volume Manager (LVM) solution is widely used for managing
+block storage in Linux. LVM provides an abstraction layer between the
+physical storage and the file system, enabling the file system to be
+resized, span across multiple disks, use arbitrary disk space, etc. LVM
+accumulates spaces taken from partitions or entire disks (called
+Physical Volumes) to form a logical container (called Volume Group),
+which is then divided into logical partitions (called Logical Volumes).
+The other key benefits of LVM include online resizing of volume groups
+and logical volumes, online data migration between logical volumes and
+between physical volumes, user-defined naming for volume groups and
+logical volumes, mirroring and striping across multiple disks, and
+snapshotting of logical volumes. Figure 13-7 depicts the LVM components.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-834a9d7e0a2dbec851f9578c12bc33ff" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-0A8W8M1U.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-834a9d7e0a2dbec851f9578c12bc33ff"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-0A8W8M1U.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-7 LVM Structure</p>
+<p>\</p>
+<p>As noted above, the LVM structure is made up of three key objects called
+physical volume, volume group, and logical volume. These objects are
+further virtually broken down into Physical Extents (PEs) and Logical
+Extents (LEs). The LVM components are explained in the following
+subsections.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0402.html}</p>
+<h2 class="style3" id="physical-volume">Physical Volume</h2>
+<p>\</p>
+<p>A Physical Volume (PV) is created when a block storage device such as a
+partition or an entire disk is initialized and brought under LVM
+control. This process constructs LVM data structures on the device,
+including a label on the second sector and metadata shortly thereafter.
+The label includes the UUID, size, and pointers to the locations of data
+and metadata areas. Given the criticality of metadata, LVM stores a copy
+of it at the end of the physical volume as well. The rest of the device
+space is available for use.</p>
+<p>\</p>
+<p>You can use an LVM command called pvs (physical volume scan or summary)
+to scan and list available physical volumes on server2:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-78fd355b19e5ef86747bde277ad94292" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZD44Z3KN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-78fd355b19e5ef86747bde277ad94292"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZD44Z3KN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output shows one physical volume (PV) /dev/sda2 of size 19GB in rhel
+volume group (VG). Additional information displays the metadata format
+(Fmt) used, status of the physical volume under the Attr column (a for
+allocatable), and the amount of free space available on the physical
+volume (PFree).</p>
+<p>\</p>
+<p>Try running this command again with the -v flag to view more information
+about the physical volume.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0403.html}</p>
+<h2 class="style3" id="volume-group">Volume Group</h2>
+<p>\</p>
+<p>A Volume Group (VG) is created when at least one physical volume is
+added to it. The space from all physical volumes in a volume group is
+aggregated to form one large pool of storage, which is then used to
+build logical volumes. The physical volumes added to a volume group may
+be of varying sizes. LVM writes volume group metadata on each physical
+volume that is added to it. The volume group metadata contains its name,
+date and time of creation, how it was created, the extent size used, a
+list of physical and logical volumes, a mapping of physical and logical
+extents, etc. A volume group can have a custom name assigned to it at
+the time of its creation. For example, it may be called vg01, vgora, or
+vgweb that identifies the type of information it is constructed to
+store. A copy of the volume group metadata is stored and maintained at
+two distinct locations on each physical volume within the volume group.</p>
+<p>\</p>
+<p>You can use an LVM command called vgs (volume group scan or summary) to
+scan and list available volume groups on server2:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ad51c92d3c94f7713a23fe914eeaaf2a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-3RA1ON81.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ad51c92d3c94f7713a23fe914eeaaf2a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-3RA1ON81.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output shows one volume group (VG) rhel on server2 containing one
+physical volume (#PV). Additional information displays the number of
+logical volumes (#LV) and snapshots (#SN) in the volume group, status of
+the volume group under the Attr column (w for writeable, z for
+resizable, and n for normal), size of the volume group (VSize), and the
+amount of free space available in the volume group (VFree).</p>
+<p>\</p>
+<p>Try running this command again with the -v flag to view more information
+about the volume group.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0404.html}</p>
+<h2 class="style3" id="physical-extent">Physical Extent</h2>
+<p>\</p>
+<p>A physical volume is divided into several smaller logical pieces when it
+is added to a volume group. These logical pieces are known as Physical
+Extents (PE). An extent is the smallest allocatable unit of space in
+LVM. At the time of volume group creation, you can either define the
+size of the PE or leave it to the default value of 4MB. This implies
+that a 20GB physical volume would have approximately 5,000 PEs. Any
+physical volumes added to this volume group thereafter will use the same
+PE size.</p>
+<p>\</p>
+<p>You can use an LVM command called vgdisplay (volume group display) on
+server2 and grep for &lsquo;PE Size&rsquo; to view the PE size used in the rhel
+volume group:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-502c459ca0113067c1fb441a8631d4e9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZJI1USBI.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-502c459ca0113067c1fb441a8631d4e9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZJI1USBI.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output reveals the PE size used for the rhel VG.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0405.html}</p>
+<h2 class="style3" id="logical-volume">Logical Volume</h2>
+<p>\</p>
+<p>A volume group consists of a pool of storage taken from one or more
+physical volumes. This volume group space is used to create one or more
+Logical Volumes (LVs). A logical volume can be created or weeded out
+online, expanded or shrunk online, and can use space taken from one or
+multiple physical volumes inside the volume group.</p>
+<p>\</p>
+<p>The default naming convention used for logical volumes is lvol0, lvol1,
+lvol2, and so on; however, you may assign custom names to them. For
+example, a logical volume may be called system, undo, or webdata1 so as
+to establish the type of information it is constructed to store.</p>
+<p>\</p>
+<p>You can use an LVM command called lvs (logical volume scan or summary)
+to scan and list available logical volumes on server2:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-f26ab1ae7a95f3195d352295995e9f15" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-VY154SEV.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f26ab1ae7a95f3195d352295995e9f15"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-VY154SEV.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output shows two logical volumes root and swap in rhel volume group.
+Additional information displays the status of the logical volumes under
+the Attr column (w for writeable, i for inherited allocation policy, a
+for active, and o for open) and their sizes.</p>
+<p>\</p>
+<p>Try running this command again with the -v flag to view more information
+about the logical volumes.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0406.html}</p>
+<h2 class="style3" id="logical-extent">Logical Extent</h2>
+<p>\</p>
+<p>A logical volume is made up of Logical Extents (LE). Logical extents
+point to physical extents, and they may be random or contiguous. The
+larger a logical volume is, the more logical extents it will have.
+Logical extents are a set of physical extents allocated to a logical
+volume.</p>
+<p>\</p>
+<p>The LE size is always the same as the PE size in a volume group. The
+default LE size is 4MB, which corresponds to the default PE size of 4MB.</p>
+<p>\</p>
+<p>You can use an LVM command called lvdisplay (logical volume display) on
+server2 to view information about the root logical volume in the rhel
+volume group.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-4c1ca9ad12114680c0662da212678e86" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-E8W3BEYL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4c1ca9ad12114680c0662da212678e86"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-E8W3BEYL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output does not disclose the LE size; however, you can convert the
+LV size in MBs (17,000) and then divide the result by the Current LE
+count (4,351) to get the LE size (which comes close to 4MB).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0407.html}</p>
+<h2 class="style3" id="lvm-operations-and-commands">LVM Operations and Commands</h2>
+<p>\</p>
+<p>The LVM toolset offers a multitude of administrative commands to carry
+out various disk and volume management operations. These operations
+include creating and removing a physical volume, volume group, and
+logical volume; extending and reducing a volume group and logical
+volume; renaming a volume group and logical volume; and listing and
+displaying physical volume, volume group, and logical volume
+information.</p>
+<p>\</p>
+<p><a href="/linux/rhcsa/13_storage_management/#chapter0407.html">Table 13-2 summarizes the common LVM tasks and the commands that are
+employed to accomplish them.</a></p>
+<p>\</p>
+<hr>
+<p>Command                             Description</p>
+<p>Create and Remove Operations</p>
+<p>pvcreate/pvremove                   Initializes/uninitializes a disk or
+partition for LVM use</p>
+<p>vgcreate/vgremove                   Creates/removes a volume group</p>
+<p>lvcreate/lvremove                   Creates/removes a logical volume</p>
+<p>Extend and Reduce Operations</p>
+<p>vgextend/vgreduce                   Adds/removes a physical volume
+to/from a volume group</p>
+<p>lvextend/lvreduce                   Extends/reduces the size of a
+logical volume</p>
+<p>lvresize                            Resizes a logical volume. With the
+-r option, this command calls the
+fsadm command to resize the
+underlying file system as well.</p>
+<p>Rename Operations</p>
+<p>vgrename                            Renames a volume group</p>
+<p>lvrename                            Renames a logical volume</p>
+<p>List and Display Operations</p>
+<p>pvs/pvdisplay                       Lists/displays physical volume
+information</p>
+<p>vgs/vgdisplay lvs/lvdisplay         Lists/displays volume group
+information Lists/displays logical
+volume information</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 13-2 Common LVM Operations and Commands</p>
+<p>\</p>
+<p>All the tools accept the -v switch to support verbosity. Refer to the
+manual pages of the commands for usage and additional details.</p>
+<p>\</p>
+<p>As noted earlier, there are five disks available on server2 for
+practice. Issue the lsblk command to confirm:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-4555ba84ec761e69b4e561d5d9832a88" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-IQ604KE2.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4555ba84ec761e69b4e561d5d9832a88"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-IQ604KE2.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>You will use the sdd and sde disks for LVM activities in the following
+exercises.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0408.html}</p>
+<h2 class="style3" id="exercise-13-6-create-physical-volume-and-volume-group">Exercise 13-6: Create Physical Volume and Volume Group</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will initialize one partition sdd1 (90MB) and one
+disk sde (250MB) for use in LVM. You will create a volume group called
+vgbook and add both physical volumes to it. You will use the PE size of
+16MB and list and display the volume group and the physical volumes.</p>
+<p>\</p>
+<p>1. Create a partition of size 90MB on sdd using the parted command and
+confirm. You need to label the disk first, as it is a new disk.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fc0e20a685b976fbff61fa9ea1f9c1bf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-CE00XPQH.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fc0e20a685b976fbff61fa9ea1f9c1bf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-CE00XPQH.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The print subcommand confirms the creation of the partition. It is the
+first partition on the disk.</p>
+<p>\</p>
+<p>2. Initialize the sdd1 partition and the sde disk using the pvcreate
+command. Note that there is no need to apply a disk label on sde with
+parted as LVM does not require it.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a32abcc6ec8439331e71bbdcbdba2606" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-IJTXXRS0.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a32abcc6ec8439331e71bbdcbdba2606"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-IJTXXRS0.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The command generated a verbose output. You now have two physical
+volumes available for use.</p>
+<p>\</p>
+<p>3. Create vgbook volume group using the vgcreate command and add the
+two physical volumes to it. Use the -s option to specify the PE size in
+MBs.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-575c01836c214b8fb97dabc6b81e3cb6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-V1UW06IN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-575c01836c214b8fb97dabc6b81e3cb6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-V1UW06IN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The above command combines the two options with a single hyphen.</p>
+<p>\</p>
+<p>4. List the volume group information:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-082d88da07209f79e67cc4ab5f4da340" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-16BC13SM.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-082d88da07209f79e67cc4ab5f4da340"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-16BC13SM.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The total capacity available in the vgbook volume group is 320MB.</p>
+<p>\</p>
+<p>5. Display detailed information about the volume group and the physical
+volumes it contains:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-395b50ecd9f25de3cfa7fb8788f918a6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5UI974Y3.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-395b50ecd9f25de3cfa7fb8788f918a6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5UI974Y3.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The verbose output includes the physical volume attributes as well.
+There are a total of 20 PEs in the volume group (5 in sdd1 and 15 in
+sde), and each PE is 16MB in size. The collective size of all the
+physical volumes represents the total size of the volume group, which is
+20x16 = 320MB.</p>
+<p>\</p>
+<p>6. List the physical volume information:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-d458dad5d2e700dbe7fa5c9e77a30011" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-2ZSLLM5D.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d458dad5d2e700dbe7fa5c9e77a30011"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-2ZSLLM5D.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output shows the physical volumes in vgbook, along with their
+utilization status.</p>
+<p>\</p>
+<p>7. Display detailed information about the physical volumes:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c1408f15324656376ea948de5694d7db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-9KCGXIQ4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c1408f15324656376ea948de5694d7db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-9KCGXIQ4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Once a partition or disk is initialized and added to a volume group,
+they are treated identically within the volume group. LVM does not
+prefer one over the other.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0409.html}</p>
+<h2 class="style3" id="exercise-13-7-create-logical-volumes">Exercise 13-7: Create Logical Volumes</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will create two logical volumes, lvol0 and
+lvbook1, in the vgbook volume group. You will use 120MB for lvol0 and
+192MB for lvbook1 from the available pool of space. You will display the
+details of the volume group and the logical volumes.</p>
+<p>\</p>
+<p>1. Create a logical volume with the default name lvol0 using the
+lvcreate command. Use the -L option to specify the logical volume size,
+120MB. You may use the -v, -vv, or -vvv option with the command for
+verbosity.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-da60fae0c5b7b31d60163311999c0c5b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LM32OX2F.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-da60fae0c5b7b31d60163311999c0c5b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LM32OX2F.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The size for the logical volume may be specified in units such as MBs,
+GBs, TBs, or as a count of LEs; however, MB is the default if no unit is
+specified (see the previous command). The size of a logical volume is
+always in multiples of the PE size. For instance, logical volumes
+created in vgbook with the PE size set at 16MB can be 16MB, 32MB, 48MB,
+64MB, and so on. The output above indicates that the logical volume is
+128MB (16x8), and not 120MB as specified.</p>
+<p>\</p>
+<p>2. Create lvbook1 of size 192MB (16x12) using the lvcreate command. Use
+the -l switch to specify the size in logical extents and -n for the
+custom name. You may use -v for verbose information.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fc83b7771c5bf70d1321742288056ff1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5WX9APRS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fc83b7771c5bf70d1321742288056ff1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5WX9APRS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. List the logical volume information:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-738cc199ca42245b8949c13bbf27e3c7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-T04RWZJ7.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-738cc199ca42245b8949c13bbf27e3c7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-T04RWZJ7.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Both logical volumes are listed in the output with their attributes and
+sizes.</p>
+<p>\</p>
+<p>4. Display detailed information about the volume group including the
+logical volumes and the physical volumes:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-1d02f76918d6c21b517510252beed9be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-C9RER9NP.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1d02f76918d6c21b517510252beed9be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-C9RER9NP.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-6f7ca9d50b88b3c0ce6aba0a67a38f69" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LXNQEW50.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6f7ca9d50b88b3c0ce6aba0a67a38f69"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LXNQEW50.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Alternatively, you can run the following to view only the logical volume
+details:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-89a0a54a00c7b04cba00e51e7ef80368" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YJEYF4QX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-89a0a54a00c7b04cba00e51e7ef80368"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YJEYF4QX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Review the attributes of the logical volumes as detailed above.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0410.html}</p>
+<h2 class="style3" id="exercise-13-8-extend-a-volume-group-and-a-logical-volume">Exercise 13-8: Extend a Volume Group and a Logical Volume</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will add another partition sdd2 of size 158MB to
+vgbook to increase the pool of allocatable space. You will initialize
+the new partition prior to adding it to the volume group. You will
+increase the size of lvbook1 to 336MB. You will display basic
+information for the physical volumes, volume group, and logical volume.</p>
+<p>\</p>
+<p>1. Create a partition of size 158MB on sdd using the parted command.
+Display the new partition to confirm the partition number and size.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fd43cee9512fd7be7a8a8dc0011d9844" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-1LUKNR1B.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd43cee9512fd7be7a8a8dc0011d9844"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-1LUKNR1B.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Initialize sdd2 using the pvcreate command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ca89eb8d63eb1a5a587540db2420af80" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-6BRTO4VJ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ca89eb8d63eb1a5a587540db2420af80"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-6BRTO4VJ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Extend vgbook by adding the new physical volume to it:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-65faf209068d7f0e68139cb9d944d0c9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-W08IN5NA.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-65faf209068d7f0e68139cb9d944d0c9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-W08IN5NA.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. List the volume group:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a61ac77c439c281f361bc897769cf3c2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-16OT9SWB.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a61ac77c439c281f361bc897769cf3c2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-16OT9SWB.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output reflects the addition of a third physical volume to vgbook.
+The total capacity of the volume group has now increased to 464MB with
+144MB free.</p>
+<p>\</p>
+<p>5. Extend the size of lvbook1 to 340MB by adding 144MB using the
+lvextend command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-534e7cc4b8fed6d9ee5c094af4a01e2c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YFBWSLAR.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-534e7cc4b8fed6d9ee5c094af4a01e2c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YFBWSLAR.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: Make sure the expansion of a logical volume does not affect
+the file system and the data it contains. More details in Chapter 14 .</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>6. Issue vgdisplay on vgbook with the -v switch for the updated
+details:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ab92e61066c0c7450bc5af2b8f23069a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-IA1APY6X.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ab92e61066c0c7450bc5af2b8f23069a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-IA1APY6X.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output will show a lot of information about the volume group and the
+logical and physical volumes it contains. It will reflect the updates
+made in this exercise. In fact, each time a volume group or a logical
+volume is resized, vgdisplay will reflect those changes. The above
+output will display three physical volumes with the combined allocatable
+space grown to 464MB. The number of PEs will have increased to 29, with
+all of them allocated to logical volumes and 0 unused. The Logical
+Volume sections will display the updated information for the logical
+volumes. And at the very bottom, the three physical volumes will show
+with their device names, and total and available PEs in each.</p>
+<p>\</p>
+<p>7. View a summary of the physical volumes:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8acc315cde4014646decf98bdcb38690" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BNB11UMX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8acc315cde4014646decf98bdcb38690"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BNB11UMX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>8. View a summary of the logical volumes:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7ec3252a30174f2e1cace1804aefed4b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KVL01A4Y.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7ec3252a30174f2e1cace1804aefed4b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KVL01A4Y.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This brings the exercise to an end.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0411.html}</p>
+<h2 class="style3" id="exercise-13-9-rename-reduce-extend-and-remove-logical-volumes">Exercise 13-9: Rename, Reduce, Extend, and Remove Logical Volumes</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will rename lvol0 to lvbook2. You will decrease
+the size of lvbook2 to 50MB using the lvreduce command and then add 32MB
+with the lvresize command. You will then remove both logical volumes.
+You will display the summary for the volume groups, logical volumes, and
+physical volumes.</p>
+<p>\</p>
+<p>1. Rename lvol0 to lvbook2 using the lvrename command and confirm with
+lvs:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-98cce75b264a93e18bd640eb5d385d02" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-MONQ5OD7.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-98cce75b264a93e18bd640eb5d385d02"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-MONQ5OD7.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Reduce the size of lvbook2 to 50MB with the lvreduce command.
+Specify the absolute desired size for the logical volume. Answer &ldquo;Do you
+really want to reduce vgbook/lvbook2?&rdquo; in the affirmative.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ae198a00b0c5ad12822ff6881a64738f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-DHLM2WXM.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ae198a00b0c5ad12822ff6881a64738f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-DHLM2WXM.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Add 32MB to lvbook2 with the lvresize command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c6031e2fff9ffb33bd5322a750644f9d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-OT804AWH.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c6031e2fff9ffb33bd5322a750644f9d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-OT804AWH.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Use the pvs, lvs, vgs, and vgdisplay commands to view the updated
+allocation.</p>
+<p>5. Remove both lvbook1 and lvbook2 logical volumes using the lvremove
+command. Use the -f option to suppress the &ldquo;Do you really want to remove
+active logical volume&rdquo; message.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-52efd8b05ae851fb456c14f6e27f39cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-9MARYSLB.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-52efd8b05ae851fb456c14f6e27f39cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-9MARYSLB.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>Removing a logical volume is a destructive task. You need to ensure that
+you perform a backup of any data in the target logical volume prior to
+deleting it. You will need to unmount the file system or disable swap in
+the logical volume. See Chapter 15 on how to unmount a file system and
+disable swap.</p>
+<p>\</p>
+<p>6. Execute the vgdisplay command and grep for &ldquo;Cur LV&rdquo; to see the
+number of logical volumes currently available in vgbook. It should show
+0, as you have removed both logical volumes.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-d8bfe2eb061da2dc8b7c94b36b7ccbfe" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-OTTUCPHQ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d8bfe2eb061da2dc8b7c94b36b7ccbfe"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-OTTUCPHQ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This concludes the exercise.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0412.html}</p>
+<h2 class="style3" id="exercise-13-10-reduce-and-remove-a-volume-group">Exercise 13-10: Reduce and Remove a Volume Group</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will reduce vgbook by removing the sdd1 and sde
+physical volumes from it, and then remove the volume group. Confirm the
+deletion of the volume group and the logical volumes at the end.</p>
+<p>\</p>
+<p>1. Remove sdd1 and sde physical volumes from vgbook by issuing the
+vgreduce command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-eb5eb0e90663f0967ec6af50faa1c7d2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-DNYF6XNR.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eb5eb0e90663f0967ec6af50faa1c7d2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-DNYF6XNR.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Remove the volume group using the vgremove command. This will also
+remove the last physical volume, sdd2, from it.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ba1a361f0398b43efa17a802baeaf237" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BJ081UKL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ba1a361f0398b43efa17a802baeaf237"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BJ081UKL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>You can also use the -f option with the vgremove command to force the
+volume group removal even if it contains any number of logical and
+physical volumes in it.</p>
+<p>\</p>
+<p>Remember to proceed with caution whenever you perform reduce and erase
+operations.</p>
+<p>\</p>
+<p>3. Execute the vgs and lvs commands for confirmation:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-2c1ca3e0f8cf23e13892d0406885f751" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-29VMZAKH.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2c1ca3e0f8cf23e13892d0406885f751"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-29VMZAKH.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This concludes the exercise.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0413.html}</p>
+<h2 class="style3" id="exercise-13-11-uninitialize-physical-volumes">Exercise 13-11: Uninitialize Physical Volumes</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will uninitialize all three physical
+volumes&mdash;sdd1, sdd2, and sde&mdash;by deleting the LVM structural
+information from them. Use the pvs command for confirmation. Remove the
+partitions from the sdd disk and verify that all disks used in Exercises
+13-6 to 13-10 are now in their original raw state.</p>
+<p>\</p>
+<p>1. Remove the LVM structures from sdd1, sdd2, and sde using the
+pvremove command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-29cf0ffc21ea0687e926cf0e3cc777cf" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-I0CEGYL2.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-29cf0ffc21ea0687e926cf0e3cc777cf"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-I0CEGYL2.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Confirm the removal using the pvs command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7ef47dfae475dbecdbca2414b46b3e19" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WEFABC3J.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7ef47dfae475dbecdbca2414b46b3e19"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WEFABC3J.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The partitions and the disk are now back to their raw state and can be
+repurposed.</p>
+<p>\</p>
+<p>3. Remove the partitions from sdd using the parted command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a548bad19ec1f6154696780098ef51a7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-SA75RDRK.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a548bad19ec1f6154696780098ef51a7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-SA75RDRK.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Verify that all disks used in previous exercises have returned to
+their original raw state using the lsblk command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-391da31843652e5ffbf88240a37a93a3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-57AXIZUP.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-391da31843652e5ffbf88240a37a93a3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-57AXIZUP.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This brings the exercise to an end.</p>
+<p>\</p>
+<p>We will recreate logical volumes and construct file system and swap
+structures in them in the next chapter.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0414.html}</p>
+<h2 class="style3" id="storage-optimization-with-virtual-data-optimizer-vdo">Storage Optimization with Virtual Data Optimizer (VDO)</h2>
+<p>\</p>
+<p>Virtual Data Optimizer (VDO) is a device driver layer that sits between
+the Linux kernel and the physical storage devices. The goals are to
+conserve disk space, improve data throughput, and save on storage cost.
+VDO employs thin provisioning, de-duplication, and compression
+technologies to help realize the goals.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0415.html}</p>
+<h2 class="style3" id="how-vdo-conserves-storage">How VDO Conserves Storage</h2>
+<p>\</p>
+<p>VDO makes use of the thin provisioning technology to identify and
+eliminate empty (zero-byte) data blocks. This is referred to as
+zero-block elimination. VDO removes randomization of data blocks by
+moving in-use data blocks to contiguous locations on the storage device.
+This is the initial stage in the process.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-611bbfa3b33c179b2be95129020be759" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-XYSCLXMC.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-611bbfa3b33c179b2be95129020be759"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-XYSCLXMC.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 13-8 Storage Optimization with VDO</p>
+<p>\</p>
+<p>Next, VDO keeps an eye on data being written to the disk. If it detects
+that the new data is an identical copy of some existing data, it makes
+an internal note of it but does not actually write the redundant data to
+the disk. VDO uses the technique called de-duplication to this end. This
+technique is implemented with the inclusion of a kernel module called
+UDS (Universal De-duplication Service). This is the second stage in the
+process.</p>
+<p>\</p>
+<p>In the third and final stage, VDO calls upon another kernel module
+called kvdo, which compresses the residual data blocks and consolidates
+them on a lower number of blocks. This results in a further drop in
+storage space utilization.</p>
+<p>\</p>
+<p>VDO runs in the background and processes inbound data through the three
+stages on VDO-enabled volumes. VDO is not a CPU- or memory-intensive
+process; it consumes a low amount of system resources.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0416.html}</p>
+<h2 class="style3" id="vdo-integration-with-lvm">VDO Integration with LVM</h2>
+<p>\</p>
+<p>RHEL 9 uses an LVM VDO implementation for managing VDO logical volumes.
+Unlike previous versions of RHEL, a separate set of VDO management tools
+are no longer necessary. The LVM utilities have been enhanced to include
+options to support VDO volumes.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0417.html}</p>
+<h2 class="style3" id="vdo-components">VDO Components</h2>
+<p>\</p>
+<p>VDO utilizes the concepts of pool and volume. A pool is a logical volume
+that is created inside an LVM volume group using a deduplicated storage
+space. A VDO volume is just like a regular LVM logical volume, but it is
+provisioned in a pool. A VDO volume needs to be formatted with file
+system structures before it can be used.</p>
+<p>\</p>
+<p>To create, mount, and manage LVM VDO volumes, two software packages are
+installed on the system by default. These packages are vdo and
+kmod-kvdo. The former installs the tools necessary to support the
+creation and management of VDO volumes and the latter implements
+fine-grained storage virtualization, thin provisioning, and compression.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0418.html}</p>
+<h2 class="style3" id="exercise-13-12-create-an-lvm-vdo-volume">Exercise 13-12: Create an LVM VDO Volume</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will initialize the 5GB disk (sdf) for use in LVM
+VDO. You will create a volume group called vgvdo and add the physical
+volume to it. You will list and display the volume group and the
+physical volume. You will create a VDO volume called lvvdo with a
+virtual size of 20GB.</p>
+<p>\</p>
+<p>1. Initialize the sdf disk using the pvcreate command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-33c9fd9175c9a445c191ab7f0c7a8c96" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-HTWOFLGF.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-33c9fd9175c9a445c191ab7f0c7a8c96"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-HTWOFLGF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Create vgvdo volume group using the vgcreate command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-4b1f5bb5e752f5784164cd49e40f8321" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-7KDEEEEN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4b1f5bb5e752f5784164cd49e40f8321"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-7KDEEEEN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Display basic information about the volume group:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c25582ba9df6069b1770b588973686e9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-D4LB619H.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c25582ba9df6069b1770b588973686e9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-D4LB619H.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The volume group contains a total of 1279 PEs.</p>
+<p>\</p>
+<p>4. Create a VDO volume called lvvdo using the lvcreate command. Use the
+-l option to specify the number of logical extents (1279) to be
+allocated and the -V option for the amount of virtual space.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-9b02c86ab7057060a43f3bee35f6a681" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5WY27FZX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9b02c86ab7057060a43f3bee35f6a681"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5WY27FZX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Display detailed information about the volume group including the
+logical volume and the physical volume:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8525c58c86c5c42dbf957a4e3d681773" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YWZ5VAQD.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8525c58c86c5c42dbf957a4e3d681773"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YWZ5VAQD.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-de7f49e764386967d1a9bbf31c735786" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-8TU5RYEF.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-de7f49e764386967d1a9bbf31c735786"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-8TU5RYEF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output reflects the creation of two logical volumes: a pool called
+/dev/vgvdo/vpool0 and a volume called /dev/vgvdo/lvvdo.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0419.html}</p>
+<h2 class="style3" id="exercise-13-13-remove-a-volume-group-and-uninitialize-physical-volume">Exercise 13-13: Remove a Volume Group and Uninitialize Physical Volume</h2>
+<p>\</p>
+<p>This exercise should be done on server2 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will remove the vgvdo volume group along with the
+VDO volumes and uninitialize the physical volume /dev/sdf. You will
+confirm the deletion.</p>
+<p>\</p>
+<p>1. Remove the volume group along with the VDO volumes using the
+vgremove command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e9f1fcbb007d41399fcfd3bb94f95478" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LL4JPQRK.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e9f1fcbb007d41399fcfd3bb94f95478"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LL4JPQRK.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>Remember to proceed with caution whenever you perform erase operations.</p>
+<p>\</p>
+<p>2. Execute sudo vgs and sudo lvs commands for confirmation.</p>
+<p>3. Remove the LVM structures from sdf using the pvremove command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ba3afe323abc29f7731d0753b791a70b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-R23G6FMO.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ba3afe323abc29f7731d0753b791a70b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-R23G6FMO.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Confirm the removal by running sudo pvs.</p>
+<p>The disk is now back to its raw state and can be repurposed.</p>
+<p>\</p>
+<p>5. Verify that the sdf disk used in the previous exercises has returned
+to its original raw state using the lsblk command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-eddd7700cbf73b6424a5973c6bd83154" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ELG2JGUL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eddd7700cbf73b6424a5973c6bd83154"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ELG2JGUL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This brings the exercise to an end.</p>
+<p>\</p>
+<p>We will recreate logical volumes in Chapter 14 and construct file system
+and swap structures in them.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0420.html}</p>
+<h2 class="style3" id="chapter-summary">Chapter Summary</h2>
+<p>\</p>
+<p>This chapter started with an overview of how and where disk partitioning
+information is stored. It presented a comparison between the two common
+schemes and explained which one to use and in which situation. A little
+later, we touched briefly on the common storage management solutions
+available in RHEL.</p>
+<p>\</p>
+<p>We examined the concept of thin provisioning and realized the benefits
+associated with this technology.</p>
+<p>\</p>
+<p>Next, we carved up available disk devices using both MBR and GPT
+partitioning schemes. We demonstrated the partition creation, display,
+and delete operations by running one command directly at the command
+prompt and launching the other in interactive mode.</p>
+<p>\</p>
+<p>Next, we explicated the Logical Volume Manager solution. We discovered
+how LVM works. We looked at various LVM objects and their relationship
+with one another. We explored LVM management commands and common options
+available with them. We performed a series of exercises to demonstrate
+the creation, expansion, renaming, reduction, and deletion of physical
+volumes, logical volumes, and volume groups.</p>
+<p>\</p>
+<p>Finally, we explored the VDO solution and how it exploits the underlying
+thin provisioning, de-duplication, and compression technologies to save
+cost, ensure efficient use of storage space, and improve data
+throughput. We performed a couple of exercises in the end to demonstrate
+the creation and deletion of VDO logical volumes under LVM.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0421.html}</p>
+<h2 class="style3" id="review-questions">Review Questions</h2>
+<p>\</p>
+<p>1. Where is the partition table information stored on BIOS-based
+systems?</p>
+<p>2. What is the name of the technology that VDO employs to remove
+randomization of data blocks?</p>
+<p>3. What would sdd3 represent?</p>
+<p>4. Provide the command to add physical volumes /dev/sdd1 and /dev/sdc
+to vg20 volume group.</p>
+<p>5. What are the two commands that you can use to add logical extents to
+a logical volume?</p>
+<p>6. Provide the command to create a volume group called vg20 on /dev/sdd
+disk with physical extent size 64MB.</p>
+<p>7. Thin provisioning technology allows us to create logical volumes of
+sizes larger than the actual physical storage size. True or False?</p>
+<p>8. What is the maximum supported number of usable partitions on a GPT
+disk?</p>
+<p>9. Which kernel module is responsible for data block compression in VDO
+volumes?</p>
+<p>10. What are the three techniques VDO volumes employ for storage
+conservation?</p>
+<p>11. What would the command parted /dev/sdc mkpart pri 1 200m do?</p>
+<p>12. What is the maximum number of usable partitions that can be created
+on an MBR disk?</p>
+<p>13. The gdisk utility can be used to store partition information in MBR
+format. True or False?</p>
+<p>14. What would the command parted /dev/sdd mklabel msdos do?</p>
+<p>15. Which file in the /proc file system stores the in-memory
+partitioning information?</p>
+<p>16. De-duplication is the process of zero-block elimination. True or
+False?</p>
+<p>17. The parted utility may be used to create LVM logical volumes. True
+or False?</p>
+<p>18. What are the two commands that you can use to reduce the number of
+logical extents from a logical volume?</p>
+<p>19. A single disk can be used by both parted and LVM solutions at the
+same time. True or False?</p>
+<p>20. Provide the command to erase /dev/sdd1 physical volume from vg20
+volume group.</p>
+<p>21. Provide the command to remove vg20 along with logical and physical
+volumes it contains.</p>
+<p>22. What is the default size of a physical extent in LVM?</p>
+<p>23. What is the default name for the first logical volume in a volume
+group?</p>
+<p>24. What is one difference between the pvs and pvdisplay commands?</p>
+<p>25. When can a disk or partition be referred to as a physical volume?</p>
+<p>26. Provide the command to remove webvol logical volume from vg20
+volume group.</p>
+<p>27. It is necessary to create file system structures in a logical
+volume before it can be used to store files in it. True or False?</p>
+<p>28. Physical and logical extents are typically of the same size. True
+or False?</p>
+<p>29. What is the purpose of the pvremove command?</p>
+<p>30. What would the command pvcreate /dev/sdd do?</p>
+<p>31. A disk or partition can be added to a volume group without being
+initialized. True or False?</p>
+<p>32. Provide the command to create a logical volume called webvol of
+size equal to 100 logical extents in vg20 volume group.</p>
+<p>33. A volume group can be created without any physical volume in it.
+True or False?</p>
+<p>34. A partition can be used as an LVM object. True or False?</p>
+<p>35. Which command would you use to view the details of a volume group
+and its objects?</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0422.html}</p>
+<h2 class="style3" id="answers-to-review-questions">Answers to Review Questions</h2>
+<p>\</p>
+<p>1. The partition table information is stored on the Master Boot Record.</p>
+<p>2. VDO employs thin provisioning technology to remove data block
+randomization.</p>
+<p>3. sdd3 represents the third partition on the fourth disk.</p>
+<p>4. vgextend vg20 /dev/sdd1 /dev/sdc</p>
+<p>5. The lvextend and lvresize commands.</p>
+<p>6. vgcreate -s 64 vg20 /dev/sdd</p>
+<p>7. True.</p>
+<p>8. 128.</p>
+<p>9. The kvdo module is responsible for compressing data blocks in VDO
+volumes.</p>
+<p>10. VDO volumes use thin provisioning, de-duplication, and compression
+techniques for storage conservation.</p>
+<p>11. The command provided will create a primary partition of size 200MB
+on the sdc disk starting at the beginning of the disk.</p>
+<p>12. 14.</p>
+<p>13. False. The gdisk tool is only for GPT type tables.</p>
+<p>14. The command provided will apply msdos label to the sdd disk.</p>
+<p>15. The partitions file.</p>
+<p>16. False. De-duplication is the process of removing blocks of
+identical data.</p>
+<p>17. False.</p>
+<p>18. The lvreduce and lvresize commands.</p>
+<p>19. True. A single disk can be shared between parted-created partitions
+and LVM.</p>
+<p>20. vgreduce vg20 /dev/sdd1</p>
+<p>21. vgremove -f vg20</p>
+<p>22. The default PE size is 4MB.</p>
+<p>23. lvol0 is the default name for the first logical volume created in a
+volume group.</p>
+<p>24. The pvs command lists basic information about physical volumes
+whereas the pvdisplay command shows the details.</p>
+<p>25. After the pvcreate command has been executed on it successfully.</p>
+<p>26. lvremove /dev/vg20/webvol</p>
+<p>27. True.</p>
+<p>28. True.</p>
+<p>29. The pvremove command is used to remove LVM information from a
+physical volume.</p>
+<p>30. The command provided will prepare the /dev/sdd disk for use in a
+volume group.</p>
+<p>31. False. A disk or partition must be initialized before it can be
+added to a volume group.</p>
+<p>32. lvcreate -l 100 -n webvol vg20</p>
+<p>33. False.</p>
+<p>34. True.</p>
+<p>35. The vgdisplay command with the -v option.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0423.html}</p>
+<h2 id="do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</h2>
+<p>\</p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the labs have already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p>\</p>
+<p>Use the lab environment built specifically for end-of-chapter labs. See
+sub-section &ldquo;Lab Environment for End-of-Chapter Labs&rdquo; in Chapter 01
+&ldquo;Local Installation&rdquo; for details.</p>
+<p>\</p>
+<p>Add more storage to server4 if required.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0424.html}</p>
+<h2 class="style3" id="lab-13-1-create-and-remove-partitions-with-parted">Lab 13-1: Create and Remove Partitions with parted</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, create a 100MB primary partition on one
+of the available 250MB disks (lsblk) by invoking the parted utility
+directly at the command prompt. Apply label &ldquo;msdos&rdquo; if the disk is new.
+Create another 100MB partition by running parted interactively while
+ensuring that the second partition won&rsquo;t overlap the first. Verify the
+label and the partitions. Remove both partitions at the command prompt.
+(Hint: MBR Storage Management with parted).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0425.html}</p>
+<h2 class="style3" id="lab-13-2-create-and-remove-partitions-with-gdisk">Lab 13-2: Create and Remove Partitions with gdisk</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, create two 80MB partitions on one of the
+250MB disks (lsblk) using the gdisk utility. Make sure the partitions
+won&rsquo;t overlap. Verify the partitions. You may delete the partitions if
+you want. (Hint: GPT Storage Management with gdisk).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0426.html}</p>
+<h2 class="style3" id="lab-13-3-create-volume-group-and-logical-volumes">Lab 13-3: Create Volume Group and Logical Volumes</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, initialize 1x250MB disk for use in LVM
+(use lsblk to identify available disks). Create volume group vg100 with
+PE size 16MB and add the physical volume. Create two logical volumes
+lvol0 and swapvol of sizes 90MB and 120MB. Use the vgs, pvs, lvs, and
+vgdisplay commands for verification. (Hint: Logical Volume Manager).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0427.html}</p>
+<h2 class="style3" id="lab-13-4-expand-volume-group-and-logical-volume">Lab 13-4: Expand Volume Group and Logical Volume</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, create a partition on an available 250MB
+disk and initialize it for use in LVM (use lsblk to identify available
+disks). Add the new physical volume to vg100. Expand the lvol0 logical
+volume to size 300MB. Use the vgs, pvs, lvs, and vgdisplay commands for
+verification. (Hint: Logical Volume Manager).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0428.html}</p>
+<h2 class="style3" id="lab-13-5-add-a-vdo-logical-volume">Lab 13-5: Add a VDO Logical Volume</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, initialize the sdf disk for use in LVM
+and add it to vg100. Create a VDO logical volume named vdovol using the
+entire disk capacity. Use the vgs, pvs, lvs, and vgdisplay commands for
+verification. (Hint: Logical Volume Manager).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0429.html}</p>
+<h2 class="style3" id="lab-13-6-reduce-and-remove-logical-volumes">Lab 13-6: Reduce and Remove Logical Volumes</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, reduce the size of lvol0 logical volume
+to 80MB. Then erase all three logical volumes swapvol, lvol0, and
+vdovol. Confirm the deletion with vgs, pvs, lvs, and vgdisplay commands.
+(Hint: Logical Volume Manager).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0430.html}</p>
+<h2 class="style3" id="lab-13-7-remove-volume-group-and-physical-volumes">Lab 13-7: Remove Volume Group and Physical Volumes</h2>
+<p>\</p>
+<p>As user1 with sudo on server4, remove the volume group and uninitialized
+the physical volumes. Confirm the deletion with vgs, pvs, lvs, and
+vgdisplay commands. Use the lsblk command and verify that the disks used
+for the LVM labs no longer show LVM information. (Hint: Logical Volume
+Manager).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0431.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1717964147" defer></script>
+        <script src="/js/search.js?1717964147" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/13_storage_management/" class="active"><a class="padding" href="/linux/rhcsa/13_storage_management/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/13_storage_management/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1717964147" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1717964147" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1717964147" defer></script>
+    <script src="/js/js-yaml.min.js?1717964147" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1717964147" defer></script>
+  </body>
+</html>

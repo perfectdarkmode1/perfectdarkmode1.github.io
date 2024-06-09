@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Networking, Network Devices, and Network Connections \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Overview of basic networking concepts: hostname, IPv4, network classes, subnetting, subnet mask, CIDR, protocol, TCP/UDP, well-known ports, ICMP, Ethernet address, IPv6, IPv4/IPv6 differences, consistent device naming, etc.
+\
+Change hostname of the system
+\
+Understand the concepts of network device and connection">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Networking, Network Devices, and Network Connections \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Overview of basic networking concepts: hostname, IPv4, network classes, subnetting, subnet mask, CIDR, protocol, TCP/UDP, well-known ports, ICMP, Ethernet address, IPv6, IPv4/IPv6 differences, consistent device naming, etc.
+\
+Change hostname of the system
+\
+Understand the concepts of network device and connection">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/15_networking_network_devices_and_network_connections/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Networking, Network Devices, and Network Connections \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Overview of basic networking concepts: hostname, IPv4, network classes, subnetting, subnet mask, CIDR, protocol, TCP/UDP, well-known ports, ICMP, Ethernet address, IPv6, IPv4/IPv6 differences, consistent device naming, etc.
+\
+Change hostname of the system
+\
+Understand the concepts of network device and connection">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Networking, Network Devices, and Network Connections \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Overview of basic networking concepts: hostname, IPv4, network classes, subnetting, subnet mask, CIDR, protocol, TCP/UDP, well-known ports, ICMP, Ethernet address, IPv6, IPv4/IPv6 differences, consistent device naming, etc.
+\
+Change hostname of the system
+\
+Understand the concepts of network device and connection">
+    <meta itemprop="wordCount" content="8531">
+    <title></title>
+    <link href="/images/favicon.png?1717964147" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1717964147" rel="stylesheet">
+    <link href="/css/auto-complete.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1717964147" rel="stylesheet">
+    <link href="/css/fonts.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1717964147" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1717964147" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1717964147" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1717964147" rel="stylesheet">
+    <link href="/css/print.css?1717964147" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1717964147"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/15_networking_network_devices_and_network_connections/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#networking-network-devices-and-network-connections">Networking, Network Devices, and Network Connections</a></li>
+      </ul>
+    </li>
+    <li><a href="#networking-fundamentals">Networking Fundamentals</a></li>
+    <li><a href="#hostname">Hostname</a></li>
+    <li><a href="#exercise-15-1-change-system-hostname">Exercise 15-1: Change System Hostname</a></li>
+    <li><a href="#ipv4-address">IPv4 Address</a></li>
+    <li><a href="#classful-network-addressing">Classful Network Addressing</a>
+      <ul>
+        <li><a href="#class-a">Class A</a></li>
+        <li><a href="#class-b">Class B</a></li>
+        <li><a href="#class-c">Class C</a></li>
+        <li><a href="#class-d">Class D</a></li>
+        <li><a href="#class-e">Class E</a></li>
+      </ul>
+    </li>
+    <li><a href="#subnetting">Subnetting</a></li>
+    <li><a href="#subnet-mask">Subnet Mask</a></li>
+    <li><a href="#classless-network-addressing">Classless Network Addressing</a></li>
+    <li><a href="#protocol">Protocol</a></li>
+    <li><a href="#tcp-and-udp-protocols">TCP and UDP Protocols</a></li>
+    <li><a href="#well-known-ports">Well-Known Ports</a></li>
+    <li><a href="#icmp-protocol">ICMP Protocol</a></li>
+    <li><a href="#ethernet-address">Ethernet Address</a></li>
+    <li><a href="#ipv6-address">IPv6 Address</a></li>
+    <li><a href="#major-differences-between-ipv4-and-ipv6">Major Differences between IPv4 and IPv6</a></li>
+    <li><a href="#network-devices-and-connections">Network Devices and Connections</a></li>
+    <li><a href="#consistent-network-device-naming">Consistent Network Device Naming</a></li>
+    <li><a href="#exercise-15-2-add-network-devices-to-server10-and-server20">Exercise 15-2: Add Network Devices to server10 and server20</a></li>
+    <li><a href="#the-networkmanager-service">The NetworkManager Service</a></li>
+    <li><a href="#understanding-interface-connection-profile">Understanding Interface Connection Profile</a></li>
+    <li><a href="#network-device-and-connection-administration-tools">Network Device and Connection Administration Tools</a></li>
+    <li><a href="#the-nmcli-command">The nmcli Command</a></li>
+    <li><a href="#exercise-15-3-configure-new-network-connection-manually">Exercise 15-3: Configure New Network Connection Manually</a></li>
+    <li><a href="#exercise-15-4-configure-new-network-connection-using-nmcli">Exercise 15-4: Configure New Network Connection Using nmcli</a></li>
+    <li><a href="#understanding-hosts-table">Understanding Hosts Table</a></li>
+    <li><a href="#testing-network-connectivity">Testing Network Connectivity</a></li>
+    <li><a href="#exercise-15-5-update-hosts-table-and-test-connectivity">Exercise 15-5: Update Hosts Table and Test Connectivity</a></li>
+    <li><a href="#chapter-summary">Chapter Summary</a></li>
+    <li><a href="#review-questions">Review Questions</a></li>
+    <li><a href="#answers-to-review-questions">Answers to Review Questions</a></li>
+    <li><a href="#do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</a></li>
+    <li><a href="#lab-15-2-add-new-interface-and-configure-connection-profile-manually">Lab 15-2: Add New Interface and Configure Connection Profile Manually</a></li>
+    <li><a href="#networking-network-devices-and-network-management">Networking, Network Devices, and Network Management</a></li>
+    <li><a href="#hostname-1">Hostname</a></li>
+    <li><a href="#lab-change-the-hostname">Lab: Change the Hostname</a></li>
+    <li><a href="#ipv4">IPv4</a></li>
+    <li><a href="#protocols">Protocols</a>
+      <ul>
+        <li><a href="#icmp">ICMP</a></li>
+        <li><a href="#icmpv6">ICMPv6</a></li>
+      </ul>
+    </li>
+    <li><a href="#misc">Misc</a></li>
+    <li><a href="#connection-profiles">Connection Profiles</a>
+      <ul>
+        <li><a href="#connection-profile-directives">Connection Profile Directives</a></li>
+      </ul>
+    </li>
+    <li><a href="#lab-add-network-devices-to-server10-and-one-to-server20-using-virtualbox">Lab: Add Network Devices to server10 and one to server20 using VirtualBox</a></li>
+    <li><a href="#administration-tools">Administration Tools</a></li>
+    <li><a href="#lab-configure-network-connection-manually-server-10">Lab: Configure network connection manually (server 10)</a></li>
+    <li><a href="#networkmanager-service">NetworkManager service</a></li>
+    <li><a href="#nmcli-command">nmcli command</a>
+      <ul>
+        <li><a href="#3-connection">3. connection</a></li>
+        <li><a href="#4-device">4. Device</a></li>
+      </ul>
+    </li>
+    <li><a href="#lab-configure-new-network-connection-using-nmcli-server20">Lab: Configure New Network Connection Using nmcli (server20)</a></li>
+    <li><a href="#hosts-table">Hosts Table</a></li>
+    <li><a href="#lab-update-hosts-table-and-test-connectivity">Lab: Update Hosts Table and Test Connectivity.</a></li>
+    <li><a href="#lab-add-new-interface-and-configure-connection-profile-with-nmcli">Lab: Add New Interface and Configure Connection Profile with nmcli</a></li>
+    <li><a href="#lab-add-new-interface-and-configure-connection-profile-manually">Lab: Add New Interface and Configure Connection Profile Manually</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h3 class="style3" id="networking-network-devices-and-network-connections">Networking, Network Devices, and Network Connections</h3>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;&rdquo;}
+:::</p>
+<p>\</p>
+<h4 id="this-chapter-describes-the-following-major-topics">This chapter describes the following major topics:</h4>
+<p>\</p>
+<p>Overview of basic networking concepts: hostname, IPv4, network classes,
+subnetting, subnet mask, CIDR, protocol, TCP/UDP, well-known ports,
+ICMP, Ethernet address, IPv6, IPv4/IPv6 differences, consistent device
+naming, etc.</p>
+<p>\</p>
+<p>Change hostname of the system</p>
+<p>\</p>
+<p>Understand the concepts of network device and connection</p>
+<p>\</p>
+<p>Anatomy of a network connection profile</p>
+<p>\</p>
+<p>Know network device and connection management tools and techniques</p>
+<p>\</p>
+<p>Configure network connections by hand and using commands</p>
+<p>\</p>
+<p>Describe the hosts table</p>
+<p>\</p>
+<p>Test network connectivity using hostname and IP address</p>
+<p>\</p>
+<h4 id="rhcsa-objectives">RHCSA Objectives:</h4>
+<p>\</p>
+<h5 id="44-configure-ipv4-and-ipv6-addresses">44. Configure IPv4 and IPv6 addresses</h5>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Acomputer network is formed when two or more physical or virtual
+computers are connected together for sharing resources and data. The
+computers may be linked via wired or wireless means, and a device such
+as a switch is used to interconnect several computers to allow them to
+communicate with one another on the network. There are numerous concepts
+and terms that need to be grasped in order to work effectively and
+efficiently with network device and network connection configuration and
+troubleshooting, and several other network services. This chapter
+provides a wealth of that information.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-3d5173a59db374b867cb95c292c1484e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ERRJFIPY.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3d5173a59db374b867cb95c292c1484e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ERRJFIPY.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>For a system to be able to talk to other systems, one of its network
+devices must have a connection profile attached containing a unique IP
+address, hostname, and other essential network parameters. The network
+assignments may be configured statically or obtained automatically from
+a DHCP server. Few files are involved in the configuration, which may be
+modified by hand or using commands. Testing follows the configuration to
+confirm the system&rsquo;s ability to communicate.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0464.html}</p>
+<h2 class="style3" id="networking-fundamentals">Networking Fundamentals</h2>
+<p>\</p>
+<p>The primary purpose of computer networks is to allow users to share data
+and resources. A simple network is formed when two computers are
+interconnected. Using a networking device such as a switch, this network
+can be expanded to include additional computers, as well as printers,
+scanners, storage, and other devices (collectively referred to as nodes
+or entities). A computer on the network can be configured to act as a
+file server, storage server, or as a gateway to the Internet for the
+rest of the networked computers. Nodes may be interconnected using wired
+or wireless means. A corporate network may have thousands of nodes
+linked via a variety of data transmission media. The Internet is the
+largest network of networks with millions of nodes interconnected.</p>
+<p>\</p>
+<p>There are many elementary concepts and terms that you need to grasp
+before being able to configure network interfaces, connection profiles,
+and client/server setups that are elaborated in this and other chapters.
+As well, there are many configuration files and commands related to
+various network services that you need to understand thoroughly in order
+to manage a RHEL-based environment effectively. Some of the concepts,
+terms, configuration files, and commands are explained in this chapter.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0465.html}</p>
+<h2 class="style3" id="hostname">Hostname</h2>
+<p>\</p>
+<p>A hostname is a unique alphanumeric label (the hyphen (-), underscore
+(_), and period (.) characters are also allowed) that is assigned to a
+node to identify it on the network. It can consist of up to 253
+characters. It is normally allotted based on the purpose and principal
+use of the system. In RHEL, the hostname is stored in the /etc/hostname
+file.</p>
+<p>\</p>
+<p>The hostname can be viewed with several different commands, such as
+hostname, hostnamectl, uname, and nmcli, as well as by displaying the
+content of the /etc/hostname file. Let&rsquo;s run these commands on server1:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a348cc9220bde591ccd078d0fa6a33d1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-H5CRP5OT.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a348cc9220bde591ccd078d0fa6a33d1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-H5CRP5OT.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>All the above commands displayed the same output.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0466.html}</p>
+<h2 class="style3" id="exercise-15-1-change-system-hostname">Exercise 15-1: Change System Hostname</h2>
+<p>\</p>
+<p>This exercise should be done on both server1 and server2 as user1 with
+sudo where required.</p>
+<p>\</p>
+<p>In this exercise, you will change the hostnames of both lab servers
+persistently. You will rename server1.example.com to
+server10.example.com by editing a file and restarting the corresponding
+service daemon. You will rename server2.example.com to
+server20.example.com using a command. You will validate the change on
+both systems.</p>
+<p>\</p>
+<p>On server1:</p>
+<p>\</p>
+<p>1. Open the /etc/hostname file in a text editor and change the current
+entry to the following:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fce5cf5ba51d12d4c01bfea235e9023b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-QP2K26GE.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fce5cf5ba51d12d4c01bfea235e9023b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-QP2K26GE.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Execute the systemctl command to restart the systemd-hostnamed
+service and verify the new hostname with the hostname command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-eb1f6b2aadb563d7d3af857fead7a354" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-W43WEV1X.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-eb1f6b2aadb563d7d3af857fead7a354"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-W43WEV1X.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. To view the reflection of the new hostname in the command prompt,
+log off and log back in as user1. The new prompt will look like:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-39e236db0c2d704208d07dbfed8f4d07" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YEUTYO6N.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-39e236db0c2d704208d07dbfed8f4d07"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YEUTYO6N.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>On server2:</p>
+<p>\</p>
+<p>1. Execute the hostnamectl command to change the hostname to
+server20.example.com:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-2b00974d0bab215b8ad425ca1b577f1a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-6YWIE1SY.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2b00974d0bab215b8ad425ca1b577f1a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-6YWIE1SY.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. To view the reflection of the new hostname in the command prompt,
+log off and log back in as user1. You can also use the hostname command
+to view the new name.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-bc36220ae226c3ca50456484fdafa7eb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5E8TDXP3.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bc36220ae226c3ca50456484fdafa7eb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5E8TDXP3.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>You can also change the system hostname using the nmcli command. For
+instance, you could have used nmcli general hostname
+server20.example.com to rename server2.example.com. The nmcli command is
+explained in detail later in this chapter.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: You need to know only one of the available methods to change
+the system hostname.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Going forward, you will be using the new hostnames server10 and
+server20.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0467.html}</p>
+<h2 id="ipv4-address">IPv4 Address</h2>
+<p>\</p>
+<p>IPv4 stands for Internet Protocol version 4 and represents a unique
+32-bit software address that every single entity on the network must
+have in order to communicate with other entities. It was the first
+version of IP that was released for public use. IPv4 addresses are also
+referred to as dotted-quad addresses, and they can be assigned on a
+temporary or permanent basis. Temporary addresses are referred to as
+dynamic addresses and are typically leased from a DHCP server for a
+specific period of time. Permanent addresses, on the other hand, are
+called static addresses and they are manually set.</p>
+<p>\</p>
+<p>You can use the ip command with the addr argument to view the current IP
+assignments on the system. Let&rsquo;s run this command on server10 and see
+what it returns:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e0d6bbf61b02f3fc4920e3b842fd9e9c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-DC5CHQGL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e0d6bbf61b02f3fc4920e3b842fd9e9c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-DC5CHQGL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output indicates one configured network connection (number 2 above)
+called enp0s3 with IPv4 address 192.168.0.110 assigned to it. The other
+connection (number 1 above), represented as lo, is a special purpose
+software device reserved for use on every Linux system. Its IPv4 address
+is always 127.0.0.1, and it is referred to as the system&rsquo;s loopback (or
+localhost) address. Network programs and applications that communicate
+with the local system employ this hostname.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0468.html}</p>
+<h2 class="style3" id="classful-network-addressing">Classful Network Addressing</h2>
+<p>\</p>
+<p>An IPv4 address is comprised of four period-separated octets (4 x 8 =
+32-bit address) that are divided into a network portion (or network
+ID/bits) comprising of the Most Significant Bits (MSBs) and a node
+portion (or node/host ID/bits) containing the Least Significant Bits
+(LSBs). The network portion identifies the correct destination network,
+and the node portion represents the correct destination node on that
+network. Public network addresses are classified into three categories:
+class A, class B, and class C. Private network addresses are classified
+into two categories: class D and class E. Class D addresses are
+multicast and they are employed in special use cases only. Class E
+addresses are experimental and are reserved for future use.</p>
+<p>\</p>
+<h3 class="style3" id="class-a">Class A</h3>
+<p>Class A addresses are used for large networks with up to 16 million
+nodes. This class uses the first octet as the network portion and the
+rest of the octets as the node portion. The total number of usable
+network and node addresses can be up to 126 and 16,777,214,
+respectively. The network address range for class A networks is between
+0 and 126. See an example below of a random class A IP address, which
+also shows two reserved addresses:</p>
+<p>\</p>
+<hr>
+<p>10.121.51.209                       (class A IP address)</p>
+<p>10.121.51.0                         (network address)</p>
+<p>10.121.51.255                       (broadcast address)</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>The 0 and 255 (highlighted) are network and broadcast addresses, and
+they are always reserved.</p>
+<p>\</p>
+<h3 class="style3" id="class-b">Class B</h3>
+<p>Class B addresses are used for mid-sized networks with up to 65 thousand
+nodes. This class employs the first two octets as the network portion
+and the other two as the node portion. The total number of usable
+network and node addresses can be up to 16,384 and 65,534, respectively.
+The network address range for class B networks is between 128 and 191.
+See an example below of a random class B IP address, which also shows
+two reserved addresses:</p>
+<p>\</p>
+<hr>
+<p>161.121.51.209                      (class B IP address)</p>
+<p>161.121.51.0                        (network address)</p>
+<p>161.121.51.255                      (broadcast address)</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>The 0 and 255 (highlighted) are network and broadcast addresses, and
+they are always reserved.</p>
+<p>\</p>
+<h3 class="style3" id="class-c">Class C</h3>
+<p>Class C addresses are employed for small networks with up to 254 nodes.
+This class uses the first three octets as the network portion and the
+last octet as the node portion. The total number of usable network and
+node addresses can be up to 2,097,152 and 254, respectively. The network
+address range for class C networks is between 192 and 223. See an
+example below of an arbitrary class C IP address, which also shows two
+reserved addresses:</p>
+<p>\</p>
+<hr>
+<p>215.121.51.209                      (class C IP address)</p>
+<p>215.121.51.0                        (network address)</p>
+<p>215.121.51.255                      (broadcast address)</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>The 0 and 255 (highlighted) are network and broadcast addresses, and
+they are always reserved.</p>
+<p>\</p>
+<h3 class="style3" id="class-d">Class D</h3>
+<p>Class D addresses range from 224 to 239.</p>
+<p>\</p>
+<h3 class="style3" id="class-e">Class E</h3>
+<p>Class E addresses range from 240 to 255.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0469.html}</p>
+<h2 class="style3" id="subnetting">Subnetting</h2>
+<p>\</p>
+<p>Subnetting is a technique by which a large network address space is
+divided into several smaller and more manageable logical subnetworks,
+referred to as subnets. Subnetting results in reduced network traffic,
+improved network performance, and de-centralized and easier
+administration, among other benefits. Subnetting does not touch the
+network bits; it uses the node bits only.</p>
+<p>\</p>
+<p>The following should be kept in mind when dealing with subnetting:</p>
+<p>\</p>
+<p>Subnetting results in the reduction of usable addresses.</p>
+<p>\</p>
+<p>All nodes in a given subnet have the same subnet mask.</p>
+<p>\</p>
+<p>Each subnet acts as an isolated network and requires a router to talk to
+other subnets.</p>
+<p>\</p>
+<p>The first and the last IP address in a subnet are reserved. The first
+address points to the subnet itself, and the last address is the
+broadcast address.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0470.html}</p>
+<h2 class="style3" id="subnet-mask">Subnet Mask</h2>
+<p>\</p>
+<p>A subnet mask or netmask is the network portion plus the subnet bits. It
+segregates the network bits from the node bits. It is used by routers to
+pinpoint the start and end of the network/subnet portion and the start
+and end of the node portion for a given IP address.</p>
+<p>\</p>
+<p>The subnet mask, like an IP address, can be represented in either
+decimal or binary notation. The 1s in the subnet mask isolate the subnet
+bits from the node bits that contain 0s. The default subnet masks for
+class A, B, and C networks are 255.0.0.0, 255.255.0.0, and
+255.255.255.0, respectively.</p>
+<p>\</p>
+<p>To determine the subnet address for an arbitrary IP address, such as
+192.168.12.72 with netmask 255.255.255.224, write the IP address in
+binary format. Then write the subnet mask in binary format with all
+network and subnet bits set to 1 and all node bits set to 0. Then
+perform a logical AND operation. For each matching 1 you get a 1,
+otherwise you get a 0. The following highlights the ANDed bits:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-32e9076c171cdb4d5dee3ea5e74ba33a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-S525VJKR.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-32e9076c171cdb4d5dee3ea5e74ba33a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-S525VJKR.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This calculation enables you to ascertain the subnet address from a
+given IP and subnet mask.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0471.html}</p>
+<h2 class="style3" id="classless-network-addressing">Classless Network Addressing</h2>
+<p>\</p>
+<p>Classless Inter-Domain Routing (CIDR) is a technique designed to control
+the quick depletion of IPv4 addresses and the rapid surge in the number
+of routing tables required to route IPv4 traffic on the network and the
+Internet. This technique was introduced as a substitute for the classful
+scheme, which was not scalable and had other limitations. Using CIDR,
+IPv4 addresses can be allocated in custom blocks suitable for networks
+of all sizes. This technique has resulted in smaller and less cluttered
+routing tables. CIDR was originally designed to address IPv4 needs;
+however, it has been extended to support IPv6 as well.</p>
+<p>\</p>
+<p>An IPv4 address written in CIDR notation has a leading forward slash (/)
+character followed by the number of routing bits. A sample IP address of
+192.168.0.20 with the default class C subnet mask of 255.255.255.0 will
+be written as 192.168.0.20/24. This notation presents a compact method
+of denoting an IP address along with its subnet mask.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0472.html}</p>
+<h2 class="style3" id="protocol">Protocol</h2>
+<p>\</p>
+<p>A protocol is a set of rules governing the exchange of data between two
+network entities. These rules include how data is formatted, coded, and
+controlled. The rules also provide error handling, speed matching, and
+data packet sequencing. In other words, a protocol is a common language
+that all nodes on the network speak and understand. Protocols are
+defined in the /etc/protocols file. An excerpt from this file is
+provided below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-2957c3b505b05396298f75e2248c8703" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-E7431CE3.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2957c3b505b05396298f75e2248c8703"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-E7431CE3.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Column 1 in the output lists the name of a protocol, followed by the
+associated port number, alias, and a short description in columns 2, 3,
+and 4.</p>
+<p>\</p>
+<p>Some common protocols are TCP, UDP, IP, and ICMP.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0473.html}</p>
+<h2 class="style3" id="tcp-and-udp-protocols">TCP and UDP Protocols</h2>
+<p>\</p>
+<p>TCP (Transmission Control Protocol) and UDP (User Datagram Protocol)
+protocols are responsible for transporting data packets between network
+entities. TCP is reliable, connection-oriented, and point-to-point. It
+inspects for errors and sequencing upon a packet&rsquo;s arrival on the
+destination node, and returns an acknowledgement to the source node,
+establishing a point-to-point connection with the peer TCP layer on the
+source node. If the packet is received with an error or if it is lost in
+transit, the destination node requests a resend of the packet. This
+ensures guaranteed data delivery and makes TCP reliable. Due to its
+reliability and connection-oriented nature, TCP is widely implemented in
+network applications.</p>
+<p>\</p>
+<p>UDP, in contrast, is unreliable, connectionless, and multi-point. If a
+packet is lost or contains errors upon arrival at the destination, the
+source node is unaware of it. The destination node does not send an
+acknowledgment back to the source node. A common use of this protocol is
+in broadcast-only applications where reliability is not sought.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0474.html}</p>
+<h2 class="style3" id="well-known-ports">Well-Known Ports</h2>
+<p>\</p>
+<p>Both TCP and UDP use ports for data transmission between a client and
+its server program. Ports are either well-known or private. A well-known
+port is reserved for an application&rsquo;s exclusive use, and it is
+standardized across all network operating systems. Well-known ports are
+defined in the /etc/services file, an excerpt of which is presented
+below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-3da6bef8003fe0b131486247aa4bc46c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-CPHWPC0K.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3da6bef8003fe0b131486247aa4bc46c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-CPHWPC0K.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Column 1 lists the official name of a network service, followed by the
+port number and transport layer protocol the service uses, optional
+aliases, and comments in successive columns.</p>
+<p>\</p>
+<p>Some common services and the ports they listen on are FTP (File Transfer
+Protocol) 21, SSH (Secure Shell) 22, SMTP (Simple Mail Transfer
+Protocol) 25, DNS (Domain Name System) 53, HTTP (HyperText Transfer
+Protocol) 80, NTP (Network Time Protocol) 123, secure HTTP (HyperText
+Transfer Protocol Secure) 443, and rsyslog 514.</p>
+<p>\</p>
+<p>A private port, on the other hand, is an arbitrary number generated when
+a client application attempts to establish a communication session with
+its server process. This port number no longer exists after the session
+has ended.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0475.html}</p>
+<h2 class="style3" id="icmp-protocol">ICMP Protocol</h2>
+<p>\</p>
+<p>The Internet Control Message Protocol (ICMP) is a key protocol. It is
+primarily used for testing and diagnosing network connections. Commands
+such as ping uses this protocol to send a stream of messages to remote
+network devices to examine their health and report statistical and
+diagnostic information. The report includes the number of packets
+transmitted, received, and lost; a round-trip time for individual
+packets with an overall average; a percentage of packets lost during the
+communication; and so on. See a sample below that shows two packets
+(-c2) sent from server10 to the IP address of server20:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-5cf8a55632a0983bd1c02269b6795c62" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-JL8F9TOU.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5cf8a55632a0983bd1c02269b6795c62"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-JL8F9TOU.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Other commands, such as traceroute, also employ this protocol for route
+determination and debugging between network entities. The IPv6 version
+of ICMP is referred to as ICMPv6 and it is used by tools such as ping6
+and tracepath6.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0476.html}</p>
+<h2 class="style3" id="ethernet-address">Ethernet Address</h2>
+<p>\</p>
+<p>An Ethernet address represents an exclusive 48-bit address that is used
+to identify the correct destination node for data packets transmitted
+from the source node. The data packets include hardware addresses for
+the source and the destination node. The Ethernet address is also
+referred to as the hardware, physical, link layer, or MAC address.</p>
+<p>\</p>
+<p>You can use the ip command to list all network interfaces available on
+the system along with their Ethernet addresses:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-bf6493e610dbb0f3ad755d919cb9a34d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-2F9CISML.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bf6493e610dbb0f3ad755d919cb9a34d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-2F9CISML.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>IP and hardware addresses work hand in hand, and a combination of both
+is critical to identifying the correct destination node on the network.
+A network protocol called Address Resolution Protocol (ARP) is used to
+enable IP and hardware addresses to work in tandem. ARP determines the
+hardware address of the destination node when its IP address is known.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0477.html}</p>
+<h2 id="ipv6-address">IPv6 Address</h2>
+<p>\</p>
+<p>With the explosive growth of the Internet, the presence of an extremely
+large number of network nodes requiring an IP, and an ever-increasing
+demand for additional addresses&mdash;the conventional IPv4 address space,
+which provides approximately 4.3 billion addresses&mdash;has been exhausted.
+To meet the future demand, a new version of IP is now available and its
+use is expanding. This new version is referred to as IPv6 (IP version 6)
+or IPng (IP next generation). By default, IPv6 is enabled in RHEL 9 on
+all configured network connections.</p>
+<p>\</p>
+<p>IPv6 is a 128-bit software address, providing access to approximately
+340 undecillion (340 followed by 36 zeros) addresses. This is an
+extremely large space, and it is expected to fulfill the IP requirements
+for several decades to come.</p>
+<p>\</p>
+<p>IPv6 uses a messaging protocol called Neighbor Discovery Protocol (NDP)
+to probe the network to discover neighboring IPv6 devices, determine
+their reachability, and map their associations. This protocol also
+includes enhanced functionalities (provided by ICMP and ARP on IPv4
+networks) for troubleshooting issues pertaining to connectivity, address
+duplication, and routing.</p>
+<p>\</p>
+<p>Unlike IPv4 addresses, which are represented as four dot-separated
+octets, IPv6 addresses contain eight colon-separated groups of four
+hexadecimal numbers. A sample IPv6 would be
+2001:1970:5383:4b00:a00:27ff:fe5f:fd43/64. It looks a bit daunting at
+first sight, but there are methods that will simplify their
+representation.</p>
+<p>\</p>
+<p>The ip addr command also shows IPv6 addresses for the interfaces:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-78026bc1717bca45054d5ba6099c0bee" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YG09ZPGB.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-78026bc1717bca45054d5ba6099c0bee"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YG09ZPGB.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>It returns two IPv6 addresses. The first one belongs to the loopback
+interface, and the second one is assigned to the enp0s3 connection.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0478.html}</p>
+<h2 class="style3" id="major-differences-between-ipv4-and-ipv6">Major Differences between IPv4 and IPv6</h2>
+<p>\</p>
+<p>There are a number of differences between IPv4 and IPv6 protocols. Some
+of the major ones are highlighted in Table 15-1.</p>
+<p>\</p>
+<hr>
+<p>IPv4                                IPv6</p>
+<p>Uses 4x8-bit, period-separated      Uses 8x16-bit, colon-separated
+decimal number format for address   hexadecimal number format for
+representation.                     address representation.</p>
+<p>Example: 192.168.0.100              Example: fe80::a00:27ff:feae:f35b</p>
+<p>Number of address bits: 32          Number of address bits: 128</p>
+<p>Maximum number of addresses: ~4.3  Maximum number of addresses:
+billion.                            virtually unlimited</p>
+<p>Common testing and troubleshooting  Common testing and troubleshooting
+tools: ping, traceroute, tracepath, tools: ping6, traceroute6,
+etc.                                tracepath6, etc.</p>
+<p>Support for IP autoconfiguration:   Support for IP autoconfiguration:
+no                                  yes</p>
+<p>Packet size: 576 bytes              Packet size: 1280 bytes</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 15-1 IPv4 vs IPv6</p>
+<p>\</p>
+<p>These and other differences not listed here are due to enhancements and
+new features added to IPv6.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0479.html}</p>
+<h2 class="style3" id="network-devices-and-connections">Network Devices and Connections</h2>
+<p>\</p>
+<p>Network Interface Cards (NICs) are hardware adapters that provide one or
+more Ethernet ports for network connectivity. NICs may also be referred
+to as network adapters and individual ports as network interfaces or
+network devices. NICs may be built-in to the system board or are add-on
+adapters. They are available in one, two, and four port designs on a
+single adapter.</p>
+<p>\</p>
+<p>Individual interfaces (devices) can have one or more connection profiles
+attached to them with different configuration settings. Each connection
+profile has a unique name and includes settings such as the device name,
+UUID, hardware address, IP address, and so on. A connection profile can
+be configured by editing files or using commands. A device can have
+multiple connection profiles attached, but only one of them can be
+active at a time.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0480.html}</p>
+<h2 class="style3" id="consistent-network-device-naming">Consistent Network Device Naming</h2>
+<p>\</p>
+<p>In RHEL versions 6 and earlier, network interfaces used eth (Ethernet),
+em (embedded), and wlan (wireless lan) naming and were numbered 0 and
+onwards as the interfaces were discovered during a system boot. This was
+the default scheme that had been in place for network device naming for
+years. Given multiple interfaces located onboard and on add-on NICs, the
+number assignments could possibly change on the next boot due to
+failures or errors in their detection, which could possibly result in
+connectivity and operational issues.</p>
+<p>\</p>
+<p>As of RHEL 7, the default naming scheme has been augmented to base on
+several rules governed by a service called udevd. The default ruleset is
+to assign names using the device&rsquo;s location and topology, and the
+setting in firmware. The underlying virtualization layer (VMware,
+VirtualBox, KVM, Hyper-V) also plays a role in the naming. Some sample
+device names are enp0s3, ens160, etc.</p>
+<p>\</p>
+<p>This advanced ruleset has resulted in consistent and predictable naming,
+eliminating the odds of reenumeration during a hardware rescan.
+Moreover, the designated names are not affected by the addition or
+removal of interface cards. This naming scheme helps in identifying,
+configuring, troubleshooting, and replacing the right adapter without
+hassle.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0481.html}</p>
+<h2 class="style3" id="exercise-15-2-add-network-devices-to-server10-and-server20">Exercise 15-2: Add Network Devices to server10 and server20</h2>
+<p>\</p>
+<p>This exercise will add one network interface to server10 and one to
+server20 using VirtualBox.</p>
+<p>\</p>
+<p>In this exercise, you will shut down server10 and server20. You will
+launch VirtualBox Manager and add one network interface to server10 and
+one to server20. You will power on both servers and confirm new
+interfaces.</p>
+<p>\</p>
+<p>1. Execute sudo shutdown now on server10.</p>
+<p>2. Start VirtualBox on your Windows/Mac computer and highlight the
+RHEL9-VM1 virtual machine.</p>
+<p>3. Click Settings at the top and then Network on the window that pops
+up. Click on &ldquo;Adapter 2&rdquo; and check the &ldquo;Enable Network Adapter&rdquo; box.
+Select &ldquo;Internal Network&rdquo; from the drop down list next to &ldquo;Attached to&rdquo;.
+See Figure 15-1.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-d665ca7cd3a575a6c537900c53128809" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-908NCBCE.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d665ca7cd3a575a6c537900c53128809"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-908NCBCE.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 15-1 VirtualBox Manager | Add Network Interface</p>
+<p>\</p>
+<p>4. Click OK to return to the main VirtualBox interface.</p>
+<p>5. Power on RHEL9-VM1 to boot RHEL 9 in it.</p>
+<p>6. When the server is up, log on as user1 and run the ip command to
+verify the new interface:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7179d06cf88c67a0b996907aefdc0e77" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BZSQYGEE.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7179d06cf88c67a0b996907aefdc0e77"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BZSQYGEE.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output reveals a new network device called enp0s8. This is the
+interface that you just added to the VM.</p>
+<p>\</p>
+<p>7. Repeat steps 1 through 6 to add a network interface to server20 and
+verify.</p>
+<p>\</p>
+<p>This completes the addition of new network interfaces to server10 and
+server20. You are now ready to use them in the upcoming exercises.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0482.html}</p>
+<h2 class="style3" id="the-networkmanager-service">The NetworkManager Service</h2>
+<p>\</p>
+<p>NetworkManager is the default interface and connection configuration,
+administration, and monitoring service used in RHEL 9. This service has
+a daemon program called NetworkManager, which is responsible for keeping
+available interfaces and connections up and active. It offers a powerful
+command line tool called nmcli to manage interfaces and connections, and
+to control the service. This utility offers many options for their
+effective management. The NetworkManager service also furnishes a
+text-based interface called nmtui and a graphical equivalent called
+nm-connection-editor that you may use in lieu of nmcli.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0483.html}</p>
+<h2 class="style3" id="understanding-interface-connection-profile">Understanding Interface Connection Profile</h2>
+<p>\</p>
+<p>Each network connection has a configuration file that defines IP
+assignments and other relevant parameters for it. The networking
+subsystem reads this file and applies the settings at the time the
+connection is activated. Connection configuration files (or connection
+profiles) are stored in a central location under the
+/etc/NetworkManager/system-connections directory. The filenames are
+identified by the interface connection names with nmconnection as the
+extension. Some instances of connection profiles are
+enp0s3.nmconnection, ens160.nmconnection, and em1.nmconnection.</p>
+<p>\</p>
+<p>On server10 and server20, the device name for the first interface is
+enp0s3 with connection name enp0s3 and relevant connection information
+stored in the enp0s3.nmconnection file. This connection was established
+at the time of RHEL installation. The current content of the file from
+server10 are presented below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-14d0e3510859739b7cee9aa6a514cf68" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-I9WYVULT.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-14d0e3510859739b7cee9aa6a514cf68"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-I9WYVULT.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The file has multiple sections. Each section defines a set of networking
+properties for the connection. The output above shows five
+sections&mdash;connection, ethernet, ipv4, ipv6, and proxy. There are no
+settings under ethernet and proxy. The other three have a few properties
+defined and they are outlined in Table 15-2 in the order in which they
+are listed.</p>
+<p>\</p>
+<hr>
+<p>Property                            Description</p>
+<p>id                                  Any description given to this
+connection. The default matches the
+interface name.</p>
+<p>uuid                                The UUID associated with this
+connection</p>
+<p>type                                Specifies the type of this
+connection</p>
+<p>autoconnect-priority                If the connection is set to
+autoconnect, connections with
+higher priority will be preferred.
+A higher number means higher
+priority. The range is between -999
+and 999 with 0 being the default.</p>
+<p>interface_name                      Specifies the device name for the
+network interface</p>
+<p>timestamp                           The time, in seconds since the Unix
+Epoch that the connection was last
+activated successfully. This field
+is automatically populated each
+time the connection is activated.</p>
+<p>address1/method                     Specifies the static IP for the
+connection if the method property
+is set to manual. /24 represents
+the subnet mask.</p>
+<p>addr-gen-mode/method                Generates an IPv6 address based on
+the hardware address of the
+interface.</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 15-2 Network Connection Configuration Directives</p>
+<p>\</p>
+<p>There are hundreds of other properties that may be defined in connection
+profiles depending on the type of interface. Run man nm-settings for a
+description of additional properties.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0484.html}</p>
+<h2 class="style3" id="network-device-and-connection-administration-tools">Network Device and Connection Administration Tools</h2>
+<p>\</p>
+<p>There are a few tools and methods available for configuring and
+administering network interfaces, connections, and connection profiles.
+The NetworkManager service includes a toolset for this purpose as well.
+Let&rsquo;s take a quick look at the basic management tools in Table 15-3.</p>
+<p>\</p>
+<hr>
+<p>Command                             Description</p>
+<p>ip                                  A powerful and versatile tool for
+displaying, monitoring, and
+managing interfaces, connections,
+routing, traffic, etc.</p>
+<p>nmcli                               Creates, updates, deletes,
+activates, and deactivates a
+connection profile.</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 15-3 Network Interface Management Tools</p>
+<p>\</p>
+<p>You can manually create a connection profile and attach it to a network
+device. Many Linux administrators prefer this approach. RHEL also offers
+an alternative method for this purpose, which is discussed later in this
+chapter.</p>
+<p>\</p>
+<p>The ifup, ifdown, and ifconfig commands, and storing interface profiles
+in the /etc/sysconfig/network-scripts directory are deprecated and
+should not be used anymore. The NetworkManager service and associated
+tools are the replacements.</p>
+<p>\</p>
+<p>In Exercise 15-3, you&rsquo;ll use the manual method to configure a connection
+profile for a new network device that was added in Exercise 15-2 and
+employ the tools listed in Table 15-3.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0485.html}</p>
+<h2 class="style3" id="the-nmcli-command">The nmcli Command</h2>
+<p>\</p>
+<p>nmcli is a NetworkManager command line tool that is employed to create,
+view, modify, remove, activate, and deactivate network connections, and
+to control and report network device status. It operates on seven
+different object categories, with each category supporting several
+options to form a complete command. The seven categories are general,
+networking, connection, device, radio, monitor, and agent. This
+discussion only focuses on the connection and device object categories.
+They are described in Table 15-4 along with management operations that
+they can perform.</p>
+<p>\</p>
+<hr>
+<p>Object                              Description</p>
+<p>Connection: activates, deactivates,
+and administers network connections</p>
+<p>show                                Lists connections</p>
+<p>up / down                           Activates/deactivates a connection</p>
+<p>add                                 Adds a connection</p>
+<p>edit                                Edits an existing connection or
+adds a new one</p>
+<p>modify                              Modifies one or more properties of
+a connection</p>
+<p>delete                              Deletes a connection</p>
+<p>reload                              Instructs NetworkManager to re-read
+all connection profiles</p>
+<p>load                                Instructs NetworkManager to re-read
+a connection profile</p>
+<p>Device: displays and administers <br>
+network interfaces</p>
+<p>status                              Exhibits device status</p>
+<p>show                                Displays detailed information about
+all or the specified interface</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 15-4 Network Connection and Device Administration Tools</p>
+<p>\</p>
+<p>Object categories and the objects within them may be written in an
+abridged form to save typing. For instance, the connection category may
+be abbreviated as a &ldquo;c&rdquo; or &ldquo;con&rdquo; and the device category as a &ldquo;d&rdquo; or
+&ldquo;dev&rdquo;. The same rule applies to object names as well. For instance, add
+may be specified as an &ldquo;a&rdquo;, delete as a &ldquo;d&rdquo;, and so on. Check the manual
+pages for nmcli-examples.</p>
+<p>\</p>
+<p>The nmcli command supports tab completion to make its use easier. Let&rsquo;s
+run a few examples on server10 to understand the command&rsquo;s usage.</p>
+<p>\</p>
+<p>To show (s) all available connections (c) including both active and
+inactive:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-4a018b4fd4446331903b8a9b68aa5884" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FEGVOF1H.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4a018b4fd4446331903b8a9b68aa5884"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FEGVOF1H.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output lists two connection profiles (NAME) and the devices (DEVICE)
+they are attached to. It also shows their UUID and type.</p>
+<p>\</p>
+<p>To deactivate (down) the connection (c) enp0s8:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-d7c31b8c22d26f1b4a67933359a83cd9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-OGXVUNJ2.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d7c31b8c22d26f1b4a67933359a83cd9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-OGXVUNJ2.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The connection profile is detached from the device, disabling the
+connection. You can check with nmcli c s.</p>
+<p>\</p>
+<p>To activate (up) the connection (c) enp0s8:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-286f242c11a37f274c1139e20c00b933" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BBQZ027O.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-286f242c11a37f274c1139e20c00b933"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BBQZ027O.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The connection profile is reattached to the device, enabling the
+connection. You can check with nmcli c s.</p>
+<p>\</p>
+<p>To display the status (s) of all available network devices (d):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a7672ae1d16c956c09c0944eb58bb5bc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-7QIY5FAN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a7672ae1d16c956c09c0944eb58bb5bc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-7QIY5FAN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output shows three devices and their types, states, and the
+connection profiles attached to them. The loopback interface is not
+managed by the NetworkManager service.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0486.html}</p>
+<h2 class="style3" id="exercise-15-3-configure-new-network-connection-manually">Exercise 15-3: Configure New Network Connection Manually</h2>
+<p>\</p>
+<p>This exercise should be done on server10 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will create a connection profile for the new
+network interface enp0s8 using a text editing tool. You will assign the
+IP 172.10.10.110/24 with gateway 172.10.10.1 and set it to autoactivate
+at system reboots. You will deactivate and reactivate this interface at
+the command prompt.</p>
+<p>\</p>
+<p>1. Create a file called enp0s8-nmconnection in the
+/etc/NetworkManager/system-connections directory and enter the following
+information to establish a connection profile:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-3febda1c85420d6b0955e8d319eae2b0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WDSOD3CW.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3febda1c85420d6b0955e8d319eae2b0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WDSOD3CW.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Deactivate and reactivate this interface using the nmcli command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7fb41d4f45e7c3c7e1503ef90201bdb8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-EX3VEWYC.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7fb41d4f45e7c3c7e1503ef90201bdb8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-EX3VEWYC.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Verify the activation of the connection:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-11c071940eeb1f156f3619b65230b751" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-R1P6M917.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-11c071940eeb1f156f3619b65230b751"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-R1P6M917.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The new connection profile has been applied to the new network device
+enp0s8. The connection is now ready for use. The connectivity to
+server10 over this new connection will be tested later in this chapter.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0487.html}</p>
+<h2 class="style3" id="exercise-15-4-configure-new-network-connection-using-nmcli">Exercise 15-4: Configure New Network Connection Using nmcli</h2>
+<p>\</p>
+<p>This exercise should be done on server20 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will create a connection profile using the nmcli
+command for the new network interface enp0s8 that was added to server20
+in Exercise 15-2. You will assign the IP 172.10.10.120/24 with gateway
+172.10.10.1, and confirm.</p>
+<p>\</p>
+<p>1. Check the presence of the new interface:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-5bb5178e8e66bf82edf6c975c146a179" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZKNVR3JS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5bb5178e8e66bf82edf6c975c146a179"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZKNVR3JS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output signifies the existence of a new network device called
+enp0s8. It does not have a connection profile attached at the moment.</p>
+<p>\</p>
+<p>2. Add (a) a connection profile (c) and attach it to the new interface.
+Use the type Ethernet, device name (ifname) enp0s8 with a matching
+connection name (con-name), CIDR (ip4) 172.10.10.120/24, and gateway
+(gw4) 172.10.10.1:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-3840d03f97d6bee712c09b738a261491" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BFAAEYAO.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3840d03f97d6bee712c09b738a261491"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BFAAEYAO.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>A new connection has been added, attached to the new interface, and
+activated. In addition, the command has saved the connection information
+in a new file called enp0s8-nmconnection and stored it in the
+/etc/NetworkManager/system-connections directory.</p>
+<p>\</p>
+<p>3. Confirm the new connection status:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-aa378d01f45ca96902b52bc1846a28be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-0MHFB9HV.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aa378d01f45ca96902b52bc1846a28be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-0MHFB9HV.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output indicates the association of the new connection with the
+network device.</p>
+<p>\</p>
+<p>4. Check the content of the enp0s8-nmconnection file:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-766d030bfc19c8d8d32dd555a6946ff5" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-V49TV5JB.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-766d030bfc19c8d8d32dd555a6946ff5"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-V49TV5JB.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>There are a number of default directives added to the connection profile
+in addition to the configuration items you entered with the nmcli
+command above.</p>
+<p>\</p>
+<p>5. Check the IP assignments for the new connection:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-0033067611cfb08955f40b22be8ee884" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-A19ICJSS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0033067611cfb08955f40b22be8ee884"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-A19ICJSS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The IP is assigned to the interface. The connection will be tested later
+in this chapter.</p>
+<p>\</p>
+<p>This brings the exercise to a conclusion.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: You need to know only one of the available methods to set IP
+assignments.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0488.html}</p>
+<h2 class="style3" id="understanding-hosts-table">Understanding Hosts Table</h2>
+<p>\</p>
+<p>Each IP address used on the system should have a hostname assigned to
+it. In an environment with multiple systems on the network, it is
+prudent to have some sort of a hostname to IP address resolution method
+in place to avoid typing the destination system IP repeatedly to access
+it. DNS is one such method. It is designed for large networks such as
+corporate networks and the Internet. For small, internal networks, the
+use of a local hosts table (the /etc/hosts file) is also common. This
+table is used to maintain hostname to IP mapping for systems on the
+local network, allowing us to access a system by simply employing its
+hostname. In this book, there are two systems in place:
+server10.example.com with IP 192.168.0.110 and alias server10, and
+server20.example.com with IP 192.168.0.120 and alias server20. You can
+append this information to the /etc/hosts file on both server10 and
+server20 as shown below:</p>
+<p>\</p>
+<hr>
+<p>192.168.0.110           server10.example.com    server10</p>
+<p>192.168.0.120           server20.example.com    server20</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Each row in the file contains an IP address in column 1 followed by the
+official (or canonical) hostname in column 2, and one or more optional
+aliases thereafter. The official hostname and one or more aliases give
+users the flexibility of accessing the system using any of these names.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: In the presence of an active DNS with all hostnames
+resolvable, there is no need to worry about updating the hosts file.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>As expressed above, the use of the hosts file is common on small
+networks, and it should be updated on each individual system to reflect
+any changes for best inter-system connectivity experience.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0489.html}</p>
+<h2 class="style3" id="testing-network-connectivity">Testing Network Connectivity</h2>
+<p>\</p>
+<p>RHEL includes the ping command to examine network connectivity between
+two systems. It uses the IP address of the destination system to send a
+series of 64-byte Internet Control Message Protocol (ICMP) test packets
+to it. A response from the remote system validates connectivity and
+health. With the -c option, you can specify the number of packets that
+you want transmitted.</p>
+<p>\</p>
+<p>The following sends two packets from server10 to 192.168.0.120
+(server20):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-34f50d111e01bed79dcdd8922a16ca6f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-K8CE63IT.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-34f50d111e01bed79dcdd8922a16ca6f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-K8CE63IT.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Under &ldquo;192.168.0.120 ping statistics,&rdquo; the output depicts the number of
+packets transmitted, received, and lost. The packet loss should be 0%,
+and the round-trip time should not be too high for a healthy connection.
+In general, you can use this command to test connectivity with the
+system&rsquo;s own IP, the loopback IP (127.0.0.1), a static route, the
+default gateway, and any other address on the local or remote network.</p>
+<p>\</p>
+<p>If a ping response fails, you need to check if the NIC is seated
+properly, its driver is installed, network cable is secured
+appropriately, IP and netmask values are set correctly, and the default
+or static route is accurate.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0490.html}</p>
+<h2 class="style3" id="exercise-15-5-update-hosts-table-and-test-connectivity">Exercise 15-5: Update Hosts Table and Test Connectivity</h2>
+<p>\</p>
+<p>This exercise should be done on server10 and server20 as user1 with sudo
+where required.</p>
+<p>\</p>
+<p>In this exercise, you will update the /etc/hosts file on server10 and
+server20. You will add the IP addresses assigned to both connections and
+map them to hostnames server10, server10s8, server20, and server20s8
+appropriately. You will test connectivity from server10 to server20 and
+from server10s8 to server20s8 using their IP addresses and then their
+hostnames.</p>
+<p>\</p>
+<p>On server20:</p>
+<p>\</p>
+<p>1. Open the /etc/hosts file and add the following entries:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-646e415aed0b98a78f506e9ceb44d473" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BDOZQLFQ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-646e415aed0b98a78f506e9ceb44d473"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BDOZQLFQ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The IP addresses for both connections are added for both servers.</p>
+<p>\</p>
+<p>On server10:</p>
+<p>\</p>
+<p>2. Open the /etc/hosts file and add the following entries:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-58fe8e3e92675c9935d67d827dc2b6d9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-XRVPK61I.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-58fe8e3e92675c9935d67d827dc2b6d9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-XRVPK61I.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The IP addresses for both connections are added for both servers.</p>
+<p>\</p>
+<p>3. Send two packets from server10 to the IP address of server20:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-42dc3e72e098f2378c7c6b16290db87f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-QXTVCQ9J.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-42dc3e72e098f2378c7c6b16290db87f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-QXTVCQ9J.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Issue two ping packets on server10 to the hostname of server20:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-6354cb4fda88853f12395ffc1e97ea07" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5QK8GN1C.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6354cb4fda88853f12395ffc1e97ea07"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5QK8GN1C.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Send one packet from server10 to the IP address of server20s8:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-5db5b4b106cc480ddb4c7a5f70f5b749" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-93A700QQ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5db5b4b106cc480ddb4c7a5f70f5b749"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-93A700QQ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>6. Issue one ping packet on server10 to the hostname of server20s8:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fd2f5685ab45537b5233a976ce4ee994" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LCDENG3S.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fd2f5685ab45537b5233a976ce4ee994"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LCDENG3S.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Steps 3 through 6 verified the connectivity to the remote server over
+both connections. Each server has two IP addresses, and each IP address
+has a unique hostname assigned to it.</p>
+<p>\</p>
+<p>This concludes the exercise.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0491.html}</p>
+<h2 class="style3" id="chapter-summary">Chapter Summary</h2>
+<p>\</p>
+<p>This chapter discussed the rudiments of networking. It began by
+providing an understanding of various essential networking terms and
+concepts to build the foundation for networking topics going forward.
+Topics such as hostname, IPv4, IPv6, classful and classless network
+addressing, subnetting, subnet mask, protocol, port, Ethernet address,
+and consistent device naming were covered in sufficient detail.</p>
+<p>\</p>
+<p>We modified hostnames on both lab servers by modifying a configuration
+file and restarting the hostname service on one server and using a
+single command on the other. We employed two different methods to
+demonstrate multiple ways of doing the same thing. A third method was
+also mentioned to rename a hostname.</p>
+<p>\</p>
+<p>Next, we described the terms network devices and network connections,
+and realized the difference between the two. We examined a connection
+profile and looked at a number of directives that may be defined for a
+network connection. We added a new network device to each lab server and
+configured them by employing two different methods. We activated the new
+connections and performed a ping test for functional validation. Lastly,
+we populated the hosts tables with the IP and hostname mapping on both
+lab servers.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0492.html}</p>
+<h2 class="style3" id="review-questions">Review Questions</h2>
+<p>\</p>
+<p>1. Which service is responsible for maintaining consistent device
+naming?</p>
+<p>2. List three key differences between TCP and UDP protocols.</p>
+<p>3. What is the significance of the NAME and DEVICE directives in a
+connection profile?</p>
+<p>4. Which class of IP addresses has the least number of node addresses?</p>
+<p>5. Which command can you use to display the hardware address of a
+network device?</p>
+<p>6. Define protocol.</p>
+<p>7. Which directory stores the network connection profiles?</p>
+<p>8. True or False. A network device is a physical or virtual network
+port and a network connection is a configuration file attached to it.</p>
+<p>9. IPv4 is a 32-bit software address. How many bits does an IPv6
+address have?</p>
+<p>10. Which file defines the port and protocol mapping?</p>
+<p>11. What would the command hostnamectl set-hostname host20 do?</p>
+<p>12. Name the file that stores the hostname of the system.</p>
+<p>13. What would the command nmcli cs do?</p>
+<p>14. The /etc/hosts file maintains hostname to hardware address
+mappings. True or False?</p>
+<p>15. Which file contains service, port, and protocol mappings?</p>
+<p>16. What would the ip addr command produce?</p>
+<p>17. Which file would you consult to identify the port number and
+protocol associated with a network service?</p>
+<p>18. Name four commands that can be used to display the hostname.</p>
+<p>19. List any two benefits of subnetting.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0493.html}</p>
+<h2 class="style3" id="answers-to-review-questions">Answers to Review Questions</h2>
+<p>\</p>
+<p>1. The udevd service handles consistent naming of network devices.</p>
+<p>2. TCP is connection-oriented, reliable, and point-to-point; UDP is
+connectionless, unreliable, and multi-point.</p>
+<p>3. The NAME directive sets the name for the network connection and the
+DEVICE directive defines the network device the connection is associated
+with.</p>
+<p>4. The C class supports the least number of node addresses.</p>
+<p>5. The ip command.</p>
+<p>6. A set of rules that govern the exchange of information between two
+network entities.</p>
+<p>7. The /etc/NetworkManager/system-connections directory.</p>
+<p>8. True.</p>
+<p>9. 128.</p>
+<p>10. The /etc/protocols file.</p>
+<p>11. The command provided will update the /etc/hostname file with the
+specified hostname and restart the systemd-hostnamed daemon for the
+change to take effect.</p>
+<p>12. The /etc/hostname file.</p>
+<p>13. The command provided will display the status information for all
+network connections.</p>
+<p>14. False. This file maintains hostname to IP address mapping.</p>
+<p>15. The /etc/services file.</p>
+<p>16. This command provided will display information about network
+connections including IP assignments and hardware address.</p>
+<p>17. The /etc/services file.</p>
+<p>18. The hostname, uname, hostnamectl, and nmcli commands can be used to
+view the system hostname.</p>
+<p>19. Better manageability and less traffic.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0494.html}</p>
+<h2 id="do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</h2>
+<p>\</p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the labs have already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p>\</p>
+<p>Use the lab environment built specifically for end-of-chapter labs. See
+sub-section &ldquo;Lab Environment for End-of-Chapter Labs&rdquo; in Chapter 01
+&ldquo;Local Installation&rdquo; for details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0495.html}</p>
+<p>Lab 15-1: Add New Interface and Configure Connection Profile with nmcli</p>
+<p>\</p>
+<p>Add a third network interface to RHEL9-VM3 in VirtualBox.</p>
+<p>\</p>
+<p>As user1 with sudo on server30, run ip a and verify the addition of the
+new interface. Use the nmcli command and assign IP 192.168.0.230/24 and
+gateway 192.168.0.1. Deactivate and reactivate this connection manually.
+Add entry server30-3 to the hosts table. (Hint: Exercise 15-2 and
+Exercise 15-4).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0496.html}</p>
+<h2 class="style3" id="lab-15-2-add-new-interface-and-configure-connection-profile-manually">Lab 15-2: Add New Interface and Configure Connection Profile Manually</h2>
+<p>\</p>
+<p>Add a third network interface to RHEL9-VM4 in VirtualBox.</p>
+<p>\</p>
+<p>As user1 with sudo on server40, run ip a and verify the addition of the
+new interface. Make a copy of the enp0s3.nmconnection file for the new
+connection under /etc/NetworkManager/system-connections. Remove the UUID
+directive and set CIDR 192.168.0.240/24. Deactivate and reactivate this
+connection manually. Add entry server40-3 to the hosts table and run
+ping tests to server40-3 and its IP address. (Hint: Exercise 15-2 and
+Exercise 15-3).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0497.html}</p>
+<h2 id="networking-network-devices-and-network-management">Networking, Network Devices, and Network Management</h2>
+<hr>
+<h2 id="hostname-1">Hostname</h2>
+<ul>
+<li>&ldquo;-&rdquo;, &ldquo;_ &ldquo;, and &ldquo;. &quot; characters are allowed.</li>
+<li>Up to 253 characters.</li>
+<li>Stored in /etc/hostname.</li>
+</ul>
+<p>View the hostname:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>hostnamectl --static</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>hostname</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>uname -n</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/hostname</code></pre></div><h2 id="lab-change-the-hostname">Lab: Change the Hostname</h2>
+<p>Server1</p>
+<ol>
+<li>Open /etc/hostname and change the entry to server10.example.com</li>
+<li>restart the systemd-hostnamed service daemon</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo systemctl restart systemd-hostnamed</code></pre></div><ol start="3">
+<li>confirm</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>hostname</code></pre></div><p>server2</p>
+<ol>
+<li>Change the hostname with hostnamectl:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo hostnamectl set-hostname server21.example.com</code></pre></div><ol start="2">
+<li>
+<p>Log out and back in for the prompt to update</p>
+</li>
+<li>
+<p>Change the hostname using nmcli</p>
+</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>nmcli general hostname server20.example.com</code></pre></div><hr>
+<h2 id="ipv4">IPv4</h2>
+<hr>
+<p>View current ipv4 address:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip addr</code></pre></div><hr>
+<h2 id="protocols">Protocols</h2>
+<hr>
+<ul>
+<li>Defined in /etc/protocols</li>
+<li>Well known ports are defined in /etc/services</li>
+</ul>
+<h3 id="icmp">ICMP</h3>
+<p>Send two pings to server 20</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ping -c2 192.168.0.120</code></pre></div><p>Ping the server&rsquo;s loopback interface:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ping 172.0.0.1</code></pre></div><p>Send a traceroute to server 20</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>traceroute 192.168.0.120</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>tracepath</code></pre></div><h3 id="icmpv6">ICMPv6</h3>
+<ul>
+<li>IPv6 version of ICMP</li>
+<li>enabled by default</li>
+</ul>
+<p>Ping and ipv6 address:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ping6 </code></pre></div><p>Trace a route to an IPv6 address:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tracepath6</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>traceroute6</code></pre></div><p>Show IPv6 addresses:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip addr | grep inet6</code></pre></div><h2 id="misc">Misc</h2>
+<p>List all network interfaces with their ethernet addresses:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip addr | grep ether</code></pre></div><h2 id="connection-profiles">Connection Profiles</h2>
+<ul>
+<li>unique name for each connection profile</li>
+<li>Device can have multiple connection profiles attached
+<ul>
+<li>Only one active profile per device at a time</li>
+</ul>
+</li>
+<li>Stored in /etc/sysconfig/network-scripts/</li>
+<li>Filename format: ifcfg~name-of-connection~</li>
+<li>connection from device to profile is established at the time of installation</li>
+<li>Can manually create a connection profile and attach it to a device</li>
+</ul>
+<h3 id="connection-profile-directives">Connection Profile Directives</h3>
+<p>BOOTPROTO</p>
+<ul>
+<li>boot protocol used</li>
+<li>(dhcp, none, or static)</li>
+</ul>
+<p>BROWSER_ONLY</p>
+<ul>
+<li>Works if PROXY_METHOD is set to auto.</li>
+<li>Default is &ldquo;no&rdquo;</li>
+</ul>
+<p>DEFROUTE</p>
+<ul>
+<li>Whether to use this connection as the default route</li>
+</ul>
+<p>DEVICE</p>
+<ul>
+<li>Device name for the network interface</li>
+</ul>
+<p>DNS1</p>
+<ul>
+<li>ip or hostname of first DNS server</li>
+<li>Placed in /etc/resolv.conf if PEERDNS is set to &ldquo;no&rdquo;</li>
+</ul>
+<p>GATEWAY</p>
+<ul>
+<li>Gateway address if BOOTPROTO is set to &ldquo;none&rdquo; or &ldquo;static&rdquo;</li>
+</ul>
+<p>HWADDR</p>
+<ul>
+<li>Hardware address</li>
+</ul>
+<p>IPADDR</p>
+<ul>
+<li>Static IP if BOOTPROTO is set to &ldquo;none&rdquo; or &ldquo;static&rdquo;</li>
+</ul>
+<p>IPV4_FAILURE_FATAL</p>
+<ul>
+<li>Disable device if IPv4 configuration fails</li>
+<li>Default is &ldquo;no&rdquo;</li>
+</ul>
+<p>IPV6INIT</p>
+<ul>
+<li>Enable IPv6 support for this connection</li>
+</ul>
+<p>NAME</p>
+<ul>
+<li>Description for the connection</li>
+<li>Default matches device name</li>
+</ul>
+<p>NETMASK</p>
+<ul>
+<li>Sets netmask address if BOOTPROTO is set to &ldquo;none&rdquo; or &ldquo;static&rdquo;</li>
+</ul>
+<p>NM_CONTROLLED</p>
+<ul>
+<li>Allows NetworkManager service to modify this connection&rsquo;s config</li>
+<li>Should be turned off for interfaces that use a static ip</li>
+<li>Default is &ldquo;yes&rdquo;</li>
+</ul>
+<p>ONBOOT</p>
+<ul>
+<li>Auto activate the connection at system boot</li>
+</ul>
+<p>PEERDNS</p>
+<ul>
+<li>Tells system to update /etc/rsolv.conf</li>
+<li>Default is &ldquo;yes&rdquo; if BOOTPROTO is set to &ldquo;dhcp&rdquo;</li>
+</ul>
+<p>PREFIX</p>
+<ul>
+<li>Number of subnet bits</li>
+<li>May be used instead of NETMASK</li>
+</ul>
+<p>PROXY_METHOD</p>
+<ul>
+<li>Used for proxy setting</li>
+<li>Default is &ldquo;no&rdquo;</li>
+</ul>
+<p>UUID</p>
+<ul>
+<li>UUID for this connection</li>
+</ul>
+<p>TYPE</p>
+<ul>
+<li>Type of connection (Ethernet, Wireless, etc.)</li>
+</ul>
+<p>View additional directives:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>man nm-settings</code></pre></div><p>Naming rules for devices are governed by udevd service based on:</p>
+<ul>
+<li>Device location</li>
+<li>Topology</li>
+<li>setting in firmware</li>
+<li>virtualization layer</li>
+</ul>
+<h2 id="lab-add-network-devices-to-server10-and-one-to-server20-using-virtualbox">Lab: Add Network Devices to server10 and one to server20 using VirtualBox</h2>
+<ol>
+<li>Shut down your servers (follow each step for both servers)</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo shutdown now</code></pre></div><ol start="2">
+<li>Add network interface in Virtualbox then power on the VMs</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>Select machine &gt; settings &gt; Network &gt; Adapter 2 &gt; Enable Network Adapter &gt; Internal Network &gt; ok</code></pre></div><ol start="3">
+<li>Verify the new interfaces:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip a</code></pre></div><h2 id="administration-tools">Administration Tools</h2>
+<p>ip</p>
+<ul>
+<li>display monitor and manage network interfaces, routing, connections, traffic, etc.</li>
+</ul>
+<p>ifup</p>
+<ul>
+<li>Brings up an interface</li>
+</ul>
+<p>ifdown</p>
+<ul>
+<li>Brings down an interface</li>
+</ul>
+<h2 id="lab-configure-network-connection-manually-server-10">Lab: Configure network connection manually (server 10)</h2>
+<ol>
+<li>Create ifcfg-enp0s8 in /etc/sysconfig/network-scripts/ and add the following directives:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>TYPE=Ethernet
+BOOTPROTO=static
+DEFROUTE=yes
+IPv4_FAILURE_FATAL=no
+IPv6INIT=no
+NAME=enp0s8
+DEVICE=enp0s8
+ONBOOT=yes
+IPADDR=172.10.10.110
+PREFIX=24
+GATEWAY=172.10.10.1</code></pre></div><ol start="2">
+<li>Bounce the interface:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo ifdown enp0s8
+sudo ifup enp0s8</code></pre></div><ol start="3">
+<li>Verify:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip a</code></pre></div><h2 id="networkmanager-service">NetworkManager service</h2>
+<p>Default service in RHEL for network:</p>
+<ul>
+<li>interface and connection configuration.</li>
+<li>Administration.</li>
+<li>Monitoring.</li>
+</ul>
+<p>NetworkManager daemon</p>
+<ul>
+<li>Responsible for keeping interfaces and connection up and active.</li>
+<li>Includes:
+<ul>
+<li>nmcli</li>
+<li>nmtui (text-based)</li>
+<li>nm-connection-editor (GUI)</li>
+</ul>
+</li>
+<li>Does not manage loopback interfaces.</li>
+</ul>
+<h2 id="nmcli-command">nmcli command</h2>
+<ul>
+<li>Create, view, modify, remove, activate, and deactivate network connections.</li>
+<li>Control and report network device status.</li>
+<li>Supports abbreviation of commands.</li>
+</ul>
+<p>Operates on 7 different object categories.</p>
+<ol>
+<li>general</li>
+<li>networking</li>
+<li>connection (c)(con)</li>
+<li>device (d)(dev)</li>
+<li>radio</li>
+<li>monitor</li>
+<li>agent</li>
+</ol>
+<h3 id="3-connection">3. connection</h3>
+<ul>
+<li>Activates, deactivates, and administers network connections.</li>
+</ul>
+<p>Options:</p>
+<ul>
+<li>show (list connections)</li>
+<li>up/down (Brings connection up or down)</li>
+<li>add(a) (adds a connection)</li>
+<li>edit (edit connection or add a new one)</li>
+<li>modify (modify properties of a connection)</li>
+<li>delete(d) (delete a connection)</li>
+<li>reload (re-read all connection profiles)</li>
+<li>load (re-read a connection profile)</li>
+</ul>
+<h3 id="4-device">4. Device</h3>
+<p>Options:</p>
+<ul>
+<li>status (Displays device status)</li>
+<li>show (Displays info about device(s)</li>
+</ul>
+<p>Show all connections, inactive or active:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>nmcli c s</code></pre></div><p>Deactivate the connection enp0s8:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo nmcli c down enp0s8</code></pre></div><p>Note:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>The connection profile gets detached from the device, disabling the connection.</code></pre></div><p>Activate the connection enp0s8:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>$ sudo nmcli c up enp0s8
+# connection profile re-attaches to the device.</code></pre></div><p>Display the status of all network devices:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>nmcli d s</code></pre></div><h2 id="lab-configure-new-network-connection-using-nmcli-server20">Lab: Configure New Network Connection Using nmcli (server20)</h2>
+<ol>
+<li>Verify NetworkManager service is running:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo systemctl status NetworkManager</code></pre></div><ol start="2">
+<li>Verify the interface that was added from virtualbox:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo nmcli d status | grep enp</code></pre></div><ol start="3">
+<li>Add connection profile  and attach it to the interface:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo nmcli con add type Ethernet ifname enp0s8 con-name enp0s8 ip4 172.10.10.120/24 gw4 172.10.10.1</code></pre></div><p>Note:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>This creates the file for the connection in /etc/sysconfig/network-scripts/
+ONBOOT is set to &#34;yes&#34; automatically</code></pre></div><ol start="4">
+<li>View the content of the connection profile:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/sysconfig/network-scripts/ifcfg-enp0s8</code></pre></div><ol start="5">
+<li>Verify ip address</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ip a</code></pre></div><ol start="6">
+<li>Deactivate the connection and detach it from the interface:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo nmcli c down enp0s8</code></pre></div><ol start="7">
+<li>Verify:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>nmcli c s</code></pre></div><ol start="8">
+<li>Reactivate the connection and attach it to the interface:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo nmcli c up enp0s8</code></pre></div><ol start="9">
+<li>Verify:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>nmcli c s</code></pre></div><h2 id="hosts-table">Hosts Table</h2>
+<p>/etc/hosts</p>
+<h2 id="lab-update-hosts-table-and-test-connectivity">Lab: Update Hosts Table and Test Connectivity.</h2>
+<ol>
+<li>Add both server10 and server20&rsquo;s interfaces to both server&rsquo;s /etc/host files:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>192.168.0.110  server10.example.com  server10 &lt;-- This is an alias
+192.168.0.120  server20.example.com  server20   
+172.10.10.110  server10s8.example.com   server10s8
+172.10.10.120  server20s8.example.com   server20s8</code></pre></div><ol start="2">
+<li>Send 2 packets from server10 to server20&rsquo;s IP address:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ping -c2 192.168.0.120</code></pre></div><ol start="3">
+<li>Send 2 pings from server10 to server20&rsquo;s hostname:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ping -c2 server20</code></pre></div><h2 id="lab-add-new-interface-and-configure-connection-profile-with-nmcli">Lab: Add New Interface and Configure Connection Profile with nmcli</h2>
+<ol>
+<li>Add a new network interface to server10 in virtualbox</li>
+<li>Verify the connection&rsquo;s presence.</li>
+<li>Use nmcli to assign IP 192.168.0.210/24 and gateway 192.168.0.1</li>
+<li>Set the connection to auto-activate on boot.</li>
+<li>Deactivate and reactivate the connection manually.</li>
+</ol>
+<h2 id="lab-add-new-interface-and-configure-connection-profile-manually">Lab: Add New Interface and Configure Connection Profile Manually</h2>
+<ol>
+<li>Add a new network interface to server20 in virtualbox.</li>
+<li>Verify the connection&rsquo;s presence.</li>
+<li>Make a copy of /etc/sysconfig/network-scripts/ifcfg-enp0s3 as ifcfg-enp0s8 in the same directory.</li>
+<li>Remove HWADDR and UUID directives.</li>
+<li>Set values for IPADDR, NETMASK, and GATEWAY.</li>
+<li>Set the connection to auto-activate on boot.</li>
+<li>Deactivate and reactivate the connection manually.</li>
+</ol>
+<p><strong>[Review]{#part0028_split_001.html#id_460 .calibre10} Questions</strong></p>
+<p>1[.]{.c19}What is the use of <em>ifup</em> and <em>ifdown</em> commands?</p>
+<p>2[.]{.c19}Which service is responsible for maintaining consistent device
+naming?</p>
+<p>3[.]{.c19}List three key differences between TCP and UDP protocols.</p>
+<p>4[.]{.c19}What is the significance of the NAME and DEVICE directives in
+a connection profile?</p>
+<p>5[.]{.c19}Which class of IP addresses has the least number of node
+addresses?</p>
+<p>6[.]{.c19}Which command can you use to display the hardware address of a
+network device?</p>
+<p>7[.]{.c19}Define protocol.</p>
+<p>8[.]{.c19}Which directory stores the network connection profiles?</p>
+<p>9[.]{.c19}True or False. A network device is a physical or virtual
+network port and a network connection is a configuration file attached
+to it.</p>
+<p>10[.]{.c23}IPv4 is a 32-bit software address. How many bits does an IPv6
+address have?</p>
+<p>11[.]{.c23}Which file defines the port and protocol mapping?</p>
+<p>12[.]{.c23}What would the command <em>hostnamectl set-hostname host20</em> do?</p>
+<p>13[.]{.c23}Name the file that stores the hostname of the system.</p>
+<p>14[.]{.c23}What would the command <em>nmcli cs</em> do?</p>
+<p>15[.]{.c23}What is the purpose of the ONBOOT directive in the network
+connection profile?</p>
+<p>16[.]{.c23}The **etc<em>hosts</em> file maintains hostname to hardware address
+mappings. True or False?</p>
+<p>17[.]{.c23}Which file contains service, port, and protocol mappings?</p>
+<p>18[.]{.c23}What would the <em>ip addr</em> command produce?</p>
+<p>19[.]{.c23}Which file would you consult to identify the port number and
+protocol associated with a network service?</p>
+<p>20[.]{.c23}Adding a connection profile with the <em>nmcli</em> command creates
+a connection profile in the **etc<em>sysconfig/network-scripts</em> directory.
+True or False?</p>
+<p>21[.]{.c23}Name four commands that can be used to display the system
+hostname?</p>
+<p>22[.]{.c23}List any two benefits of subnetting.</p>
+<p><strong>[Answers]{#part0028_split_001.html#id_461 .calibre10} to Review
+Questions</strong></p>
+<p>1[.]{.c19}The <em>ifup</em> and <em>ifdown</em> commands are used to enable and
+disable a network connection, respectively.</p>
+<p>2[.]{.c19}The <em>udevd</em> service handles consistent naming of network
+devices.</p>
+<p>3[.]{.c19}TCP is connection-oriented, reliable, and point-to-point; UDP
+is connectionless, unreliable, and multi-point.</p>
+<p>4[.]{.c19}The NAME directive sets the name for the network connection
+and the DEVICE directive defines the network device the connection is
+associated with.</p>
+<p>5[.]{.c19}The C class supports the least number of node addresses.</p>
+<p>6[.]{.c19}The <em>ip</em> command.</p>
+<p>7[.]{.c19}A set of rules that govern the exchange of information between
+two network entities.</p>
+<p>8[.]{.c19}The **etc<em>sysconfig/network-scripts</em> directory.</p>
+<p>9[.]{.c19}True.</p>
+<p>10[.]{.c23}128.</p>
+<p>11[.]{.c23}The **etc<em>protocols</em> file.</p>
+<p>12[.]{.c23}The command provided will update the **etc<em>hostname</em> file
+with the specified hostname and restart the <em>systemd-hostnamed</em> daemon
+for the change to take effect.</p>
+<p>13[.]{.c23}The **etc<em>hostname</em> file.</p>
+<p>14[.]{.c23}The command provided will display the status information for
+all network connections.</p>
+<p>15[.]{.c23}The purpose of the ONBOOT directive is to direct the boot
+scripts whether to activate this connection.</p>
+<p>16[.]{.c23}False. This file maintains hostname to IP address mapping.</p>
+<p>17[.]{.c23}The **etc<em>services</em> file.</p>
+<p>18[.]{.c23}This command provided will display information about network
+connections including IP assignments and hardware address.</p>
+<p>19[.]{.c23}The **etc<em>services</em> file.</p>
+<p>20[.]{.c23}True.</p>
+<p>21[.]{.c23}The <em>hostname</em>, <em>uname</em>, <em>hostnamectl</em>, and <em>nmcli</em> commands
+can be used to view the system hostname.</p>
+<p>22[.]{.c23}Better manageability and less traffic.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1717964147" defer></script>
+        <script src="/js/search.js?1717964147" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/15_networking_network_devices_and_network_connections/" class="active"><a class="padding" href="/linux/rhcsa/15_networking_network_devices_and_network_connections/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/15_networking_network_devices_and_network_connections/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1717964147" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1717964147" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1717964147" defer></script>
+    <script src="/js/js-yaml.min.js?1717964147" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1717964147" defer></script>
+  </body>
+</html>

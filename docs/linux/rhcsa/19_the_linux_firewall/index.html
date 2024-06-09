@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 19 \
+The Linux Firewall \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics:
+\
+Describe Linux firewall for host-based security control
+\
+Overview of the firewalld service
+\
+Understand the concepts of firewalld zones and services
+\
+Analyze zone and service configuration files
+\
+Control access to network services and ports through firewalld
+\
+Use firewall-cmd command to manage firewall rules">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 19 \
+The Linux Firewall \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics:
+\
+Describe Linux firewall for host-based security control
+\
+Overview of the firewalld service
+\
+Understand the concepts of firewalld zones and services
+\
+Analyze zone and service configuration files
+\
+Control access to network services and ports through firewalld
+\
+Use firewall-cmd command to manage firewall rules">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/19_the_linux_firewall/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 19 \
+The Linux Firewall \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics:
+\
+Describe Linux firewall for host-based security control
+\
+Overview of the firewalld service
+\
+Understand the concepts of firewalld zones and services
+\
+Analyze zone and service configuration files
+\
+Control access to network services and ports through firewalld
+\
+Use firewall-cmd command to manage firewall rules">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Chapter 19 \
+The Linux Firewall \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics:
+\
+Describe Linux firewall for host-based security control
+\
+Overview of the firewalld service
+\
+Understand the concepts of firewalld zones and services
+\
+Analyze zone and service configuration files
+\
+Control access to network services and ports through firewalld
+\
+Use firewall-cmd command to manage firewall rules">
+    <meta itemprop="wordCount" content="3374">
+    <title></title>
+    <link href="/images/favicon.png?1717964147" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1717964147" rel="stylesheet">
+    <link href="/css/auto-complete.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1717964147" rel="stylesheet">
+    <link href="/css/fonts.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1717964147" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1717964147" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1717964147" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1717964147" rel="stylesheet">
+    <link href="/css/print.css?1717964147" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1717964147"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/19_the_linux_firewall/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#chapter-19">Chapter 19</a>
+      <ul>
+        <li><a href="#the-linux-firewall">The Linux Firewall</a></li>
+      </ul>
+    </li>
+    <li><a href="#firewall-overview">Firewall Overview</a></li>
+    <li><a href="#overview-of-the-firewalld-service">Overview of the firewalld Service</a></li>
+    <li><a href="#firewalld-zones">firewalld Zones</a></li>
+    <li><a href="#zone-configuration-files">Zone Configuration Files</a></li>
+    <li><a href="#firewalld-services">firewalld Services</a></li>
+    <li><a href="#service-configuration-files">Service Configuration Files</a></li>
+    <li><a href="#firewalld-management">Firewalld Management</a></li>
+    <li><a href="#the-firewall-cmd-command">The firewall-cmd Command</a></li>
+    <li><a href="#querying-the-operational-status-of-firewalld">Querying the Operational Status of firewalld</a></li>
+    <li><a href="#exercise-19-1-add-services-and-ports-and-manage-zones">Exercise 19-1: Add Services and Ports, and Manage Zones</a></li>
+    <li><a href="#exercise-19-2-remove-services-and-ports-and-manage-zones">Exercise 19-2: Remove Services and Ports, and Manage Zones</a></li>
+    <li><a href="#exercise-19-3-test-the-effect-of-firewall-rule">Exercise 19-3: Test the Effect of Firewall Rule</a></li>
+    <li><a href="#chapter-summary">Chapter Summary</a></li>
+    <li><a href="#review-questions">Review Questions</a></li>
+    <li><a href="#answers-to-review-questions">Answers to Review Questions</a></li>
+    <li><a href="#do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</a></li>
+    <li><a href="#lab-19-1-add-service-to-firewall">Lab 19-1: Add Service to Firewall</a></li>
+    <li><a href="#lab-19-2-add-port-range-to-firewall">Lab 19-2: Add Port Range to Firewall</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h2 style="text-align: right" id="chapter-19">Chapter 19</h2>
+<p>\</p>
+<h3 class="style3" id="the-linux-firewall">The Linux Firewall</h3>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;&rdquo;}
+:::</p>
+<p>\</p>
+<p>This chapter describes the following major topics:</p>
+<p>\</p>
+<p>Describe Linux firewall for host-based security control</p>
+<p>\</p>
+<p>Overview of the firewalld service</p>
+<p>\</p>
+<p>Understand the concepts of firewalld zones and services</p>
+<p>\</p>
+<p>Analyze zone and service configuration files</p>
+<p>\</p>
+<p>Control access to network services and ports through firewalld</p>
+<p>\</p>
+<p>Use firewall-cmd command to manage firewall rules</p>
+<p>\</p>
+<p>RHCSA Objectives:</p>
+<p>\</p>
+<p>47. Restrict network access using firewall-cmd/firewall</p>
+<p>52. Configure firewall settings using firewall-cmd/firewalld</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Running a system in a networked or an Internet-facing environment
+requires that some security measures be taken to tighten access to the
+system in general and individual services in particular. This can be
+accomplished by implementing a firewall and restricting inbound traffic
+to allowed ports from valid source IP addresses only. We discuss a
+host-based firewall solution in this chapter.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-757b7a578e0fd46759b0b1b17fe2a315" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-0MNXH66H.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-757b7a578e0fd46759b0b1b17fe2a315"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-0MNXH66H.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0564.html}</p>
+<h2 class="style3" id="firewall-overview">Firewall Overview</h2>
+<p>\</p>
+<p>A firewall is a protective layer implemented at the network or server
+level to secure, monitor, and control inbound and outbound traffic flow.
+Firewalls employed at the network level use either dedicated hardware or
+sophisticated software appliances to form a shield around the network.
+Server level firewalls are referred to as host-based firewalls and they
+run in a computer operating system to monitor and manage traffic in and
+out. Firewalls defend a network or an individual server from undesired
+traffic.</p>
+<p>\</p>
+<p>RHEL is shipped with a host-based firewall solution that works by
+filtering data packets. A data packet is formed as a result of a process
+called encapsulation whereby the header information is attached to a
+message (called payload) during packet formation. The header includes
+information such as source and destination IP addresses, port, and type
+of data. Based on predefined rules, a firewall intercepts each inbound
+and outbound data packet, inspects its header, and decides whether to
+allow the packet to pass through.</p>
+<p>\</p>
+<p>Ports are defined in the /etc/services file for common network services
+that are standardized across all network operating systems, including
+RHEL. Some common services and the ports they listen on are FTP (File
+Transfer Protocol) on port 21, SSH (Secure Shell) 22, Postfix (an email
+service) 25, HTTP (HyperText Transfer Protocol) 80, and NTP (Network
+Time Protocol) on port 123.</p>
+<p>\</p>
+<p>The host-based firewall solution employed in RHEL uses a kernel module
+called netfilter together with a filtering and packet classification
+framework called nftables for policing the traffic movement. It also
+supports other advanced features such as Network Address Translation
+(NAT) and port forwarding. This firewall solution inspects, modifies,
+drops, or routes incoming, outgoing, and forwarded network packets based
+on defined rulesets.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0565.html}</p>
+<h2 class="style3" id="overview-of-the-firewalld-service">Overview of the firewalld Service</h2>
+<p>\</p>
+<p>firewalld is the default host-based firewall management service in RHEL
+9. One of the major advantages is its ability to add, modify, or delete
+firewall rules immediately without disrupting current network
+connections or restarting the service process. This is especially useful
+in testing and troubleshooting scenarios. firewalld also allows to save
+rules persistently so that they are activated automatically at system
+reboots.</p>
+<p>\</p>
+<p>The firewalld service lets you perform management operations at the
+command line using the firewall-cmd command, graphically using the web
+console, or manually by editing rules files. firewalld stores the
+default rules in files located in the /usr/lib/firewalld directory, and
+those that contain custom rules in the /etc/firewalld directory. The
+default rules files may be copied to the custom rules directory and
+modified.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0566.html}</p>
+<h2 class="style3" id="firewalld-zones">firewalld Zones</h2>
+<p>\</p>
+<p>firewalld uses the concept of zones for easier and transparent traffic
+management. Zones define policies based on the trust level of network
+connections and source IP addresses. A network connection can be part of
+only one zone at a time; however, a zone can have multiple network
+connections assigned to it. Zone configuration may include services,
+ports, and protocols that may be open or closed. It may also include
+rules for advanced configuration items such as masquerading, port
+forwarding, NAT&rsquo;ing, ICMP filters, and rich language. Rules for each
+zone are defined and manipulated independent of other zones.</p>
+<p>\</p>
+<p>firewalld inspects each incoming packet to determine the source IP
+address and applies the rules of the zone that has a match for the
+address. In the event no zone configuration matches the address, it
+associates the packet with the zone that has the network connection
+defined, and applies the rules of that zone. If neither works, firewalld
+associates the packet with the default zone, and enforces the rules of
+the default zone on the packet.</p>
+<p>\</p>
+<p>The firewalld software installs several predefined zone files that may
+be selected or customized. These files include templates for traffic
+that must be blocked or dropped, and for traffic that is public-facing,
+internal, external, home, public, trusted, and work-related. Of these,
+the public zone is the default zone, and it is activated by default when
+the firewalld service is started. Table 19-1 lists and describes the
+predefined zones sorted based on the trust level from trusted to
+untrusted.</p>
+<p>\</p>
+<hr>
+<p>Zone                                Description</p>
+<p>trusted                             Allow all incoming traffic</p>
+<p>internal                            Reject all incoming traffic except
+for what is allowed. Intended for
+use on internal networks.</p>
+<p>home                                Reject all incoming traffic except
+for what is allowed. Intended for
+use in homes.</p>
+<p>work                                Reject all incoming traffic except
+for what is allowed. Intended for
+use at workplaces.</p>
+<p>dmz                                 Reject all incoming traffic except
+for what is allowed. Intended for
+use in publicly accessible
+demilitarized zones.</p>
+<p>external                            Reject all incoming traffic except
+for what is allowed. Outgoing IPv4
+traffic forwarded through this zone
+is masqueraded to look like it
+originated from the IPv4 address of
+an outgoing network interface.
+Intended for use on external
+networks with masquerading enabled.</p>
+<p>public                              Reject all incoming traffic except
+for what is allowed. It is the
+default zone for any newly added
+network interfaces. Intended for us
+in public places.</p>
+<p>block                               Reject all incoming traffic with
+icmp-host-prohibited message
+returned. Intended for use in
+secure places.</p>
+<p>drop                                Drop all incoming traffic without
+responding with ICMP errors.
+Intended for use in highly secure
+places.</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 19-1 firewalld Default Zones</p>
+<p>\</p>
+<p>For all the predefined zones, outgoing traffic is allowed by default.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0567.html}</p>
+<h2 class="style3" id="zone-configuration-files">Zone Configuration Files</h2>
+<p>\</p>
+<p>firewalld stores zone rules in XML format at two locations: the
+system-defined rules in the /usr/lib/firewalld/zones directory, and the
+user-defined rules in the /etc/firewalld/zones directory. The files at
+the former location can be used as templates for adding new rules, or
+applied instantly to any available network connection. A system zone
+configuration file is automatically copied to the /etc/firewalld/zones
+directory if it is modified with a management tool. Alternatively, you
+can copy the required zone file to the /etc/firewalld/zones directory
+manually, and make the necessary changes. The firewalld service reads
+the files saved in this location, and applies the rules defined in them.
+A listing of the system zone files is presented below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c9a57154c95c03d7a50fc68ac03dc1be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-S4NM3TC3.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c9a57154c95c03d7a50fc68ac03dc1be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-S4NM3TC3.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The default public zone file is displayed below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-638791e705666be5c98532490c2c1882" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZBGJ36OA.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-638791e705666be5c98532490c2c1882"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZBGJ36OA.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>As depicted in the screenshot, the zone has a name and description, and
+it contains a list of all the allowed services&mdash;ssh, dhcpv6-client, and
+cockpit. See the manual pages for firewalld.zone for details on zone
+configuration files.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0568.html}</p>
+<h2 class="style3" id="firewalld-services">firewalld Services</h2>
+<p>\</p>
+<p>In addition to the concept of zones, firewalld also uses the idea of
+services for easier activation and deactivation of specific rules.
+firewalld services are preconfigured firewall rules delineated for
+various services and stored in different files. The rules consist of
+necessary settings, such as the port number, protocol, and possibly
+helper modules, to support the loading of the service. firewalld
+services can be added to a zone. By default, firewalld blocks all
+traffic unless a service or port is explicitly opened.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0569.html}</p>
+<h2 class="style3" id="service-configuration-files">Service Configuration Files</h2>
+<p>\</p>
+<p>firewalld stores service rules in XML format at two locations: the
+system-defined rules in the /usr/lib/firewalld/services directory, and
+the user-defined rules in the /etc/firewalld/services directory. The
+files at the former location can be used as templates for adding new
+service rules, or activated instantly. A system service configuration
+file is automatically copied to the /etc/firewalld/services directory if
+it is modified with a management tool. Alternatively, you can copy the
+required service file to the /etc/firewalld/services directory manually,
+and make the necessary changes. The firewalld service reads the files
+saved in this location, and applies the rules defined in them. A listing
+of the system service files is presented below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-1dc56a794633ad11ac715843ca6799ee" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-3UHDIN7E.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1dc56a794633ad11ac715843ca6799ee"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-3UHDIN7E.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The following shows the content of the ssh service file:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8cb71677a2536fda1b12267e9d73de5e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-IH333ZL1.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8cb71677a2536fda1b12267e9d73de5e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-IH333ZL1.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>As depicted in the screenshot, the service has a name and description,
+and it defines the port and protocol for the service. See the manual
+pages for firewalld.service for details on service configuration files.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0570.html}</p>
+<h2 class="style3" id="firewalld-management">Firewalld Management</h2>
+<p>\</p>
+<p>Managing the firewalld service involves a number of operations, such as
+listing, querying, adding, changing, and removing zones, services,
+ports, IP sources, and network connections. There are three methods
+available in RHEL 9 to perform the management tasks. They include the
+firewall-cmd utility for those who prefer to work at the command line
+and the web interface for graphical administration. The third management
+option is to make use of the zone and service templates, and edit them
+manually as desired. We use the command line method in this book.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0571.html}</p>
+<h2 class="style3" id="the-firewall-cmd-command">The firewall-cmd Command</h2>
+<p>\</p>
+<p>The firewall-cmd command is a powerful tool to manage the firewalld
+service at the command prompt. This tool can be used to add or remove
+rules from the runtime configuration, or save any modifications to
+service configuration for persistence. It supports numerous options for
+the management of zones, services, ports, connections, and so on; Table
+19-2 lists and describes the common options only.</p>
+<p>\</p>
+<hr>
+<p>Option                              Description</p>
+<p>General</p>
+<p>--state                            Displays the running status of
+firewalld</p>
+<p>--reload                           Reloads firewall rules from zone
+files. All runtime changes are
+lost.</p>
+<p>--permanent                        Stores a change persistently. The
+change only becomes active after a
+service reload or restart.</p>
+<p>Zones</p>
+<p>--get-default-zone                 Shows the name of the
+default/active zone</p>
+<p>--set-default-zone                 Changes the default zone for both
+runtime and permanent configuration</p>
+<p>--get-zones                        Prints a list of available zones</p>
+<p>--get-active-zones                 Displays the active zone and the
+assigned interfaces</p>
+<p>--list-all                         Lists all settings for a zone</p>
+<p>--list-all-zones                   Lists the settings for all
+available zones</p>
+<p>--zone                             Specifies the name of the zone to
+work on. Without this option, the
+default zone is used.</p>
+<p>Services</p>
+<p>--get-services                     Prints predefined services</p>
+<p>--list-services                    Lists services for a zone</p>
+<p>--add-service                      Adds a service to a zone</p>
+<p>--remove-service                   Removes a service from a zone</p>
+<p>--query-service                    Queries for the presence of a
+service</p>
+<p>Ports</p>
+<p>--list-ports                       Lists network ports</p>
+<p>--add-port                         Adds a port or a range of ports to
+a zone</p>
+<p>--remove-port                      Removes a port from a zone</p>
+<p>--query-port                       Queries for the presence of a port</p>
+<p>Network Connections</p>
+<p>--list-interfaces                  Lists network connections assigned
+to a zone</p>
+<p>--add-interface                    Binds a network connection to a
+zone</p>
+<p>--change-interface                 Changes the binding of a network
+connection to a different zone</p>
+<p>--remove-interface                 Unbinds a network connection from a
+zone</p>
+<p>IP Sources</p>
+<p>--list-sources                     Lists IP sources assigned to a zone</p>
+<p>--add-source                       Adds an IP source to a zone</p>
+<p>--change-source                    Changes an IP source</p>
+<p>--remove-source                    Removes an IP source from a zone</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 19-2 Common firewall-cmd Options</p>
+<p>\</p>
+<p>With all the --add and --remove options, the --permanent switch may
+be specified to ensure the rule is stored in the zone configuration file
+under the /etc/firewalld/zones directory for persistence. Some of the
+options from Table 19-2 are used in the upcoming exercises; the rest are
+beyond the scope of this book. Consult the manual pages of the command
+for details on the usage of these and other options.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0572.html}</p>
+<h2 class="style3" id="querying-the-operational-status-of-firewalld">Querying the Operational Status of firewalld</h2>
+<p>\</p>
+<p>You can check the running status of the firewalld service using either
+the systemctl or the firewall-cmd command. Both commands will produce
+different outputs, but the intent here is to ensure the service is in
+the running state.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-13a8e126389a71dc21c95fb288b3ee77" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5SCTOSWV.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-13a8e126389a71dc21c95fb288b3ee77"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5SCTOSWV.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The output indicates that the firewalld service is in the running state
+on server10. The other command outcome also reports that the service is
+marked for autostart at system reboots. In case firewalld is not enabled
+or is inactive, issue sudo systemctl --now enable firewalld to start it
+immediately, and mark it for autostart on reboots.</p>
+<p>\</p>
+<p>You are ready to perform the exercises presented next.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0573.html}</p>
+<h2 class="style3" id="exercise-19-1-add-services-and-ports-and-manage-zones">Exercise 19-1: Add Services and Ports, and Manage Zones</h2>
+<p>\</p>
+<p>This exercise should be done on server10 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will determine the current active zone. You will
+add and activate a permanent rule to allow HTTP traffic on port 80, and
+then add a runtime rule for traffic intended for TCP port 443 (the HTTPS
+service). You will add a permanent rule to the internal zone for TCP
+port range 5901 to 5910. You will confirm the changes and display the
+contents of the affected zone files. Lastly, you will switch the default
+zone to the internal zone and activate it.</p>
+<p>\</p>
+<p>1. Determine the name of the current default zone:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-1b3cd0a4b2a98bb40d7a60ce357c9465" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WEEG8L06.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1b3cd0a4b2a98bb40d7a60ce357c9465"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WEEG8L06.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Add a permanent rule to allow HTTP traffic on its default port:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c4567dbf83bee67caceabb407a233852" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-X0KNQ04K.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c4567dbf83bee67caceabb407a233852"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-X0KNQ04K.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The command made a copy of the public.xml file from
+/usr/lib/firewalld/zones directory into the /etc/firewalld/zones
+directory, and added the rule for the HTTP service.</p>
+<p>\</p>
+<p>3. Activate the new rule:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-b8354c2e7eb2cf30f61e54d5c2a97d99" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-DWOATQSW.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8354c2e7eb2cf30f61e54d5c2a97d99"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-DWOATQSW.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Confirm the activation of the new rule:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e147947c2936beffd417d41aee5063f0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-CWFUIVCE.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e147947c2936beffd417d41aee5063f0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-CWFUIVCE.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Display the content of the default zone file to confirm the addition
+of the permanent rule:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-1e36e0a95537ca122b33bb77916bece0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-7HPRCRQP.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1e36e0a95537ca122b33bb77916bece0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-7HPRCRQP.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>6. Add a runtime rule to allow traffic on TCP port 443 and verify:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-96f50731e56ad323b93e3a3dcdc3d4a2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-IAF208HM.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-96f50731e56ad323b93e3a3dcdc3d4a2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-IAF208HM.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>7. Add a permanent rule to the internal zone for TCP port range 5901 to
+5910:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-3952e3173fdbbdb043c1f03dc7098aa6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KGFPOI7H.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3952e3173fdbbdb043c1f03dc7098aa6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KGFPOI7H.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>8. Display the content of the internal zone file to confirm the
+addition of the permanent rule:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-bd6e6f0213f3fdbfe52e389cd01908b9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-AH8JJ4D4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bd6e6f0213f3fdbfe52e389cd01908b9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-AH8JJ4D4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The firewall-cmd command makes a backup of the affected zone file with a
+.old extension whenever an update is made to a zone.</p>
+<p>\</p>
+<p>9. Switch the default zone to internal and confirm:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-92f5caaf593e8a04b049c629fab76c4d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FHUNPQFX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-92f5caaf593e8a04b049c629fab76c4d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FHUNPQFX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>10. Activate the rules defined in the internal zone and list the port
+range added earlier:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-faf5797b3d1ef2e2f50421c365435255" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-Q0SD0X6U.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-faf5797b3d1ef2e2f50421c365435255"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-Q0SD0X6U.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This completes the exercise.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0574.html}</p>
+<h2 class="style3" id="exercise-19-2-remove-services-and-ports-and-manage-zones">Exercise 19-2: Remove Services and Ports, and Manage Zones</h2>
+<p>\</p>
+<p>This exercise should be done on server10 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will remove the two permanent rules that were
+added in Exercise 19-1. You will switch the public zone back as the
+default zone, and confirm the changes.</p>
+<p>\</p>
+<p>1. Remove the permanent rule for HTTP from the public zone:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-81a43e411bf6d1b005306a864f982328" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-CDVOAQMO.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-81a43e411bf6d1b005306a864f982328"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-CDVOAQMO.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Notice the equal sign (=) used with the --remove-service option. The
+firewall-cmd command supports the specification of add, remove, change,
+and zone options with and without an equal sign (=). The --zone option
+is used to specify the public zone as it is currently not the default.</p>
+<p>\</p>
+<p>2. Remove the permanent rule for ports 5901 to 5910 from the internal
+zone:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-372c0b408ed9bf16bf4b2c052ff698d0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-2WXYGL5G.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-372c0b408ed9bf16bf4b2c052ff698d0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-2WXYGL5G.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The --zone option is not used, as &lsquo;internal&rsquo; is currently the default
+zone.</p>
+<p>\</p>
+<p>3. Switch the default zone to public and validate:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7584578a390b29681528fd96087ed22f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FB7XJGXW.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7584578a390b29681528fd96087ed22f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FB7XJGXW.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Activate the public zone rules, and list the current services:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8fde69d57f5d02bbcebfa35f26e1c3d2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-UZOYYK3J.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8fde69d57f5d02bbcebfa35f26e1c3d2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-UZOYYK3J.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The public zone reflects the removal of the http service. This concludes
+the exercise.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0575.html}</p>
+<h2 class="style3" id="exercise-19-3-test-the-effect-of-firewall-rule">Exercise 19-3: Test the Effect of Firewall Rule</h2>
+<p>\</p>
+<p>This exercise should be done on server10 and server20 as user1 with sudo
+where required.</p>
+<p>\</p>
+<p>In this exercise, you will remove the sshd service rule from the runtime
+configuration on server10, and try to access the server from server20
+using the ssh command.</p>
+<p>\</p>
+<p>1. Remove the rule for the sshd service on server10:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-49238ea15a3fbe352097fdc5b183b2de" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-NOWQA9XK.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49238ea15a3fbe352097fdc5b183b2de"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-NOWQA9XK.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Issue the ssh command on server20 to access server10:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e8bf7881fd091781953b866eb6e29f3a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YGXLCZR7.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e8bf7881fd091781953b866eb6e29f3a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YGXLCZR7.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The error displayed is because the firewall on server10 blocked the
+access. Put the rule back on server10 and try to access it from server20
+again:</p>
+<p>\</p>
+<p>3. Add the rule back for sshd on server10:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-af967ff129358dd893776dcbcec297d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-QTJSC8LG.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-af967ff129358dd893776dcbcec297d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-QTJSC8LG.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Issue the ssh command on server20 to access server10. Enter &ldquo;yes&rdquo; if
+prompted and the password for user1.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-80d06757b1a88fe79d4f90d3e5c488a2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-O6909C0F.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-80d06757b1a88fe79d4f90d3e5c488a2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-O6909C0F.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This brings the exercise to an end.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0576.html}</p>
+<h2 class="style3" id="chapter-summary">Chapter Summary</h2>
+<p>\</p>
+<p>We discussed a native host-based firewall solution for system protection
+in this chapter. We explored the concepts around firewall and described
+how it works. We looked at the firewalld service and examined the
+concepts of zones and services. We reviewed predefined zones and
+services, and analyzed their configuration files. We studied the lone
+firewall management command and reviewed options for listing and
+administering zones, services, ports, network connections, and source IP
+addresses.</p>
+<p>\</p>
+<p>We learned how to change and check the operational state of the
+firewalld service. We performed exercises to add and remove services and
+ports persistently and non-persistently, and manage zones. Finally, we
+tested the effect of deleting a port from the firewall configuration and
+adding it back.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0577.html}</p>
+<h2 class="style3" id="review-questions">Review Questions</h2>
+<p>\</p>
+<p>1. A firewall can be configured between two networks but not between
+two hosts. True or False?</p>
+<p>2. After changing the default firewalld zone to internal, what would
+you run to verify?</p>
+<p>3. What is the process of data packet formation called?</p>
+<p>4. What would the command firewall-cmd --remove-port=5000/tcp do?</p>
+<p>5. What is the primary command line tool for managing firewalld called?</p>
+<p>6. What would the command firewall-cmd --permanent --add-service=nfs
+--zone=external do?</p>
+<p>7. If you have a set of firewall rules defined for a service stored
+under both /etc/firewalld and /usr/lib/firewalld directories, which of
+the two sets will take precedence?</p>
+<p>8. What is the kernel module in RHEL 9 that implements the host-level
+protection called?</p>
+<p>9. firewalld is the firewall management solution in RHEL 9. True or
+False?</p>
+<p>10. Which directory stores the configuration file for modified
+firewalld zones?</p>
+<p>11. Name the default firewalld zone.</p>
+<p>12. What is the purpose of firewalld service configuration files?</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0578.html}</p>
+<h2 class="style3" id="answers-to-review-questions">Answers to Review Questions</h2>
+<p>\</p>
+<p>1. False. A firewall can also be configured between two host computers.</p>
+<p>2. You run firewall-cmd --get-default-zone for validation.</p>
+<p>3. The process of data packet formation is called encapsulation.</p>
+<p>4. The command provided will remove the runtime firewall rule for TCP
+port 5000.</p>
+<p>5. The primary command line tool for managing firewalld is called
+firewall-cmd.</p>
+<p>6. The command provided will add the nfs service to external firewalld
+zone persistently.</p>
+<p>7. The ruleset located in the /etc/firewalld directory will have
+precedence.</p>
+<p>8. The kernel module that implements the host-level protection is
+called netfilter.</p>
+<p>9. True.</p>
+<p>10. The modified firewalld zone files are stored under
+/etc/firewalld/zones directory.</p>
+<p>11. The default firewalld zone is the public zone.</p>
+<p>12. firewalld service configuration files store service-specific port,
+protocol, and other details, which makes it easy to activate and
+deactivate them.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0579.html}</p>
+<h2 id="do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</h2>
+<p>\</p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the labs have already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p>\</p>
+<p>Use the lab environment built specifically for end-of-chapter labs. See
+sub-section &ldquo;Lab Environment for End-of-Chapter Labs&rdquo; in Chapter 01
+&ldquo;Local Installation&rdquo; for details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0580.html}</p>
+<h2 class="style3" id="lab-19-1-add-service-to-firewall">Lab 19-1: Add Service to Firewall</h2>
+<p>\</p>
+<p>As user1 with sudo on server30, add and activate a permanent rule for
+HTTPs traffic to the default zone. Confirm the change by viewing the
+zone&rsquo;s XML file and running the firewall-cmd command. (Hint: Firewall
+Management).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0581.html}</p>
+<h2 class="style3" id="lab-19-2-add-port-range-to-firewall">Lab 19-2: Add Port Range to Firewall</h2>
+<p>\</p>
+<p>As user1 with sudo on server30, add and activate a permanent rule for
+the UDP port range 8000 to 8005 to the trusted zone. Confirm the change
+by viewing the zone&rsquo;s XML file and running the firewall-cmd command.
+(Hint: Firewall Management).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0582.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1717964147" defer></script>
+        <script src="/js/search.js?1717964147" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/19_the_linux_firewall/" class="active"><a class="padding" href="/linux/rhcsa/19_the_linux_firewall/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/19_the_linux_firewall/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1717964147" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1717964147" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1717964147" defer></script>
+    <script src="/js/js-yaml.min.js?1717964147" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1717964147" defer></script>
+  </body>
+</html>

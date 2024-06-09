@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 18 \
+The Secure Shell Service \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Understand the OpenSSH service, versions, and algorithms
+\
+Overview of encryption techniques and authentication methods
+\
+Describe OpenSSH administration commands and configuration files
+\
+Configure private/public key-based authentication
+\
+Access OpenSSH server from other Linux systems
+\
+Use OpenSSH client tools to transfer files">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 18 \
+The Secure Shell Service \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Understand the OpenSSH service, versions, and algorithms
+\
+Overview of encryption techniques and authentication methods
+\
+Describe OpenSSH administration commands and configuration files
+\
+Configure private/public key-based authentication
+\
+Access OpenSSH server from other Linux systems
+\
+Use OpenSSH client tools to transfer files">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/18_the_secure_shell_service/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 18 \
+The Secure Shell Service \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Understand the OpenSSH service, versions, and algorithms
+\
+Overview of encryption techniques and authentication methods
+\
+Describe OpenSSH administration commands and configuration files
+\
+Configure private/public key-based authentication
+\
+Access OpenSSH server from other Linux systems
+\
+Use OpenSSH client tools to transfer files">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Chapter 18 \
+The Secure Shell Service \
+::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
+\
+This chapter describes the following major topics: \
+Understand the OpenSSH service, versions, and algorithms
+\
+Overview of encryption techniques and authentication methods
+\
+Describe OpenSSH administration commands and configuration files
+\
+Configure private/public key-based authentication
+\
+Access OpenSSH server from other Linux systems
+\
+Use OpenSSH client tools to transfer files">
+    <meta itemprop="wordCount" content="3875">
+    <title></title>
+    <link href="/images/favicon.png?1717964147" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1717964147" rel="stylesheet">
+    <link href="/css/auto-complete.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1717964147" rel="stylesheet">
+    <link href="/css/fonts.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1717964147" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1717964147" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1717964147" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1717964147" rel="stylesheet">
+    <link href="/css/print.css?1717964147" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1717964147"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/18_the_secure_shell_service/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#chapter-18">Chapter 18</a>
+      <ul>
+        <li><a href="#the-secure-shell-service">The Secure Shell Service</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-openssh-service">The OpenSSH Service</a></li>
+    <li><a href="#common-encryption-techniques">Common Encryption Techniques</a>
+      <ul>
+        <li><a href="#symmetric-technique">Symmetric Technique</a></li>
+        <li><a href="#asymmetric-technique">Asymmetric Technique</a></li>
+      </ul>
+    </li>
+    <li><a href="#authentication-methods">Authentication Methods</a>
+      <ul>
+        <li><a href="#gssapi-based-authentication">GSSAPI-Based Authentication</a></li>
+        <li><a href="#host-based-authentication">Host-Based Authentication</a></li>
+        <li><a href="#privatepublic-key-based-authentication">Private/Public Key-Based Authentication</a></li>
+        <li><a href="#challenge-response-authentication">Challenge-Response Authentication</a></li>
+        <li><a href="#password-based-authentication">Password-Based Authentication</a></li>
+      </ul>
+    </li>
+    <li><a href="#openssh-protocol-version-and-algorithms">OpenSSH Protocol Version and Algorithms</a></li>
+    <li><a href="#openssh-packages">OpenSSH Packages</a></li>
+    <li><a href="#openssh-server-daemon-and-client-commands">OpenSSH Server Daemon and Client Commands</a></li>
+    <li><a href="#server-configuration-file">Server Configuration File</a></li>
+    <li><a href="#client-configuration-file">Client Configuration File</a></li>
+    <li><a href="#system-access-and-file-transfer">System Access and File Transfer</a></li>
+    <li><a href="#exercise-18-1-access-rhel-system-from-another-rhel-system">Exercise 18-1: Access RHEL System from Another RHEL System</a></li>
+    <li><a href="#exercise-18-2-generate-distribute-and-use-ssh-keys">Exercise 18-2: Generate, Distribute, and Use SSH Keys</a></li>
+    <li><a href="#executing-commands-remotely-using-ssh">Executing Commands Remotely Using ssh</a></li>
+    <li><a href="#transferring-files-remotely-using-sftp">Transferring Files Remotely Using sftp</a></li>
+    <li><a href="#chapter-summary">Chapter Summary</a></li>
+    <li><a href="#review-questions">Review Questions</a></li>
+    <li><a href="#answers-to-review-questions">Answers to Review Questions</a></li>
+    <li><a href="#do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</a></li>
+    <li><a href="#lab-18-1-establish-key-based-authentication">Lab 18-1: Establish Key-Based Authentication</a></li>
+    <li><a href="#lab-18-2-test-the-effect-of-permitrootlogin-directive">Lab 18-2: Test the Effect of PermitRootLogin Directive</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h2 style="text-align: right" id="chapter-18">Chapter 18</h2>
+<p>\</p>
+<h3 class="style3" id="the-secure-shell-service">The Secure Shell Service</h3>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;&rdquo;}
+:::</p>
+<p>\</p>
+<h4 id="this-chapter-describes-the-following-major-topics">This chapter describes the following major topics:</h4>
+<p>\</p>
+<p>Understand the OpenSSH service, versions, and algorithms</p>
+<p>\</p>
+<p>Overview of encryption techniques and authentication methods</p>
+<p>\</p>
+<p>Describe OpenSSH administration commands and configuration files</p>
+<p>\</p>
+<p>Configure private/public key-based authentication</p>
+<p>\</p>
+<p>Access OpenSSH server from other Linux systems</p>
+<p>\</p>
+<p>Use OpenSSH client tools to transfer files</p>
+<p>\</p>
+<p>Synchronize files remotely over OpenSSH</p>
+<p>\</p>
+<h4 id="rhcsa-objectives">RHCSA Objectives:</h4>
+<p>\</p>
+<p>04. Access remote systems using ssh</p>
+<p>25. Securely transfer files between systems</p>
+<p>54. Configure key-based authentication for SSH</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Secure Shell is a network service that delivers a secure mechanism for
+data transmission between source and destination systems over insecure
+network paths. It provides a set of utilities that allows users to
+generate key pairs and use them to set up trusted logins between systems
+for themselves.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-6c1623b789c9069f0d011fa1e424d5c7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-T8F8RZ4U.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6c1623b789c9069f0d011fa1e424d5c7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-T8F8RZ4U.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Additional utilities in the set gives remote users the ability to log
+in, execute commands, and transfer files securely over encrypted network
+channels. These tools have predominantly supplanted their insecure
+counterparts in the corporate world.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0544.html}</p>
+<h2 class="style3" id="the-openssh-service">The OpenSSH Service</h2>
+<p>\</p>
+<p>Secure Shell (SSH) delivers a secure mechanism for data transmission
+between source and destination systems over IP networks. It was designed
+to replace the old remote login programs that transmitted user passwords
+in clear text and data unencrypted. SSH employs digital signatures for
+user authentication with encryption to secure a communication channel.
+As a result, this makes it extremely hard for unauthorized people to
+gain access to passwords or the data in transit. It also monitors the
+data being transferred throughout a session to ensure integrity. SSH
+includes a set of utilities&mdash;ssh and sftp&mdash;for remote users to log in,
+transfer files, and execute commands securely.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0545.html}</p>
+<h2 class="style3" id="common-encryption-techniques">Common Encryption Techniques</h2>
+<p>\</p>
+<p>Encryption is a way of scrambling information with the intent to conceal
+the real information from unauthorized access. OpenSSH can utilize
+various encryption techniques during an end-to-end communication session
+between two entities (client and server). The two common techniques are
+symmetric and asymmetric. They are also referred to as secret key
+encryption and public key encryption techniques.</p>
+<p>\</p>
+<h3 class="style3" id="symmetric-technique">Symmetric Technique</h3>
+<p>This technique uses a single key called a secret key that is generated
+as a result of a negotiation process between two entities at the time of
+their initial contact. Both sides use the same secret key during
+subsequent communication for data encryption and decryption.</p>
+<p>\</p>
+<h3 class="style3" id="asymmetric-technique">Asymmetric Technique</h3>
+<p>This technique uses a combination of private and public keys, which are
+randomly generated and mathematically related strings of alphanumeric
+characters attached to messages being exchanged. The client transmutes
+the information with a public key and the server decrypts it with the
+paired private key. The private key must be kept secure since it is
+private to a single sender; the public key is disseminated to clients.
+This technique is used for channel encryption as well as user
+authentication.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0546.html}</p>
+<h2 class="style3" id="authentication-methods">Authentication Methods</h2>
+<p>\</p>
+<p>Once an encrypted channel is established between the client and server,
+additional negotiations take place between the two to authenticate the
+user trying to access the server. OpenSSH offers several methods for
+this purpose; they are listed below in the order in which they are
+attempted during the authentication process:</p>
+<p>\</p>
+<p>• GSSAPI-based ( Generic Security Service Application Program Interface
+) authentication</p>
+<p>• Host-based authentication</p>
+<p>• Public key-based authentication</p>
+<p>• Challenge-response authentication</p>
+<p>• Password-based authentication</p>
+<p>\</p>
+<p>Let&rsquo;s review each one in detail.</p>
+<p>\</p>
+<h3 class="style3" id="gssapi-based-authentication">GSSAPI-Based Authentication</h3>
+<p>GSSAPI provides a standard interface that allows security mechanisms,
+such as Kerberos, to be plugged in. OpenSSH uses this interface and the
+underlying Kerberos for authentication. With this method, an exchange of
+tokens takes place between the client and server to validate user
+identity.</p>
+<p>\</p>
+<h3 class="style3" id="host-based-authentication">Host-Based Authentication</h3>
+<p>This type of authentication allows a single user, a group of users, or
+all users on the client to be authenticated on the server. A user may be
+configured to log in with a matching username on the server or as a
+different user that already exists there. For each user that requires an
+automatic entry on the server, a ~/.shosts file is set up containing
+the client name or IP address, and, optionally, a different username.</p>
+<p>\</p>
+<p>The same rule applies to a group of users or all users on the client
+that require access to the server. In that case, the setup is done in
+the /etc/ssh/shosts.equiv file on the server.</p>
+<p>\</p>
+<h3 class="style3" id="privatepublic-key-based-authentication">Private/Public Key-Based Authentication</h3>
+<p>This method uses a private/public key combination for user
+authentication. The user on the client has a private key and the server
+stores the corresponding public key. At the login attempt, the server
+prompts the user to enter the passphrase associated with the key and
+logs the user in if the passphrase and key are validated.</p>
+<p>\</p>
+<h3 class="style3" id="challenge-response-authentication">Challenge-Response Authentication</h3>
+<p>This method is based on the response(s) to one or more arbitrary
+challenge questions that the user has to answer correctly in order to be
+allowed to log in to the server.</p>
+<p>\</p>
+<h3 class="style3" id="password-based-authentication">Password-Based Authentication</h3>
+<p>This is the last fall back option. The server prompts the user to enter
+their password. It checks the password against the stored entry in the
+shadow file and allows the user in if the password is confirmed.</p>
+<p>\</p>
+<p>Of the five authentication methods, the password-based method is common
+and requires no further explanation. The GSSAPI-based, host-based, and
+challenge-response methods are beyond the scope of this book. The
+public/private authentication and encryption methods will be the focus
+in the remainder of this chapter.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0547.html}</p>
+<h2 class="style3" id="openssh-protocol-version-and-algorithms">OpenSSH Protocol Version and Algorithms</h2>
+<p>\</p>
+<p>OpenSSH has evolved over the years. Its latest and the default version
+in RHEL 9, version 2, has numerous enhancements, improvements, and
+sophisticated configuration options. It supports various algorithms for
+data encryption and user authentication (digital signatures) such as
+RSA, DSA, and ECDSA. RSA is more prevalent than the rest partly because
+it supports both encryption and authentication. In contrast, DSA and
+ECDSA are restricted to authentication only. These algorithms are used
+to generate public and private key pairs for the asymmetric technique.</p>
+<p>\</p>
+<p>RSA stands for Rivest-Shamir-Adleman, who first published this
+algorithm, DSA for Digital Signature Algorithm, and ECDSA is an acronym
+for Elliptic Curve Digital Signature Algorithm.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0548.html}</p>
+<h2 class="style3" id="openssh-packages">OpenSSH Packages</h2>
+<p>\</p>
+<p>OpenSSH has three software packages that are of interest. These are
+openssh, openssh-clients, and openssh-server. The openssh package
+provides the ssh-keygen command and some library routines; the
+openssh-clients package includes commands, such as sftp, ssh, and
+ssh-copy-id, and a client configuration file /etc/ssh/ssh_config; and
+the openssh-server package contains the sshd service daemon, server
+configuration file /etc/ssh/sshd_config, and library routines. By
+default, all three packages are installed during OS installation.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0549.html}</p>
+<h2 class="style3" id="openssh-server-daemon-and-client-commands">OpenSSH Server Daemon and Client Commands</h2>
+<p>\</p>
+<p>The OpenSSH server program sshd is preconfigured and operational on new
+RHEL installations, allowing remote users to log in to the system using
+an ssh client program such as PuTTY or the ssh command. This daemon
+listens on well-known TCP port 22 as documented in the
+/etc/ssh/sshd_config file with the Port directive.</p>
+<p>\</p>
+<p>A discussion around the scp command has been removed from the book, as
+this tool is not recommended to be used due to some serious security
+flaws; use sftp instead.</p>
+<p>\</p>
+<p>The client software includes plenty of utilities such as those listed
+and described in Table 18-1.</p>
+<p>\</p>
+<hr>
+<p>Command                             Description</p>
+<p>sftp                                A secure remote file transfer
+program</p>
+<p>ssh                                 A secure remote login command</p>
+<p>ssh-copy-id                         Copies public key to remote systems</p>
+<p>ssh-keygen                          Generates and manages private and
+public key pairs</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 18-1 OpenSSH Client Tools</p>
+<p>\</p>
+<p>The use of these commands is demonstrated in the following subsections.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0550.html}</p>
+<h2 class="style3" id="server-configuration-file">Server Configuration File</h2>
+<p>\</p>
+<p>The OpenSSH service sshd has a configuration file that defines default
+global settings on how it should operate. This file is located in the
+/etc/ssh directory and called sshd_config. There are a number of
+directives preset in this file that affect all inbound ssh communication
+and are tuned to work as-is for most use cases. In addition, the
+/var/log/secure log file is used to capture authentication messages.</p>
+<p>\</p>
+<p>A few directives with their default values from the sshd_config file are
+displayed below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-22e84f540c4f3cfb8076adcd3163416d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-UYPEB3P5.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-22e84f540c4f3cfb8076adcd3163416d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-UYPEB3P5.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The above directives are elaborated in Table 18-2.</p>
+<p>\</p>
+<hr>
+<p>Directive                           Description</p>
+<p>Port                                Specifies the port number to listen
+on. Default is 22.</p>
+<p>Protocol                            Specifies the default protocol
+version to use.</p>
+<p>ListenAddress                       Sets the local addresses the sshd
+service should listen on. Default
+is to listen on all local
+addresses.</p>
+<p>SyslogFacility                      Defines the facility code to be
+used when logging messages to the
+/var/log/secure file. This is based
+on the configuration in the
+/etc/rsyslog.conf file. Default is
+AUTHPRIV.</p>
+<p>LogLevel                            Identifies the level of criticality
+for the messages to be logged.
+Default is INFO.</p>
+<p>PermitRootLogin                     Allows or disallows the root user
+to log in directly to the system.
+Default is yes.</p>
+<p>PubKeyAuthentication                Enables or disables public
+key-based authentication. Default
+is yes.</p>
+<p>AuthorizedKeysFile                  Sets the name and location of the
+file containing a user&rsquo;s authorized
+keys. Default is
+~/.ssh/authorized_keys.</p>
+<p>PasswordAuthentication              Enables or disables local password
+authentication. Default is yes.</p>
+<p>PermitEmptyPasswords                Allows or disallows the use of null
+passwords. Default is no.</p>
+<p>ChallengeResponseAuthentication     Enables or disables
+challenge-response authentication
+mechanism. Default is yes.</p>
+<p>UsePAM                              Enables or disables user
+authentication via PAM. If enabled,
+only root will be able to run the
+sshd daemon. Default is yes.</p>
+<p>X11Forwarding                       Allows or disallows remote access
+to graphical applications. Default
+is yes.</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 18-2 OpenSSH Server Configuration File</p>
+<p>\</p>
+<p>There are many more settings available that may be added to the file for
+additional control. Check out the manual pages of the sshd_config file
+(man 5 sshd_config) for details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0551.html}</p>
+<h2 class="style3" id="client-configuration-file">Client Configuration File</h2>
+<p>\</p>
+<p>Each RHEL client machine that uses ssh to access a remote OpenSSH server
+has a local configuration file that directs how the client should
+behave. This file, ssh_config, is located in the /etc/ssh directory.
+There are a number of directives preset in this file that affect all
+outbound ssh communication and are tuned to work as-is for most use
+cases.</p>
+<p>\</p>
+<p>A few directives with their default values from the ssh_config file are
+displayed below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-44b5dbf2cfe63e0ecc8a053cbfb83321" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-E0QKD3CH.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-44b5dbf2cfe63e0ecc8a053cbfb83321"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-E0QKD3CH.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The above directives are described in Table 18-3.</p>
+<p>\</p>
+<hr>
+<p>Directive                           Description</p>
+<p>Host                                Container that declares directives
+applicable to one host, a group of
+hosts, or all hosts. It ends when
+another occurrence of Host or Match
+is encountered. Default is *,
+which sets global defaults for all
+hosts.</p>
+<p>ForwardX11                          Enables or disables automatic
+redirection of X11 traffic over SSH
+connections. Default is no.</p>
+<p>PasswordAuthentication              Allows or disallows password
+authentication. Default is yes.</p>
+<p>StrictHostKeyChecking               Controls (1) whether to add host
+keys (host fingerprints) to
+~/.ssh/known_hosts when accessing
+a host for the first time, and (2)
+what to do when the keys of a
+previously accessed host mismatch
+with what is stored in
+~/.ssh/known_hosts. Options are:</p>
+<pre><code>                                  no: adds new host keys and ignores
+                                  changes to existing keys.
+
+                                  yes: adds new host keys and
+                                  disallows connections to hosts with
+                                  non-matching keys. accept-new: adds
+                                  new host keys and disallows
+                                  connections to hosts with
+                                  non-matching keys. ask (default):
+                                  prompts whether to add new host
+                                  keys and disallows connections to
+                                  hosts with non-matching keys.
+</code></pre>
+<p>IdentityFile                        Defines the name and location of a
+file that stores a user&rsquo;s private
+key for their identity validation.
+Defaults are id_rsa, id_dsa, and
+id_ecdsa based on the type of
+algorithm used. Their corresponding
+public key files with .pub
+extension are also stored at the
+same directory location.</p>
+<p>Port                                Sets the port number to listen on.
+Default is 22.</p>
+<p>Protocol                            Specifies the default protocol
+version to use</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 18-3 OpenSSH Client Configuration File</p>
+<p>\</p>
+<p>The ~/.ssh directory does not exist by default; it is created when a
+user executes the ssh-keygen command for the first time to generate a
+key pair or connects to a remote ssh server and accepts its host key for
+the first time. In the latter case, the client stores the server&rsquo;s host
+key locally in a file called known_hosts along with its hostname or IP
+address. On subsequent access attempts, the client will use this
+information to verify the server&rsquo;s authenticity.</p>
+<p>\</p>
+<p>There are a lot more settings available that may be added to the file
+for additional control. Check out the manual pages of the ssh_config
+file (man 5 ssh_config) for details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0552.html}</p>
+<h2 class="style3" id="system-access-and-file-transfer">System Access and File Transfer</h2>
+<p>\</p>
+<p>A user must log in to the Linux system in order to use it or transfer
+files. The login process identifies the user to the system. For
+accessing a RHEL system remotely, use the ssh command, and the sftp
+command for copying files. These tools require either a resolvable
+hostname of the target system or its IP address in order to establish a
+connection. Both commands are secure and may be used over secure and
+unsecure network channels for data exchange.</p>
+<p>\</p>
+<p>The following subsections and exercises describe multiple access
+scenarios including accessing a RHEL system (server20) from another RHEL
+system (server10) and a Windows computer, accessing a RHEL system
+(server20) using ssh keys, and transferring files using sftp.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0553.html}</p>
+<h2 class="style3" id="exercise-18-1-access-rhel-system-from-another-rhel-system">Exercise 18-1: Access RHEL System from Another RHEL System</h2>
+<p>\</p>
+<p>This exercise should be done on server10 and server20 as user1.</p>
+<p>\</p>
+<p>This exercise works under two assumptions: (1) user1 exists on both
+server10 and server20, and (2) hostname and IP mapping is in place in
+the /etc/hosts file (Chapter 16). Use the IP address in lieu of the
+hostname if the mapping is unavailable for server20.</p>
+<p>\</p>
+<p>In this exercise, you will issue the ssh command as user1 on server10 to
+log in to server20. You will run appropriate commands on server20 for
+validation. You will log off and return to the originating system.</p>
+<p>\</p>
+<p>1. Issue the ssh command as user1 on server10:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-aecf9e85fd5684497359b32919ca47d0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-C6AR1L63.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aecf9e85fd5684497359b32919ca47d0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-C6AR1L63.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Answer &lsquo;yes&rsquo; to the question presented and press Enter to continue. This
+step adds the hostname of server20 to a file called known_hosts under
+/home/user1/.ssh directory on the originating computer (server10). This
+message will not reappear on subsequent login attempts to server20 for
+this user. Enter the correct password for user1 to be allowed in. You
+will be placed in the home directory of user1 on server20. The command
+prompt will reflect that information.</p>
+<p>\</p>
+<p>2. Issue the basic Linux commands whoami, hostname, and pwd to confirm
+that you are logged in as user1 on server20 and placed in the correct
+home directory:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8a67d9f2c6e3cc18dc9229a2e4cd6765" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-UYW0XV6U.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8a67d9f2c6e3cc18dc9229a2e4cd6765"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-UYW0XV6U.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Run the logout or the exit command or simply press the key
+combination Ctrl+d to log off server20 and return to server10:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-78a64a4507c04248d4e147ed8e9c60d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-P3O6NZMP.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-78a64a4507c04248d4e147ed8e9c60d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-P3O6NZMP.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This concludes the exercise.</p>
+<p>\</p>
+<p>If you wish to log on as a different user such as user2 (assuming user2
+exists on the target server server20), you may run the ssh command in
+either of the following ways:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-4c75e4db377436333205a2d05c25b612" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-B2SI8GOO.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4c75e4db377436333205a2d05c25b612"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-B2SI8GOO.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The above will allow you to log in if the password entered for user2 is
+valid.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0554.html}</p>
+<h2 class="style3" id="exercise-18-2-generate-distribute-and-use-ssh-keys">Exercise 18-2: Generate, Distribute, and Use SSH Keys</h2>
+<p>\</p>
+<p>This exercise should be done on server10 and server20 as user1 and sudo
+where required. In this exercise, you will generate a passwordless ssh
+key pair using RSA algorithm for user1 on server10. You will display the
+private and public file contents. You will distribute the public key to
+server20 and attempt to log on to server20 from server10. You will show
+the log file message for the login attempt.</p>
+<p>\</p>
+<p>1. Log on to server10 as user1.</p>
+<p>2. Generate RSA keys without a password (-N) and without detailed
+output (-q). Press Enter when prompted to provide the filename to store
+the private key.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ee309939fa0b61585a22625b651a689f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-18CH2YAQ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ee309939fa0b61585a22625b651a689f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-18CH2YAQ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The content of the id_rsa (private key) file is shown below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a7b4246822e972395afdde37495f6f1a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-57JMZECE.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a7b4246822e972395afdde37495f6f1a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-57JMZECE.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The content of the id_rsa.pub (public key) file is displayed below:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-84134172cb468a09017847ddb36129d2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZF4UCGIL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-84134172cb468a09017847ddb36129d2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZF4UCGIL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Copy the public key file to server20 under /home/user1/.ssh
+directory. Accept the fingerprints for server20 when prompted (only
+presented on the first login attempt). Enter the password for user1 set
+on server20 to continue with the file copy. The public key will be
+copied as authorized_keys.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-9ab2aad8744eb05eba95318cf8dd3ae2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-V0PMF9RX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9ab2aad8744eb05eba95318cf8dd3ae2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-V0PMF9RX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>At the same time, this command also creates or updates the known_hosts
+file on server10 and stores the fingerprints for server20 in it. Here is
+what is currently stored in it:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ffc943e719af97969f642016874dabe7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-OIHHXXPJ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ffc943e719af97969f642016874dabe7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-OIHHXXPJ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. On server10, run the ssh command as user1 to connect to server20.
+You will not be prompted for a password because there was none assigned
+to the ssh keys.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-14a6c76ba89371a8c9cbc0530ec7542c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-V02PXIDS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-14a6c76ba89371a8c9cbc0530ec7542c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-V02PXIDS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>You can view this login attempt in the /var/log/secure file on server20:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-74f652b04d4f46ce8e1fc09221c361c7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-J24F26SQ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-74f652b04d4f46ce8e1fc09221c361c7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-J24F26SQ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The log entry shows the timestamp, hostname, process name and PID,
+username and source IP, and other relevant information. This file will
+log all future login attempts for this user.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0555.html}</p>
+<h2 class="style3" id="executing-commands-remotely-using-ssh">Executing Commands Remotely Using ssh</h2>
+<p>\</p>
+<p>The ssh command allows you to securely sign in to a remote system or
+execute a command without actually logging on to it. Exercise 18-2
+demonstrated how a user can log in using this command. The following
+shows a few basic examples on how to use ssh to execute a command on a
+remote system.</p>
+<p>\</p>
+<p>Invoke the ssh command on server10 to execute the hostname command on
+server20:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fb0e81e238fccb7ee41814f591f39f7c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LHOE9L53.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fb0e81e238fccb7ee41814f591f39f7c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LHOE9L53.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Run the nmcli command on server20 to show (s) active network connections
+(c):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-4b718fce70bc566e5897dac68807954f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FVC4GBQL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4b718fce70bc566e5897dac68807954f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FVC4GBQL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>You can run any command on server20 this way without having to log in to
+it.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0556.html}</p>
+<h2 class="style3" id="transferring-files-remotely-using-sftp">Transferring Files Remotely Using sftp</h2>
+<p>\</p>
+<p>The sftp command is an interactive file transfer tool. This tool can be
+launched as follows on server10 to connect to server20:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-dbf5eedbd8a23d4463a5742d93ced637" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TAPZT0RN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-dbf5eedbd8a23d4463a5742d93ced637"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TAPZT0RN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Type ? at the prompt to list available commands along with a short
+description:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-ec18815f9fd89e2415a70ca8d8b3ff67" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YLL4896K.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ec18815f9fd89e2415a70ca8d8b3ff67"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YLL4896K.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>As shown in the above screenshot, there are many common commands
+available at the sftp&gt; prompt. These include cd to change directory,
+get/put to download/upload a file, ls to list files, pwd to print
+working directory, mkdir to create a directory, rename to rename a file,
+rm to remove a file, and bye/quit/exit to exit the program and return to
+the command prompt. These commands will run on the remote server
+(server20). The following screenshot shows how these commands are used:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e543d1d2e57879cd57d2baec6bf62f19" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-7GQBAXOH.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e543d1d2e57879cd57d2baec6bf62f19"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-7GQBAXOH.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Furthermore, there are four commands beginning with an &rsquo;l&rsquo;&mdash;lcd, lls,
+lpwd, and lmkdir&mdash;at the sftp&gt; prompt. These commands are intended to
+be run on the source server (server10). Other Linux commands are also
+available at the sftp&gt; prompt that you may use for basic file
+management operations on the remote server.</p>
+<p>\</p>
+<p>Type quit at the sftp&gt; prompt to exit the program when you&rsquo;re done.</p>
+<p>\</p>
+<p>Consult the manual pages of the command for options and additional
+details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0557.html}</p>
+<h2 class="style3" id="chapter-summary">Chapter Summary</h2>
+<p>\</p>
+<p>This chapter discussed the open-source version of the secure shell
+service. It started with an overview of the service, and described what
+it is, how it works, available versions, and algorithms employed. We
+skimmed through various encryption techniques and authentication
+methods. We touched upon the service daemon, client and server
+configuration files, and commands. We demonstrated accessing a lab
+server from another lab server. We generated and distributed
+passwordless private/public key pair and employed ssh utilities to
+remote execute commands and transfer files.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0558.html}</p>
+<h2 class="style3" id="review-questions">Review Questions</h2>
+<p>\</p>
+<p>1. Name the SSH client-side configuration file.</p>
+<p>2. What would the command ssh server10 ls do?</p>
+<p>3. What would the command ssh-keygen -N &quot;&quot; do?</p>
+<p>4. What is the default location to store user SSH keys?</p>
+<p>5. What would the command ssh-copy-id do?</p>
+<p>6. Which two of the five authentication methods mentioned in this
+chapter are more prevalent?</p>
+<p>7. What is the use of the ssh-keygen command?</p>
+<p>8. Name the default algorithm used with SSH.</p>
+<p>9. The primary secure shell server configuration file is ssh_config.
+True or False?</p>
+<p>10. Which three common algorithms are used with SSH version 2 for
+encryption and/or authentication?</p>
+<p>11. What kind of information does the ~/.ssh/known_hosts file store?</p>
+<p>12. List the two encryption techniques described in this chapter.</p>
+<p>13. What is the default port used by the secure shell service?</p>
+<p>14. Which log file stores authentication messages?</p>
+<p>15. The ssh tool provides a non-secure tunnel over a network for
+accessing a RHEL system. True or False?</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0559.html}</p>
+<h2 class="style3" id="answers-to-review-questions">Answers to Review Questions</h2>
+<p>\</p>
+<p>1. The client-side SSH configuration file is ssh_config and it is
+located in the /etc/ssh directory.</p>
+<p>2. The command provided will run the ls command on the specified remote
+ssh server without the need for the user to log in.</p>
+<p>3. The command provided will generate a passwordless ssh key pair using
+the default RSA algorithm.</p>
+<p>4. Under the ~/.ssh directory.</p>
+<p>5. The ssh-copy-id command is used to distribute the public key to
+remote systems.</p>
+<p>6. The public key-based and password-based authentication methods are
+more prevalent.</p>
+<p>7. The ssh-keygen command is used to generate public/private key
+combination for use with ssh.</p>
+<p>8. The default algorithm used with ssh is RSA.</p>
+<p>9. False. The primary secure shell configuration file is sshd_config.</p>
+<p>10. The SSH version 2 uses RSA, DSA, and ECDSA algorithms.</p>
+<p>11. The ~/.ssh/known_hosts file stores fingerprints of remote servers.</p>
+<p>12. The two encryption techniques are symmetric (secret key) and
+asymmetric (public key).</p>
+<p>13. The default port used by the secure shell service is 22.</p>
+<p>14. The /var/log/secure file stores authentication messages.</p>
+<p>15. False. The ssh command provides a secure tunnel over a network.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0560.html}</p>
+<h2 id="do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</h2>
+<p>\</p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the labs have already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p>\</p>
+<p>Use the lab environment built specifically for end-of-chapter labs. See
+sub-section &ldquo;Lab Environment for End-of-Chapter Labs&rdquo; in Chapter 01
+&ldquo;Local Installation&rdquo; for details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0561.html}</p>
+<h2 class="style3" id="lab-18-1-establish-key-based-authentication">Lab 18-1: Establish Key-Based Authentication</h2>
+<p>\</p>
+<p>As user1 with sudo on server30 and server40, create user account user20
+and assign a password. As user20 on server40, generate a private/public
+key pair without a passphrase using the ssh-keygen command. Distribute
+the public key to server30 with the ssh-copy-id command. Log on to
+server30 as user20 and accept the fingerprints for the server if
+presented. On subsequent log in attempts from server40 to server30,
+user20 should not be prompted for their password. (Hint: System Access
+and File Transfer).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0562.html}</p>
+<h2 class="style3" id="lab-18-2-test-the-effect-of-permitrootlogin-directive">Lab 18-2: Test the Effect of PermitRootLogin Directive</h2>
+<p>\</p>
+<p>As user1 with sudo on server40, edit the /etc/ssh/sshd_config file and
+change the value of the directive PermitRootLogin to &ldquo;no&rdquo;. Use the
+systemctl command to activate the change. As root on server30, run ssh
+server40 (or use its IP). You&rsquo;ll get permission denied message. Reverse
+the change on server40 and retry ssh server40. You should be able to log
+in. (Hint: The OpenSSH Service).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0563.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1717964147" defer></script>
+        <script src="/js/search.js?1717964147" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/18_the_secure_shell_service/" class="active"><a class="padding" href="/linux/rhcsa/18_the_secure_shell_service/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/18_the_secure_shell_service/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1717964147" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1717964147" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1717964147" defer></script>
+    <script src="/js/js-yaml.min.js?1717964147" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1717964147" defer></script>
+  </body>
+</html>

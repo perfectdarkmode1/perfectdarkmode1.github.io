@@ -1,1 +1,0 @@
-Made it through 100 pages of Infinite Jest. Honestly, I have no idea what's going on in this book. I think I randomly read 3 paragraphs about Feral Hampsters? Am I wasting my time? I have no clue. But so many people say it's worth it to push through.

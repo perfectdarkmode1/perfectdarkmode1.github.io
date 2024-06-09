@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Same tools for mounting and unmounting a filesystem.
+Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible. Share stays mounted until manually unmounted or the client shuts down.">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Same tools for mounting and unmounting a filesystem.
+Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible. Share stays mounted until manually unmounted or the client shuts down.">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/16_network-file-system/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Same tools for mounting and unmounting a filesystem.
+Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible. Share stays mounted until manually unmounted or the client shuts down.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Same tools for mounting and unmounting a filesystem.
+Mounted and accessed the same way as local filesystems. Network protocol that allows file sharing over the network. Multi-platform Multiple clients can access a single share at the same time. Reduced overhead and storage cost. Give users access to uniform data. Consolidate scattered user home directories. May cause client to hang if share is not accessible. Share stays mounted until manually unmounted or the client shuts down.">
+    <meta itemprop="wordCount" content="6281">
+    <title></title>
+    <link href="/images/favicon.png?1717964147" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1717964147" rel="stylesheet">
+    <link href="/css/auto-complete.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1717964147" rel="stylesheet">
+    <link href="/css/fonts.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1717964147" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1717964147" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1717964147" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1717964147" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1717964147" rel="stylesheet">
+    <link href="/css/print.css?1717964147" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1717964147"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/rhcsa/16_network-file-system/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#nfs-supported-versions">NFS Supported versions</a></li>
+    <li><a href="#network-file-system-service">Network File System service</a></li>
+    <li><a href="#nfs-server-and-client-configuration">NFS Server and Client Configuration</a>
+      <ul>
+        <li><a href="#how-to-export-a-share">How to export a share</a></li>
+        <li><a href="#mount-a-share-from-the-client-side">Mount a share from the client side</a></li>
+      </ul>
+    </li>
+    <li><a href="#autofs">AutoFS</a>
+      <ul>
+        <li><a href="#direct-map">Direct Map</a></li>
+        <li><a href="#indirect-map">Indirect Map</a></li>
+      </ul>
+    </li>
+    <li><a href="#lab-export-share-on-nfs-server">Lab: Export Share on NFS Server</a></li>
+    <li><a href="#lab-access-nfs-share-using-direct-map">Lab: Access NFS Share Using Direct Map</a></li>
+    <li><a href="#lab-access-nfs-share-using-indirect-map">Lab: Access NFS Share Using Indirect Map</a></li>
+    <li><a href="#chapter-16">Chapter 16</a>
+      <ul>
+        <li><a href="#network-file-system">Network File System</a></li>
+      </ul>
+    </li>
+    <li><a href="#network-file-system-1">Network File System</a></li>
+    <li><a href="#nfs-versions">NFS Versions</a></li>
+    <li><a href="#nfs-server-and-client-configuration-1">NFS Server and Client Configuration</a></li>
+    <li><a href="#exercise-16-1-export-share-on-nfs-server">Exercise 16-1: Export Share on NFS Server</a></li>
+    <li><a href="#exercise-16-2-mount-share-on-nfs-client">Exercise 16-2: Mount Share on NFS Client</a></li>
+    <li><a href="#auto-file-system-autofs">Auto File System (AutoFS)</a></li>
+    <li><a href="#benefits-of-using-autofs">Benefits of Using AutoFS</a></li>
+    <li><a href="#how-autofs-works">How AutoFS Works</a></li>
+    <li><a href="#autofs-configuration-file">AutoFS Configuration File</a></li>
+    <li><a href="#autofs-maps">AutoFS Maps</a>
+      <ul>
+        <li><a href="#the-master-map">The Master Map</a></li>
+        <li><a href="#the-direct-map">The Direct Map</a></li>
+        <li><a href="#the-indirect-map">The Indirect Map</a></li>
+        <li><a href="#direct-map-vs-indirect-map">Direct Map vs. Indirect Map</a></li>
+      </ul>
+    </li>
+    <li><a href="#exercise-16-3-access-nfs-share-using-direct-map">Exercise 16-3: Access NFS Share Using Direct Map</a></li>
+    <li><a href="#exercise-16-4-access-nfs-share-using-indirect-map">Exercise 16-4: Access NFS Share Using Indirect Map</a></li>
+    <li><a href="#automounting-user-home-directories">Automounting User Home Directories</a></li>
+    <li><a href="#exercise-16-5-automount-user-home-directories-using-indirect-map">Exercise 16-5: Automount User Home Directories Using Indirect Map</a></li>
+    <li><a href="#chapter-summary">Chapter Summary</a></li>
+    <li><a href="#review-questions">Review Questions</a></li>
+    <li><a href="#answers-to-review-questions">Answers to Review Questions</a></li>
+    <li><a href="#do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</a></li>
+    <li><a href="#lab-16-1-configure-nfs-share-and-automount-with-direct-map">Lab 16-1: Configure NFS Share and Automount with Direct Map</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>Same tools for mounting and unmounting a filesystem.</p>
+<ul>
+<li>Mounted and accessed the same way as local filesystems.</li>
+<li>Network protocol that allows file sharing over the network.</li>
+<li>Multi-platform</li>
+<li>Multiple clients can access a single share at the same time.</li>
+<li>Reduced overhead and storage cost.</li>
+<li>Give users access to uniform data.</li>
+<li>Consolidate scattered user home directories.</li>
+<li>May cause client to hang if share is not accessible.</li>
+<li>Share stays mounted until manually unmounted or the client shuts down.</li>
+<li>Does not support wildcard characters or environment variables.</li>
+</ul>
+<h2 id="nfs-supported-versions">NFS Supported versions</h2>
+<ul>
+<li>RHEL 8 Supports versions 3,4.0,4.1, and 4.2 (default)</li>
+<li>NFSv3 supports:
+<ul>
+<li>TCP and UDP.</li>
+<li>asynchronous writes.</li>
+<li>64-bit files sizes.</li>
+<li>Access files larger than 2GB.</li>
+</ul>
+</li>
+<li>NFSv4.x supports:
+<ul>
+<li>All features of NFSv3.</li>
+<li>Transit firewalls and work on internet.</li>
+<li>Enhanced security and support for encrypted transfers and ACLs.</li>
+<li>Better scalability</li>
+<li>Better cross-platform</li>
+<li>Better system crash handling</li>
+<li>use usernames and group names rather than UID and GID.</li>
+<li>Uses TCP by default.</li>
+<li>Can use UDP for backwards compatibility.</li>
+<li>Version 4.2 only supports TCP</li>
+</ul>
+</li>
+</ul>
+<h2 id="network-file-system-service">Network File System service</h2>
+<ul>
+<li>Export shares to mount on remote clients</li>
+<li>Exporting
+<ul>
+<li>When the NFS server makes shares available.</li>
+</ul>
+</li>
+<li>Mounting
+<ul>
+<li>When a client mounts an exported share locally.</li>
+<li>Mount point should be empty before trying to mount a share on it.</li>
+</ul>
+</li>
+<li>System can be both client and server.</li>
+<li>Entire directory tree of the share is shared.</li>
+<li>Cannot re-share a subdirectory of a share.</li>
+<li>A mounted share cannot be exported from the client.</li>
+<li>A single exported share is mounted on a directory mount point.</li>
+<li>Make sure to update the fstab file on the client.</li>
+</ul>
+<h2 id="nfs-server-and-client-configuration">NFS Server and Client Configuration</h2>
+<h3 id="how-to-export-a-share">How to export a share</h3>
+<ul>
+<li>Add entry of the share to /etc/exports using exportfs command</li>
+<li>Add firewall rule to allow access</li>
+</ul>
+<h3 id="mount-a-share-from-the-client-side">Mount a share from the client side</h3>
+<ul>
+<li>Use mount and add the filesystem to the fstab file.</li>
+</ul>
+<h2 id="autofs">AutoFS</h2>
+<ul>
+<li>Automatically mount and unmount on clients during runtime and system reboots.</li>
+<li>Triggers mount or unmount action based on mount point activity.</li>
+<li>Client-side service</li>
+<li>Mount an NFS share on demand</li>
+<li>Entry placed in AutoFS config files.</li>
+<li>Automatically mounts share upon detecting activity in it&rsquo;s mount point. (touch, ls, cd)</li>
+<li>unmounts share if the share hasn&rsquo;t been accessed for a predefined period of time.</li>
+<li>Mounts managed with autofs should not be mounted manually via /etc/fstab to avoid inconsistencies.</li>
+<li>Saves Kernel from having to maintain unused NFS shares. (Improved performance!)</li>
+<li>NFS shares are defined in config files called maps (/etc/ or /etc/auto.master.d/)</li>
+<li>Does not use /etc/fstab.</li>
+<li>Does not require root to mount a share (fstab does).</li>
+<li>Prevents client from hanging if share is down.</li>
+<li>Share is unmounted if not accessed for 5 minutes (default)</li>
+<li>Supports wildcard characters or environment variables.</li>
+<li>Automount daemond
+<ul>
+<li>in the userland mounts configured shares automatically upon access.</li>
+<li>invoked at system boot.</li>
+<li>Reads AutoFS master map and create inititial mount point entries. (not mounting yet)</li>
+<li>Does not mount shares until user activity is detected.</li>
+<li>Unmounts after set timeframe of inactivity.</li>
+</ul>
+</li>
+<li>Use the mount command on a share to verify the path of the AutoFS map, file system type, and options used during mount.</li>
+</ul>
+<p>/etc/autofs.conf/ preset Directives:
+master_map_name=auto.master
+timeout = 300
+negative_timeout = 60
+mount_nfs_default_protocol = 4
+logging = none</p>
+<p>Additional directives:
+master_map_name
+- Name of the master map. Default is /etc/auto.master
+timeout
+- time in second to unmount a share.
+negative_timeout
+- Timeout (in seconds) value for failed mount attempts. (1 minute default)
+mount_nfs_default_protocol
+- Sets the NFS version used to mount shares.
+logging
+- Logging level (none, verbose, debug)
+- Default is none (disabled)</p>
+<ul>
+<li>Normally left to their default values.</li>
+</ul>
+<p>AutoFS Maps</p>
+<ul>
+<li>Where AutoFS finds the shares to mount and their locations.</li>
+<li>Also tells Autofs what options to use. Map Types</li>
+<li>master</li>
+<li>direct</li>
+<li>indirect</li>
+</ul>
+<p>Master Map</p>
+<ul>
+<li>/etc/auto.master is default</li>
+<li>Default is defined in /etc/autofs.conf with master_map_name directive.</li>
+<li>May be used to define entries for indirect and direct maps.
+<ul>
+<li>But it is recommended to store user-defined maps in /etc/auto.master.d/
+<ul>
+<li>AutoFS service parses this at startup.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>You can append an option to auto.master but it will apply globally to all subentries in the specified map file.</li>
+</ul>
+<p>Map entry format examples:</p>
+<h3 id="direct-map">Direct Map</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>/- /etc/auto.master.d/auto.direct &lt;-- defines direct map and points to auto.direct for details</code></pre></div><ul>
+<li>Mount shares on any number of unrelated mount points</li>
+<li>Always visible to users</li>
+<li>Can exist with an indirect share under one parent directory</li>
+<li>Accessing a directory containing many direct mount points mounts all shares.</li>
+<li>Each direct map entry places a separate share entry to /etc/mtab
+<ul>
+<li>/etc/mtab maintains a list of all mounted file systems whether they are local or remote.</li>
+<li>Updated whenever a local file system, removable file system, or aq network share is mounted or unmounted.</li>
+</ul>
+</li>
+</ul>
+<h3 id="indirect-map">Indirect Map</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>/misc /etc/auto.misc &lt;-- indirect map and points to auto.misc for details</code></pre></div><ul>
+<li>Umbrella mount point /misc will precede all mount point entries listed in /etc/auto.misc</li>
+<li>Used to automount removable file systems (CD, DVD, USB disks, etc.)</li>
+<li>Custom indirect map files shouold be located in /etc/auto.master.d/</li>
+<li>Preferred over direct mount for mounting all shares under one common parent directory.</li>
+<li>Become visible only after they have been accessed.</li>
+<li>Local and indirect mounted shares cannot coexist under the same parent directory.</li>
+<li>One entry in /etc/mtab gets added for each indirect map.</li>
+<li>Accessing a directory containing many indirect mount points shows only the shares that are already mounted.</li>
+<li>Usually better to use indirect map for automounting NFS shares.</li>
+</ul>
+<h2 id="lab-export-share-on-nfs-server">Lab: Export Share on NFS Server</h2>
+<ol>
+<li>Install nfs-utils</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo dnf -y install nfs-utils</code></pre></div><ol>
+<li>Create /common</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo mkdir /common</code></pre></div><ol>
+<li>Add full permissions</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo chmod 777 /common</code></pre></div><ol>
+<li>Add NFS service persistently to the firewalld configuration to allow NFS traffic and load the new rule:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo firewall-cmd --permanent --add-service nfs
+sudo firewall-cmd --reload</code></pre></div><ol>
+<li>Start the NFS service and enable it to autostart at system reboots:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo systemctl --now enable nfs-server</code></pre></div><ol>
+<li>Verify Operational Status of the NFS services:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo systemctl status nfs-server</code></pre></div><ol>
+<li>Open /etc/exports and add entry for /common to export it to server10 with read/write:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>/common server10(rw)</code></pre></div><ol>
+<li>Export the entry defined in /etc/exports. -a option exports all entries in the file. -v is verbose.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo exportfs -av</code></pre></div><ol>
+<li>Unexport the share (-u):</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo exportfs -u server10:/common</code></pre></div><ol>
+<li>Re-export the share:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo exportfs -av</code></pre></div><p>LAB: Mount share on NFS client</p>
+<ol>
+<li>Install nfs-utils</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo dnf -y install nfs-utils</code></pre></div><ol>
+<li>Create /local mount point</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo mkdir /local</code></pre></div><ol>
+<li>Mount the share manually:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo mount server20:/common /local</code></pre></div><ol>
+<li>Confirm using mount: (shows nfs version)</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mount | grep local</code></pre></div><ol>
+<li>Confirm using df:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>df -h | grep local</code></pre></div><ol>
+<li>Add to /fstab for persistence:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>server20:/common /local nfs _netdev 0 0</code></pre></div><p>Note:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>_netdev option makes system wait for networking to come up before trying to mount the share. </code></pre></div><ol>
+<li>Unmount share manually using umount then remount to validate accuracy of the entry in /fstab:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo umount /local
+sudo mount -a</code></pre></div><ol>
+<li>Verify:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>df -h</code></pre></div><ol>
+<li>Create a file in /local/ and verify:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch /local/nfsfile
+ls -l /local</code></pre></div><ol>
+<li>Confirm the sync on server 2</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /common/</code></pre></div><h2 id="lab-access-nfs-share-using-direct-map">Lab: Access NFS Share Using Direct Map</h2>
+<ol>
+<li>Install Autofs</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo dnf install -y autofs</code></pre></div><ol>
+<li>Create mount point /autodir using mkdir</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo mkdir /autodir</code></pre></div><ol>
+<li>Add an entry to /etc/auto.master to point the AutoFS service to the auto.dir file for more information:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>/- /etc/auto.master.d/auto.dir</code></pre></div><ol>
+<li>Create /etc/auto.master.d/auto.dir and add the mount point, NFS server, and share info:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>/autodir server20:/common</code></pre></div><ol>
+<li>Start AutoFS service and enable it at startup:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo systemctl enable --now autofs</code></pre></div><ol>
+<li>Make sure AUtoFS service is running. Use -l and &ndash;no-pager options to show full details without piping the output to a pager program (pg)</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo systemctl status autofs -l --no-pager</code></pre></div><ol>
+<li>Run ls on the mount point then verify the share is automounted and accessible with mount.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls /autodir
+mount | grep autodir</code></pre></div><ol>
+<li>Wait 5 minutes and run the mount command again to see it has disappeared.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mount | grep autodir</code></pre></div><h2 id="lab-access-nfs-share-using-indirect-map">Lab: Access NFS Share Using Indirect Map</h2>
+<h2 style="text-align: right" id="chapter-16">Chapter 16</h2>
+<p>\</p>
+<h3 class="style3" id="network-file-system">Network File System</h3>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;&rdquo;}
+:::</p>
+<p>\</p>
+<h4 id="this-chapter-describes-the-following-major-topics">This chapter describes the following major topics:</h4>
+<p>\</p>
+<p>Overview of Network File System service and key components</p>
+<p>\</p>
+<p>Network File System benefits and versions</p>
+<p>\</p>
+<p>Export a share on NFS server</p>
+<p>\</p>
+<p>Mount the share on NFS client using standard mount method</p>
+<p>\</p>
+<p>Understand the AutoFS service, and its benefits and functioning</p>
+<p>\</p>
+<p>Analyze AutoFS configuration maps</p>
+<p>\</p>
+<p>Mount the exported share on NFS client using AutoFS</p>
+<p>\</p>
+<p>Configure NFS and AutoFS to share and mount user home directories</p>
+<p>\</p>
+<h4 id="rhcsa-objectives">RHCSA Objectives:</h4>
+<p>\</p>
+<p>33. Mount and unmount network file systems using NFS</p>
+<p>34. Configure autofs</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Network shares may be mounted on RHEL and accessed the same way as local
+file systems. This can be done manually using the same tools that are
+employed for mounting and unmounting local file systems. An alternative
+solution is to implement the AutoFS service to automatically mount and
+unmount them without the need to execute any commands explicitly. AutoFS
+monitors activities in mount points based on which it triggers a mount
+or unmount action.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-6fa61a942348434e2ef48424335942db" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-PZNUOJTO.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6fa61a942348434e2ef48424335942db"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-PZNUOJTO.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>RHEL exports shares using the Network File System service for remote
+mounting on clients. A combination of this service and AutoFS/standard
+mount is prevalent in real world scenarios. This chapter elaborates on
+the benefits of the file sharing solution and expounds upon AutoFS. It
+demonstrates a series of exercises to detail the server-side and
+client-side configurations. It also explores the automatic mounting of
+user home directories on clients.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0498.html}</p>
+<h2 class="style3" id="network-file-system-1">Network File System</h2>
+<p>\</p>
+<p>Network File System (NFS) is a networking protocol that allows file
+sharing over the network. The Network File System service is based upon
+the client/server architecture whereby users on one system access files,
+directories, and file systems (collectively called &ldquo;shares&rdquo;) that reside
+on a remote system as if they are mounted locally on their system. The
+remote system that makes its shares available for network access is
+referred to as an NFS server, and the process of making the shares
+accessible is referred to as exporting. The shares the NFS server
+exports may be accessed by one or more systems. These systems are called
+NFS clients, and the process of making the shares accessible on clients
+is referred to as mounting. See Figure 16-1 for a simple NFS
+client/server arrangement that shows two shares&mdash;/export1 and
+/export2&mdash;exported on the network to a remote system, which has them
+mounted there.</p>
+<p>\</p>
+<p>::: {style=&ldquo;text-align: center;&rdquo;}
+<a href="#R-image-f3b8e4e142527fec7957a598bacbcf07" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-W460VEES.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f3b8e4e142527fec7957a598bacbcf07"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-W460VEES.jpg"></a>{height=&ldquo;100%&rdquo;}
+:::</p>
+<p>Figure 16-1 NFS Server/Client</p>
+<p>\</p>
+<p>A system can provide both server and client functionality concurrently.
+When a directory or file system share is exported, the entire directory
+structure beneath it becomes available for mounting on the client. A
+subdirectory or the parent directory of a share cannot be re-exported if
+it exists in the same file system. Similarly, a mounted share cannot be
+exported further. A single exported file share is mounted on a directory
+mount point.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0499.html}</p>
+<p>Benefits of Using NFS</p>
+<p>\</p>
+<p>The use of NFS provides several benefits, some of which are highlighted
+below:</p>
+<p>\</p>
+<p>Supports a variety of operating system platforms including Linux, UNIX,
+and Microsoft Windows.</p>
+<p>\</p>
+<p>Multiple NFS clients can access a single share simultaneously.</p>
+<p>\</p>
+<p>Enables the sharing of common application binaries and other read-only
+information, resulting in reduced administration overhead and storage
+cost.</p>
+<p>\</p>
+<p>Gives users access to uniform data.</p>
+<p>\</p>
+<p>Allows the consolidation of scattered user home directories on the NFS
+server and then exporting them to the clients. This way users will have
+only one home directory to maintain.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0500.html}</p>
+<h2 class="style3" id="nfs-versions">NFS Versions</h2>
+<p>\</p>
+<p>RHEL 9 provides the support for NFS versions 3, 4.0, 4.1, and 4.2, with
+version 4.2 being the default. NFSv3 supports both TCP and UDP transport
+protocols, asynchronous writes, and 64-bit file sizes that gives clients
+the ability to access files of sizes larger than 2GB.</p>
+<p>\</p>
+<p>NFSv4.x are Internet Engineering Task Force (IETF) series of protocols
+that provide all the features of NFSv3, plus the ability to transit
+firewalls and work on the Internet. They provide enhanced security and
+support for encrypted transfers, as well as greater scalability, better
+cross-platform interoperability, and better system crash handling. They
+use usernames and group names rather than UIDs and GIDs for files
+located on network shares. NFSv4.0 and NFSv4.1 use the TCP protocol by
+default, but can work with UDP for backward compatibility. In contrast,
+NFSv4.2 only supports TCP.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0501.html}</p>
+<h2 class="style3" id="nfs-server-and-client-configuration-1">NFS Server and Client Configuration</h2>
+<p>\</p>
+<p>This section presents two exercises, one demonstrating how to export a
+share on a server (NFS server) and the other outlines the steps on
+mounting and accessing a share on a remote system (NFS client). The
+basic setup of the NFS service is straightforward. It requires adding an
+entry of the share to a file named /etc/exports and using a command
+called exportfs to make it available on the network. It also requires
+the addition of a firewall rule to allow access to the share by NFS
+clients.</p>
+<p>\</p>
+<p>The mount command employed on an NFS client is the same command that was
+used in Chapter 14 &ldquo;Local File Systems and Swap&rdquo; to mount local file
+systems. Moreover, the fstab file requires an entry for the NFS share on
+the client for persistent mounting.</p>
+<p>\</p>
+<p>The exercises in this section illustrate the usage of both commands and
+the syntax of both files.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0502.html}</p>
+<h2 class="style3" id="exercise-16-1-export-share-on-nfs-server">Exercise 16-1: Export Share on NFS Server</h2>
+<p>\</p>
+<p>This exercise should be done on server20 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will create a directory called /common and export
+it to server10 in read/write mode. You will ensure that NFS traffic is
+allowed through the firewall. You will confirm the export.</p>
+<p>\</p>
+<p>1. Install the NFS software called nfs-utils:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-3c6af931badd14d897dacede6b8043ed" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-Y3HSOQJ1.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-3c6af931badd14d897dacede6b8043ed"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-Y3HSOQJ1.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>Follow the instructions outlined in &ldquo;Exercise 9-1: Mount RHEL 9 ISO
+Persistently&rdquo; and &ldquo;Exercise 10-1: Configure Access to Pre-Built
+Repositories&rdquo; to ensure the above software installation works.</p>
+<p>\</p>
+<p>2. Create /common directory to be exported as a share:</p>
+<p>\</p>
+<p><a href="#R-image-23910ceac220301f08264edbbc0639e4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-9XVK7KG5.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-23910ceac220301f08264edbbc0639e4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-9XVK7KG5.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p>3. Add full permissions to /common:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-49881276df5937e6483f846784fe0524" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-7FVQ1A64.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49881276df5937e6483f846784fe0524"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-7FVQ1A64.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Add the NFS service persistently to the Linux firewall to allow the
+NFS traffic to pass through it, and load the new rule:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-fde26e9861a7c3a8416512a0f3537c73" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-F3QXBPMD.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-fde26e9861a7c3a8416512a0f3537c73"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-F3QXBPMD.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>Refer to Chapter 19 &ldquo;The Linux Firewall&rdquo; for details around the Linux
+firewall service.</p>
+<p>\</p>
+<p>5. Start the NFS service and enable it to autostart at system reboots:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c67931dc0ae6f34f555dd500669060fa" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-Z7KMDEV3.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c67931dc0ae6f34f555dd500669060fa"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-Z7KMDEV3.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>6. Verify the operational status of the NFS service:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-b8c341f090245e6ad1b7bf4974a4f725" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FLE6D24E.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-b8c341f090245e6ad1b7bf4974a4f725"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FLE6D24E.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>7. Open the /etc/exports file in a text editor and add an entry for
+/common to export it to server10 with read/write option:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e5da20dbae1c87ef315b05575521e5cc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-3P396CJ4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e5da20dbae1c87ef315b05575521e5cc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-3P396CJ4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>8. Export the entry defined in the /etc/exports file. The -a option
+exports all the entries listed in the file and -v displays verbose
+output.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-52ccfe75c2b655cf2020effb52a4373f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-P67WMV3I.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-52ccfe75c2b655cf2020effb52a4373f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-P67WMV3I.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The NFS service is now set up on server20 with the /common share
+available for mounting on server10 (NFS client in this case).</p>
+<p>\</p>
+<p>For practice, you can unexport the share by issuing the exportfs command
+with the -u flag as follows:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-c549debcef60a9e170ec211ec7f42e23" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-VF7055NU.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c549debcef60a9e170ec211ec7f42e23"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-VF7055NU.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Before proceeding, re-export the share using sudo exportfs -av.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0503.html}</p>
+<h2 class="style3" id="exercise-16-2-mount-share-on-nfs-client">Exercise 16-2: Mount Share on NFS Client</h2>
+<p>\</p>
+<p>This exercise should be done on server10 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will mount the /common share exported in Exercise
+16-1. You will create a mount point called /local, mount the remote
+share manually, and confirm the mount. You will add the remote share to
+the file system table for persistence. You will remount the share and
+confirm the mount. You will create a test file in the mount point and
+confirm the file creation on the NFS server (server20).</p>
+<p>\</p>
+<p>1. Install the NFS software called nfs-utils:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e519561bde1ef0184dcd98f58ca2566a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-VR7N9PHK.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e519561bde1ef0184dcd98f58ca2566a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-VR7N9PHK.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Create /local mount point:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-6d520ea300fc8a60a6f913690a6a27d3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-6U8QXI0Z.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6d520ea300fc8a60a6f913690a6a27d3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-6U8QXI0Z.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Mount the share manually using the mount command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-f05bfc2adcd4698ebf0a127a18be7595" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BKFJJK0I.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-f05bfc2adcd4698ebf0a127a18be7595"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BKFJJK0I.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The remote share is successfully mounted on server10, and it can be
+accessed as any other local file system.</p>
+<p>\</p>
+<p>4. Confirm the mount using either the mount or the df command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-94ca644e40bf1eb839944627fa50404f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-40F15W4K.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-94ca644e40bf1eb839944627fa50404f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-40F15W4K.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The mount command output returns the NFS protocol version (NFS4.2) and
+all the default options used in mounting the share.</p>
+<p>\</p>
+<p>5. Open the /etc/fstab file and append the following entry for
+persistence:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-01954e3ec0af967e88ca4a4e0670dadb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-D1EFHGXS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-01954e3ec0af967e88ca4a4e0670dadb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-D1EFHGXS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>The _netdev option will make the system wait for networking to
+establish before attempting to mount this share.</p>
+<p>\</p>
+<p>A mount point should be empty and must not be in use when an attempt is
+made to mount a share to it.</p>
+<p>\</p>
+<p>6. Unmount the share manually using the umount command and remount it
+via the fstab file to validate the accuracy of the entry placed in the
+file:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-77996d806ba7152cadd656c173f2ec80" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TORCBQDK.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-77996d806ba7152cadd656c173f2ec80"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TORCBQDK.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>7. Run mount and df -h again to verify the remounting.</p>
+<p>8. Create a file called nfsfile under /local and verify:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-af840401de2a02a13a9e9ad79653764a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-RMXWFJB1.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-af840401de2a02a13a9e9ad79653764a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-RMXWFJB1.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>9. Confirm the file creation on the NFS server (server20):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-9c453c7d08c8b52ceab480c097e8677d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-RRSA2THB.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9c453c7d08c8b52ceab480c097e8677d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-RRSA2THB.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: Do not forget to update the /etc/fstab file on the client.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>This completes the setup and testing of mounting, unmounting, and
+remounting of an NFS share on the client.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0504.html}</p>
+<h2 class="style3" id="auto-file-system-autofs">Auto File System (AutoFS)</h2>
+<p>\</p>
+<p>In the previous section, you learned how to attach (mount) an NFS share
+to the Linux directory tree manually for access by users and
+applications on an NFS client. Once attached, the share was treated just
+like any other local file system. You also learned how to detach
+(unmount) an NFS share manually from the directory tree to make it
+inaccessible to users and applications. You placed an entry for the
+share in the fstab file to guarantee a remount during system reboots.</p>
+<p>\</p>
+<p>RHEL offers an alternative way of mounting and unmounting a share on the
+clients during runtime as well as system reboots. This feature is
+delivered by a service called the Auto File System (AutoFS). AutoFS is a
+client-side service, which is employed to mount an NFS share on-demand.
+With a proper entry placed in AutoFS configuration files, the AutoFS
+service automatically mounts a share upon detecting an activity in its
+mount point with a command such as ls or cd. In the same manner, AutoFS
+unmounts the share automatically if it has not been accessed for a
+predefined period of time.</p>
+<p>\</p>
+<p>To avoid inconsistencies, mounts managed with AutoFS should not be
+mounted or unmounted manually or via the /etc/fstab file.</p>
+<p>\</p>
+<p>The use of AutoFS saves the kernel from dedicating system resources to
+maintain unused NFS shares, resulting in slight improvement in system
+performance.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0505.html}</p>
+<h2 class="style3" id="benefits-of-using-autofs">Benefits of Using AutoFS</h2>
+<p>\</p>
+<p>There are several benefits associated with using the AutoFS service over
+placing entries in the /etc/fstab file. Some of the key benefits are
+described below:</p>
+<p>\</p>
+<p>AutoFS requires that NFS shares be defined in text configuration files
+called maps , which are located in the /etc or /etc/auto.master.d
+directory. AutoFS does not make use of the /etc/fstab file.</p>
+<p>\</p>
+<p>AutoFS does not require root privileges to mount an NFS share; manual
+mounting and mounting via fstab do require that privilege.</p>
+<p>\</p>
+<p>AutoFS prevents an NFS client from hanging if an NFS server is down or
+inaccessible. With the other method, the unavailability of the NFS
+server may cause the NFS client to hang.</p>
+<p>\</p>
+<p>With AutoFS, a share is unmounted automatically if it is not accessed
+for five minutes by default. With the fstab method, the share stays
+mounted until it is either manually unmounted or the client shuts down.</p>
+<p>\</p>
+<p>### AutoFS supports wildcard characters and environment variables,
+which the other method does not support.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0506.html}</p>
+<h2 class="style3" id="how-autofs-works">How AutoFS Works</h2>
+<p>\</p>
+<p>The AutoFS service consists of a daemon called automount in the userland
+that mounts configured shares automatically upon access. This daemon is
+invoked at system boot. It reads the AutoFS master map and creates
+initial mount point entries, but it does not mount any shares yet. When
+the service detects a user activity under a mount point during runtime,
+it mounts the requested file system at that time. If a share remains
+idle for a certain time period, automount unmounts it by itself.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0507.html}</p>
+<h2 class="style3" id="autofs-configuration-file">AutoFS Configuration File</h2>
+<p>\</p>
+<p>The configuration file for the AutoFS service is /etc/autofs.conf, which
+AutoFS consults at service startup. Some key directives from this file
+are shown below along with preset values:</p>
+<p>\</p>
+<p>master_map_name = auto.master</p>
+<p>timeout = 300</p>
+<p>negative_timeout = 60</p>
+<p>mount_nfs_default_protocol = 4</p>
+<p>logging = none</p>
+<p>\</p>
+<p>There are additional directives available in this file and more can be
+added to modify the default behavior of the AutoFS service. Table 16-1
+describes the above directives.</p>
+<p>\</p>
+<hr>
+<p>Directive                           Description</p>
+<p>master_map_name                     Defines the name of the master map.
+The default is auto.master located
+in the /etc directory.</p>
+<p>timeout                             Specifies, in seconds, the maximum
+idle time after which a share is
+automatically unmounted. The
+default is five minutes.</p>
+<p>negative_timeout                    Expresses, in seconds, a timeout
+value for failed mount attempts.
+The default is one minute.</p>
+<p>mount_nfs_default_protocol          Sets the default NFS version to be
+used to mount shares.</p>
+<p>logging                             Configures a logging level. Options
+are none, verbose, and debug. The
+default is none (disabled).</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>Table 16-1 AutoFS Directives</p>
+<p>\</p>
+<p>The directives in the autofs.conf file are normally left to their
+default values, but you can alter them if required.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0508.html}</p>
+<h2 class="style3" id="autofs-maps">AutoFS Maps</h2>
+<p>\</p>
+<p>The AutoFS service needs to know the NFS shares to be mounted and their
+locations. It also needs to know any specific options to use with
+mounting them. This information is defined in AutoFS files called maps.
+There are three common AutoFS map types: master, direct, and indirect.</p>
+<p>\</p>
+<h3 class="style3" id="the-master-map">The Master Map</h3>
+<p>The auto.master file located in the /etc directory is the default master
+map, as defined in the /etc/autofs.conf configuration file with the
+master_map_name directive. This map may be used to define entries for
+direct and indirect maps. However, it is recommended to store
+user-defined map files in the /etc/auto.master.d directory, which the
+AutoFS service automatically parses at startup. The following presents
+two samples to explain the format of the map entries:</p>
+<p>\</p>
+<hr>
+<p>/-                      /etc/auto.master.d/auto.direct   # Line 1</p>
+<p>/misc                   /etc/auto.misc                   # Line 2</p>
+<hr>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>\</p>
+<p>The two entries are explained below.</p>
+<p>\</p>
+<h3 class="style3" id="the-direct-map">The Direct Map</h3>
+<p>The direct map is used to mount shares automatically on any number of
+unrelated mount points. Some key points to note when working with direct
+maps are:</p>
+<p>\</p>
+<p>Direct mounted shares are always visible to users.</p>
+<p>\</p>
+<p>Local and direct mounted shares can coexist under one parent directory.</p>
+<p>\</p>
+<p>Accessing a directory containing many direct mount points mounts all
+shares.</p>
+<p>\</p>
+<p>Each direct map entry places a separate share entry to the /etc/mtab
+file, which maintains a list of all mounted file systems whether they
+are local or remote. This file is updated whenever a local file system,
+removable file system, or a network share is mounted or unmounted.</p>
+<p>\</p>
+<p>Line 1 from above defines a direct map and points to the
+/etc/auto.master.d/auto.direct file for mount details.</p>
+<p>\</p>
+<p>You may append an option to the line entry in the auto.master file
+above; however, that option will apply to all subentries in the
+specified map file.</p>
+<p>\</p>
+<h3 class="style3" id="the-indirect-map">The Indirect Map</h3>
+<p>The indirect map is preferred over the direct map if you want to mount
+all shares under one common parent directory. Some key points to note
+when working with indirect maps are:</p>
+<p>\</p>
+<p>Indirect mounted shares become visible only after they have been
+accessed.</p>
+<p>\</p>
+<p>Local and indirect mounted shares cannot coexist under the same parent
+directory.</p>
+<p>\</p>
+<p>Each indirect map puts only one entry in the /etc/mtab mount table.</p>
+<p>\</p>
+<p>Accessing a directory containing many indirect mount points shows only
+the shares that are already mounted.</p>
+<p>\</p>
+<p>Line 2 from above represents an indirect map, notifying AutoFS to refer
+to the /etc/auto.misc file for mount details. The umbrella mount point
+/misc will precede all mount point entries listed in the /etc/auto.misc
+file. This indirect map entry is normally used to automount removable
+file systems, such as CD, DVD, external USB disks, and so on. Any custom
+indirect map file should be located in the /etc/auto.master.d directory.</p>
+<p>\</p>
+<p>You may append an option to the corresponding line entry in the
+auto.master file above; however, that option will apply to all
+subentries in the specified map file.</p>
+<p>\</p>
+<h3 class="style3" id="direct-map-vs-indirect-map">Direct Map vs. Indirect Map</h3>
+<p>Both direct and indirect maps have their own merits and demerits. By
+comparing their features, it seems more prudent to use the indirect map
+for automounting NFS shares. However, this statement may not be true for
+every environment, as there could be specifics that would dictate which
+option to go with.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0509.html}</p>
+<h2 class="style3" id="exercise-16-3-access-nfs-share-using-direct-map">Exercise 16-3: Access NFS Share Using Direct Map</h2>
+<p>\</p>
+<p>This exercise should be done on server10 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will configure a direct map to automount the NFS
+share /common that is available from server20. You will install the
+relevant software, create a local mount point /autodir, and set up
+AutoFS maps to support the automatic mounting. Note that /common is
+already mounted to /local on server10 (NFS client) via the fstab file.
+There should not be any conflict in configuration or functionality
+between the two.</p>
+<p>\</p>
+<p>1. Install the AutoFS software package called autofs:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8afccf9350bbf0dfa31512aa2d55f591" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-JV0VLRKV.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8afccf9350bbf0dfa31512aa2d55f591"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-JV0VLRKV.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Create a mount point /autodir using the mkdir command:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-db6d76df31249639ad7043a64b964446" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WX4PVBAM.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-db6d76df31249639ad7043a64b964446"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WX4PVBAM.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Edit the /etc/auto.master file and add the following entry at the
+beginning of the file. This entry will point the AutoFS service to the
+auto.dir file for additional information.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7e009bc9df0647d6cab107e6494b4439" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-25VG0T6I.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7e009bc9df0647d6cab107e6494b4439"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-25VG0T6I.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Create /etc/auto.master.d/auto.dir file and add the mount point, NFS
+server, and share information to it:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-8c14261bec73af947dfeb25003db8118" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-D1DBM7Z4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8c14261bec73af947dfeb25003db8118"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-D1DBM7Z4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Start the AutoFS service now and set it to autostart at system
+reboots:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-1a4f38e4ea3aeda9f47e00217d75ebe6" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-217ZEA7U.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1a4f38e4ea3aeda9f47e00217d75ebe6"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-217ZEA7U.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>6. Verify the operational status of the AutoFS service. Use the -l and
+--no-pager options to show full details without piping the output to a
+pager program (the pg command in this case).</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-29628d2b1700fce95841a5f3d5291d77" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5ZDWYN76.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-29628d2b1700fce95841a5f3d5291d77"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5ZDWYN76.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>7. Run the ls command on the mount point /autodir and then issue the
+mount command to verify that the share is automounted and accessible:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-2a28d7a74540e53a91b426b22db86e16" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-BVSYBB5B.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2a28d7a74540e53a91b426b22db86e16"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-BVSYBB5B.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Observe the above outcomes. An activity in the mount point (the ls
+command) caused AutoFS to mount the share /common on /autodir. The mount
+command output depicts the path of the AutoFS map
+(/etc/auto.master.d/auto.dir), the file system type (autofs), and the
+options used during the mount process. Wait for five minutes and run the
+mount command again. You&rsquo;ll see that the auto file system has
+disappeared. A cd, ls, or another activity in the mount point will bring
+it back.</p>
+<p>\</p>
+<p>This completes the AutoFS setup for an NFS share on the client using a
+direct map.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0510.html}</p>
+<h2 class="style3" id="exercise-16-4-access-nfs-share-using-indirect-map">Exercise 16-4: Access NFS Share Using Indirect Map</h2>
+<p>\</p>
+<p>This exercise should be done on server10 as user1 with sudo where
+required.</p>
+<p>\</p>
+<p>In this exercise, you will configure an indirect map to automount the
+NFS share /common that is available from server20. You will install the
+relevant software and set up AutoFS maps to support the automatic
+mounting. You will observe that the specified mount point &ldquo;autoindir&rdquo; is
+created automatically under /misc.</p>
+<p>\</p>
+<p>Note that /common is already mounted on the /local mount point via the
+fstab file and it is also configured via a direct map for automounting
+on /autodir. There should occur no conflict in configuration or
+functionality among the three.</p>
+<p>\</p>
+<p>1. Install the autofs software package if it is not already there:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-662eb3ebb3e52518ded342ea27af3ba2" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5ZCH4XO4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-662eb3ebb3e52518ded342ea27af3ba2"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5ZCH4XO4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Confirm the entry for the indirect map /misc in the /etc/auto.master
+file exists:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-30ab38f8107197060dea1ad59a9fe97d" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-RB8VLK54.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-30ab38f8107197060dea1ad59a9fe97d"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-RB8VLK54.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Edit the /etc/auto.misc file and add the mount point, NFS server,
+and share information to it:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-49fba805f89821094b7531ae6dce9068" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-NJSLAQTL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-49fba805f89821094b7531ae6dce9068"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-NJSLAQTL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Start the AutoFS service now and set it to autostart at system
+reboots:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-89567884c88a859934116b75d018b0a8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-LFTPDKG9.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-89567884c88a859934116b75d018b0a8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-LFTPDKG9.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Verify the operational status of the AutoFS service. Use the -l and
+--no-pager options to show full details without piping the output to a
+pager program (the pg command in this case):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-9418a3eafd310e59d428ce42e1415495" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-S0ND3WG4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-9418a3eafd310e59d428ce42e1415495"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-S0ND3WG4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>6. Run the ls command on the mount point /misc/autoindir and then grep
+for both auto.misc and autoindir on the mount command output to verify
+that the share is automounted and accessible:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-266b4e5a3118075d34b65ffd0ce76dec" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-9VMDJ9FI.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-266b4e5a3118075d34b65ffd0ce76dec"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-9VMDJ9FI.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>Observe the above outcomes. An activity in the mount point (ls command
+in this case) caused AutoFS to mount the share /common on
+/misc/autoindir. The mount command output illustrates the path of the
+AutoFS map (/etc/auto.misc), the auto-generated mount point
+(/misc/autoindir), file system type (autofs), and the options used
+during the mount process. You can use the same umbrella mount point
+/misc to mount additional auto-generated mount points.</p>
+<p>\</p>
+<p>This mount point will automatically disappear after five minutes of
+idling. You can verify that by issuing the mount command again. A cd,
+ls, or another activity in the mount point will bring it back.</p>
+<p>\</p>
+<p>This completes the AutoFS setup for an NFS share on the client using an
+indirect map.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0511.html}</p>
+<h2 class="style3" id="automounting-user-home-directories">Automounting User Home Directories</h2>
+<p>\</p>
+<p>AutoFS allows us to automount user home directories by exploiting two
+special characters in indirect maps. The asterisk (*) replaces the
+references to specific mount points and the ampersand (&amp;) substitutes
+the references to NFS servers and shared subdirectories. With user home
+directories located under /home, on one or more NFS servers, the AutoFS
+service will connect with all of them simultaneously when a user
+attempts to log on to a client. The service will mount only that
+specific user&rsquo;s home directory rather than the entire /home. The
+indirect map entry for this type of substitution is defined in an
+indirect map, such as /etc/auto.master.d/auto.home, and will look like:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a4551d0311e2b34b1ea1b152fdb0d79e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FPTPKH8O.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4551d0311e2b34b1ea1b152fdb0d79e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FPTPKH8O.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>With this entry in place, there is no need to update any AutoFS
+configuration files if additional NFS servers with /home shared are
+added or removed. Similarly, if user home directories are added or
+deleted, there will be no impact on the functionality of AutoFS. If
+there is only one NFS server sharing the home directories, you can
+simply specify its name in lieu of the first &amp; symbol in the above
+entry.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0512.html}</p>
+<h2 class="style3" id="exercise-16-5-automount-user-home-directories-using-indirect-map">Exercise 16-5: Automount User Home Directories Using Indirect Map</h2>
+<p>\</p>
+<p>There are two portions for this exercise. The first portion should be
+done on server20 (NFS server) and the second portion on server10 (NFS
+client) as user1 with sudo where required.</p>
+<p>\</p>
+<p>In the first portion, you will create a user account called user30 with
+UID 3000. You will add the /home directory to the list of NFS shares so
+that it becomes available for remote mount.</p>
+<p>\</p>
+<p>In the second portion, you will create a user account called user30 with
+UID 3000, base directory /nfshome, and no home directory. You will
+create an umbrella mount point called /nfshome for mounting the user
+home directory from the NFS server. You will install the relevant
+software and establish an indirect map to automount the remote home
+directory of user30 under /nfshome. You will observe that the home
+directory is automounted under /nfshome when you sign in as user30.</p>
+<p>\</p>
+<p>On NFS server server20:</p>
+<p>\</p>
+<p>1. Create a user account called user30 with UID 3000 (-u) and assign
+password &ldquo;password1&rdquo;:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-5721d6b6c585bc9c35bebb0687650ddd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-1Z5AFEAS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-5721d6b6c585bc9c35bebb0687650ddd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-1Z5AFEAS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Edit the /etc/exports file and add an entry for /home (do not modify
+or remove the previous entry):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a633f0de89fdaf6bc10907625c555c8c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-JW7ANJY0.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a633f0de89fdaf6bc10907625c555c8c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-JW7ANJY0.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>3. Export all the shares listed in the /etc/exports file:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-a8131ed5ffbc3031bac3956598d315e9" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-FAG808ZE.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a8131ed5ffbc3031bac3956598d315e9"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-FAG808ZE.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>On NFS client server10:</p>
+<p>\</p>
+<p>1. Install the autofs software package if it is not already there:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-331a662ac13f47d4614a4e93c2f2e13e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-97MYNTLA.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-331a662ac13f47d4614a4e93c2f2e13e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-97MYNTLA.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>2. Create a user account called user30 with UID 3000 (-u), base home
+directory location /nfshome (-b), no home directory (-M), and password
+&ldquo;password1&rdquo;:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-e2cde9ef4d0772b5bee7eeeec4d06e2f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-T0WVSMTF.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e2cde9ef4d0772b5bee7eeeec4d06e2f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-T0WVSMTF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>This is to ensure that the UID for the user is consistent on the server
+and the client to avoid access issues.</p>
+<p>\</p>
+<p>3. Create the umbrella mount point /nfshome to automount the user&rsquo;s
+home directory:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-d54337886bf8047993ca3ff6e0a29983" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-UN1HDEOX.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d54337886bf8047993ca3ff6e0a29983"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-UN1HDEOX.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>4. Edit the /etc/auto.master file and add the mount point and indirect
+map location to it:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-705e0c8f02d8b2d9fb575a2f50a79c57" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-RELSQT0W.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-705e0c8f02d8b2d9fb575a2f50a79c57"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-RELSQT0W.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>5. Create the /etc/auto.master.d/auto.home file and add the following
+information to it:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7b34402748946534b50b223b5d685ddd" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-ZSB5R08Q.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7b34402748946534b50b223b5d685ddd"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-ZSB5R08Q.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>For multiple user setup, you can replace &ldquo;user30&rdquo; with the &amp; character,
+but ensure that those users exist on both the server and the client with
+consistent UIDs.</p>
+<p>\</p>
+<p>6. Start the AutoFS service now and set it to autostart at system
+reboots. This step is not required if AutoFS is already running and
+enabled.</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7678e141834296fff91caf4b82a8d65f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-PPPSE8XC.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7678e141834296fff91caf4b82a8d65f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-PPPSE8XC.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>7. Verify the operational status of the AutoFS service. Use the -l and
+--no-pager options to show full details without piping the output to a
+pager program (the pg command):</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-7cf50eb8e7cc6740f8006ef79fd048f7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-JD2MMF3Q.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-7cf50eb8e7cc6740f8006ef79fd048f7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-JD2MMF3Q.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>8. Log in as user30 and run the pwd, ls, and df commands for
+verification:</p>
+<p>\</p>
+<!-- raw HTML omitted -->
+<p><a href="#R-image-66a9c073d4d6f74ed877970134ce5740" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-8VYYLD55.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-66a9c073d4d6f74ed877970134ce5740"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-8VYYLD55.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<!-- raw HTML omitted -->
+<p>The user is successfully logged in with their home directory automounted
+from the NFS server. The pwd command confirms the path. The df command
+verifies the NFS server name and the source home directory path for
+user30, as well as the mount location. You can also use the mount
+command and pipe the output to grep for user30 to view mount details
+(mount | grep user30).</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>EXAM TIP: You may need to configure AutoFS for mounting a remote user
+home directory.</p>
+<p>\</p>
+<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
+:::</p>
+<p>\</p>
+<p>This completes the setup for an automounted home directory share for a
+user.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0513.html}</p>
+<h2 class="style3" id="chapter-summary">Chapter Summary</h2>
+<p>\</p>
+<p>This chapter discussed the sharing and mounting of remote file systems
+using the Network File System protocol. It elucidated the concepts,
+benefits, and versions of the NFS service, and described the commands
+and configuration files involved in NFS management on the server and the
+client.</p>
+<p>\</p>
+<p>Next, we performed an exercise to demonstrate the configuration and
+sharing of a directory on one of the lab servers (NFS server) and
+another exercise on the second lab system (NFS client) to mount that
+share manually and persistently using the standard NFS mount method.</p>
+<p>\</p>
+<p>We explored the client-side service called AutoFS for automounting NFS
+shares. We discussed the concepts, benefits, and components associated
+with AutoFS, and analyzed its maps. We performed exercises to mount,
+confirm, and unmount the remote NFS share using both direct and indirect
+methods.</p>
+<p>\</p>
+<p>Finally, we described the AutoFS setting to automount user home
+directories from the NFS server.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0514.html}</p>
+<h2 class="style3" id="review-questions">Review Questions</h2>
+<p>\</p>
+<p>1. The name of the AutoFS service daemon is autofs. True or False?</p>
+<p>2. What would the line entry /dir1 *(rw) in the /etc/exports file
+mean?</p>
+<p>3. What type of AutoFS map would have the /- /etc/auto.media entry in
+the auto.master file?</p>
+<p>4. AutoFS requires root privileges to automatically mount a network
+file system. True or False?</p>
+<p>5. What is the default timeout value for a file system before AutoFS
+unmounts it automatically?</p>
+<p>6. Name the three common types of maps that AutoFS support.</p>
+<p>7. Arrange the tasks in three different correct sequences to export a
+share using NFS: (a) update /etc/exports, (b) add service to firewall,
+(c) run exportfs, (d) install nfs-utils, and (e) start nfs service.</p>
+<p>8. What would the entry * server10:/home/&amp; in an AutoFS indirect map
+imply?</p>
+<p>9. Which command is used to export a share?</p>
+<p>10. An NFS server exports a share and an NFS server mounts it. True or
+False?</p>
+<p>11. Which command would you use to unexport a share?</p>
+<p>12. What is the name of the NFS server configuration file?</p>
+<p>13. What is the name of the AutoFS configuration file and where is it
+located?</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0515.html}</p>
+<h2 class="style3" id="answers-to-review-questions">Answers to Review Questions</h2>
+<p>\</p>
+<p>1. False. The name of the AutoFS service daemon is automount.</p>
+<p>2. The line entry would export /dir1 in read/write mode to all systems.</p>
+<p>3. A direct map.</p>
+<p>4. False.</p>
+<p>5. Five minutes.</p>
+<p>6. The three common AutoFS maps are master, direct, and indirect.</p>
+<p>7. d/e/b/a/c, d/e/a/c/b, or d/e/a/b/c.</p>
+<p>8. This indirect map entry would mount individual user home directories
+from server10.</p>
+<p>9. The exportfs command.</p>
+<p>10. True.</p>
+<p>11. The exportfs command with the -u switch.</p>
+<p>12. The /etc/nfs.conf file.</p>
+<p>13. The name of the AutoFS configuration file is autofs.conf and it is
+located in the /etc directory.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0516.html}</p>
+<h2 id="do-it-yourself-challenge-labs">Do-It-Yourself Challenge Labs</h2>
+<p>\</p>
+<p>The following labs are useful to strengthen most of the concepts and
+topics learned in this chapter. It is expected that you perform the labs
+without external help. A step-by-step guide is not supplied, as the
+knowledge and skill required to implement the labs have already been
+disseminated in the chapter; however, hints to the relevant major
+topic(s) are included.</p>
+<p>\</p>
+<p>Use the lab environment built specifically for end-of-chapter labs. See
+sub-section &ldquo;Lab Environment for End-of-Chapter Labs&rdquo; in Chapter 01
+&ldquo;Local Installation&rdquo; for details.</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0517.html}</p>
+<h2 class="style3" id="lab-16-1-configure-nfs-share-and-automount-with-direct-map">Lab 16-1: Configure NFS Share and Automount with Direct Map</h2>
+<p>\</p>
+<p>As user1 with sudo on server30, share directory /sharenfs (create it) in
+read/write mode using NFS. On server40 as user1 with sudo, install the
+AutoFS software and start the service. Configure the master and a direct
+map to automount the share on /mntauto (create it). Run ls on /mntauto
+to trigger the mount. Use df -h to confirm. (Hint: NFS Server and Client
+Configuration, and Auto File System).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0518.html}</p>
+<p>Lab 16-2: Automount NFS Share with Indirect Map</p>
+<p>\</p>
+<p>As user1 with sudo on server40, configure the master and an indirect map
+to automount the share under /autoindir (create it). Run ls on
+/autoindir/sharenfs to trigger the mount. Use df -h to confirm. (Hint:
+Auto File System).</p>
+<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
+:::</p>
+<p>[]{#chapter0519.html}</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1717964147" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1717964147" defer></script>
+        <script src="/js/search.js?1717964147" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsa/16_network-file-system/" class="active"><a class="padding" href="/linux/rhcsa/16_network-file-system/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/rhcsa/16_network-file-system/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1717964147" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1717964147" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1717964147" defer></script>
+    <script src="/js/js-yaml.min.js?1717964147" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1717964147" defer></script>
+  </body>
+</html>
