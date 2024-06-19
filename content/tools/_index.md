@@ -18,6 +18,7 @@ alwaysopen = false
 - [githubpageshugo](githubpageshugo.md)
 - [hugorelearn](hugorelearn.md)
 - [SCSSandSASSinhugo](SCSSandSASSinhugo.md)
+- [Add Plausible to Hugo Site](Add%20Plausible%20to%20Hugo%20Site.md)
 
 ## Obsidian
 

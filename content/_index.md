@@ -2,7 +2,7 @@
 archetype = "home"
 title = ""
 +++
-What I am doing [Now](perfectdarkmode1.github.io/content/now/_index.md).
+What I am doing [Now.](now/_index.md)
 
 Here are the current areas of content you can find here:
 
