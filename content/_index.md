@@ -4,15 +4,16 @@ title = ""
 +++
 What I am doing [Now](perfectdarkmode1.github.io/content/now/_index.md).
 
-I am also interested in digital minimalism, privacy, and personal development topics. Expect to see writings on those as well. 
+Here are the current areas of content you can find here:
 
-[Linux Stuff](/linux/_index)
+- [Linux Stuff](/linux/_index)
 
-[Tools](tools/_index.md)
+- [Tools](tools/_index.md)
 
-[Networking](networking/_index.md)
+- [Networking](networking/_index.md)
+
+- [Writing](writing/_index.md)
+
+<---  You can also click the links in the side bar. 
 
 
-### Recent Posts:
-
-![fedoradesktop](fedoradesktop.png)

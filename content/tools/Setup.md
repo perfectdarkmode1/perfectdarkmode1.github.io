@@ -1,8 +1,3 @@
----
-draft: true
-title: My Obsidian Setup
----
-
 ## Obsidian todo
 * to do list
 	* checklist plugin

@@ -7,6 +7,11 @@ alwaysopen = false
   render = "always"
 +++
 
+## Articles
+- [ccna_spaced_repetition](ccna_spaced_repetition.md)
+- [resources_for_passing_ccna](resources_for_passing_ccna.md)
+- [things_to_learn_after_ccna](things_to_learn_after_ccna.md)
+
 The formatting and images of all of my networking notes go destroyed when migrating away from OneNote. But they still come in handy all of the time. 
 
 See my networking notes:

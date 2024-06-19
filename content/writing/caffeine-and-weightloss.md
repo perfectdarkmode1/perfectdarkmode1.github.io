@@ -1,8 +1,3 @@
----
-title: Is Caffeine Making You Fat?
-draft: false
----
-
 Any claim you make regarding caffeine is going to be filled with hot takes. For example, I could say that quitting caffeine should, in theory, promote healthy testosterone levels. 
 
 The immediate response from many would be: "There is no scientific evidence for this." or "Actually, here is a study showing caffeine use spikes testosterone levels." 

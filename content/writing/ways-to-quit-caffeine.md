@@ -1,8 +1,3 @@
----
-title: Why Caffeine Keeps You Trapped, Here's 4 ways to ESCAPE
-draft: false
----
-
 The cycle of caffeine addiction can be vicious. Just like any other drug.
 
 The cycle goes like this:

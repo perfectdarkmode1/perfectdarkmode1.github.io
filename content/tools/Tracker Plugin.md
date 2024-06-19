@@ -1,9 +1,4 @@
----
-draft: true
-title: Obsidian Tracker Plugin
----
-
-#three backtiks + tracker to create a tracker
+# three backtiks + tracker to create a tracker
 
 https://github.com/pyrochlore/obsidian-tracker/blob/master/examples/HabitTracker.md
 

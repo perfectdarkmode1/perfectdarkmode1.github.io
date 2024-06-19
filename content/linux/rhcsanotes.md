@@ -1,12 +1,3 @@
-+++
-title = "RHCSA Notes"
-date = 2023-11-06T06:20:36-07:00
-draft = false
-alwaysopen = false
-+++ 
-
-
-
 ![RHCSA 9 - Asghar Ghori](https://m.media-amazon.com/images/I/61nDZ7iz85L._SL1360_.jpg?classes=inline&height=175px)
 
 
@@ -14,9 +5,9 @@ Here are my notes from Asghar Gori's RHCSA book. Buy the book or read the review
 
 Track my RHCSA progress: [RHCSA_Tracker](RHCSA_Tracker.md)
 
-- [installation](1_installation.md)
-- [interaction](2_interaction.md)
-- [File Management](3_file_management.md)
+- [1_installation](1_installation.md)
+- [2_interaction](2_interaction.md)
+- [3_file_management](3_file_management.md)
 - [4_adv_file_management](4_adv_file_management.md)
 - [5_basic_user_management](5_basic_user_management.md)
 - [6_Adv_user_management](6_Adv_user_management.md)

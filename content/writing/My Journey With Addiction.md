@@ -1,7 +1,3 @@
----
-title: My Journey With Addiction (NSFW)
-draft: false
----
 In 2010, I was facing felony charges for distribution of drugs. I was a drug addict. Hook line and sinker. But never admitted that to myself. My drug of choice? Anything I could get my hands on. Cocaine, ecstasy, weed, Xanax, Oxycontin, ciggys, alcohol, ativan, seroquil, spice, mushrooms.. You name it. 
 
 ![](/images/full%20(3).jpg)

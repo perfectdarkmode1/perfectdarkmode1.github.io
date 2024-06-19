@@ -1,7 +1,3 @@
----
-draft: false
-title: 19 Biggest Lessons From Reading 100 Books
----
 I started reading non-fiction after hitting my rock bottom. I found people to look up to and saw that they were reading and learning constantly to better themselves. This inspired me to develop a reading and self improvement habit that I have continued for more than 10 years. 
 
 No single book has the ability to change your life. But the things you do, good or bad, over time, compound to extraordinary changes. 

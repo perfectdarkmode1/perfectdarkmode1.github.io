@@ -1,8 +1,3 @@
----
-title: Fedora Silverblue
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
 Automated setup https://universal-blue.org/
 
 You get all the benefits of using containers

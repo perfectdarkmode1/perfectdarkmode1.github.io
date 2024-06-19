@@ -1,9 +1,3 @@
----
-title: "Nextcloud Guide"
-date: 2023-04-23T13:44:23-07:00
-draft: false
----
-
 This is a step-by-step guide to setting up Nextcloud on a Debian server. You will need a server hosted by a VPS like Vultr. And a Domain hosted by a DNS provider such as Cloudflare
 
 ### What is Nextcloud?

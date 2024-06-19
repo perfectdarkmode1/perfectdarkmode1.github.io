@@ -1,10 +1,3 @@
----
-title: "How to Set up Hugo Relearn Theme"
-date: 2023-04-22T05:45:26-07:00
-draft: false
----
-
-
 # Hugo Setup
 
 

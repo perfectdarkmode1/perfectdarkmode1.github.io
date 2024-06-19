@@ -1,10 +1,6 @@
----
-title: "What to Learn After CCNA"
-date: 2023-11-06T06:20:36-07:00
-draft: false
----
+# What to Learn After CCNA
 
-It's easy to get overwhelmed with options after completing your CCNA. What do you learn next? If you are trying to get a job as a Network Engineer, you will want to check this out. 
+It's easy to get overwhelmed with options after [completing](resources_for_passing_ccna.md) your CCNA. What do you learn next? If you are trying to get a job as a Network Engineer, you will want to check this out. 
 
 I went through dozens of job listings that mentioned CCNA. Then, tallied up the main devices/vendors, certifications, and technologies mentioned. And left out anything that wasn't mentioned more than twice.
 

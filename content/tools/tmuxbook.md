@@ -1,9 +1,3 @@
----
-draft: true
-title: TMUX 2 Book Notes
----
-
-
 Links:
 https://git.jharmison.com/james/dotfiles/src/branch/master/.tmux.conf
 https://www.youtube.com/watch?v=nTqu6w2wc68

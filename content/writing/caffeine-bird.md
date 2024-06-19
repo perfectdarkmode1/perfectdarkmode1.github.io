@@ -1,8 +1,3 @@
----
-title: Caffeine is Killing Your Creativity, Energy, and Focus. And is a Gateway Drug. Look at this bird.
-draft: false
----
-
 No seriously. Look at this bird.
 
 [https://www.youtube.com/watch?v=HUngLgGRJpo](https://www.youtube.com/watch?v=HUngLgGRJpo)

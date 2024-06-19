@@ -1,9 +1,3 @@
----
-title: Migrating Away from Iphone
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
-
 ## Convert .MOV to MP4
 All .MOV files in  a folder
 ```

@@ -1,8 +1,3 @@
----
-draft: true
-title: Obsidian Image to Text Extractor
----
-
 Use the Obsidian text extractor plugin to pull text from images to the clipboard.
 
 https://github.com/scambier/obsidian-text-extractor

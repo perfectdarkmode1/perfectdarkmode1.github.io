@@ -1,8 +1,3 @@
----
-draft: true
-title: Building a Dashboard in Obsidian
----
-
 https://www.youtube.com/watch?v=AatZl1Z_n-g&list=PL7oLu8NfQd84_gsyqBVSVgUmCCgcvSZMx&index=22
 Settings > appearance > CSS Snippets > folder icon
 https://github.com/TfTHacker/DashboardPlusPlus

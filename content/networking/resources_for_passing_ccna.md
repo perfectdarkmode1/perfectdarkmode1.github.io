@@ -1,8 +1,3 @@
----
-title: "Resources I used to Pass CCNA"
-date: 2023-11-06T06:20:36-07:00
-draft: false
----
 ![](/images/resourcesforccna.png)
 
 There are a lot of great CCNA resources out there. This list does not include all of them. Only the ones that I personally used to pass the CCNA 200-301 exam.

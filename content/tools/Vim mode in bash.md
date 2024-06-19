@@ -1,4 +1,3 @@
-
 in bash.rc
 
 set -o vi

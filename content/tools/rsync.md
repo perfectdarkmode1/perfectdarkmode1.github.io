@@ -1,10 +1,3 @@
----
-title: "Rsync Guide"
-date: 2023-04-22T06:19:10-07:00
-draft: true
----
-
-
 # Using Rsync to sync a folder between two hosts 
 
 I was using github to sync my notebook with my website. But that introduces some extra steps that rsync can easily eliminate.

@@ -1,11 +1,3 @@
----
-tags: 
-aliases: 
-type: 
-draft: true
-title: YAML in Obsidian
----
-
 three dashes at the first line of the note to enter metadata
 
 tags: Evergreen_notes

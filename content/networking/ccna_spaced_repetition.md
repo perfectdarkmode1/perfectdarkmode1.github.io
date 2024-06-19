@@ -1,8 +1,3 @@
----
-title: How to Study for CCNA
-date: 2023-11-06T06:20:36-07:00
-draft: false
----
 ![CCNA Study Calendar](/Pasted%20image%2020231208132459.png)
 
 It took me a whopping 2 years to finish my CCNA! I kept giving up and quitting my studies for months at a time. Why? Because I couldn't remember the massive amount of content covered in the CCNA. It felt hopeless. I could have done it in 6 month (or faster) if I knew how to study.

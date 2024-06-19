@@ -1,8 +1,3 @@
----
-title: "How to Process Bookfusion Highlights in Vim"
-date: 2023-04-23T13:44:23-07:00
-draft: false
----
 Here are my highlights pulled up in Vim:
 
 ![](/images/Pasted%20image%2020240414034031.png)

@@ -1,8 +1,3 @@
----
-draft: true
-title: Serial In on Linux
----
-
 Using GTKterm app
 
 Find out what port your serial cable is plugged into:

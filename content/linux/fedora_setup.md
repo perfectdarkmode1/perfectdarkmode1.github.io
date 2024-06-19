@@ -1,10 +1,3 @@
-+++
-title = "Fedora Desktop Setup"
-date = 2023-11-06T06:20:36-07:00
-draft = false
-alwaysopen = false
-+++ 
-
 When you first download Fedora Workstation, it's going to be a little hard to figure out how to make it usable. Especially if you've never tinkered with Linux before.
 
 Here is how to set up Fedora.

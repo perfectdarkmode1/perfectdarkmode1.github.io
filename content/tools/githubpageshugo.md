@@ -1,9 +1,3 @@
----
-title: Github Pages with Hugo
-date: 2023-11-06T06:20:36-07:00
-draft: true
----
-
 Go through quick setup here: https://pages.github.com/
 
 Hugo Setup: https://gohugo.io/hosting-and-deployment/hosting-on-github/

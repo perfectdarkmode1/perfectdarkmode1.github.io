@@ -1,24 +1,3 @@
-+++
-title = "Building a Minimalist Website with Hugo"
-description = ""
-type = ["posts","post"]
-tags = [
-    "hugo",
-    "nginx",
-    "ssl",
-    "http",
-    "vultr",
-]
-date = "2023-03-26"
-categories = [
-    "tools",
-    "linux",
-]
-series = ["tools"]
-[ author ]
-  name = "David Thomas"
-+++
-
 Word Press is great, but it is probably a lot more bloated then you need for a personal website. Enter Hugo, it has less server capacity and storage needs than Word Press. Hugo is a static site generator than takes markdown files and converts them to html. 
 
 Hosting your own website is also a lot cheaper than having a provider like Bluehost do it for you. Instead of \$15 per month, I am currently paying \$10 per year. 

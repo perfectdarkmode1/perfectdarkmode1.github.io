@@ -1,8 +1,3 @@
----
-title: "Vim Guide"
-date: 2023-04-23T06:20:36-07:00
-draft: true
----
 test 
 
 Vim (Vi Improved)

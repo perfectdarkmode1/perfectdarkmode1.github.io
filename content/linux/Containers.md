@@ -1,8 +1,3 @@
----
-draft: true
-title: Container Stuff
----
-
 Why you don't run all processes on the same OS
 - Blast radius
 - Dependency deconfliction
