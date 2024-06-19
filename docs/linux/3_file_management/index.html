@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 3 RHCSA Notes - File Management 7 File types regular directory block special device character special device symbolic link named pipe socket Commands
+ls stat file Regular files Text or binary data. Represented by hyphen (-). Directory Files Identified by the letter “d” in the beginning of ls output. Block and Character (raw) Special Device Files All hardware has device file in /dev/. Used by system to communicate with device. Identified by “c” or “b” in ls listing. Each device driver is assigned a unique number called the major number Character device reads and writes 8 bits at a time Serial Block device Receives data in fixed block size determined by drivers 512 or 4096 bytes Major Number Used by kernel to recognize device driver type. Column 5 of ls listing. ls -l /dev/sdaMinor Number Each device controlled by the same device driver gets a Minor Number Applies to disk partitions as well. The same driver can control multiple devices of the same type. Column 6 of ls listing ls -l /dev/sdaSymbolic Links Shortcut to another file or directory. Begins with “l” in ls listing. ls -l /usr/sbin/vigr lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving Archiving Preserves file attributes such as ownership, owning group, and timestamp. Preserves extended file attributes such as ACLs and SELinux contexts. Syntax of tar and star are identical. star command tar (tape archive) command Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile) Can compress a tarball after it’s been created. Automatically removes “/” so you do not have to specify the full pathname when restoring files at any location. flags tar -c :: Create tarball. tar -f :: Specify tarball name. tar -p :: Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user. tar -r :: Append files to the end of an existing uncompressed tarball. tar -t :: List contents of a tarball. tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer. -z -j -C
+Archive entire home directory: tar -cvf /tmp/home.tar /homeArchive two specific files: tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: tar -tvf /tmp/files.tarRestore single file and confirm: tar -xf /tmp/files.tar etc/yum.conf ls -l etc/yum.confRestore all files and confirm: tar -xf /tmp/files.tar lsCreate a gzip-compressed tarball under /tmp for /home: tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory: tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp: tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools gzip (gunzip) command Create a compressed file for each of the specified files. Adds .gz extension. Flags
+Copy /etc/fstab to the current directory and display filename when uncompressed: cp /etc/fstab . ls -l fstabgzip fstab and view details: gzip fstab ls -l fstab.gzDisplay compression info: gzip -l fstab.gzUncompress fstab.gz: gunzip fstab.gz ls -l fstabbzip2 (bunzip2) command Adds .bz2 extension. Better compression/ decompression ratio but is slower than gzip. Compress fstab using bzip and view details: bzip2 fstab ls -l fstab.bz2Unzip fstab.bz2 and view details: bunzip2 fstab.bz2 ls -l fstabFile Editing Vim vimguide
+File and Directory Operations touch command File is created with 0 bytes in size. Run touch on it and it will get a new timestamp Flags
+Set date on file1 to 2019-09-20: touch -d 2019-09-20 file1Change modification time on file1 to current system time: touch -m file1mkdir command Create a new directory. flags
+Create dir1 verbosely: mkdir dir1 -vCreate dir2/perl/perl5: mkdir -vp dir2/perl/perl5Commands for displaying file contents cat more less head tail cat command Concatenate and print files to standard output. Flags
+Redirect output to specified file: cat &gt; catfile1tac command Display file contents in reverse ">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 3 RHCSA Notes - File Management 7 File types regular directory block special device character special device symbolic link named pipe socket Commands
+ls stat file Regular files Text or binary data. Represented by hyphen (-). Directory Files Identified by the letter “d” in the beginning of ls output. Block and Character (raw) Special Device Files All hardware has device file in /dev/. Used by system to communicate with device. Identified by “c” or “b” in ls listing. Each device driver is assigned a unique number called the major number Character device reads and writes 8 bits at a time Serial Block device Receives data in fixed block size determined by drivers 512 or 4096 bytes Major Number Used by kernel to recognize device driver type. Column 5 of ls listing. ls -l /dev/sdaMinor Number Each device controlled by the same device driver gets a Minor Number Applies to disk partitions as well. The same driver can control multiple devices of the same type. Column 6 of ls listing ls -l /dev/sdaSymbolic Links Shortcut to another file or directory. Begins with “l” in ls listing. ls -l /usr/sbin/vigr lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving Archiving Preserves file attributes such as ownership, owning group, and timestamp. Preserves extended file attributes such as ACLs and SELinux contexts. Syntax of tar and star are identical. star command tar (tape archive) command Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile) Can compress a tarball after it’s been created. Automatically removes “/” so you do not have to specify the full pathname when restoring files at any location. flags tar -c :: Create tarball. tar -f :: Specify tarball name. tar -p :: Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user. tar -r :: Append files to the end of an existing uncompressed tarball. tar -t :: List contents of a tarball. tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer. -z -j -C
+Archive entire home directory: tar -cvf /tmp/home.tar /homeArchive two specific files: tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: tar -tvf /tmp/files.tarRestore single file and confirm: tar -xf /tmp/files.tar etc/yum.conf ls -l etc/yum.confRestore all files and confirm: tar -xf /tmp/files.tar lsCreate a gzip-compressed tarball under /tmp for /home: tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory: tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp: tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools gzip (gunzip) command Create a compressed file for each of the specified files. Adds .gz extension. Flags
+Copy /etc/fstab to the current directory and display filename when uncompressed: cp /etc/fstab . ls -l fstabgzip fstab and view details: gzip fstab ls -l fstab.gzDisplay compression info: gzip -l fstab.gzUncompress fstab.gz: gunzip fstab.gz ls -l fstabbzip2 (bunzip2) command Adds .bz2 extension. Better compression/ decompression ratio but is slower than gzip. Compress fstab using bzip and view details: bzip2 fstab ls -l fstab.bz2Unzip fstab.bz2 and view details: bunzip2 fstab.bz2 ls -l fstabFile Editing Vim vimguide
+File and Directory Operations touch command File is created with 0 bytes in size. Run touch on it and it will get a new timestamp Flags
+Set date on file1 to 2019-09-20: touch -d 2019-09-20 file1Change modification time on file1 to current system time: touch -m file1mkdir command Create a new directory. flags
+Create dir1 verbosely: mkdir dir1 -vCreate dir2/perl/perl5: mkdir -vp dir2/perl/perl5Commands for displaying file contents cat more less head tail cat command Concatenate and print files to standard output. Flags
+Redirect output to specified file: cat &gt; catfile1tac command Display file contents in reverse ">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/3_file_management/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 3 RHCSA Notes - File Management 7 File types regular directory block special device character special device symbolic link named pipe socket Commands
+ls stat file Regular files Text or binary data. Represented by hyphen (-). Directory Files Identified by the letter “d” in the beginning of ls output. Block and Character (raw) Special Device Files All hardware has device file in /dev/. Used by system to communicate with device. Identified by “c” or “b” in ls listing. Each device driver is assigned a unique number called the major number Character device reads and writes 8 bits at a time Serial Block device Receives data in fixed block size determined by drivers 512 or 4096 bytes Major Number Used by kernel to recognize device driver type. Column 5 of ls listing. ls -l /dev/sdaMinor Number Each device controlled by the same device driver gets a Minor Number Applies to disk partitions as well. The same driver can control multiple devices of the same type. Column 6 of ls listing ls -l /dev/sdaSymbolic Links Shortcut to another file or directory. Begins with “l” in ls listing. ls -l /usr/sbin/vigr lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving Archiving Preserves file attributes such as ownership, owning group, and timestamp. Preserves extended file attributes such as ACLs and SELinux contexts. Syntax of tar and star are identical. star command tar (tape archive) command Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile) Can compress a tarball after it’s been created. Automatically removes “/” so you do not have to specify the full pathname when restoring files at any location. flags tar -c :: Create tarball. tar -f :: Specify tarball name. tar -p :: Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user. tar -r :: Append files to the end of an existing uncompressed tarball. tar -t :: List contents of a tarball. tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer. -z -j -C
+Archive entire home directory: tar -cvf /tmp/home.tar /homeArchive two specific files: tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: tar -tvf /tmp/files.tarRestore single file and confirm: tar -xf /tmp/files.tar etc/yum.conf ls -l etc/yum.confRestore all files and confirm: tar -xf /tmp/files.tar lsCreate a gzip-compressed tarball under /tmp for /home: tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory: tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp: tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools gzip (gunzip) command Create a compressed file for each of the specified files. Adds .gz extension. Flags
+Copy /etc/fstab to the current directory and display filename when uncompressed: cp /etc/fstab . ls -l fstabgzip fstab and view details: gzip fstab ls -l fstab.gzDisplay compression info: gzip -l fstab.gzUncompress fstab.gz: gunzip fstab.gz ls -l fstabbzip2 (bunzip2) command Adds .bz2 extension. Better compression/ decompression ratio but is slower than gzip. Compress fstab using bzip and view details: bzip2 fstab ls -l fstab.bz2Unzip fstab.bz2 and view details: bunzip2 fstab.bz2 ls -l fstabFile Editing Vim vimguide
+File and Directory Operations touch command File is created with 0 bytes in size. Run touch on it and it will get a new timestamp Flags
+Set date on file1 to 2019-09-20: touch -d 2019-09-20 file1Change modification time on file1 to current system time: touch -m file1mkdir command Create a new directory. flags
+Create dir1 verbosely: mkdir dir1 -vCreate dir2/perl/perl5: mkdir -vp dir2/perl/perl5Commands for displaying file contents cat more less head tail cat command Concatenate and print files to standard output. Flags
+Redirect output to specified file: cat &gt; catfile1tac command Display file contents in reverse ">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Chapter 3 RHCSA Notes - File Management 7 File types regular directory block special device character special device symbolic link named pipe socket Commands
+ls stat file Regular files Text or binary data. Represented by hyphen (-). Directory Files Identified by the letter “d” in the beginning of ls output. Block and Character (raw) Special Device Files All hardware has device file in /dev/. Used by system to communicate with device. Identified by “c” or “b” in ls listing. Each device driver is assigned a unique number called the major number Character device reads and writes 8 bits at a time Serial Block device Receives data in fixed block size determined by drivers 512 or 4096 bytes Major Number Used by kernel to recognize device driver type. Column 5 of ls listing. ls -l /dev/sdaMinor Number Each device controlled by the same device driver gets a Minor Number Applies to disk partitions as well. The same driver can control multiple devices of the same type. Column 6 of ls listing ls -l /dev/sdaSymbolic Links Shortcut to another file or directory. Begins with “l” in ls listing. ls -l /usr/sbin/vigr lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving Archiving Preserves file attributes such as ownership, owning group, and timestamp. Preserves extended file attributes such as ACLs and SELinux contexts. Syntax of tar and star are identical. star command tar (tape archive) command Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile) Can compress a tarball after it’s been created. Automatically removes “/” so you do not have to specify the full pathname when restoring files at any location. flags tar -c :: Create tarball. tar -f :: Specify tarball name. tar -p :: Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user. tar -r :: Append files to the end of an existing uncompressed tarball. tar -t :: List contents of a tarball. tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer. -z -j -C
+Archive entire home directory: tar -cvf /tmp/home.tar /homeArchive two specific files: tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: tar -tvf /tmp/files.tarRestore single file and confirm: tar -xf /tmp/files.tar etc/yum.conf ls -l etc/yum.confRestore all files and confirm: tar -xf /tmp/files.tar lsCreate a gzip-compressed tarball under /tmp for /home: tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory: tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp: tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools gzip (gunzip) command Create a compressed file for each of the specified files. Adds .gz extension. Flags
+Copy /etc/fstab to the current directory and display filename when uncompressed: cp /etc/fstab . ls -l fstabgzip fstab and view details: gzip fstab ls -l fstab.gzDisplay compression info: gzip -l fstab.gzUncompress fstab.gz: gunzip fstab.gz ls -l fstabbzip2 (bunzip2) command Adds .bz2 extension. Better compression/ decompression ratio but is slower than gzip. Compress fstab using bzip and view details: bzip2 fstab ls -l fstab.bz2Unzip fstab.bz2 and view details: bunzip2 fstab.bz2 ls -l fstabFile Editing Vim vimguide
+File and Directory Operations touch command File is created with 0 bytes in size. Run touch on it and it will get a new timestamp Flags
+Set date on file1 to 2019-09-20: touch -d 2019-09-20 file1Change modification time on file1 to current system time: touch -m file1mkdir command Create a new directory. flags
+Create dir1 verbosely: mkdir dir1 -vCreate dir2/perl/perl5: mkdir -vp dir2/perl/perl5Commands for displaying file contents cat more less head tail cat command Concatenate and print files to standard output. Flags
+Redirect output to specified file: cat &gt; catfile1tac command Display file contents in reverse ">
+    <meta itemprop="wordCount" content="1953">
+    <title></title>
+    <link href="/images/favicon.png?1718799825" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718799825" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718799825" rel="stylesheet">
+    <link href="/css/fonts.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718799825" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718799825" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718799825" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718799825" rel="stylesheet">
+    <link href="/css/print.css?1718799825" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718799825"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/3_file_management/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#7-file-types">7 File types</a>
+      <ul>
+        <li><a href="#regular-files">Regular files</a></li>
+        <li><a href="#directory-files">Directory Files</a></li>
+        <li><a href="#block-and-character-raw-special-device-files">Block and Character (raw) Special Device Files</a></li>
+        <li><a href="#symbolic-links">Symbolic Links</a></li>
+      </ul>
+    </li>
+    <li><a href="#compression-and-archiving">Compression and Archiving</a>
+      <ul>
+        <li><a href="#archiving">Archiving</a></li>
+        <li><a href="#star-command">star command</a></li>
+        <li><a href="#tar-tape-archive-command">tar (tape archive) command</a></li>
+      </ul>
+    </li>
+    <li><a href="#compression-tools">Compression tools</a>
+      <ul>
+        <li><a href="#gzip-gunzip-command">gzip (gunzip) command</a></li>
+        <li><a href="#bzip2-bunzip2-command">bzip2 (bunzip2) command</a></li>
+      </ul>
+    </li>
+    <li><a href="#file-editing">File Editing</a>
+      <ul>
+        <li><a href="#vim">Vim</a></li>
+        <li><a href="#file-and-directory-operations">File and Directory Operations</a></li>
+        <li><a href="#touch-command">touch command</a></li>
+        <li><a href="#mkdir-command">mkdir command</a></li>
+      </ul>
+    </li>
+    <li><a href="#commands-for-displaying-file-contents">Commands for displaying file contents</a>
+      <ul>
+        <li><a href="#cat-command">cat command</a></li>
+        <li><a href="#tac-command">tac command</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading"></a>
+      <ul>
+        <li></li>
+        <li><a href="#less-command">less command</a></li>
+        <li><a href="#head-command">head command</a></li>
+        <li><a href="#tail-command">tail command</a></li>
+      </ul>
+    </li>
+    <li><a href="#counting-words-lines-and-characters-in-text-files">Counting Words, Lines, and Characters in Text Files</a>
+      <ul>
+        <li><a href="#wc-word-count-command">wc (word count) command</a></li>
+      </ul>
+    </li>
+    <li><a href="#copying-files-and-directories">Copying Files and Directories</a>
+      <ul>
+        <li><a href="#cp-command">cp command</a></li>
+      </ul>
+    </li>
+    <li><a href="#moving-and-renaming-files-and-directories">Moving and renaming Files and Directories</a>
+      <ul>
+        <li><a href="#mv-command">mv command</a></li>
+      </ul>
+    </li>
+    <li><a href="#removing-files">Removing files</a>
+      <ul>
+        <li><a href="#rm-command">rm command</a></li>
+      </ul>
+    </li>
+    <li><a href="#file-linking">File Linking</a>
+      <ul>
+        <li><a href="#inode-index-node">inode (index node)</a></li>
+        <li><a href="#hard-links">Hard links</a></li>
+      </ul>
+    </li>
+    <li><a href="#soft-links">Soft Links</a>
+      <ul>
+        <li><a href="#ln-command">ln command</a></li>
+      </ul>
+    </li>
+    <li><a href="#copying-vs-linking">Copying vs linking</a></li>
+    <li><a href="#labs">Labs</a>
+      <ul>
+        <li><a href="#lab-viewing-regular-file-information">Lab: Viewing regular file information:</a></li>
+        <li><a href="#lab-create-and-manage-hard-links">Lab Create and Manage Hard Links</a></li>
+        <li><a href="#lab-create-and-manage-soft-links">Lab: Create and Manage Soft Links</a></li>
+        <li><a href="#lab-archive-list-and-restore-files">Lab: Archive, List, and Restore Files</a></li>
+        <li><a href="#lab-practice-the-vim-editor">Lab: Practice the vim Editor</a></li>
+        <li><a href="#lab-file-and-directory-operations">Lab: File and Directory Operations</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h1 id="chapter-3-rhcsa-notes---file-management">Chapter 3 RHCSA Notes - File Management</h1>
+<h2 id="7-file-types">7 File types</h2>
+<ol>
+<li>regular</li>
+<li>directory</li>
+<li>block special device</li>
+<li>character special device</li>
+<li>symbolic link</li>
+<li>named pipe</li>
+<li>socket</li>
+</ol>
+<p>Commands</p>
+<ul>
+<li>ls</li>
+<li>stat</li>
+<li>file</li>
+</ul>
+<h3 id="regular-files">Regular files</h3>
+<ul>
+<li>Text or binary data.</li>
+<li>Represented by hyphen (-).</li>
+</ul>
+<h3 id="directory-files">Directory Files</h3>
+<ul>
+<li>Identified by the letter &ldquo;d&rdquo; in the beginning of ls output.</li>
+</ul>
+<h3 id="block-and-character-raw-special-device-files">Block and Character (raw) Special Device Files</h3>
+<ul>
+<li>All hardware has device file in /dev/.</li>
+<li>Used by system to communicate with device.</li>
+<li>Identified by &ldquo;c&rdquo; or &ldquo;b&rdquo; in ls listing.</li>
+<li>Each device driver is assigned a unique number called the major number</li>
+<li>Character device
+<ul>
+<li>reads and writes 8 bits at a time</li>
+<li>Serial</li>
+</ul>
+</li>
+<li>Block device
+<ul>
+<li>Receives data in fixed block size determined by drivers</li>
+<li>512 or 4096 bytes</li>
+</ul>
+</li>
+</ul>
+<h4 id="major-number">Major Number</h4>
+<ul>
+<li>Used by kernel to recognize device driver type.</li>
+<li>Column 5 of ls listing.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /dev/sda</code></pre></div><h4 id="minor-number">Minor Number</h4>
+<ul>
+<li>Each device controlled by the same device driver gets a Minor Number</li>
+<li>Applies to disk partitions as well.</li>
+<li>The same driver can control multiple devices of the same type.</li>
+<li>Column 6 of ls listing</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /dev/sda</code></pre></div><h3 id="symbolic-links">Symbolic Links</h3>
+<ul>
+<li>Shortcut to another file or directory.</li>
+<li>Begins with &ldquo;l&rdquo; in ls listing.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /usr/sbin/vigr
+lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipw</code></pre></div><h2 id="compression-and-archiving">Compression and Archiving</h2>
+<h3 id="archiving">Archiving</h3>
+<ul>
+<li>Preserves file attributes such as ownership, owning group, and timestamp.</li>
+<li>Preserves extended file attributes such as ACLs and SELinux contexts.</li>
+<li>Syntax of tar and star are identical.</li>
+</ul>
+<h3 id="star-command">star command</h3>
+<h3 id="tar-tape-archive-command">tar (tape archive) command</h3>
+<ul>
+<li>Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile)</li>
+<li>Can compress a tarball after it&rsquo;s been created.</li>
+<li>Automatically removes &ldquo;/&rdquo; so you do not have to specify the full pathname  when restoring files at any location.</li>
+</ul>
+<p>flags
+tar -c :: Create tarball.
+tar -f :: Specify tarball name.
+tar -p :: Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user.
+tar -r :: Append files to the end of an existing uncompressed tarball.
+tar -t :: List contents of a tarball.
+tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer.
+-z
+-j
+-C</p>
+<h4 id="archive-entire-home-directory">Archive entire home directory:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -cvf /tmp/home.tar /home</code></pre></div><h4 id="archive-two-specific-files">Archive two specific files:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -cvf /tmp/files.tar /etc/passwd /etc/yum.conf</code></pre></div><h4 id="append-files-in-a-directory-to-existing-tarball">Append files in a directory to existing tarball:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -rvf /tmp/files.tar /etc/yum.repos.d</code></pre></div><h4 id="list-what-is-included-in-hometar-tarball">List what is included in home.tar tarball:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -tvf /tmp/files.tar</code></pre></div><h4 id="restore-single-file-and-confirm">Restore single file and confirm:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -xf /tmp/files.tar etc/yum.conf
+ls -l etc/yum.conf</code></pre></div><h4 id="restore-all-files-and-confirm">Restore all files and confirm:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -xf /tmp/files.tar
+ls</code></pre></div><h4 id="create-a-gzip-compressed-tarball-under-tmp-for-home">Create a gzip-compressed tarball under /tmp for /home:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -czf /tmp/home.tar.gz /home</code></pre></div><h4 id="create-bzip2-compressed-tarball-under-tmp-for-home">Create bzip2-compressed tarball under /tmp for /home:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo tar -cjf /tmp/home.tar.bz2 /home</code></pre></div><h4 id="list-content-of-gzip-compressed-archive-without-uncompressing-it">List content of gzip-compressed archive without uncompressing it:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -tf /tmp/home.tar.gz</code></pre></div><h4 id="extract-files-from-gzip-compressed-tarball-in-the-current-directory">Extract files from gzip-compressed tarball in the current directory:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -xf /tmp/home.tar.gz</code></pre></div><h4 id="extract-files-from-the-bzip2-compressed-tarball-under-tmp">Extract files from the bzip2-compressed tarball under /tmp:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -xf /tmp/home.tar.bz2 -C /tmp</code></pre></div><h2 id="compression-tools">Compression tools</h2>
+<h3 id="gzip-gunzip-command">gzip (gunzip) command</h3>
+<ul>
+<li>Create a compressed file for each of the specified files.</li>
+<li>Adds .gz extension.</li>
+</ul>
+<p>Flags</p>
+<h4 id="copy-etcfstab-to-the-current-directory-and-display-filename-when-uncompressed">Copy /etc/fstab to the current directory and display filename when uncompressed:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp /etc/fstab .
+ls -l fstab</code></pre></div><h4 id="gzip-fstab-and-view-details">gzip fstab and view details:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>gzip fstab
+ls -l fstab.gz</code></pre></div><h4 id="display-compression-info">Display compression info:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>gzip -l fstab.gz</code></pre></div><h4 id="uncompress-fstabgz">Uncompress fstab.gz:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>gunzip fstab.gz
+ls -l fstab</code></pre></div><h3 id="bzip2-bunzip2-command">bzip2 (bunzip2) command</h3>
+<ul>
+<li>Adds .bz2 extension.</li>
+</ul>
+<ul>
+<li>Better compression/ decompression ratio but is slower than gzip.</li>
+</ul>
+<h4 id="compress-fstab-using-bzip-and-view-details">Compress fstab using bzip and view details:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>bzip2 fstab
+ls -l fstab.bz2</code></pre></div><h4 id="unzip-fstabbz2-and-view-details">Unzip fstab.bz2 and view details:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>bunzip2 fstab.bz2
+ls -l fstab</code></pre></div><h2 id="file-editing">File Editing</h2>
+<h3 id="vim">Vim</h3>
+<p><a href="vimguide.md">vimguide</a></p>
+<h3 id="file-and-directory-operations">File and Directory Operations</h3>
+<h3 id="touch-command">touch command</h3>
+<ul>
+<li>File is created with 0 bytes in size.</li>
+<li>Run touch on it and it will get a new timestamp</li>
+</ul>
+<p>Flags</p>
+<h4 id="set-date-on-file1-to-2019-09-20">Set date on file1 to 2019-09-20:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch -d 2019-09-20 file1</code></pre></div><h4 id="change-modification-time-on-file1-to-current-system-time">Change modification time on file1 to current system time:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch -m file1</code></pre></div><h3 id="mkdir-command">mkdir command</h3>
+<ul>
+<li>Create a new directory.</li>
+</ul>
+<p>flags</p>
+<h4 id="create-dir1-verbosely">Create dir1 verbosely:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mkdir dir1 -v</code></pre></div><h4 id="create-dir2perlperl5">Create dir2/perl/perl5:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mkdir -vp dir2/perl/perl5</code></pre></div><h2 id="commands-for-displaying-file-contents">Commands for displaying file contents</h2>
+<ul>
+<li>cat</li>
+<li>more</li>
+<li>less</li>
+<li>head</li>
+<li>tail</li>
+</ul>
+<h3 id="cat-command">cat command</h3>
+<ul>
+<li>Concatenate and print files to standard output.</li>
+</ul>
+<p>Flags</p>
+<h4 id="redirect-output-to-specified-file">Redirect output to specified file:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat &gt; catfile1</code></pre></div><h3 id="tac-command">tac command</h3>
+<ul>
+<li>Display file contents in reverse</li>
+</ul>
+<h2 id="heading"></h2>
+<p>command</p>
+<ul>
+<li>Display files on page-by-page basis.</li>
+<li>Forward text searching only.</li>
+</ul>
+<h4 id="navigation">Navigation</h4>
+<h3 id="less-command">less command</h3>
+<ul>
+<li>Display files on page-by-page basis.</li>
+<li>Forward and backwards searching.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>less /usr/bin/znew</code></pre></div><h4 id="navigation-1">Navigation</h4>
+<h3 id="head-command">head command</h3>
+<ul>
+<li>Displays first 10 lines of a file.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>head /etc/profile</code></pre></div><h4 id="view-top-3-lines-of-a-file">View top 3 lines of a file:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>head -3 /etc/profile</code></pre></div><h3 id="tail-command">tail command</h3>
+<ul>
+<li>Display last 10 lines of a file.</li>
+</ul>
+<p>Flags</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tail /etc/profile</code></pre></div><h4 id="view-last-3-lines-of-etcprofile">View last 3 lines of /etc/profile:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tail -3 /etc/profile</code></pre></div><h4 id="view-updates-to-the-system-log-file-varlogmessages-in-real-time">View updates to the system log file /varlog/messages in real time:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo tail -f /var/log/messages</code></pre></div><h2 id="counting-words-lines-and-characters-in-text-files">Counting Words, Lines, and Characters in Text Files</h2>
+<h3 id="wc-word-count-command">wc (word count) command</h3>
+<ul>
+<li>Display the number of lines, words, and characters (or bytes) contained in a text file or input supplied.</li>
+</ul>
+<p>Flags</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code> wc /etc/profile
+  85  294 2123 /etc/profile</code></pre></div><h4 id="display-count-of-characters-on-etcprofile">Display count of characters on /etc/profile:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>wc -m /etc/profile</code></pre></div><h2 id="copying-files-and-directories">Copying Files and Directories</h2>
+<h3 id="cp-command">cp command</h3>
+<ul>
+<li>Copy files or directories.</li>
+<li>Overwrites destination without warning.</li>
+<li>root has a custom alias in their .bashrc file that automatically adds the -i option.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>alias cp=&#39;cp -i&#39;</code></pre></div><p>Flags</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp file1 newfile1</code></pre></div><h4 id="copy-file-to-new-directory">Copy file to new directory:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp file1 dir1</code></pre></div><h4 id="get-confirmation-before-overwriting">Get confirmation before overwriting:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp file1 dir1 -i
+cp: overwrite &#39;dir1/file1&#39;? y</code></pre></div><h4 id="copy-a-directory-and-view-hierarchy">Copy a directory and view hierarchy:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp -r dir1 dir2
+ls -l dir2 -R</code></pre></div><h4 id="copy-file-while-preserving-attributes">Copy file while preserving attributes:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp -p file1 /tmp</code></pre></div><h2 id="moving-and-renaming-files-and-directories">Moving and renaming Files and Directories</h2>
+<h3 id="mv-command">mv command</h3>
+<ul>
+<li>Move or rename files and directories.</li>
+<li>Can move a directory into another directory.
+<ul>
+<li>Target directory must exist otherwise you are just renaming the directory.</li>
+</ul>
+</li>
+<li>Alias exists in root&rsquo;s home directory for -i in the .bashrc file.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0"><code>alias—“alias mv=’mv -i’&#34;&#34;</code></pre></div><p>Flags</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mv -i file1 dir1</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>mv newfile1 newfile2</code></pre></div><h4 id="move-a-dir-into-another-dir-target-exists">Move a dir into another dir (target exists):</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mv dir1 dir2</code></pre></div><h4 id="rename-a-directory-target-does-not-exist">Rename a directory (Target does not exist):</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mv dir2 dir20</code></pre></div><h2 id="removing-files">Removing files</h2>
+<h3 id="rm-command">rm command</h3>
+<ul>
+<li>Delete one or more specified files or directories.</li>
+<li>Alias—“alias rm=’rm -i’”— in the .bashrc file in the root user’s home directory.</li>
+<li>Remember to backslash &ldquo;&quot; any wildcard characters in filenames.</li>
+</ul>
+<p>Flags</p>
+<h4 id="erase-newfile2">Erase newfile2:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>rm -i newfile2</code></pre></div><h4 id="rm-a-directory">rm a directory:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code> rm -dv emptydir</code></pre></div><h4 id="rm-a-directory-recursively">rm a directory recursively:</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>rm -r dir20</code></pre></div><h4 id="rmdir-command">rmdir command</h4>
+<ul>
+<li>Remove empty directories.</li>
+</ul>
+<p>Flags</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>rmdir emptydir -v</code></pre></div><h2 id="file-linking">File Linking</h2>
+<h3 id="inode-index-node">inode (index node)</h3>
+<ul>
+<li>Contains metadata about a file (128 bytes)
+<ul>
+<li>File type, Size, permissions, owner name, owning group, access times, link count, etc.</li>
+<li>Also shows number of allocated blocks and pointers to the data storage location.</li>
+</ul>
+</li>
+<li>Assigned a unique numeric identifier that is used by the kernel for accessing, tracking, and managing the file.</li>
+<li>Does not store the filename.</li>
+<li>Filename and corresponding inode number mapping is maintained in the directory’s metadata where the file resides.</li>
+<li>Links are not created between files and directories</li>
+</ul>
+<h3 id="hard-links">Hard links</h3>
+<ul>
+<li>Mapping between one or more filenames and an inode number.</li>
+<li>Hard-linked files are indistinguishable from one another.</li>
+<li>All hard-linked files will have identical metadata.</li>
+<li>Changes to the file metadata and content can be made by accessing any of the filenames.</li>
+<li>Cannot cross file system boundaries.</li>
+<li>Cannot link directories.</li>
+</ul>
+<h4 id="ls--li-output">ls -li output</h4>
+<ul>
+<li>Column 1 inode number.</li>
+<li>Column 3 link count.</li>
+</ul>
+<h2 id="soft-links">Soft Links</h2>
+<ul>
+<li>Symbolic (symlink).</li>
+<li>Like a Windows shortcut.</li>
+<li>Unique inode number for each symlink.</li>
+<li>Link count does not increase or decrease.</li>
+<li>Size of soft link is the number of character in pathname to target.</li>
+<li>Can cross file system boundaries.</li>
+<li>Can link directories.</li>
+<li>ls-l shows l at the beginning of the permissions for soft link</li>
+<li>if you remove the original file, the softlink will point to a file that doesn&rsquo;t exist.</li>
+<li>RHEL 8 has four soft-linked directories under /.
+<ol>
+<li>bin -&gt; usr/bin</li>
+<li>lib -&gt; usr/lib</li>
+<li>lib64 -&gt;usr/lib64</li>
+<li>sbin -&gt; usr/sbin</li>
+</ol>
+</li>
+<li>Same syntax for creating linked directories</li>
+</ul>
+<h3 id="ln-command">ln command</h3>
+<ul>
+<li>Create links between files.</li>
+<li>Creates hard link by default.</li>
+</ul>
+<h5 id="hard-link-file10-and-file20-and-verify-the-inode-number">Hard link file10 and file20 and verify the inode number:</h5>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch file10
+ln file10 file20
+ls -li</code></pre></div><h4 id="create-a-soft-link-to-file10-called-soft10-card">Create a soft link to file10 called soft10: #card</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ln -s file10 soft10</code></pre></div><h2 id="copying-vs-linking">Copying vs linking</h2>
+<p>Copying</p>
+<ul>
+<li>Duplicates source file.</li>
+<li>Each copy stores data at a unique location.</li>
+<li>Each copied file has a unique inode number and unique metadata.</li>
+<li>If a copy is moved, erased, or renamed, the source file will have no impact, and vice versa.</li>
+<li>Copy is used when the data needs to be edited independent of the other.</li>
+<li>Permissions on the source and the copy are managed independent of each other.</li>
+</ul>
+<p>Linking</p>
+<ul>
+<li>Creates a shortcut that points to the source file.</li>
+<li>Source can be accessed or modified using either the source file or the link.</li>
+<li>All linked files point to the same data.</li>
+<li>Hard Link: All hard-linked files share the same inode number, and hence the metadata.</li>
+<li>Symlink: Each symlinked file has a unique inode number, but the inode number stores only the pathname to the source.</li>
+<li>Hard Link: If the hard link is weeded out, the other file and the data will remain untouched.</li>
+<li>Symlink: If the source is deleted, the soft link will be broken and become meaningless. If the soft link is removed, the source will have no impact.</li>
+<li>Links are used when access to the same source is required from multiple locations.</li>
+<li>Permissions are managed on the source file.</li>
+</ul>
+<h2 id="labs">Labs</h2>
+<h3 id="lab-viewing-regular-file-information">Lab: Viewing regular file information:</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch file1
+ls -l</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>file file1</code></pre></div><div class="highlight wrap-code"><pre tabindex="0"><code>stat file1</code></pre></div><h3 id="lab-create-and-manage-hard-links">Lab Create and Manage Hard Links</h3>
+<ol>
+<li>Create an empty file /tmp/hard1, and display the long file listing including the inode number:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch /tmp/hard1
+ls -li /tmp/hard1</code></pre></div><ol start="2">
+<li>Create two hard links called hard2 and hard3 under /tmp, and display the long listing:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ln /tmp/hard1 /tmp/hard2
+ln /tmp/hard1 /tmp/hard3
+ls -li /tmp/hard*</code></pre></div><ol start="3">
+<li>Edit file hard2 and add some random text. Display the long listing for all three files again:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>vim /tmp/hard2
+ls -li /tmp/hard*</code></pre></div><ol start="4">
+<li>Erase file hard1 and hard3, and display the long listing for the remaining file:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>rm -f /tmp/hard1 /tmp/hard3
+ls -li /tmp/hard*</code></pre></div><h3 id="lab-create-and-manage-soft-links">Lab: Create and Manage Soft Links</h3>
+<ol>
+<li>Create soft link /root/soft1 pointing to /tmp/hard2, and display the long file listing for both:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo ln -s /tmp/hard2 /root/soft1
+ls -li /tmp/hard2 /root/soft1
+sudo ls -li /tmp/hard2 /root/soft1</code></pre></div><p>2.Edit soft1 and display the long listing again:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo vim /root/soft1
+sudo ls -li /tmp/hard2 /root/soft1</code></pre></div><p>3.Remove hard2 and display the long listing:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo ls -li /tmp/hard2 /root/soft1</code></pre></div><p>remove the soft link</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>rm -f /root/soft1.</code></pre></div><h3 id="lab-archive-list-and-restore-files">Lab: Archive, List, and Restore Files</h3>
+<p>Create a gzip-compressed archive of the /etc directory.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>tar -czf etc.tar.gz /etc</code></pre></div><p>Create a bzip2-compressed archive of the /etc directory.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo tar -cjf etc.tar.bz2 /etc</code></pre></div><p>Compare the file sizes of the two archives.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l etc*</code></pre></div><p>Run the tar command and uncompress and restore both archives without  specifying the compression tool used.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo tar -xf etc.tar.bz2 ; sudo tar -xf etc.tar.gz</code></pre></div><h3 id="lab-practice-the-vim-editor">Lab: Practice the vim Editor</h3>
+<p>As user1 on server1, create a file called vipractice in the home directory using vim. Type (do not copy and paste) each sentence from Lab 3-1 on a separate line (do not worry about line wrapping). Save the file and quit the editor.</p>
+<h4 id="open-vipractice-in-vim-again-and-reveal-line-numbering-copy-lines-2-and-3-to-the-end-of-the-file-to-make-the-total-number-of-lines-in-the-file-to-6">Open vipractice in vim again and reveal line numbering. Copy lines 2 and 3 to the end of the file to make the total number of lines in the file to 6.</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>:set number!
+#then
+yy and p</code></pre></div><h4 id="move-line-3-to-make-it-line-1">Move line 3 to make it line 1.</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>3m0</code></pre></div><h4 id="go-to-the-last-line-and-append-the-contents-of-the-bash_profile">Go to the last line and append the contents of the .bash_profile.</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>:r ~/.bashrc</code></pre></div><h4 id="substitute-all-occurrences-of-the-string-profile-with-pro-file-and-all-occurrences-of-the-string-profile-with-pro-file">Substitute all occurrences of the string “Profile” with “Pro File”, and all occurrences of the string “profile” with “pro file”.</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>:%s/profile/pro file/gi</code></pre></div><h4 id="erase-lines-5-to-8">Erase lines 5 to 8.</h4>
+<div class="highlight wrap-code"><pre tabindex="0"><code>:5,8d</code></pre></div><p>Provide a count of lines, words, and characters in the vipractice file using the wc command.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>wc vipractice</code></pre></div><h3 id="lab-file-and-directory-operations">Lab: File and Directory Operations</h3>
+<p>As user1 on server1, create one file and one directory in the home directory.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch file3
+mkdir dir5</code></pre></div><p>List the file and directory and observe the permissions, ownership, and owning group.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l file3
+ls -l dir5
+ls -ld dir5</code></pre></div><p>Try to move the file and the directory to the /var/log directory and notice what happens.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mv dir5 /var/log
+mv file3 /var/log</code></pre></div><p>Try again to move them to the /tmp directory.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>mv dir5 /tmp
+ls /tmp</code></pre></div><p>Duplicate the file with the cp command, and then rename the duplicated file using any name.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cp /tmp/file3 file4
+ls /tmp
+ls</code></pre></div><p>Erase the file and directory created for this lab.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>rm -d /tmp/dir5; rm file4</code></pre></div>
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718799825" defer></script>
+        <script src="/js/search.js?1718799825" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/3_file_management/" class="active"><a class="padding" href="/linux/3_file_management/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/3_file_management/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1718799825" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718799825" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718799825" defer></script>
+    <script src="/js/js-yaml.min.js?1718799825" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1718799825" defer></script>
+  </body>
+</html>

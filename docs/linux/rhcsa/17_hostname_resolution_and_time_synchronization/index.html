@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.124.1">
@@ -8,86 +8,50 @@
     <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
     <meta name="description" content="Chapter 17 \
 Hostname Resolution and Time Synchronization \
-::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
 \
 This chapter describes the following major topics: \
-Overview of Domain Name System and hostname resolution
-\
-Understand various DNS roles
-\
-Analyze entries in resolver configuration files
-\
-Perform name resolution using a variety of lookup tools
-\
-Describe time synchronization and the role of Network Time Protocol">
+Overview of Domain Name System and hostname resolution Understand various DNS roles Analyze entries in resolver configuration files Perform name resolution using a variety of lookup tools Describe time synchronization and the role of Network Time Protocol Comprehend the terms: time source, NTP roles, and stratum levels Anatomy of the Chrony service configuration file Configure and verify NTP/Chrony client service View and set system date and time \">
     <meta name="author" content="David">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:description" content="Chapter 17 \
 Hostname Resolution and Time Synchronization \
-::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
 \
 This chapter describes the following major topics: \
-Overview of Domain Name System and hostname resolution
-\
-Understand various DNS roles
-\
-Analyze entries in resolver configuration files
-\
-Perform name resolution using a variety of lookup tools
-\
-Describe time synchronization and the role of Network Time Protocol">
-    <meta property="og:url" content="http://perfectdarkmode.com/linux/rhcsa/17_hostname_resolution_and_time_synchronization/">
+Overview of Domain Name System and hostname resolution Understand various DNS roles Analyze entries in resolver configuration files Perform name resolution using a variety of lookup tools Describe time synchronization and the role of Network Time Protocol Comprehend the terms: time source, NTP roles, and stratum levels Anatomy of the Chrony service configuration file Configure and verify NTP/Chrony client service View and set system date and time \">
+    <meta property="og:url" content="http://localhost:1313/linux/rhcsa/17_hostname_resolution_and_time_synchronization/">
     <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:description" content="Chapter 17 \
 Hostname Resolution and Time Synchronization \
-::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
 \
 This chapter describes the following major topics: \
-Overview of Domain Name System and hostname resolution
-\
-Understand various DNS roles
-\
-Analyze entries in resolver configuration files
-\
-Perform name resolution using a variety of lookup tools
-\
-Describe time synchronization and the role of Network Time Protocol">
+Overview of Domain Name System and hostname resolution Understand various DNS roles Analyze entries in resolver configuration files Perform name resolution using a variety of lookup tools Describe time synchronization and the role of Network Time Protocol Comprehend the terms: time source, NTP roles, and stratum levels Anatomy of the Chrony service configuration file Configure and verify NTP/Chrony client service View and set system date and time \">
     <meta property="og:locale" content="en-us">
     <meta property="og:type" content="article">
     <meta property="article:section" content="Linux">
     <meta itemprop="description" content="Chapter 17 \
 Hostname Resolution and Time Synchronization \
-::: {style=“border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;”} :::
 \
 This chapter describes the following major topics: \
-Overview of Domain Name System and hostname resolution
-\
-Understand various DNS roles
-\
-Analyze entries in resolver configuration files
-\
-Perform name resolution using a variety of lookup tools
-\
-Describe time synchronization and the role of Network Time Protocol">
-    <meta itemprop="wordCount" content="4944">
+Overview of Domain Name System and hostname resolution Understand various DNS roles Analyze entries in resolver configuration files Perform name resolution using a variety of lookup tools Describe time synchronization and the role of Network Time Protocol Comprehend the terms: time source, NTP roles, and stratum levels Anatomy of the Chrony service configuration file Configure and verify NTP/Chrony client service View and set system date and time \">
+    <meta itemprop="wordCount" content="4664">
     <title></title>
-    <link href="/images/favicon.png?1717964147" rel="icon" type="image/png">
-    <link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1717964147" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1717964147" rel="stylesheet">
-    <link href="/css/auto-complete.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1717964147" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1717964147" rel="stylesheet">
-    <link href="/css/fonts.css?1717964147" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1717964147" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1717964147" rel="stylesheet">
-    <link href="/css/theme-zen-dark.css?1717964147" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1717964147" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1717964147" rel="stylesheet">
-    <link href="/css/print.css?1717964147" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1717964147"></script>
+    <link href="/images/favicon.png?1718798988" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1718798988" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718798988" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718798988" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718798988" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718798988" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718798988" rel="stylesheet">
+    <link href="/css/fonts.css?1718798988" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718798988" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718798988" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718798988" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718798988" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718798988" rel="stylesheet">
+    <link href="/css/print.css?1718798988" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718798988"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..\/..';
       window.relearn.relBaseUri='..\/..\/..';
-      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.relearn.absBaseUri='http:\/\/localhost:1313';
       window.index_js_url="/index.search.js";
       // variant stuff
       window.variants && variants.init( [ 'zen-dark' ] );
@@ -141,13 +105,18 @@ Describe time synchronization and the role of Network Time Protocol">
     <li><a href="#performing-name-resolution-with-host">Performing Name Resolution with host</a></li>
     <li><a href="#performing-name-resolution-with-nslookup">Performing Name Resolution with nslookup</a></li>
     <li><a href="#performing-name-resolution-with-getent">Performing Name Resolution with getent</a></li>
-    <li><a href="#time-synchronization">Time Synchronization</a></li>
+    <li><a href="#time-synchronization">Time Synchronization</a>
+      <ul>
+        <li><a href="#network-time-protocol-ntp">Network Time Protocol (NTP)</a></li>
+        <li><a href="#crony">Crony</a></li>
+      </ul>
+    </li>
     <li><a href="#time-sources">Time Sources</a></li>
     <li><a href="#ntp-roles">NTP Roles</a></li>
     <li><a href="#stratum-levels">Stratum Levels</a></li>
     <li><a href="#chrony-configuration-file">Chrony Configuration File</a></li>
     <li><a href="#chrony-daemon-and-command">Chrony Daemon and Command</a></li>
-    <li><a href="#exercise-17-1-configure-ntp-client">Exercise 17-1: Configure NTP Client</a></li>
+    <li><a href="#exercise-17-1-configure-ntp-client-server10">Exercise 17-1: Configure NTP Client (server10)</a></li>
     <li><a href="#displaying-and-setting-system-date-and-time">Displaying and Setting System Date and Time</a></li>
     <li><a href="#chapter-summary">Chapter Summary</a></li>
     <li><a href="#review-questions">Review Questions</a></li>
@@ -199,39 +168,28 @@ Describe time synchronization and the role of Network Time Protocol">
 
 <h1 id=""></h1>
 
-<h2 style="text-align: right" id="chapter-17">Chapter 17</h2>
+<h2 id="chapter-17">Chapter 17</h2>
 <p>\</p>
-<h3 class="style3" id="hostname-resolution-and-time-synchronization">Hostname Resolution and Time Synchronization</h3>
+<h3 id="hostname-resolution-and-time-synchronization">Hostname Resolution and Time Synchronization</h3>
 <p>\</p>
-<p>::: {style=&ldquo;border-style: double; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.375;&rdquo;}
-:::</p>
 <p>\</p>
 <h4 id="this-chapter-describes-the-following-major-topics">This chapter describes the following major topics:</h4>
 <p>\</p>
-<p>Overview of Domain Name System and hostname resolution</p>
-<p>\</p>
-<p>Understand various DNS roles</p>
-<p>\</p>
-<p>Analyze entries in resolver configuration files</p>
-<p>\</p>
-<p>Perform name resolution using a variety of lookup tools</p>
-<p>\</p>
-<p>Describe time synchronization and the role of Network Time Protocol</p>
-<p>\</p>
-<p>Comprehend the terms: time source, NTP roles, and stratum levels</p>
-<p>\</p>
-<p>Anatomy of the Chrony service configuration file</p>
-<p>\</p>
-<p>Configure and verify NTP/Chrony client service</p>
-<p>\</p>
-<p>View and set system date and time</p>
+<ul>
+<li>Overview of Domain Name System and hostname resolution</li>
+<li>Understand various DNS roles</li>
+<li>Analyze entries in resolver configuration files</li>
+<li>Perform name resolution using a variety of lookup tools</li>
+<li>Describe time synchronization and the role of Network Time Protocol</li>
+<li>Comprehend the terms: time source, NTP roles, and stratum levels</li>
+<li>Anatomy of the Chrony service configuration file</li>
+<li>Configure and verify NTP/Chrony client service</li>
+<li>View and set system date and time</li>
+</ul>
 <p>\</p>
 <h4 id="rhcsa-objectives">RHCSA Objectives:</h4>
-<p>\</p>
 <h5 id="45-configure-hostname-resolution">45. Configure hostname resolution</h5>
 <h5 id="41-configure-time-service-clients">41. Configure time service clients</h5>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>Domain Name System is an OS- and hardware-independent network service
 employed for determining the IP address of a system when its hostname is
@@ -244,25 +202,16 @@ communicate with remote systems. There are several lookup programs that
 use DNS to obtain information.</p>
 <p>\</p>
 <p>::: {style=&ldquo;text-align: center;&rdquo;}
-<a href="#R-image-77a75e40e380eec7a587a3bc678be622" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-NAZVOO3N.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-77a75e40e380eec7a587a3bc678be622"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-NAZVOO3N.jpg"></a>{height=&ldquo;100%&rdquo;}
-:::</p>
-<p>The Chrony service, an implementation of the Network Time Protocol,
-maintains the clock on the system and keeps it synchronized with a more
-accurate and reliable source of time. Providing accurate and uniform
-time for systems on the network allows time-sensitive applications such
-as monitoring software, backup tools, scheduling utilities, billing
-systems, file sharing protocols, and authentication programs to perform
-correctly and precisely. It also aids logging and auditing services to
-capture and record messages and alerts in log files with accurate
+<a href="#R-image-ade5b72fa280e9ce7fac97abafefe44b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-NAZVOO3N.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ade5b72fa280e9ce7fac97abafefe44b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-NAZVOO3N.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p>The Chrony service, an implementation of the Network Time Protocol, maintains the clock on the system and keeps it synchronized with a more
+accurate and reliable source of time. Providing accurate and uniform time for systems on the network allows time-sensitive applications such
+as monitoring software, backup tools, scheduling utilities, billing systems, file sharing protocols, and authentication programs to perform
+correctly and precisely. It also aids logging and auditing services to capture and record messages and alerts in log files with accurate
 timestamps.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0520.html}</p>
-<h2 class="style3" id="dns-and-name-resolution">DNS and Name Resolution</h2>
+<h2 id="dns-and-name-resolution">DNS and Name Resolution</h2>
 <p>\</p>
-<p>Domain Name System (DNS) is an inverted tree-like structure employed on
-the Internet and private networks (including home and corporate
+<p>Domain Name System (DNS) is an inverted tree-like structure employed on the Internet and private networks (including home and corporate
 networks) as the de facto standard for resolving hostnames to their
 numeric IP addresses. DNS is platform-independent with support
 integrated in every operating system. DNS is also referred to as BIND,
@@ -274,9 +223,6 @@ technique that uses DNS/BIND for hostname lookups.</p>
 imperative. The following subsections provide a look at the client-side
 configuration files and commands, along with examples on how to use the
 tools for resolving hostnames.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0521.html}</p>
 <h2 class="style3" id="dns-name-space-and-domains">DNS Name Space and Domains</h2>
 <p>\</p>
 <p>The DNS name space is a hierarchical organization of all the domains on
@@ -292,11 +238,8 @@ redhat.com.</p>
 <p><a href="/linux/rhcsa/17_hostname_resolution_and_time_synchronization/#chapter0521.html">Figure 17-1 exhibits a sample hierarchy of the name space, showing the
 top three domain levels.</a></p>
 <p>\</p>
-<p>::: {style=&ldquo;text-align: center;&rdquo;}
-<a href="#R-image-101f21e17895e437662c268978987236" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TJ7OW7U5.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-101f21e17895e437662c268978987236"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TJ7OW7U5.jpg"></a>{height=&ldquo;100%&rdquo;}
-:::</p>
-<p>Figure 17-1 Sample DNS Hierarchy</p>
+<p><a href="#R-image-2475fe8a7df737cf755b977704299e91" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TJ7OW7U5.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2475fe8a7df737cf755b977704299e91"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TJ7OW7U5.jpg"></a></p>
 <p>\</p>
 <p>At the deepest level of the hierarchy are the leaves (systems, nodes, or
 any device with an IP address) of the name space. For example, a network
@@ -304,9 +247,6 @@ switch net01 in .travel.gc.ca subdomain will be known as
 net01.travel.gc.ca. If a period (.) is added to the end of this name to
 look like net01.travel.gc.ca., it will be referred to as the Fully
 Qualified Domain Name (FQDN) for net01.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0522.html}</p>
 <h2 class="style3" id="dns-roles">DNS Roles</h2>
 <p>\</p>
 <p>From a DNS perspective, a system can be configured to operate as a
@@ -327,17 +267,11 @@ access to the Internet or other external networks will have the DNS
 client functionality configured and operational. Setting up DNS client
 on Linux involves two text files that are discussed in the next two
 subsections.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0523.html}</p>
-<h2 class="style3" id="understanding-resolver-configuration-file">Understanding Resolver Configuration File</h2>
+<h2 id="understanding-resolver-configuration-file">Understanding Resolver Configuration File</h2>
 <p>\</p>
-<p>The resolv.conf file under /etc is the DNS resolver configuration file
-where information to support hostname lookups is defined. This file may
-be edited manually with a text editor. It is referenced by resolver
-utilities to construct and transmit queries. There are three key
-directives set in this file&mdash;domain, nameserver, and search&mdash;and they
-are described in Table 17-1.</p>
+<p>The resolv.conf file under /etc is the DNS resolver configuration file where information to support hostname lookups is defined. This file may
+be edited manually with a text editor. It is referenced by resolver utilities to construct and transmit queries. There are three key
+directives set in this file&mdash;domain, nameserver, and search&mdash;and they are described in Table 17-1.</p>
 <p>\</p>
 <hr>
 <p>Directive                           Description</p>
@@ -355,8 +289,6 @@ local domain. No need to define the
 domain directive if the search
 directive is used.</p>
 <hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>Table 17-1 The Resolver Configuration File</p>
 <p>\</p>
@@ -368,8 +300,6 @@ directive is used.</p>
 example.gov</p>
 <p>nameserver                          192.168.0.1 8.8.8.8 8.8.4.4</p>
 <hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>A variation of the above would be:</p>
 <p>\</p>
@@ -381,25 +311,19 @@ example.gov</p>
 <p>nameserver                          8.8.8.8</p>
 <p>nameserver                          8.8.4.4</p>
 <hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>Currently, there are two search and three nameserver entries in the
 resolv.conf file on both server10 and server20. These entries are
 automatically placed by the NetworkManager service.</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-031cad688d211bfb0a764eb4f5dd1e14" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KOBUAFWS.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-031cad688d211bfb0a764eb4f5dd1e14"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KOBUAFWS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-0039ede5925f95705a8219ccf1375687" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KOBUAFWS.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-0039ede5925f95705a8219ccf1375687"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KOBUAFWS.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>On a system with this file absent, the resolver utilities only query the
 nameserver configured on the localhost, determine the domain name from
 the hostname of the system, and construct the search path based on the
 domain name.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0524.html}</p>
-<h2 class="style3" id="viewing-and-adjusting-name-resolution-sources-and-order">Viewing and Adjusting Name Resolution Sources and Order</h2>
+<h2 id="viewing-and-adjusting-name-resolution-sources-and-order">Viewing and Adjusting Name Resolution Sources and Order</h2>
 <p>\</p>
 <p>The nsswitch.conf file under /etc directs the lookup utilities to the
 correct source to get hostname information. In the presence of multiple
@@ -422,8 +346,6 @@ configured</p>
 <p>tryagain                Source busy, retry      continue (try the next
 later                   source)</p>
 <hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>Table 17-2 Name Service Source and Order Determination</p>
 <p>\</p>
@@ -434,8 +356,6 @@ the nsswitch.conf file. It shows two sources for name resolution: files
 <hr>
 <p>hosts:                  files                   dns</p>
 <hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>Based on the default behavior, the search will terminate if the
 requested information is found in the hosts table. However, you can
@@ -447,8 +367,6 @@ like:</p>
 <p>hosts:                  files                   dns
 [notfound=return]</p>
 <hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
 <p>\</p>
 <p>This altered entry will ignore the DNS.</p>
 <p>\</p>
@@ -459,9 +377,6 @@ for details on the /etc/hosts file.</p>
 appropriately, you can use any of the native client resolver tools for
 lookups. Common query tools available in RHEL 9 include dig, host,
 nslookup, and getent.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0525.html}</p>
 <h2 class="style3" id="performing-name-resolution-with-dig">Performing Name Resolution with dig</h2>
 <p>\</p>
 <p>dig (domain information groper) is a DNS lookup utility. It queries the
@@ -473,15 +388,10 @@ following shows a few usage examples.</p>
 <p>To get the IP for redhat.com using the nameserver listed in the
 resolv.conf file:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-fae19476b30191db4c072ae944bd09b7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YDHYBNK1.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fae19476b30191db4c072ae944bd09b7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YDHYBNK1.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-afcb8b81dc0b58a5666c08923e97f124" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TGZ3IJXO.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-afcb8b81dc0b58a5666c08923e97f124"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TGZ3IJXO.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<p><a href="#R-image-ef76368278ffcea883466f0645d2c7f0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-YDHYBNK1.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ef76368278ffcea883466f0645d2c7f0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-YDHYBNK1.jpg"></a></p>
+<p><a href="#R-image-76b37d746d8bd76093370d56701b0422" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TGZ3IJXO.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-76b37d746d8bd76093370d56701b0422"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TGZ3IJXO.jpg"></a></p>
 <p>The output shows the total time (20 milliseconds) it took to get the
 result, the IP addresses (52.200.142.250 and 34.235.198.240) of
 redhat.com, the nameserver IPv6 (2001:1970:xxxxxx) used for the query,
@@ -491,15 +401,11 @@ information.</p>
 <p>To perform a reverse lookup on the redhat.com IP (52.200.142.250), use
 the -x option with the command:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-0860148ccbc864a2b1b0a793e03cb507" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-H3BLEJ3V.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0860148ccbc864a2b1b0a793e03cb507"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-H3BLEJ3V.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-07bce522ddb825234b672ac15a6a953f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-H3BLEJ3V.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-07bce522ddb825234b672ac15a6a953f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-H3BLEJ3V.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>Reference the command&rsquo;s manual pages for details and options.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0526.html}</p>
-<h2 class="style3" id="performing-name-resolution-with-host">Performing Name Resolution with host</h2>
+<h2 id="performing-name-resolution-with-host">Performing Name Resolution with host</h2>
 <p>\</p>
 <p>host is an elementary DNS lookup utility that works on the same
 principles as the dig command in terms of nameserver determination. This
@@ -508,9 +414,8 @@ the -v option for verbosity.</p>
 <p>\</p>
 <p>To perform a lookup on redhat.com:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-d8cff2df96f1e9739d1027bb71767200" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5QNYLQ6V.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d8cff2df96f1e9739d1027bb71767200"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5QNYLQ6V.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-4d79af7ae489ede8ce1517e4a3a33fa4" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-5QNYLQ6V.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-4d79af7ae489ede8ce1517e4a3a33fa4"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-5QNYLQ6V.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>Rerun the above with -v added. The output will be similar to that of the
 dig command.</p>
@@ -518,14 +423,10 @@ dig command.</p>
 <p>To perform a reverse lookup on the IP of redhat.com using the -v flag to
 add details:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-64a738840b1c03e7672433edbc086659" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WOZD6C5K.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-64a738840b1c03e7672433edbc086659"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WOZD6C5K.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-d0462d06c461dcc2c08ba8f1dc0338ce" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WOZD6C5K.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d0462d06c461dcc2c08ba8f1dc0338ce"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WOZD6C5K.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>Refer to the command&rsquo;s manual pages for options and more information.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0527.html}</p>
 <h2 class="style3" id="performing-name-resolution-with-nslookup">Performing Name Resolution with nslookup</h2>
 <p>\</p>
 <p>nslookup queries the nameservers listed in the resolv.conf file or
@@ -534,22 +435,15 @@ specified at the command line. The following shows a few usage examples.</p>
 <p>To get the IP for redhat.com using nameserver 8.8.8.8 instead of the
 nameserver defined in resolv.conf:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-eac3ed09e004190b5062dd7735156788" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-6MJ73J5Q.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-eac3ed09e004190b5062dd7735156788"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-6MJ73J5Q.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<p><a href="#R-image-a4da7f17e8d00c159cfd638d7e36aee1" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-6MJ73J5Q.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4da7f17e8d00c159cfd638d7e36aee1"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-6MJ73J5Q.jpg"></a></p>
 <p>To perform a reverse lookup on the IP of redhat.com using the nameserver
 from the resolver configuration file:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-470869da5535d1fe9b6c5a41d503aa55" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TCI69YR4.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-470869da5535d1fe9b6c5a41d503aa55"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TCI69YR4.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<p><br>
+<a href="#R-image-aac02ee8236ba940b55de5de9d3248be" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TCI69YR4.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aac02ee8236ba940b55de5de9d3248be"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TCI69YR4.jpg"></a></p>
 <p>Consult the command&rsquo;s manual pages on how to use it in interactive mode.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0528.html}</p>
-<h2 class="style3" id="performing-name-resolution-with-getent">Performing Name Resolution with getent</h2>
+<h2 id="performing-name-resolution-with-getent">Performing Name Resolution with getent</h2>
 <p>\</p>
 <p>The getent (get entries) command is a rudimentary tool that can fetch
 matching entries from the databases defined in the nsswitch.conf file.
@@ -557,306 +451,244 @@ This command reads the corresponding database and displays the
 information if found. For name resolution, use the hosts database and
 getent will attempt to resolve the specified hostname or IP address. For
 instance, run the following for forward and reverse lookups:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-35244b48b2daa4ad5ab38d3e56b80dce" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TMDUQ18Q.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-35244b48b2daa4ad5ab38d3e56b80dce"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TMDUQ18Q.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<p><a href="#R-image-04de7668a1f070a2ec520508e7994d74" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-TMDUQ18Q.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-04de7668a1f070a2ec520508e7994d74"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-TMDUQ18Q.jpg"></a></p>
 <p>Check the command&rsquo;s manual pages for available flags and additional
 information.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0529.html}</p>
 <h2 class="style3" id="time-synchronization">Time Synchronization</h2>
+<h3 id="network-time-protocol-ntp">Network Time Protocol (NTP)</h3>
+<ul>
+<li>networking protocol for synchronizing the system clock with remote time servers for accuracy and reliability.</li>
+<li>Having steady and exact time on networked systems allows time-sensitive applications, such as authentication and email applications, backup and scheduling tools, financial and billing systems, logging and monitoring software, and file and storage sharing protocols, to function with precision.</li>
+</ul>
 <p>\</p>
-<p>Network Time Protocol (NTP) is a networking protocol for synchronizing
-the system clock with remote time servers for accuracy and reliability.
-This protocol has been in use with tens of millions of computing devices
-employing it to synchronize their clocks with tens of thousands of time
-servers deployed across the globe. Having steady and exact time on
-networked systems allows time-sensitive applications, such as
-authentication and email applications, backup and scheduling tools,
-financial and billing systems, logging and monitoring software, and file
-and storage sharing protocols, to function with precision.</p>
+<ul>
+<li>sends a stream of messages to configured time servers and binds itself to the one with least amount of delay in its responses, the most accurate, and may or may not be the closest distance-wise.</li>
+<li>client system maintains a drift in time in a file and references this file for gradual drop in inaccuracy.</li>
+</ul>
 <p>\</p>
-<p>NTP sends a stream of messages to configured time servers and binds
-itself to the one with least amount of delay in its responses, the most
-accurate, and may or may not be the closest distance-wise. The client
-system maintains a drift in time in a file and references this file for
-gradual drop in inaccuracy.</p>
+<h3 id="crony">Crony</h3>
+<ul>
+<li>RHEL 9 implementation of NTP</li>
+<li>uses the UDP port 123.</li>
+<li>If enabled, it starts at system boot and continuously operates to keep the system clock in sync with a more accurate source of time.</li>
+</ul>
 <p>\</p>
-<p>RHEL 9 has an implementation of NTP called Chrony. Chrony uses the UDP
-protocol over the well-known port 123. If enabled, it starts at system
-boot and continuously operates to keep the system clock in sync with a
-more accurate source of time.</p>
+<ul>
+<li>performs well on computers that are occasionally connected to the network, attached to busy networks, do not run all the time, or have variations in temperature.</li>
+</ul>
+<h2 id="time-sources">Time Sources</h2>
+<ul>
+<li>A time source is any reference device that acts as a provider of time to other devices.</li>
+<li>The most precise sources of time are the atomic clocks.</li>
+<li>They use Universal Time Coordinated (UTC) for time accuracy.</li>
+<li>They produce radio signals that radio clocks use for time propagation to computer servers and other devices that require correctness in time.</li>
+<li>When choosing a time source for a network, preference should be given to the one that takes the least amount of time to respond.</li>
+<li>This server may or may not be closest physically.</li>
+</ul>
+<p>The common sources of time employed on computer networks are:</p>
+<ul>
+<li>the local system clock</li>
+<li>Internet-based public time server</li>
+<li>radio clock.</li>
+</ul>
 <p>\</p>
-<p>Chrony performs well on computers that are occasionally connected to the
-network, attached to busy networks, do not run all the time, or have
-variations in temperature.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0530.html}</p>
-<h2 class="style3" id="time-sources">Time Sources</h2>
+<p>local system clock</p>
+<ul>
+<li>can be used as a provider of time.</li>
+<li>This requires the maintenance of correct time on the server either manually or automatically via cron.</li>
+<li>Keep in mind that this server has no way of synchronizing itself with a more reliable and precise external time source.</li>
+<li>Using the local system clock as a time server is the least recommended option.</li>
+</ul>
+<p><br>
+Public time server</p>
+<ul>
+<li>Several public time servers are available over the Internet for general use (visit <a href="https://www.ntp.org" rel="external" target="_blank">www.ntp.org</a> for a list).</li>
+<li>These servers are typically operated by government agencies, research and scientific organizations, large software vendors, and universities around the world.</li>
+<li>One of the systems on the local network is identified and configured to receive time from one or more public time servers.</li>
+<li>Preferred over the use of the local system clock.</li>
+</ul>
 <p>\</p>
-<p>A time source is any reference device that acts as a provider of time to
-other devices. The most precise sources of time are the atomic clocks.
-They use Universal Time Coordinated (UTC) for time accuracy. They
-produce radio signals that radio clocks use for time propagation to
-computer servers and other devices that require correctness in time.
-When choosing a time source for a network, preference should be given to
-the one that takes the least amount of time to respond. This server may
-or may not be closest physically.</p>
+<p>The official ntp.org site also provides a common pool called pool.ntp.org for vendors and organizations to register their own NTP
+servers voluntarily for public use.
+Examples:</p>
+<ul>
+<li>rhel.pool.ntp.org and ubuntu.pool.ntp.org for distribution-specific pools,</li>
+<li>ca.pool.ntp.org and oceania.pool.ntp.org for country and continent/region-specific pools.</li>
+</ul>
+<p>Under these sub-pools, the owners maintain multiple time servers with enumerated hostnames such as 0.rhel.pool.ntp.org, 1.rhel.pool.ntp.org, 2.rhel.pool.ntp.org, and so on.</p>
 <p>\</p>
-<p>The common sources of time employed on computer networks are the local
-system clock, an Internet-based public time server, and a radio clock.</p>
+<p>Radio clock</p>
+<ul>
+<li>Regarded as the perfect provider of time</li>
+<li>Receives time updates straight from an atomic clock.</li>
+<li>Global Positioning System (GPS), WWVB, and DCF77 are some popular radio clock methods.</li>
+<li>A direct use of signals from these sources requires connectivity of some hardware to the computer identified to act as an organizational or site-wide time server.</li>
+</ul>
+<h2 id="ntp-roles">NTP Roles</h2>
+<ul>
+<li>a system can be configured to operate as a primary server, secondary server, peer, or client.\</li>
+</ul>
+<p><strong>Primary server</strong></p>
+<ul>
+<li>gets time from a time source and provides time to secondary servers or directly to clients.</li>
+</ul>
+<p><strong>secondary server</strong></p>
+<ul>
+<li>receives time from a primary server and can be configured to furnish time to a set of clients to offload the primary or for redundancy.</li>
+<li>The presence of a secondary server on the network is optional but highly recommended.</li>
+</ul>
+<p><strong>peer</strong></p>
+<ul>
+<li>reciprocates time with an NTP server.</li>
+<li>All peers work at the same stratum level, and all of them are considered equally reliable.</li>
+</ul>
+<p><strong>client</strong></p>
+<ul>
+<li>Receives time from a primary or a secondary server and adjusts its clock accordingly.</li>
+</ul>
+<h2 id="stratum-levels">Stratum Levels</h2>
 <p>\</p>
-<p>The local system clock can be used as a provider of time. This requires
-the maintenance of correct time on the server either manually or
-automatically via cron. Keep in mind that this server has no way of
-synchronizing itself with a more reliable and precise external time
-source. Therefore, using the local system clock as a time server is the
-least recommended option.</p>
-<p>\</p>
-<p>Several public time servers are available over the Internet for general
-use (visit <a href="https://www.ntp.org" rel="external" target="_blank">www.ntp.org</a> for a list). These servers are typically operated
-by government agencies, research and scientific organizations, large
-software vendors, and universities around the world. One of the systems
-on the local network is identified and configured to receive time from
-one or more public time servers. This option is preferred over the use
-of the local system clock.</p>
-<p>\</p>
-<p>The official ntp.org site also provides a common pool called
-pool.ntp.org for vendors and organizations to register their own NTP
-servers voluntarily for public use. Examples include rhel.pool.ntp.org
-and ubuntu.pool.ntp.org for distribution-specific pools, and
-ca.pool.ntp.org and oceania.pool.ntp.org for country and
-continent/region-specific pools. Under these sub-pools, the owners
-maintain multiple time servers with enumerated hostnames such as
-0.rhel.pool.ntp.org, 1.rhel.pool.ntp.org, 2.rhel.pool.ntp.org, and so
-on.</p>
-<p>\</p>
-<p>A radio clock is regarded as the perfect provider of time, as it
-receives time updates straight from an atomic clock. Global Positioning
-System (GPS), WWVB, and DCF77 are some popular radio clock methods. A
-direct use of signals from these sources requires connectivity of some
-hardware to the computer identified to act as an organizational or
-site-wide time server.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0531.html}</p>
-<h2 class="style3" id="ntp-roles">NTP Roles</h2>
-<p>\</p>
-<p>From an NTP standpoint, a system can be configured to operate as a
-primary server, secondary server, peer, or client.</p>
-<p>\</p>
-<p>A primary server gets time from a time source and provides time to
-secondary servers or directly to clients.</p>
-<p>\</p>
-<p>A secondary server receives time from a primary server and can be
-configured to furnish time to a set of clients to offload the primary or
-for redundancy. The presence of a secondary server on the network is
-optional but highly recommended.</p>
-<p>\</p>
-<p>A peer reciprocates time with an NTP server. All peers work at the same
-stratum level, and all of them are considered equally reliable.</p>
-<p>\</p>
-<p>A client receives time from a primary or a secondary server and adjusts
-its clock accordingly.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0532.html}</p>
-<h2 class="style3" id="stratum-levels">Stratum Levels</h2>
-<p>\</p>
-<p>As mentioned, there are different types of time sources available so you
-can synchronize the system clock. These time sources are categorized
-hierarchically into several levels that are referred to as stratum
-levels based on their distance from the reference clocks (atomic, radio,
-and GPS). The reference clocks operate at stratum level 0 and are the
-most accurate provider of time with little to no delay. Besides stratum
-0, there are fifteen additional levels that range from 1 to 15. Of
-these, servers operating at stratum 1 are considered perfect, as they
-get time updates directly from a stratum 0 device. See Figure 17-2 for a
-sample hierarchy.</p>
-<p>\</p>
-<p>A stratum 0 device cannot be used on the network directly. It is
-attached to a computer, which is then configured to operate at
-stratum 1. Servers functioning at stratum 1 are called time servers and
-they can be set up to deliver time to stratum 2 servers. Similarly, a
-stratum 3 server can be configured to synchronize its time with a
-stratum 2 server and deliver time to the next lower-level servers, and
-so on. Servers sharing the same stratum can be configured as peers to
-exchange time updates with one another.</p>
-<p>\</p>
-<p>::: {style=&ldquo;text-align: center;&rdquo;}
-<a href="#R-image-f4167eb99f8d103022619cd3cde95bfb" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-OOGYXDFA.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-f4167eb99f8d103022619cd3cde95bfb"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-OOGYXDFA.jpg"></a>{height=&ldquo;100%&rdquo;}
-:::</p>
-<p>Figure 17-2 NTP Stratum Levels</p>
-<p>\</p>
-<p>There are numerous public NTP servers available for free that
-synchronize time. They normally operate at higher stratum levels such as
-2 and 3.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0533.html}</p>
-<h2 class="style3" id="chrony-configuration-file">Chrony Configuration File</h2>
-<p>\</p>
-<p>The key configuration file for the Chrony service is chrony.conf located
-in the /etc directory. This file is referenced by the Chrony daemon at
-startup to determine the sources to synchronize the clock, the log file
-location, and other details. This file can be modified by hand to set or
-alter directives as required. Some common directives used in this file
-along with real or mock values are presented below:</p>
-<p>\</p>
-<hr>
-<p>driftfile                           /var/lib/chrony/drift</p>
-<p>logdir                              /var/log/chrony</p>
-<p>pool                                0.rhel.pool.ntp.org iburst</p>
-<p>server                              server20s8.example.com iburst</p>
-<p>server                              127.127.1.0</p>
-<p>peer                                prodntp1.abc.net</p>
-<hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>\</p>
-<p><a href="/linux/rhcsa/17_hostname_resolution_and_time_synchronization/#chapter0533.html">Table 17-3 describes these directives.</a></p>
-<p>\</p>
-<hr>
-<p>Directive                           Description</p>
-<p>driftfile                           Indicates the location and name of
-the drift file to be used to record
-the rate at which the system clock
-gains or losses time. This data is
-used by Chrony to maintain local
-system clock accuracy.</p>
-<p>logdir                              Sets the directory location to
-store the log files in</p>
-<p>pool                                Defines the hostname that
-represents a pool of time servers.
-Chrony binds itself with one of the
-servers to get updates. In case of
-a failure of that server, it
-automatically switches the binding
-to another server within the pool.</p>
-<pre><code>                                  The iburst option dictates the
-                                  Chrony service to send the first
-                                  four update requests to the time
-                                  server every 2 seconds. This allows
-                                  the daemon to quickly bring the
-                                  local clock closer to the time
-                                  server at startup.
-</code></pre>
-<p>server                              Defines the hostname or IP address
-of a single time server. The IP
-127.127.1.0 is a special address
-that epitomizes the local system
-clock.</p>
-<p>peer                                Identifies the hostname or IP
-address of a time server running at
-the same stratum level. A peer
-provides time to a server as well
-as receives time from the same
-server.</p>
-<hr>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>\</p>
-<p>Table 17-3 Chrony Directives</p>
-<p>\</p>
+<ul>
+<li>
+<p>time sources are categorized hierarchically into several levels that are referred to as stratum levels based on their distance from the reference clocks (atomic, radio, and GPS).</p>
+</li>
+<li>
+<p>The reference clocks operate at stratum level 0 and are the most accurate provider of time with little to no delay.</p>
+</li>
+<li>
+<p>Besides stratum 0, there are fifteen additional levels that range from 1 to 15.</p>
+</li>
+<li>
+<p>Of these, servers operating at stratum 1 are considered perfect, as they get time updates directly from a stratum 0 device.</p>
+</li>
+<li>
+<p>A stratum 0 device cannot be used on the network directly. It is attached to a computer, which is then configured to operate at stratum 1.</p>
+</li>
+<li>
+<p>Servers functioning at stratum 1 are called time servers and they can be set up to deliver time to stratum 2 servers.</p>
+</li>
+<li>
+<p>Similarly, a stratum 3 server can be configured to synchronize its time with a stratum 2 server and deliver time to the next lower-level servers, and so on.</p>
+</li>
+<li>
+<p>Servers sharing the same stratum can be configured as peers to exchange time updates with one another.</p>
+</li>
+</ul>
+<p><a href="#R-image-8383759eba41698b7d449e373a1c0008" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-OOGYXDFA.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8383759eba41698b7d449e373a1c0008"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-OOGYXDFA.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><br>
+There are numerous public NTP servers available for free that synchronize time.
+They normally operate at higher stratum levels such as 2 and 3.</p>
+<h2 id="chrony-configuration-file">Chrony Configuration File</h2>
+<p><strong>/etc/chrony.conf</strong></p>
+<ul>
+<li>key configuration file for the Chrony service</li>
+<li>referenced by the Chrony daemon at startup to determine the sources to synchronize the clock, the log file location, and other details.</li>
+<li>can be modified by hand to set or alter directives as required.</li>
+<li>common directives used in this file along with real or mock values are presented below:</li>
+</ul>
+<p>driftfile</p>
+<ul>
+<li>/var/lib/chrony/drift</li>
+<li>Indicates the location and name of the drift file to be used to record the rate at which the system clockgains or losses time. This data is used by Chrony to maintain local system clock accuracy.</li>
+</ul>
+<p>logdir</p>
+<ul>
+<li>/var/log/chrony</li>
+<li>Sets the directory location to store the log files in</li>
+</ul>
+<p>pool</p>
+<ul>
+<li>0.rhel.pool.ntp.org iburst</li>
+<li>Defines the hostname that represents a pool of time servers. Chrony binds itself with one of the servers to get updates. In case of a failure of that server, it automatically switches the binding to another server within the pool.</li>
+<li>The iburst option dictates the Chrony service to send the first four update requests to the time server every 2 seconds. This allows the daemon to quickly bring the local clock closer to the time server at startup.</li>
+</ul>
+<p>server</p>
+<ul>
+<li>server20s8.example.com iburst</li>
+<li>Defines the hostname or IP address of a single time server.</li>
+</ul>
+<p>server</p>
+<ul>
+<li>127.127.1.0</li>
+<li>The IP 127.127.1.0 is a special address that epitomizes the local system clock.</li>
+</ul>
+<p>peer</p>
+<ul>
+<li>prodntp1.abc.net</li>
+<li>Identifies the hostname or IP address of a time server running at the same stratum level. A peer provides time to a server as well as receives time from the same server</li>
+</ul>
 <p>There are plenty of other directives and options available with Chrony
 that may be defined in this file. Use man chrony.conf for details.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0534.html}</p>
-<h2 class="style3" id="chrony-daemon-and-command">Chrony Daemon and Command</h2>
-<p>\</p>
-<p>The Chrony service runs as a daemon program called chronyd that handles
-time synchronization in the background. It uses the configuration
-defined in the /etc/chrony.conf file at startup and sets its behavior
-accordingly. If the local clock requires a time adjustment, Chrony takes
-multiple small steps toward minimizing the gap rather than doing it
-abruptly in a single step. There are a number of additional options
-available that may be passed to the service daemon if required.</p>
-<p>\</p>
-<p>The Chrony service has a command line program called chronyc available
-that can be employed to monitor the performance of the service and
-control its runtime behavior. There are a few subcommands available with
-chronyc; the sources and tracking subcommands list current sources of
-time and view performance statistics, respectively.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0535.html}</p>
-<h2 class="style3" id="exercise-17-1-configure-ntp-client">Exercise 17-1: Configure NTP Client</h2>
-<p>\</p>
-<p>This exercise should be done on server10 as user1 with sudo where
-required.</p>
-<p>\</p>
-<p>In this exercise, you will install the Chrony software package and
-activate the service without making any changes to the default
-configuration. You will validate the binding and operation.</p>
-<p>\</p>
+<h2 id="chrony-daemon-and-command">Chrony Daemon and Command</h2>
+<p>The Chrony service runs as a daemon program called chronyd that handles time synchronization in the background.
+It uses the configuration defined in the /etc/chrony.conf file at startup and sets its behavior accordingly.
+If the local clock requires a time adjustment, Chrony takes multiple small steps toward minimizing the gap rather than doing it abruptly in a single step.
+There are a number of additional options available that may be passed to the service daemon if required.</p>
+<p>The Chrony service has a command line program called <code>chronyc</code> available that can be employed to monitor the performance of the service and control its runtime behavior.
+There are a few subcommands available with chronyc;
+the sources and tracking subcommands list current sources of time and view performance statistics, respectively.</p>
+<h2 id="exercise-17-1-configure-ntp-client-server10">Exercise 17-1: Configure NTP Client (server10)</h2>
+<ul>
+<li>install the Chrony software package and activate the service without making any changes to the default configuration.</li>
+<li>validate the binding and operation.</li>
+</ul>
 <p>1. Install the Chrony package using the dnf command:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-ce74c2fbcc37147ed82599498600dbdc" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-12U3TD72.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-ce74c2fbcc37147ed82599498600dbdc"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-12U3TD72.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<p><a href="#R-image-aa79764d47eae5bdcafb619d06174571" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-12U3TD72.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-aa79764d47eae5bdcafb619d06174571"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-12U3TD72.jpg"></a></p>
 <p>The software is already installed on the system.</p>
-<p>\</p>
 <p>2. Ensure that preconfigured public time server entries are present in
 the /etc/chrony.conf file:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-063d7612c661ef132dfdb76cf4e2340a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-JQ63PSU7.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-063d7612c661ef132dfdb76cf4e2340a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-JQ63PSU7.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
-<p>There is a single pool entry set in the file by default. This pool name
-is backed by multiple NTP servers behind the scenes.</p>
-<p>\</p>
-<p>3. Start the Chrony service and set it to autostart at reboots:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-a621a3755ca68ecc1556219a6511d80e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-05VCU30R.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a621a3755ca68ecc1556219a6511d80e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-05VCU30R.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
-<p>4. Examine the operational status of Chrony:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-e8acbd0dfbbec892fd5196e08fdc5fc3" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-Z4GH16SN.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e8acbd0dfbbec892fd5196e08fdc5fc3"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-Z4GH16SN.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@server1 ~]# grep -E &#39;pool|server&#39; /etc/chrony.conf | grep -v ^#
+pool 2.rhel.pool.ntp.org iburst</code></pre></div><p>There is a single pool entry set in the file by default. This pool name is backed by multiple NTP servers behind the scenes.</p>
+<p>3. Start the Chrony service and set it to autostart at reboots:
+<code>sudo systemctl --now enable chronyd</code></p>
+<p><a href="#R-image-6921c6c96450d879dabd36ef810efd40" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-05VCU30R.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-6921c6c96450d879dabd36ef810efd40"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-05VCU30R.jpg"></a></p>
+<p>4. Examine the operational status of Chrony:
+<code>sudo systemctl status chronyd --no-pager -l</code>
+<a href="#R-image-136480fed344c13e7d2624b87866d261" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-Z4GH16SN.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-136480fed344c13e7d2624b87866d261"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-Z4GH16SN.jpg"></a></p>
 <p>The service has started successfully and it is set for autostart.</p>
-<p>\</p>
-<p>5. Inspect the binding status using the sources subcommand with
-chronyc:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-e275d58ea3e6621e22e3dd59a460ee0e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-QQAUUTE5.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-e275d58ea3e6621e22e3dd59a460ee0e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-QQAUUTE5.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
-<p>The output shows the information in eight columns. Columns 1 to 4&mdash;M,
-S, Name/IP address, and Stratum&mdash;illustrate the mode, state,
-hostname/IP, and stratum level of the source. The ^ means the source is
-a server and the * implies current association with the source.</p>
-<p>\</p>
-<p>Columns 4 to 8&mdash;Poll, Reach, LastRx, and Last Sample&mdash;display the
-polling rate (6 means 64 seconds), reachability register (377 indicates
-a valid response was received), how long ago the last sample was
-received, and the offset between the local clock and the source at the
-last measurement. Check out the manual pages of the chronyc command and
-search for the section &lsquo;sources&rsquo; for additional details.</p>
-<p>\</p>
-<p>The second time source ntp3.torix.ca from the top in the output depicts
-that server10 is bound to it. This association is identified with the
-asterisk character (*) beside the time server.</p>
-<p>\</p>
-<p>6. Display the clock performance using the tracking subcommand with
-chronyc:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-51601985575baddc3e20d76541cee0e0" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-U9AIT51T.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-51601985575baddc3e20d76541cee0e0"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-U9AIT51T.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<p>5. Inspect the binding status using the sources subcommand with chronyc:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@server1 ~]# chronyc sources
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^+ ntp7-2.mattnordhoffdns.n&gt;     2   8   377   324  -3641us[-3641us] +/-   53ms
+^* 2600:1700:4e60:b983::123      1   8   377   430   +581us[  +84us] +/-   36ms
+^- 2600:1700:5a0f:ee00::314&gt;     2   8   377    58  -1226us[-1226us] +/-   50ms
+^- 2603:c020:6:b900:ed2f:b4&gt;     2   9   377   320   +142us[ +142us] +/-   73ms</code></pre></div><p><a href="#R-image-d3610659009737890f74cd3e1582649b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-QQAUUTE5.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d3610659009737890f74cd3e1582649b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-QQAUUTE5.jpg"></a></p>
+<p>^ means the source is a server
+* implies current association with the source.</p>
+<p>Poll</p>
+<ul>
+<li>polling rate (6 means 64 seconds),
+Reach</li>
+<li>reachability register (377 indicates a valid response was received),
+Last sample</li>
+<li>how long ago the last sample was received, and the offset between the local clock and the source at the
+last measurement</li>
+</ul>
+<p>asterisk character (*) beside the time server depicts the NTP server bound to the local server
+The second time source ntp3.torix.ca from the top in the output depicts that server10 is bound to it.</p>
+<p>6. Display the clock performance using the tracking subcommand with chronyc:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>[root@server1 ~]# chronyc tracking
+Reference ID    : 2EA39303 (2600:1700:4e60:b983::123)
+Stratum         : 2
+Ref time (UTC)  : Sun Jun 16 12:05:45 2024
+System time     : 286930.187500000 seconds slow of NTP time
+Last offset     : -0.000297195 seconds
+RMS offset      : 2486.306152344 seconds
+Frequency       : 3.435 ppm slow
+Residual freq   : -0.034 ppm
+Skew            : 0.998 ppm
+Root delay      : 0.064471066 seconds
+Root dispersion : 0.003769779 seconds
+Update interval : 517.9 seconds
+Leap status     : Normal</code></pre></div><p><a href="#R-image-39d13f43d130c7d618b67f205a62832c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-U9AIT51T.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-39d13f43d130c7d618b67f205a62832c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-U9AIT51T.jpg"></a></p>
 <p>Rows 1 and 2 in the above output identify the current source of time
 (Reference ID) and the stratum level it is configured at (Stratum). Row
 3 shows the reference time at which the last measurement from the time
@@ -865,62 +697,38 @@ from the NTP time (System time). Row 5 depicts the last reported offset
 from the NTP server (Last offset). Row 6 identifies the frequency at
 which time adjustments are occurring (Frequency). The rest of the rows
 show additional information. Check out the manual pages of the chronyc
-command and search for the section &ldquo;tracking&rdquo; for additional details.</p>
-<p>\</p>
-<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
-:::</p>
-<p>\</p>
-<p>EXAM TIP: You will not have access to the outside network during the
-exam. You will need to point your system to an NTP server available on
-the exam network. Simply comment the default server/pool directive(s)
-and add a single directive &ldquo;server &lt;hostname&gt;&rdquo; to the file. Replace
-&lt;hostname&gt; with the NTP server name or its IP address as provided.</p>
-<p>\</p>
-<p>::: {style=&ldquo;border-style: solid; border-color: rgb(0, 0, 0); border-top-width: 1px; width: 0.0625;&rdquo;}
-:::</p>
-<p>\</p>
+command and search for the section &ldquo;tracking&rdquo; for additional details.
+\</p>
+<p>EXAM TIP: You will not have access to the outside network during the exam. You will need to point your system to an NTP server available on the exam network. Simply comment the default server/pool directive(s) and add a single directive &ldquo;server &lt;hostname&gt;&rdquo; to the file. Replace &lt;hostname&gt; with the NTP server name or its IP address as provided.</p>
 <p>The concludes the exercise.</p>
-<p>::: {style=&ldquo;page-break-before: always;&rdquo;}
-:::</p>
-<p>[]{#chapter0536.html}</p>
-<h2 class="style3" id="displaying-and-setting-system-date-and-time">Displaying and Setting System Date and Time</h2>
-<p>\</p>
-<p>System date and time can be viewed and manually adjusted with native
-Linux tools such as the timedatectl command. This command can modify the
-date, time, and time zone. When executed without any option, as shown
-below, it outputs the local time, Universal time, RTC time (real-time
-clock, a battery-backed hardware clock located on the system board),
-time zone, and the status of the NTP service:</p>
-<p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-d76c23f41a4a4078409055842d374f84" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-2VNY85LG.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-d76c23f41a4a4078409055842d374f84"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-2VNY85LG.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
-<!-- raw HTML omitted -->
+<h2 id="displaying-and-setting-system-date-and-time">Displaying and Setting System Date and Time</h2>
+<p>System date and time can be viewed and manually adjusted with native Linux tools such as the timedatectl command.
+This command can modify the date, time, and time zone.
+When executed without any option, as shown below, it outputs the local time, Universal time, RTC time (real-time
+clock, a battery-backed hardware clock located on the system board), time zone, and the status of the NTP service:</p>
+<p><a href="#R-image-c7bec5ceea2af4238d19ae79cacc64d7" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-2VNY85LG.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c7bec5ceea2af4238d19ae79cacc64d7"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-2VNY85LG.jpg"></a></p>
 <p>This command requires that the NTP/Chrony service is deactivated in
 order to make time adjustments. Run the timedatectl command as follows
 to turn off NTP and verify:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-0125eca1c49035915bf95e84c2e6084a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-UYIURDAL.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-0125eca1c49035915bf95e84c2e6084a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-UYIURDAL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-71f9f846ddb00b12b6f3fe64926e919b" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-UYIURDAL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-71f9f846ddb00b12b6f3fe64926e919b"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-UYIURDAL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>To modify the current date to February 28, 2023, and confirm:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-58143e41299f7e00aedb9c6c6f04a26c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-PBWZS3DT.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-58143e41299f7e00aedb9c6c6f04a26c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-PBWZS3DT.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-cbf67106a3ad8858171785e97384b58c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-PBWZS3DT.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-cbf67106a3ad8858171785e97384b58c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-PBWZS3DT.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>To change both date and time in one go (March 18, 2023 11:20 p.m.):</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-a4c884a441c8d0fc325cb3f469315dc8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KLSPK1PF.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-a4c884a441c8d0fc325cb3f469315dc8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KLSPK1PF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-ddf74c1d38019d7fdcac1c33d16c474c" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-KLSPK1PF.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-ddf74c1d38019d7fdcac1c33d16c474c"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-KLSPK1PF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>To reactivate NTP:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-7e5cd9901ac94a2fb5730783bf2f5200" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-XCSIHCHZ.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-7e5cd9901ac94a2fb5730783bf2f5200"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-XCSIHCHZ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-708d003ed56fb14e442656290dfd1d1e" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-XCSIHCHZ.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-708d003ed56fb14e442656290dfd1d1e"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-XCSIHCHZ.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>Check out the manual pages of the timedatectl command for more
 subcommands and usage examples.</p>
@@ -930,15 +738,14 @@ date and time.</p>
 <p>\</p>
 <p>To view current date and time:</p>
 <p>\</p>
-<!-- raw HTML omitted -->
-<p><a href="#R-image-4443b896daca24ffe04202152c729e23" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WD0CY9GL.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-4443b896daca24ffe04202152c729e23"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WD0CY9GL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-e27fb36f6cbebed9d4ac9cf120b31f14" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-WD0CY9GL.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-e27fb36f6cbebed9d4ac9cf120b31f14"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-WD0CY9GL.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>To change the date and time to February 11, 2023, 8:00 a.m.:</p>
 <p>\</p>
 <!-- raw HTML omitted -->
-<p><a href="#R-image-9f57c3d17141be0e9359e5ecde83fef8" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-8U96CFAF.jpg" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-9f57c3d17141be0e9359e5ecde83fef8"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-8U96CFAF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
+<p><a href="#R-image-2e17fdee59785e39cf61710305532454" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="image-8U96CFAF.jpg" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-2e17fdee59785e39cf61710305532454"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="image-8U96CFAF.jpg"></a>{height=&ldquo;100%&rdquo;}</p>
 <!-- raw HTML omitted -->
 <p>There are many options available with the date command. Consult its
 manual pages for details.</p>
@@ -1099,12 +906,12 @@ timedatectl command. (Hint: Time Synchronization).</p>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1717964147" defer></script>
-        <script src="/js/lunr/lunr.min.js?1717964147" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1717964147" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1717964147" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1717964147" defer></script>
-        <script src="/js/search.js?1717964147" defer></script>
+        <script src="/js/auto-complete.js?1718798988" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718798988" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718798988" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718798988" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718798988" defer></script>
+        <script src="/js/search.js?1718798988" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -1188,8 +995,8 @@ timedatectl command. (Hint: Time Synchronization).</p>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1717964147" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1717964147" defer></script>
+    <script src="/js/clipboard.min.js?1718798988" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718798988" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -1205,20 +1012,20 @@ timedatectl command. (Hint: Time Synchronization).</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1717964147" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1717964147" defer></script>
-    <script src="/js/js-yaml.min.js?1717964147" defer></script>
+    <script src="/js/d3/d3-color.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718798988" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718798988" defer></script>
+    <script src="/js/js-yaml.min.js?1718798988" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1717964147" defer></script>
+    <script src="/js/theme.js?1718798988" defer></script>
   </body>
 </html>

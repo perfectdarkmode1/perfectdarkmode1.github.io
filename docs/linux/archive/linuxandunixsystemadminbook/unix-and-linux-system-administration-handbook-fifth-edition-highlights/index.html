@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Controlling access creates accounts for new users, removes the accounts of inactive users, and handles all the account-related issues that come up in between
+process of actually adding and removing accounts is typically automated by a configuration management system or centralized directory service
+Adding hardware Automating tasks increases your efficiency, reduces the likelihood of errors caused by humans, and improves your ability to respond rapidly to changing equirements
+Overseeing backups Backups must be executed on a regular schedule and restores must be tested periodically to ensure that they are functioning correctly.">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Controlling access creates accounts for new users, removes the accounts of inactive users, and handles all the account-related issues that come up in between
+process of actually adding and removing accounts is typically automated by a configuration management system or centralized directory service
+Adding hardware Automating tasks increases your efficiency, reduces the likelihood of errors caused by humans, and improves your ability to respond rapidly to changing equirements
+Overseeing backups Backups must be executed on a regular schedule and restores must be tested periodically to ensure that they are functioning correctly.">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/archive/linuxandunixsystemadminbook/unix-and-linux-system-administration-handbook-fifth-edition-highlights/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Controlling access creates accounts for new users, removes the accounts of inactive users, and handles all the account-related issues that come up in between
+process of actually adding and removing accounts is typically automated by a configuration management system or centralized directory service
+Adding hardware Automating tasks increases your efficiency, reduces the likelihood of errors caused by humans, and improves your ability to respond rapidly to changing equirements
+Overseeing backups Backups must be executed on a regular schedule and restores must be tested periodically to ensure that they are functioning correctly.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Controlling access creates accounts for new users, removes the accounts of inactive users, and handles all the account-related issues that come up in between
+process of actually adding and removing accounts is typically automated by a configuration management system or centralized directory service
+Adding hardware Automating tasks increases your efficiency, reduces the likelihood of errors caused by humans, and improves your ability to respond rapidly to changing equirements
+Overseeing backups Backups must be executed on a regular schedule and restores must be tested periodically to ensure that they are functioning correctly.">
+    <meta itemprop="wordCount" content="4141">
+    <title></title>
+    <link href="/images/favicon.png?1718799825" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718799825" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718799825" rel="stylesheet">
+    <link href="/css/fonts.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718799825" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718799825" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718799825" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718799825" rel="stylesheet">
+    <link href="/css/print.css?1718799825" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718799825"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/archive/linuxandunixsystemadminbook/unix-and-linux-system-administration-handbook-fifth-edition-highlights/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#controlling-access">Controlling access</a></li>
+        <li><a href="#adding-hardware">Adding hardware</a></li>
+        <li><a href="#automating-tasks">Automating tasks</a></li>
+        <li><a href="#overseeing-backups">Overseeing backups</a></li>
+        <li><a href="#installing-and-upgrading-software">Installing and upgrading software</a></li>
+        <li><a href="#monitoring">Monitoring</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+        <li><a href="#maintaining-local-documentation">Maintaining local documentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#vigilantly-monitoring-security">Vigilantly monitoring security</a>
+      <ul>
+        <li><a href="#tuning-performance">Tuning performance</a></li>
+        <li><a href="#developing-site-policies">Developing site policies</a></li>
+        <li><a href="#working-with-vendors">Working with vendors</a></li>
+        <li><a href="#fire-fighting">Fire fighting</a></li>
+        <li><a href="#vim">Vim</a></li>
+        <li><a href="#programming">Programming</a></li>
+        <li><a href="#distributions">Distributions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h3 id="controlling-access">Controlling access</h3>
+<p>creates accounts for new users, removes the accounts of inactive users, and handles all the account-related issues that come up in between</p>
+<p>process of actually adding and removing accounts is typically automated by a configuration management system or centralized directory service</p>
+<h3 id="adding-hardware">Adding hardware</h3>
+<h3 id="automating-tasks">Automating tasks</h3>
+<p>increases your efficiency, reduces the likelihood of errors caused by humans, and improves your ability to respond rapidly to changing equirements</p>
+<h3 id="overseeing-backups">Overseeing backups</h3>
+<p>Backups must be executed on a regular schedule and restores must be tested periodically to ensure that they are functioning correctly.</p>
+<h3 id="installing-and-upgrading-software">Installing and upgrading software</h3>
+<p>As patches and security updates are released, they must be tested, reviewed, and incorporated into the local environment without endangering the stability of production systems</p>
+<p>software delivery” refers to the process of releasing updated versions of software</p>
+<p>Continuous delivery” takes this process to the next level by automatically releasing software to users at a regular cadence as it is developed</p>
+<h3 id="monitoring">Monitoring</h3>
+<p>detecting problems and fixing them before public failures occur.</p>
+<p>monitoring tasks include ensuring that web services respond quickly and correctly, collecting and analyzing log files, and keeping tabs on the availability of server resources such as disk space</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<h3 id="maintaining-local-documentation">Maintaining local documentation</h3>
+<p>Thorough and accurate documentation is a blessing for team members who would otherwise need to reverse-engineer a system to resolve problems in the middle of the night</p>
+<h2 id="vigilantly-monitoring-security">Vigilantly monitoring security</h2>
+<p>must implement a security policy and set up procedures to prevent systems from being breached</p>
+<p>might include only a few basic checks for unauthorized access, or it might involve an elaborate network of traps and auditing programs, depending on the context</p>
+<h3 id="tuning-performance">Tuning performance</h3>
+<p>tailor systems for optimal performance in accord with the needs of users, the available infrastructure, and the services the systems provide</p>
+<p>When a server is performing poorly, it is the administrator’s job to investigate its operation and identify areas that need improvement.</p>
+<h3 id="developing-site-policies">Developing site policies</h3>
+<p>most sites need policies that govern the acceptable use of computer systems, the management and retention of data, the privacy and security of networks and systems, and other areas of regulatory interest</p>
+<p>develop sensible policies that meet the letter and</p>
+<p>intent of the law and yet still promote progress and productivity</p>
+<h3 id="working-with-vendors">Working with vendors</h3>
+<h3 id="fire-fighting">Fire fighting</h3>
+<p>your response to these issues affects your perceived value as an administrator far more than does any actual technical skill you might possess a single well-handled trouble ticket scores more brownie points than five hours of midnight debugging</p>
+<h3 id="vim">Vim</h3>
+<p>Mastering vim is perhaps the single best productivity enhancement available to administrators
+Use the vimtutor command for an excellent, interactive introduction.</p>
+<h3 id="programming">Programming</h3>
+<p>Capable administrators are usually polyglot programmers who don’t mind picking up a new language when the need arises</p>
+<p>we recommend Bash (aka bash, aka sh), Ruby, or Python</p>
+<p>We also suggest that you learn expect, which is not a programming language so much as a front end for driving interactive programs. It’s an efficient glue technology that can replace some complex scripting and is easy to learn.</p>
+<h3 id="distributions">Distributions</h3>
+<p>A Linux distribution comprises the Linux kernel, which is the core of the operating system, and packages that make up all the commands you can run on the system</p>
+<p>All distributions share the same kernel lineage, but the format, type, and number of packages
+differ quite a bit</p>
+<p>distributions derived from the Debian and Red Hat lineages will predominate in production environments in the years ahead</p>
+<p>Virtually all leading distributions are cluttered with scores of unused software packages; security vulnerabilities and administrative anguish often come along for the ride</p>
+<blockquote>
+<p>By adopting a distribution, you are making an investment in a
+particular vendor’s way of doing things. Instead of looking only at
+the features of the installed software, it’s wise to consider how your
+organization and that vendor are going to work with each other. Some
+important questions to ask are:</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>Is this distribution going to be around in five years?</li>
+<li>Is this distribution going to stay on top of the latest security
+patches?</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Does this distribution have an active community and sufficient
+documentation</p>
+</blockquote>
+<blockquote>
+<p>If I have problems, will the vendor talk to me, and how much will that
+cost</p>
+</blockquote>
+<blockquote>
+<p>A comprehensive list of distributions, including many non-English
+distributions, can be found at lwn.net/Distributions or
+distrowatch.com</p>
+</blockquote>
+<blockquote>
+<p>Debian GNU/Linux, Ubuntu Linux, Red</p>
+</blockquote>
+<blockquote>
+<p>Hat Enterprise Linux (and its dopplegänger CentOS), and FreeBSD</p>
+</blockquote>
+<blockquote>
+<p>Debian defines three releases that are maintained simultaneously:
+stable, targeting production servers; unstable, with current packages
+that may</p>
+</blockquote>
+<blockquote>
+<p>have bugs and security vulnerabilities; and testing, which is
+somewhere in between.</p>
+</blockquote>
+<blockquote>
+<p>Ubuntu version numbers derive from the</p>
+</blockquote>
+<blockquote>
+<p>year and month of release, so version 16.10 is from October, 2016.
+Each release also has an alliterative code name such as Vivid Vervet
+or Wily Werewolf.</p>
+</blockquote>
+<blockquote>
+<p>Two versions of Ubuntu are released annually: one in April and one in
+October. The April releases</p>
+</blockquote>
+<blockquote>
+<p>in even-numbered years are long-term support (LTS) editions that
+promise five years of maintenance updates. These are the releases
+recommended for production use</p>
+</blockquote>
+<blockquote>
+<p>RHEL is open source but requires a license. If you’re not willing to
+pay for the license, you’re not going to be running Red Hat.</p>
+</blockquote>
+<blockquote>
+<p>Fedora, a community-based distribution that serves as an incubator for
+bleeding-edge software not considered stable enough for RHEL</p>
+</blockquote>
+<blockquote>
+<p>Fedora is used as the initial test bed for software and configurations
+that later find their way to RHEL</p>
+</blockquote>
+<blockquote>
+<p>CentOS is an excellent choice for sites that want to deploy a
+production-oriented distribution without paying tithes to Red Hat. A
+hybrid approach is also feasible: front-line servers can run Red Hat
+Enterprise</p>
+</blockquote>
+<blockquote>
+<p>Linux and avail themselves of Red Hat’s excellent support, even as
+nonproduction systems run CentOS</p>
+</blockquote>
+<blockquote>
+<p>This arrangement covers the important bases in terms of risk and
+support while also minimizing cost and administrative complexity</p>
+</blockquote>
+<blockquote>
+<p>CentOS aspires to full binary and bug-for-bug compatibility with Red
+Hat Enterprise Linux</p>
+</blockquote>
+<blockquote>
+<p>Apple’s macOS has a BSD heritage</p>
+</blockquote>
+<blockquote>
+<p>FreeBSD</p>
+</blockquote>
+<blockquote>
+<p>commands a 70% market share among BSD variants</p>
+</blockquote>
+<blockquote>
+<p>Unlike Linux, FreeBSD is a complete operating system, not just a
+kernel</p>
+</blockquote>
+<blockquote>
+<p>We use $ to denote the shell prompt for a normal, unprivileged user,
+and # for the root user</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>A star (*) matches zero or more characters.</li>
+<li>A question mark (?) matches one character.</li>
+<li>A tilde or “twiddle” (~) means the home directory of the current
+user</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>~user means the home directory of user.</p>
+</blockquote>
+<blockquote>
+<p>one “megabyte” of memory is really 220 or 1,048,576 bytes</p>
+</blockquote>
+<blockquote>
+<p>RAM is always denominated in powers of 2, but network bandwidth</p>
+</blockquote>
+<blockquote>
+<p>is always a power of 10. Storage space is usually quoted in
+power-of-10 units, but block and page sizes are in fact powers of 2</p>
+</blockquote>
+<blockquote>
+<p>Unit decoding examples</p>
+</blockquote>
+<blockquote>
+<p>see wiki.ubuntu.com/UnitsPolicy for some additional details</p>
+</blockquote>
+<blockquote>
+<p>Man pages and other on-line documentatio</p>
+</blockquote>
+<blockquote>
+<p>consult man pages as an authoritative resource because they are
+accessible from the command line</p>
+</blockquote>
+<blockquote>
+<p>details on a program’s options, and show helpful examples and related
+commands</p>
+</blockquote>
+<blockquote>
+<p>concise descriptions of individual commands, drivers, file formats, or
+library routines</p>
+</blockquote>
+<blockquote>
+<p>FreeBSD and Linux divide the man pages into sections.</p>
+</blockquote>
+<blockquote>
+<p>Sections of the man pages</p>
+</blockquote>
+<blockquote>
+<p>be aware of the section definitions when a topic with the same name
+appears in multiple sections</p>
+</blockquote>
+<blockquote>
+<p>man title formats a specific manual page and sends it to your terminal
+through more, less, or whatever program is specified in your PAGER
+environment variable</p>
+</blockquote>
+<blockquote>
+<p>title is usually a command, device, filename, or name of a library
+routine</p>
+</blockquote>
+<blockquote>
+<p>sections of the manual are searched in roughly numeric order, although
+sections that describe commands (sections 1 and 8) are usually
+searched first.</p>
+</blockquote>
+<blockquote>
+<p>man section title gets you a man page from a particular section</p>
+</blockquote>
+<blockquote>
+<p>man sync gets you the man page for the sync command, and man 2 sync
+gets you the man page for the sync system call</p>
+</blockquote>
+<blockquote>
+<p>man -k keyword or apropos keyword prints a list of man pages that have
+keyword in their one-line synopses</p>
+</blockquote>
+<blockquote>
+<p>The keywords database can become outdated. If you add additional man
+pages to your system</p>
+</blockquote>
+<blockquote>
+<p>you may need to rebuild this file with makewhatis (Red Hat and
+FreeBSD) or mandb (Ubuntu).</p>
+</blockquote>
+<blockquote>
+<p>nroff input for man pages (i.e., the man page source code) is stored
+in directories under /usr/share/man and compressed with gzip to save
+space</p>
+</blockquote>
+<blockquote>
+<p>man maintains a cache of formatted pages in /var/cache/man or
+/usr/share/man if the appropriate directories are writable; however,
+this is a security risk. Most systems preformat the man pages once at
+installation time (see catman) or not at all.</p>
+</blockquote>
+<blockquote>
+<p>The man command can search several man page repositories to find the
+manual pages you request. On Linux systems, you can find out the
+current default search path with the manpath command. This path (from
+Ubuntu) is typical</p>
+</blockquote>
+<blockquote>
+<p>If necessary, you can set your MANPATH environment variable to
+override the default path</p>
+</blockquote>
+<blockquote>
+<p>Some systems let you set a custom system-wide default search path for
+man pages, which can be useful if you need to maintain a parallel tree
+of man pages such as those generated by OpenPKG</p>
+</blockquote>
+<blockquote>
+<p>Where to find OS</p>
+</blockquote>
+<blockquote>
+<p>Pro Git from git-scm.com/book make the hunt worthwhile</p>
+</blockquote>
+<blockquote>
+<p>Many pieces of software have both a man page and a long-form article</p>
+</blockquote>
+<blockquote>
+<p>Most software projects have user and developer mailing lists and IRC
+channels</p>
+</blockquote>
+<blockquote>
+<p>if you have questions</p>
+</blockquote>
+<blockquote>
+<p>Request for Comments documents describe the protocols and procedures
+used on the Internet</p>
+</blockquote>
+<blockquote>
+<p>The phrase “reference implementation” applied to software</p>
+</blockquote>
+<blockquote>
+<p>usually translates to “implemented by a trusted source according to
+the RFC specification</p>
+</blockquote>
+<blockquote>
+<p>When stuck, search the web.</p>
+</blockquote>
+<blockquote>
+<p>Resources for keeping up to date</p>
+</blockquote>
+<blockquote>
+<!-- raw HTML omitted -->
+<p>Social media are also useful. Twitter and reddit in particular have
+strong, engaged communities with a lot to offer, though the
+signal-to-noise ratio can sometimes be quite bad. On reddit, join the
+sysadmin, linux, linuxadmin, and netsec subreddits.</p>
+</blockquote>
+<blockquote>
+<p>Task-specific forums and reference sites</p>
+</blockquote>
+<blockquote>
+<p>Stack Overflow and Server Fault</p>
+</blockquote>
+<blockquote>
+<p>It’s worth creating an account and joining this large community</p>
+</blockquote>
+<blockquote>
+<p>Conferences relevant to system administrators</p>
+</blockquote>
+<blockquote>
+<p>Meetups (meetup.com) are another way to network and engage with
+like-minded people. Most urban areas in the United States and around
+the world have a Linux user group or DevOps meetup that sponsors
+speakers, discussions, and hack days.</p>
+</blockquote>
+<blockquote>
+<p>When adding software, don your security hat and remember that
+additional software creates additional attack surface</p>
+</blockquote>
+<blockquote>
+<p>Most software is developed by independent groups that release the
+software in the form of source code. Package repositories then pick up
+the source code, compile it appropriately for the conventions in use
+on the systems they serve, and package the resulting</p>
+</blockquote>
+<blockquote>
+<p>binaries. It’s usually easier to install a system-specific binary
+package than to fetch and compile the original source code. However,
+packagers are sometimes a release or two behind the current version.</p>
+</blockquote>
+<blockquote>
+<p>two systems use the same package format doesn’t necessarily mean that
+packages for the two systems are interchangeable</p>
+</blockquote>
+<blockquote>
+<p>Red Hat and SUSE both use RPM</p>
+</blockquote>
+<blockquote>
+<p>When the packaged format is insufficient, administrators must install
+software the old-fashioned way: by downloading a tar archive of the
+source code and manually configuring, compiling, and installing it.
+Depending on the software and the operating system, this process can
+range from trivial to nightmarish</p>
+</blockquote>
+<blockquote>
+<p>use the shell’s which command to find out if a relevant binary is
+already</p>
+</blockquote>
+<blockquote>
+<p>reveals that the GNU C compiler has already been installed on this
+machine</p>
+</blockquote>
+<blockquote>
+<p>If which can’t find the command you’re looking for, try whereis; it
+searches a broader range of system directories and is independent of
+your shell’s search path</p>
+</blockquote>
+<blockquote>
+<p>locate command, which consults a precompiled index</p>
+</blockquote>
+<blockquote>
+<p>the filesystem to locate filenames that match a particular pattern.</p>
+</blockquote>
+<blockquote>
+<p>FreeBSD includes locate as part of the base system. In Linux, the
+current implementation of locate is in the mlocate package</p>
+</blockquote>
+<blockquote>
+<p>On Red Hat</p>
+</blockquote>
+<blockquote>
+<p>and CentOS, install the mlocate package with yum; see this page.</p>
+</blockquote>
+<blockquote>
+<p>locate can find any type of file; it is not specific to commands or
+packages. For example, if you weren’t sure where to find the signal.h
+include file, you could try</p>
+</blockquote>
+<blockquote>
+<p>locate’s database is updated periodically by the updatedb command (in
+FreeBSD</p>
+</blockquote>
+<blockquote>
+<p>locate.updatedb), which runs periodically out of cron.</p>
+</blockquote>
+<blockquote>
+<p>Therefore, the results of a locate don’t always reflect recent changes
+to the filesystem</p>
+</blockquote>
+<blockquote>
+<p>you can also use your system’s packaging utilities to check directly
+for the package’s presence</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#45|1713)
+</code></pre>
+<blockquote>
+<p>checks for the presence (and installed version) of the Python
+interpreter</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#45|1828)
+</code></pre>
+<blockquote>
+<p>find out which package a particular file belongs to:</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#46|557)
+</code></pre>
+<blockquote>
+<p>installation of the tcpdump command on each of our example systems.
+tcpdump is a packet capture tool that lets you view the raw packets
+being sent to and from the system on the network.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Debian and Ubuntu use APT, the Debian Advanced Package Tool:</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#46|931)
+</code></pre>
+<blockquote>
+<p>The Red Hat and CentOS version is</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#46|1016)
+</code></pre>
+<blockquote>
+<p>The package manager for FreeBSD is pkg.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|75)
+</code></pre>
+<blockquote>
+<p>build a version of tcpdump from the source code.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|150)
+</code></pre>
+<blockquote>
+<p>identify the code.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|169)
+</code></pre>
+<blockquote>
+<p>Software maintainers sometimes keep an index of releases on the
+project’s web site that are downloadable as tarballs. For open source
+projects, you’re most likely to find the code in a Git repository.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|373)
+</code></pre>
+<blockquote>
+<p>The tcpdump source is kept on GitHub. Clone the repository in the /tmp
+directory, create a branch of the tagged version you want to build,
+then unpack, configure, build, and install it:</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|590)
+</code></pre>
+<blockquote>
+<p>configure/make/make install sequence is common to most software
+written in C and works on all UNIX and Linux systems.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|736)
+</code></pre>
+<blockquote>
+<p>check the package’s INSTALL or README file for specifics</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|798)
+</code></pre>
+<blockquote>
+<p>must have the development environment and any package-specific
+prerequisites installed. (In the case of tcpdump, libpcap and its
+libraries are prerequisites.)</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#47|960)
+</code></pre>
+<blockquote>
+<p>You’ll often need to tweak the build configuration, so use ./configure
+&ndash;help to see the options available for each particular package.
+Another useful configure option is &ndash;prefix=directory, which lets you
+compile the software for installation somewhere other than /usr/local,
+which is usually the default.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|34)
+</code></pre>
+<blockquote>
+<p>Cross-platform software bundles increasingly offer an expedited
+installation process that’s driven by a shell script you download from
+the web with curl, fetch, or wget.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|204)
+</code></pre>
+<blockquote>
+<p>These are all simple HTTP clients that download the contents of a URL
+to a local file or, optionally, print the contents to their standard
+output. For example, to set up a machine as a Salt client, you can run
+the following commands:</p>
+<!-- raw HTML omitted -->
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|465)
+</code></pre>
+<blockquote>
+<p>The bootstrap script investigates the local environment, then
+downloads, installs, and configures an appropriate version of the
+software. This type of installation is particularly common in cases
+where the process itself is somewhat complex, but the vendor is highly
+motivated to make things easy for users. (Another good example is RVM;
+see this page.)</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|908)
+</code></pre>
+<blockquote>
+<p>This installation method</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|1030)
+</code></pre>
+<blockquote>
+<p>leaves no proper record of the installation for future reference. If
+your operating system offers a packagized version of the software,
+it’s usually preferable to install the package instead of running a
+web installer.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|1249)
+</code></pre>
+<blockquote>
+<p>Packages are easy to track, upgrade, and remove. (On the other hand,
+most OS-level packages are out of date. You probably won’t end up with
+the most current version of the software.)</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|1511)
+</code></pre>
+<blockquote>
+<p>Be very suspicious if the URL of the boot script is not secure (that
+is, it does not start with https:). Unsecured HTTP is trivial to
+hijack, and installation URLs are of particular interest to hackers
+because they know you’re likely to run, as root, whatever code comes
+back. By contrast, HTTPS validates the identity of the server through
+a cryptographic chain of trust. Not foolproof, but reliable enough.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|1923)
+</code></pre>
+<blockquote>
+<p>A few vendors publicize an HTTP installation URL that automatically
+redirects to an HTTPS version. This is dumb and is in fact no more
+secure than straight-up HTTP. There’s nothing to prevent the initial
+HTTP exchange from being intercepted, so you might never reach the
+vendor’s redirect</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|2213)
+</code></pre>
+<blockquote>
+<p>However, the existence of such redirects does mean it’s worth trying
+your own substitution of https for http in insecure URLs. More often
+than not, it works just fine.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|2618)
+</code></pre>
+<blockquote>
+<p>he root shell still runs even if curl outputs a partial script and
+then fails—say, because of a transient network glitch. The end result
+is unpredictable and potentially not good.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|2947)
+</code></pre>
+<blockquote>
+<p>piping the output of curl to a shell has entered the collective
+sysadmin unconscious as a prototypical rookie blunder, so if you must
+do it, at least keep it on the sly.</p>
+</blockquote>
+<pre><code>      1.10 Ways to find and install software
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#48|3138)
+</code></pre>
+<blockquote>
+<p>ust save the script to a temporary file, then run the script in a
+separate step after the download successfully completes.</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|326)
+</code></pre>
+<blockquote>
+<p>The most practical choice, and our recommendation for new projects, is
+a public cloud provider. These facilities offer numerous advantages
+over data centers:</p>
+<ul>
+<li>No capital expenses and low initial operating costs</li>
+<li>No need to install, secure, and manage hardware</li>
+<li>On-demand adjustment of storage, bandwidth, and compute capacity</li>
+<li>Ready-made solutions for common ancillary needs such as databases,
+load balancers, queues, monitoring, and more</li>
+<li>Cheaper and simpler implementation of highly available/redundant
+systems</li>
+</ul>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1106)
+</code></pre>
+<blockquote>
+<p>Our preferred cloud platform is the leader in the space: Amazon Web
+Services (AWS)</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1246)
+</code></pre>
+<blockquote>
+<p>AWS is ten times the size of all competitors combined</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1301)
+</code></pre>
+<blockquote>
+<p>AWS innovates rapidly and offers a much broader array of services than
+does any other provider.</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1510)
+</code></pre>
+<blockquote>
+<p>free service tier to cut your teeth on, including a year’s use of a
+low powered cloud server.</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1607)
+</code></pre>
+<blockquote>
+<p>Google Cloud Platform (GCP</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1805)
+</code></pre>
+<blockquote>
+<p>reputation for dropping support for popular offerings.</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1873)
+</code></pre>
+<blockquote>
+<p>customer-friendly pricing terms</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1959)
+</code></pre>
+<blockquote>
+<p>DigitalOcean</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|1977)
+</code></pre>
+<blockquote>
+<p>simpler service with a stated goal of high performance.</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|2037)
+</code></pre>
+<blockquote>
+<p>target market is developers, whom it woos with a clean API, low
+pricing, and extremely fast boot times</p>
+</blockquote>
+<pre><code>      1.11 Where to host
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#49|2159)
+</code></pre>
+<blockquote>
+<p>strong proponent of open source software, and their tutorials and
+guides for popular Internet technologies are some of the best
+available.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#50|347)
+</code></pre>
+<blockquote>
+<p>Your goal as a system administrator, or as a professional working in
+any of these related areas, is to achieve the objectives of the
+organization. Avoid letting politics or hierarchy interfere with
+progress. The best administrators solve problems and share information
+freely with others.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#51|78)
+</code></pre>
+<blockquote>
+<p>DevOps</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#51|163)
+</code></pre>
+<blockquote>
+<p>aims to improve the efficiency of building and delivering software,
+especially at large sites that have many interrelated services and
+teams. Organizations with a DevOps practice promote integration among
+engineering teams and may draw little or no distinction between
+development and operations. Experts who work in this area seek out
+inefficient processes and replace them with small shell scripts or
+large and unwieldy Chef repositories.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#52|32)
+</code></pre>
+<blockquote>
+<p>Site reliability engineers value uptime and correctness above all else</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#52|104)
+</code></pre>
+<blockquote>
+<p>Monitoring networks, deploying production software, taking pager duty,
+planning future expansion, and debugging outages</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#52|282)
+</code></pre>
+<blockquote>
+<p>Single points of failure are site reliability engineers’ nemeses.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#53|35)
+</code></pre>
+<blockquote>
+<p>Security operations engineers</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#53|65)
+</code></pre>
+<blockquote>
+<p>focus on the practical, day-to-day side of an information security
+program</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#53|153)
+</code></pre>
+<blockquote>
+<p>install and operate tools that search for vulnerabilities and monitor
+for attacks on the network. They also participate in attack
+simulations to gauge the effectiveness of their prevention and
+detection techniques.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#54|28)
+</code></pre>
+<blockquote>
+<p>Network administrators design, install, configure, and operate
+networks. Sites that operate data centers are most likely to employ
+network administrators; that’s because these facilities have a variety
+of physical switches, routers, firewalls, and other devices that need
+management. Cloud platforms also offer a variety of networking
+options, but these usually don’t require a dedicated administrator
+because most of the work is handled by the provider.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#55|2)
+</code></pre>
+<blockquote>
+<p>Database administrators</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#55|83)
+</code></pre>
+<blockquote>
+<p>experts at installing and managing database software.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#55|142)
+</code></pre>
+<blockquote>
+<p>manage database schemas, perform installations and upgrades, configure
+clustering, tune settings for optimal performance, and help users
+formulate efficient queries.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#55|317)
+</code></pre>
+<blockquote>
+<p>usually wizards with one or more query languages and have experience
+with both relational and nonrelational (NoSQL) databases.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#56|47)
+</code></pre>
+<blockquote>
+<p>NOC engineers monitor the real-time health of large sites and track
+incidents and outages.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#56|143)
+</code></pre>
+<blockquote>
+<p>troubleshoot tickets from users, perform routine upgrades, and
+coordinate actions among other teams. They can most often be found
+watching a wall of monitors that show graphs and measurements.</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#57|2)
+</code></pre>
+<blockquote>
+<p>Data center technicians</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#57|53)
+</code></pre>
+<blockquote>
+<p>work with hardware. They receive new equipment, track equipment
+inventory and life cycles, install servers in racks, run cabling,
+maintain power and air conditioning, and handle the daily operations
+of a data center</p>
+</blockquote>
+<pre><code>      1.12 Specialization and adjacent disciplines
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#58|16)
+</code></pre>
+<blockquote>
+<p>Systems architects have deep expertise in more than one area. They use
+their experience to design distributed systems. Their job descriptions
+may include defining security zones and segmentation, eliminating
+single points of failure, planning for future growth, ensuring
+connectivity among multiple networks and third parties, and other
+site-wide decision making. Good architects are technically proficient
+and generally prefer to implement and test their own designs.</p>
+</blockquote>
+<pre><code>      1.13 Recommended reading
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#59|30)
+</code></pre>
+<blockquote>
+<p>Abbott, Martin L., and Michael T. Fisher. The Art of Scalability:
+Scalable Web Architecture, Processes, and Organizations for the Modern
+Enterprise (2nd Edition). Addison-Wesley Professional, 2015.</p>
+<p>Gancarz, Mike. Linux and the Unix Philosophy. Boston: Digital Press,
+2003.</p>
+<p>Limoncelli, Thomas A., and Peter Salus. The Complete April Fools’ Day
+RFCs. Peer-to-Peer Communications LLC. 2007. Engineering humor. You
+can read this collection on-line for free at rfc-humor.com.</p>
+<p>Raymond, Eric S. The Cathedral &amp; The Bazaar: Musings on Linux and
+Open Source by an Accidental Revolutionary. Sebastopol, CA: O’Reilly
+Media, 2001.</p>
+<p>Salus, Peter H. The Daemon, the GNU &amp; the Penguin: How Free and
+Open Software is Changing the World. Reed Media Services, 2008. This
+fascinating history of the open source movement by UNIX’s best-known
+historian is also available at groklaw.com under the Creative Commons
+license. The URL for the book itself is quite long; look for a current
+link at groklaw.com or try this compressed equivalent:
+tinyurl.com/d6u7j.</p>
+<p>Siever, Ellen, Stephen Figgins, Robert Love, and Arnold Robbins. Linux
+in a Nutshell (6th Edition). Sebastopol, CA: O’Reilly Media, 2009.</p>
+</blockquote>
+<pre><code>      1.13 Recommended reading
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#60|2)
+</code></pre>
+<blockquote>
+<p>Kim, Gene, Kevin Behr, and George Spafford. The Phoenix Project: A
+Novel about IT, DevOps, and Helping Your Business Win. Portland, OR:
+IT Revolution Press, 2014. A guide to the philosophy and mindset
+needed to run a modern IT organization, written as a narrative. An
+instant classic.</p>
+<p>Kim, Gene, Jez Humble, Patrick Debois, and John Willis. The DevOps
+Handbook: How to Create World-Class Agility, Reliability, and Security
+in Technology Organizations. Portland, OR: IT Revolution Press, 2016.</p>
+<p>Limoncelli, Thomas A., Christina J. Hogan, and Strata R. Chalup. The
+Practice of System and Network Administration (2nd Edition). Reading,
+MA: Addison-Wesley, 2008. This is a good book with particularly strong
+coverage of the policy and procedural aspects of system
+administration. The authors maintain a system administration blog at
+everythingsysadmin.com.</p>
+<p>Limoncelli, Thomas A., Christina J. Hogan, and Strata R. Chalup. The
+Practice of Cloud System Administration. Reading, MA: Addison-Wesley,
+2014. From the same authors as the previous title, now with a focus on
+distributed systems and cloud computing.</p>
+</blockquote>
+<pre><code>      1.13 Recommended reading
+    ](https://reader.bookfusion.com/books/4031036-unix-and-linux-system-administration-handbook-fifth-edition?type=epub_reflowable#61|2)
+</code></pre>
+<blockquote>
+<p>Blum, Richard, and Christine Bresnahan. Linux Command Line and Shell
+Scripting Bible (3rd Edition). Wiley, 2015.</p>
+<p>Dougherty, Dale, and Arnold Robins. Sed &amp; Awk (2nd Edition).
+Sebastopol, CA: O’Reilly Media, 1997. Classic O’Reilly book on the
+powerful, indispensable text processors sed and awk.</p>
+<p>Kim, Peter. The Hacker Playbook 2: Practical Guide To Penetration
+Testing. CreateSpace Independent Publishing Platform, 2015.</p>
+<p>Neil, Drew. Practical Vim: Edit Text at the Speed of Thought.
+Pragmatic Bookshelf, 2012.</p>
+<p>Shotts, William E. The Linux Command Line: A Complete Introduction.
+San Francisco, CA: No Starch Press, 2012.</p>
+<p>Sweigart, Al. Automate the Boring Stuff with Python: Practical
+Programming for Total Beginners. San Francisco, CA: No Starch Press,
+2015.</p>
+</blockquote>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718799825" defer></script>
+        <script src="/js/search.js?1718799825" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/archive/linuxandunixsystemadminbook/unix-and-linux-system-administration-handbook-fifth-edition-highlights/" class="active"><a class="padding" href="/linux/archive/linuxandunixsystemadminbook/unix-and-linux-system-administration-handbook-fifth-edition-highlights/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/archive/linuxandunixsystemadminbook/unix-and-linux-system-administration-handbook-fifth-edition-highlights/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1718799825" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718799825" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718799825" defer></script>
+    <script src="/js/js-yaml.min.js?1718799825" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1718799825" defer></script>
+  </body>
+</html>

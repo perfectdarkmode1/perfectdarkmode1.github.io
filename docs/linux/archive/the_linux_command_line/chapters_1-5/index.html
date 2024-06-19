@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="What is the shell?
+# prompt = superuser
+Display current time/date
+$ dateCalendar
+$ calsee disk space
+$ dfSee free memory
+$ freeClose Terminal
+$ exitor
+ctrl&#43;dNavigation
+single files tree regardless of drives/ storage devices
+absolute pathnames begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)
+$ cd bin
+cd shortcuts
+$ cd -">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="What is the shell?
+# prompt = superuser
+Display current time/date
+$ dateCalendar
+$ calsee disk space
+$ dfSee free memory
+$ freeClose Terminal
+$ exitor
+ctrl&#43;dNavigation
+single files tree regardless of drives/ storage devices
+absolute pathnames begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)
+$ cd bin
+cd shortcuts
+$ cd -">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/archive/the_linux_command_line/chapters_1-5/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="What is the shell?
+# prompt = superuser
+Display current time/date
+$ dateCalendar
+$ calsee disk space
+$ dfSee free memory
+$ freeClose Terminal
+$ exitor
+ctrl&#43;dNavigation
+single files tree regardless of drives/ storage devices
+absolute pathnames begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)
+$ cd bin
+cd shortcuts
+$ cd -">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="What is the shell?
+# prompt = superuser
+Display current time/date
+$ dateCalendar
+$ calsee disk space
+$ dfSee free memory
+$ freeClose Terminal
+$ exitor
+ctrl&#43;dNavigation
+single files tree regardless of drives/ storage devices
+absolute pathnames begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)
+$ cd bin
+cd shortcuts
+$ cd -">
+    <meta itemprop="wordCount" content="927">
+    <title></title>
+    <link href="/images/favicon.png?1718799825" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718799825" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718799825" rel="stylesheet">
+    <link href="/css/fonts.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718799825" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718799825" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718799825" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718799825" rel="stylesheet">
+    <link href="/css/print.css?1718799825" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718799825"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/archive/the_linux_command_line/chapters_1-5/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#absolute-pathnames">absolute pathnames</a></li>
+    <li><a href="#wildcards">Wildcards</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>What is the shell?</p>
+<p># prompt = superuser</p>
+<p>Display current time/date</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>$ date</code></pre></div><p>Calendar</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>$ cal</code></pre></div><p>see disk space</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>$ df</code></pre></div><p>See free memory</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>$ free</code></pre></div><p>Close Terminal</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>$ exit</code></pre></div><p>or</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ctrl+d</code></pre></div><p>Navigation</p>
+<p>single files tree regardless of drives/ storage devices</p>
+<h2 id="absolute-pathnames">absolute pathnames</h2>
+<p>begins with \ (root) &amp; follows full path</p>
+<p>relative pathnames</p>
+<p>starts from working directory</p>
+<p>how to use a relative pathname</p>
+<p>$ cd ./bin (./ is implied)</p>
+<p>$ cd bin</p>
+<p>cd shortcuts</p>
+<p>$ cd -</p>
+<p>previous</p>
+<p>$ cd ~username</p>
+<p>home directory of user</p>
+<p>Exploring the system</p>
+<p>specify directory to ls</p>
+<p>$ ls /usr</p>
+<p>multiple directories</p>
+<p>$ ls ~ /usr</p>
+<p>sort by modification time</p>
+<p>$ ls -lt</p>
+<p>reverse order</p>
+<p>$ ls -lt &ndash;reverse</p>
+<p>View all even hidden</p>
+<p>$ ls -a or &ndash;all</p>
+<p>all except for . and ..</p>
+<p>$ ls -A</p>
+<p>view details about the directory itself</p>
+<p>$ ls -d or &ndash;directory (/)</p>
+<p>display file sizes in a human readable format</p>
+<p>$ ls -h or &ndash;human-readable</p>
+<p>reverse order results</p>
+<p>ls -r or &ndash;reverse</p>
+<p>sort by file size</p>
+<p>ls -s</p>
+<p>sort by modification time</p>
+<p>ls -t</p>
+<p>File Access Rights</p>
+<p>- rw- r&ndash; r&ndash;</p>
+<p>type of file | file owner | group | everyone else</p>
+<p>Determine file type</p>
+<p>$ file filename</p>
+<p>- brief description of file&rsquo;s contents</p>
+<p>View text files</p>
+<p>less</p>
+<p>$ lesss /etc/passwd</p>
+<p>- press “q” to quit out of less</p>
+<p>less commands</p>
+<p>PAGE UP or b</p>
+<p>Scroll back one page</p>
+<p>PAGE DOWN or space</p>
+<p>Scroll forward one page</p>
+<p>Up arrow</p>
+<p>Scroll up one line</p>
+<p>Down arrow</p>
+<p>Scroll down one line</p>
+<p>G</p>
+<p>Move to the end of the text file</p>
+<p>1G or g</p>
+<p>Move to the beginning of the text file</p>
+<p>/characters</p>
+<p>Search forward to the next occurance of characters</p>
+<p>n</p>
+<p>Search the next occurance of the previous search</p>
+<p>h</p>
+<p>Display help screen</p>
+<p>q</p>
+<p>Quit less</p>
+<p>pagers</p>
+<p>programs that allow the easy viewing of long text documents in a page-by-page manner</p>
+<p>Take a guided tour</p>
+<p>- you can doubleclick a filename to copy it and middle click to paste</p>
+<p>- enter reset to clear a messy terminal</p>
+<p>Directories</p>
+<p>/</p>
+<p>root</p>
+<p>/bin</p>
+<p>binaries that must be present for the system to boot and run</p>
+<p>/boot</p>
+<p>Linux kernel, initial RAM disk image (for drivers needed at boot time), and the boot loader.</p>
+<p>/boot/grub/grub.conf or /boot/grub/menu.lst</p>
+<p>used to configure the bootloader</p>
+<p>/boot/vmlinuz</p>
+<p>Linux Kernel</p>
+<p>/dev</p>
+<p>device nodes</p>
+<p>list of all devices the kernel understands</p>
+<p>/etc</p>
+<p>Contains all system-wide configuration files</p>
+<p>Contains shell scripts that start system services at boot</p>
+<p>Everything is readable text</p>
+<p>/etc/crontab</p>
+<p>defines when automated jobs will run</p>
+<p>/etc/fstab</p>
+<p>table of storage devices and their associated mount points</p>
+<p>/etc/passwd</p>
+<p>list of user accounts</p>
+<p>/home</p>
+<p>where user home directorie are stored</p>
+<p>/lost+found</p>
+<p>used for recovery</p>
+<p>/media</p>
+<p>Mount points for removable media</p>
+<p>/mnt</p>
+<p>mount point on older systems for manually added removable media</p>
+<p>/opt</p>
+<p>used to install optional (commercial) software</p>
+<p>/proc</p>
+<p>virtual filesystem maintained by the Linux kernel</p>
+<p>files within are peepholes into the Kernel itself</p>
+<p>/root</p>
+<p>home directory of the root account</p>
+<p>/sbin</p>
+<p>contains system binaries</p>
+<p>programs that perform vital system tasks usually reserved for the superuser</p>
+<p>/tmp</p>
+<p>storage of temporary files</p>
+<p>can be configured to empty on every reboot</p>
+<p>/usr</p>
+<p>very large</p>
+<p>programs and support files used by regular users</p>
+<p>/usr/bin</p>
+<p>contains executables installed by your linux distro</p>
+<p>/usr/lib/</p>
+<p>shared libraries for programs in /usr/bin/</p>
+<p>/usr/local</p>
+<p>system wide programs not included with distro</p>
+<p>/usr/local/bin</p>
+<p>programs compiled from source code</p>
+<p>empty unless you put something in it.</p>
+<p>/usr/sbin</p>
+<p>sys admin programs</p>
+<p>/usr/share</p>
+<p>shared data used by programs in /usr/sbin</p>
+<p>default config files</p>
+<p>icons</p>
+<p>backgrounds</p>
+<p>soundfiles</p>
+<p>etc.</p>
+<p>/usr/share/doc</p>
+<p>documentation files organized by package</p>
+<p>/var</p>
+<p>where data likely to change is stored</p>
+<p>databases</p>
+<p>spool files</p>
+<p>user mail</p>
+<p>etc.</p>
+<p>/var/log</p>
+<p>log files</p>
+<p>notable:</p>
+<p>/var/log/messages</p>
+<p>/var/log/syslog</p>
+<p>may need admin to view log files</p>
+<p>Symbolic Links</p>
+<p>soft link (symlink)</p>
+<p>file referenced by multiple names</p>
+<p>- used for version change</p>
+<p>- don&rsquo;t have to point programs to new file</p>
+<p>- can revert link if newer version has a bug</p>
+<p>Hard Links</p>
+<p>- allow files to have multiple names</p>
+<p>Chapter 4: Manipulating Files and Directories</p>
+<p>copy only files that do not exist in the destination directory or are newer than the versions in the destination directory.</p>
+<p>$ cp -u *.html destination</p>
+<h2 id="wildcards">Wildcards</h2>
+<p>using wildcards is also known as globbing</p>
+<p>select filenames based on patterns of characters</p>
+<p>Meanings</p>
+<ul>
+<li></li>
+</ul>
+<p>match any characters</p>
+<p>?</p>
+<p>match any single character</p>
+<p>[characters]</p>
+<p>matches any character that is a member of the set characters</p>
+<p>[!characters]</p>
+<p>matches any character that is not a member of the set characters</p>
+<p>[[:class:]]</p>
+<p>matches any character that is a member of the specified class</p>
+<p>Common character classes</p>
+<p>[:alum:]</p>
+<p>alphanumeric</p>
+<p>[:alpha:]</p>
+<p>alphabetic character</p>
+<p>[:digit:]</p>
+<p>numeral</p>
+<p>[:lower:]</p>
+<p>lowecase letter</p>
+<p>[:upper:]</p>
+<p>uppercase letter</p>
+<p>Wildcard Examples</p>
+<ul>
+<li></li>
+</ul>
+<p>all files</p>
+<p>g*</p>
+<p>any file beginning with g</p>
+<p>b*.txt</p>
+<p>any file begginning with b followed by any characters ending with .txt</p>
+<p>Data???</p>
+<p>begins with data followed by 3 characters</p>
+<p>[abc]*</p>
+<p>begins with a, a b, or a c</p>
+<p>BACKUP.[0-9][0-9][0-9]</p>
+<p>begins with BACKUP followed by exactly 3 numerals</p>
+<p>[[:upper:]]*</p>
+<p>any beginning with an upper case letter</p>
+<p>[![:digit:]]*</p>
+<p>any not beginning with numeral</p>
+<p>*[[:lower:]123]</p>
+<p>any ending with lowercase letter or 1, 2 or 3</p>
+<p>Wildcards work in the GUI</p>
+<p>nautilus (the file manager for GNOME)</p>
+<p>select files by pressing ctrl-S and enter a file selection</p>
+<p>pattern with wildcards and the files in the currently selected directory will be selected</p>
+<p>Dolphin and Konqueror (file managers for KDE)</p>
+<p>enter wildcards on the location bar</p>
+<p>wildcards can be used on any command that accepts filenames as arguments</p>
+<p>mkdir</p>
+<p>$ mkdir dir1 dir2 dir3</p>
+<p>cp</p>
+<p>copy files or directories</p>
+<p>$ cp item1 item2</p>
+<p>$ cp item.. dir</p>
+<p>cp options</p>
+<p>-a, &ndash;archive</p>
+<p>copy files and directories and their attributes</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718799825" defer></script>
+        <script src="/js/search.js?1718799825" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/archive/the_linux_command_line/chapters_1-5/" class="active"><a class="padding" href="/linux/archive/the_linux_command_line/chapters_1-5/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/archive/the_linux_command_line/chapters_1-5/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1718799825" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718799825" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718799825" defer></script>
+    <script src="/js/js-yaml.min.js?1718799825" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1718799825" defer></script>
+  </body>
+</html>

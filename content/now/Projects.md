@@ -114,3 +114,12 @@ Hugo
 BTL1 and CCD certifications (security)
 
 How to change google snippet in hugo
+
+https://gitlab.com/askyourself/dotfiles
+
+---
+
+open source analytics
+https://plausible.io/
+https://analytics.bookstackapp.com/bookstackapp.com
+[[Add Plausible to Hugo Site]]

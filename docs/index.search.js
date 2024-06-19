@@ -1,8 +1,8 @@
 var relearn_search_index = [
   {
     "breadcrumb": "",
-    "content": "",
-    "description": "",
+    "content": "RHCSA Stuff rhcsanotes RHCSA_Tracker Exam_Environment How to Study for RHCSA study_points_for_exam rhel_vm1 rhcsavagrantlabsetup Fedora fedora_setup Misc Using Man Pages Labs Turn a file into a block device ",
+    "description": "RHCSA Stuff rhcsanotes RHCSA_Tracker Exam_Environment How to Study for RHCSA study_points_for_exam rhel_vm1 rhcsavagrantlabsetup Fedora fedora_setup Misc Using Man Pages Labs Turn a file into a block device ",
     "tags": [],
     "title": "Linux",
     "uri": "/linux/"

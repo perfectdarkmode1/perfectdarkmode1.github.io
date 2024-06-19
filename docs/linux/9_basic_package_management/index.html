@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 9 RHCSA Notes - Basic Package Management RPM (Redhat Package Manager) also refers to a file(s) packaged together in a special format with the .rpm extension. Each package included or available for RHEL is in rpm format. Metadata info also gets updated whenever a package gets updated. rpm command Query, install, upgrade, freshen, remove, or decompress packages. Validate package integrity and authenticity. Packages Two types of packages :: binary (or installable) and source.">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 9 RHCSA Notes - Basic Package Management RPM (Redhat Package Manager) also refers to a file(s) packaged together in a special format with the .rpm extension. Each package included or available for RHEL is in rpm format. Metadata info also gets updated whenever a package gets updated. rpm command Query, install, upgrade, freshen, remove, or decompress packages. Validate package integrity and authenticity. Packages Two types of packages :: binary (or installable) and source.">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/9_basic_package_management/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 9 RHCSA Notes - Basic Package Management RPM (Redhat Package Manager) also refers to a file(s) packaged together in a special format with the .rpm extension. Each package included or available for RHEL is in rpm format. Metadata info also gets updated whenever a package gets updated. rpm command Query, install, upgrade, freshen, remove, or decompress packages. Validate package integrity and authenticity. Packages Two types of packages :: binary (or installable) and source.">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Chapter 9 RHCSA Notes - Basic Package Management RPM (Redhat Package Manager) also refers to a file(s) packaged together in a special format with the .rpm extension. Each package included or available for RHEL is in rpm format. Metadata info also gets updated whenever a package gets updated. rpm command Query, install, upgrade, freshen, remove, or decompress packages. Validate package integrity and authenticity. Packages Two types of packages :: binary (or installable) and source.">
+    <meta itemprop="wordCount" content="2014">
+    <title></title>
+    <link href="/images/favicon.png?1718799825" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718799825" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718799825" rel="stylesheet">
+    <link href="/css/fonts.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718799825" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718799825" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718799825" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718799825" rel="stylesheet">
+    <link href="/css/print.css?1718799825" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718799825"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/9_basic_package_management/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#rpm-redhat-package-manager">RPM (Redhat Package Manager)</a>
+      <ul>
+        <li><a href="#rpm-command">rpm command</a></li>
+        <li><a href="#packages">Packages</a></li>
+      </ul>
+    </li>
+    <li><a href="#package-naming">Package Naming</a></li>
+    <li><a href="#package-dependency">Package Dependency</a></li>
+    <li><a href="#package-database">Package Database</a></li>
+    <li><a href="#package-management-tools">Package Management Tools</a></li>
+    <li><a href="#package-management-with-rpm">Package management with rpm</a>
+      <ul>
+        <li><a href="#rpm-command-1">rpm command</a></li>
+      </ul>
+    </li>
+    <li><a href="#querying-packages">Querying packages</a></li>
+    <li><a href="#installing-a-package">Installing a package</a></li>
+    <li><a href="#upgrading-a-package">Upgrading a package</a></li>
+    <li><a href="#freshening-a-package">Freshening a package</a></li>
+    <li><a href="#overwriting-a-package">Overwriting a Package</a></li>
+    <li><a href="#removing-a-package">Removing a Package</a></li>
+    <li><a href="#extracting-files-from-an-installable-package">Extracting Files from an Installable Package</a></li>
+    <li><a href="#validating-package-integrity-and-credibility">Validating Package Integrity and Credibility</a></li>
+    <li><a href="#viewing-gpg-keys">Viewing GPG Keys</a></li>
+    <li><a href="#verifying-package-attributes">Verifying Package Attributes</a></li>
+    <li><a href="#labs">Labs</a>
+      <ul>
+        <li><a href="#lab-mount-rhel-8-iso-persistently">Lab: Mount RHEL 8 ISO Persistently</a></li>
+        <li><a href="#lab-query-packages-rpm">Lab: Query Packages (RPM)</a></li>
+        <li><a href="#lab-installing-a-package-rpm">Lab: Installing a Package (RPM)</a></li>
+        <li><a href="#lab-upgrading-a-package-rpm">Lab: Upgrading a Package (RPM)</a></li>
+        <li><a href="#lab-freshening-a-package">Lab: Freshening a Package</a></li>
+        <li><a href="#lab-overwriting-a-package">Lab: Overwriting a Package</a></li>
+        <li><a href="#lab-removing-a-package">Lab: Removing a Package</a></li>
+        <li><a href="#lab-extracting-files-from-an-installable-package">Lab: Extracting Files from an Installable Package</a></li>
+        <li><a href="#lab-validating-package-integrity-and-credibility">Lab: Validating Package Integrity and Credibility</a></li>
+        <li><a href="#lab-viewing-gpg-keys">Lab: Viewing GPG Keys</a></li>
+        <li><a href="#lab-verifying-package-attributes">Lab: Verifying Package Attributes</a></li>
+        <li><a href="#lab-perform-package-management-using-rpm">Lab: Perform Package Management Using rpm</a></li>
+        <li><a href="#lab-9-1-install-and-verify-packages">Lab: 9-1: Install and Verify Packages</a></li>
+      </ul>
+    </li>
+    <li><a href="#lab-9-2-query-and-erase-packages">Lab: 9-2: Query and Erase Packages</a></li>
+    <li><a href="#review-questions">Review Questions</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h1 id="chapter-9-rhcsa-notes---basic-package-management">Chapter 9 RHCSA Notes - Basic Package Management</h1>
+<h2 id="rpm-redhat-package-manager">RPM (Redhat Package Manager)</h2>
+<ul>
+<li>also refers to a file(s) packaged together in a special format with the .rpm extension.</li>
+<li>Each package included or available for RHEL is in rpm format.</li>
+<li>Metadata info also gets updated whenever a package gets updated.</li>
+</ul>
+<h3 id="rpm-command">rpm command</h3>
+<ul>
+<li>Query, install, upgrade, freshen, remove, or decompress packages.</li>
+<li>Validate package integrity and authenticity.</li>
+</ul>
+<h3 id="packages">Packages</h3>
+<p>Two types of packages :: binary (or installable) and source.</p>
+<h4 id="binary-packages">binary packages</h4>
+<ul>
+<li>installation ready</li>
+<li>bundled for distribution.</li>
+<li>Have .rpm extension.</li>
+<li>Contain:
+<ul>
+<li>install scripts (pre and post)</li>
+<li>Executables</li>
+<li>Configuration files</li>
+<li>Library files</li>
+<li>Dependency information</li>
+<li>Where to install files</li>
+<li>Documentation
+<ul>
+<li>How to install/uninstall</li>
+<li>Man pages for config files/commands</li>
+<li>other install and usage info</li>
+</ul>
+</li>
+<li>Metadata
+<ul>
+<li>stored in central location</li>
+<li>includes:
+<ul>
+<li>Package version</li>
+<li>Install location</li>
+<li>Checksum values</li>
+<li>List of included files and their attributes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Package intelligence
+<ul>
+<li>used by package administration toolset for successful completion of the package installation process.</li>
+<li>May include info on:
+<ul>
+<li>prerequisites</li>
+<li>User account setup</li>
+<li>Needed directories/ soft links</li>
+</ul>
+</li>
+<li>Includes reverse process for uninstall.</li>
+</ul>
+</li>
+</ul>
+<h2 id="package-naming">Package Naming</h2>
+<p>5 parts to a package name:
+1. Name
+2. Version
+3. release (revision or build)
+4. Linux version 
+5. Processor Architecture
+- noarch
+- platform independant
+- src
+- Source code packages</p>
+<ul>
+<li>Always has .rpm extension</li>
+<li>.rpm is removed after install
+Example:
+openssl-1.1.1-8.el8.x86_64.rpm,</li>
+</ul>
+<h2 id="package-dependency">Package Dependency</h2>
+<ul>
+<li>Dependency info is in the metadata
+<ul>
+<li>Read by package handling utilities</li>
+</ul>
+</li>
+</ul>
+<h2 id="package-database">Package Database</h2>
+<ul>
+<li>Metadata for installed packages and package files is stored in /var/lib/rpm/
+<ul>
+<li>Package database</li>
+<li>Referenced by package manipulation utilities to obtain:
+<ul>
+<li>package name and version data</li>
+<li>Info about owerships, permissions, timestamps, and file sizes that are part of the package.</li>
+<li>Contain info on dependencies.</li>
+<li>Aids management commands in:
+<ul>
+<li>listing and querying packages</li>
+<li>Verifying dependencies and file attributes.</li>
+<li>Installing new packages.</li>
+<li>Upgrading and uninstalling packages.</li>
+</ul>
+</li>
+<li>Removes and replaces metadata when a package is replaced.</li>
+<li>Can maintain multiple version of a single package.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="package-management-tools">Package Management Tools</h2>
+<ul>
+<li>rpm (redhat package manager)
+<ul>
+<li>Does not automatically resolve dependencies.</li>
+</ul>
+</li>
+<li>yum (yellowdog update, modified)
+<ul>
+<li>Find, get, and install dependencies automatically.</li>
+<li>softlink to dnf now.</li>
+</ul>
+</li>
+<li>dnf (dandified yum)</li>
+</ul>
+<h2 id="package-management-with-rpm">Package management with rpm</h2>
+<p>rpm package management tasks:
+- query
+- install
+- upgrade
+- freshen
+- overwrite
+- remove
+- extract
+- validate
+- verify</p>
+<ul>
+<li>Works with installed and installable packages.</li>
+</ul>
+<h3 id="rpm-command-1">rpm command</h3>
+<h6 id="query-options">Query options</h6>
+<p>Query and display packages<br>
+<code>-q (--query)</code> <br>
+<br>
+List all installed packages<br>
+<code>-qa (--query --all)</code><br>
+<br>
+List config files in a package<br>
+<code>-qc (--query --config-files)</code><br>
+<br>
+List documentation files in a package<br>
+<code>-qd (--query --docfiles)</code> <br>
+<br>
+Exhibit what package a file comes from<br>
+<code>-qf (--query --file)</code> <br>
+<br>
+Show installed package info (Version, Size, Installation status, Date, Signature, Description, etc.)
+<code>-qi (--query --info)</code></p>
+<p>Show installable package info (Version, Size, Installation status, Date, Signature, Description, etc.)
+<code>-qip (--query --info --package)</code></p>
+<p>List all files in a package.<br>
+<code>-ql (--query --list)</code></p>
+<p>List files and packages a package depends on. <br>
+<code>-qR (--query --requires)</code></p>
+<p>List packages that provide the specified package or file.<br>
+<code>-q --whatprovides</code></p>
+<p>List packages that require the specified package or file.<br>
+<code>-q --whatrequires</code></p>
+<h6 id="package-installation-options">Package installation options</h6>
+<p>Remove a package<br>
+<code>-e (--erase)</code></p>
+<p>Upgrades installed package. Or loads if not installed.<br>
+<code>-U (--upgrade)</code></p>
+<p>Display detailed information<br>
+<code>-v (--verbose or -vv)</code></p>
+<p>Verify integrity of a package or package files<br>
+<code>-V (--verify)</code></p>
+<h2 id="querying-packages">Querying packages</h2>
+<p>Query packages in the package database or at a specified location.</p>
+<h2 id="installing-a-package">Installing a package</h2>
+<ul>
+<li>Creates directory structure needed</li>
+<li>Installs files</li>
+<li>Runs needed post installation steps</li>
+<li>Installing package will fail if missing dependancies.</li>
+<li>Error message will show missing dependencies.</li>
+</ul>
+<h2 id="upgrading-a-package">Upgrading a package</h2>
+<ul>
+<li>Installs the package if previous version does not exist. (-U)</li>
+<li>Makes backup of effected configuration files and adds .rpmsave extension.</li>
+</ul>
+<h2 id="freshening-a-package">Freshening a package</h2>
+<ul>
+<li>Older version must exist.</li>
+<li>-F option</li>
+<li>Will only work if a newer version of a package is available.</li>
+</ul>
+<h2 id="overwriting-a-package">Overwriting a Package</h2>
+<ul>
+<li>Replaces existing files of a package with the same version.</li>
+<li>&ndash;replacepkgs option.</li>
+<li>Useful when you suspect corruption.</li>
+</ul>
+<h2 id="removing-a-package">Removing a Package</h2>
+<ul>
+<li>Uninstalls package and associated files/ directories</li>
+<li>-e Option</li>
+<li>Checks to see if this package is a dependency for another program and fails if it is.</li>
+</ul>
+<h2 id="extracting-files-from-an-installable-package">Extracting Files from an Installable Package</h2>
+<ul>
+<li>rpm2cpio command</li>
+<li>-i (extract)</li>
+<li>-d create directory structure.
+Useful for:
+<ul>
+<li>Examining package contents.</li>
+<li>Replacing corrupt or lost command.</li>
+<li>Replace critical configuration file to it&rsquo;s original state</li>
+</ul>
+</li>
+</ul>
+<h2 id="validating-package-integrity-and-credibility">Validating Package Integrity and Credibility</h2>
+<ul>
+<li>MD5 Checksum for verifying package integrity</li>
+<li>GNU Privacy Guard Public Key (GNU Privacy Guard or GPG) for ensuring credibility of publisher.</li>
+<li>PGP (Pretty Good Privacy) - commercial version of GPG.</li>
+<li>&ndash;nosignature and -K option ? &lt; Not sure about this
+rpmkeys command
+<ul>
+<li>check credibility, import GPG key, and verify packages</li>
+</ul>
+</li>
+<li>Redhat signs their products and updates with a GPG key.
+<ul>
+<li>Files in installation media include public keys in the products for verification.</li>
+<li>Copied to /etc/pki/rpm-gpg during OS installation.
+RPM-GPG-KEY-redhat-release
+<ul>
+<li>Used for packages shipped after November 2009 and thier updates.
+RPM-GPG-KEY-redhat-beta</li>
+<li>For Beta products shipped after November 2009.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Import the relevant GPG key and the verify the package to check the credibility of a package.</li>
+</ul>
+<h2 id="viewing-gpg-keys">Viewing GPG Keys</h2>
+<ul>
+<li>view with rpm command <code>rpm -q gpg-pubkey</code></li>
+<li>-i option
+<ul>
+<li>show info about a key.</li>
+</ul>
+</li>
+</ul>
+<h2 id="verifying-package-attributes">Verifying Package Attributes</h2>
+<ul>
+<li>Compare package file attributes with originals stored in package database at the time of installation.</li>
+<li>-V option
+<ul>
+<li>compare owner, group, permission mode, size, modification time, digest, type, etc.</li>
+<li>Returns to prompt if no changes are detected</li>
+<li>-v or vv for verbose</li>
+</ul>
+</li>
+<li>-Vf
+<ul>
+<li>run the check directly on the file</li>
+</ul>
+</li>
+<li>Three columns of output:
+<ul>
+<li>Column 1
+<ul>
+<li>9 fields
+<ul>
+<li>S = Different file size.</li>
+<li>M = Mode or permission or file type change.</li>
+<li>5 = MD5 Checksum does not match.</li>
+<li>D = Device file and its major and minor number have changed.</li>
+<li>L = File is a symlink and it&rsquo;s path has been altered.</li>
+<li>U = Ownership has changed.</li>
+<li>G = Group membership has been modified.</li>
+<li>T = Timestamp changed.</li>
+<li>P = Capabilities are altered.</li>
+<li>. = No modifications detected.</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li>Column 2
+<ul>
+<li>File type
+<ul>
+<li>c = Configuration file</li>
+<li>d = Documentation File</li>
+<li>g = Ghost FIle</li>
+<li>l = License file</li>
+<li>r = Readme file</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Column 3
+<ul>
+<li>Full path of file</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="labs">Labs</h2>
+<h3 id="lab-mount-rhel-8-iso-persistently">Lab: Mount RHEL 8 ISO Persistently</h3>
+<ol>
+<li>Go to the VirtualBox VM Manager and make sure that the RHEL 8 image is attached to RHEL8-VM1 as depicted below:</li>
+</ol>
+<p><a href="#R-image-1f701b8bce079e4ad20edf96a563ab84" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="Pasted%20image%2020240212082306.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-1f701b8bce079e4ad20edf96a563ab84"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="Pasted%20image%2020240212082306.png"></a></p>
+<ol start="2">
+<li>
+<p>Open the /etc/fstab file in the vim editor (or another editor of your choice) and add the following line entry at the end of the file to mount the DVD image (/dev/sr0) in read-only (ro) mode on the /mnt directory.</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>/dev/sr0 /mnt iso9660 ro 0 0</code></pre></div></li>
+</ol>
+<p>Note: sr0 represents the first instance of the optical device and iso9660 is the standard format for optical file systems.</p>
+<ol start="3">
+<li>
+<p>Mount the file system as per the configuration defined in the /etc/fstab file using the mount command with the -a (all) option:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo mount -a</code></pre></div></li>
+<li>
+<p>Verify the mount using the df command:</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>df -h | grep mnt</code></pre></div></li>
+</ol>
+<p>Note: The image and the packages therein can now be accessed via the /mnt directory just like any other local directory on the system.</p>
+<ol start="5">
+<li>
+<p>List the two directories—/mnt/BaseOS/Packages and /mnt/AppStream/Packages—that contain all the software packages (directory names are case sensitive):</p>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /mnt/BaseOS/Packages | more</code></pre></div></li>
+</ol>
+<h3 id="lab-query-packages-rpm">Lab: Query Packages (RPM)</h3>
+<ol>
+<li>
+<p>query all installed packages:
+<code>rpm -qa</code></p>
+</li>
+<li>
+<p>query whether the perl package is installed:
+<code>rpm -q perl</code></p>
+</li>
+<li>
+<p>list all files in a package:
+<code>rpm -ql iproute</code></p>
+</li>
+<li>
+<p>list only the documentation files in a package:
+<code>rpm -qd audit</code></p>
+</li>
+<li>
+<p>list only the configuration files in a package:
+<code>rpm -qc cups</code></p>
+</li>
+<li>
+<p>identify which package owns the specified file:
+<code>rpm -qf /etc/passwd</code></p>
+</li>
+<li>
+<p>display information about an installed package including version, release, installation status, installation date, size, signatures, description, and so on:
+<code>rpm -qi setup</code></p>
+</li>
+<li>
+<p>list all file and package dependencies for a given package:
+<code>rpm -qR chrony</code></p>
+</li>
+<li>
+<p>query an installable package for metadata information (version, release, architecture, description, size, signatures, etc.):
+<code>rpm -qip /mnt/BaseOS/Packages/zsh-5.5.1-6.el8.x86_64.rpm</code></p>
+</li>
+<li>
+<p>determine what packages require the specified package in order to operate properly:
+<code>rpm -q --whatrequires lvm2</code></p>
+</li>
+</ol>
+<h3 id="lab-installing-a-package-rpm">Lab: Installing a Package (RPM)</h3>
+<ol>
+<li>Install zsh-5.5.1-6.el8.x86_64.rpm
+<code>sudo rpm -ivh /mnt/BaseOS/Packages/zsh-5.5.1-6.el8.x86_64.rpm</code></li>
+</ol>
+<h3 id="lab-upgrading-a-package-rpm">Lab: Upgrading a Package (RPM)</h3>
+<ol>
+<li>Upgrade sushi with the -U option:
+<code>sudo rpm -Uvh /mnt/AppStream/Packages/sushi-3.28.3-1.el8.x86_64.rpm</code></li>
+</ol>
+<h3 id="lab-freshening-a-package">Lab: Freshening a Package</h3>
+<ol>
+<li>Freshen the sushi package:
+<code>sudo rpm -Fvh /mnt/AppStream/Packages/sushi-3.28.3-1.el8.x86_64.rpm</code></li>
+</ol>
+<h3 id="lab-overwriting-a-package">Lab: Overwriting a Package</h3>
+<ol>
+<li>Overwrite zsh-5.5.1-6.el8.x86_64
+<code>sudo rpm -ivh --replacepkgs /mnt/BaseOS/Packages/zsh-5.5.1-6.el8.x86_64</code></li>
+</ol>
+<h3 id="lab-removing-a-package">Lab: Removing a Package</h3>
+<ol>
+<li>Remove sushi
+<code>sudo rpm sushi -ve</code>
+``</li>
+</ol>
+<h3 id="lab-extracting-files-from-an-installable-package">Lab: Extracting Files from an Installable Package</h3>
+<ol>
+<li>
+<p>You have lost /etc/crony.conf. Determine what package this file comes from:
+<code>rpm -qf /etc/chrony.conf</code></p>
+</li>
+<li>
+<p>Extract all files from the crony package to /tmp and create the directory structure:</p>
+</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd /tmp
+sudo rpm2cpio /mnt/BaseOS/Packages/chrony-3.3-3.el8.x86_64.rpm | cpio -imd
+1066 blocks</code></pre></div><ol start="3">
+<li>
+<p>Use find to locate the crony.conf file:
+<code>sudo find . -name chrony.conf</code></p>
+</li>
+<li>
+<p>Copy the file to /etc:</p>
+</li>
+</ol>
+<h3 id="lab-validating-package-integrity-and-credibility">Lab: Validating Package Integrity and Credibility</h3>
+<ol>
+<li>Check the integrity of zsh-5.5.1-6.el8.x86_64.rpm located in /mnt/BaseOS/Packages:
+<code>rpm -K /mnt/BaseOS/Packages/zsh-5.5.1-6.el8.x86_64.rpm --nosignature</code></li>
+<li>Import the GPG key from the proper file and verify the signature for the zsh-5.5.1-6.el8.x86_64.rpm package.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo rpmkeys --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sudo rpmkeys -K /mnt/BaseOS/Packages/zsh-5.5.1-6.el8.x86_64.rpm</code></pre></div><h3 id="lab-viewing-gpg-keys">Lab: Viewing GPG Keys</h3>
+<ol>
+<li>List the imported key:
+<code>rpm -q gpg-pubkey</code></li>
+<li>View details for the first key:
+<code>rpm -qi gpg-pubkey-fd431d51-4ae0493b</code></li>
+</ol>
+<h3 id="lab-verifying-package-attributes">Lab: Verifying Package Attributes</h3>
+<ol>
+<li>Run a check on the at program:
+<code>sudo rpm -V at</code></li>
+<li>Change permissions of one of the files and run the check again:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l /etc/sysconfig/atd
+sudo chmod -v 770 /etc/sysconfig/atd
+sudo rpm -V at</code></pre></div><ol start="3">
+<li>
+<p>Run the check directly on the file:
+<code>sudo rpm -Vf /etc/sysconfig/atd</code></p>
+</li>
+<li>
+<p>Reset the value and check the file again:</p>
+</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo chmod -v 644 /etc/sysconfig/atd
+sudo rpm -V at</code></pre></div><h3 id="lab-perform-package-management-using-rpm">Lab: Perform Package Management Using rpm</h3>
+<ol>
+<li>
+<p>Run the ls command on the /mnt/AppStream/Packages directory to confirm that the dcraw package is available:
+<code>ls -l /mnt/AppStream/Packages/dcraw*</code></p>
+</li>
+<li>
+<p>Run the rpm command and verify the integrity and credibility of the package:
+<code>rpmkeys -K /mnt/AppStream/Packages/dcraw-9.27.0-9.el8.x86_64.rpm</code></p>
+</li>
+<li>
+<p>Install the Package:
+<code>sudo rpm -ivh /mnt/AppStream/Packaghes/dcraw-9.27.0-9.el8x86_64.rpm</code></p>
+</li>
+<li>
+<p>Show basic information about the package:
+<code>rpm -qi dcraw</code></p>
+</li>
+<li>
+<p>Show all the files the package contains:
+<code>rpm -ql dcraw</code></p>
+</li>
+<li>
+<p>List the documentation files the package has:
+<code>rpm -qd dcraw</code></p>
+</li>
+<li>
+<p>Verify the attributes of each file in the package. Use verbose mode.
+<code>rpm -Vv dcraw</code></p>
+</li>
+<li>
+<p>Remove the package:
+<code>sudo rpm -ve dcraw</code></p>
+</li>
+</ol>
+<h3 id="lab-9-1-install-and-verify-packages">Lab: 9-1: Install and Verify Packages</h3>
+<p>As user1 with sudo on server1, make sure the RHEL 8 ISO image is attached to the VM and mounted. Use the rpm command and install the zsh package by specifying its full path. Run the rpm command again and perform the following on the zsh package: (1) show information, (2) validate integrity, and (3) display attributes. (Hint: Package Management with rpm).</p>
+<h2 id="lab-9-2-query-and-erase-packages">Lab: 9-2: Query and Erase Packages</h2>
+<p>As user1 with sudo on server1, make sure the RHEL 8 ISO image is attached to the VM and mounted. Use the rpm command to perform the following: (1) check whether the setup package is installed, (2) display the list of configuration files in the setup package, (3) show information for the zlib-devel package on the ISO image, (4) reinstall the zsh package (&ndash;reinstall -vh), and (5) remove the zsh package. (Hint: Package Management with rpm).</p>
+<h2 id="review-questions">Review Questions</h2>
+<p>Q. What would the rpm -ql zsh command do?
+A. The command provided will list all the files that are included in the installed zsh package.</p>
+<p>Q. State the purpose of the rpm2cpio command.
+A. The rpm2cpio command is used to extract files from the specified package.</p>
+<p>Q. What is the difference between freshening and upgrading a package?<br>
+A. Both are used to upgrade an existing package, but freshening requires an older version of the package to exist.</p>
+<p>Q. The rpm command automatically takes care of package dependencies. True or False?
+A. False.</p>
+<p>Q. What is the difference between installing and upgrading a package?
+A. Installing will install a new package whereas upgrading will upgrade an existing package or install it if it dos not already exist.</p>
+<p>Q. Package database is located in the /var/lib/rpm directory. True or False?
+A. True.</p>
+<p>Q. What would the rpm -qf /bin/bash command do?.
+A. The command provided will display information about the /bin/bash file.</p>
+<p>Q. Name the directory where RHEL 8 stores GPG signatures
+A. RHEL 8 stores GPG signatures in the /etc/pki/rpm-gpg directory.</p>
+<p>Q. What would the options ivh cause the rpm command to do?
+A. The rpm command will install the specified package and show installation details and hash signs for progress.</p>
+<p>Q. What would the rpm -qa command do?
+A. The command provided will list all installed packages.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718799825" defer></script>
+        <script src="/js/search.js?1718799825" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/9_basic_package_management/" class="active"><a class="padding" href="/linux/9_basic_package_management/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/9_basic_package_management/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1718799825" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718799825" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718799825" defer></script>
+    <script src="/js/js-yaml.min.js?1718799825" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1718799825" defer></script>
+  </body>
+</html>

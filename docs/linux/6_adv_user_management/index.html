@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="Chapter 6 RHCSA Notes - Advanced User Management Objectives and Topics Configure password aging attributes on local user accounts Lock and unlock user account Understand, create, modify, and delete local groups and group memberships Switch into another user account Configure who can execute which privileged commands Identify and manage file owners and owning groups RHCSA Objectives: 05. Log in and switch users in multi-user targets Change passwords and adjust password aging for local user accounts Create, delete, and modify local groups and group memberships Configure superuser access">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="Chapter 6 RHCSA Notes - Advanced User Management Objectives and Topics Configure password aging attributes on local user accounts Lock and unlock user account Understand, create, modify, and delete local groups and group memberships Switch into another user account Configure who can execute which privileged commands Identify and manage file owners and owning groups RHCSA Objectives: 05. Log in and switch users in multi-user targets Change passwords and adjust password aging for local user accounts Create, delete, and modify local groups and group memberships Configure superuser access">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/6_adv_user_management/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="Chapter 6 RHCSA Notes - Advanced User Management Objectives and Topics Configure password aging attributes on local user accounts Lock and unlock user account Understand, create, modify, and delete local groups and group memberships Switch into another user account Configure who can execute which privileged commands Identify and manage file owners and owning groups RHCSA Objectives: 05. Log in and switch users in multi-user targets Change passwords and adjust password aging for local user accounts Create, delete, and modify local groups and group memberships Configure superuser access">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="Chapter 6 RHCSA Notes - Advanced User Management Objectives and Topics Configure password aging attributes on local user accounts Lock and unlock user account Understand, create, modify, and delete local groups and group memberships Switch into another user account Configure who can execute which privileged commands Identify and manage file owners and owning groups RHCSA Objectives: 05. Log in and switch users in multi-user targets Change passwords and adjust password aging for local user accounts Create, delete, and modify local groups and group memberships Configure superuser access">
+    <meta itemprop="wordCount" content="2425">
+    <title></title>
+    <link href="/images/favicon.png?1718799825" rel="icon" type="image/png">
+    <link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718799825" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718799825" rel="stylesheet">
+    <link href="/css/fonts.css?1718799825" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718799825" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718799825" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718799825" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718799825" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718799825" rel="stylesheet">
+    <link href="/css/print.css?1718799825" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718799825"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/6_adv_user_management/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#objectives-and-topics">Objectives and Topics</a></li>
+    <li><a href="#password-aging-attributes">Password Aging attributes</a></li>
+    <li><a href="#password-aging-and-management">Password Aging and management</a>
+      <ul>
+        <li><a href="#chage-command">chage command</a></li>
+        <li><a href="#passwd-command">passwd command</a></li>
+        <li><a href="#usermod-command">usermod command</a></li>
+      </ul>
+    </li>
+    <li><a href="#linux-groups-and-their-management">Linux Groups and their Management</a>
+      <ul>
+        <li><a href="#groupadd-command">groupadd command</a></li>
+        <li><a href="#groupmod-command">groupmod command</a></li>
+      </ul>
+    </li>
+    <li><a href="#switching-users">Switching Users</a>
+      <ul>
+        <li><a href="#su-command">su command</a></li>
+        <li><a href="#whoami-command">whoami command</a></li>
+        <li><a href="#logname-command">logname command</a></li>
+        <li><a href="#groupdel-command">groupdel command</a></li>
+      </ul>
+    </li>
+    <li><a href="#doing-as-superuser-substutute-user">Doing as Superuser (substutute user)</a>
+      <ul>
+        <li><a href="#sudo-command">sudo command</a></li>
+      </ul>
+    </li>
+    <li><a href="#owning-user-and-owning-group">Owning User and Owning Group</a>
+      <ul>
+        <li><a href="#chown-command">chown command</a></li>
+        <li><a href="#chgrp-command">chgrp command</a></li>
+      </ul>
+    </li>
+    <li><a href="#labs">Labs</a>
+      <ul>
+        <li><a href="#lab-set-and-confirm-password-aging-with-chage-root">Lab: Set and Confirm Password Aging with chage (root)</a></li>
+        <li><a href="#lab-set-and-confirm-password-aging-with-passwd-root">Lab: Set and Confirm Password Aging with passwd (root)</a></li>
+        <li><a href="#lab-lock-and-unlock-a-user-account-with-usermod-and-passwd-root">Lab: Lock and Unlock a User Account with usermod and passwd (root)</a></li>
+        <li><a href="#lab-create-a-group-and-add-members-root">Lab: Create a Group and Add Members (root)</a></li>
+        <li><a href="#lab-modify-and-delete-a-group-account-root">Lab: Modify and Delete a Group Account (root)</a></li>
+        <li><a href="#lab-to-switch-from-user1-assuming-you-are-logged-in-as-user1-into-root-without-executing-the-startup-scripts">Lab: To switch from user1 (assuming you are logged in as user1) into root without executing the startup scripts</a></li>
+        <li><a href="#lab-add-user1-to-sudo-file-but-only-for-the-cat-command">Lab: Add user1 to sudo file but only for the cat command.</a></li>
+        <li><a href="#lab-add-user-and-command-aliases-to-the-sudoer-file">Lab: Add user and command aliases to the sudoer file.</a></li>
+        <li><a href="#lab-take-a-look-at-examples-in-the-sudoers-file">Lab: Take a look at examples in the sudoers file.</a></li>
+        <li><a href="#lab-viewing-owner-and-group-information">Lab: Viewing owner and group information</a></li>
+        <li><a href="#lab-modify-file-owner-and-owning-group">Lab: Modify File Owner and Owning Group</a></li>
+        <li><a href="#lab-create-user-and-configure-password-aging-root">Lab: Create User and Configure Password Aging (root)</a></li>
+        <li><a href="#lab-6-2-lock-and-unlock-user-root">Lab 6-2: Lock and Unlock User (root)</a></li>
+      </ul>
+    </li>
+    <li><a href="#review-questions">Review Questions</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<h1 id="chapter-6-rhcsa-notes---advanced-user-management">Chapter 6 RHCSA Notes - Advanced User Management</h1>
+<h2 id="objectives-and-topics">Objectives and Topics</h2>
+<ul>
+<li>Configure password aging attributes on local user accounts</li>
+<li>Lock and unlock user account</li>
+<li>Understand, create, modify, and delete local groups and group memberships</li>
+<li>Switch into another user account</li>
+<li>Configure who can execute which privileged commands</li>
+<li>Identify and manage file owners and owning groups</li>
+</ul>
+<p>RHCSA Objectives: 05.
+Log in and switch users in multi-user targets
+Change passwords and adjust password aging for local user accounts
+Create, delete, and modify local groups and group memberships
+Configure superuser access</p>
+<h2 id="password-aging-attributes">Password Aging attributes</h2>
+<ul>
+<li>can be done for an individual user or applied to all users.</li>
+<li>Individual user accounts may be prevented from logging in to the system by locking their access for a period of time or permanently.</li>
+<li>must be performed by a user with elevated privileges of the root user.</li>
+<li>Normal users may be allowed access to privileged commands by defining them appropriately in a configuration file.</li>
+<li>Each file that exists on the system regardless of its type has an owning user and an owning group.</li>
+<li>every file that a user creates is in the ownership of that user.</li>
+<li>ownership may be changed and given to another user by a super user.</li>
+</ul>
+<h2 id="password-aging-and-management">Password Aging and management</h2>
+<ul>
+<li>setting restrictions on password expiry, account disablement, locking and unlocking users, and password change frequency.</li>
+<li>Can choose to inactivate it completely for an individual user.</li>
+<li>Stored in the /etc/shadow file (fields 4 to 8) and its default policies in the /etc/login.defs configuration file.</li>
+<li>aging management tools—chage and passwd—</li>
+<li>usermod command can be used to implement two aging attributes (user expiry and password expiry) and lock and unlock user accounts.</li>
+</ul>
+<h3 id="chage-command">chage command</h3>
+<ul>
+<li>set or alter password aging parameters on a user account.</li>
+<li>changes various fields in the shadow file</li>
+<li>Switches
+<ul>
+<li>-d (&ndash;lastday)
+<ul>
+<li>Specifies an explicit date in the YYYY-MM-DD format, or the number of days since the UNIX time when the password was last modified. With -d 0, the user is forced to change the password at next login. It corresponds to field 3 in the shadow file.</li>
+</ul>
+</li>
+<li>-E (&ndash;expiredate)
+<ul>
+<li>Sets an explicit date in the YYYY-MM-DD format, or the number of days since the UNIX time on which the user account is deactivated. This feature can be disabled with -E -1. It corresponds to the eighth field in the shadow file.</li>
+</ul>
+</li>
+<li>-I (&ndash;inactive)
+<ul>
+<li>Defines the number of days of inactivity after the password expiry and before the account is locked. The user may be able to log in during this period with their expired password. This feature can be disabled with -I -1. It corresponds to field 7 in the shadow file.</li>
+</ul>
+</li>
+<li>-l
+<ul>
+<li>Lists password aging attributes set on a user account.</li>
+</ul>
+</li>
+<li>-m (&ndash;mindays)
+<ul>
+<li>Indicates the minimum number of days that must elapse before the password can be changed. A value of 0 allows the user to change their password at any time. It corresponds to field 4 in the shadow file.</li>
+</ul>
+</li>
+<li>-M (&ndash;maxdays)
+<ul>
+<li>Denotes the maximum number of days of password validity before the user password expires and it must be changed. This feature can be disabled with -M -1. It corresponds to field 5 in the shadow file.</li>
+</ul>
+</li>
+<li>-W (&ndash;warndays)
+<ul>
+<li>Designates the number of days for which the user gets alerts to change their password before it expires. It corresponds to field 6 in the shadow file.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="passwd-command">passwd command</h3>
+<ul>
+<li>set or modify a user’s password</li>
+<li>modify the password aging attributes and</li>
+<li>lock or unlock account</li>
+<li>Switches
+<ul>
+<li>-d (&ndash;delete)
+<ul>
+<li>Deletes a user password</li>
+<li>does not expire the user account.</li>
+</ul>
+</li>
+<li>-e (&ndash;expire)
+<ul>
+<li>Forces a user to change their password upon next logon.</li>
+<li>sets date to prior to Unix time</li>
+</ul>
+</li>
+<li>-i (&ndash;inactive)
+<ul>
+<li>Defines the number of days of inactivity after the password expiry and before the account is locked. (field 7 in shadow file)</li>
+</ul>
+</li>
+<li>-l (&ndash;lock)
+<ul>
+<li>Locks a user account.</li>
+</ul>
+</li>
+<li>-n (&ndash;minimum)
+<ul>
+<li>Specifies the number of days that must elapse before the password can be changed. (field 4 in shadow file)</li>
+</ul>
+</li>
+<li>-S (&ndash;status)
+<ul>
+<li>Displays the status information for a user.</li>
+</ul>
+</li>
+<li>-u (&ndash;unlock)
+<ul>
+<li>Unlocks a locked user account.</li>
+</ul>
+</li>
+<li>-w (&ndash;warning)
+<ul>
+<li>Designates the number of days for which the user gets alerts to change their password before it actually expires. (field 6 in shadow file)</li>
+</ul>
+</li>
+<li>-x (&ndash;maximum)
+<ul>
+<li>Denotes the maximum number of days of password validity before the user password expires and it must be changed. (field 5 in shadow file)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="usermod-command">usermod command</h3>
+<ul>
+<li>modify a user’s attribute</li>
+<li>lock or unlock their account</li>
+<li>Switches
+<ul>
+<li>-L (&ndash;lock)
+<ul>
+<li>Locks a user account by placing a single exclamation mark (!) at the beginning of the password field and before the hashed password string.</li>
+</ul>
+</li>
+<li>-U (&ndash;unlock)
+<ul>
+<li>Unlocks a user’s account by removing the exclamation mark (!) from the beginning of the password field.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="linux-groups-and-their-management">Linux Groups and their Management</h2>
+<ul>
+<li>/etc/group
+<ul>
+<li>group info</li>
+</ul>
+</li>
+<li>/etc/login.defs
+<ul>
+<li>default policies</li>
+</ul>
+</li>
+<li>/etc/gshadow
+<ul>
+<li>group administrator information and group-level passwords</li>
+</ul>
+</li>
+<li>group management tools
+<ul>
+<li>groupadd, groupmod, and groupdel</li>
+<li>create, alter, and erase groups</li>
+</ul>
+</li>
+</ul>
+<h3 id="groupadd-command">groupadd command</h3>
+<ul>
+<li>adds entries to the group and gshadow files for each group added to the system</li>
+<li>picks up default values from /etc/login.defs</li>
+<li>Switches
+<ul>
+<li>-g (&ndash;gid)
+<ul>
+<li>Specifies the GID to be assigned to the group</li>
+</ul>
+</li>
+<li>-o (&ndash;non-unique)
+<ul>
+<li>Creates a group with a matching GID of an existing group. When two groups have an identical GID, members of both groups get identical rights on each other’s files. This should only be done in specific situations.</li>
+</ul>
+</li>
+<li>-r
+<ul>
+<li>Creates a system group with a GID below 1000</li>
+</ul>
+</li>
+<li>groupname
+<ul>
+<li>Specifies a group name</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="groupmod-command">groupmod command</h3>
+<ul>
+<li>syntax of this command is very similar to the groupadd with most options identical.</li>
+<li>Additional flags
+<ul>
+<li>-n
+<ul>
+<li>change name of existing group</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="switching-users">Switching Users</h2>
+<h3 id="su-command">su command</h3>
+<ul>
+<li>Ctrl-d
+<ul>
+<li>return to previous user
+su -</li>
+<li>switch user with startup scripts
+-c</li>
+<li>issue a command as a user without switching to them.</li>
+</ul>
+</li>
+<li>root user can switch into any user account that exists on the system without being prompted for that user’s password.</li>
+<li>switching into the root account to execute privileged actions is not recommended.</li>
+</ul>
+<h3 id="whoami-command">whoami command</h3>
+<ul>
+<li>show current user</li>
+</ul>
+<h3 id="logname-command">logname command</h3>
+<ul>
+<li>Identity of the user who originally logged in.</li>
+</ul>
+<h3 id="groupdel-command">groupdel command</h3>
+<ul>
+<li>removes entries for the specified group from both group and gshadow files.</li>
+</ul>
+<h2 id="doing-as-superuser-substutute-user">Doing as Superuser (substutute user)</h2>
+<ul>
+<li>Any normal user that requires privileged access to administrative commands or non-owning files is defined in the sudoers file.
+<ul>
+<li>file may be edited with a command called visudo,</li>
+<li>creates a copy of the file as sudoers.tmp and applies the changes there. After the visudo session is over, the updated updated file overwrites the original sudoers file and sudoers.tmp is deleted.</li>
+<li>syntax
+<ul>
+<li>user1 ALL=(ALL) ALL</li>
+<li>%dba ALL=(ALL) ALL
+group is prefixed by %</li>
+</ul>
+</li>
+<li>Make it so members are not prompted for password
+<ul>
+<li>user1 ALL=(ALL) NOPASSWD:ALL</li>
+<li>%dba ALL=(ALL) NOPASSWD:ALL</li>
+</ul>
+</li>
+<li>Limit access to a single command
+<ul>
+<li>user1 ALL=/usr/bin/cat</li>
+<li>%dba ALL=/usr/bin/cat</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>too many entries can clutter sudoers file. Use aliases instead:
+<ul>
+<li>User_Alias
+<ul>
+<li>you can define a User_Alias called PKGADM for user1, user100, and user200. These users may or may not belong to the same Linux group.</li>
+</ul>
+</li>
+<li>Cmnd_Alias
+<ul>
+<li>you can define a Cmnd_Alias called PKGCMD containing yum and rpm package management commands,</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="sudo-command">sudo command</h3>
+<ul>
+<li>/etc/sudoers</li>
+<li>/etc/sudoers.d/
+<ul>
+<li>drop-in directory
+/var/log/secure</li>
+<li>Sudo logs successful authentication and command data to here under the name of the user using the command.</li>
+</ul>
+</li>
+</ul>
+<h2 id="owning-user-and-owning-group">Owning User and Owning Group</h2>
+<ul>
+<li>Every file and directory has an owner.</li>
+<li>Creator assumes ownership by default.</li>
+<li>Every user is a member of one or more groups.</li>
+<li>Owners group is also assigned to file or directory by default.</li>
+</ul>
+<h3 id="chown-command">chown command</h3>
+<ul>
+<li>alter the ownership for files and directories</li>
+<li>Must have root privileges.</li>
+<li>Can also change owning group.</li>
+</ul>
+<h3 id="chgrp-command">chgrp command</h3>
+<ul>
+<li>alter the owning group for files and directories</li>
+<li>Must have root privileges.</li>
+</ul>
+<h2 id="labs">Labs</h2>
+<h3 id="lab-set-and-confirm-password-aging-with-chage-root">Lab: Set and Confirm Password Aging with chage (root)</h3>
+<ol>
+<li>Set password aging parameters for user100 to mindays (-m) 7, maxdays (-M) 28, and warndays (-W) 5:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>chage -m 7 -M 28 -W 5 user100</code></pre></div><ol start="2">
+<li>Confirm</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>chage -l user100</code></pre></div><ol start="3">
+<li>Set the account expiry to January 31, 2020</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>chage -E 2020-01-31 user100</code></pre></div><ol start="4">
+<li>Verify the new account expiry setting</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>chage -l user100</code></pre></div><h3 id="lab-set-and-confirm-password-aging-with-passwd-root">Lab: Set and Confirm Password Aging with passwd (root)</h3>
+<ol>
+<li>Set password aging attributes for user200 to mindays (-n) 10, maxdays (-x) 90, and warndays (-w) 14:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -n 10 -x 90 -w 14 user200</code></pre></div><ol start="2">
+<li>Confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -S user200</code></pre></div><ol start="3">
+<li>Set the number of inactivity days to 5:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -i 5 user200</code></pre></div><ol start="4">
+<li>Confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -S user200</code></pre></div><ol start="5">
+<li>Ensure that the user is forced to change their password at next login:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -e user200</code></pre></div><ol start="6">
+<li>Confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -S user200</code></pre></div><h3 id="lab-lock-and-unlock-a-user-account-with-usermod-and-passwd-root">Lab: Lock and Unlock a User Account with usermod and passwd (root)</h3>
+<ol>
+<li>Obtain the current password information for user200 from the shadow file:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep user200 /etc/shadow</code></pre></div><ol start="2">
+<li>Lock the account for user200:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>usermod -L user200 </code></pre></div><ol start="3">
+<li>Confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep user200 /etc/shadow</code></pre></div><ol start="4">
+<li>Unlock the account with either of the following:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>usermod -U user200
+or
+passwd -u user200</code></pre></div><ol start="5">
+<li>confirm</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep user200 /etc/shadow</code></pre></div><h3 id="lab-create-a-group-and-add-members-root">Lab: Create a Group and Add Members (root)</h3>
+<ol>
+<li>Create the group linuxadm with GID 5000:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groupadd -g 5000 linuxadm</code></pre></div><ol start="2">
+<li>Create a group called dba with the same GID as that of group linuxadm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groupadd -o -g 5000 dba</code></pre></div><ol start="3">
+<li>Confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep linuxadm /etc/group
+grep dba /etc/group</code></pre></div><ol start="4">
+<li>Add user1 as a secondary member of group dba using the usermod command. The existing membership for the user must remain intact.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>usermod -aG dba user1</code></pre></div><ol start="5">
+<li>Verify the updated group membership information for user1 by extracting the relevant entry from the group file, and running the id and groups command for user1:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep dba /etc/group
+id user1
+groups user1</code></pre></div><h3 id="lab-modify-and-delete-a-group-account-root">Lab: Modify and Delete a Group Account (root)</h3>
+<ol>
+<li>Alter the name of linuxadm to sysadm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groupmod -n sysadm linuxadm</code></pre></div><ol start="2">
+<li>Change the GID of sysadm to 6000:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groupmod -g 6000 sysadm</code></pre></div><ol start="3">
+<li>Confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>grep sysadm /etc/group
+grep linuxadm /etc/group</code></pre></div><ol start="4">
+<li>Delete sysadm group and confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groupdel sysadm
+grep sysadm /etc/group</code></pre></div><h3 id="lab-to-switch-from-user1-assuming-you-are-logged-in-as-user1-into-root-without-executing-the-startup-scripts">Lab: To switch from user1 (assuming you are logged in as user1) into root without executing the startup scripts</h3>
+<ol>
+<li></li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>su</code></pre></div><ol start="2">
+<li>switch to user100</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user100</code></pre></div><ol start="3">
+<li>See what whoami and logname reports now:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>whoami
+logname</code></pre></div><ol start="4">
+<li>use su as follows and execute this privileged command to obtain desired results:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>su -c &#39;firewall-cmd --list-services&#39;</code></pre></div><h3 id="lab-add-user1-to-sudo-file-but-only-for-the-cat-command">Lab: Add user1 to sudo file but only for the cat command.</h3>
+<ol>
+<li>Open up /etc/sudoers and add the following:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>user1 ALL=/usr/bin/cat</code></pre></div><ol start="2">
+<li>run cat as user1 with and without sudo:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/sudoers
+sudo cat /etc/sudoers</code></pre></div><h3 id="lab-add-user-and-command-aliases-to-the-sudoer-file">Lab: Add user and command aliases to the sudoer file.</h3>
+<ol>
+<li>Add the following to the bottom of the sudoers file:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>Cmnd_Alias PKGCMD = /usr/bin/yum, /usr/bin/rpm
+User_Alias PKGADM = user1, user100, user200 
+PKGADM ALL=PKGCMD</code></pre></div><ol start="2">
+<li>Run rpm or yum with sudo as one of the users.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo yum </code></pre></div><h3 id="lab-take-a-look-at-examples-in-the-sudoers-file">Lab: Take a look at examples in the sudoers file.</h3>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/sudoers</code></pre></div><h3 id="lab-viewing-owner-and-group-information">Lab: Viewing owner and group information</h3>
+<ol>
+<li>Create a file file1 as user1 in their home directory and exhibit the file’s long listing:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>touch file1
+ls -l file1</code></pre></div><ol start="2">
+<li>View the corresponding UID and GID instead, you can specify the -n option with the command:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -ln file1</code></pre></div><h3 id="lab-modify-file-owner-and-owning-group">Lab: Modify File Owner and Owning Group</h3>
+<ol>
+<li>Change into the /tmp directory and create file10 and dir10:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cd /tmp
+touch file10
+mkdir dir10</code></pre></div><ol start="2">
+<li>Check and validate that both attributes are set to user1:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>ls -l file10
+ls -ld dir10</code></pre></div><ol start="3">
+<li>Set the ownership of file10 to user100 and confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo chown user100 file10
+ls -l file10</code></pre></div><ol start="4">
+<li>Alter the owning group to dba and verify:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo chgrp dba file10
+ls -l file10</code></pre></div><ol start="5">
+<li>Change the ownership to user200 and owning group to user100 and confirm:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo chown user200:user100 file10</code></pre></div><ol start="6">
+<li>Modify the ownership to user200 and owning group to dba recursively on dir10 and validate:</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>sudo  chown -R user200:dba dir10
+ls -ld dir10</code></pre></div><h3 id="lab-create-user-and-configure-password-aging-root">Lab: Create User and Configure Password Aging (root)</h3>
+<ol>
+<li>Create group lnxgrp with GID 6000.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>groupadd lnxgrp -g 6000</code></pre></div><ol start="2">
+<li>Create user user5000 with UID 5000 and GID 6000. Assign this user a password.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>useradd -u 5000 -g 6000 user5000</code></pre></div><ol start="3">
+<li>Establish password aging attributes so that this user cannot change their password within 4 days after setting it and with a password validity of 30 days. This user should start getting warning messages for changing password 10 days prior to account lock down.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>chage -m 4 -M 30 -W 10 user5000</code></pre></div><ol start="4">
+<li>This user account needs to expire on the 20th of December, 2021.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>chage -E 2021-12-20 user5000</code></pre></div><h3 id="lab-6-2-lock-and-unlock-user-root">Lab 6-2: Lock and Unlock User (root)</h3>
+<ol>
+<li>Lock the user account for user5000 using the passwd command, and</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>passwd -l user5000</code></pre></div><ol start="2">
+<li>confirm by examining the change in the /etc/shadow file.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>cat /etc/shadow</code></pre></div><ol start="3">
+<li>Try to log in with user5000 and observe what happens.</li>
+</ol>
+<div class="highlight wrap-code"><pre tabindex="0"><code>su - user1
+su - user5000</code></pre></div><ol start="4">
+<li>Use the usermod command and unlock</li>
+</ol>
+<h2 id="review-questions">Review Questions</h2>
+<p>Q. Which command can be used to display the effective (current) username?
+A. <code>whoami </code></p>
+<p>Q. What is the recommended location to store custom sudo rules?
+A. The custom sudo rules should be stored in files under the /etc/sudoers.d directory.</p>
+<p>Q. What would the command passwd -l user10 do?
+A. This command will lock user10.</p>
+<p>Q. The chown command may be used to modify both ownership and group membership on a file. True or False?
+A. True.</p>
+<p>Q. What would the command passwd -n 7 -x 15 -w 3 user5 do?
+A. The command will set mindays to 7, maxdays to 15, and warndays to 3 for user5.</p>
+<p>Q. Write the two command names for managing all of the password aging attributes.
+A. The passwd and chage commands.</p>
+<p>Q. Which file has the default password aging settings defined?
+A. The /etc/login.defs file has the defaults for password aging defined.</p>
+<p>Q. What would the command chage -E 2020-10-22 user10 do?
+A. The command provided will set October 22, 2020 as the expiry date for user10.</p>
+<p>Q. What would the command chage -l user5 do?
+A. The command provided will display password aging attributes for user5.</p>
+<p>Q. Which two commands can be used to lock and unlock a user account?
+A. <code>usermod</code> and <code>passwd</code></p>
+<p>Q. When using sudo, log files record activities under the root user account. True or False?
+A. False. The activities are registered under the username who invokes the sudo command.</p>
+<p>Q. What is the difference between running the su command with and without the hyphen sign?
+A. With the dash sign the su command processes the specified user’s startup files, and it won’t without this sign.</p>
+<p>Q. What is the significance of the -o option with the groupadd and groupmod commands?
+A. The -o option lets the commands share a GID between two or more groups.</p>
+<p>Q. What would the entry user10 ALL=(ALL) NOPASSWD:ALL in the sudoers file imply?
+A. It will give user10 password-less access to all privileged commands.</p>
+<p>Q. The chgrp command may be used to modify both ownership and group membership on a file. True or False?
+A. False.</p>
+<p>Q. What would the command chage -d 0 user60 do?
+A. The command provided will force user60 to change their password at next login.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718799825" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718799825" defer></script>
+        <script src="/js/search.js?1718799825" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/6_adv_user_management/" class="active"><a class="padding" href="/linux/6_adv_user_management/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/6_adv_user_management/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1718799825" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718799825" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718799825" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718799825" defer></script>
+    <script src="/js/js-yaml.min.js?1718799825" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1718799825" defer></script>
+  </body>
+</html>
