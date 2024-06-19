@@ -5,6 +5,10 @@ title = ""
 What I am doing [Now](perfectdarkmode1.github.io/content/now/_index.md).
 
 I am also interested in digital minimalism, privacy, and personal development topics. Expect to see writings on those as well. 
+
+[Linux Stuff](/linux/_index)
+
+![](Pasted%20image%2020240619071242.png)
 ### Recent Posts:
 
 [![RHCSA Vagrant Lab](/images/vagrantmultivmdeployment.jpg?classes=inline&height=225px&lightbox=false)](linux/rhcsavagrantlabsetup/)
