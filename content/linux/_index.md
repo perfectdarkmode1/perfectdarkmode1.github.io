@@ -23,6 +23,8 @@ alwaysopen = false
 
 # Misc
 - [Using Man Pages](Using%20Man%20Pages.md)
+- [wsl2](wsl2.md)
+
 # Labs
 
 - [Turn a file into a block device](Turn%20a%20file%20into%20a%20block%20device.md)

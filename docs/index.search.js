@@ -1,8 +1,8 @@
 var relearn_search_index = [
   {
     "breadcrumb": "",
-    "content": "RHCSA Stuff rhcsanotes RHCSA_Tracker Exam_Environment How to Study for RHCSA study_points_for_exam rhel_vm1 rhcsavagrantlabsetup Fedora fedora_setup Misc Using Man Pages Labs Turn a file into a block device ",
-    "description": "RHCSA Stuff rhcsanotes RHCSA_Tracker Exam_Environment How to Study for RHCSA study_points_for_exam rhel_vm1 rhcsavagrantlabsetup Fedora fedora_setup Misc Using Man Pages Labs Turn a file into a block device ",
+    "content": "RHCSA Stuff rhcsanotes RHCSA_Tracker Exam_Environment How to Study for RHCSA study_points_for_exam rhel_vm1 rhcsavagrantlabsetup Fedora fedora_setup Misc Using Man Pages wsl2 Labs Turn a file into a block device ",
+    "description": "RHCSA Stuff rhcsanotes RHCSA_Tracker Exam_Environment How to Study for RHCSA study_points_for_exam rhel_vm1 rhcsavagrantlabsetup Fedora fedora_setup Misc Using Man Pages wsl2 Labs Turn a file into a block device ",
     "tags": [],
     "title": "Linux",
     "uri": "/linux/"
@@ -17,8 +17,8 @@ var relearn_search_index = [
   },
   {
     "breadcrumb": "",
-    "content": "Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.space/\nRSS Create and RSS feed of my site and subscribe to other feeds.\nFollow these sites:\nhttps://denshi.org/ https://drewdevault.com/ https://opensourcemusings.com/support https://www.mrmoneymustache.com/\nDWM Tile Manager http://thedarnedestthing.com/vim/wiki%20cheatsheet\n[[../Security/firefox_hardening]]\nBrowser Sync https://www.xbrowsersync.org/\nPrivacy tools https://www.privacytools.io/",
-    "description": "Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.space/\nRSS Create and RSS feed of my site and subscribe to other feeds.\nFollow these sites:\nhttps://denshi.org/ https://drewdevault.com/ https://opensourcemusings.com/support https://www.mrmoneymustache.com/\nDWM Tile Manager http://thedarnedestthing.com/vim/wiki%20cheatsheet\n[[../Security/firefox_hardening]]\nBrowser Sync https://www.xbrowsersync.org/\nPrivacy tools https://www.privacytools.io/",
+    "content": "Containers Calibre Web with docker distrobox vagrantguide Website Apache buildawebsite githubpageshugo hugorelearn SCSSandSASSinhugo Obsidian Free Obsidian sync Building a Dashboard How to use Templates How to use the dataview plugin YAML In Obsidian image_to_text Tracker Plugin Setup Git gitguide Vim vimguide Vim mode in bash Misc Calibre_Server emailserver iphonemigrate nextcloud pandoc Process-bookfusion-highlights proxmox_setup rsync Serial-in-on-linux Silverblue tmuxbook VS_Codium LEGO_BRICK_LABELS-CONTACT_SHEET Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.space/\nRSS Create and RSS feed of my site and subscribe to other feeds.\nFollow these sites:\nhttps://denshi.org/ https://drewdevault.com/ https://opensourcemusings.com/support https://www.mrmoneymustache.com/\nDWM Tile Manager http://thedarnedestthing.com/vim/wiki%20cheatsheet\n[[../Security/firefox_hardening]]\nBrowser Sync https://www.xbrowsersync.org/\nPrivacy tools https://www.privacytools.io/",
+    "description": "Containers Calibre Web with docker distrobox vagrantguide Website Apache buildawebsite githubpageshugo hugorelearn SCSSandSASSinhugo Obsidian Free Obsidian sync Building a Dashboard How to use Templates How to use the dataview plugin YAML In Obsidian image_to_text Tracker Plugin Setup Git gitguide Vim vimguide Vim mode in bash Misc Calibre_Server emailserver iphonemigrate nextcloud pandoc Process-bookfusion-highlights proxmox_setup rsync Serial-in-on-linux Silverblue tmuxbook VS_Codium LEGO_BRICK_LABELS-CONTACT_SHEET Upcoming Projects: Searx Create my own searx search engine\ngo to https://searx.",
     "tags": [],
     "title": "Tools",
     "uri": "/tools/"

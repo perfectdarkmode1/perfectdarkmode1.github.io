@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.124.1">
+    <meta name="generator" content="Relearn 6.0.0+tip">
+    <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+    <meta name="description" content="cd/ ls/ less/ wildcards/ cp/ mv
+# prompt = superuser
+Display current time/date
+$ date
+Calendar
+$ cal
+see disk space
+$ df
+See free memory
+$ free
+Close Terminal
+$ exit
+or
+ctrl&#43;d
+Navigation
+single files tree regardless of drives/ storage devices
+absolute pathnames
+begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)">
+    <meta name="author" content="David">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="cd/ ls/ less/ wildcards/ cp/ mv
+# prompt = superuser
+Display current time/date
+$ date
+Calendar
+$ cal
+see disk space
+$ df
+See free memory
+$ free
+Close Terminal
+$ exit
+or
+ctrl&#43;d
+Navigation
+single files tree regardless of drives/ storage devices
+absolute pathnames
+begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)">
+    <meta property="og:url" content="http://perfectdarkmode.com/linux/archive/exploring_the_system/">
+    <meta property="og:site_name" content="Perfect Dark Mode">
+    <meta property="og:description" content="cd/ ls/ less/ wildcards/ cp/ mv
+# prompt = superuser
+Display current time/date
+$ date
+Calendar
+$ cal
+see disk space
+$ df
+See free memory
+$ free
+Close Terminal
+$ exit
+or
+ctrl&#43;d
+Navigation
+single files tree regardless of drives/ storage devices
+absolute pathnames
+begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)">
+    <meta property="og:locale" content="en-us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Linux">
+    <meta itemprop="description" content="cd/ ls/ less/ wildcards/ cp/ mv
+# prompt = superuser
+Display current time/date
+$ date
+Calendar
+$ cal
+see disk space
+$ df
+See free memory
+$ free
+Close Terminal
+$ exit
+or
+ctrl&#43;d
+Navigation
+single files tree regardless of drives/ storage devices
+absolute pathnames
+begins with \ (root) &amp; follows full path
+relative pathnames
+starts from working directory
+how to use a relative pathname
+$ cd ./bin (./ is implied)">
+    <meta itemprop="wordCount" content="1760">
+    <title></title>
+    <link href="/css/fontawesome-all.min.css?1718812508" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718812508" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718812508" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718812508" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718812508" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718812508" rel="stylesheet">
+    <link href="/css/fonts.css?1718812508" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718812508" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718812508" rel="stylesheet">
+    <link href="/css/theme-zen-dark.css?1718812508" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718812508" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718812508" rel="stylesheet">
+    <link href="/css/print.css?1718812508" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718812508"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
+      window.index_js_url="/index.search.js";
+      // variant stuff
+      window.variants && variants.init( [ 'zen-dark' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-23N4FSG0HM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-23N4FSG0HM');
+</script>
+
+  </head>
+  <body class="mobile-support html" data-url="/linux/archive/exploring_the_system/">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-back" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="history.back()" type="button" title=""><i class="fa-fw fas fa-chevron-left"></i></button>
+            </div>
+
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+  <ul>
+    <li><a href="#less">less</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#directories">Directories</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#soft-link-symlink">soft link (symlink)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mkdir">mkdir</a></li>
+    <li><a href="#cp">cp</a></li>
+    <li><a href="#rmremove-files-and-directories">rm—Remove Files and Directories</a></li>
+    <li><a href="#ln---create-links">LN - Create Links</a>
+      <ul>
+        <li><a href="#hardlinks">Hardlinks</a></li>
+        <li><a href="#symbolic-links-1">Symbolic Links</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#moving-and-renaming-files">Moving and renaming files</a></li>
+    <li><a href="#creating-hard-links">Creating hard links</a></li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <span class="topbar-breadcrumbs highlightable">
+            
+          </span>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-about" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/about/" title=""><i class="fa-fw fas fa-address-card"></i> <span class="title">About</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-now" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/now/" title=""><i class="fa-fw fas fa-play"></i> <span class="title">Now</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-recommended" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/recommended/" title=""><i class="fa-fw fas fa-thumbs-up"></i> <span class="title">Recommended</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-booknotes" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/booknotes/" title=""><i class="fa-fw fas fa-file"></i> <span class="title">Book Notes</span></a>
+            </div>
+
+            <div class="topbar-button topbar-button-contact" data-content-empty="show" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/contact/" title=""><i class="fa-fw fas fa-envelope"></i> <span class="title">Contact</span></a>
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+        <div class="flex-block-wrapper">
+          <article class="default">
+            <header class="headline">
+            </header>
+
+<h1 id=""></h1>
+
+<p>cd/ ls/ less/ wildcards/ cp/ mv</p>
+<p># prompt = superuser</p>
+<p>Display current time/date</p>
+<p>$ date</p>
+<p>Calendar</p>
+<p>$ cal</p>
+<p>see disk space</p>
+<p>$ df</p>
+<p>See free memory</p>
+<p>$ free</p>
+<p>Close Terminal</p>
+<p>$ exit</p>
+<p>or</p>
+<p>ctrl+d</p>
+<p>Navigation</p>
+<p>single files tree regardless of drives/ storage devices</p>
+<p>absolute pathnames</p>
+<p>begins with \ (root) &amp; follows full path</p>
+<p>relative pathnames</p>
+<p>starts from working directory</p>
+<p>how to use a relative pathname</p>
+<p>$ cd ./bin (./ is implied)</p>
+<p>$ cd bin</p>
+<p>cd shortcuts</p>
+<p>$ cd -</p>
+<p>previous</p>
+<p>$ cd ~username</p>
+<p>home directory of user</p>
+<h1 id="exploring-the-system">Exploring the system</h1>
+<p>specify directory to ls</p>
+<p>$ ls /usr</p>
+<p>multiple directories</p>
+<p>$ ls ~ /usr</p>
+<p>sort by modification time</p>
+<p>$ ls -lt</p>
+<p>reverse order</p>
+<p>$ ls -lt &ndash;reverse</p>
+<p>View all even hidden</p>
+<p>$ ls -a or &ndash;all</p>
+<p>all except for . and ..</p>
+<p>$ ls -A</p>
+<p>view details about the directory itself</p>
+<p>$ ls -d or &ndash;directory (/)</p>
+<p>display file sizes in a human readable format</p>
+<p>$ ls -h or &ndash;human-readable</p>
+<p>reverse order results</p>
+<p>ls -r or &ndash;reverse</p>
+<p>sort by file size</p>
+<p>ls -s</p>
+<p>sort by modification time</p>
+<p>ls -t</p>
+<h1 id="file-access-rights">File Access Rights</h1>
+<p>- rw- r&ndash; r&ndash;</p>
+<p>type of file | file owner | group | everyone else</p>
+<p>Determine file type</p>
+<p>$ file filename</p>
+<p>- brief description of file&rsquo;s contents</p>
+<h1 id="view-text-files">View text files</h1>
+<h2 id="less">less</h2>
+<p>$ lesss /etc/passwd</p>
+<p>- press “q” to quit out of less</p>
+<p>less commands</p>
+<p>PAGE UP or b</p>
+<p>Scroll back one page</p>
+<p>PAGE DOWN or space</p>
+<p>Scroll forward one page</p>
+<p>Up arrow</p>
+<p>Scroll up one line</p>
+<p>Down arrow</p>
+<p>Scroll down one line</p>
+<p>G</p>
+<p>Move to the end of the text file</p>
+<p>1G or g</p>
+<p>Move to the beginning of the text file</p>
+<p>/characters</p>
+<p>Search forward to the next occurance of characters</p>
+<p>n</p>
+<p>earch the next occurance of the previous search</p>
+<p>h</p>
+<p>Display help screen</p>
+<p>q</p>
+<p>Quit less</p>
+<p>pagers</p>
+<p>programs that allow the easy viewing of long text documents in a page-by-page manner</p>
+<h1 id="take-a-guided-tour">Take a guided tour</h1>
+<p>- you can doubleclick a filename to copy it and middle click to paste</p>
+<p>- enter reset to clear a messy terminal</p>
+<h2 id="directories">Directories</h2>
+<p>/</p>
+<p>root</p>
+<p>/bin</p>
+<p>binaries that must be present for the system to boot and run</p>
+<p>/boot</p>
+<p>Linux kernel, initial RAM disk image (for drivers needed at boot time), and the boot loader.</p>
+<p>/boot/grub/grub.conf or /boot/grub/menu.lst</p>
+<p>used to configure the bootloader</p>
+<p>/boot/vmlinuz</p>
+<p>Linux Kernel</p>
+<p>/dev</p>
+<p>device nodes</p>
+<p>list of all devices the kernel understands</p>
+<p>/etc</p>
+<p>Contains all system-wide configuration files</p>
+<p>Contains shell scripts that start system services at boot</p>
+<p>Everything is readable text</p>
+<p>/etc/crontab</p>
+<p>defines when automated jobs will run</p>
+<p>/etc/fstab</p>
+<p>table of storage devices and their associated mount points</p>
+<p>/etc/passwd</p>
+<p>list of user accounts</p>
+<p>/home</p>
+<p>where user home directorie are stored</p>
+<p>/lost+found</p>
+<p>used for recovery</p>
+<p>/media</p>
+<p>Mount points for removable media</p>
+<p>/mnt</p>
+<p>mount point on older systems for manually added removable media</p>
+<p>/opt</p>
+<p>used to install optional (commercial) software</p>
+<p>/proc</p>
+<p>virtual filesystem maintained by the Linux kernel</p>
+<p>files within are peepholes into the Kernel itself</p>
+<p>/root</p>
+<p>home directory of the root account</p>
+<p>/sbin</p>
+<p>contains system binaries</p>
+<p>programs that perform vital system tasks usually reserved for the superuser</p>
+<p>/tmp</p>
+<p>storage of temporary files</p>
+<p>can be configured to empty on every reboot</p>
+<p>/usr</p>
+<p>very large</p>
+<p>programs and support files used by regular users</p>
+<p>/usr/bin</p>
+<p>contains executables installed by your linux distro</p>
+<p>/usr/lib/</p>
+<p>shared libraries for programs in /usr/bin/</p>
+<p>/usr/local</p>
+<p>system wide programs not included with distro</p>
+<p>/usr/local/bin</p>
+<p>programs compiled from source code</p>
+<p>empty unless you put something in it.</p>
+<p>/usr/sbin</p>
+<p>sys admin programs</p>
+<p>/usr/share</p>
+<p>shared data used by programs in /usr/sbin</p>
+<p>default config files</p>
+<p>icons</p>
+<p>backgrounds</p>
+<p>soundfiles</p>
+<p>etc.</p>
+<p>/usr/share/doc</p>
+<p>documentation files organized by package</p>
+<p>/var</p>
+<p>where data likely to change is stored</p>
+<p>databases</p>
+<p>spool files</p>
+<p>user mail</p>
+<p>etc.</p>
+<p>/var/log</p>
+<p>log files</p>
+<p>notable:</p>
+<p>/var/log/messages</p>
+<p>/var/log/syslog</p>
+<p>may need admin to view log files</p>
+<h1 id="symbolic-links">Symbolic Links</h1>
+<h2 id="soft-link-symlink">soft link (symlink)</h2>
+<p>file referenced by multiple names</p>
+<p>- used for version change</p>
+<p>- don&rsquo;t have to point programs to new file</p>
+<p>- can revert link if newer version has a bug</p>
+<p>Hard Links</p>
+<p>- allow files to have multiple names</p>
+<h1 id="chapter-4-manipulating-files-and-directories">Chapter 4: Manipulating Files and Directories</h1>
+<p>copy only files that do not exist in the destination directory or are newer than the versions in the destination directory.</p>
+<p>$ cp -u *.html destination</p>
+<h1 id="wildcards">Wildcards</h1>
+<p>using wildcards is also known as globbing</p>
+<p>select filenames based on patterns of characters</p>
+<p>Meanings</p>
+<ul>
+<li></li>
+</ul>
+<p>match any characters</p>
+<p>?</p>
+<p>match any single character</p>
+<p>[characters]</p>
+<p>matches any character that is a member of the set characters</p>
+<p>[!characters]</p>
+<p>matches any character that is not a member of the set characters</p>
+<p>[[:class:]]</p>
+<p>matches any character that is a member of the specified class</p>
+<p>Common character classes</p>
+<p>[:alum:]</p>
+<p>alphanumeric</p>
+<p>[:alpha:]</p>
+<p>alphabetic character</p>
+<p>[:digit:]</p>
+<p>numeral</p>
+<p>[:lower:]</p>
+<p>lowecase letter</p>
+<p>[:upper:]</p>
+<p>uppercase letter</p>
+<p>Wildcard Examples</p>
+<ul>
+<li></li>
+</ul>
+<p>all files</p>
+<p>g*</p>
+<p>any file beginning with g</p>
+<p>b*.txt</p>
+<p>any file begginning with b followed by any characters ending with .txt</p>
+<p>Data???</p>
+<p>begins with data followed by 3 characters</p>
+<p>[abc]*</p>
+<p>begins with a, a b, or a c</p>
+<p>BACKUP.[0-9][0-9][0-9]</p>
+<p>begins with BACKUP followed by exactly 3 numerals</p>
+<p>[[:upper:]]*</p>
+<p>any beginning with an upper case letter</p>
+<p>[![:digit:]]*</p>
+<p>any not beginning with numeral</p>
+<p>*[[:lower:]123]</p>
+<p>any ending with lowercase letter or 1, 2 or 3</p>
+<p>Wildcards work in the GUI</p>
+<p>nautilus (the file manager for GNOME)</p>
+<p>select files by pressing ctrl-S and enter a file selection</p>
+<p>pattern with wildcards and the files in the currently selected directory will be selected</p>
+<p>Dolphin and Konqueror (file managers for KDE)</p>
+<p>enter wildcards on the location bar</p>
+<p>wildcards can be used on any command that accepts filenames as arguments</p>
+<h2 id="mkdir">mkdir</h2>
+<p>$ mkdir dir1 dir2 dir3</p>
+<h2 id="cp">cp</h2>
+<p>copy files or directories</p>
+<p>$ cp item1 item2</p>
+<p>$ cp item.. dir</p>
+<p>cp options</p>
+<p>-a, &ndash;archive</p>
+<p>copy files and directories and their attributes</p>
+<p>Normally, copies take on the default attributes of the user performing the copy.</p>
+<p>-i, &ndash;interactive</p>
+<p>prompt Before overwriting</p>
+<p>cp will silently (meaning there will be no warning) overwrite files.</p>
+<p>-r, &ndash;recursive</p>
+<p>Recursively copy directories and their contents</p>
+<p>This option (or the -a option) is required when copying directories</p>
+<p>-u, &ndash;update</p>
+<p>When copying files from one directory to another, only copy files that either don’t exist or are newer than the existing corresponding files n the destination directory.</p>
+<p>-v, &ndash;verbose</p>
+<p>Display informative messages</p>
+<p>cp Examples</p>
+<p>cp file1 file2</p>
+<p>If file2 exists, it is overwritten with the contents of file1. If file2 does not exist, it is created</p>
+<p>cp -i file1 file2</p>
+<p>prompted</p>
+<p>cp file1 file2 dir1</p>
+<p>Copy file1 and file2 into directory dir1. The directory dir1 must already exist.</p>
+<p>cp dir1/* dir2</p>
+<p>copy all the files in dir1 into dir2. The directory dir2 must already exist</p>
+<p>cp -r dir1 dir2</p>
+<p>Copy the contents of directory dir1 to directory dir2. If directory dir2 does not exist, it is created and, after the copy, will contain the same contents as directory dir1. If directory dir2 does exist, then directory dir1 (and its contents) will be copied into dir2.</p>
+<p>mv</p>
+<p>file moving and file renaming</p>
+<p>the original filename no longer exists after the operation</p>
+<p>mv Options</p>
+<p>-i, &ndash;interactive</p>
+<p>prompt</p>
+<p>If this option is not specified, mv will silently overwrite files</p>
+<p>-u, &ndash;update</p>
+<p>When moving files from one directory to another, only move files that either don’t exist or are newer than the existing corresponding files in the destination directory.</p>
+<p>-v, &ndash;verbose</p>
+<p>Display informative messages as the move is performed</p>
+<p>mv Examples</p>
+<p>mv file1 file2</p>
+<p>Move file1 to file2. If file2 exists, it is overwritten with the contents of file1. If file2 does not exist, it is created. In either case, file1 ceases to exist.</p>
+<p>mv -i file1 file2</p>
+<p>Same as the previous command, except that if file2 exists, the user is prompted before it is overwritten.</p>
+<p>mv file1 file2 dir1</p>
+<p>Move file1 and file2 into directory dir1. The directory dir1 must already exist</p>
+<p>mv dir1 dir2</p>
+<p>If directory dir2 does not exist, create directory dir2 and move the contents of directory dir1 into dir2 and delete directory dir1. If directory dir2 does exist, move directory dir1 (and its contents) into directory dir2</p>
+<h2 id="rmremove-files-and-directories">rm—Remove Files and Directories</h2>
+<p>rm item&hellip;</p>
+<p>Useful Options and Examples</p>
+<p>-i, &ndash;interactive</p>
+<p>Before deleting an existing file, prompt the user for confirmation. If this option is not specified, rm will silently delete files.</p>
+<p>-r, &ndash;recursive</p>
+<p>Recursively delete directories. This means that if a directory being deleted has subdirectories, delete them too. To delete a directory, this option must be specified.</p>
+<p>-f, &ndash;force</p>
+<p>Ignore nonexistent files and do not prompt. This overrides the &ndash;interactive option.</p>
+<p>-v, &ndash;verbose</p>
+<p>Display informative messages as the deletion is performed.</p>
+<p>Linux do not have an undelete command</p>
+<p>test the wildcard first with ls.</p>
+<p>rm Examples</p>
+<p>rm file1</p>
+<p>Delete file1 silently.</p>
+<p>rm -i file1</p>
+<p>Same as the previous command, except that the user is prompted for confirmation before the deletion is performed.</p>
+<p>rm -r file1 dir1</p>
+<p>Delete file1 and dir1 and its contents.</p>
+<p>rm -rf file1 dir1</p>
+<p>Same as the previous command, except that if either file1 or dir1 does not exist, rm will continue silently.</p>
+<h2 id="ln---create-links">LN - Create Links</h2>
+<p>ln file link</p>
+<p>Create a hard link</p>
+<p>ln -s item link</p>
+<p>Create a symbolic link</p>
+<h3 id="hardlinks">Hardlinks</h3>
+<p>Cannot reference a file outside of it&rsquo;s own filesystem</p>
+<p>Can&rsquo;t reference a directory</p>
+<h3 id="symbolic-links-1">Symbolic Links</h3>
+<p>Link will point to nothing if original file gets deleted</p>
+<p>Operates like a windows shortcut</p>
+<h1 id="lab-building-a-playground">Lab: Building a playground</h1>
+<h4 id="create-directories">Create Directories</h4>
+<p>cd</p>
+<p>mkdir playground</p>
+<p>cd playground</p>
+<p>mkdir dir1 dir2</p>
+<h4 id="copy-files">Copy files</h4>
+<p>cp /etc/passwd .</p>
+<p>ls –l</p>
+<p>cp -v /etc/ passwd . (with –v just to see what it does)</p>
+<p>Overwrote first copy with no warning</p>
+<p>To get a warning</p>
+<p>-I option</p>
+<h2 id="moving-and-renaming-files">Moving and renaming files</h2>
+<p>Moving fun around</p>
+<p>Vagrant@server1:~$ mv passwd fun</p>
+<p>vagrant@server1:~$ ls</p>
+<p>dir1  dir2  fun  playground</p>
+<p>vagrant@server1:~$ mv dir* playground</p>
+<p>vagrant@server1:~$ ls</p>
+<p>fun  playground</p>
+<p>vagrant@server1:~$ mv fun playground/</p>
+<p>vagrant@server1:~$ ls</p>
+<p>playground</p>
+<p>vagrant@server1:~$ cd playground</p>
+<p>vagrant@server1:~/playground$ ls</p>
+<p>dir1  dir2  fun</p>
+<p>vagrant@server1:~/playground$ mv fun dir1</p>
+<p>vagrant@server1:~/playground$ mv dir1/fun dir2</p>
+<p>vagrant@server1:~/playground$ mv fun dir2/fun .</p>
+<p>vagrant@server1:~/playground$ mv fun dir1</p>
+<p>vagrant@server1:~/playground$ ls</p>
+<p>dir1  dir2</p>
+<p>vagrant@server1:~/playground$ mv dir1 dir2</p>
+<p>vagrant@server1:~/playground$ ls -l dir2</p>
+<p>total 4</p>
+<p>drwxrwxr-x 2 vagrant vagrant 4096 Nov  4 12:00 dir1</p>
+<p>vagrant@server1:~/playground$ ls -l dir2/dir1</p>
+<p>total 4</p>
+<p>-rw-r&ndash;r&ndash; 1 vagrant vagrant 1457 Nov  4 11:51 fun</p>
+<p>vagrant@server1:~/playground$ mv dir2/dir1 .</p>
+<p>vagrant@server1:~/playground$ mv dir1/fun .</p>
+<p>vagrant@server1:~/playground$ ls</p>
+<p>dir1  dir2  fun</p>
+<h2 id="creating-hard-links">Creating hard links</h2>
+<p>vagrant@server1:~/playground$ ln fun fun-hard</p>
+<p>vagrant@server1:~/playground$ ln fun dir1/fun-hard</p>
+<p>vagrant@server1:~/playground$ ln fun dir2/fun-hard</p>
+<p>vagrant@server1:~/playground$ ls -l</p>
+<p>total 16</p>
+<p>drwxrwxr-x 2 vagrant vagrant 4096 Nov  4 12:08 dir1</p>
+<p>drwxrwxr-x 2 vagrant vagrant 4096 Nov  4 12:09 dir2</p>
+<p>-rw-r&ndash;r&ndash; 4 vagrant vagrant 1457 Nov  4 11:51 fun</p>
+<p>-rw-r&ndash;r&ndash; 4 vagrant vagrant 1457 Nov  4 11:51 fun-hard</p>
+<p>Note the second field is how many hard links there are for a file. We created 3 and there is one hard link per file created by default.</p>
+
+            <footer class="footline">
+            </footer>
+          </article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation showVisitedLinks">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+<img src="/images/perfectlogo.png" alt="perfect dark mode">
+
+        </div>
+
+        <search>
+          <div class="searchbox default-animation">
+            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/js/auto-complete.js?1718812508" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718812508" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718812508" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718812508" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718812508" defer></script>
+        <script src="/js/search.js?1718812508" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+          <li data-nav-id="/linux/" class="parent "><a class="padding" href="/linux/">Linux<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-9e5aaccdf48687824ccd3b3097af8e41" class="morespace collapsible-menu">
+          <li data-nav-id="/linux/fedora_setup/" class=""><a class="padding" href="/linux/fedora_setup/">Fedora Desktop Setup<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsavagrantlabsetup/" class=""><a class="padding" href="/linux/rhcsavagrantlabsetup/">RHCSA Lab Using Vagrant<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/rhcsanotes/" class=""><a class="padding" href="/linux/rhcsanotes/">RHCSA Notes<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/linux/archive/exploring_the_system/" class="active"><a class="padding" href="/linux/archive/exploring_the_system/"><i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="" class=""><span class="padding">images</span></li>
+          <li data-nav-id="/networking/" class=""><a class="padding" href="/networking/">Networking<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-ec0ce2ce30f7ea4f73b681ec6981b84f" class="morespace collapsible-menu">
+          <li data-nav-id="/networking/ccna_spaced_repetition/" class=""><a class="padding" href="/networking/ccna_spaced_repetition/">How to Study for CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/resources_for_passing_ccna/" class=""><a class="padding" href="/networking/resources_for_passing_ccna/">Resources I used to Pass CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/networking/things_to_learn_after_ccna/" class=""><a class="padding" href="/networking/things_to_learn_after_ccna/">What to Learn After CCNA<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          <li data-nav-id="/tools/" class=""><a class="padding" href="/tools/">Tools<i class="fa-fw fas fa-check read-icon"></i></a><ul id="R-subsections-cff67d57e00d6d598d882def3568f700" class="morespace collapsible-menu">
+          <li data-nav-id="/tools/process-bookfusion-highlights/" class=""><a class="padding" href="/tools/process-bookfusion-highlights/">How to Process Bookfusion Highlights in Vim<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/nextcloud/" class=""><a class="padding" href="/tools/nextcloud/">Nextcloud Guide<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/hugorelearn/" class=""><a class="padding" href="/tools/hugorelearn/">How to Set up Hugo Relearn Theme<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/buildawebsite/" class=""><a class="padding" href="/tools/buildawebsite/">Building a Minimalist Website with Hugo<i class="fa-fw fas fa-check read-icon"></i></a></li>
+          <li data-nav-id="/tools/calibre-web-with-docker/" class=""><a class="padding" href="/tools/calibre-web-with-docker/">Calibre Web With Docker<i class="fa-fw fas fa-check read-icon"></i></a></li></ul></li>
+          </ul>
+        </div>
+        <div id="R-shortcuts">
+          <div class="nav-title padding">More</div>
+          <ul class="space">
+            <li><a class="padding" href="https://github.com/perfectdarkmode1"><i class='fab fa-fw fa-github'></i> GitHub</a></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showVisitedLinks showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks showVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/linux/archive/exploring_the_system/" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks showVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+	    <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/js/clipboard.min.js?1718812508" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718812508" defer></script>
+    <script>
+      function useMathJax( config ){
+        window.MathJax = Object.assign( window.MathJax || {}, {
+          tex: {
+            inlineMath:  [['\\(', '\\)'], ['$',  '$']],  
+            displayMath: [['\\[', '\\]'], ['$$', '$$']], 
+          },
+          options: {
+            enableMenu: false 
+          }
+        }, config );
+      }
+      useMathJax( JSON.parse("{}") );
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="/js/d3/d3-color.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718812508" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718812508" defer></script>
+    <script src="/js/js-yaml.min.js?1718812508" defer></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
+    <script>
+      window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
+    </script>
+    <script src="/js/theme.js?1718812508" defer></script>
+  </body>
+</html>
