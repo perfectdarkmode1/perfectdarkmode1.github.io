@@ -8,7 +8,7 @@ I am also interested in digital minimalism, privacy, and personal development to
 
 [Linux Stuff](/linux/_index)
 
-![](Pasted%20image%2020240619071242.png)
+![](/images/Pasted%20image%2020240619071242.png)
 ### Recent Posts:
 
 [![RHCSA Vagrant Lab](/images/vagrantmultivmdeployment.jpg?classes=inline&height=225px&lightbox=false)](linux/rhcsavagrantlabsetup/)
