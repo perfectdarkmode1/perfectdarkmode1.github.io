@@ -1,5 +1,5 @@
 +++ 
-archetype = "chapter" 
+archetype = "moc" 
 title = "Networking" 
 weight = 2
 alwaysopen = false

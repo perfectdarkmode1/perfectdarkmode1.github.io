@@ -1,8 +1,9 @@
 +++ 
-archetype = "chapter" 
+archetype = "default" 
 title = "images" 
-weight = 1
+weight = 5
 alwaysopen = false
 [_build]
-  render = "never"
+  render = "always"
+  list = "never"
 +++

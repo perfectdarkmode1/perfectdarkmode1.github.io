@@ -1,25 +1,25 @@
 +++ 
-archetype = "chapter" 
+archetype = "moc" 
 title = "Tools" 
-weight = 4
+weight = 3
 alwaysopen = false
 [_build]
   render = "always"
 +++
 
-# Containers
+## Containers
 - [Calibre Web with docker](Calibre%20Web%20with%20docker.md)
 - [distrobox](distrobox.md)
 - [vagrantguide](vagrantguide.md)
 
-# Website
+## Website
 - [Apache](Apache.md)
 - [buildawebsite](buildawebsite.md)
 - [githubpageshugo](githubpageshugo.md)
 - [hugorelearn](hugorelearn.md)
 - [SCSSandSASSinhugo](SCSSandSASSinhugo.md)
 
-# Obsidian
+## Obsidian
 
 - [Free Obsidian sync](Free%20Obsidian%20sync.md)
 - [Building a Dashboard](Building%20a%20Dashboard.md)
@@ -29,14 +29,14 @@ alwaysopen = false
 - [image_to_text](image_to_text.md)
 - [Tracker Plugin](Tracker%20Plugin.md)
 - [Setup](Setup.md)
-# Git
+## Git
 - [gitguide](gitguide.md)
 
-# Vim
+## Vim
 - [vimguide](vimguide.md)
 - [Vim mode in bash](Vim%20mode%20in%20bash.md)
 
-# Misc
+## Misc
 - [Calibre_Server](Calibre_Server.md)
 - [emailserver](emailserver.md)
 - [iphonemigrate](iphonemigrate.md)
@@ -50,8 +50,7 @@ alwaysopen = false
 - [tmuxbook](tmuxbook.md)
 - [VS_Codium](VS_Codium.md)
 - [LEGO_BRICK_LABELS-CONTACT_SHEET](LEGO_BRICK_LABELS-CONTACT_SHEET.pdf)
-
-# 
+ 
 ## Upcoming Projects:
 
 ### Searx 
