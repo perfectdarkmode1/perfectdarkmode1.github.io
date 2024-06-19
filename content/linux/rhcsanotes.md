@@ -5,9 +5,12 @@ draft = false
 alwaysopen = false
 +++ 
 
-![RHCSA Red Hat Enterprise Linux 9](https://m.media-amazon.com/images/I/61nDZ7iz85L._SL1360_.jpg?classs=inline&height=125px)RHCSA Red Hat Enterprise Linux 8 (UPDATED) - Asghar 
 
-Here are my notes from Asghar Gori's RHCSA book. Buy the book or read the reviews [here.](https://www.amazon.com/RHCSA-Red-Enterprise-Linux-UPDATED/dp/1775062147/ref=sr_1_6?crid=3TDQLDWCOKJGL&keywords=rhcsa&qid=1701790165&sprefix=rhcs%2Caps%2C128&sr=8-6)
+
+![RHCSA 9 - Asghar Ghori](https://m.media-amazon.com/images/I/61nDZ7iz85L._SL1360_.jpg?classes=inline&height=175px)
+
+
+Here are my notes from Asghar Gori's RHCSA book. Buy the book or read the reviews [here.](https://www.amazon.com/RHCSA-Red-Hat-Enterprise-Linux/dp/1775062163/ref=sr_1_5?crid=2I2WWIIUSBJTS&dib=eyJ2IjoiMSJ9.2cKkf0SVI8xiomxkQTLFdBIEKbc49QuIPVsHACMMTYzz4pdrJTIwdtMFfjNNmDPyqPrL2VYFRocsneNku2P1MtH7gXk7YbF0sC6U9-dYMU5wlAWxikYs-sj22p5QuaM_XtjaT5LcbsQwOuuxrFO3XBfnKZzjA8gEL5lVmHbtQcnBNYghDRqnG3HdIqtdmboHHXvzT2iQqBEOK61foukrWBrj6R3ZzPYnZ7ApPXU36qs.v2EwAB-KyjpyzfN0rZogW8boUhf2xdc0KN0HwhpUUDs&dib_tag=se&keywords=rhcsa+9&qid=1718810780&sprefix=rhcsa+9%2Caps%2C152&sr=8-5)
 
 Track my RHCSA progress: [RHCSA_Tracker](RHCSA_Tracker.md)
 
