@@ -9,7 +9,7 @@ alwaysopen = false
 
 Here are my notes from Asghar Gori's RHCSA book. Buy the book or read the reviews [here.](https://www.amazon.com/RHCSA-Red-Enterprise-Linux-UPDATED/dp/1775062147/ref=sr_1_6?crid=3TDQLDWCOKJGL&keywords=rhcsa&qid=1701790165&sprefix=rhcs%2Caps%2C128&sr=8-6)
 
-- [Chapter 1: Installation](/linux/rhcsa/1_installation)
+- [Chapter 1: installation](1_installation.md)
 - [Chapter 2: Interaction](/linux/rhcsa/2_interaction)
 - [Chapter 3: File Management](/linux/rhcsa/3_file_management)
 - [Chapter 4: Advanced File Management](/linux/rhcsa/4_adv_file_management)
