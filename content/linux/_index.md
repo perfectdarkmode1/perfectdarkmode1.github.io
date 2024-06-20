@@ -9,17 +9,16 @@ alwaysopen = false
 
 ## RHCSA Stuff
 
-- [rhcsanotes](rhcsanotes.md)
-- [RHCSA_Tracker](RHCSA_Tracker.md)
-- [Exam_Environment](Exam_Environment.md)
+- [RHCSA Notes](RHCSA%20Notes.md)
+- [RHCSA Study Tracker](RHCSA%20Study%20Tracker.md)
+- [Redhat Exam Environment](Redhat%20Exam%20Environment.md)
 - [How to Study for RHCSA](How%20to%20Study%20for%20RHCSA.md)
-- [study_points_for_exam](study_points_for_exam.md)
-- [rhel_vm1](rhel_vm1.md)
-- [rhcsavagrantlabsetup](rhcsavagrantlabsetup.md)
+- [RHCSA Study Points](RHCSA%20Study%20Points.md)
+- [RHCSA Vagrant Lab Setup](RHCSA%20Vagrant%20Lab%20Setup.md)
 
 ## Fedora
 
-- [fedora_setup](fedora_setup.md)
+- [My Fedora Setup](My%20Fedora%20Setup.md)
 
 ## Misc
 - [Using Man Pages](Using%20Man%20Pages.md)
