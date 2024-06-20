@@ -43,17 +43,17 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
 [Unit] Description=Calibre library server After=network.target [Service] Type=simple User=root Group=root ExecStart=/usr/bin/calibre-server --enable-auth --enable-local-write /opt/calibre/your_library --listen-on 127.0.0.1 [Install] WantedBy=multi-user.targetYou can change the port with the --port prefix.">
     <meta itemprop="wordCount" content="219">
     <title></title>
-    <link href="/css/fontawesome-all.min.css?1718846168" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718846168" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1718846168" rel="stylesheet">
-    <link href="/css/auto-complete.css?1718846168" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718846168" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1718846168" rel="stylesheet">
-    <link href="/css/fonts.css?1718846168" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718846168" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1718846168" rel="stylesheet">
-    <link href="/css/theme-zen-dark.css?1718846168" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1718846168" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1718846168" rel="stylesheet">
-    <link href="/css/print.css?1718846168" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1718846168"></script>
+    <link href="/css/fontawesome-all.min.css?1718926403" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718926403" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718926403" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718926403" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718926403" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718926403" rel="stylesheet">
+    <link href="/css/fonts.css?1718926403" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718926403" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718926403" rel="stylesheet">
+    <link href="/css/theme-amoled.css?1718926403" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718926403" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718926403" rel="stylesheet">
+    <link href="/css/print.css?1718926403" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718926403"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -61,7 +61,7 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
       window.relearn.absBaseUri='http:\/\/perfectdarkmode.com';
       window.index_js_url="/index.search.js";
       // variant stuff
-      window.variants && variants.init( [ 'zen-dark' ] );
+      window.variants && variants.init( [ 'amoled' ] );
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -182,11 +182,11 @@ Creating a service Create a new file /etc/systemd/system/calibre-server.service
 </span></span><span style="display:flex;"><span>systemctl reload nginx</span></span></code></pre></div><p>Issue a Let&rsquo;s Encrypt certificate. <a href="https://landchad.net/certbot" rel="external" target="_blank">Detailed instructions and additional information</a>.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#e2e4e5;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>certbot --nginx</span></span></code></pre></div><p>Add CNAME record</p>
 <p>Now just go to <strong>calibre.example.org</strong>. The server will request an username and a password.</p>
-<p><a href="#R-image-2fb84fec305118589dd4ba4533015630" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-2fb84fec305118589dd4ba4533015630"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png"></a></p>
+<p><a href="#R-image-492dd13f90fe6ab7c8b77f0af7d1fa54" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-492dd13f90fe6ab7c8b77f0af7d1fa54"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-1.png"></a></p>
 <p>After login you will see something like this.</p>
-<p><a href="#R-image-93922e5c0da52fbabd5b49d4eba875ee" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-93922e5c0da52fbabd5b49d4eba875ee"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png"></a></p>
+<p><a href="#R-image-8e8bdf161a609c46a3de1fadea4fe76a" class="lightbox-link"><img alt="calibre" class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-8e8bdf161a609c46a3de1fadea4fe76a"><img alt="calibre" class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="https://landchad.net/pix/calibre/calibre-2.png"></a></p>
 <p>De DRM Books</p>
 <p>Download kindle verion 1.26 <a href="https://www.filehorse.com/download-kindle-for-pc/40502/download/" rel="external" target="_blank">https://www.filehorse.com/download-kindle-for-pc/40502/download/</a></p>
 <p>filename: KindleForPC-installer-1.26.55076.exe<br>
@@ -224,12 +224,12 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1718846168" defer></script>
-        <script src="/js/lunr/lunr.min.js?1718846168" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1718846168" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1718846168" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1718846168" defer></script>
-        <script src="/js/search.js?1718846168" defer></script>
+        <script src="/js/auto-complete.js?1718926403" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718926403" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718926403" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718926403" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718926403" defer></script>
+        <script src="/js/search.js?1718926403" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -278,7 +278,7 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-variant">Theme</label>
                     <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-select-variant-zen-dark" value="zen-dark" selected>Zen Dark</option>
+                      <option id="R-select-variant-amoled" value="amoled" selected>Amoled</option>
                     </select>
                   </div>
                   <div class="clear"></div>
@@ -303,8 +303,8 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1718846168" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1718846168" defer></script>
+    <script src="/js/clipboard.min.js?1718926403" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718926403" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -320,20 +320,20 @@ Found here: <a href="https://www.mobileread.com/forums/showthread.php?t=283371" 
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1718846168" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1718846168" defer></script>
-    <script src="/js/js-yaml.min.js?1718846168" defer></script>
+    <script src="/js/d3/d3-color.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718926403" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718926403" defer></script>
+    <script src="/js/js-yaml.min.js?1718926403" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1718846168" defer></script>
+    <script src="/js/theme.js?1718926403" defer></script>
   </body>
 </html>
