@@ -25,7 +25,6 @@ Set date on file1 to 2019-09-20: touch -d 2019-09-20 file1Change modification ti
 Create dir1 verbosely: mkdir dir1 -vCreate dir2/perl/perl5: mkdir -vp dir2/perl/perl5Commands for displaying file contents cat more less head tail cat command Concatenate and print files to standard output. Flags
 Redirect output to specified file: cat &gt; catfile1tac command Display file contents in reverse ">
     <meta property="og:url" content="http://perfectdarkmode.com/linux/3_file_management/">
-    <meta property="og:site_name" content="Perfect Dark Mode">
     <meta property="og:description" content="Chapter 3 RHCSA Notes - File Management 7 File types regular directory block special device character special device symbolic link named pipe socket Commands
 ls stat file Regular files Text or binary data. Represented by hyphen (-). Directory Files Identified by the letter “d” in the beginning of ls output. Block and Character (raw) Special Device Files All hardware has device file in /dev/. Used by system to communicate with device. Identified by “c” or “b” in ls listing. Each device driver is assigned a unique number called the major number Character device reads and writes 8 bits at a time Serial Block device Receives data in fixed block size determined by drivers 512 or 4096 bytes Major Number Used by kernel to recognize device driver type. Column 5 of ls listing. ls -l /dev/sdaMinor Number Each device controlled by the same device driver gets a Minor Number Applies to disk partitions as well. The same driver can control multiple devices of the same type. Column 6 of ls listing ls -l /dev/sdaSymbolic Links Shortcut to another file or directory. Begins with “l” in ls listing. ls -l /usr/sbin/vigr lrwxrwxrwx. 1 root root 4 Jul 21 14:36 /usr/sbin/vigr -&gt; vipwCompression and Archiving Archiving Preserves file attributes such as ownership, owning group, and timestamp. Preserves extended file attributes such as ACLs and SELinux contexts. Syntax of tar and star are identical. star command tar (tape archive) command Create, append, update, list, and extract files/directory tree to/from a file called a tarball(tarfile) Can compress a tarball after it’s been created. Automatically removes “/” so you do not have to specify the full pathname when restoring files at any location. flags tar -c :: Create tarball. tar -f :: Specify tarball name. tar -p :: Preserve file permissions. Default for the root user. Specify this if you create an archive as a normal user. tar -r :: Append files to the end of an existing uncompressed tarball. tar -t :: List contents of a tarball. tar -u :: Append files to the end of an existing uncompressed tarball provided the specified files being added are newer. -z -j -C
 Archive entire home directory: tar -cvf /tmp/home.tar /homeArchive two specific files: tar -cvf /tmp/files.tar /etc/passwd /etc/yum.confAppend files in a directory to existing tarball: tar -rvf /tmp/files.tar /etc/yum.repos.dList what is included in home.tar tarball: tar -tvf /tmp/files.tarRestore single file and confirm: tar -xf /tmp/files.tar etc/yum.conf ls -l etc/yum.confRestore all files and confirm: tar -xf /tmp/files.tar lsCreate a gzip-compressed tarball under /tmp for /home: tar -czf /tmp/home.tar.gz /homeCreate bzip2-compressed tarball under /tmp for /home: sudo tar -cjf /tmp/home.tar.bz2 /homeList content of gzip-compressed archive without uncompressing it: tar -tf /tmp/home.tar.gzExtract files from gzip-compressed tarball in the current directory: tar -xf /tmp/home.tar.gzExtract files from the bzip2-compressed tarball under /tmp: tar -xf /tmp/home.tar.bz2 -C /tmpCompression tools gzip (gunzip) command Create a compressed file for each of the specified files. Adds .gz extension. Flags
@@ -47,17 +46,17 @@ Create dir1 verbosely: mkdir dir1 -vCreate dir2/perl/perl5: mkdir -vp dir2/perl/
 Redirect output to specified file: cat &gt; catfile1tac command Display file contents in reverse ">
     <meta itemprop="wordCount" content="1953">
     <title></title>
-    <link href="/css/fontawesome-all.min.css?1718926402" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718926402" rel="stylesheet"></noscript>
-    <link href="/css/nucleus.css?1718926402" rel="stylesheet">
-    <link href="/css/auto-complete.css?1718926402" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718926402" rel="stylesheet"></noscript>
-    <link href="/css/perfect-scrollbar.min.css?1718926402" rel="stylesheet">
-    <link href="/css/fonts.css?1718926402" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718926402" rel="stylesheet"></noscript>
-    <link href="/css/theme.css?1718926402" rel="stylesheet">
-    <link href="/css/theme-amoled.css?1718926402" rel="stylesheet" id="R-variant-style">
-    <link href="/css/chroma-relearn-dark.css?1718926402" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/css/variant.css?1718926402" rel="stylesheet">
-    <link href="/css/print.css?1718926402" rel="stylesheet" media="print">
-    <script src="/js/variant.js?1718926402"></script>
+    <link href="/css/fontawesome-all.min.css?1718935575" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fontawesome-all.min.css?1718935575" rel="stylesheet"></noscript>
+    <link href="/css/nucleus.css?1718935575" rel="stylesheet">
+    <link href="/css/auto-complete.css?1718935575" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/auto-complete.css?1718935575" rel="stylesheet"></noscript>
+    <link href="/css/perfect-scrollbar.min.css?1718935575" rel="stylesheet">
+    <link href="/css/fonts.css?1718935575" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/css/fonts.css?1718935575" rel="stylesheet"></noscript>
+    <link href="/css/theme.css?1718935575" rel="stylesheet">
+    <link href="/css/theme-amoled.css?1718935575" rel="stylesheet" id="R-variant-style">
+    <link href="/css/chroma-relearn-dark.css?1718935575" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/css/variant.css?1718935575" rel="stylesheet">
+    <link href="/css/print.css?1718935575" rel="stylesheet" media="print">
+    <script src="/js/variant.js?1718935575"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -621,7 +620,7 @@ ls</code></pre></div><p>Erase the file and directory created for this lab.</p>
       <div id="R-header-topbar" class="default-animation"></div>
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
-<img src="/images/perfectlogo.png" alt="perfect dark mode">
+<img src="/images/V.png" alt="perfect dark mode">
 
         </div>
 
@@ -636,12 +635,12 @@ ls</code></pre></div><p>Erase the file and directory created for this lab.</p>
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/js/auto-complete.js?1718926402" defer></script>
-        <script src="/js/lunr/lunr.min.js?1718926402" defer></script>
-        <script src="/js/lunr/lunr.stemmer.support.min.js?1718926402" defer></script>
-        <script src="/js/lunr/lunr.multi.min.js?1718926402" defer></script>
-        <script src="/js/lunr/lunr.en.min.js?1718926402" defer></script>
-        <script src="/js/search.js?1718926402" defer></script>
+        <script src="/js/auto-complete.js?1718935575" defer></script>
+        <script src="/js/lunr/lunr.min.js?1718935575" defer></script>
+        <script src="/js/lunr/lunr.stemmer.support.min.js?1718935575" defer></script>
+        <script src="/js/lunr/lunr.multi.min.js?1718935575" defer></script>
+        <script src="/js/lunr/lunr.en.min.js?1718935575" defer></script>
+        <script src="/js/search.js?1718935575" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -715,8 +714,8 @@ ls</code></pre></div><p>Erase the file and directory created for this lab.</p>
         </div>
       </div>
     </aside>
-    <script src="/js/clipboard.min.js?1718926402" defer></script>
-    <script src="/js/perfect-scrollbar.min.js?1718926402" defer></script>
+    <script src="/js/clipboard.min.js?1718935575" defer></script>
+    <script src="/js/perfect-scrollbar.min.js?1718935575" defer></script>
     <script>
       function useMathJax( config ){
         window.MathJax = Object.assign( window.MathJax || {}, {
@@ -732,20 +731,20 @@ ls</code></pre></div><p>Erase the file and directory created for this lab.</p>
       useMathJax( JSON.parse("{}") );
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="/js/d3/d3-color.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-dispatch.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-drag.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-ease.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-interpolate.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-selection.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-timer.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-transition.min.js?1718926402" defer></script>
-    <script src="/js/d3/d3-zoom.min.js?1718926402" defer></script>
-    <script src="/js/js-yaml.min.js?1718926402" defer></script>
+    <script src="/js/d3/d3-color.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-dispatch.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-drag.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-ease.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-interpolate.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-selection.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-timer.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-transition.min.js?1718935575" defer></script>
+    <script src="/js/d3/d3-zoom.min.js?1718935575" defer></script>
+    <script src="/js/js-yaml.min.js?1718935575" defer></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js" defer></script>
     <script>
       window.themeUseMermaid = JSON.parse("{ \"theme\": \"default\" }");
     </script>
-    <script src="/js/theme.js?1718926402" defer></script>
+    <script src="/js/theme.js?1718935575" defer></script>
   </body>
 </html>
